@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account - VID SECRET</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0b0b0b;
+            color: white;
+        }
+
+        header {
+            padding: 20px;
+            border-bottom: 1px solid #222;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            color: #ff1744;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 60px auto;
+            padding: 20px;
+        }
+
+        .account-box {
+            background: #151515;
+            border: 1px solid #292929;
+            border-radius: 15px;
+            padding: 30px 20px;
+        }
+
+        h2 {
+            margin-top: 0;
+            text-align: center;
+        }
+
+        .info {
+            background: #0d0d0d;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            word-break: break-word;
+        }
+
+        .label {
+            color: #aaa;
+            font-size: 14px;
+            margin-bottom: 7px;
+        }
+
+        .value {
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: #ff1744;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background: #e0143c;
+        }
+
+        .home {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #aaa;
+            text-decoration: none;
+        }
+
+        .loading {
+            text-align: center;
+            color: #aaa;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>VID SECRET</h1>
+</header>
+
+<div class="container">
+
+    <div class="account-box">
+
+        <h2>My Account</h2>
+
+        <div id="loading" class="loading">
+            Loading account...
+        </div>
+
+        <div id="accountContent" style="display:none;">
+
+            <div class="info">
+                <div class="label">Email</div>
+                <div class="value" id="userEmail"></div>
+            </div>
+
+            <div class="info">
+                <div class="label">User ID</div>
+                <div class="value" id="userId"></div>
+            </div>
+
+            <button id="logoutButton">
+                Log Out
+            </button>
+
+            <a href="index.html" class="home">
+                ← Back to Home
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const SUPABASE_URL =
+    "https://qkzdlxqledsznhbifaxy.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_ZdpHXwLlhpbXztsTXpAFTg_TgOji91v";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+async function loadAccount() {
+
+    const {
+        data: { user },
+        error
+    } = await supabaseClient.auth.getUser();
+
+    if (error || !user) {
+
+        window.location.href = "login.html";
+
+        return;
+    }
+
+    document.getElementById("userEmail").textContent =
+        user.email || "No email";
+
+    document.getElementById("userId").textContent =
+        user.id;
+
+    document.getElementById("loading").style.display = "none";
+
+    document.getElementById("accountContent").style.display =
+        "block";
+}
+
+
+document.getElementById("logoutButton").addEventListener(
+    "click",
+    async function () {
+
+        const { error } =
+            await supabaseClient.auth.signOut();
+
+        if (!error) {
+            window.location.href = "index.html";
+        } else {
+            alert("Logout failed. Please try again.");
+        }
+
+    }
+);
+
+
+loadAccount();
+
+</script>
+
+</body>
+</html>
