@@ -1,168 +1,916 @@
-<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Watch premium video content on VID SECRET.">
 
-<meta name="description"
-      content="VID SECRET - مشاهدة المحتوى">
+    <meta name="theme-color" content="#070707">
 
-<title>مشاهدة المحتوى | VID SECRET</title>
+    <title>Watch Video | VID SECRET</title>
 
-<link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-</head><body><!-- HEADER -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* =====================================================
+           VIDEO PAGE
+           ===================================================== */
+
+        .watch-page {
+            min-height: calc(100vh - 76px);
+            padding: 45px 0 90px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #888;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 22px;
+            transition: .2s;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+        }
+
+        .watch-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 300px;
+            gap: 28px;
+            align-items: start;
+        }
+
+        .player-wrapper {
+            overflow: hidden;
+            background: #000;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+        }
+
+        .main-player {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            display: block;
+            background: #000;
+        }
+
+        .video-details {
+            padding: 25px 2px 0;
+        }
+
+        .video-details .category {
+            margin-bottom: 8px;
+        }
+
+        .video-details h1 {
+            font-size: clamp(27px, 4vw, 42px);
+            line-height: 1.1;
+            letter-spacing: -1.5px;
+            margin-bottom: 13px;
+        }
+
+        .video-description {
+            max-width: 760px;
+            color: #8c8c8c;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .video-info-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .info-pill {
+            padding: 6px 9px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: #999;
+            font-size: 9px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .7px;
+        }
+
+        .info-pill.highlight {
+            border-color: rgba(255,204,0,.25);
+            color: var(--accent);
+        }
+
+
+        /* SIDEBAR */
+
+        .watch-sidebar {
+            position: sticky;
+            top: 100px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 20px;
+        }
+
+        .sidebar-label {
+            color: var(--accent);
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            margin-bottom: 14px;
+        }
+
+        .sidebar-title {
+            font-size: 17px;
+            margin-bottom: 20px;
+        }
+
+        .related-item {
+            display: grid;
+            grid-template-columns: 95px 1fr;
+            gap: 12px;
+            padding: 10px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .related-thumb {
+            position: relative;
+            aspect-ratio: 16 / 10;
+            overflow: hidden;
+            border-radius: 8px;
+            background: #171717;
+        }
+
+        .related-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .related-info h3 {
+            font-size: 11px;
+            line-height: 1.4;
+            margin-bottom: 5px;
+        }
+
+        .related-info span {
+            color: #666;
+            font-size: 8px;
+        }
+
+        .related-item:hover h3 {
+            color: var(--accent);
+        }
+
+
+        /* ERROR */
+
+        .video-error {
+            display: none;
+            padding: 80px 20px;
+            text-align: center;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+        }
+
+        .video-error.show {
+            display: block;
+        }
+
+        .video-error h1 {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .video-error p {
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 850px) {
+
+            .watch-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .watch-sidebar {
+                position: static;
+            }
+
+            .related-item {
+                grid-template-columns: 120px 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .watch-page {
+                padding: 25px 0 70px;
+            }
+
+            .player-wrapper {
+                border-radius: 12px;
+            }
+
+            .video-details {
+                padding-top: 20px;
+            }
+
+            .video-details h1 {
+                font-size: 27px;
+            }
+
+            .video-description {
+                font-size: 12px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+<!-- =====================================================
+     HEADER
+     ===================================================== -->
 
 <header class="site-header">
 
-    <div class="container header-container">
+    <div class="container header-inner">
 
         <a href="index.html" class="logo">
 
-            <span class="logo-icon">
-                ▶
-                <span class="lock">🔒</span>
-            </span>
+            <span class="logo-mark">▶</span>
 
-            <span class="logo-text">
-
-                <span class="vid">
-                    VID
-                </span>
-
-                <span class="secret">
-                    SECRET
-                </span>
-
+            <span>
+                VID <b>SECRET</b>
             </span>
 
         </a>
 
-        <nav class="main-nav">
+
+        <nav class="desktop-nav">
 
             <a href="index.html">
-                الرئيسية
+                Home
             </a>
 
-            <a href="index.html#content">
-                المحتوى
+            <a href="index.html#videos">
+                Videos
             </a>
 
             <a href="index.html#categories">
-                الفئات
+                Categories
+            </a>
+
+            <a href="login.html" id="accountLink">
+                Sign In
             </a>
 
         </nav>
 
+
+        <button
+            class="menu-button"
+            id="menuButton"
+            aria-label="Open menu"
+        >
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </button>
+
     </div>
+
+
+    <nav class="mobile-nav" id="mobileNav">
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="index.html#videos">
+            Videos
+        </a>
+
+        <a href="index.html#categories">
+            Categories
+        </a>
+
+        <a href="login.html" id="mobileAccountLink">
+            Sign In
+        </a>
+
+    </nav>
 
 </header>
 
 
-<!-- VIDEO -->
+<!-- =====================================================
+     MAIN
+     ===================================================== -->
 
-<main>
+<main class="watch-page">
 
-    <section class="video-section">
+    <div class="container">
 
-        <div class="container">
+        <a href="index.html#videos" class="back-link">
+            ← Back to Videos
+        </a>
 
-            <a href="index.html#content"
-               class="back-link">
 
-                ← العودة إلى المحتوى
+        <!-- ERROR -->
 
+        <div class="video-error" id="videoError">
+
+            <h1>
+                Video Not Found
+            </h1>
+
+            <p>
+                The requested video could not be found.
+            </p>
+
+            <a
+                href="index.html#videos"
+                class="btn btn-primary"
+            >
+                Browse Videos
             </a>
 
-
-            <!-- REAL VIDEO PLAYER -->
-
-            <div class="video-player">
-
-                <video
-                    controls
-                    playsinline
-                    preload="metadata"
-                    poster="">
-
-                    <source
-                        src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
-                        type="video/mp4">
-
-                    متصفحك لا يدعم تشغيل الفيديو.
-
-                </video>
-
-            </div>
+        </div>
 
 
-            <!-- VIDEO INFORMATION -->
+        <!-- CONTENT -->
 
-            <div class="video-info">
+        <div id="videoContent">
 
-                <div class="private-label">
-                    🔒 تجريبي
-                </div>
+            <div class="watch-layout">
 
-                <h1>
-                    الفيديو التجريبي
-                </h1>
 
-                <p class="video-description">
+                <!-- PLAYER -->
 
-                    هذا فيديو تجريبي للتأكد من أن
-                    مشغل الفيديو يعمل بشكل صحيح
-                    على موقع VID SECRET.
+                <section>
 
-                </p>
+                    <div class="player-wrapper">
 
-                <div class="video-meta">
+                        <video
+                            id="mainVideo"
+                            class="main-player"
+                            controls
+                            playsinline
+                            preload="metadata"
+                        >
 
-                    <span>
-                        🎬 فيديو
-                    </span>
+                            <source
+                                id="videoSource"
+                                src=""
+                                type="video/mp4"
+                            >
 
-                    <span>
-                        ▶ تشغيل مباشر
-                    </span>
+                            Your browser does not support HTML5 video.
 
-                    <span>
-                        📱 متوافق مع الهاتف
-                    </span>
+                        </video>
 
-                </div>
+                    </div>
+
+
+                    <!-- DETAILS -->
+
+                    <div class="video-details">
+
+                        <span
+                            class="category"
+                            id="videoCategory"
+                        >
+                            FEATURED
+                        </span>
+
+
+                        <h1 id="videoTitle">
+                            Loading...
+                        </h1>
+
+
+                        <p
+                            class="video-description"
+                            id="videoDescription"
+                        >
+                            Loading video information...
+                        </p>
+
+
+                        <div class="video-info-row">
+
+                            <span
+                                class="info-pill highlight"
+                                id="videoQuality"
+                            >
+                                HD
+                            </span>
+
+                            <span
+                                class="info-pill"
+                                id="videoDuration"
+                            >
+                                —
+                            </span>
+
+                            <span class="info-pill">
+                                DIGITAL VIDEO
+                            </span>
+
+                            <span class="info-pill">
+                                DEMO
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- SIDEBAR -->
+
+                <aside class="watch-sidebar">
+
+                    <div class="sidebar-label">
+                        MORE CONTENT
+                    </div>
+
+                    <h2 class="sidebar-title">
+                        Continue Exploring
+                    </h2>
+
+
+                    <a
+                        href="video.html?id=1"
+                        class="related-item"
+                    >
+
+                        <div class="related-thumb">
+
+                            <img
+                                src="https://storage.googleapis.com/coverr-main/mp4/Mt_Baker.jpg"
+                                alt="Mountain Experience"
+                            >
+
+                        </div>
+
+                        <div class="related-info">
+
+                            <h3>
+                                Mountain Experience
+                            </h3>
+
+                            <span>
+                                HD • DEMO
+                            </span>
+
+                        </div>
+
+                    </a>
+
+
+                    <a
+                        href="video.html?id=2"
+                        class="related-item"
+                    >
+
+                        <div class="related-thumb">
+
+                            <img
+                                src="https://storage.googleapis.com/coverr-main/mp4/Footboys.jpg"
+                                alt="City Journey"
+                            >
+
+                        </div>
+
+                        <div class="related-info">
+
+                            <h3>
+                                City Journey
+                            </h3>
+
+                            <span>
+                                HD • DEMO
+                            </span>
+
+                        </div>
+
+                    </a>
+
+
+                    <a
+                        href="video.html?id=3"
+                        class="related-item"
+                    >
+
+                        <div class="related-thumb">
+
+                            <img
+                                src="https://storage.googleapis.com/coverr-main/mp4/Island.jpg"
+                                alt="Island Escape"
+                            >
+
+                        </div>
+
+                        <div class="related-info">
+
+                            <h3>
+                                Island Escape
+                            </h3>
+
+                            <span>
+                                HD • DEMO
+                            </span>
+
+                        </div>
+
+                    </a>
+
+
+                    <a
+                        href="video.html?id=4"
+                        class="related-item"
+                    >
+
+                        <div class="related-thumb">
+
+                            <img
+                                src="https://storage.googleapis.com/coverr-main/mp4/Beach.jpg"
+                                alt="Beach Moments"
+                            >
+
+                        </div>
+
+                        <div class="related-info">
+
+                            <h3>
+                                Beach Moments
+                            </h3>
+
+                            <span>
+                                HD • DEMO
+                            </span>
+
+                        </div>
+
+                    </a>
+
+                </aside>
 
             </div>
 
         </div>
 
-    </section>
+    </div>
 
 </main>
 
 
-<!-- FOOTER -->
+<!-- =====================================================
+     FOOTER
+     ===================================================== -->
 
-<footer class="site-footer">
+<footer class="footer">
 
     <div class="container">
 
-        <div class="footer-logo">
-            VID <span>SECRET</span>
+        <div class="footer-bottom">
+
+            <span>
+                © 2026 VID SECRET. All Rights Reserved.
+            </span>
+
+            <span>
+                Premium Digital Platform
+            </span>
+
         </div>
-
-        <p>
-            منصة رقمية حديثة للمحتوى الخاص والمحمي.
-        </p>
-
-        <p class="copyright">
-            © 2026 VID SECRET — جميع الحقوق محفوظة
-        </p>
 
     </div>
 
 </footer>
 
 
-<script src="script.js"></script>
+<!-- =====================================================
+     JAVASCRIPT
+     ===================================================== -->
 
-</body></html>
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+
+
+    /* =====================================================
+       MOBILE MENU
+       ===================================================== */
+
+    const menuButton =
+        document.getElementById("menuButton");
+
+    const mobileNav =
+        document.getElementById("mobileNav");
+
+
+    menuButton.addEventListener("click", () => {
+
+        menuButton.classList.toggle("active");
+
+        mobileNav.classList.toggle("active");
+
+    });
+
+
+    /* =====================================================
+       VIDEO DATABASE — TEMPORARY DEMO DATA
+       ===================================================== */
+
+    const videos = {
+
+        "1": {
+
+            title: "Mountain Experience",
+
+            category: "FEATURED",
+
+            description:
+                "A cinematic nature video used as demo content for testing the VID SECRET video player and viewing experience.",
+
+            duration: "00:18",
+
+            quality: "HD",
+
+            poster:
+                "https://storage.googleapis.com/coverr-main/mp4/Mt_Baker.jpg",
+
+            source:
+                "https://storage.googleapis.com/coverr-main/mp4/Mt_Baker.mp4"
+
+        },
+
+
+        "2": {
+
+            title: "City Journey",
+
+            category: "DISCOVER",
+
+            description:
+                "A public demonstration video designed to test responsive playback, navigation and the VID SECRET viewing interface.",
+
+            duration: "00:15",
+
+            quality: "HD",
+
+            poster:
+                "https://storage.googleapis.com/coverr-main/mp4/Footboys.jpg",
+
+            source:
+                "https://storage.googleapis.com/coverr-main/mp4/Footboys.mp4"
+
+        },
+
+
+        "3": {
+
+            title: "Island Escape",
+
+            category: "TRAVEL",
+
+            description:
+                "A premium-style demo video for testing the global-ready VID SECRET viewing experience.",
+
+            duration: "00:20",
+
+            quality: "HD",
+
+            poster:
+                "https://storage.googleapis.com/coverr-main/mp4/Island.jpg",
+
+            source:
+                "https://storage.googleapis.com/coverr-main/mp4/Island.mp4"
+
+        },
+
+
+        "4": {
+
+            title: "Beach Moments",
+
+            category: "NEW",
+
+            description:
+                "A clean demonstration video created for testing video playback on mobile and desktop devices.",
+
+            duration: "00:16",
+
+            quality: "HD",
+
+            poster:
+                "https://storage.googleapis.com/coverr-main/mp4/Beach.jpg",
+
+            source:
+                "https://storage.googleapis.com/coverr-main/mp4/Beach.mp4"
+
+        }
+
+    };
+
+
+    /* =====================================================
+       GET VIDEO ID
+       ===================================================== */
+
+    const params =
+        new URLSearchParams(window.location.search);
+
+    const videoId =
+        params.get("id");
+
+
+    const video =
+        videos[videoId];
+
+
+    /* =====================================================
+       ELEMENTS
+       ===================================================== */
+
+    const videoContent =
+        document.getElementById("videoContent");
+
+    const videoError =
+        document.getElementById("videoError");
+
+    const mainVideo =
+        document.getElementById("mainVideo");
+
+    const videoSource =
+        document.getElementById("videoSource");
+
+    const videoTitle =
+        document.getElementById("videoTitle");
+
+    const videoCategory =
+        document.getElementById("videoCategory");
+
+    const videoDescription =
+        document.getElementById("videoDescription");
+
+    const videoDuration =
+        document.getElementById("videoDuration");
+
+    const videoQuality =
+        document.getElementById("videoQuality");
+
+
+    /* =====================================================
+       LOAD VIDEO
+       ===================================================== */
+
+    if (!video) {
+
+        videoContent.style.display = "none";
+
+        videoError.classList.add("show");
+
+        document.title =
+            "Video Not Found | VID SECRET";
+
+    } else {
+
+        videoTitle.textContent =
+            video.title;
+
+        videoCategory.textContent =
+            video.category;
+
+        videoDescription.textContent =
+            video.description;
+
+        videoDuration.textContent =
+            video.duration;
+
+        videoQuality.textContent =
+            video.quality;
+
+        mainVideo.poster =
+            video.poster;
+
+        videoSource.src =
+            video.source;
+
+        mainVideo.load();
+
+        document.title =
+            video.title + " | VID SECRET";
+
+    }
+
+
+    /* =====================================================
+       SUPABASE AUTH
+       ===================================================== */
+
+    const SUPABASE_URL =
+        "https://qkzdlxqledsznhbifaxy.supabase.co";
+
+    const SUPABASE_KEY =
+        "sb_publishable_ZdpHXwLlhpbXztsTXpAFTg_TgOji91v";
+
+
+    const script =
+        document.createElement("script");
+
+
+    script.src =
+        "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
+
+
+    script.onload =
+        async () => {
+
+            try {
+
+                const client =
+                    window.supabase.createClient(
+                        SUPABASE_URL,
+                        SUPABASE_KEY
+                    );
+
+
+                const { data } =
+                    await client.auth.getSession();
+
+
+                if (data.session) {
+
+                    const accountLink =
+                        document.getElementById(
+                            "accountLink"
+                        );
+
+                    const mobileAccountLink =
+                        document.getElementById(
+                            "mobileAccountLink"
+                        );
+
+
+                    accountLink.textContent =
+                        "My Account";
+
+                    accountLink.href =
+                        "account.html";
+
+
+                    mobileAccountLink.textContent =
+                        "My Account";
+
+                    mobileAccountLink.href =
+                        "account.html";
+
+                }
+
+            } catch (error) {
+
+                console.log(
+                    "Authentication check unavailable."
+                );
+
+            }
+
+        };
+
+
+    document.head.appendChild(script);
+
+});
+
+</script>
+
+</body>
+      </html>
