@@ -1,605 +1,1234 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="VID SECRET — Premium digital video platform.">
-  <meta name="theme-color" content="#080808">
-  <title>VID SECRET — Premium Video Platform</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>VID SECRET — Premium Digital Video Content</title>
+    <meta name="description" content="Discover premium digital video content on VID SECRET.">
 
-  <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #07090d;
+            --bg-soft: #0d1118;
+            --card: #11161f;
+            --card-hover: #171e29;
+            --text: #f5f7fa;
+            --muted: #9aa4b2;
+            --border: rgba(255,255,255,0.08);
+            --accent: #ffffff;
+            --accent-dark: #0a0c10;
+            --success: #55d68a;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font: inherit;
+        }
+
+        .container {
+            width: min(1180px, calc(100% - 32px));
+            margin: auto;
+        }
+
+        /* HEADER */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(7,9,13,0.92);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav {
+            min-height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            color: #cbd2dc;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .account-btn {
+            padding: 10px 17px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: white;
+            color: #080a0e !important;
+            font-weight: 700;
+        }
+
+        .menu-btn {
+            display: none;
+            border: 0;
+            background: transparent;
+            color: white;
+            font-size: 27px;
+            cursor: pointer;
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 580px;
+            display: grid;
+            place-items: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.28;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(to bottom, rgba(7,9,13,0.35), var(--bg)),
+                linear-gradient(to right, rgba(7,9,13,0.9), rgba(7,9,13,0.35));
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 760px;
+            padding: 70px 0;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            margin-bottom: 18px;
+            padding: 7px 12px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            color: #d6dce5;
+            background: rgba(255,255,255,0.05);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 7vw, 76px);
+            line-height: 1.02;
+            letter-spacing: -3px;
+            margin-bottom: 22px;
+        }
+
+        .hero p {
+            max-width: 650px;
+            color: #b3bdca;
+            font-size: 18px;
+            margin-bottom: 32px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+            padding: 0 21px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #080a0e;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.05);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* STATS */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .stat {
+            padding: 28px 20px;
+            text-align: center;
+            border-right: 1px solid var(--border);
+        }
+
+        .stat:last-child {
+            border-right: 0;
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 27px;
+            margin-bottom: 5px;
+        }
+
+        .stat span {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* SECTIONS */
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 28px;
+        }
+
+        .section-heading h2 {
+            font-size: 31px;
+            letter-spacing: -1px;
+        }
+
+        .section-heading p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        /* VIDEOS */
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .video-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: 0.25s;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            background: var(--card-hover);
+            border-color: rgba(255,255,255,0.15);
+        }
+
+        .thumbnail {
+            position: relative;
+            aspect-ratio: 16 / 10;
+            background: #161b23;
+            overflow: hidden;
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .quality {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            padding: 5px 8px;
+            background: rgba(0,0,0,0.72);
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .duration {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            padding: 5px 8px;
+            background: rgba(0,0,0,0.78);
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .video-info {
+            padding: 17px;
+        }
+
+        .category {
+            color: #aab4c2;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 7px;
+        }
+
+        .video-info h3 {
+            font-size: 17px;
+            margin-bottom: 7px;
+        }
+
+        .description {
+            color: var(--muted);
+            font-size: 13px;
+            min-height: 42px;
+            margin-bottom: 15px;
+        }
+
+        .card-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .price {
+            font-size: 15px;
+            font-weight: 800;
+        }
+
+        .view-btn {
+            padding: 9px 12px;
+            border-radius: 8px;
+            background: white;
+            color: #080a0e;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        /* LOADING / ERROR */
+
+        .state-box {
+            grid-column: 1 / -1;
+            padding: 45px 20px;
+            text-align: center;
+            border: 1px dashed var(--border);
+            border-radius: 15px;
+            color: var(--muted);
+        }
+
+        .state-box strong {
+            display: block;
+            color: white;
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+
+        /* CATEGORIES */
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+
+        .category-box {
+            padding: 24px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            text-align: center;
+            transition: 0.2s;
+        }
+
+        .category-box:hover {
+            background: var(--card-hover);
+            transform: translateY(-3px);
+        }
+
+        .category-box strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .category-box span {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* ACCOUNT CTA */
+
+        .account-section {
+            padding-top: 20px;
+        }
+
+        .account-box {
+            padding: 55px 30px;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            text-align: center;
+            background:
+                radial-gradient(circle at top, rgba(255,255,255,0.07), transparent 55%),
+                var(--card);
+        }
+
+        .account-box h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .account-box p {
+            max-width: 560px;
+            margin: 0 auto 25px;
+            color: var(--muted);
+        }
+
+        /* FOOTER */
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 35px 0;
+            color: var(--muted);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .footer-logo {
+            color: white;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        .copyright {
+            font-size: 12px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 950px) {
+            .video-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .category-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                width: min(100% - 24px, 1180px);
+            }
+
+            .nav {
+                min-height: 64px;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 64px;
+                left: 12px;
+                right: 12px;
+                padding: 15px;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 5px;
+                background: #0d1118;
+                border: 1px solid var(--border);
+                border-radius: 12px;
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links a {
+                padding: 12px;
+            }
+
+            .hero {
+                min-height: 540px;
+            }
+
+            .hero h1 {
+                letter-spacing: -2px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .stat {
+                border-right: 0;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .stat:last-child {
+                border-bottom: 0;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .section-heading {
+                display: block;
+            }
+
+            .section-heading p {
+                margin-top: 6px;
+            }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .category-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 430px) {
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<header class="site-header">
-  <div class="container header-inner">
+<header>
+    <div class="container nav">
 
-    <a href="index.html" class="logo">
-      <span class="logo-mark">▶</span>
-      <span>VID <b>SECRET</b></span>
-    </a>
+        <a href="index.html" class="logo">VID SECRET</a>
 
-    <nav class="desktop-nav">
-      <a href="index.html" class="active">Home</a>
-      <a href="#videos">Videos</a>
-      <a href="#categories">Categories</a>
-      <a href="login.html" id="accountLink">Sign In</a>
-    </nav>
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+            ☰
+        </button>
 
-    <button class="menu-button" id="menuButton" aria-label="Open menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+        <nav class="nav-links" id="navLinks">
+            <a href="index.html">Home</a>
+            <a href="#videos">Videos</a>
+            <a href="#categories">Categories</a>
+            <a href="account.html" class="account-btn" id="accountLink">
+                Account
+            </a>
+        </nav>
 
-  </div>
-
-  <nav class="mobile-nav" id="mobileNav">
-    <a href="index.html">Home</a>
-    <a href="#videos">Videos</a>
-    <a href="#categories">Categories</a>
-    <a href="login.html" id="mobileAccountLink">Sign In</a>
-  </nav>
+    </div>
 </header>
 
 
 <main>
 
-  <!-- HERO -->
+    <!-- HERO -->
 
-  <section class="hero">
-    <div class="hero-glow"></div>
+    <section class="hero">
 
-    <div class="container hero-grid">
-
-      <div class="hero-content">
-
-        <div class="eyebrow">
-          <span></span>
-          PREMIUM DIGITAL PLATFORM
-        </div>
-
-        <h1>
-          Discover.
-          <strong>Watch.</strong>
-          Enjoy.
-        </h1>
-
-        <p>
-          Explore premium digital video content
-          through a fast, modern and private viewing experience.
-        </p>
-
-        <div class="hero-actions">
-          <a href="#videos" class="btn btn-primary">
-            Explore Videos
-            <span>→</span>
-          </a>
-
-          <a href="#categories" class="btn btn-outline">
-            Browse Categories
-          </a>
-        </div>
-
-        <div class="hero-trust">
-          <span>✓ HD Quality</span>
-          <span>✓ Fast Access</span>
-          <span>✓ Private Library</span>
-        </div>
-
-      </div>
-
-
-      <div class="hero-player">
-
-        <div class="hero-player-top">
-          <span class="live-dot"></span>
-          FEATURED CONTENT
-        </div>
-
-        <div class="hero-video-box">
-
-          <video
-            controls
+        <video
+            class="hero-bg"
+            autoplay
+            muted
+            loop
             playsinline
             preload="metadata"
-            poster="https://storage.googleapis.com/coverr-main/mp4/Mt_Baker.jpg">
-
+        >
             <source
-              src="https://storage.googleapis.com/coverr-main/mp4/Mt_Baker.mp4"
-              type="video/mp4">
+                src="https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/720/Big_Buck_Bunny_720_10s_1MB.mp4"
+                type="video/mp4"
+            >
+        </video>
 
-            Your browser does not support HTML5 video.
-          </video>
+        <div class="hero-overlay"></div>
 
-          <div class="hero-play-label">
-            <span>▶</span>
-            Watch Preview
-          </div>
+        <div class="container hero-content">
 
-        </div>
+            <span class="eyebrow">
+                Premium Digital Content
+            </span>
 
-        <div class="hero-player-info">
-          <div>
-            <small>FEATURED</small>
-            <h3>Mountain Experience</h3>
-          </div>
-
-          <span class="hd-badge">HD</span>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- STATS -->
-
-  <section class="stats">
-    <div class="container stats-grid">
-
-      <div class="stat">
-        <strong>04+</strong>
-        <span>Demo Videos</span>
-      </div>
-
-      <div class="stat">
-        <strong>HD</strong>
-        <span>Video Quality</span>
-      </div>
-
-      <div class="stat">
-        <strong>24/7</strong>
-        <span>Online Access</span>
-      </div>
-
-      <div class="stat">
-        <strong>GLOBAL</strong>
-        <span>Digital Platform</span>
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- VIDEOS -->
-
-  <section class="section" id="videos">
-
-    <div class="container">
-
-      <div class="section-head">
-
-        <div>
-          <span class="section-label">EXPLORE</span>
-          <h2>Latest Videos</h2>
-          <p>Watch our latest demo content.</p>
-        </div>
-
-        <span class="results-count">04 VIDEOS</span>
-
-      </div>
-
-
-      <div class="video-grid">
-
-        <!-- 1 -->
-
-        <article class="video-card">
-
-          <a href="video.html?id=1" class="video-thumb">
-
-            <img
-              src="https://storage.googleapis.com/coverr-main/mp4/Mt_Baker.jpg"
-              alt="Mountain Experience"
-              loading="lazy">
-
-            <div class="thumb-overlay"></div>
-
-            <span class="play-button">▶</span>
-
-            <span class="duration">00:18</span>
-
-            <span class="quality">HD</span>
-
-          </a>
-
-          <div class="video-info">
-
-            <span class="category">FEATURED</span>
-
-            <h3>Mountain Experience</h3>
+            <h1>
+                Discover content worth watching.
+            </h1>
 
             <p>
-              A cinematic nature video for testing the VID SECRET player.
+                Explore a growing collection of premium digital videos,
+                discover new experiences, and build your personal library.
             </p>
 
-            <div class="video-bottom">
-              <span>HD</span>
-              <span>•</span>
-              <span>Free Demo</span>
+            <div class="hero-actions">
+
+                <a href="#videos" class="btn btn-primary">
+                    Explore Content
+                </a>
+
+                <a href="#categories" class="btn btn-secondary">
+                    Browse Categories
+                </a>
+
             </div>
 
-            <a href="video.html?id=1" class="watch-link">
-              Watch Now →
-            </a>
-
-          </div>
-
-        </article>
-
-
-        <!-- 2 -->
-
-        <article class="video-card">
-
-          <a href="video.html?id=2" class="video-thumb">
-
-            <img
-              src="https://storage.googleapis.com/coverr-main/mp4/Footboys.jpg"
-              alt="City Journey"
-              loading="lazy">
-
-            <div class="thumb-overlay"></div>
-
-            <span class="play-button">▶</span>
-
-            <span class="duration">00:15</span>
-
-            <span class="quality">HD</span>
-
-          </a>
-
-          <div class="video-info">
-
-            <span class="category">DISCOVER</span>
-
-            <h3>City Journey</h3>
-
-            <p>
-              A second public demo video for testing playback and navigation.
-            </p>
-
-            <div class="video-bottom">
-              <span>HD</span>
-              <span>•</span>
-              <span>Free Demo</span>
-            </div>
-
-            <a href="video.html?id=2" class="watch-link">
-              Watch Now →
-            </a>
-
-          </div>
-
-        </article>
-
-
-        <!-- 3 -->
-
-        <article class="video-card">
-
-          <a href="video.html?id=3" class="video-thumb">
-
-            <img
-              src="https://storage.googleapis.com/coverr-main/mp4/Island.jpg"
-              alt="Island Escape"
-              loading="lazy">
-
-            <div class="thumb-overlay"></div>
-
-            <span class="play-button">▶</span>
-
-            <span class="duration">00:20</span>
-
-            <span class="quality">HD</span>
-
-          </a>
-
-          <div class="video-info">
-
-            <span class="category">TRAVEL</span>
-
-            <h3>Island Escape</h3>
-
-            <p>
-              Premium-style demo content with a responsive video experience.
-            </p>
-
-            <div class="video-bottom">
-              <span>HD</span>
-              <span>•</span>
-              <span>Free Demo</span>
-            </div>
-
-            <a href="video.html?id=3" class="watch-link">
-              Watch Now →
-            </a>
-
-          </div>
-
-        </article>
-
-
-        <!-- 4 -->
-
-        <article class="video-card">
-
-          <a href="video.html?id=4" class="video-thumb">
-
-            <img
-              src="https://storage.googleapis.com/coverr-main/mp4/Beach.jpg"
-              alt="Beach Moments"
-              loading="lazy">
-
-            <div class="thumb-overlay"></div>
-
-            <span class="play-button">▶</span>
-
-            <span class="duration">00:16</span>
-
-            <span class="quality">HD</span>
-
-          </a>
-
-          <div class="video-info">
-
-            <span class="category">NEW</span>
-
-            <h3>Beach Moments</h3>
-
-            <p>
-              A clean demo experience designed for mobile and desktop.
-            </p>
-
-            <div class="video-bottom">
-              <span>HD</span>
-              <span>•</span>
-              <span>Free Demo</span>
-            </div>
-
-            <a href="video.html?id=4" class="watch-link">
-              Watch Now →
-            </a>
-
-          </div>
-
-        </article>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- CATEGORIES -->
-
-  <section class="section categories" id="categories">
-
-    <div class="container">
-
-      <div class="center-heading">
-        <span class="section-label">DISCOVER</span>
-        <h2>Browse Categories</h2>
-        <p>Explore content by category.</p>
-      </div>
-
-      <div class="category-grid">
-
-        <a href="#videos" class="category-card">
-          <span class="category-icon">🎬</span>
-          <div>
-            <h3>All Videos</h3>
-            <p>Explore everything</p>
-          </div>
-          <span>→</span>
-        </a>
-
-        <a href="#videos" class="category-card">
-          <span class="category-icon">🔥</span>
-          <div>
-            <h3>Trending</h3>
-            <p>Popular content</p>
-          </div>
-          <span>→</span>
-        </a>
-
-        <a href="#videos" class="category-card">
-          <span class="category-icon">⭐</span>
-          <div>
-            <h3>Featured</h3>
-            <p>Selected content</p>
-          </div>
-          <span>→</span>
-        </a>
-
-        <a href="#videos" class="category-card">
-          <span class="category-icon">🔒</span>
-          <div>
-            <h3>Private</h3>
-            <p>Protected content</p>
-          </div>
-          <span>→</span>
-        </a>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- ACCOUNT -->
-
-  <section class="account-section">
-
-    <div class="container">
-
-      <div class="account-box">
-
-        <div>
-          <span class="section-label">MEMBERS AREA</span>
-
-          <h2>
-            Create your
-            <strong>VID SECRET</strong>
-            account.
-          </h2>
-
-          <p>
-            Manage your profile, library and future purchases
-            from one secure account.
-          </p>
         </div>
 
-        <div class="account-actions">
-          <a href="login.html" class="btn btn-primary" id="accountButton">
-            Create Account →
-          </a>
+    </section>
 
-          <a href="login.html" class="btn btn-outline">
-            Sign In
-          </a>
+
+    <!-- STATS -->
+
+    <div class="container stats">
+
+        <div class="stat">
+            <strong id="videoCount">0</strong>
+            <span>Published Videos</span>
         </div>
 
-      </div>
+        <div class="stat">
+            <strong>HD</strong>
+            <span>Quality Content</span>
+        </div>
+
+        <div class="stat">
+            <strong>24/7</strong>
+            <span>Access</span>
+        </div>
 
     </div>
 
-  </section>
+
+    <!-- VIDEOS -->
+
+    <section id="videos">
+
+        <div class="container">
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>Latest Content</h2>
+                    <p>Explore the latest videos available on VID SECRET.</p>
+                </div>
+
+            </div>
+
+            <div class="video-grid" id="videoGrid">
+
+                <div class="state-box">
+                    Loading videos...
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CATEGORIES -->
+
+    <section id="categories">
+
+        <div class="container">
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>Categories</h2>
+                    <p>Discover content by category.</p>
+                </div>
+
+            </div>
+
+            <div class="category-grid" id="categoryGrid">
+
+                <div class="category-box">
+                    <strong>All Content</strong>
+                    <span>Explore everything</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ACCOUNT -->
+
+    <section class="account-section">
+
+        <div class="container">
+
+            <div class="account-box">
+
+                <h2 id="accountTitle">
+                    Create your account
+                </h2>
+
+                <p id="accountText">
+                    Create an account to manage your profile and,
+                    later, access your personal content library.
+                </p>
+
+                <div class="hero-actions" style="justify-content:center;">
+
+                    <a
+                        href="login.html"
+                        class="btn btn-primary"
+                        id="accountAction"
+                    >
+                        Create Account / Sign In
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
 
 </main>
 
 
 <!-- FOOTER -->
 
-<footer class="footer">
+<footer>
 
-  <div class="container">
+    <div class="container footer-content">
 
-    <div class="footer-grid">
+        <div>
+            <div class="footer-logo">VID SECRET</div>
+            <div class="copyright">
+                Premium digital video platform.
+            </div>
+        </div>
 
-      <div class="footer-brand">
-
-        <a href="index.html" class="logo">
-          <span class="logo-mark">▶</span>
-          <span>VID <b>SECRET</b></span>
-        </a>
-
-        <p>
-          A modern digital platform for premium video content.
-        </p>
-
-      </div>
-
-      <div>
-        <h4>Platform</h4>
-        <a href="index.html">Home</a>
-        <a href="#videos">Videos</a>
-        <a href="#categories">Categories</a>
-      </div>
-
-      <div>
-        <h4>Account</h4>
-        <a href="login.html">Sign In</a>
-        <a href="login.html">Create Account</a>
-      </div>
-
-      <div>
-        <h4>Legal</h4>
-        <a href="#">Terms</a>
-        <a href="#">Privacy</a>
-      </div>
+        <div class="copyright">
+            © 2026 VID SECRET. All rights reserved.
+        </div>
 
     </div>
-
-    <div class="footer-bottom">
-      <span>© 2026 VID SECRET. All Rights Reserved.</span>
-      <span>Premium Digital Platform</span>
-    </div>
-
-  </div>
 
 </footer>
 
 
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
-document.addEventListener("DOMContentLoaded", () => {
 
-  const menuButton = document.getElementById("menuButton");
-  const mobileNav = document.getElementById("mobileNav");
+    /* ============================================
+       SUPABASE CONFIGURATION
+       ============================================ */
 
-  menuButton.addEventListener("click", () => {
-    menuButton.classList.toggle("active");
-    mobileNav.classList.toggle("active");
-  });
+    const SUPABASE_URL =
+        "https://qkzdlxqledsznhbifaxy.supabase.co";
 
-  mobileNav.querySelectorAll("a").forEach(link => {
-    link.addEventListener("click", () => {
-      menuButton.classList.remove("active");
-      mobileNav.classList.remove("active");
+    const SUPABASE_PUBLISHABLE_KEY =
+        "sb_publishable_ZdpHXwLlhpbXztsTXpAFTg_TgOji91v";
+
+    const supabaseClient =
+        window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_PUBLISHABLE_KEY,
+            {
+                auth: {
+                    persistSession: true,
+                    autoRefreshToken: true,
+                    detectSessionInUrl: true
+                }
+            }
+        );
+
+
+    /* ============================================
+       MOBILE MENU
+       ============================================ */
+
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+
+    menuBtn.addEventListener("click", function () {
+        navLinks.classList.toggle("open");
     });
-  });
 
 
-  /* Supabase session */
+    document.querySelectorAll(".nav-links a").forEach(link => {
 
-  const SUPABASE_URL =
-    "https://qkzdlxqledsznhbifaxy.supabase.co";
+        link.addEventListener("click", function () {
+            navLinks.classList.remove("open");
+        });
 
-  const SUPABASE_KEY =
-    "sb_publishable_ZdpHXwLlhpbXztsTXpAFTg_TgOji91v";
+    });
 
 
-  const script = document.createElement("script");
+    /* ============================================
+       FORMAT DURATION
+       ============================================ */
 
-  script.src =
-    "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
+    function formatDuration(seconds) {
 
-  script.onload = async () => {
+        if (!seconds || seconds <= 0) {
+            return "—";
+        }
 
-    const client =
-      window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-      );
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = seconds % 60;
 
-    const { data } =
-      await client.auth.getSession();
+        if (minutes < 60) {
+            return `${minutes}:${String(remainingSeconds).padStart(2, "0")}`;
+        }
 
-    if (data.session) {
+        const hours = Math.floor(minutes / 60);
+        const remainingMinutes = minutes % 60;
 
-      document.getElementById("accountLink").textContent =
-        "My Account";
-
-      document.getElementById("accountLink").href =
-        "account.html";
-
-      document.getElementById("mobileAccountLink").textContent =
-        "My Account";
-
-      document.getElementById("mobileAccountLink").href =
-        "account.html";
-
-      document.getElementById("accountButton").textContent =
-        "Open My Account →";
-
-      document.getElementById("accountButton").href =
-        "account.html";
+        return `${hours}:${String(remainingMinutes).padStart(2, "0")}`;
     }
-  };
 
-  document.head.appendChild(script);
 
-});
+    /* ============================================
+       ESCAPE HTML
+       ============================================ */
+
+    function escapeHTML(value) {
+
+        if (value === null || value === undefined) {
+            return "";
+        }
+
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+
+    /* ============================================
+       LOAD VIDEOS FROM SUPABASE
+       ============================================ */
+
+    async function loadVideos() {
+
+        const videoGrid =
+            document.getElementById("videoGrid");
+
+        const videoCount =
+            document.getElementById("videoCount");
+
+        videoGrid.innerHTML = `
+            <div class="state-box">
+                Loading videos...
+            </div>
+        `;
+
+        const {
+            data: videos,
+            error
+        } = await supabaseClient
+            .from("videos")
+            .select(`
+                id,
+                title,
+                description,
+                category,
+                duration,
+                quality,
+                price,
+                thumbnail_url,
+                video_url,
+                is_published,
+                created_at
+            `)
+            .eq("is_published", true)
+            .order("created_at", {
+                ascending: false
+            });
+
+
+        if (error) {
+
+            console.error("Supabase error:", error);
+
+            videoGrid.innerHTML = `
+                <div class="state-box">
+                    <strong>Unable to load videos</strong>
+                    Please check the database connection and try again.
+                </div>
+            `;
+
+            return;
+        }
+
+
+        if (!videos || videos.length === 0) {
+
+            videoCount.textContent = "0";
+
+            videoGrid.innerHTML = `
+                <div class="state-box">
+                    <strong>No videos available yet</strong>
+                    New content will appear here when published.
+                </div>
+            `;
+
+            return;
+        }
+
+
+        videoCount.textContent = videos.length;
+
+
+        videoGrid.innerHTML = videos.map(video => {
+
+            const title =
+                escapeHTML(video.title);
+
+            const description =
+                escapeHTML(
+                    video.description || "Premium digital content."
+                );
+
+            const category =
+                escapeHTML(
+                    video.category || "General"
+                );
+
+            const quality =
+                escapeHTML(
+                    video.quality || "HD"
+                );
+
+            const price =
+                Number(video.price || 0).toFixed(2);
+
+            const duration =
+                formatDuration(video.duration);
+
+            const thumbnail =
+                video.thumbnail_url
+                    ? escapeHTML(video.thumbnail_url)
+                    : "";
+
+
+            return `
+                <article class="video-card">
+
+                    <a href="video.html?id=${encodeURIComponent(video.id)}">
+
+                        <div class="thumbnail">
+
+                            ${
+                                thumbnail
+                                ? `
+                                    <img
+                                        src="${thumbnail}"
+                                        alt="${title}"
+                                        loading="lazy"
+                                    >
+                                `
+                                : `
+                                    <div style="
+                                        width:100%;
+                                        height:100%;
+                                        display:grid;
+                                        place-items:center;
+                                        color:#8f99a8;
+                                        font-size:13px;
+                                    ">
+                                        VID SECRET
+                                    </div>
+                                `
+                            }
+
+                            <span class="quality">
+                                ${quality}
+                            </span>
+
+                            <span class="duration">
+                                ${duration}
+                            </span>
+
+                        </div>
+
+                    </a>
+
+
+                    <div class="video-info">
+
+                        <div class="category">
+                            ${category}
+                        </div>
+
+                        <h3>
+                            ${title}
+                        </h3>
+
+                        <p class="description">
+                            ${description}
+                        </p>
+
+                        <div class="card-bottom">
+
+                            <span class="price">
+                                $${price}
+                            </span>
+
+                            <a
+                                href="video.html?id=${encodeURIComponent(video.id)}"
+                                class="view-btn"
+                            >
+                                View Details
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+            `;
+
+        }).join("");
+
+
+        loadCategories(videos);
+    }
+
+
+    /* ============================================
+       CATEGORIES
+       ============================================ */
+
+    function loadCategories(videos) {
+
+        const categoryGrid =
+            document.getElementById("categoryGrid");
+
+        const categories = [
+            ...new Set(
+                videos
+                    .map(video => video.category)
+                    .filter(Boolean)
+            )
+        ];
+
+
+        if (categories.length === 0) {
+            return;
+        }
+
+
+        categoryGrid.innerHTML = `
+
+            <div class="category-box">
+
+                <strong>All Content</strong>
+
+                <span>
+                    Explore everything
+                </span>
+
+            </div>
+
+            ${categories.map(category => `
+
+                <div class="category-box">
+
+                    <strong>
+                        ${escapeHTML(category)}
+                    </strong>
+
+                    <span>
+                        ${
+                            videos.filter(
+                                video =>
+                                    video.category === category
+                            ).length
+                        } videos
+                    </span>
+
+                </div>
+
+            `).join("")}
+
+        `;
+    }
+
+
+    /* ============================================
+       ACCOUNT STATE
+       ============================================ */
+
+    async function updateAccountState() {
+
+        const {
+            data: {
+                session
+            }
+        } = await supabaseClient.auth.getSession();
+
+
+        const accountLink =
+            document.getElementById("accountLink");
+
+        const accountTitle =
+            document.getElementById("accountTitle");
+
+        const accountText =
+            document.getElementById("accountText");
+
+        const accountAction =
+            document.getElementById("accountAction");
+
+
+        if (session && session.user) {
+
+            accountLink.textContent = "My Account";
+
+            accountLink.href = "account.html";
+
+            accountTitle.textContent =
+                "Welcome back";
+
+            accountText.textContent =
+                "Your account is ready. Open your account to manage your profile.";
+
+            accountAction.textContent =
+                "Open My Account";
+
+            accountAction.href =
+                "account.html";
+
+        } else {
+
+            accountLink.textContent =
+                "Account";
+
+            accountLink.href =
+                "account.html";
+
+            accountTitle.textContent =
+                "Create your account";
+
+            accountText.textContent =
+                "Create an account to manage your profile and, later, access your personal content library.";
+
+            accountAction.textContent =
+                "Create Account / Sign In";
+
+            accountAction.href =
+                "login.html";
+        }
+    }
+
+
+    /* ============================================
+       AUTH STATE
+       ============================================ */
+
+    supabaseClient.auth.onAuthStateChange(
+        function () {
+            updateAccountState();
+        }
+    );
+
+
+    /* ============================================
+       START
+       ============================================ */
+
+    loadVideos();
+
+    updateAccountState();
+
 </script>
 
 </body>
-                                                           </html>
+  </html>
