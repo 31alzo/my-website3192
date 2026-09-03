@@ -1,9 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Sign In | VID SECRET</title>
 
@@ -12,88 +9,56 @@
     content="Sign in to your VID SECRET account."
 >
 
-<meta
-    name="theme-color"
-    content="#050505"
->
+<meta name="theme-color" content="#050505">
 
-<link
-    rel="stylesheet"
-    href="style.css"
->
+<link rel="stylesheet" href="style.css">
 
-<!-- Supabase -->
+<!-- Supabase JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-</head><body><!-- ================= HEADER ================= --><header class="site-header"><div class="container header-content">
+</head><body><header class="site-header"><div class="container header-content">
 
-    <a
-        href="index.html"
-        class="logo"
-    >
-
-        <span class="logo-icon">
-            ▶
-        </span>
+    <a href="index.html" class="logo">
+        <span class="logo-icon">▶</span>
 
         <span class="logo-text">
             VID <strong>SECRET</strong>
         </span>
-
     </a>
 
-
     <nav class="main-nav">
-
-        <a href="index.html">
-            Home
-        </a>
-
-        <a href="index.html#videos">
-            Videos
-        </a>
-
-        <a href="index.html#categories">
-            Categories
-        </a>
-
+        <a href="index.html">Home</a>
+        <a href="index.html#videos">Videos</a>
+        <a href="index.html#categories">Categories</a>
     </nav>
 
 </div>
 
-</header><!-- ================= MAIN ================= --><main><section class="login-page"><div class="container">
-
+</header><main><section class="login-page"><div class="container">
 
     <div class="auth-box">
-
 
         <div class="auth-logo">
             🔐
         </div>
 
-
         <span class="card-category">
             VID SECRET
         </span>
-
 
         <h1>
             Sign In
         </h1>
 
-
         <p class="auth-description">
-
             Sign in to access your account
             and personal content.
-
         </p>
 
 
-        <!-- LOGIN FORM -->
+        <!-- LOGIN -->
 
         <form id="loginForm">
-
 
             <div class="form-group">
 
@@ -134,23 +99,14 @@
                 class="button auth-button"
                 id="loginButton"
             >
-
                 Sign In
-
             </button>
-
 
         </form>
 
 
-        <!-- DIVIDER -->
-
         <div class="auth-divider">
-
-            <span>
-                OR
-            </span>
-
+            <span>OR</span>
         </div>
 
 
@@ -159,11 +115,9 @@
         <button
             type="button"
             class="button secondary-button auth-button"
-            onclick="showRegister()"
+            id="registerButton"
         >
-
             Create New Account
-
         </button>
 
 
@@ -172,47 +126,41 @@
         <p
             id="authMessage"
             class="auth-message"
+            aria-live="polite"
         ></p>
 
-
-        <!-- BACK -->
 
         <a
             href="index.html"
             class="back-link auth-back"
         >
-
             ← Back to Home
-
         </a>
-
 
     </div>
 
 </div>
 
-</section></main><!-- ================= FOOTER ================= --><footer class="site-footer"><div class="container">
+</section></main><footer class="site-footer"><div class="container">
 
     <div class="footer-logo">
-
         ▶ VID <strong>SECRET</strong>
-
     </div>
 
-
     <p>
-
         © 2026 VID SECRET — All Rights Reserved
-
     </p>
 
 </div>
 
-</footer><!-- ================= SUPABASE SCRIPT ================= --><script>
+</footer><script>
+
+/* =========================================
+   SUPABASE CONFIGURATION
+========================================= */
 
 const SUPABASE_URL =
     "https://qkzdlxqledsznhbifaxy.supabase.co";
-
 
 const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable_ZdpHXwLlhpbXztsTXpAFTg_TgOji91v";
@@ -225,19 +173,37 @@ const supabaseClient =
     );
 
 
+/* =========================================
+   ELEMENTS
+========================================= */
+
 const loginForm =
     document.getElementById("loginForm");
-
 
 const loginButton =
     document.getElementById("loginButton");
 
+const registerButton =
+    document.getElementById("registerButton");
 
 const message =
     document.getElementById("authMessage");
 
 
-/* ================= LOGIN ================= */
+/* =========================================
+   MESSAGE FUNCTION
+========================================= */
+
+function showMessage(text) {
+
+    message.textContent = text;
+
+}
+
+
+/* =========================================
+   LOGIN
+========================================= */
 
 loginForm.addEventListener(
     "submit",
@@ -245,33 +211,46 @@ loginForm.addEventListener(
 
         event.preventDefault();
 
-
         const email =
-            document.getElementById("email").value.trim();
-
+            document.getElementById("email")
+                .value
+                .trim();
 
         const password =
-            document.getElementById("password").value;
+            document.getElementById("password")
+                .value;
 
 
-        message.textContent =
-            "Signing in...";
+        if (!email || !password) {
+
+            showMessage(
+                "Please enter your email and password."
+            );
+
+            return;
+
+        }
 
 
-        loginButton.disabled =
-            true;
+        loginButton.disabled = true;
+
+        loginButton.textContent =
+            "Signing In...";
+
+        showMessage("");
 
 
         try {
 
             const { data, error } =
-                await supabaseClient.auth.signInWithPassword({
+                await supabaseClient.auth
+                    .signInWithPassword({
 
-                    email: email,
+                        email: email,
 
-                    password: password
+                        password: password
 
-                });
+                    });
 
 
             if (error) {
@@ -281,26 +260,181 @@ loginForm.addEventListener(
             }
 
 
-            if (data.user) {
+            if (!data.session) {
 
-                message.textContent =
-                    "Login successful!";
-
-
-                /*
-                 * Save the user's UID temporarily.
-                 */
-
-                console.log(
-                    "User UID:",
-                    data.user.id
+                throw new Error(
+                    "Login session was not created."
                 );
 
+            }
 
-                /*
-                 * Give Supabase a moment
-                 * to save the session.
-                 */
+
+            console.log(
+                "Logged in user:",
+                data.user
+            );
+
+
+            console.log(
+                "User UID:",
+                data.user.id
+            );
+
+
+            showMessage(
+                "Login successful!"
+            );
+
+
+            /*
+             * Give Supabase time to save
+             * the authentication session.
+             */
+
+            setTimeout(
+                function() {
+
+                    window.location.href =
+                        "index.html";
+
+                },
+                800
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "Login error:",
+                error
+            );
+
+
+            showMessage(
+                translateError(error.message)
+            );
+
+
+        } finally {
+
+            loginButton.disabled =
+                false;
+
+            loginButton.textContent =
+                "Sign In";
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   CREATE ACCOUNT
+========================================= */
+
+registerButton.addEventListener(
+    "click",
+    async function() {
+
+        const email =
+            document.getElementById("email")
+                .value
+                .trim();
+
+        const password =
+            document.getElementById("password")
+                .value;
+
+
+        if (!email) {
+
+            showMessage(
+                "Enter your email address first."
+            );
+
+            return;
+
+        }
+
+
+        if (!password) {
+
+            showMessage(
+                "Enter a password first."
+            );
+
+            return;
+
+        }
+
+
+        if (password.length < 6) {
+
+            showMessage(
+                "Password must contain at least 6 characters."
+            );
+
+            return;
+
+        }
+
+
+        registerButton.disabled =
+            true;
+
+        registerButton.textContent =
+            "Creating Account...";
+
+        showMessage("");
+
+
+        try {
+
+            const { data, error } =
+                await supabaseClient.auth
+                    .signUp({
+
+                        email: email,
+
+                        password: password
+
+                    });
+
+
+            if (error) {
+
+                throw error;
+
+            }
+
+
+            if (!data.user) {
+
+                throw new Error(
+                    "Account could not be created."
+                );
+
+            }
+
+
+            /*
+             * If email confirmation is enabled,
+             * there will be no active session yet.
+             */
+
+            if (!data.session) {
+
+                showMessage(
+                    "Account created successfully. Please check your email and confirm your account."
+                );
+
+            } else {
+
+                showMessage(
+                    "Account created successfully!"
+                );
+
 
                 setTimeout(
                     function() {
@@ -317,17 +451,24 @@ loginForm.addEventListener(
 
         } catch (error) {
 
-            console.error(error);
+            console.error(
+                "Registration error:",
+                error
+            );
 
 
-            message.textContent =
-                getLoginError(error.message);
+            showMessage(
+                translateError(error.message)
+            );
 
 
         } finally {
 
-            loginButton.disabled =
+            registerButton.disabled =
                 false;
+
+            registerButton.textContent =
+                "Create New Account";
 
         }
 
@@ -335,105 +476,11 @@ loginForm.addEventListener(
 );
 
 
-/* ================= REGISTER ================= */
+/* =========================================
+   ERROR TRANSLATION
+========================================= */
 
-async function showRegister() {
-
-    const email =
-        document.getElementById("email").value.trim();
-
-
-    const password =
-        document.getElementById("password").value;
-
-
-    if (!email || !password) {
-
-        message.textContent =
-            "Enter your email and password first.";
-
-        return;
-
-    }
-
-
-    if (password.length < 6) {
-
-        message.textContent =
-            "Password must be at least 6 characters.";
-
-        return;
-
-    }
-
-
-    message.textContent =
-        "Creating your account...";
-
-
-    try {
-
-        const { data, error } =
-            await supabaseClient.auth.signUp({
-
-                email: email,
-
-                password: password
-
-            });
-
-
-        if (error) {
-
-            throw error;
-
-        }
-
-
-        if (data.user) {
-
-            if (data.session) {
-
-                message.textContent =
-                    "Account created successfully!";
-
-
-                setTimeout(
-                    function() {
-
-                        window.location.href =
-                            "index.html";
-
-                    },
-                    800
-                );
-
-            } else {
-
-                message.textContent =
-                    "Account created. Please check your email to confirm your account.";
-
-            }
-
-        }
-
-
-    } catch (error) {
-
-        console.error(error);
-
-
-        message.textContent =
-            getLoginError(error.message);
-
-    }
-
-}
-
-
-/* ================= ERROR MESSAGES ================= */
-
-function getLoginError(error) {
+function translateError(error) {
 
     if (!error) {
 
@@ -447,7 +494,9 @@ function getLoginError(error) {
 
 
     if (
-        text.includes("invalid login credentials")
+        text.includes(
+            "invalid login credentials"
+        )
     ) {
 
         return "Incorrect email or password.";
@@ -456,7 +505,9 @@ function getLoginError(error) {
 
 
     if (
-        text.includes("email not confirmed")
+        text.includes(
+            "email not confirmed"
+        )
     ) {
 
         return "Please confirm your email before signing in.";
@@ -465,10 +516,34 @@ function getLoginError(error) {
 
 
     if (
-        text.includes("user already registered")
+        text.includes(
+            "user already registered"
+        )
     ) {
 
-        return "This email is already registered.";
+        return "This email is already registered. Try signing in.";
+
+    }
+
+
+    if (
+        text.includes(
+            "password should be at least"
+        )
+    ) {
+
+        return "Password must contain at least 6 characters.";
+
+    }
+
+
+    if (
+        text.includes(
+            "rate limit"
+        )
+    ) {
+
+        return "Too many attempts. Please wait and try again.";
 
     }
 
@@ -478,19 +553,46 @@ function getLoginError(error) {
 }
 
 
-/* ================= CHECK EXISTING SESSION ================= */
+/* =========================================
+   CHECK CURRENT SESSION
+========================================= */
 
 async function checkSession() {
 
-    const { data } =
-        await supabaseClient.auth.getSession();
+    try {
+
+        const { data, error } =
+            await supabaseClient.auth
+                .getSession();
 
 
-    if (data.session) {
+        if (error) {
 
-        console.log(
-            "Already logged in:",
-            data.session.user.id
+            console.error(error);
+
+            return;
+
+        }
+
+
+        if (data.session) {
+
+            console.log(
+                "Active session found."
+            );
+
+            console.log(
+                "User UID:",
+                data.session.user.id
+            );
+
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Session check error:",
+            error
         );
 
     }
@@ -501,14 +603,15 @@ async function checkSession() {
 checkSession();
 
 
-/* ================= AUTH STATE ================= */
+/* =========================================
+   AUTH STATE LISTENER
+========================================= */
 
 supabaseClient.auth.onAuthStateChange(
-
     function(event, session) {
 
         console.log(
-            "Auth event:",
+            "Auth state:",
             event
         );
 
@@ -516,14 +619,14 @@ supabaseClient.auth.onAuthStateChange(
         if (session) {
 
             console.log(
-                "Logged in UID:",
+                "Authenticated UID:",
                 session.user.id
             );
 
         }
 
     }
-
 );
 
-</script></body></html>
+</script></body>
+            </html>
