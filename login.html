@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>تسجيل الدخول | VID SECRET</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="site-header">
+
+    <div class="container header-content">
+
+        <a href="index.html" class="logo">
+            <span class="logo-icon">▶</span>
+            <span class="logo-text">
+                VID <strong>SECRET</strong>
+            </span>
+        </a>
+
+        <nav class="main-nav">
+            <a href="index.html">الرئيسية</a>
+            <a href="index.html#videos">الفيديوهات</a>
+            <a href="index.html#categories">التصنيفات</a>
+        </nav>
+
+    </div>
+
+</header>
+
+
+<main>
+
+<section class="login-page">
+
+    <div class="container">
+
+        <div class="auth-box">
+
+            <div class="auth-logo">
+                🔐
+            </div>
+
+            <span class="card-category">
+                VID SECRET
+            </span>
+
+            <h1>
+                تسجيل الدخول
+            </h1>
+
+            <p class="auth-description">
+                سجّل الدخول للوصول إلى حسابك ومحتواك.
+            </p>
+
+
+            <form id="loginForm">
+
+                <div class="form-group">
+
+                    <label for="email">
+                        البريد الإلكتروني
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="example@email.com"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="password">
+                        كلمة المرور
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="أدخل كلمة المرور"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="button auth-button"
+                >
+                    تسجيل الدخول
+                </button>
+
+            </form>
+
+
+            <div class="auth-divider">
+                <span>أو</span>
+            </div>
+
+
+            <button
+                type="button"
+                class="button secondary-button auth-button"
+                onclick="showRegister()"
+            >
+                إنشاء حساب جديد
+            </button>
+
+
+            <p
+                id="authMessage"
+                class="auth-message"
+            ></p>
+
+
+            <a
+                href="index.html"
+                class="back-link auth-back"
+            >
+                → العودة إلى الصفحة الرئيسية
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<footer class="site-footer">
+
+    <div class="container">
+
+        <div class="footer-logo">
+            ▶ VID <strong>SECRET</strong>
+        </div>
+
+        <p>
+            © 2026 VID SECRET — جميع الحقوق محفوظة
+        </p>
+
+    </div>
+
+</footer>
+
+
+<script>
+
+const loginForm = document.getElementById("loginForm");
+
+loginForm.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const message = document.getElementById("authMessage");
+
+    message.textContent =
+        "نظام الحسابات سيتم ربطه بقاعدة البيانات في الخطوة القادمة.";
+
+});
+
+
+function showRegister() {
+
+    const message = document.getElementById("authMessage");
+
+    message.textContent =
+        "إنشاء الحساب سيتم تفعيله بعد ربط قاعدة البيانات.";
+
+}
+
+</script>
+
+</body>
+              </html>
