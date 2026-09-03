@@ -4,271 +4,358 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="Watch premium video content on VID SECRET.">
-
-    <meta name="theme-color" content="#070707">
-
-    <title>Watch Video | VID SECRET</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
-
-    <link rel="stylesheet" href="style.css">
+    <title>VID SECRET — Video</title>
+    <meta name="description" content="Watch premium digital video content on VID SECRET.">
 
     <style>
-
-        /* =====================================================
-           VIDEO PAGE
-           ===================================================== */
-
-        .watch-page {
-            min-height: calc(100vh - 76px);
-            padding: 45px 0 90px;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .back-link {
-            display: inline-flex;
+        :root {
+            --bg: #07090d;
+            --bg-soft: #0d1118;
+            --card: #11161f;
+            --text: #f5f7fa;
+            --muted: #9aa4b2;
+            --border: rgba(255,255,255,0.08);
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            width: min(1180px, calc(100% - 32px));
+            margin: auto;
+        }
+
+        /* HEADER */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(7,9,13,0.94);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav {
+            min-height: 72px;
+            display: flex;
             align-items: center;
-            gap: 8px;
-            color: #888;
-            font-size: 12px;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            color: #cbd2dc;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .account-btn {
+            padding: 10px 17px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: white;
+            color: #080a0e !important;
             font-weight: 700;
+        }
+
+        .menu-btn {
+            display: none;
+            border: 0;
+            background: transparent;
+            color: white;
+            font-size: 27px;
+            cursor: pointer;
+        }
+
+        /* MAIN */
+
+        main {
+            padding: 55px 0 80px;
+        }
+
+        .back {
+            display: inline-block;
+            color: #aeb8c5;
+            font-size: 14px;
             margin-bottom: 22px;
-            transition: .2s;
         }
 
-        .back-link:hover {
-            color: var(--accent);
+        .back:hover {
+            color: white;
         }
 
-        .watch-layout {
+        .layout {
             display: grid;
             grid-template-columns: minmax(0, 1fr) 300px;
-            gap: 28px;
+            gap: 25px;
             align-items: start;
         }
 
-        .player-wrapper {
-            overflow: hidden;
+        /* VIDEO */
+
+        .video-wrapper {
             background: #000;
             border: 1px solid var(--border);
-            border-radius: 18px;
-            box-shadow: var(--shadow);
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 16 / 9;
         }
 
-        .main-player {
-            width: 100%;
-            aspect-ratio: 16 / 9;
+        video {
             display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
             background: #000;
         }
 
-        .video-details {
-            padding: 25px 2px 0;
+        /* INFO */
+
+        .video-info {
+            padding-top: 25px;
         }
 
-        .video-details .category {
+        .category {
+            color: #aab4c2;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             margin-bottom: 8px;
         }
 
-        .video-details h1 {
-            font-size: clamp(27px, 4vw, 42px);
+        h1 {
+            font-size: clamp(30px, 5vw, 48px);
             line-height: 1.1;
             letter-spacing: -1.5px;
-            margin-bottom: 13px;
+            margin-bottom: 15px;
         }
 
-        .video-description {
+        .description {
+            color: var(--muted);
+            font-size: 16px;
             max-width: 760px;
-            color: #8c8c8c;
-            font-size: 13px;
-            line-height: 1.8;
-        }
-
-        .video-info-row {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .info-pill {
-            padding: 6px 9px;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            color: #999;
-            font-size: 9px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: .7px;
-        }
-
-        .info-pill.highlight {
-            border-color: rgba(255,204,0,.25);
-            color: var(--accent);
-        }
-
-
-        /* SIDEBAR */
-
-        .watch-sidebar {
-            position: sticky;
-            top: 100px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: 20px;
-        }
-
-        .sidebar-label {
-            color: var(--accent);
-            font-size: 9px;
-            font-weight: 800;
-            letter-spacing: 1.5px;
-            margin-bottom: 14px;
-        }
-
-        .sidebar-title {
-            font-size: 17px;
             margin-bottom: 20px;
         }
 
-        .related-item {
-            display: grid;
-            grid-template-columns: 95px 1fr;
-            gap: 12px;
-            padding: 10px 0;
-            border-top: 1px solid var(--border);
+        .meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
         }
 
-        .related-thumb {
-            position: relative;
-            aspect-ratio: 16 / 10;
-            overflow: hidden;
-            border-radius: 8px;
-            background: #171717;
-        }
-
-        .related-thumb img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .related-info h3 {
-            font-size: 11px;
-            line-height: 1.4;
-            margin-bottom: 5px;
-        }
-
-        .related-info span {
-            color: #666;
-            font-size: 8px;
-        }
-
-        .related-item:hover h3 {
-            color: var(--accent);
-        }
-
-
-        /* ERROR */
-
-        .video-error {
-            display: none;
-            padding: 80px 20px;
-            text-align: center;
-            background: var(--surface);
+        .meta span {
+            padding: 7px 10px;
             border: 1px solid var(--border);
-            border-radius: 18px;
+            border-radius: 8px;
+            color: #cbd2dc;
+            background: rgba(255,255,255,0.04);
+            font-size: 12px;
         }
 
-        .video-error.show {
+        /* SIDEBAR */
+
+        .sidebar {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        .sidebar h2 {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .side-link {
             display: block;
+            padding: 13px 0;
+            border-bottom: 1px solid var(--border);
+            color: #cbd2dc;
+            font-size: 14px;
         }
 
-        .video-error h1 {
-            font-size: 30px;
-            margin-bottom: 10px;
+        .side-link:last-child {
+            border-bottom: 0;
         }
 
-        .video-error p {
-            color: #777;
-            margin-bottom: 25px;
+        .side-link:hover {
+            color: white;
         }
 
+        /* STATES */
+
+        .state {
+            min-height: 400px;
+            display: grid;
+            place-items: center;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .state-box {
+            max-width: 520px;
+            padding: 40px 25px;
+            border: 1px dashed var(--border);
+            border-radius: 15px;
+        }
+
+        .state-box strong {
+            display: block;
+            font-size: 20px;
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        .state-box p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* FOOTER */
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 35px 0;
+            color: var(--muted);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .footer-logo {
+            color: white;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        .copyright {
+            font-size: 12px;
+        }
 
         /* MOBILE */
 
         @media (max-width: 850px) {
 
-            .watch-layout {
+            .layout {
                 grid-template-columns: 1fr;
             }
 
-            .watch-sidebar {
-                position: static;
-            }
-
-            .related-item {
-                grid-template-columns: 120px 1fr;
+            .sidebar {
+                order: 2;
             }
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 700px) {
 
-            .watch-page {
-                padding: 25px 0 70px;
+            .container {
+                width: min(100% - 24px, 1180px);
             }
 
-            .player-wrapper {
+            .nav {
+                min-height: 64px;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 64px;
+                left: 12px;
+                right: 12px;
+                padding: 15px;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 5px;
+                background: #0d1118;
+                border: 1px solid var(--border);
                 border-radius: 12px;
             }
 
-            .video-details {
-                padding-top: 20px;
+            .nav-links.open {
+                display: flex;
             }
 
-            .video-details h1 {
-                font-size: 27px;
+            .nav-links a {
+                padding: 12px;
             }
 
-            .video-description {
-                font-size: 12px;
+            main {
+                padding-top: 30px;
+            }
+
+            .video-wrapper {
+                border-radius: 11px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
             }
         }
-
     </style>
 </head>
 
-
 <body>
 
-<!-- =====================================================
-     HEADER
-     ===================================================== -->
+<header>
 
-<header class="site-header">
-
-    <div class="container header-inner">
+    <div class="container nav">
 
         <a href="index.html" class="logo">
-
-            <span class="logo-mark">▶</span>
-
-            <span>
-                VID <b>SECRET</b>
-            </span>
-
+            VID SECRET
         </a>
 
+        <button
+            class="menu-btn"
+            id="menuBtn"
+            aria-label="Open menu"
+        >
+            ☰
+        </button>
 
-        <nav class="desktop-nav">
+        <nav class="nav-links" id="navLinks">
 
             <a href="index.html">
                 Home
@@ -282,303 +369,155 @@
                 Categories
             </a>
 
-            <a href="login.html" id="accountLink">
-                Sign In
+            <a
+                href="account.html"
+                class="account-btn"
+                id="accountLink"
+            >
+                Account
             </a>
 
         </nav>
 
-
-        <button
-            class="menu-button"
-            id="menuButton"
-            aria-label="Open menu"
-        >
-
-            <span></span>
-            <span></span>
-            <span></span>
-
-        </button>
-
     </div>
-
-
-    <nav class="mobile-nav" id="mobileNav">
-
-        <a href="index.html">
-            Home
-        </a>
-
-        <a href="index.html#videos">
-            Videos
-        </a>
-
-        <a href="index.html#categories">
-            Categories
-        </a>
-
-        <a href="login.html" id="mobileAccountLink">
-            Sign In
-        </a>
-
-    </nav>
 
 </header>
 
 
-<!-- =====================================================
-     MAIN
-     ===================================================== -->
-
-<main class="watch-page">
+<main>
 
     <div class="container">
 
-        <a href="index.html#videos" class="back-link">
-            ← Back to Videos
+        <a href="index.html" class="back">
+            ← Back to videos
         </a>
 
 
-        <!-- ERROR -->
+        <!-- LOADING -->
 
-        <div class="video-error" id="videoError">
+        <div id="loadingState" class="state">
 
-            <h1>
-                Video Not Found
-            </h1>
+            <div class="state-box">
 
-            <p>
-                The requested video could not be found.
-            </p>
+                <strong>
+                    Loading video...
+                </strong>
 
-            <a
-                href="index.html#videos"
-                class="btn btn-primary"
-            >
-                Browse Videos
-            </a>
+                <p>
+                    Please wait.
+                </p>
+
+            </div>
 
         </div>
 
 
-        <!-- CONTENT -->
+        <!-- ERROR -->
 
-        <div id="videoContent">
+        <div id="errorState" class="state hidden">
 
-            <div class="watch-layout">
+            <div class="state-box">
+
+                <strong>
+                    Video not found
+                </strong>
+
+                <p id="errorMessage">
+                    The requested video could not be found.
+                </p>
+
+                <br>
+
+                <a
+                    href="index.html"
+                    class="back"
+                >
+                    Return to videos
+                </a>
+
+            </div>
+
+        </div>
 
 
-                <!-- PLAYER -->
+        <!-- VIDEO CONTENT -->
 
-                <section>
+        <div id="videoContent" class="hidden">
 
-                    <div class="player-wrapper">
+            <div class="layout">
+
+                <div>
+
+                    <div class="video-wrapper">
 
                         <video
                             id="mainVideo"
-                            class="main-player"
                             controls
                             playsinline
                             preload="metadata"
                         >
-
-                            <source
-                                id="videoSource"
-                                src=""
-                                type="video/mp4"
-                            >
-
                             Your browser does not support HTML5 video.
-
                         </video>
 
                     </div>
 
 
-                    <!-- DETAILS -->
+                    <div class="video-info">
 
-                    <div class="video-details">
-
-                        <span
+                        <div
                             class="category"
                             id="videoCategory"
                         >
-                            FEATURED
-                        </span>
-
+                            General
+                        </div>
 
                         <h1 id="videoTitle">
-                            Loading...
+                            Video
                         </h1>
 
-
                         <p
-                            class="video-description"
+                            class="description"
                             id="videoDescription"
                         >
-                            Loading video information...
                         </p>
 
 
-                        <div class="video-info-row">
+                        <div class="meta">
 
-                            <span
-                                class="info-pill highlight"
-                                id="videoQuality"
-                            >
+                            <span id="videoDuration">
+                                Duration
+                            </span>
+
+                            <span id="videoQuality">
                                 HD
                             </span>
 
-                            <span
-                                class="info-pill"
-                                id="videoDuration"
-                            >
-                                —
-                            </span>
-
-                            <span class="info-pill">
-                                DIGITAL VIDEO
-                            </span>
-
-                            <span class="info-pill">
-                                DEMO
+                            <span id="videoPrice">
+                                $0.00
                             </span>
 
                         </div>
 
                     </div>
 
-                </section>
+                </div>
 
 
                 <!-- SIDEBAR -->
 
-                <aside class="watch-sidebar">
+                <aside class="sidebar">
 
-                    <div class="sidebar-label">
-                        MORE CONTENT
-                    </div>
-
-                    <h2 class="sidebar-title">
+                    <h2>
                         Continue Exploring
                     </h2>
 
+                    <div id="relatedVideos">
 
-                    <a
-                        href="video.html?id=1"
-                        class="related-item"
-                    >
-
-                        <div class="related-thumb">
-
-                            <img
-                                src="https://storage.googleapis.com/coverr-main/mp4/Mt_Baker.jpg"
-                                alt="Mountain Experience"
-                            >
-
+                        <div class="side-link">
+                            Loading...
                         </div>
 
-                        <div class="related-info">
-
-                            <h3>
-                                Mountain Experience
-                            </h3>
-
-                            <span>
-                                HD • DEMO
-                            </span>
-
-                        </div>
-
-                    </a>
-
-
-                    <a
-                        href="video.html?id=2"
-                        class="related-item"
-                    >
-
-                        <div class="related-thumb">
-
-                            <img
-                                src="https://storage.googleapis.com/coverr-main/mp4/Footboys.jpg"
-                                alt="City Journey"
-                            >
-
-                        </div>
-
-                        <div class="related-info">
-
-                            <h3>
-                                City Journey
-                            </h3>
-
-                            <span>
-                                HD • DEMO
-                            </span>
-
-                        </div>
-
-                    </a>
-
-
-                    <a
-                        href="video.html?id=3"
-                        class="related-item"
-                    >
-
-                        <div class="related-thumb">
-
-                            <img
-                                src="https://storage.googleapis.com/coverr-main/mp4/Island.jpg"
-                                alt="Island Escape"
-                            >
-
-                        </div>
-
-                        <div class="related-info">
-
-                            <h3>
-                                Island Escape
-                            </h3>
-
-                            <span>
-                                HD • DEMO
-                            </span>
-
-                        </div>
-
-                    </a>
-
-
-                    <a
-                        href="video.html?id=4"
-                        class="related-item"
-                    >
-
-                        <div class="related-thumb">
-
-                            <img
-                                src="https://storage.googleapis.com/coverr-main/mp4/Beach.jpg"
-                                alt="Beach Moments"
-                            >
-
-                        </div>
-
-                        <div class="related-info">
-
-                            <h3>
-                                Beach Moments
-                            </h3>
-
-                            <span>
-                                HD • DEMO
-                            </span>
-
-                        </div>
-
-                    </a>
+                    </div>
 
                 </aside>
 
@@ -591,24 +530,24 @@
 </main>
 
 
-<!-- =====================================================
-     FOOTER
-     ===================================================== -->
+<footer>
 
-<footer class="footer">
+    <div class="container footer-content">
 
-    <div class="container">
+        <div>
 
-        <div class="footer-bottom">
+            <div class="footer-logo">
+                VID SECRET
+            </div>
 
-            <span>
-                © 2026 VID SECRET. All Rights Reserved.
-            </span>
+            <div class="copyright">
+                Premium digital video platform.
+            </div>
 
-            <span>
-                Premium Digital Platform
-            </span>
+        </div>
 
+        <div class="copyright">
+            © 2026 VID SECRET. All rights reserved.
         </div>
 
     </div>
@@ -616,134 +555,132 @@
 </footer>
 
 
-<!-- =====================================================
-     JAVASCRIPT
-     ===================================================== -->
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 
 <script>
 
-document.addEventListener("DOMContentLoaded", () => {
+    /* ============================================
+       SUPABASE
+       ============================================ */
+
+    const SUPABASE_URL =
+        "https://qkzdlxqledsznhbifaxy.supabase.co";
+
+    const SUPABASE_PUBLISHABLE_KEY =
+        "sb_publishable_ZdpHXwLlhpbXztsTXpAFTg_TgOji91v";
+
+    const supabaseClient =
+        window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_PUBLISHABLE_KEY,
+            {
+                auth: {
+                    persistSession: true,
+                    autoRefreshToken: true,
+                    detectSessionInUrl: true
+                }
+            }
+        );
 
 
-    /* =====================================================
+    /* ============================================
        MOBILE MENU
-       ===================================================== */
+       ============================================ */
 
-    const menuButton =
-        document.getElementById("menuButton");
+    const menuBtn =
+        document.getElementById("menuBtn");
 
-    const mobileNav =
-        document.getElementById("mobileNav");
+    const navLinks =
+        document.getElementById("navLinks");
 
 
-    menuButton.addEventListener("click", () => {
+    menuBtn.addEventListener("click", function () {
 
-        menuButton.classList.toggle("active");
-
-        mobileNav.classList.toggle("active");
+        navLinks.classList.toggle("open");
 
     });
 
 
-    /* =====================================================
-       VIDEO DATABASE — TEMPORARY DEMO DATA
-       ===================================================== */
+    document.querySelectorAll(".nav-links a")
+        .forEach(function (link) {
 
-    const videos = {
+            link.addEventListener("click", function () {
 
-        "1": {
+                navLinks.classList.remove("open");
 
-            title: "Mountain Experience",
+            });
 
-            category: "FEATURED",
-
-            description:
-                "A cinematic nature video used as demo content for testing the VID SECRET video player and viewing experience.",
-
-            duration: "00:18",
-
-            quality: "HD",
-
-            poster:
-                "https://storage.googleapis.com/coverr-main/mp4/Mt_Baker.jpg",
-
-            source:
-                "https://storage.googleapis.com/coverr-main/mp4/Mt_Baker.mp4"
-
-        },
+        });
 
 
-        "2": {
+    /* ============================================
+       HTML ESCAPE
+       ============================================ */
 
-            title: "City Journey",
+    function escapeHTML(value) {
 
-            category: "DISCOVER",
+        if (
+            value === null ||
+            value === undefined
+        ) {
+            return "";
+        }
 
-            description:
-                "A public demonstration video designed to test responsive playback, navigation and the VID SECRET viewing interface.",
-
-            duration: "00:15",
-
-            quality: "HD",
-
-            poster:
-                "https://storage.googleapis.com/coverr-main/mp4/Footboys.jpg",
-
-            source:
-                "https://storage.googleapis.com/coverr-main/mp4/Footboys.mp4"
-
-        },
-
-
-        "3": {
-
-            title: "Island Escape",
-
-            category: "TRAVEL",
-
-            description:
-                "A premium-style demo video for testing the global-ready VID SECRET viewing experience.",
-
-            duration: "00:20",
-
-            quality: "HD",
-
-            poster:
-                "https://storage.googleapis.com/coverr-main/mp4/Island.jpg",
-
-            source:
-                "https://storage.googleapis.com/coverr-main/mp4/Island.mp4"
-
-        },
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
 
 
-        "4": {
+    /* ============================================
+       DURATION
+       ============================================ */
 
-            title: "Beach Moments",
+    function formatDuration(seconds) {
 
-            category: "NEW",
+        if (!seconds || seconds <= 0) {
+            return "Duration unavailable";
+        }
 
-            description:
-                "A clean demonstration video created for testing video playback on mobile and desktop devices.",
+        const minutes =
+            Math.floor(seconds / 60);
 
-            duration: "00:16",
+        const remainingSeconds =
+            seconds % 60;
 
-            quality: "HD",
+        if (minutes < 60) {
 
-            poster:
-                "https://storage.googleapis.com/coverr-main/mp4/Beach.jpg",
-
-            source:
-                "https://storage.googleapis.com/coverr-main/mp4/Beach.mp4"
+            return (
+                String(minutes) +
+                ":" +
+                String(remainingSeconds).padStart(2, "0")
+            );
 
         }
 
-    };
+        const hours =
+            Math.floor(minutes / 60);
+
+        const remainingMinutes =
+            minutes % 60;
+
+        return (
+            String(hours) +
+            ":" +
+            String(remainingMinutes).padStart(2, "0")
+        );
+    }
 
 
-    /* =====================================================
-       GET VIDEO ID
-       ===================================================== */
+    /* ============================================
+       GET VIDEO ID FROM URL
+       ============================================ */
 
     const params =
         new URLSearchParams(window.location.search);
@@ -752,165 +689,267 @@ document.addEventListener("DOMContentLoaded", () => {
         params.get("id");
 
 
-    const video =
-        videos[videoId];
+    /* ============================================
+       LOAD SINGLE VIDEO
+       ============================================ */
+
+    async function loadVideo() {
+
+        const loadingState =
+            document.getElementById("loadingState");
+
+        const errorState =
+            document.getElementById("errorState");
+
+        const videoContent =
+            document.getElementById("videoContent");
+
+        const errorMessage =
+            document.getElementById("errorMessage");
 
 
-    /* =====================================================
-       ELEMENTS
-       ===================================================== */
+        if (!videoId) {
 
-    const videoContent =
-        document.getElementById("videoContent");
+            loadingState.classList.add("hidden");
 
-    const videoError =
-        document.getElementById("videoError");
+            errorMessage.textContent =
+                "No video ID was provided.";
 
-    const mainVideo =
-        document.getElementById("mainVideo");
+            errorState.classList.remove("hidden");
 
-    const videoSource =
-        document.getElementById("videoSource");
-
-    const videoTitle =
-        document.getElementById("videoTitle");
-
-    const videoCategory =
-        document.getElementById("videoCategory");
-
-    const videoDescription =
-        document.getElementById("videoDescription");
-
-    const videoDuration =
-        document.getElementById("videoDuration");
-
-    const videoQuality =
-        document.getElementById("videoQuality");
+            return;
+        }
 
 
-    /* =====================================================
-       LOAD VIDEO
-       ===================================================== */
+        const {
+            data: video,
+            error
+        } = await supabaseClient
+            .from("videos")
+            .select(`
+                id,
+                title,
+                description,
+                category,
+                duration,
+                quality,
+                price,
+                thumbnail_url,
+                video_url,
+                is_published,
+                created_at
+            `)
+            .eq("id", videoId)
+            .eq("is_published", true)
+            .single();
 
-    if (!video) {
 
-        videoContent.style.display = "none";
+        if (error || !video) {
 
-        videoError.classList.add("show");
+            console.error(
+                "Video loading error:",
+                error
+            );
+
+            loadingState.classList.add("hidden");
+
+            errorMessage.textContent =
+                "This video does not exist or is not currently published.";
+
+            errorState.classList.remove("hidden");
+
+            return;
+        }
+
+
+        /* ========================================
+           DISPLAY VIDEO
+           ======================================== */
 
         document.title =
-            "Video Not Found | VID SECRET";
-
-    } else {
-
-        videoTitle.textContent =
+            "VID SECRET — " +
             video.title;
 
-        videoCategory.textContent =
-            video.category;
 
-        videoDescription.textContent =
-            video.description;
+        document.getElementById("videoCategory")
+            .textContent =
+            video.category || "General";
 
-        videoDuration.textContent =
-            video.duration;
 
-        videoQuality.textContent =
-            video.quality;
+        document.getElementById("videoTitle")
+            .textContent =
+            video.title;
 
-        mainVideo.poster =
-            video.poster;
 
-        videoSource.src =
-            video.source;
+        document.getElementById("videoDescription")
+            .textContent =
+            video.description ||
+            "Premium digital content.";
 
-        mainVideo.load();
 
-        document.title =
-            video.title + " | VID SECRET";
+        document.getElementById("videoDuration")
+            .textContent =
+            formatDuration(video.duration);
+
+
+        document.getElementById("videoQuality")
+            .textContent =
+            video.quality || "HD";
+
+
+        document.getElementById("videoPrice")
+            .textContent =
+            "$" +
+            Number(video.price || 0).toFixed(2);
+
+
+        const mainVideo =
+            document.getElementById("mainVideo");
+
+
+        if (video.video_url) {
+
+            mainVideo.src =
+                video.video_url;
+
+        } else {
+
+            mainVideo.removeAttribute("src");
+
+            mainVideo.innerHTML = `
+                Your video source is not available.
+            `;
+        }
+
+
+        /*
+         * Poster image
+         */
+
+        if (video.thumbnail_url) {
+
+            mainVideo.poster =
+                video.thumbnail_url;
+
+        }
+
+
+        loadingState.classList.add("hidden");
+
+        videoContent.classList.remove("hidden");
+
+
+        /*
+         * Load related videos
+         */
+
+        loadRelatedVideos(video.id);
 
     }
 
 
-    /* =====================================================
-       SUPABASE AUTH
-       ===================================================== */
+    /* ============================================
+       RELATED VIDEOS
+       ============================================ */
 
-    const SUPABASE_URL =
-        "https://qkzdlxqledsznhbifaxy.supabase.co";
+    async function loadRelatedVideos(currentId) {
 
-    const SUPABASE_KEY =
-        "sb_publishable_ZdpHXwLlhpbXztsTXpAFTg_TgOji91v";
-
-
-    const script =
-        document.createElement("script");
+        const relatedContainer =
+            document.getElementById("relatedVideos");
 
 
-    script.src =
-        "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
+        const {
+            data: videos,
+            error
+        } = await supabaseClient
+            .from("videos")
+            .select(`
+                id,
+                title,
+                category
+            `)
+            .eq("is_published", true)
+            .neq("id", currentId)
+            .order("created_at", {
+                ascending: false
+            })
+            .limit(5);
 
 
-    script.onload =
-        async () => {
+        if (error || !videos || videos.length === 0) {
 
-            try {
+            relatedContainer.innerHTML = `
+                <div class="side-link">
+                    No other videos available.
+                </div>
+            `;
 
-                const client =
-                    window.supabase.createClient(
-                        SUPABASE_URL,
-                        SUPABASE_KEY
-                    );
-
-
-                const { data } =
-                    await client.auth.getSession();
+            return;
+        }
 
 
-                if (data.session) {
+        relatedContainer.innerHTML =
+            videos.map(function (video) {
 
-                    const accountLink =
-                        document.getElementById(
-                            "accountLink"
-                        );
+                return `
+                    <a
+                        href="video.html?id=${encodeURIComponent(video.id)}"
+                        class="side-link"
+                    >
+                        ${escapeHTML(video.title)}
+                    </a>
+                `;
 
-                    const mobileAccountLink =
-                        document.getElementById(
-                            "mobileAccountLink"
-                        );
+            }).join("");
 
-
-                    accountLink.textContent =
-                        "My Account";
-
-                    accountLink.href =
-                        "account.html";
+    }
 
 
-                    mobileAccountLink.textContent =
-                        "My Account";
+    /* ============================================
+       ACCOUNT STATE
+       ============================================ */
 
-                    mobileAccountLink.href =
-                        "account.html";
+    async function updateAccountState() {
 
-                }
-
-            } catch (error) {
-
-                console.log(
-                    "Authentication check unavailable."
-                );
-
+        const {
+            data: {
+                session
             }
+        } = await supabaseClient.auth.getSession();
 
-        };
+
+        const accountLink =
+            document.getElementById("accountLink");
 
 
-    document.head.appendChild(script);
+        if (session && session.user) {
 
-});
+            accountLink.textContent =
+                "My Account";
+
+            accountLink.href =
+                "account.html";
+
+        } else {
+
+            accountLink.textContent =
+                "Account";
+
+            accountLink.href =
+                "account.html";
+        }
+    }
+
+
+    /* ============================================
+       START
+       ============================================ */
+
+    loadVideo();
+
+    updateAccountState();
 
 </script>
 
 </body>
-      </html>
+                                </html>
