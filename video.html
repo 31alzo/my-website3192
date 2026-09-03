@@ -37,7 +37,6 @@
 
         </a>
 
-
         <nav class="main-nav">
 
             <a href="index.html">
@@ -59,17 +58,13 @@
 </header>
 
 
-
-<!-- VIDEO PAGE -->
+<!-- VIDEO -->
 
 <main>
 
     <section class="video-section">
 
         <div class="container">
-
-
-            <!-- BACK -->
 
             <a href="index.html#content"
                class="back-link">
@@ -79,55 +74,46 @@
             </a>
 
 
-            <!-- VIDEO PLAYER -->
+            <!-- REAL VIDEO PLAYER -->
 
             <div class="video-player">
 
-                <div class="video-placeholder">
+                <video
+                    controls
+                    playsinline
+                    preload="metadata"
+                    poster="">
 
-                    <div class="video-lock">
-                        🔒
-                    </div>
+                    <source
+                        src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+                        type="video/mp4">
 
-                    <div class="video-play">
-                        ▶
-                    </div>
+                    متصفحك لا يدعم تشغيل الفيديو.
 
-                    <h1>
-                        المحتوى الخاص
-                    </h1>
-
-                    <p>
-                        الفيديو سيظهر هنا
-                    </p>
-
-                </div>
+                </video>
 
             </div>
 
 
-            <!-- VIDEO INFO -->
+            <!-- VIDEO INFORMATION -->
 
             <div class="video-info">
 
                 <div class="private-label">
-                    🔒 خاص
+                    🔒 تجريبي
                 </div>
 
-
                 <h1>
-                    عنوان المحتوى الأول
+                    الفيديو التجريبي
                 </h1>
-
 
                 <p class="video-description">
 
-                    هذا وصف تجريبي للمحتوى.
-                    لاحقًا سيتم استبداله بالمعلومات
-                    الحقيقية الخاصة بالفيديو.
+                    هذا فيديو تجريبي للتأكد من أن
+                    مشغل الفيديو يعمل بشكل صحيح
+                    على موقع VID SECRET.
 
                 </p>
-
 
                 <div class="video-meta">
 
@@ -136,25 +122,22 @@
                     </span>
 
                     <span>
-                        ⭐ مميز
+                        ▶ تشغيل مباشر
                     </span>
 
                     <span>
-                        🔒 محتوى خاص
+                        📱 متوافق مع الهاتف
                     </span>
 
                 </div>
 
-
             </div>
-
 
         </div>
 
     </section>
 
 </main>
-
 
 
 <!-- FOOTER -->
@@ -178,7 +161,6 @@
     </div>
 
 </footer>
-
 
 
 <script src="script.js"></script>
