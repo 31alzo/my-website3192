@@ -1,715 +1,605 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="VID SECRET — Premium digital video platform.">
+  <meta name="theme-color" content="#080808">
+  <title>VID SECRET — Premium Video Platform</title>
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-<title>VID SECRET | Premium Video Platform</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 
-<meta
-    name="description"
-    content="VID SECRET — Discover premium digital video content."
->
+<body>
 
-<meta
-    name="theme-color"
-    content="#050505"
->
+<header class="site-header">
+  <div class="container header-inner">
 
-<link
-    rel="stylesheet"
-    href="style.css"
->
-
-<!-- Supabase -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-</head><body><!-- ================= HEADER ================= --><header class="site-header"><div class="container header-content">
-
-
-    <a
-        href="index.html"
-        class="logo"
-    >
-
-        <span class="logo-icon">
-            ▶
-        </span>
-
-        <span class="logo-text">
-            VID <strong>SECRET</strong>
-        </span>
-
+    <a href="index.html" class="logo">
+      <span class="logo-mark">▶</span>
+      <span>VID <b>SECRET</b></span>
     </a>
 
-
-    <nav class="main-nav">
-
-        <a
-            href="index.html"
-            class="active"
-        >
-            Home
-        </a>
-
-        <a href="#videos">
-            Videos
-        </a>
-
-        <a href="#categories">
-            Categories
-        </a>
-
-        <a
-            href="login.html"
-            id="accountLink"
-        >
-            Sign In
-        </a>
-
+    <nav class="desktop-nav">
+      <a href="index.html" class="active">Home</a>
+      <a href="#videos">Videos</a>
+      <a href="#categories">Categories</a>
+      <a href="login.html" id="accountLink">Sign In</a>
     </nav>
 
-</div>
+    <button class="menu-button" id="menuButton" aria-label="Open menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
-</header><!-- ================= MAIN ================= --><main><!-- ================= HERO ================= --><section class="hero"><div class="container hero-content">
+  </div>
 
-
-    <div class="hero-badge">
-        🔒 PREMIUM DIGITAL PLATFORM
-    </div>
-
-
-    <h1>
-
-        Discover
-
-        <span>
-            VID SECRET
-        </span>
-
-    </h1>
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="index.html">Home</a>
+    <a href="#videos">Videos</a>
+    <a href="#categories">Categories</a>
+    <a href="login.html" id="mobileAccountLink">Sign In</a>
+  </nav>
+</header>
 
 
-    <p>
+<main>
 
-        Discover premium video content
-        through a modern, fast and simple
-        viewing experience.
+  <!-- HERO -->
 
-    </p>
+  <section class="hero">
+    <div class="hero-glow"></div>
 
+    <div class="container hero-grid">
 
-    <div class="hero-buttons">
+      <div class="hero-content">
 
-        <a
-            href="#videos"
-            class="button"
-        >
-            ▶ Explore Videos
-        </a>
+        <div class="eyebrow">
+          <span></span>
+          PREMIUM DIGITAL PLATFORM
+        </div>
 
+        <h1>
+          Discover.
+          <strong>Watch.</strong>
+          Enjoy.
+        </h1>
 
-        <a
-            href="#categories"
-            class="button secondary-button"
-        >
+        <p>
+          Explore premium digital video content
+          through a fast, modern and private viewing experience.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#videos" class="btn btn-primary">
+            Explore Videos
+            <span>→</span>
+          </a>
+
+          <a href="#categories" class="btn btn-outline">
             Browse Categories
-        </a>
+          </a>
+        </div>
 
-    </div>
+        <div class="hero-trust">
+          <span>✓ HD Quality</span>
+          <span>✓ Fast Access</span>
+          <span>✓ Private Library</span>
+        </div>
+
+      </div>
 
 
-    <div class="hero-stats">
+      <div class="hero-player">
 
+        <div class="hero-player-top">
+          <span class="live-dot"></span>
+          FEATURED CONTENT
+        </div>
 
-        <div class="stat">
+        <div class="hero-video-box">
 
-            <strong>
-                04
-            </strong>
+          <video
+            controls
+            playsinline
+            preload="metadata"
+            poster="https://storage.googleapis.com/coverr-main/mp4/Mt_Baker.jpg">
 
-            <span>
-                Videos
-            </span>
+            <source
+              src="https://storage.googleapis.com/coverr-main/mp4/Mt_Baker.mp4"
+              type="video/mp4">
+
+            Your browser does not support HTML5 video.
+          </video>
+
+          <div class="hero-play-label">
+            <span>▶</span>
+            Watch Preview
+          </div>
 
         </div>
 
+        <div class="hero-player-info">
+          <div>
+            <small>FEATURED</small>
+            <h3>Mountain Experience</h3>
+          </div>
 
-        <div class="stat">
-
-            <strong>
-                HD
-            </strong>
-
-            <span>
-                Quality
-            </span>
-
+          <span class="hd-badge">HD</span>
         </div>
 
+      </div>
 
-        <div class="stat">
+    </div>
+  </section>
 
-            <strong>
-                24/7
-            </strong>
 
-            <span>
-                Available
-            </span>
+  <!-- STATS -->
 
+  <section class="stats">
+    <div class="container stats-grid">
+
+      <div class="stat">
+        <strong>04+</strong>
+        <span>Demo Videos</span>
+      </div>
+
+      <div class="stat">
+        <strong>HD</strong>
+        <span>Video Quality</span>
+      </div>
+
+      <div class="stat">
+        <strong>24/7</strong>
+        <span>Online Access</span>
+      </div>
+
+      <div class="stat">
+        <strong>GLOBAL</strong>
+        <span>Digital Platform</span>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- VIDEOS -->
+
+  <section class="section" id="videos">
+
+    <div class="container">
+
+      <div class="section-head">
+
+        <div>
+          <span class="section-label">EXPLORE</span>
+          <h2>Latest Videos</h2>
+          <p>Watch our latest demo content.</p>
         </div>
 
+        <span class="results-count">04 VIDEOS</span>
+
+      </div>
+
+
+      <div class="video-grid">
+
+        <!-- 1 -->
+
+        <article class="video-card">
+
+          <a href="video.html?id=1" class="video-thumb">
+
+            <img
+              src="https://storage.googleapis.com/coverr-main/mp4/Mt_Baker.jpg"
+              alt="Mountain Experience"
+              loading="lazy">
+
+            <div class="thumb-overlay"></div>
+
+            <span class="play-button">▶</span>
+
+            <span class="duration">00:18</span>
+
+            <span class="quality">HD</span>
+
+          </a>
+
+          <div class="video-info">
+
+            <span class="category">FEATURED</span>
+
+            <h3>Mountain Experience</h3>
+
+            <p>
+              A cinematic nature video for testing the VID SECRET player.
+            </p>
+
+            <div class="video-bottom">
+              <span>HD</span>
+              <span>•</span>
+              <span>Free Demo</span>
+            </div>
+
+            <a href="video.html?id=1" class="watch-link">
+              Watch Now →
+            </a>
+
+          </div>
+
+        </article>
+
+
+        <!-- 2 -->
+
+        <article class="video-card">
+
+          <a href="video.html?id=2" class="video-thumb">
+
+            <img
+              src="https://storage.googleapis.com/coverr-main/mp4/Footboys.jpg"
+              alt="City Journey"
+              loading="lazy">
+
+            <div class="thumb-overlay"></div>
+
+            <span class="play-button">▶</span>
+
+            <span class="duration">00:15</span>
+
+            <span class="quality">HD</span>
+
+          </a>
+
+          <div class="video-info">
+
+            <span class="category">DISCOVER</span>
+
+            <h3>City Journey</h3>
+
+            <p>
+              A second public demo video for testing playback and navigation.
+            </p>
+
+            <div class="video-bottom">
+              <span>HD</span>
+              <span>•</span>
+              <span>Free Demo</span>
+            </div>
+
+            <a href="video.html?id=2" class="watch-link">
+              Watch Now →
+            </a>
+
+          </div>
+
+        </article>
+
+
+        <!-- 3 -->
+
+        <article class="video-card">
+
+          <a href="video.html?id=3" class="video-thumb">
+
+            <img
+              src="https://storage.googleapis.com/coverr-main/mp4/Island.jpg"
+              alt="Island Escape"
+              loading="lazy">
+
+            <div class="thumb-overlay"></div>
+
+            <span class="play-button">▶</span>
+
+            <span class="duration">00:20</span>
+
+            <span class="quality">HD</span>
+
+          </a>
+
+          <div class="video-info">
+
+            <span class="category">TRAVEL</span>
+
+            <h3>Island Escape</h3>
+
+            <p>
+              Premium-style demo content with a responsive video experience.
+            </p>
+
+            <div class="video-bottom">
+              <span>HD</span>
+              <span>•</span>
+              <span>Free Demo</span>
+            </div>
+
+            <a href="video.html?id=3" class="watch-link">
+              Watch Now →
+            </a>
+
+          </div>
+
+        </article>
+
+
+        <!-- 4 -->
+
+        <article class="video-card">
+
+          <a href="video.html?id=4" class="video-thumb">
+
+            <img
+              src="https://storage.googleapis.com/coverr-main/mp4/Beach.jpg"
+              alt="Beach Moments"
+              loading="lazy">
+
+            <div class="thumb-overlay"></div>
+
+            <span class="play-button">▶</span>
+
+            <span class="duration">00:16</span>
+
+            <span class="quality">HD</span>
+
+          </a>
+
+          <div class="video-info">
+
+            <span class="category">NEW</span>
+
+            <h3>Beach Moments</h3>
+
+            <p>
+              A clean demo experience designed for mobile and desktop.
+            </p>
+
+            <div class="video-bottom">
+              <span>HD</span>
+              <span>•</span>
+              <span>Free Demo</span>
+            </div>
+
+            <a href="video.html?id=4" class="watch-link">
+              Watch Now →
+            </a>
+
+          </div>
+
+        </article>
+
+      </div>
 
     </div>
 
-</div>
-
-</section><!-- ================= VIDEOS ================= --><section
-    id="videos"
-    class="section"
-><div class="container">
+  </section>
 
 
-    <div class="section-heading">
+  <!-- CATEGORIES -->
 
-        <span>
-            CONTENT
-        </span>
+  <section class="section categories" id="categories">
 
-        <h2>
-            Latest Videos
-        </h2>
+    <div class="container">
+
+      <div class="center-heading">
+        <span class="section-label">DISCOVER</span>
+        <h2>Browse Categories</h2>
+        <p>Explore content by category.</p>
+      </div>
+
+      <div class="category-grid">
+
+        <a href="#videos" class="category-card">
+          <span class="category-icon">🎬</span>
+          <div>
+            <h3>All Videos</h3>
+            <p>Explore everything</p>
+          </div>
+          <span>→</span>
+        </a>
+
+        <a href="#videos" class="category-card">
+          <span class="category-icon">🔥</span>
+          <div>
+            <h3>Trending</h3>
+            <p>Popular content</p>
+          </div>
+          <span>→</span>
+        </a>
+
+        <a href="#videos" class="category-card">
+          <span class="category-icon">⭐</span>
+          <div>
+            <h3>Featured</h3>
+            <p>Selected content</p>
+          </div>
+          <span>→</span>
+        </a>
+
+        <a href="#videos" class="category-card">
+          <span class="category-icon">🔒</span>
+          <div>
+            <h3>Private</h3>
+            <p>Protected content</p>
+          </div>
+          <span>→</span>
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ACCOUNT -->
+
+  <section class="account-section">
+
+    <div class="container">
+
+      <div class="account-box">
+
+        <div>
+          <span class="section-label">MEMBERS AREA</span>
+
+          <h2>
+            Create your
+            <strong>VID SECRET</strong>
+            account.
+          </h2>
+
+          <p>
+            Manage your profile, library and future purchases
+            from one secure account.
+          </p>
+        </div>
+
+        <div class="account-actions">
+          <a href="login.html" class="btn btn-primary" id="accountButton">
+            Create Account →
+          </a>
+
+          <a href="login.html" class="btn btn-outline">
+            Sign In
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+  <div class="container">
+
+    <div class="footer-grid">
+
+      <div class="footer-brand">
+
+        <a href="index.html" class="logo">
+          <span class="logo-mark">▶</span>
+          <span>VID <b>SECRET</b></span>
+        </a>
 
         <p>
-            Choose a video and start watching.
+          A modern digital platform for premium video content.
         </p>
 
-    </div>
-
-
-
-    <div class="video-grid">
-
-
-        <!-- VIDEO 1 -->
-
-        <article class="video-card">
-
-            <a
-                href="video1.html"
-                class="card-image"
-            >
-
-                <img
-                    src="images/17884079899904140292268390378909.jpg"
-                    alt="Video One"
-                    loading="lazy"
-                >
-
-                <span class="play-icon">
-                    ▶
-                </span>
-
-                <span class="video-duration">
-                    05:30
-                </span>
-
-                <span class="private-label">
-                    🔒 PRIVATE
-                </span>
-
-            </a>
-
-
-            <div class="card-content">
-
-                <span class="card-category">
-                    VIDEO
-                </span>
-
-                <h3>
-                    Video One
-                </h3>
-
-                <p>
-                    Explore the first video
-                    on VID SECRET.
-                </p>
-
-
-                <a
-                    href="video1.html"
-                    class="button card-button"
-                >
-                    ▶ Watch Now
-                </a>
-
-            </div>
-
-        </article>
-
-
-
-        <!-- VIDEO 2 -->
-
-        <article class="video-card">
-
-            <a
-                href="video2.html"
-                class="card-image"
-            >
-
-                <img
-                    src="images/17884079899904140292268390378909.jpg"
-                    alt="Video Two"
-                    loading="lazy"
-                >
-
-                <span class="play-icon">
-                    ▶
-                </span>
-
-                <span class="video-duration">
-                    08:15
-                </span>
-
-                <span class="private-label">
-                    🔒 PRIVATE
-                </span>
-
-            </a>
-
-
-            <div class="card-content">
-
-                <span class="card-category">
-                    VIDEO
-                </span>
-
-                <h3>
-                    Video Two
-                </h3>
-
-                <p>
-                    Discover more content
-                    available on the platform.
-                </p>
-
-
-                <a
-                    href="video2.html"
-                    class="button card-button"
-                >
-                    ▶ Watch Now
-                </a>
-
-            </div>
-
-        </article>
-
-
-
-        <!-- VIDEO 3 -->
-
-        <article class="video-card">
-
-            <a
-                href="video3.html"
-                class="card-image"
-            >
-
-                <img
-                    src="images/17884079899904140292268390378909.jpg"
-                    alt="Video Three"
-                    loading="lazy"
-                >
-
-                <span class="play-icon">
-                    ▶
-                </span>
-
-                <span class="video-duration">
-                    12:40
-                </span>
-
-                <span class="private-label">
-                    🔒 PRIVATE
-                </span>
-
-            </a>
-
-
-            <div class="card-content">
-
-                <span class="card-category">
-                    VIDEO
-                </span>
-
-                <h3>
-                    Video Three
-                </h3>
-
-                <p>
-                    Watch and discover
-                    more available content.
-                </p>
-
-
-                <a
-                    href="video3.html"
-                    class="button card-button"
-                >
-                    ▶ Watch Now
-                </a>
-
-            </div>
-
-        </article>
-
-
-
-        <!-- VIDEO 4 -->
-
-        <article class="video-card">
-
-            <a
-                href="video4.html"
-                class="card-image"
-            >
-
-                <img
-                    src="images/17884079899904140292268390378909.jpg"
-                    alt="Video Four"
-                    loading="lazy"
-                >
-
-                <span class="play-icon">
-                    ▶
-                </span>
-
-                <span class="video-duration">
-                    15:20
-                </span>
-
-                <span class="private-label">
-                    🔒 PRIVATE
-                </span>
-
-            </a>
-
-
-            <div class="card-content">
-
-                <span class="card-category">
-                    VIDEO
-                </span>
-
-                <h3>
-                    Video Four
-                </h3>
-
-                <p>
-                    An additional test video
-                    for VID SECRET.
-                </p>
-
-
-                <a
-                    href="video4.html"
-                    class="button card-button"
-                >
-                    ▶ Watch Now
-                </a>
-
-            </div>
-
-        </article>
-
+      </div>
+
+      <div>
+        <h4>Platform</h4>
+        <a href="index.html">Home</a>
+        <a href="#videos">Videos</a>
+        <a href="#categories">Categories</a>
+      </div>
+
+      <div>
+        <h4>Account</h4>
+        <a href="login.html">Sign In</a>
+        <a href="login.html">Create Account</a>
+      </div>
+
+      <div>
+        <h4>Legal</h4>
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+      </div>
 
     </div>
 
-</div>
-
-</section><!-- ================= CATEGORIES ================= --><section
-    id="categories"
-    class="section categories-section"
-><div class="container">
-
-
-    <div class="section-heading">
-
-        <span>
-            DISCOVER
-        </span>
-
-        <h2>
-            Categories
-        </h2>
-
-        <p>
-            Explore different types of content.
-        </p>
-
+    <div class="footer-bottom">
+      <span>© 2026 VID SECRET. All Rights Reserved.</span>
+      <span>Premium Digital Platform</span>
     </div>
 
+  </div>
 
-    <div class="categories">
-
-
-        <a
-            href="#videos"
-            class="category"
-        >
-
-            <span>
-                🎬
-            </span>
-
-            <strong>
-                Videos
-            </strong>
-
-            <small>
-                Watch content
-            </small>
-
-        </a>
+</footer>
 
 
-        <a
-            href="#videos"
-            class="category"
-        >
+<script>
+document.addEventListener("DOMContentLoaded", () => {
 
-            <span>
-                🔥
-            </span>
+  const menuButton = document.getElementById("menuButton");
+  const mobileNav = document.getElementById("mobileNav");
 
-            <strong>
-                Trending
-            </strong>
+  menuButton.addEventListener("click", () => {
+    menuButton.classList.toggle("active");
+    mobileNav.classList.toggle("active");
+  });
 
-            <small>
-                Popular content
-            </small>
-
-        </a>
-
-
-        <a
-            href="#videos"
-            class="category"
-        >
-
-            <span>
-                ⭐
-            </span>
-
-            <strong>
-                Featured
-            </strong>
-
-            <small>
-                Selected content
-            </small>
-
-        </a>
+  mobileNav.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+      menuButton.classList.remove("active");
+      mobileNav.classList.remove("active");
+    });
+  });
 
 
-        <a
-            href="#videos"
-            class="category"
-        >
+  /* Supabase session */
 
-            <span>
-                🔒
-            </span>
-
-            <strong>
-                Private
-            </strong>
-
-            <small>
-                Protected content
-            </small>
-
-        </a>
-
-
-    </div>
-
-</div>
-
-</section><!-- ================= LOGIN ================= --><section
-    id="login"
-    class="section login-section"
-><div class="container">
-
-    <div class="login-box">
-
-
-        <span class="login-icon">
-            🔐
-        </span>
-
-
-        <span class="card-category">
-            MEMBER ACCOUNT
-        </span>
-
-
-        <h2>
-            Join VID SECRET
-        </h2>
-
-
-        <p>
-            Create an account and access
-            your personal content.
-        </p>
-
-
-        <a
-            href="login.html"
-            class="button"
-            id="mainAccountButton"
-        >
-            Sign In / Create Account
-        </a>
-
-
-    </div>
-
-</div>
-
-</section></main><!-- ================= FOOTER ================= --><footer class="site-footer"><div class="container">
-
-
-    <div class="footer-logo">
-        ▶ VID <strong>SECRET</strong>
-    </div>
-
-
-    <p>
-        © 2026 VID SECRET — All Rights Reserved
-    </p>
-
-
-</div>
-
-</footer><!-- Existing website JavaScript --><script src="script.js"></script><!-- ================= SUPABASE ACCOUNT SYSTEM ================= --><script>
-
-const SUPABASE_URL =
+  const SUPABASE_URL =
     "https://qkzdlxqledsznhbifaxy.supabase.co";
 
-
-const SUPABASE_PUBLISHABLE_KEY =
+  const SUPABASE_KEY =
     "sb_publishable_ZdpHXwLlhpbXztsTXpAFTg_TgOji91v";
 
 
-const supabaseClient =
-    window.supabase.createClient(
+  const script = document.createElement("script");
+
+  script.src =
+    "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
+
+  script.onload = async () => {
+
+    const client =
+      window.supabase.createClient(
         SUPABASE_URL,
-        SUPABASE_PUBLISHABLE_KEY
-    );
+        SUPABASE_KEY
+      );
 
+    const { data } =
+      await client.auth.getSession();
 
-const accountLink =
-    document.getElementById(
-        "accountLink"
-    );
+    if (data.session) {
 
+      document.getElementById("accountLink").textContent =
+        "My Account";
 
-const mainAccountButton =
-    document.getElementById(
-        "mainAccountButton"
-    );
+      document.getElementById("accountLink").href =
+        "account.html";
 
+      document.getElementById("mobileAccountLink").textContent =
+        "My Account";
 
+      document.getElementById("mobileAccountLink").href =
+        "account.html";
 
-/* ================= UPDATE ACCOUNT UI ================= */
+      document.getElementById("accountButton").textContent =
+        "Open My Account →";
 
-async function updateAccountUI() {
-
-    try {
-
-        const {
-            data: { user }
-        } =
-            await supabaseClient.auth.getUser();
-
-
-        if (user) {
-
-            /* Header */
-
-            accountLink.textContent =
-                "👤 My Account";
-
-            accountLink.href =
-                "account.html";
-
-
-            /* Main account button */
-
-            mainAccountButton.textContent =
-                "👤 My Account";
-
-            mainAccountButton.href =
-                "account.html";
-
-
-        } else {
-
-            /* Header */
-
-            accountLink.textContent =
-                "Sign In";
-
-            accountLink.href =
-                "login.html";
-
-
-            /* Main account button */
-
-            mainAccountButton.textContent =
-                "Sign In / Create Account";
-
-            mainAccountButton.href =
-                "login.html";
-
-        }
-
-
-    } catch (error) {
-
-        console.error(
-            "Account check error:",
-            error
-        );
-
+      document.getElementById("accountButton").href =
+        "account.html";
     }
+  };
 
-}
+  document.head.appendChild(script);
 
+});
+</script>
 
-
-/* ================= START ================= */
-
-updateAccountUI();
-
-
-
-/* ================= AUTH LISTENER ================= */
-
-supabaseClient.auth.onAuthStateChange(
-    function() {
-
-        updateAccountUI();
-
-    }
-);
-
-</script></body></html>
+</body>
+                                                           </html>
