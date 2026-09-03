@@ -1,282 +1,529 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
 
-<head>
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-    <meta charset="UTF-8">
+<title>Sign In | VID SECRET</title>
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
+<meta
+    name="description"
+    content="Sign in to your VID SECRET account."
+>
+
+<meta
+    name="theme-color"
+    content="#050505"
+>
+
+<link
+    rel="stylesheet"
+    href="style.css"
+>
+
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+</head><body><!-- ================= HEADER ================= --><header class="site-header"><div class="container header-content">
+
+    <a
+        href="index.html"
+        class="logo"
     >
 
-    <title>Sign In | VID SECRET</title>
+        <span class="logo-icon">
+            ▶
+        </span>
 
-    <meta
-        name="description"
-        content="Sign in to your VID SECRET account."
-    >
+        <span class="logo-text">
+            VID <strong>SECRET</strong>
+        </span>
 
-    <meta
-        name="theme-color"
-        content="#050505"
-    >
-
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
-
-</head>
+    </a>
 
 
-<body>
+    <nav class="main-nav">
 
-
-<!-- ================= HEADER ================= -->
-
-<header class="site-header">
-
-    <div class="container header-content">
-
-        <a
-            href="index.html"
-            class="logo"
-        >
-
-            <span class="logo-icon">
-                ▶
-            </span>
-
-            <span class="logo-text">
-                VID <strong>SECRET</strong>
-            </span>
-
+        <a href="index.html">
+            Home
         </a>
 
+        <a href="index.html#videos">
+            Videos
+        </a>
 
-        <nav class="main-nav">
+        <a href="index.html#categories">
+            Categories
+        </a>
 
-            <a href="index.html">
-                Home
-            </a>
+    </nav>
 
-            <a href="index.html#videos">
-                Videos
-            </a>
+</div>
 
-            <a href="index.html#categories">
-                Categories
-            </a>
-
-        </nav>
-
-    </div>
-
-</header>
+</header><!-- ================= MAIN ================= --><main><section class="login-page"><div class="container">
 
 
-<!-- ================= MAIN ================= -->
-
-<main>
-
-<section class="login-page">
-
-    <div class="container">
+    <div class="auth-box">
 
 
-        <div class="auth-box">
+        <div class="auth-logo">
+            🔐
+        </div>
 
 
-            <div class="auth-logo">
-                🔐
-            </div>
+        <span class="card-category">
+            VID SECRET
+        </span>
 
 
-            <span class="card-category">
-                VID SECRET
-            </span>
+        <h1>
+            Sign In
+        </h1>
 
 
-            <h1>
-                Sign In
-            </h1>
+        <p class="auth-description">
+
+            Sign in to access your account
+            and personal content.
+
+        </p>
 
 
-            <p class="auth-description">
+        <!-- LOGIN FORM -->
 
-                Sign in to access your account
-                and personal content.
-
-            </p>
+        <form id="loginForm">
 
 
-            <!-- LOGIN FORM -->
+            <div class="form-group">
 
-            <form id="loginForm">
+                <label for="email">
+                    Email Address
+                </label>
 
-
-                <div class="form-group">
-
-                    <label for="email">
-                        Email Address
-                    </label>
-
-                    <input
-                        type="email"
-                        id="email"
-                        placeholder="example@email.com"
-                        autocomplete="email"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="password">
-                        Password
-                    </label>
-
-                    <input
-                        type="password"
-                        id="password"
-                        placeholder="Enter your password"
-                        autocomplete="current-password"
-                        required
-                    >
-
-                </div>
-
-
-                <button
-                    type="submit"
-                    class="button auth-button"
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="example@email.com"
+                    autocomplete="email"
+                    required
                 >
 
-                    Sign In
-
-                </button>
+            </div>
 
 
-            </form>
+            <div class="form-group">
 
+                <label for="password">
+                    Password
+                </label>
 
-            <!-- DIVIDER -->
-
-            <div class="auth-divider">
-
-                <span>
-                    OR
-                </span>
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    required
+                >
 
             </div>
 
 
-            <!-- REGISTER -->
-
             <button
-                type="button"
-                class="button secondary-button auth-button"
-                onclick="showRegister()"
+                type="submit"
+                class="button auth-button"
+                id="loginButton"
             >
 
-                Create New Account
+                Sign In
 
             </button>
 
 
-            <!-- MESSAGE -->
-
-            <p
-                id="authMessage"
-                class="auth-message"
-            ></p>
+        </form>
 
 
-            <!-- BACK -->
+        <!-- DIVIDER -->
 
-            <a
-                href="index.html"
-                class="back-link auth-back"
-            >
+        <div class="auth-divider">
 
-                ← Back to Home
-
-            </a>
-
-
-        </div>
-
-    </div>
-
-</section>
-
-</main>
-
-
-<!-- ================= FOOTER ================= -->
-
-<footer class="site-footer">
-
-    <div class="container">
-
-        <div class="footer-logo">
-
-            ▶ VID <strong>SECRET</strong>
+            <span>
+                OR
+            </span>
 
         </div>
 
 
-        <p>
+        <!-- REGISTER -->
 
-            © 2026 VID SECRET — All Rights Reserved
+        <button
+            type="button"
+            class="button secondary-button auth-button"
+            onclick="showRegister()"
+        >
 
-        </p>
+            Create New Account
+
+        </button>
+
+
+        <!-- MESSAGE -->
+
+        <p
+            id="authMessage"
+            class="auth-message"
+        ></p>
+
+
+        <!-- BACK -->
+
+        <a
+            href="index.html"
+            class="back-link auth-back"
+        >
+
+            ← Back to Home
+
+        </a>
+
 
     </div>
 
-</footer>
+</div>
+
+</section></main><!-- ================= FOOTER ================= --><footer class="site-footer"><div class="container">
+
+    <div class="footer-logo">
+
+        ▶ VID <strong>SECRET</strong>
+
+    </div>
 
 
-<!-- ================= SCRIPT ================= -->
+    <p>
 
-<script>
+        © 2026 VID SECRET — All Rights Reserved
+
+    </p>
+
+</div>
+
+</footer><!-- ================= SUPABASE SCRIPT ================= --><script>
+
+const SUPABASE_URL =
+    "https://qkzdlxqledsznhbifaxy.supabase.co";
+
+
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_ZdpHXwLlhpbXztsTXpAFTg_TgOji91v";
+
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
+
 
 const loginForm =
     document.getElementById("loginForm");
 
 
+const loginButton =
+    document.getElementById("loginButton");
+
+
+const message =
+    document.getElementById("authMessage");
+
+
+/* ================= LOGIN ================= */
+
 loginForm.addEventListener(
     "submit",
-    function(event) {
+    async function(event) {
 
         event.preventDefault();
 
-        const message =
-            document.getElementById("authMessage");
+
+        const email =
+            document.getElementById("email").value.trim();
+
+
+        const password =
+            document.getElementById("password").value;
+
 
         message.textContent =
-            "The account system will be connected to the database in the next phase.";
+            "Signing in...";
+
+
+        loginButton.disabled =
+            true;
+
+
+        try {
+
+            const { data, error } =
+                await supabaseClient.auth.signInWithPassword({
+
+                    email: email,
+
+                    password: password
+
+                });
+
+
+            if (error) {
+
+                throw error;
+
+            }
+
+
+            if (data.user) {
+
+                message.textContent =
+                    "Login successful!";
+
+
+                /*
+                 * Save the user's UID temporarily.
+                 */
+
+                console.log(
+                    "User UID:",
+                    data.user.id
+                );
+
+
+                /*
+                 * Give Supabase a moment
+                 * to save the session.
+                 */
+
+                setTimeout(
+                    function() {
+
+                        window.location.href =
+                            "index.html";
+
+                    },
+                    800
+                );
+
+            }
+
+
+        } catch (error) {
+
+            console.error(error);
+
+
+            message.textContent =
+                getLoginError(error.message);
+
+
+        } finally {
+
+            loginButton.disabled =
+                false;
+
+        }
 
     }
 );
 
 
-function showRegister() {
+/* ================= REGISTER ================= */
 
-    const message =
-        document.getElementById("authMessage");
+async function showRegister() {
+
+    const email =
+        document.getElementById("email").value.trim();
+
+
+    const password =
+        document.getElementById("password").value;
+
+
+    if (!email || !password) {
+
+        message.textContent =
+            "Enter your email and password first.";
+
+        return;
+
+    }
+
+
+    if (password.length < 6) {
+
+        message.textContent =
+            "Password must be at least 6 characters.";
+
+        return;
+
+    }
+
 
     message.textContent =
-        "Account registration will be activated after connecting the database.";
+        "Creating your account...";
+
+
+    try {
+
+        const { data, error } =
+            await supabaseClient.auth.signUp({
+
+                email: email,
+
+                password: password
+
+            });
+
+
+        if (error) {
+
+            throw error;
+
+        }
+
+
+        if (data.user) {
+
+            if (data.session) {
+
+                message.textContent =
+                    "Account created successfully!";
+
+
+                setTimeout(
+                    function() {
+
+                        window.location.href =
+                            "index.html";
+
+                    },
+                    800
+                );
+
+            } else {
+
+                message.textContent =
+                    "Account created. Please check your email to confirm your account.";
+
+            }
+
+        }
+
+
+    } catch (error) {
+
+        console.error(error);
+
+
+        message.textContent =
+            getLoginError(error.message);
+
+    }
 
 }
 
-</script>
+
+/* ================= ERROR MESSAGES ================= */
+
+function getLoginError(error) {
+
+    if (!error) {
+
+        return "Something went wrong.";
+
+    }
 
 
-</body>
+    const text =
+        error.toLowerCase();
 
-</html>
+
+    if (
+        text.includes("invalid login credentials")
+    ) {
+
+        return "Incorrect email or password.";
+
+    }
+
+
+    if (
+        text.includes("email not confirmed")
+    ) {
+
+        return "Please confirm your email before signing in.";
+
+    }
+
+
+    if (
+        text.includes("user already registered")
+    ) {
+
+        return "This email is already registered.";
+
+    }
+
+
+    return error;
+
+}
+
+
+/* ================= CHECK EXISTING SESSION ================= */
+
+async function checkSession() {
+
+    const { data } =
+        await supabaseClient.auth.getSession();
+
+
+    if (data.session) {
+
+        console.log(
+            "Already logged in:",
+            data.session.user.id
+        );
+
+    }
+
+}
+
+
+checkSession();
+
+
+/* ================= AUTH STATE ================= */
+
+supabaseClient.auth.onAuthStateChange(
+
+    function(event, session) {
+
+        console.log(
+            "Auth event:",
+            event
+        );
+
+
+        if (session) {
+
+            console.log(
+                "Logged in UID:",
+                session.user.id
+            );
+
+        }
+
+    }
+
+);
+
+</script></body></html>
