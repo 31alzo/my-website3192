@@ -588,6 +588,213 @@ color: #666;
 .main-nav a {
     font-size: 12px;
     padding: 6px 7px;
+}/* ================================
+VIDEO PAGE
+================================ */
+
+.video-section {
+background: var(--light);
+min-height: 70vh;
+padding: 45px 0 70px;
 }
+
+.back-link {
+display: inline-flex;
+align-items: center;
+gap: 8px;
+
+color: #555;
+
+font-size: 14px;
+font-weight: bold;
+
+margin-bottom: 20px;
+
+transition: 0.2s;
+
+}
+
+.back-link:hover {
+color: var(--red);
+}
+
+/* VIDEO PLAYER */
+
+.video-player {
+width: 100%;
+
+background: #000;
+
+border-radius: 14px;
+
+overflow: hidden;
+
+box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.18);
+
+}
+
+.video-placeholder {
+min-height: 500px;
+
+display: flex;
+flex-direction: column;
+
+align-items: center;
+justify-content: center;
+
+text-align: center;
+
+color: white;
+
+background:
+    radial-gradient(
+        circle,
+        #292929 0%,
+        #080808 70%
+    );
+
+padding: 30px;
+
+}
+
+.video-lock {
+font-size: 42px;
+margin-bottom: 10px;
+}
+
+.video-play {
+width: 72px;
+height: 72px;
+
+display: flex;
+align-items: center;
+justify-content: center;
+
+background: var(--yellow);
+
+color: var(--black);
+
+border-radius: 50%;
+
+font-size: 25px;
+
+margin-bottom: 20px;
+
+box-shadow:
+    0 0 0 6px rgba(255, 210, 28, 0.12);
+
+}
+
+.video-placeholder h1 {
+font-size: 26px;
+margin-bottom: 5px;
+}
+
+.video-placeholder p {
+color: #aaa;
+}
+
+/* VIDEO INFORMATION */
+
+.video-info {
+background: var(--white);
+
+margin-top: 20px;
+
+padding: 25px;
+
+border-radius: 14px;
+
+border: 1px solid #ddd;
+
+position: relative;
+
+}
+
+.video-info .private-label {
+position: static;
+
+display: inline-block;
+
+margin-bottom: 12px;
+
+}
+
+.video-info h1 {
+font-size: 28px;
+
+margin-bottom: 10px;
+
+}
+
+.video-description {
+color: #666;
+
+max-width: 800px;
+
+margin-bottom: 20px;
+
+}
+
+.video-meta {
+display: flex;
+
+flex-wrap: wrap;
+
+gap: 10px;
+
+}
+
+.video-meta span {
+background: #f1f1f1;
+
+border: 1px solid #ddd;
+
+border-radius: 7px;
+
+padding: 7px 12px;
+
+font-size: 13px;
+
+color: #555;
+
+}
+
+/* VIDEO MOBILE */
+
+@media (max-width: 768px) {
+
+.video-section {
+    padding: 30px 0 50px;
+}
+
+.video-placeholder {
+    min-height: 280px;
+}
+
+.video-play {
+    width: 60px;
+    height: 60px;
+    font-size: 21px;
+}
+
+.video-placeholder h1 {
+    font-size: 21px;
+}
+
+.video-info {
+    padding: 20px;
+}
+
+.video-info h1 {
+    font-size: 23px;
+}
+
+.video-description {
+    font-size: 14px;
+}
+
+  }
 
    }
