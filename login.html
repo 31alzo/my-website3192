@@ -1,32 +1,74 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>تسجيل الدخول | VID SECRET</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <link rel="stylesheet" href="style.css">
+    <title>Sign In | VID SECRET</title>
+
+    <meta
+        name="description"
+        content="Sign in to your VID SECRET account."
+    >
+
+    <meta
+        name="theme-color"
+        content="#050505"
+    >
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
 
+
 <body>
+
+
+<!-- ================= HEADER ================= -->
 
 <header class="site-header">
 
     <div class="container header-content">
 
-        <a href="index.html" class="logo">
-            <span class="logo-icon">▶</span>
+        <a
+            href="index.html"
+            class="logo"
+        >
+
+            <span class="logo-icon">
+                ▶
+            </span>
+
             <span class="logo-text">
                 VID <strong>SECRET</strong>
             </span>
+
         </a>
 
+
         <nav class="main-nav">
-            <a href="index.html">الرئيسية</a>
-            <a href="index.html#videos">الفيديوهات</a>
-            <a href="index.html#categories">التصنيفات</a>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="index.html#videos">
+                Videos
+            </a>
+
+            <a href="index.html#categories">
+                Categories
+            </a>
+
         </nav>
 
     </div>
@@ -34,43 +76,57 @@
 </header>
 
 
+<!-- ================= MAIN ================= -->
+
 <main>
 
 <section class="login-page">
 
     <div class="container">
 
+
         <div class="auth-box">
+
 
             <div class="auth-logo">
                 🔐
             </div>
 
+
             <span class="card-category">
                 VID SECRET
             </span>
 
+
             <h1>
-                تسجيل الدخول
+                Sign In
             </h1>
 
+
             <p class="auth-description">
-                سجّل الدخول للوصول إلى حسابك ومحتواك.
+
+                Sign in to access your account
+                and personal content.
+
             </p>
 
 
+            <!-- LOGIN FORM -->
+
             <form id="loginForm">
+
 
                 <div class="form-group">
 
                     <label for="email">
-                        البريد الإلكتروني
+                        Email Address
                     </label>
 
                     <input
                         type="email"
                         id="email"
                         placeholder="example@email.com"
+                        autocomplete="email"
                         required
                     >
 
@@ -80,13 +136,14 @@
                 <div class="form-group">
 
                     <label for="password">
-                        كلمة المرور
+                        Password
                     </label>
 
                     <input
                         type="password"
                         id="password"
-                        placeholder="أدخل كلمة المرور"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
                         required
                     >
 
@@ -97,25 +154,40 @@
                     type="submit"
                     class="button auth-button"
                 >
-                    تسجيل الدخول
+
+                    Sign In
+
                 </button>
+
 
             </form>
 
 
+            <!-- DIVIDER -->
+
             <div class="auth-divider">
-                <span>أو</span>
+
+                <span>
+                    OR
+                </span>
+
             </div>
 
+
+            <!-- REGISTER -->
 
             <button
                 type="button"
                 class="button secondary-button auth-button"
                 onclick="showRegister()"
             >
-                إنشاء حساب جديد
+
+                Create New Account
+
             </button>
 
+
+            <!-- MESSAGE -->
 
             <p
                 id="authMessage"
@@ -123,12 +195,17 @@
             ></p>
 
 
+            <!-- BACK -->
+
             <a
                 href="index.html"
                 class="back-link auth-back"
             >
-                → العودة إلى الصفحة الرئيسية
+
+                ← Back to Home
+
             </a>
+
 
         </div>
 
@@ -139,16 +216,23 @@
 </main>
 
 
+<!-- ================= FOOTER ================= -->
+
 <footer class="site-footer">
 
     <div class="container">
 
         <div class="footer-logo">
+
             ▶ VID <strong>SECRET</strong>
+
         </div>
 
+
         <p>
-            © 2026 VID SECRET — جميع الحقوق محفوظة
+
+            © 2026 VID SECRET — All Rights Reserved
+
         </p>
 
     </div>
@@ -156,32 +240,43 @@
 </footer>
 
 
+<!-- ================= SCRIPT ================= -->
+
 <script>
 
-const loginForm = document.getElementById("loginForm");
+const loginForm =
+    document.getElementById("loginForm");
 
-loginForm.addEventListener("submit", function(event) {
 
-    event.preventDefault();
+loginForm.addEventListener(
+    "submit",
+    function(event) {
 
-    const message = document.getElementById("authMessage");
+        event.preventDefault();
 
-    message.textContent =
-        "نظام الحسابات سيتم ربطه بقاعدة البيانات في الخطوة القادمة.";
+        const message =
+            document.getElementById("authMessage");
 
-});
+        message.textContent =
+            "The account system will be connected to the database in the next phase.";
+
+    }
+);
 
 
 function showRegister() {
 
-    const message = document.getElementById("authMessage");
+    const message =
+        document.getElementById("authMessage");
 
     message.textContent =
-        "إنشاء الحساب سيتم تفعيله بعد ربط قاعدة البيانات.";
+        "Account registration will be activated after connecting the database.";
 
 }
 
 </script>
 
+
 </body>
-              </html>
+
+</html>
