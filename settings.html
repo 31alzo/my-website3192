@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>الإعدادات | عالم شيخ الأساتذة</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Tahoma,sans-serif;
+    background:#f5f9ff;
+    color:#14213d;
+    min-height:100vh;
+}
+
+header{
+    background:white;
+    border-bottom:1px solid #e5edf8;
+    position:sticky;
+    top:0;
+    z-index:20;
+}
+
+.header-inner{
+    max-width:900px;
+    margin:auto;
+    padding:12px 16px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:#075dcc;
+    font-weight:bold;
+}
+
+.brand-icon{
+    width:42px;
+    height:42px;
+    background:#1677ff;
+    color:white;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+}
+
+.back-btn{
+    border:none;
+    background:#eef5ff;
+    color:#1268dc;
+    padding:10px 14px;
+    border-radius:10px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+main{
+    max-width:900px;
+    margin:auto;
+    padding:25px 16px 60px;
+}
+
+.page-title{
+    margin-bottom:6px;
+    font-size:27px;
+}
+
+.page-description{
+    color:#667085;
+    font-size:14px;
+    margin-bottom:25px;
+    line-height:1.7;
+}
+
+.section{
+    margin-bottom:25px;
+}
+
+.section-title{
+    font-size:18px;
+    margin-bottom:11px;
+}
+
+.card{
+    background:white;
+    border:1px solid #e5edf8;
+    border-radius:18px;
+    overflow:hidden;
+}
+
+.setting-row{
+    min-height:66px;
+    padding:14px 16px;
+    border-bottom:1px solid #edf2f7;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.setting-row:last-child{
+    border-bottom:none;
+}
+
+.setting-info{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    min-width:0;
+}
+
+.setting-icon{
+    width:40px;
+    height:40px;
+    flex-shrink:0;
+    border-radius:12px;
+    background:#eef5ff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+}
+
+.setting-text{
+    min-width:0;
+}
+
+.setting-name{
+    font-size:14px;
+    font-weight:bold;
+    margin-bottom:4px;
+}
+
+.setting-description{
+    color:#667085;
+    font-size:11px;
+    line-height:1.5;
+}
+
+.value{
+    color:#1268dc;
+    font-size:13px;
+    font-weight:bold;
+    text-align:left;
+}
+
+.select{
+    border:1px solid #d7e3f3;
+    background:#f8fbff;
+    color:#14213d;
+    padding:9px 12px;
+    border-radius:10px;
+    font-size:13px;
+    outline:none;
+}
+
+.select:focus{
+    border-color:#1677ff;
+}
+
+.switch{
+    position:relative;
+    width:48px;
+    height:27px;
+    flex-shrink:0;
+}
+
+.switch input{
+    display:none;
+}
+
+.slider{
+    position:absolute;
+    inset:0;
+    background:#d7e0ec;
+    border-radius:30px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.slider:before{
+    content:"";
+    position:absolute;
+    width:21px;
+    height:21px;
+    right:3px;
+    top:3px;
+    background:white;
+    border-radius:50%;
+    transition:.2s;
+    box-shadow:0 2px 5px rgba(0,0,0,.15);
+}
+
+.switch input:checked + .slider{
+    background:#1677ff;
+}
+
+.switch input:checked + .slider:before{
+    transform:translateX(-21px);
+}
+
+.action{
+    width:100%;
+    border:1px solid #e5edf8;
+    background:white;
+    color:#344054;
+    padding:15px;
+    border-radius:14px;
+    text-align:right;
+    font-size:14px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.action:hover{
+    border-color:#1677ff;
+    color:#1268dc;
+}
+
+.danger{
+    color:#b42318;
+    background:#fff5f4;
+    border-color:#fecdca;
+}
+
+.profile-mini{
+    padding:20px;
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.avatar{
+    width:58px;
+    height:58px;
+    border-radius:18px;
+    background:#1677ff;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:23px;
+    font-weight:bold;
+    flex-shrink:0;
+}
+
+.profile-name{
+    font-size:17px;
+    font-weight:bold;
+}
+
+.profile-email{
+    direction:ltr;
+    color:#667085;
+    font-size:12px;
+    margin-top:5px;
+    word-break:break-all;
+}
+
+.status{
+    display:inline-block;
+    margin-top:8px;
+    background:#eaf3ff;
+    color:#1268dc;
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:bold;
+}
+
+.info-box{
+    background:#eef5ff;
+    border:1px solid #d8e8ff;
+    padding:15px;
+    border-radius:15px;
+    color:#345;
+    font-size:13px;
+    line-height:1.8;
+}
+
+.footer{
+    text-align:center;
+    color:#98a2b3;
+    font-size:11px;
+    margin-top:30px;
+}
+
+@media(max-width:500px){
+
+    .page-title{
+        font-size:24px;
+    }
+
+    .setting-row{
+        padding:13px;
+    }
+
+    .setting-description{
+        max-width:220px;
+    }
+
+    .brand span{
+        display:none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-inner">
+
+        <div class="brand">
+            <div class="brand-icon">AI</div>
+            <span>عالم شيخ الأساتذة</span>
+        </div>
+
+        <button class="back-btn" onclick="goAccount()">
+            حسابي
+        </button>
+
+    </div>
+</header>
+
+<main>
+
+    <h1 class="page-title">الإعدادات</h1>
+
+    <p class="page-description">
+        تحكم في حسابك وطريقة استخدامك للمنصة وتجربة التعلم الخاصة بك.
+    </p>
+
+
+    <!-- الحساب -->
+
+    <section class="section">
+
+        <h2 class="section-title">👤 الحساب</h2>
+
+        <div class="card">
+
+            <div class="profile-mini">
+
+                <div class="avatar" id="avatar">
+                    AI
+                </div>
+
+                <div>
+
+                    <div class="profile-name" id="userName">
+                        الطالب
+                    </div>
+
+                    <div class="profile-email" id="userEmail">
+                        -
+                    </div>
+
+                    <span class="status">
+                        حساب نشط
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- المظهر واللغة -->
+
+    <section class="section">
+
+        <h2 class="section-title">🎨 المظهر واللغة</h2>
+
+        <div class="card">
+
+            <div class="setting-row">
+
+                <div class="setting-info">
+
+                    <div class="setting-icon">🌐</div>
+
+                    <div class="setting-text">
+
+                        <div class="setting-name">
+                            اللغة
+                        </div>
+
+                        <div class="setting-description">
+                            لغة واجهة المنصة
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <select class="select" id="language">
+
+                    <option value="ar">
+                        العربية
+                    </option>
+
+                    <option value="fr">
+                        Français
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="setting-row">
+
+                <div class="setting-info">
+
+                    <div class="setting-icon">🌓</div>
+
+                    <div class="setting-text">
+
+                        <div class="setting-name">
+                            الوضع الداكن
+                        </div>
+
+                        <div class="setting-description">
+                            تغيير مظهر المنصة
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        id="darkMode"
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- الإشعارات -->
+
+    <section class="section">
+
+        <h2 class="section-title">🔔 الإشعارات</h2>
+
+        <div class="card">
+
+            <div class="setting-row">
+
+                <div class="setting-info">
+
+                    <div class="setting-icon">📢</div>
+
+                    <div class="setting-text">
+
+                        <div class="setting-name">
+                            إشعارات المنصة
+                        </div>
+
+                        <div class="setting-description">
+                            أخبار المنصة والتحديثات المهمة
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        id="platformNotifications"
+                        checked
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <div class="setting-row">
+
+                <div class="setting-info">
+
+                    <div class="setting-icon">📚</div>
+
+                    <div class="setting-text">
+
+                        <div class="setting-name">
+                            تذكير بالدراسة
+                        </div>
+
+                        <div class="setting-description">
+                            تذكيرك بمتابعة دروسك
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        id="studyNotifications"
+                        checked
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <div class="setting-row">
+
+                <div class="setting-info">
+
+                    <div class="setting-icon">🏆</div>
+
+                    <div class="setting-text">
+
+                        <div class="setting-name">
+                            التحديات والإنجازات
+                        </div>
+
+                        <div class="setting-description">
+                            إشعارات التحديات والشارات والنقاط
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        id="achievementNotifications"
+                        checked
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- إعدادات التعلم -->
+
+    <section class="section">
+
+        <h2 class="section-title">📚 التعلم</h2>
+
+        <div class="card">
+
+            <div class="setting-row">
+
+                <div class="setting-info">
+
+                    <div class="setting-icon">▶️</div>
+
+                    <div class="setting-text">
+
+                        <div class="setting-name">
+                            متابعة التعلم تلقائيًا
+                        </div>
+
+                        <div class="setting-description">
+                            فتح آخر درس كنت تدرسه
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        id="continueLearning"
+                        checked
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <div class="setting-row">
+
+                <div class="setting-info">
+
+                    <div class="setting-icon">⏰</div>
+
+                    <div class="setting-text">
+
+                        <div class="setting-name">
+                            مدة الدراسة المفضلة
+                        </div>
+
+                        <div class="setting-description">
+                            المدة التي تريد تخصيصها لجلسة الدراسة
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <select class="select" id="studyDuration">
+
+                    <option value="15">
+                        15 دقيقة
+                    </option>
+
+                    <option value="30" selected>
+                        30 دقيقة
+                    </option>
+
+                    <option value="45">
+                        45 دقيقة
+                    </option>
+
+                    <option value="60">
+                        ساعة
+                    </option>
+
+                    <option value="90">
+                        ساعة ونصف
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- الذكاء الاصطناعي -->
+
+    <section class="section">
+
+        <h2 class="section-title">🤖 الأستاذ AI</h2>
+
+        <div class="card">
+
+            <div class="setting-row">
+
+                <div class="setting-info">
+
+                    <div class="setting-icon">🧠</div>
+
+                    <div class="setting-text">
+
+                        <div class="setting-name">
+                            المساعدة الذكية
+                        </div>
+
+                        <div class="setting-description">
+                            السماح للأستاذ AI بمساعدتك في التعلم
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        id="aiAssistant"
+                        checked
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+            <div style="padding:15px">
+
+                <div class="info-box">
+
+                    الأستاذ AI سيعمل لاحقًا ضمن المنهج الدراسي
+                    لمساعدتك في فهم الدروس وحل التمارين والتدرب
+                    على الأسئلة.
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- الخصوصية والمجتمع -->
+
+    <section class="section">
+
+        <h2 class="section-title">👥 الخصوصية والمجتمع</h2>
+
+        <div class="card">
+
+            <div class="setting-row">
+
+                <div class="setting-info">
+
+                    <div class="setting-icon">🏅</div>
+
+                    <div class="setting-text">
+
+                        <div class="setting-name">
+                            الظهور في لوحة المتصدرين
+                        </div>
+
+                        <div class="setting-description">
+                            السماح بظهور حسابك في الترتيب العام
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        id="leaderboard"
+                        checked
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <div class="setting-row">
+
+                <div class="setting-info">
+
+                    <div class="setting-icon">🎭</div>
+
+                    <div class="setting-text">
+
+                        <div class="setting-name">
+                            الاسم المستعار
+                        </div>
+
+                        <div class="setting-description">
+                            استخدام اسم مستعار في المجتمع لاحقًا
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <button
+                    class="action"
+                    style="width:auto;padding:9px 12px"
+                    onclick="comingSoon('الاسم المستعار')"
+                >
+                    إعداد
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- الأمان -->
+
+    <section class="section">
+
+        <h2 class="section-title">🔐 الأمان</h2>
+
+        <div class="card">
+
+            <div class="setting-row">
+
+                <div class="setting-info">
+
+                    <div class="setting-icon">🔑</div>
+
+                    <div class="setting-text">
+
+                        <div class="setting-name">
+                            تغيير كلمة المرور
+                        </div>
+
+                        <div class="setting-description">
+                            تحديث كلمة مرور حسابك
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <button
+                    class="action"
+                    style="width:auto;padding:9px 12px"
+                    onclick="comingSoon('تغيير كلمة المرور')"
+                >
+                    فتح
+                </button>
+
+            </div>
+
+
+            <div class="setting-row">
+
+                <div class="setting-info">
+
+                    <div class="setting-icon">🛡️</div>
+
+                    <div class="setting-text">
+
+                        <div class="setting-name">
+                            جلسات الحساب
+                        </div>
+
+                        <div class="setting-description">
+                            إدارة الأجهزة والجلسات المسجلة
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <button
+                    class="action"
+                    style="width:auto;padding:9px 12px"
+                    onclick="comingSoon('جلسات الحساب')"
+                >
+                    فتح
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- الاشتراك -->
+
+    <section class="section">
+
+        <h2 class="section-title">💳 الاشتراك والمدفوعات</h2>
+
+        <div class="card">
+
+            <div class="setting-row">
+
+                <div class="setting-info">
+
+                    <div class="setting-icon">📋</div>
+
+                    <div class="setting-text">
+
+                        <div class="setting-name">
+                            حالة الاشتراك
+                        </div>
+
+                        <div class="setting-description">
+                            الاشتراكات والوصول إلى الفصول
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <span class="value">
+                    غير محدد
+                </span>
+
+            </div>
+
+
+            <div style="padding:15px">
+
+                <button
+                    class="action"
+                    onclick="comingSoon('الاشتراكات والمدفوعات')"
+                >
+                    💳 إدارة الاشتراكات والمدفوعات
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- المساعدة -->
+
+    <section class="section">
+
+        <h2 class="section-title">ℹ️ المساعدة</h2>
+
+        <div class="card">
+
+            <div class="setting-row">
+
+                <div class="setting-info">
+
+                    <div class="setting-icon">❓</div>
+
+                    <div class="setting-text">
+
+                        <div class="setting-name">
+                            مركز المساعدة
+                        </div>
+
+                        <div class="setting-description">
+                            الأسئلة والمساعدة في استخدام المنصة
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <button
+                    class="action"
+                    style="width:auto;padding:9px 12px"
+                    onclick="comingSoon('مركز المساعدة')"
+                >
+                    فتح
+                </button>
+
+            </div>
+
+
+            <div class="setting-row">
+
+                <div class="setting-info">
+
+                    <div class="setting-icon">📩</div>
+
+                    <div class="setting-text">
+
+                        <div class="setting-name">
+                            التواصل معنا
+                        </div>
+
+                        <div class="setting-description">
+                            التواصل مع إدارة المنصة
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <button
+                    class="action"
+                    style="width:auto;padding:9px 12px"
+                    onclick="comingSoon('التواصل معنا')"
+                >
+                    فتح
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- معلومات -->
+
+    <section class="section">
+
+        <h2 class="section-title">📱 حول المنصة</h2>
+
+        <div class="card">
+
+            <div class="setting-row">
+
+                <div class="setting-info">
+
+                    <div class="setting-icon">🎓</div>
+
+                    <div class="setting-text">
+
+                        <div class="setting-name">
+                            عالم شيخ الأساتذة
+                        </div>
+
+                        <div class="setting-description">
+                            منصة تعليمية رقمية
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <span class="value">
+                    الإصدار 1.0
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- تسجيل الخروج -->
+
+    <section class="section">
+
+        <button
+            class="action danger"
+            onclick="logout()"
+        >
+            🚪 تسجيل الخروج
+        </button>
+
+    </section>
+
+
+    <div class="footer">
+        عالم شيخ الأساتذة — الأستاذ AI
+    </div>
+
+</main>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL =
+"https://qkzdlxqledsznhbifaxy.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_ZdpHXwLlhpbXztsTXpAFTg_TgOji91v";
+
+const supabaseClient =
+supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+// التحقق من تسجيل الدخول
+
+async function loadUser(){
+
+    const {data,error} =
+        await supabaseClient.auth.getSession();
+
+    if(error || !data.session){
+
+        window.location.href =
+            "login.html";
+
+        return;
+    }
+
+    const user =
+        data.session.user;
+
+    let name =
+        user.user_metadata?.full_name ||
+        user.user_metadata?.name ||
+        user.user_metadata?.display_name;
+
+    if(!name){
+
+        name =
+            user.email
+            ? user.email.split("@")[0]
+            : "الطالب";
+    }
+
+    const email =
+        user.email || "-";
+
+
+    document.getElementById(
+        "userName"
+    ).textContent = name;
+
+
+    document.getElementById(
+        "userEmail"
+    ).textContent = email;
+
+
+    const firstLetter =
+        name.trim().charAt(0);
+
+    if(firstLetter){
+
+        document.getElementById(
+            "avatar"
+        ).textContent = firstLetter;
+    }
+
+
+    loadSettings();
+
+}
+
+
+// حفظ الإعدادات
+
+function saveSettings(){
+
+    const settings = {
+
+        language:
+            document.getElementById(
+                "language"
+            ).value,
+
+        darkMode:
+            document.getElementById(
+                "darkMode"
+            ).checked,
+
+        platformNotifications:
+            document.getElementById(
+                "platformNotifications"
+            ).checked,
+
+        studyNotifications:
+            document.getElementById(
+                "studyNotifications"
+            ).checked,
+
+        achievementNotifications:
+            document.getElementById(
+                "achievementNotifications"
+            ).checked,
+
+        continueLearning:
+            document.getElementById(
+                "continueLearning"
+            ).checked,
+
+        studyDuration:
+            document.getElementById(
+                "studyDuration"
+            ).value,
+
+        aiAssistant:
+            document.getElementById(
+                "aiAssistant"
+            ).checked,
+
+        leaderboard:
+            document.getElementById(
+                "leaderboard"
+            ).checked
+    };
+
+
+    localStorage.setItem(
+        "platform_settings",
+        JSON.stringify(settings)
+    );
+
+}
+
+
+// تحميل الإعدادات
+
+function loadSettings(){
+
+    const saved =
+        localStorage.getItem(
+            "platform_settings"
+        );
+
+    if(!saved){
+        return;
+    }
+
+    try{
+
+        const settings =
+            JSON.parse(saved);
+
+
+        if(settings.language){
+
+            document.getElementById(
+                "language"
+            ).value =
+                settings.language;
+        }
+
+
+        if(typeof settings.darkMode === "boolean"){
+
+            document.getElementById(
+                "darkMode"
+            ).checked =
+                settings.darkMode;
+        }
+
+
+        if(typeof settings.platformNotifications === "boolean"){
+
+            document.getElementById(
+                "platformNotifications"
+            ).checked =
+                settings.platformNotifications;
+        }
+
+
+        if(typeof settings.studyNotifications === "boolean"){
+
+            document.getElementById(
+                "studyNotifications"
+            ).checked =
+                settings.studyNotifications;
+        }
+
+
+        if(typeof settings.achievementNotifications === "boolean"){
+
+            document.getElementById(
+                "achievementNotifications"
+            ).checked =
+                settings.achievementNotifications;
+        }
+
+
+        if(typeof settings.continueLearning === "boolean"){
+
+            document.getElementById(
+                "continueLearning"
+            ).checked =
+                settings.continueLearning;
+        }
+
+
+        if(settings.studyDuration){
+
+            document.getElementById(
+                "studyDuration"
+            ).value =
+                settings.studyDuration;
+        }
+
+
+        if(typeof settings.aiAssistant === "boolean"){
+
+            document.getElementById(
+                "aiAssistant"
+            ).checked =
+                settings.aiAssistant;
+        }
+
+
+        if(typeof settings.leaderboard === "boolean"){
+
+            document.getElementById(
+                "leaderboard"
+            ).checked =
+                settings.leaderboard;
+        }
+
+
+    }catch(error){
+
+        console.log(
+            "Settings error:",
+            error
+        );
+
+    }
+
+}
+
+
+// حفظ أي تغيير
+
+document.addEventListener(
+    "change",
+    function(){
+
+        saveSettings();
+
+    }
+);
+
+
+// العودة للحساب
+
+function goAccount(){
+
+    window.location.href =
+        "account.html";
+}
+
+
+// تسجيل الخروج
+
+async function logout(){
+
+    const confirmed =
+        confirm(
+            "هل تريد تسجيل الخروج من حسابك؟"
+        );
+
+    if(!confirmed){
+        return;
+    }
+
+
+    const {error} =
+        await supabaseClient.auth.signOut();
+
+
+    if(error){
+
+        alert(
+            "حدث خطأ أثناء تسجيل الخروج."
+        );
+
+        return;
+    }
+
+
+    localStorage.removeItem(
+        "student_level"
+    );
+
+    localStorage.removeItem(
+        "platform_settings"
+    );
+
+
+    window.location.href =
+        "login.html";
+}
+
+
+// العناصر التي سنفعلها لاحقًا
+
+function comingSoon(section){
+
+    alert(
+        "قسم " +
+        section +
+        " سيتم تفعيله في المرحلة القادمة."
+    );
+
+}
+
+
+loadUser();
+
+</script>
+
+</body>
+  </html>
