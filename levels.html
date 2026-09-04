@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>لوحة الطالب | عالم شيخ الأساتذة</title>
+  <title>اختيار المستوى | عالم شيخ الأساتذة</title>
 
   <style>
 
@@ -25,539 +25,151 @@
     header {
       background: white;
       border-bottom: 1px solid #e5edf8;
+      padding: 15px 18px;
       position: sticky;
       top: 0;
-      z-index: 20;
+      z-index: 10;
     }
 
     .header-inner {
-      max-width: 1000px;
+      max-width: 900px;
       margin: auto;
-      padding: 12px 16px;
-
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      gap: 10px;
     }
 
     .brand {
       display: flex;
       align-items: center;
       gap: 10px;
-      color: #075dcc;
       font-weight: bold;
-      font-size: 16px;
+      color: #075dcc;
     }
 
     .brand-icon {
       width: 42px;
       height: 42px;
-
       background: #1677ff;
       color: white;
-
       border-radius: 12px;
-
       display: flex;
       align-items: center;
       justify-content: center;
-
       font-weight: bold;
     }
 
-    .header-actions {
-      display: flex;
-      gap: 8px;
-    }
-
-    .icon-btn {
-      width: 42px;
-      height: 42px;
-
+    .back-btn {
       border: none;
-      border-radius: 12px;
-
       background: #eef5ff;
       color: #1268dc;
-
-      font-size: 19px;
+      padding: 10px 14px;
+      border-radius: 10px;
       cursor: pointer;
+      font-weight: bold;
     }
 
     main {
-      max-width: 1000px;
+      max-width: 900px;
       margin: auto;
-
-      padding: 25px 16px 90px;
+      padding: 35px 18px 50px;
     }
 
-    /* الترحيب */
-
-    .welcome {
-      background: linear-gradient(135deg, #1677ff, #075dcc);
-      color: white;
-
-      border-radius: 24px;
-
-      padding: 25px 20px;
-
-      margin-bottom: 20px;
-
-      box-shadow: 0 12px 30px rgba(22,119,255,.2);
-    }
-
-    .welcome small {
-      opacity: .85;
-      font-size: 13px;
-    }
-
-    .welcome h1 {
-      margin-top: 8px;
-      font-size: 25px;
-    }
-
-    .welcome p {
-      margin-top: 8px;
-      line-height: 1.6;
-      font-size: 14px;
-      opacity: .9;
-    }
-
-    /* الإحصائيات */
-
-    .stats {
-      display: grid;
-
-      grid-template-columns:
-        repeat(2, 1fr);
-
-      gap: 12px;
-
-      margin-bottom: 25px;
-    }
-
-    .stat {
-      background: white;
-
-      border: 1px solid #e5edf8;
-
-      border-radius: 18px;
-
-      padding: 17px;
-
+    .intro {
       text-align: center;
+      margin-bottom: 30px;
     }
 
-    .stat-icon {
-      font-size: 24px;
-      margin-bottom: 7px;
+    .intro h1 {
+      font-size: 29px;
+      margin-bottom: 10px;
     }
 
-    .stat strong {
-      display: block;
-
-      font-size: 21px;
-
-      color: #1268dc;
-    }
-
-    .stat span {
-      display: block;
-
-      margin-top: 4px;
-
+    .intro p {
       color: #667085;
-
-      font-size: 12px;
+      line-height: 1.7;
+      font-size: 15px;
     }
 
-    /* العناوين */
-
-    .section-title {
-      display: flex;
-
-      align-items: center;
-      justify-content: space-between;
-
-      margin: 28px 2px 13px;
+    .levels {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
     }
-
-    .section-title h2 {
-      font-size: 19px;
-    }
-
-    .section-title span {
-      color: #667085;
-      font-size: 12px;
-    }
-
-    /* متابعة التعلم */
-
-    .continue-card {
-      background: white;
-
-      border: 1px solid #e5edf8;
-
-      border-radius: 20px;
-
-      padding: 20px;
-
-      box-shadow: 0 7px 22px rgba(0,70,160,.05);
-    }
-
-    .course-top {
-      display: flex;
-
-      align-items: center;
-
-      gap: 14px;
-    }
-
-    .course-icon {
-      width: 58px;
-      height: 58px;
-
-      flex-shrink: 0;
-
-      background: #eaf3ff;
-      color: #1268dc;
-
-      border-radius: 16px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-size: 27px;
-    }
-
-    .course-info h3 {
-      font-size: 17px;
-      margin-bottom: 5px;
-    }
-
-    .course-info p {
-      color: #667085;
-      font-size: 13px;
-    }
-
-    .progress-area {
-      margin-top: 18px;
-    }
-
-    .progress-label {
-      display: flex;
-
-      justify-content: space-between;
-
-      color: #667085;
-
-      font-size: 12px;
-
-      margin-bottom: 7px;
-    }
-
-    .progress {
-      height: 8px;
-
-      background: #edf2f7;
-
-      border-radius: 20px;
-
-      overflow: hidden;
-    }
-
-    .progress-bar {
-      width: 0%;
-
-      height: 100%;
-
-      background: #1677ff;
-
-      border-radius: 20px;
-    }
-
-    .continue-btn {
-      width: 100%;
-
-      margin-top: 16px;
-
-      padding: 13px;
-
-      border: none;
-
-      border-radius: 12px;
-
-      background: #1677ff;
-
-      color: white;
-
-      font-weight: bold;
-
-      cursor: pointer;
-    }
-
-    /* المستوى */
 
     .level-card {
       background: white;
-
-      border: 1px solid #e5edf8;
-
-      border-radius: 20px;
-
-      padding: 20px;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: space-between;
-
-      gap: 15px;
+      border: 2px solid #e5edf8;
+      border-radius: 22px;
+      padding: 25px 20px;
+      cursor: pointer;
+      transition: .25s;
+      box-shadow: 0 8px 25px rgba(0, 70, 160, .07);
+      text-align: center;
     }
 
-    .level-info {
-      display: flex;
-
-      align-items: center;
-
-      gap: 13px;
+    .level-card:hover {
+      transform: translateY(-4px);
+      border-color: #1677ff;
+      box-shadow: 0 15px 35px rgba(22,119,255,.15);
     }
 
     .level-icon {
-      width: 52px;
-      height: 52px;
-
+      width: 70px;
+      height: 70px;
+      border-radius: 20px;
       background: #eaf3ff;
       color: #1268dc;
-
-      border-radius: 15px;
-
+      margin: 0 auto 17px;
       display: flex;
       align-items: center;
       justify-content: center;
-
-      font-size: 24px;
+      font-size: 32px;
     }
 
-    .level-info h3 {
-      font-size: 16px;
-      margin-bottom: 5px;
-    }
-
-    .level-info p {
-      color: #667085;
-      font-size: 12px;
-    }
-
-    .change-level {
-      border: none;
-
-      background: #eef5ff;
-
-      color: #1268dc;
-
-      padding: 10px 13px;
-
-      border-radius: 10px;
-
-      font-weight: bold;
-
-      cursor: pointer;
-
-      white-space: nowrap;
-    }
-
-    /* القائمة */
-
-    .quick-grid {
-      display: grid;
-
-      grid-template-columns:
-        repeat(2, 1fr);
-
-      gap: 12px;
-    }
-
-    .quick-card {
-      background: white;
-
-      border: 1px solid #e5edf8;
-
-      border-radius: 18px;
-
-      padding: 18px 12px;
-
-      text-align: center;
-
-      cursor: pointer;
-
-      transition: .2s;
-    }
-
-    .quick-card:hover {
-      transform: translateY(-2px);
-
-      border-color: #1677ff;
-    }
-
-    .quick-icon {
-      font-size: 26px;
-
-      margin-bottom: 9px;
-    }
-
-    .quick-card h3 {
-      font-size: 14px;
-    }
-
-    .quick-card p {
-      color: #667085;
-
-      font-size: 11px;
-
-      margin-top: 4px;
-    }
-
-    /* الأستاذ AI */
-
-    .ai-card {
-      background: white;
-
-      border: 1px solid #dceaff;
-
-      border-radius: 22px;
-
-      padding: 22px;
-
-      text-align: center;
-    }
-
-    .ai-avatar {
-      width: 65px;
-      height: 65px;
-
-      margin: auto;
-
-      border-radius: 20px;
-
-      background: #1677ff;
-
-      color: white;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-size: 25px;
-
-      font-weight: bold;
-    }
-
-    .ai-card h2 {
-      margin-top: 12px;
-
-      font-size: 19px;
-    }
-
-    .ai-card p {
-      color: #667085;
-
-      font-size: 13px;
-
-      line-height: 1.7;
-
-      margin-top: 7px;
-    }
-
-    .ai-btn {
-      margin-top: 15px;
-
-      border: none;
-
-      background: #1677ff;
-
-      color: white;
-
-      padding: 12px 25px;
-
-      border-radius: 11px;
-
-      font-weight: bold;
-
-      cursor: pointer;
-    }
-
-    /* التنقل السفلي */
-
-    .bottom-nav {
-      position: fixed;
-
-      bottom: 0;
-      left: 0;
-      right: 0;
-
-      background: white;
-
-      border-top: 1px solid #e5edf8;
-
-      height: 65px;
-
-      display: flex;
-
-      justify-content: space-around;
-
-      align-items: center;
-
-      z-index: 30;
-    }
-
-    .nav-item {
-      border: none;
-
-      background: none;
-
-      color: #667085;
-
-      font-size: 11px;
-
-      text-align: center;
-
-      cursor: pointer;
-    }
-
-    .nav-item div {
+    .level-card h2 {
       font-size: 21px;
-
-      margin-bottom: 2px;
+      margin-bottom: 8px;
     }
 
-    .nav-item.active {
-      color: #1268dc;
+    .level-card p {
+      color: #667085;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
 
+    .choose-btn {
+      display: inline-block;
+      background: #1677ff;
+      color: white;
+      padding: 11px 22px;
+      border-radius: 11px;
+      font-size: 14px;
       font-weight: bold;
+    }
+
+    .note {
+      margin-top: 28px;
+      background: #eef6ff;
+      border: 1px solid #d5e7ff;
+      padding: 15px;
+      border-radius: 14px;
+      color: #315b8a;
+      font-size: 13px;
+      line-height: 1.7;
+      text-align: center;
     }
 
     @media (min-width: 650px) {
 
-      .stats {
-        grid-template-columns:
-          repeat(4, 1fr);
+      .levels {
+        grid-template-columns: repeat(3, 1fr);
       }
 
-      .quick-grid {
-        grid-template-columns:
-          repeat(4, 1fr);
-      }
-
-      .bottom-nav {
-        display: none;
-      }
-
-      main {
-        padding-bottom: 40px;
+      .level-card {
+        min-height: 270px;
       }
 
     }
@@ -565,9 +177,7 @@
   </style>
 </head>
 
-
 <body>
-
 
 <header>
 
@@ -585,543 +195,115 @@
 
     </div>
 
-
-    <div class="header-actions">
-
-      <button
-        class="icon-btn"
-        onclick="showNotifications()"
-        title="الإشعارات">
-
-        🔔
-
-      </button>
-
-
-      <button
-        class="icon-btn"
-        onclick="openAccount()"
-        title="الحساب">
-
-        👤
-
-      </button>
-
-    </div>
+    <button class="back-btn" onclick="goDashboard()">
+      لوحة الطالب
+    </button>
 
   </div>
 
 </header>
 
 
-
 <main>
 
+  <section class="intro">
 
-  <!-- الترحيب -->
-
-  <section class="welcome">
-
-    <small>
-      لوحة الطالب
-    </small>
-
-    <h1 id="welcomeName">
-      مرحبًا بك 👋
+    <h1>
+      اختر مستواك الدراسي 🎓
     </h1>
 
     <p>
-      ابدأ رحلتك التعليمية اليوم،
-      وتقدم خطوة جديدة نحو هدفك.
+      اختر المستوى الذي تدرس فيه لنجهز لك المحتوى التعليمي المناسب.
     </p>
 
   </section>
 
 
-
-  <!-- الإحصائيات -->
-
-  <section class="stats">
+  <section class="levels">
 
 
-    <div class="stat">
+    <!-- كونكور -->
 
-      <div class="stat-icon">
-        ⭐
+    <div class="level-card" onclick="selectLevel('كونكور')">
+
+      <div class="level-icon">
+        🏫
       </div>
 
-      <strong>
-        0
-      </strong>
+      <h2>
+        كونكور
+      </h2>
 
-      <span>
-        النقاط
+      <p>
+        دروس وتمارين الرياضيات الخاصة بمستوى الكونكور.
+      </p>
+
+      <span class="choose-btn">
+        اختيار المستوى
       </span>
 
     </div>
 
 
-    <div class="stat">
+    <!-- بريڤي -->
 
-      <div class="stat-icon">
-        🔥
+    <div class="level-card" onclick="selectLevel('بريڤي')">
+
+      <div class="level-icon">
+        📘
       </div>
 
-      <strong>
-        0
-      </strong>
+      <h2>
+        بريڤي
+      </h2>
 
-      <span>
-        أيام متتالية
+      <p>
+        دروس وتمارين الرياضيات الخاصة بمستوى البريڤي.
+      </p>
+
+      <span class="choose-btn">
+        اختيار المستوى
       </span>
 
     </div>
 
 
-    <div class="stat">
+    <!-- باكالوريا -->
 
-      <div class="stat-icon">
-        🏅
-      </div>
-
-      <strong>
-        0
-      </strong>
-
-      <span>
-        الشارات
-      </span>
-
-    </div>
-
-
-    <div class="stat">
-
-      <div class="stat-icon">
-        📈
-      </div>
-
-      <strong>
-        0%
-      </strong>
-
-      <span>
-        التقدم
-      </span>
-
-    </div>
-
-  </section>
-
-
-
-  <!-- متابعة التعلم -->
-
-  <div class="section-title">
-
-    <h2>
-      متابعة التعلم
-    </h2>
-
-    <span>
-      آخر نشاط
-    </span>
-
-  </div>
-
-
-  <section class="continue-card">
-
-    <div class="course-top">
-
-      <div class="course-icon">
-        ∑
-      </div>
-
-      <div class="course-info">
-
-        <h3>
-          الرياضيات
-        </h3>
-
-        <p id="courseLevel">
-          اختر مستواك للبدء
-        </p>
-
-      </div>
-
-    </div>
-
-
-    <div class="progress-area">
-
-      <div class="progress-label">
-
-        <span>
-          التقدم
-        </span>
-
-        <span>
-          0%
-        </span>
-
-      </div>
-
-      <div class="progress">
-
-        <div class="progress-bar"></div>
-
-      </div>
-
-    </div>
-
-
-    <button
-      class="continue-btn"
-      onclick="startLearning()">
-
-      ابدأ التعلم
-
-    </button>
-
-  </section>
-
-
-
-  <!-- المستوى -->
-
-  <div class="section-title">
-
-    <h2>
-      مستواك الدراسي
-    </h2>
-
-  </div>
-
-
-  <section class="level-card">
-
-    <div class="level-info">
+    <div class="level-card" onclick="selectLevel('باكالوريا')">
 
       <div class="level-icon">
         🎓
       </div>
 
-      <div>
+      <h2>
+        باكالوريا
+      </h2>
 
-        <h3 id="selectedLevel">
-          لم يتم اختيار المستوى
-        </h3>
+      <p>
+        دروس وتمارين الرياضيات الخاصة بمستوى الباكالوريا.
+      </p>
 
-        <p>
-          اختر المستوى المناسب لك
-        </p>
-
-      </div>
+      <span class="choose-btn">
+        اختيار المستوى
+      </span>
 
     </div>
 
 
-    <button
-      class="change-level"
-      onclick="changeLevel()">
-
-      تغيير المستوى
-
-    </button>
-
   </section>
 
 
+  <div class="note">
 
-  <!-- القائمة -->
-
-  <div class="section-title">
-
-    <h2>
-      الوصول السريع
-    </h2>
+    💡 يمكنك تغيير المستوى لاحقًا من لوحة الطالب.
 
   </div>
-
-
-  <section class="quick-grid">
-
-
-    <div
-      class="quick-card"
-      onclick="openLibrary()">
-
-      <div class="quick-icon">
-        📚
-      </div>
-
-      <h3>
-        مكتبتي
-      </h3>
-
-      <p>
-        دروسي ومحتواي
-      </p>
-
-    </div>
-
-
-    <div
-      class="quick-card"
-      onclick="openForum()">
-
-      <div class="quick-icon">
-        💬
-      </div>
-
-      <h3>
-        المنتدى
-      </h3>
-
-      <p>
-        أسئلة ونقاشات
-      </p>
-
-    </div>
-
-
-    <div
-      class="quick-card"
-      onclick="openChallenge()">
-
-      <div class="quick-icon">
-        🏆
-      </div>
-
-      <h3>
-        التحدي الأسبوعي
-      </h3>
-
-      <p>
-        نافس زملاءك
-      </p>
-
-    </div>
-
-
-    <div
-      class="quick-card"
-      onclick="openLeaderboard()">
-
-      <div class="quick-icon">
-        📊
-      </div>
-
-      <h3>
-        الترتيب
-      </h3>
-
-      <p>
-        أفضل الطلاب
-      </p>
-
-    </div>
-
-
-    <div
-      class="quick-card"
-      onclick="openBadges()">
-
-      <div class="quick-icon">
-        🥇
-      </div>
-
-      <h3>
-        الشارات
-      </h3>
-
-      <p>
-        إنجازاتك
-      </p>
-
-    </div>
-
-
-    <div
-      class="quick-card"
-      onclick="openSubscriptions()">
-
-      <div class="quick-icon">
-        💳
-      </div>
-
-      <h3>
-        الاشتراكات
-      </h3>
-
-      <p>
-        حالة اشتراكك
-      </p>
-
-    </div>
-
-
-    <div
-      class="quick-card"
-      onclick="openSettings()">
-
-      <div class="quick-icon">
-        ⚙️
-      </div>
-
-      <h3>
-        الإعدادات
-      </h3>
-
-      <p>
-        تخصيص حسابك
-      </p>
-
-    </div>
-
-
-    <div
-      class="quick-card"
-      onclick="openAccount()">
-
-      <div class="quick-icon">
-        👤
-      </div>
-
-      <h3>
-        حسابي
-      </h3>
-
-      <p>
-        الملف الشخصي
-      </p>
-
-    </div>
-
-  </section>
-
-
-
-  <!-- الأستاذ AI -->
-
-  <div class="section-title">
-
-    <h2>
-      الأستاذ AI
-    </h2>
-
-  </div>
-
-
-  <section class="ai-card">
-
-    <div class="ai-avatar">
-      AI
-    </div>
-
-    <h2>
-      اسأل الأستاذ AI 🤖
-    </h2>
-
-    <p>
-      مساعدك التعليمي لشرح الدروس،
-      حل التمارين، وإنشاء تمارين مشابهة
-      ومساعدتك على فهم الرياضيات.
-    </p>
-
-    <button
-      class="ai-btn"
-      onclick="openAI()">
-
-      ابدأ المحادثة
-
-    </button>
-
-  </section>
-
 
 </main>
 
 
-
-<!-- التنقل السفلي -->
-
-<nav class="bottom-nav">
-
-
-  <button
-    class="nav-item active"
-    onclick="goDashboard()">
-
-    <div>
-      🏠
-    </div>
-
-    الرئيسية
-
-  </button>
-
-
-  <button
-    class="nav-item"
-    onclick="openLibrary()">
-
-    <div>
-      📚
-    </div>
-
-    مكتبتي
-
-  </button>
-
-
-  <button
-    class="nav-item"
-    onclick="openForum()">
-
-    <div>
-      💬
-    </div>
-
-    المنتدى
-
-  </button>
-
-
-  <button
-    class="nav-item"
-    onclick="openAI()">
-
-    <div>
-      🤖
-    </div>
-
-    الأستاذ AI
-
-  </button>
-
-
-  <button
-    class="nav-item"
-    onclick="openSettings()">
-
-    <div>
-      ⚙️
-    </div>
-
-    الإعدادات
-
-  </button>
-
-</nav>
-
-
-
-<!-- SUPABASE -->
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 
 <script>
 
@@ -1131,7 +313,6 @@
   const SUPABASE_KEY =
     "sb_publishable_ZdpHXwLlhpbXztsTXpAFTg_TgOji91v";
 
-
   const supabaseClient =
     supabase.createClient(
       SUPABASE_URL,
@@ -1139,8 +320,7 @@
     );
 
 
-
-  // حماية لوحة الطالب
+  // التأكد من أن الطالب مسجل الدخول
 
   async function checkAuth() {
 
@@ -1149,88 +329,33 @@
 
     if (!data.session) {
 
-      window.location.href =
-        "login.html";
-
-      return;
-
-    }
-
-
-    const user =
-      data.session.user;
-
-
-    let name =
-      user.user_metadata?.full_name ||
-      user.user_metadata?.name ||
-      user.user_metadata?.display_name;
-
-
-    if (!name && user.email) {
-
-      name =
-        user.email.split("@")[0];
-
-    }
-
-
-    if (name) {
-
-      document.getElementById(
-        "welcomeName"
-      ).textContent =
-        "مرحبًا " + name + " 👋";
-
-    }
-
-
-    loadSelectedLevel();
-
-  }
-
-
-
-  // قراءة المستوى المختار
-
-  function loadSelectedLevel() {
-
-    const level =
-      localStorage.getItem(
-        "student_level"
-      );
-
-
-    if (level) {
-
-      document.getElementById(
-        "selectedLevel"
-      ).textContent = level;
-
-
-      document.getElementById(
-        "courseLevel"
-      ).textContent =
-        "مستوى " + level;
+      window.location.href = "login.html";
 
     }
 
   }
 
 
+  // اختيار المستوى
 
-  // زر تغيير المستوى
+  function selectLevel(level) {
 
-  function changeLevel() {
+    localStorage.setItem(
+      "student_level",
+      level
+    );
+
+    alert(
+      "تم اختيار مستوى " + level + " بنجاح ✅"
+    );
 
     window.location.href =
-      "levels.html";
+      "dashboard.html";
 
   }
 
 
-
-  // الصفحة الرئيسية
+  // العودة إلى لوحة الطالب
 
   function goDashboard() {
 
@@ -1240,137 +365,9 @@
   }
 
 
-
-  // الحساب
-
-  function openAccount() {
-
-    window.location.href =
-      "account.html";
-
-  }
-
-
-
-  // الإشعارات
-
-  function showNotifications() {
-
-    alert(
-      "قسم الإشعارات سيتم تفعيله لاحقًا 🔔"
-    );
-
-  }
-
-
-
-  // بدء التعلم
-
-  function startLearning() {
-
-    const level =
-      localStorage.getItem(
-        "student_level"
-      );
-
-
-    if (!level) {
-
-      window.location.href =
-        "levels.html";
-
-      return;
-
-    }
-
-
-    alert(
-      "سيتم فتح دروس " +
-      level +
-      " بعد بناء قسم الدروس."
-    );
-
-  }
-
-
-
-  // الصفحات التي سنبنيها لاحقًا
-
-  function openLibrary() {
-
-    alert(
-      "مكتبتي سيتم تفعيلها في المرحلة القادمة 📚"
-    );
-
-  }
-
-
-  function openForum() {
-
-    alert(
-      "المنتدى سيتم تفعيله في المرحلة القادمة 💬"
-    );
-
-  }
-
-
-  function openChallenge() {
-
-    alert(
-      "التحدي الأسبوعي سيتم تفعيله لاحقًا 🏆"
-    );
-
-  }
-
-
-  function openLeaderboard() {
-
-    alert(
-      "الترتيب سيتم تفعيله لاحقًا 📊"
-    );
-
-  }
-
-
-  function openBadges() {
-
-    alert(
-      "الشارات سيتم تفعيلها لاحقًا 🥇"
-    );
-
-  }
-
-
-  function openSubscriptions() {
-
-    alert(
-      "الاشتراكات سيتم تفعيلها لاحقًا 💳"
-    );
-
-  }
-
-
-  function openSettings() {
-
-    alert(
-      "الإعدادات سيتم تفعيلها لاحقًا ⚙️"
-    );
-
-  }
-
-
-  function openAI() {
-
-    alert(
-      "الأستاذ AI سيتم تفعيله في مرحلة الذكاء الاصطناعي 🤖"
-    );
-
-  }
-
-
   checkAuth();
 
 </script>
 
 </body>
-        </html>
+    </html>
