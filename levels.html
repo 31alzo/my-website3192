@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>اختيار المستوى | عالم شيخ الأساتذة</title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Tahoma, sans-serif;
+      background: #f5f9ff;
+      color: #14213d;
+      min-height: 100vh;
+    }
+
+    header {
+      background: white;
+      border-bottom: 1px solid #e5edf8;
+      padding: 15px 18px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .header-inner {
+      max-width: 900px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: bold;
+      color: #075dcc;
+    }
+
+    .brand-icon {
+      width: 42px;
+      height: 42px;
+      background: #1677ff;
+      color: white;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .back-btn {
+      border: none;
+      background: #eef5ff;
+      color: #1268dc;
+      padding: 10px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    main {
+      max-width: 900px;
+      margin: auto;
+      padding: 35px 18px 50px;
+    }
+
+    .intro {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .intro h1 {
+      font-size: 29px;
+      margin-bottom: 10px;
+    }
+
+    .intro p {
+      color: #667085;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .levels {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .level-card {
+      background: white;
+      border: 2px solid #e5edf8;
+      border-radius: 22px;
+      padding: 25px 20px;
+      cursor: pointer;
+      transition: .25s;
+      box-shadow: 0 8px 25px rgba(0, 70, 160, .07);
+      text-align: center;
+    }
+
+    .level-card:hover {
+      transform: translateY(-4px);
+      border-color: #1677ff;
+      box-shadow: 0 15px 35px rgba(22,119,255,.15);
+    }
+
+    .level-icon {
+      width: 70px;
+      height: 70px;
+      border-radius: 20px;
+      background: #eaf3ff;
+      color: #1268dc;
+      margin: 0 auto 17px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+    }
+
+    .level-card h2 {
+      font-size: 21px;
+      margin-bottom: 8px;
+    }
+
+    .level-card p {
+      color: #667085;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .choose-btn {
+      display: inline-block;
+      background: #1677ff;
+      color: white;
+      padding: 11px 22px;
+      border-radius: 11px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .note {
+      margin-top: 28px;
+      background: #eef6ff;
+      border: 1px solid #d5e7ff;
+      padding: 15px;
+      border-radius: 14px;
+      color: #315b8a;
+      font-size: 13px;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    @media (min-width: 650px) {
+
+      .levels {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .level-card {
+        min-height: 270px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="header-inner">
+
+    <div class="brand">
+
+      <div class="brand-icon">
+        AI
+      </div>
+
+      <span>
+        عالم شيخ الأساتذة
+      </span>
+
+    </div>
+
+    <button class="back-btn" onclick="goDashboard()">
+      لوحة الطالب
+    </button>
+
+  </div>
+
+</header>
+
+
+<main>
+
+  <section class="intro">
+
+    <h1>
+      اختر مستواك الدراسي 🎓
+    </h1>
+
+    <p>
+      اختر المستوى الذي تدرس فيه لنجهز لك المحتوى التعليمي المناسب.
+    </p>
+
+  </section>
+
+
+  <section class="levels">
+
+
+    <!-- كونكور -->
+
+    <div class="level-card" onclick="selectLevel('كونكور')">
+
+      <div class="level-icon">
+        🏫
+      </div>
+
+      <h2>
+        كونكور
+      </h2>
+
+      <p>
+        دروس وتمارين الرياضيات الخاصة بمستوى الكونكور.
+      </p>
+
+      <span class="choose-btn">
+        اختيار المستوى
+      </span>
+
+    </div>
+
+
+    <!-- بريڤي -->
+
+    <div class="level-card" onclick="selectLevel('بريڤي')">
+
+      <div class="level-icon">
+        📘
+      </div>
+
+      <h2>
+        بريڤي
+      </h2>
+
+      <p>
+        دروس وتمارين الرياضيات الخاصة بمستوى البريڤي.
+      </p>
+
+      <span class="choose-btn">
+        اختيار المستوى
+      </span>
+
+    </div>
+
+
+    <!-- باكالوريا -->
+
+    <div class="level-card" onclick="selectLevel('باكالوريا')">
+
+      <div class="level-icon">
+        🎓
+      </div>
+
+      <h2>
+        باكالوريا
+      </h2>
+
+      <p>
+        دروس وتمارين الرياضيات الخاصة بمستوى الباكالوريا.
+      </p>
+
+      <span class="choose-btn">
+        اختيار المستوى
+      </span>
+
+    </div>
+
+
+  </section>
+
+
+  <div class="note">
+
+    💡 يمكنك تغيير المستوى لاحقًا من لوحة الطالب.
+
+  </div>
+
+</main>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+  const SUPABASE_URL =
+    "https://qkzdlxqledsznhbifaxy.supabase.co";
+
+  const SUPABASE_KEY =
+    "sb_publishable_ZdpHXwLlhpbXztsTXpAFTg_TgOji91v";
+
+  const supabaseClient =
+    supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+
+  // التأكد من أن الطالب مسجل الدخول
+
+  async function checkAuth() {
+
+    const { data } =
+      await supabaseClient.auth.getSession();
+
+    if (!data.session) {
+
+      window.location.href = "login.html";
+
+    }
+
+  }
+
+
+  // اختيار المستوى
+
+  function selectLevel(level) {
+
+    localStorage.setItem(
+      "student_level",
+      level
+    );
+
+    alert(
+      "تم اختيار مستوى " + level + " بنجاح ✅"
+    );
+
+    window.location.href =
+      "dashboard.html";
+
+  }
+
+
+  // العودة إلى لوحة الطالب
+
+  function goDashboard() {
+
+    window.location.href =
+      "dashboard.html";
+
+  }
+
+
+  checkAuth();
+
+</script>
+
+</body>
+  </html>
