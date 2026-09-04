@@ -1,207 +1,842 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Account - VID SECRET</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <title>حسابي | عالم شيخ الأساتذة</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+  <style>
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #0b0b0b;
-            color: white;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        header {
-            padding: 20px;
-            border-bottom: 1px solid #222;
-            text-align: center;
-        }
+    body {
+      font-family: Arial, Tahoma, sans-serif;
+      background: #f5f9ff;
+      color: #14213d;
+      min-height: 100vh;
+    }
 
-        header h1 {
-            margin: 0;
-            color: #ff1744;
-        }
+    header {
+      background: white;
+      border-bottom: 1px solid #e5edf8;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
 
-        .container {
-            max-width: 500px;
-            margin: 60px auto;
-            padding: 20px;
-        }
+    .header-inner {
+      max-width: 900px;
+      margin: auto;
+      padding: 12px 16px;
 
-        .account-box {
-            background: #151515;
-            border: 1px solid #292929;
-            border-radius: 15px;
-            padding: 30px 20px;
-        }
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-        h2 {
-            margin-top: 0;
-            text-align: center;
-        }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
 
-        .info {
-            background: #0d0d0d;
-            border-radius: 10px;
-            padding: 15px;
-            margin: 15px 0;
-            word-break: break-word;
-        }
+      color: #075dcc;
+      font-weight: bold;
+    }
 
-        .label {
-            color: #aaa;
-            font-size: 14px;
-            margin-bottom: 7px;
-        }
+    .brand-icon {
+      width: 42px;
+      height: 42px;
 
-        .value {
-            font-size: 16px;
-        }
+      background: #1677ff;
+      color: white;
 
-        button {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 10px;
-            background: #ff1744;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 20px;
-        }
+      border-radius: 12px;
 
-        button:hover {
-            background: #e0143c;
-        }
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-        .home {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            color: #aaa;
-            text-decoration: none;
-        }
+      font-weight: bold;
+    }
 
-        .loading {
-            text-align: center;
-            color: #aaa;
-        }
-    </style>
+    .back-btn {
+      border: none;
+      background: #eef5ff;
+      color: #1268dc;
+
+      padding: 10px 14px;
+
+      border-radius: 10px;
+
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    main {
+      max-width: 900px;
+      margin: auto;
+
+      padding: 25px 16px 50px;
+    }
+
+    .profile-card {
+      background: white;
+
+      border: 1px solid #e5edf8;
+
+      border-radius: 24px;
+
+      padding: 25px;
+
+      text-align: center;
+
+      box-shadow: 0 10px 30px rgba(0,70,160,.06);
+    }
+
+    .avatar {
+      width: 85px;
+      height: 85px;
+
+      margin: auto;
+
+      border-radius: 25px;
+
+      background: #1677ff;
+      color: white;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 30px;
+      font-weight: bold;
+    }
+
+    .profile-card h1 {
+      margin-top: 14px;
+      font-size: 23px;
+    }
+
+    .email {
+      color: #667085;
+      font-size: 13px;
+      margin-top: 5px;
+      direction: ltr;
+    }
+
+    .level-badge {
+      display: inline-block;
+
+      margin-top: 13px;
+
+      background: #eaf3ff;
+      color: #1268dc;
+
+      padding: 7px 13px;
+
+      border-radius: 20px;
+
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .section-title {
+      margin: 25px 3px 12px;
+
+      font-size: 19px;
+    }
+
+    .info-card {
+      background: white;
+
+      border: 1px solid #e5edf8;
+
+      border-radius: 18px;
+
+      overflow: hidden;
+    }
+
+    .info-row {
+      padding: 17px;
+
+      border-bottom: 1px solid #edf2f7;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 15px;
+    }
+
+    .info-row:last-child {
+      border-bottom: none;
+    }
+
+    .info-label {
+      color: #667085;
+      font-size: 13px;
+    }
+
+    .info-value {
+      font-weight: bold;
+      font-size: 14px;
+
+      text-align: left;
+
+      direction: ltr;
+    }
+
+    .stats {
+      display: grid;
+
+      grid-template-columns: repeat(2,1fr);
+
+      gap: 12px;
+    }
+
+    .stat {
+      background: white;
+
+      border: 1px solid #e5edf8;
+
+      border-radius: 17px;
+
+      padding: 17px;
+
+      text-align: center;
+    }
+
+    .stat-icon {
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+
+    .stat strong {
+      display: block;
+
+      color: #1268dc;
+
+      font-size: 20px;
+    }
+
+    .stat span {
+      color: #667085;
+
+      font-size: 11px;
+    }
+
+    .actions {
+      display: grid;
+
+      gap: 10px;
+    }
+
+    .action-btn {
+      width: 100%;
+
+      border: none;
+
+      background: white;
+
+      border: 1px solid #e5edf8;
+
+      color: #344054;
+
+      padding: 15px;
+
+      border-radius: 14px;
+
+      font-size: 14px;
+
+      text-align: right;
+
+      cursor: pointer;
+
+      font-weight: bold;
+    }
+
+    .action-btn:hover {
+      border-color: #1677ff;
+      color: #1268dc;
+    }
+
+    .logout {
+      color: #b42318;
+
+      background: #fff5f4;
+
+      border-color: #fecdca;
+    }
+
+    .danger {
+      color: #b42318;
+      background: #fff5f4;
+      border-color: #fecdca;
+    }
+
+    .loading {
+      text-align: center;
+
+      padding: 40px;
+
+      color: #667085;
+    }
+
+    @media (min-width: 650px) {
+
+      .stats {
+        grid-template-columns: repeat(4,1fr);
+      }
+
+      .actions {
+        grid-template-columns: repeat(2,1fr);
+      }
+
+    }
+
+  </style>
 </head>
+
 
 <body>
 
+
 <header>
-    <h1>VID SECRET</h1>
-</header>
 
-<div class="container">
+  <div class="header-inner">
 
-    <div class="account-box">
+    <div class="brand">
 
-        <h2>My Account</h2>
+      <div class="brand-icon">
+        AI
+      </div>
 
-        <div id="loading" class="loading">
-            Loading account...
-        </div>
-
-        <div id="accountContent" style="display:none;">
-
-            <div class="info">
-                <div class="label">Email</div>
-                <div class="value" id="userEmail"></div>
-            </div>
-
-            <div class="info">
-                <div class="label">User ID</div>
-                <div class="value" id="userId"></div>
-            </div>
-
-            <button id="logoutButton">
-                Log Out
-            </button>
-
-            <a href="index.html" class="home">
-                ← Back to Home
-            </a>
-
-        </div>
+      <span>
+        عالم شيخ الأساتذة
+      </span>
 
     </div>
 
-</div>
+
+    <button
+      class="back-btn"
+      onclick="goDashboard()">
+
+      لوحة الطالب
+
+    </button>
+
+  </div>
+
+</header>
+
+
+
+<main>
+
+
+  <div id="loading" class="loading">
+
+    جاري تحميل الحساب...
+
+  </div>
+
+
+
+  <div id="content" style="display:none;">
+
+
+    <!-- بطاقة الحساب -->
+
+    <section class="profile-card">
+
+      <div
+        class="avatar"
+        id="avatar">
+
+        AI
+
+      </div>
+
+
+      <h1 id="studentName">
+        الطالب
+      </h1>
+
+
+      <p
+        class="email"
+        id="studentEmail">
+      </p>
+
+
+      <span
+        class="level-badge"
+        id="studentLevel">
+
+        لم يتم اختيار المستوى
+
+      </span>
+
+    </section>
+
+
+
+    <!-- الإحصائيات -->
+
+    <h2 class="section-title">
+      إنجازاتي
+    </h2>
+
+
+    <section class="stats">
+
+
+      <div class="stat">
+
+        <div class="stat-icon">
+          ⭐
+        </div>
+
+        <strong>
+          0
+        </strong>
+
+        <span>
+          النقاط
+        </span>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="stat-icon">
+          🔥
+        </div>
+
+        <strong>
+          0
+        </strong>
+
+        <span>
+          أيام متتالية
+        </span>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="stat-icon">
+          🏅
+        </div>
+
+        <strong>
+          0
+        </strong>
+
+        <span>
+          الشارات
+        </span>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="stat-icon">
+          📚
+        </div>
+
+        <strong>
+          0
+        </strong>
+
+        <span>
+          الدروس
+        </span>
+
+      </div>
+
+
+    </section>
+
+
+
+    <!-- معلومات الحساب -->
+
+    <h2 class="section-title">
+      معلومات الحساب
+    </h2>
+
+
+    <section class="info-card">
+
+
+      <div class="info-row">
+
+        <span class="info-label">
+          الاسم
+        </span>
+
+        <span
+          class="info-value"
+          id="infoName">
+
+          -
+
+        </span>
+
+      </div>
+
+
+      <div class="info-row">
+
+        <span class="info-label">
+          البريد الإلكتروني
+        </span>
+
+        <span
+          class="info-value"
+          id="infoEmail">
+
+          -
+
+        </span>
+
+      </div>
+
+
+      <div class="info-row">
+
+        <span class="info-label">
+          المستوى
+        </span>
+
+        <span
+          class="info-value"
+          id="infoLevel">
+
+          -
+
+        </span>
+
+      </div>
+
+
+    </section>
+
+
+
+    <!-- إجراءات الحساب -->
+
+    <h2 class="section-title">
+      إدارة الحساب
+    </h2>
+
+
+    <section class="actions">
+
+
+      <button
+        class="action-btn"
+        onclick="changeLevel()">
+
+        🎓 تغيير المستوى
+
+      </button>
+
+
+      <button
+        class="action-btn"
+        onclick="openSettings()">
+
+        ⚙️ الإعدادات
+
+      </button>
+
+
+      <button
+        class="action-btn"
+        onclick="showComingSoon('تعديل البيانات')">
+
+        ✏️ تعديل البيانات
+
+      </button>
+
+
+      <button
+        class="action-btn"
+        onclick="showComingSoon('تغيير كلمة المرور')">
+
+        🔐 تغيير كلمة المرور
+
+      </button>
+
+
+      <button
+        class="action-btn"
+        onclick="showComingSoon('جلسات الحساب')">
+
+        🛡️ الأمان والجلسات
+
+      </button>
+
+
+      <button
+        class="action-btn"
+        onclick="showComingSoon('الاشتراكات والمدفوعات')">
+
+        💳 الاشتراكات والمدفوعات
+
+      </button>
+
+
+      <button
+        class="action-btn danger"
+        onclick="showComingSoon('حذف الحساب')">
+
+        🗑️ حذف الحساب
+
+      </button>
+
+
+      <button
+        class="action-btn logout"
+        onclick="logout()">
+
+        🚪 تسجيل الخروج
+
+      </button>
+
+
+    </section>
+
+
+  </div>
+
+</main>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 
 <script>
 
-const SUPABASE_URL =
+  const SUPABASE_URL =
     "https://qkzdlxqledsznhbifaxy.supabase.co";
 
-const SUPABASE_PUBLISHABLE_KEY =
+  const SUPABASE_KEY =
     "sb_publishable_ZdpHXwLlhpbXztsTXpAFTg_TgOji91v";
 
-const supabaseClient =
-    window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_PUBLISHABLE_KEY
+
+  const supabaseClient =
+    supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
     );
 
 
-async function loadAccount() {
 
-    const {
-        data: { user },
-        error
-    } = await supabaseClient.auth.getUser();
+  async function loadAccount() {
 
-    if (error || !user) {
-
-        window.location.href = "login.html";
-
-        return;
-    }
-
-    document.getElementById("userEmail").textContent =
-        user.email || "No email";
-
-    document.getElementById("userId").textContent =
-        user.id;
-
-    document.getElementById("loading").style.display = "none";
-
-    document.getElementById("accountContent").style.display =
-        "block";
-}
+    const { data, error } =
+      await supabaseClient.auth.getSession();
 
 
-document.getElementById("logoutButton").addEventListener(
-    "click",
-    async function () {
+    if (
+      error ||
+      !data.session
+    ) {
 
-        const { error } =
-            await supabaseClient.auth.signOut();
+      window.location.href =
+        "login.html";
 
-        if (!error) {
-            window.location.href = "index.html";
-        } else {
-            alert("Logout failed. Please try again.");
-        }
+      return;
 
     }
-);
 
 
-loadAccount();
+    const user =
+      data.session.user;
+
+
+    let name =
+      user.user_metadata?.full_name ||
+      user.user_metadata?.name ||
+      user.user_metadata?.display_name;
+
+
+    if (!name) {
+
+      name =
+        user.email
+          ? user.email.split("@")[0]
+          : "الطالب";
+
+    }
+
+
+    const email =
+      user.email || "-";
+
+
+    const level =
+      localStorage.getItem(
+        "student_level"
+      ) ||
+      "لم يتم اختيار المستوى";
+
+
+    document.getElementById(
+      "studentName"
+    ).textContent = name;
+
+
+    document.getElementById(
+      "studentEmail"
+    ).textContent = email;
+
+
+    document.getElementById(
+      "studentLevel"
+    ).textContent = level;
+
+
+    document.getElementById(
+      "infoName"
+    ).textContent = name;
+
+
+    document.getElementById(
+      "infoEmail"
+    ).textContent = email;
+
+
+    document.getElementById(
+      "infoLevel"
+    ).textContent = level;
+
+
+    const firstLetter =
+      name.trim().charAt(0);
+
+
+    if (firstLetter) {
+
+      document.getElementById(
+        "avatar"
+      ).textContent =
+        firstLetter;
+
+    }
+
+
+    document.getElementById(
+      "loading"
+    ).style.display = "none";
+
+
+    document.getElementById(
+      "content"
+    ).style.display = "block";
+
+  }
+
+
+
+  function goDashboard() {
+
+    window.location.href =
+      "dashboard.html";
+
+  }
+
+
+
+  function changeLevel() {
+
+    window.location.href =
+      "levels.html";
+
+  }
+
+
+
+  function openSettings() {
+
+    alert(
+      "صفحة الإعدادات سنبنيها في الخطوة القادمة ⚙️"
+    );
+
+  }
+
+
+
+  function showComingSoon(section) {
+
+    alert(
+      "قسم " +
+      section +
+      " سيتم تفعيله في المرحلة القادمة."
+    );
+
+  }
+
+
+
+  async function logout() {
+
+    const confirmed =
+      confirm(
+        "هل تريد تسجيل الخروج من حسابك؟"
+      );
+
+
+    if (!confirmed) {
+      return;
+    }
+
+
+    const { error } =
+      await supabaseClient.auth.signOut();
+
+
+    if (error) {
+
+      alert(
+        "حدث خطأ أثناء تسجيل الخروج."
+      );
+
+      return;
+
+    }
+
+
+    localStorage.removeItem(
+      "student_level"
+    );
+
+
+    window.location.href =
+      "login.html";
+
+  }
+
+
+
+  loadAccount();
 
 </script>
 
 </body>
-</html>
+        </html>
