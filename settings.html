@@ -2,41 +2,45 @@
 <html lang="ar" dir="rtl">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>الإعدادات | EduNova AI</title>
 
-    <!--
-        النظام العالمي الجديد:
-        Theme + Language + Storage + Utilities
-    -->
+    <!-- النظام العالمي -->
     <script src="script.js"></script>
 
-    <!-- تطبيق المظهر مبكرًا قبل ظهور الصفحة -->
+    <!-- تطبيق المظهر واللغة مبكرًا لمنع الوميض -->
     <script>
         (function () {
             try {
+
                 const theme =
                     localStorage.getItem("site_theme") || "light";
 
                 const language =
                     localStorage.getItem("site_language") || "ar";
 
-                if (theme === "dark") {
-                    document.documentElement.classList.add("dark-mode");
-                }
+                document.documentElement.classList.toggle(
+                    "dark-mode",
+                    theme === "dark"
+                );
 
                 document.documentElement.setAttribute(
                     "data-theme",
                     theme === "dark" ? "dark" : "light"
                 );
 
-                document.documentElement.lang =
-                    language === "fr" ? "fr" : "ar";
+                document.documentElement.setAttribute(
+                    "lang",
+                    language === "fr" ? "fr" : "ar"
+                );
 
-                document.documentElement.dir =
-                    language === "fr" ? "ltr" : "rtl";
+                document.documentElement.setAttribute(
+                    "dir",
+                    language === "fr" ? "ltr" : "rtl"
+                );
 
             } catch (error) {}
         })();
@@ -559,6 +563,7 @@
         }
 
     </style>
+
 </head>
 
 
@@ -644,7 +649,6 @@
 
         </p>
 
-
         <div class="card settings-card">
 
             <div class="profile-box">
@@ -704,7 +708,6 @@
 
         </h2>
 
-
         <div class="card settings-card">
 
 
@@ -740,10 +743,10 @@
 
                 </div>
 
-
                 <select
                     class="settings-select"
-                    id="language">
+                    id="language"
+                    aria-label="Language">
 
                     <option
                         value="ar"
@@ -798,7 +801,6 @@
 
                 </div>
 
-
                 <label class="switch">
 
                     <input
@@ -827,7 +829,6 @@
             🔔 الإشعارات
 
         </h2>
-
 
         <div class="card settings-card">
 
@@ -860,7 +861,6 @@
                     </div>
 
                 </div>
-
 
                 <label class="switch">
 
@@ -906,7 +906,6 @@
 
                 </div>
 
-
                 <label class="switch">
 
                     <input
@@ -951,7 +950,6 @@
 
                 </div>
 
-
                 <label class="switch">
 
                     <input
@@ -981,7 +979,6 @@
             📚 التعلم
 
         </h2>
-
 
         <div class="card settings-card">
 
@@ -1014,7 +1011,6 @@
                     </div>
 
                 </div>
-
 
                 <label class="switch">
 
@@ -1059,7 +1055,6 @@
                     </div>
 
                 </div>
-
 
                 <select
                     class="settings-select"
@@ -1110,7 +1105,6 @@
 
         </h2>
 
-
         <div class="card settings-card">
 
             <div class="setting-row">
@@ -1142,7 +1136,6 @@
                     </div>
 
                 </div>
-
 
                 <label class="switch">
 
@@ -1189,7 +1182,6 @@
 
         </h2>
 
-
         <div class="card settings-card">
 
             <div class="setting-row">
@@ -1222,7 +1214,6 @@
 
                 </div>
 
-
                 <label class="switch">
 
                     <input
@@ -1252,7 +1243,6 @@
             ⚡ الوصول السريع
 
         </h2>
-
 
         <div class="settings-actions">
 
@@ -1433,7 +1423,6 @@
 
         </h2>
 
-
         <div class="settings-actions">
 
             <button
@@ -1532,7 +1521,6 @@
 
         </h2>
 
-
         <div class="card settings-card">
 
             <div class="setting-row">
@@ -1564,7 +1552,6 @@
                     </div>
 
                 </div>
-
 
                 <span class="setting-value">
                     1.0
@@ -1623,6 +1610,8 @@
     </section>
 
 
+    <!-- VERSION -->
+
     <div class="version">
 
         EduNova AI — Afkrash AI
@@ -1645,26 +1634,44 @@
 
 <nav class="bottom-nav">
 
-    <button onclick="goDashboard()" type="button">
+    <button
+        onclick="goDashboard()"
+        type="button">
+
         🏠
+
         <span data-i18n="home">
             الرئيسية
         </span>
+
     </button>
 
-    <button onclick="goLibrary()" type="button">
+
+    <button
+        onclick="goLibrary()"
+        type="button">
+
         📚
+
         <span data-i18n="library">
             مكتبتي
         </span>
+
     </button>
 
-    <button onclick="goForum()" type="button">
+
+    <button
+        onclick="goForum()"
+        type="button">
+
         💬
+
         <span data-i18n="forum">
             المنتدى
         </span>
+
     </button>
+
 
     <button
         class="active"
@@ -1682,14 +1689,20 @@
 </nav>
 
 
+<!-- TOAST -->
+
 <div
     class="toast"
     id="toast">
 </div>
 
 
-<!-- Supabase -->
+<!-- =====================================================
+     SUPABASE
+===================================================== -->
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 
 <script>
 
@@ -1715,21 +1728,17 @@ const supabaseClient =
 
 /* =========================================================
    SETTINGS TRANSLATIONS
-   إعدادات خاصة بهذه الصفحة فقط
 ========================================================= */
 
 const SETTINGS_TRANSLATIONS = {
 
     ar: {
 
-        brand:
-            "EduNova AI",
+        brand: "EduNova AI",
 
-        myAccount:
-            "حسابي",
+        myAccount: "حسابي",
 
-        settings:
-            "الإعدادات",
+        settings: "الإعدادات",
 
         settingsIntro:
             "خصص تجربة التعلم الخاصة بك وتحكم في إعدادات المنصة.",
@@ -2135,16 +2144,16 @@ function getPageSettings() {
 
     try {
 
-        return {
-
-            ...defaultSettings,
-
-            ...JSON.parse(
+        const saved =
+            JSON.parse(
                 localStorage.getItem(
                     "platform_settings"
                 ) || "{}"
-            )
+            );
 
+        return {
+            ...defaultSettings,
+            ...saved
         };
 
     } catch (error) {
@@ -2159,7 +2168,7 @@ function getPageSettings() {
 
 
 /* =========================================================
-   SETTINGS PAGE TRANSLATION
+   SETTINGS TRANSLATION
 ========================================================= */
 
 function translateSettingsPage() {
@@ -2168,9 +2177,8 @@ function translateSettingsPage() {
         getSiteLanguage();
 
     const dictionary =
-        SETTINGS_TRANSLATIONS[
-            language
-        ] || SETTINGS_TRANSLATIONS.ar;
+        SETTINGS_TRANSLATIONS[language] ||
+        SETTINGS_TRANSLATIONS.ar;
 
 
     document
@@ -2207,43 +2215,55 @@ function translateSettingsPage() {
         const options =
             duration.options;
 
+
         if (language === "fr") {
 
-            options[0].textContent =
-                "15 minutes";
+            if (options[0])
+                options[0].textContent =
+                    "15 minutes";
 
-            options[1].textContent =
-                "30 minutes";
+            if (options[1])
+                options[1].textContent =
+                    "30 minutes";
 
-            options[2].textContent =
-                "45 minutes";
+            if (options[2])
+                options[2].textContent =
+                    "45 minutes";
 
-            options[3].textContent =
-                "1 heure";
+            if (options[3])
+                options[3].textContent =
+                    "1 heure";
 
-            options[4].textContent =
-                "1 h 30";
+            if (options[4])
+                options[4].textContent =
+                    "1 h 30";
 
         } else {
 
-            options[0].textContent =
-                "15 دقيقة";
+            if (options[0])
+                options[0].textContent =
+                    "15 دقيقة";
 
-            options[1].textContent =
-                "30 دقيقة";
+            if (options[1])
+                options[1].textContent =
+                    "30 دقيقة";
 
-            options[2].textContent =
-                "45 دقيقة";
+            if (options[2])
+                options[2].textContent =
+                    "45 دقيقة";
 
-            options[3].textContent =
-                "ساعة";
+            if (options[3])
+                options[3].textContent =
+                    "ساعة";
 
-            options[4].textContent =
-                "ساعة ونصف";
+            if (options[4])
+                options[4].textContent =
+                    "ساعة ونصف";
 
         }
 
-        duration.value = value;
+        duration.value =
+            value;
 
     }
 
@@ -2262,6 +2282,8 @@ function translateSettingsPage() {
         });
 
 
+    /* عنوان الصفحة */
+
     document.title =
         language === "fr"
             ? "Paramètres | EduNova AI"
@@ -2271,66 +2293,59 @@ function translateSettingsPage() {
 
 
 /* =========================================================
-   SAVE STUDENT SETTINGS
+   SAVE PAGE SETTINGS
 ========================================================= */
 
 function savePageSettings(
     showMessage = true
 ) {
 
-    const language =
-        getSiteLanguage();
-
     const settings = {
-
-        language:
-            language,
-
-        darkMode:
-            getSiteTheme() === "dark",
 
         platformNotifications:
             document.getElementById(
                 "platformNotifications"
-            ).checked,
+            )?.checked ?? true,
 
         studyNotifications:
             document.getElementById(
                 "studyNotifications"
-            ).checked,
+            )?.checked ?? true,
 
         achievementNotifications:
             document.getElementById(
                 "achievementNotifications"
-            ).checked,
+            )?.checked ?? true,
 
         continueLearning:
             document.getElementById(
                 "continueLearning"
-            ).checked,
+            )?.checked ?? true,
 
         studyDuration:
             document.getElementById(
                 "studyDuration"
-            ).value,
+            )?.value || "30",
 
         aiAssistant:
             document.getElementById(
                 "aiAssistant"
-            ).checked,
+            )?.checked ?? true,
 
         leaderboard:
             document.getElementById(
                 "leaderboard"
-            ).checked
+            )?.checked ?? true
 
     };
 
 
     /*
-     * نحفظ الإعدادات الإضافية فقط هنا.
-     * Theme و Language مصدرهما الحقيقي:
-     * site_theme + site_language
+     * إعدادات الطالب الإضافية
+     * أما اللغة والمظهر فمصدرهما:
+     *
+     * site_language
+     * site_theme
      */
 
     localStorage.setItem(
@@ -2340,6 +2355,9 @@ function savePageSettings(
 
 
     if (showMessage) {
+
+        const language =
+            getSiteLanguage();
 
         const dictionary =
             SETTINGS_TRANSLATIONS[
@@ -2364,67 +2382,129 @@ function loadSettings() {
     const settings =
         getPageSettings();
 
-
     const language =
         getSiteLanguage();
-
 
     const theme =
         getSiteTheme();
 
 
-    document.getElementById(
-        "language"
-    ).value =
-        language;
+    const languageElement =
+        document.getElementById(
+            "language"
+        );
+
+    const darkModeElement =
+        document.getElementById(
+            "darkMode"
+        );
 
 
-    document.getElementById(
-        "darkMode"
-    ).checked =
-        theme === "dark";
+    if (languageElement) {
+
+        languageElement.value =
+            language;
+
+    }
 
 
-    document.getElementById(
-        "platformNotifications"
-    ).checked =
-        settings.platformNotifications;
+    if (darkModeElement) {
+
+        darkModeElement.checked =
+            theme === "dark";
+
+    }
 
 
-    document.getElementById(
-        "studyNotifications"
-    ).checked =
-        settings.studyNotifications;
+    const platformNotifications =
+        document.getElementById(
+            "platformNotifications"
+        );
+
+    if (platformNotifications) {
+
+        platformNotifications.checked =
+            settings.platformNotifications;
+
+    }
 
 
-    document.getElementById(
-        "achievementNotifications"
-    ).checked =
-        settings.achievementNotifications;
+    const studyNotifications =
+        document.getElementById(
+            "studyNotifications"
+        );
+
+    if (studyNotifications) {
+
+        studyNotifications.checked =
+            settings.studyNotifications;
+
+    }
 
 
-    document.getElementById(
-        "continueLearning"
-    ).checked =
-        settings.continueLearning;
+    const achievementNotifications =
+        document.getElementById(
+            "achievementNotifications"
+        );
+
+    if (achievementNotifications) {
+
+        achievementNotifications.checked =
+            settings.achievementNotifications;
+
+    }
 
 
-    document.getElementById(
-        "studyDuration"
-    ).value =
-        settings.studyDuration;
+    const continueLearning =
+        document.getElementById(
+            "continueLearning"
+        );
+
+    if (continueLearning) {
+
+        continueLearning.checked =
+            settings.continueLearning;
+
+    }
 
 
-    document.getElementById(
-        "aiAssistant"
-    ).checked =
-        settings.aiAssistant;
+    const studyDuration =
+        document.getElementById(
+            "studyDuration"
+        );
+
+    if (studyDuration) {
+
+        studyDuration.value =
+            settings.studyDuration;
+
+    }
 
 
-    document.getElementById(
-        "leaderboard"
-    ).checked =
-        settings.leaderboard;
+    const aiAssistant =
+        document.getElementById(
+            "aiAssistant"
+        );
+
+    if (aiAssistant) {
+
+        aiAssistant.checked =
+            settings.aiAssistant;
+
+    }
+
+
+    const leaderboard =
+        document.getElementById(
+            "leaderboard"
+        );
+
+    if (leaderboard) {
+
+        leaderboard.checked =
+            settings.leaderboard;
+
+    }
 
 
     /*
@@ -2453,7 +2533,6 @@ function showToast(message) {
         document.getElementById(
             "toast"
         );
-
 
     if (!toast) return;
 
@@ -2488,12 +2567,15 @@ function showToast(message) {
 
 
 /* =========================================================
-   THEME CHANGE
+   SETTINGS CHANGE
 ========================================================= */
 
 document.addEventListener(
     "change",
     function (event) {
+
+
+        /* DARK MODE */
 
         if (
             event.target.id ===
@@ -2503,10 +2585,6 @@ document.addEventListener(
             const enabled =
                 event.target.checked;
 
-
-            /*
-             * النظام العالمي الجديد
-             */
 
             applySiteTheme(
                 enabled
@@ -2520,7 +2598,6 @@ document.addEventListener(
 
             const language =
                 getSiteLanguage();
-
 
             const dictionary =
                 SETTINGS_TRANSLATIONS[
@@ -2536,8 +2613,11 @@ document.addEventListener(
 
 
             return;
+
         }
 
+
+        /* LANGUAGE */
 
         if (
             event.target.id ===
@@ -2548,18 +2628,10 @@ document.addEventListener(
                 event.target.value;
 
 
-            /*
-             * النظام العالمي الجديد
-             */
-
             applySiteLanguage(
                 language
             );
 
-
-            /*
-             * ترجمة صفحة الإعدادات
-             */
 
             translateSettingsPage();
 
@@ -2572,9 +2644,7 @@ document.addEventListener(
         }
 
 
-        /*
-         * بقية الإعدادات
-         */
+        /* بقية الإعدادات */
 
         savePageSettings(true);
 
@@ -2635,7 +2705,6 @@ function comingSoon() {
     const language =
         getSiteLanguage();
 
-
     const dictionary =
         SETTINGS_TRANSLATIONS[
             language
@@ -2657,7 +2726,6 @@ async function logout() {
 
     const language =
         getSiteLanguage();
-
 
     const dictionary =
         SETTINGS_TRANSLATIONS[
@@ -2767,23 +2835,45 @@ async function loadUser() {
     }
 
 
-    document.getElementById(
-        "userName"
-    ).textContent =
-        name;
+    const userName =
+        document.getElementById(
+            "userName"
+        );
+
+    const userEmail =
+        document.getElementById(
+            "userEmail"
+        );
+
+    const avatar =
+        document.getElementById(
+            "avatar"
+        );
 
 
-    document.getElementById(
-        "userEmail"
-    ).textContent =
-        user.email || "-";
+    if (userName) {
+
+        userName.textContent =
+            name;
+
+    }
 
 
-    document.getElementById(
-        "avatar"
-    ).textContent =
-        name.trim().charAt(0) ||
-        "ط";
+    if (userEmail) {
+
+        userEmail.textContent =
+            user.email || "-";
+
+    }
+
+
+    if (avatar) {
+
+        avatar.textContent =
+            name.trim().charAt(0) ||
+            "ط";
+
+    }
 
 
     loadSettings();
@@ -2807,4 +2897,5 @@ document.addEventListener(
 </script>
 
 </body>
+
     </html>
