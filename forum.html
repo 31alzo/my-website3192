@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>المنتدى | عالم شيخ الأساتذة</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Tahoma, sans-serif;
+      background: #f4f8ff;
+      color: #172033;
+    }
+
+    header {
+      background: #1565d8;
+      color: white;
+      padding: 15px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+    }
+
+    .header-inner {
+      max-width: 900px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .back-btn {
+      border: none;
+      background: rgba(255,255,255,0.15);
+      color: white;
+      padding: 9px 13px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    main {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px 14px 40px;
+    }
+
+    .intro {
+      background: white;
+      border-radius: 20px;
+      padding: 21px;
+      margin-bottom: 16px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+    }
+
+    .intro small {
+      color: #1565d8;
+      font-weight: bold;
+    }
+
+    .intro h1 {
+      margin: 8px 0;
+      font-size: 24px;
+    }
+
+    .intro p {
+      margin: 0;
+      color: #64748b;
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .new-post {
+      background: white;
+      border-radius: 18px;
+      padding: 18px;
+      margin-bottom: 18px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    }
+
+    .new-post h2 {
+      margin-top: 0;
+      font-size: 18px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      border: 1px solid #dbe3ef;
+      border-radius: 12px;
+      padding: 13px;
+      font-family: inherit;
+      font-size: 14px;
+      outline: none;
+      background: #f8fafc;
+      margin-bottom: 10px;
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: #1565d8;
+      background: white;
+    }
+
+    .post-btn {
+      width: 100%;
+      border: none;
+      background: #1565d8;
+      color: white;
+      padding: 13px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .section-title {
+      font-size: 20px;
+      margin: 22px 0 12px;
+    }
+
+    .post {
+      background: white;
+      border-radius: 18px;
+      padding: 17px;
+      margin-bottom: 13px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    }
+
+    .post-head {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      margin-bottom: 12px;
+    }
+
+    .avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #eaf3ff;
+      color: #1565d8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    .post-user {
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .post-time {
+      color: #94a3b8;
+      font-size: 11px;
+      margin-top: 4px;
+    }
+
+    .post-title {
+      font-size: 17px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .post-content {
+      color: #475569;
+      line-height: 1.8;
+      font-size: 14px;
+      white-space: pre-wrap;
+    }
+
+    .post-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .action-btn {
+      border: 1px solid #e2e8f0;
+      background: #f8fafc;
+      color: #475569;
+      padding: 8px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .comments {
+      margin-top: 13px;
+      border-top: 1px solid #eef2f7;
+      padding-top: 12px;
+    }
+
+    .comment {
+      background: #f8fafc;
+      border-radius: 11px;
+      padding: 10px;
+      margin-top: 8px;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .comment strong {
+      color: #1565d8;
+    }
+
+    .comment-box {
+      margin-top: 10px;
+      display: none;
+    }
+
+    .comment-box textarea {
+      min-height: 75px;
+      margin-bottom: 7px;
+    }
+
+    .comment-submit {
+      border: none;
+      background: #1565d8;
+      color: white;
+      padding: 9px 13px;
+      border-radius: 9px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .empty {
+      text-align: center;
+      background: white;
+      border-radius: 18px;
+      padding: 30px 18px;
+      color: #64748b;
+    }
+
+    .empty-icon {
+      font-size: 40px;
+      margin-bottom: 8px;
+    }
+
+    .footer-btn {
+      width: 100%;
+      border: 1px solid #1565d8;
+      background: white;
+      color: #1565d8;
+      padding: 13px;
+      border-radius: 13px;
+      cursor: pointer;
+      font-size: 15px;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+
+    <div class="brand">
+      عالم شيخ الأساتذة
+    </div>
+
+    <button
+      class="back-btn"
+      onclick="goDashboard()">
+      ← الرئيسية
+    </button>
+
+  </div>
+</header>
+
+
+<main>
+
+  <section class="intro">
+
+    <small>مجتمع الطلاب</small>
+
+    <h1>
+      المنتدى الطلابي 💬
+    </h1>
+
+    <p>
+      مكان للتعاون وطرح الأسئلة ومشاركة الحلول
+      والاستفادة من تجارب بقية الطلاب.
+    </p>
+
+  </section>
+
+
+  <section class="new-post">
+
+    <h2>
+      ✍️ اكتب منشورًا جديدًا
+    </h2>
+
+    <input
+      id="postTitle"
+      type="text"
+      placeholder="عنوان المنشور">
+
+    <textarea
+      id="postContent"
+      placeholder="اكتب سؤالك أو فكرتك أو الحل الذي تريد مشاركته..."></textarea>
+
+    <button
+      class="post-btn"
+      onclick="createPost()">
+      نشر المنشور
+    </button>
+
+  </section>
+
+
+  <h2 class="section-title">
+    أحدث المنشورات
+  </h2>
+
+
+  <section id="postsContainer"></section>
+
+
+  <button
+    class="footer-btn"
+    onclick="goDashboard()">
+    العودة إلى الرئيسية
+  </button>
+
+</main>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+  const SUPABASE_URL =
+    "https://qkzdlxqledsznhbifaxy.supabase.co";
+
+  const SUPABASE_KEY =
+    "sb_publishable_ZdpHXwLlhpbXztsTXpAFTg_TgOji91v";
+
+  const supabaseClient =
+    supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+
+  let currentUser = null;
+
+
+  const defaultPosts = [
+
+    {
+      id: 1,
+      name: "طالب الرياضيات",
+      title: "كيف أفهم هذا التمرين؟",
+      content:
+        "هل يمكن لأحد أن يساعدني في فهم طريقة حل التمرين؟ أريد أن أفهم الخطوات وليس الجواب فقط.",
+      time: "اليوم",
+      comments: [
+        {
+          name: "طالب مجتهد",
+          text:
+            "حاول تقسيم المسألة إلى خطوات صغيرة وستجد أن الحل يصبح أسهل."
+        }
+      ]
+    },
+
+    {
+      id: 2,
+      name: "محب الرياضيات",
+      title: "مشاركة حل",
+      content:
+        "وجدت طريقة مختلفة لحل أحد التمارين، وسأشاركها معكم للاستفادة والنقاش.",
+      time: "أمس",
+      comments: []
+    }
+
+  ];
+
+
+  async function checkAuth() {
+
+    const {
+      data: { session }
+    } = await supabaseClient.auth.getSession();
+
+
+    if (!session) {
+
+      window.location.href =
+        "login.html";
+
+      return false;
+
+    }
+
+
+    currentUser =
+      session.user;
+
+    return true;
+
+  }
+
+
+  function getDisplayName() {
+
+    if (
+      currentUser &&
+      currentUser.user_metadata &&
+      currentUser.user_metadata.full_name
+    ) {
+
+      return currentUser.user_metadata.full_name;
+
+    }
+
+
+    if (
+      currentUser &&
+      currentUser.email
+    ) {
+
+      return currentUser.email
+        .split("@")[0];
+
+    }
+
+
+    return "طالب";
+
+  }
+
+
+  function getInitial(name) {
+
+    if (!name) {
+      return "ط";
+    }
+
+    return name.charAt(0);
+
+  }
+
+
+  function getPosts() {
+
+    const saved =
+      localStorage.getItem(
+        "forum_posts"
+      );
+
+
+    if (saved) {
+
+      try {
+
+        return JSON.parse(saved);
+
+      } catch (error) {
+
+        return defaultPosts;
+
+      }
+
+    }
+
+
+    return defaultPosts;
+
+  }
+
+
+  function savePosts(posts) {
+
+    localStorage.setItem(
+      "forum_posts",
+      JSON.stringify(posts)
+    );
+
+  }
+
+
+  function renderPosts() {
+
+    const container =
+      document.getElementById(
+        "postsContainer"
+      );
+
+
+    const posts =
+      getPosts();
+
+
+    container.innerHTML = "";
+
+
+    if (!posts.length) {
+
+      container.innerHTML = `
+
+        <div class="empty">
+
+          <div class="empty-icon">
+            💬
+          </div>
+
+          لا توجد منشورات بعد.
+          كن أول طالب يبدأ النقاش!
+
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+
+    posts
+      .slice()
+      .reverse()
+      .forEach(function(post) {
+
+        const article =
+          document.createElement("article");
+
+        article.className =
+          "post";
+
+
+        const comments =
+          post.comments || [];
+
+
+        let commentsHTML = "";
+
+
+        comments.forEach(function(comment) {
+
+          commentsHTML += `
+
+            <div class="comment">
+
+              <strong>
+                ${escapeHTML(comment.name)}
+              </strong>
+
+              <br>
+
+              ${escapeHTML(comment.text)}
+
+            </div>
+
+          `;
+
+        });
+
+
+        article.innerHTML = `
+
+          <div class="post-head">
+
+            <div class="avatar">
+              ${escapeHTML(
+                getInitial(post.name)
+              )}
+            </div>
+
+            <div>
+
+              <div class="post-user">
+                ${escapeHTML(post.name)}
+              </div>
+
+              <div class="post-time">
+                ${escapeHTML(post.time)}
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="post-title">
+            ${escapeHTML(post.title)}
+          </div>
+
+
+          <div class="post-content">
+            ${escapeHTML(post.content)}
+          </div>
+
+
+          <div class="post-actions">
+
+            <button
+              class="action-btn"
+              onclick="toggleComments(${post.id})">
+              💬 التعليقات (${comments.length})
+            </button>
+
+          </div>
+
+
+          <div
+            class="comments"
+            id="comments-${post.id}">
+
+            ${commentsHTML}
+
+
+            <div
+              class="comment-box"
+              id="comment-box-${post.id}">
+
+              <textarea
+                id="comment-input-${post.id}"
+                placeholder="اكتب تعليقك..."></textarea>
+
+              <button
+                class="comment-submit"
+                onclick="addComment(${post.id})">
+                نشر التعليق
+              </button>
+
+            </div>
+
+          </div>
+
+        `;
+
+
+        container.appendChild(article);
+
+      });
+
+  }
+
+
+  function createPost() {
+
+    const title =
+      document.getElementById(
+        "postTitle"
+      ).value.trim();
+
+
+    const content =
+      document.getElementById(
+        "postContent"
+      ).value.trim();
+
+
+    if (!title) {
+
+      alert(
+        "اكتب عنوان المنشور أولًا."
+      );
+
+      return;
+
+    }
+
+
+    if (!content) {
+
+      alert(
+        "اكتب محتوى المنشور أولًا."
+      );
+
+      return;
+
+    }
+
+
+    const posts =
+      getPosts();
+
+
+    const newPost = {
+
+      id:
+        Date.now(),
+
+      name:
+        getDisplayName(),
+
+      title:
+        title,
+
+      content:
+        content,
+
+      time:
+        "الآن",
+
+      comments:
+        []
+
+    };
+
+
+    posts.push(newPost);
+
+
+    savePosts(posts);
+
+
+    document.getElementById(
+      "postTitle"
+    ).value = "";
+
+
+    document.getElementById(
+      "postContent"
+    ).value = "";
+
+
+    renderPosts();
+
+
+    alert(
+      "تم نشر منشورك بنجاح ✓"
+    );
+
+  }
+
+
+  function toggleComments(postId) {
+
+    const box =
+      document.getElementById(
+        "comment-box-" + postId
+      );
+
+
+    if (!box) {
+      return;
+    }
+
+
+    if (box.style.display === "block") {
+
+      box.style.display = "none";
+
+    } else {
+
+      box.style.display = "block";
+
+    }
+
+  }
+
+
+  function addComment(postId) {
+
+    const input =
+      document.getElementById(
+        "comment-input-" + postId
+      );
+
+
+    if (!input) {
+      return;
+    }
+
+
+    const text =
+      input.value.trim();
+
+
+    if (!text) {
+
+      alert(
+        "اكتب التعليق أولًا."
+      );
+
+      return;
+
+    }
+
+
+    const posts =
+      getPosts();
+
+
+    const post =
+      posts.find(function(item) {
+
+        return item.id === postId;
+
+      });
+
+
+    if (!post) {
+      return;
+    }
+
+
+    if (!post.comments) {
+      post.comments = [];
+    }
+
+
+    post.comments.push({
+
+      name:
+        getDisplayName(),
+
+      text:
+        text
+
+    });
+
+
+    savePosts(posts);
+
+
+    renderPosts();
+
+
+    alert(
+      "تم نشر تعليقك ✓"
+    );
+
+  }
+
+
+  function escapeHTML(value) {
+
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+
+  }
+
+
+  function goDashboard() {
+
+    window.location.href =
+      "dashboard.html";
+
+  }
+
+
+  async function startPage() {
+
+    const authenticated =
+      await checkAuth();
+
+
+    if (!authenticated) {
+      return;
+    }
+
+
+    renderPosts();
+
+  }
+
+
+  startPage();
+
+</script>
+
+</body>
+    </html>
