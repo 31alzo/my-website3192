@@ -2,14 +2,23 @@
 <html lang="ar" dir="rtl">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
     <title>Chapitre | EduNova AI</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css">
+
+    <script src="script.js"></script>
 
     <style>
+
         /* =========================================
            CHAPTER PAGE
            ========================================= */
@@ -39,14 +48,11 @@
             border: 1px solid var(--border);
             background: var(--surface);
             color: var(--text);
-
             padding: 9px 12px;
             border-radius: 11px;
-
             font-family: inherit;
             font-size: 11px;
             font-weight: 800;
-
             cursor: pointer;
         }
 
@@ -63,14 +69,11 @@
             display: flex;
             align-items: center;
             gap: 12px;
-
             margin-bottom: 17px;
             padding: 12px 14px;
-
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 18px;
-
             box-shadow: var(--shadow-sm);
         }
 
@@ -78,39 +81,30 @@
             width: 45px;
             height: 45px;
             flex-shrink: 0;
-
             display: grid;
             place-items: center;
-
             border-radius: 14px;
-
             background:
                 linear-gradient(
                     135deg,
                     var(--primary),
                     var(--accent)
                 );
-
             color: white;
-
             font-size: 13px;
             font-weight: 900;
         }
 
         .teacher-strip strong {
             display: block;
-
             font-size: 14px;
             font-weight: 900;
         }
 
         .teacher-strip span {
             display: block;
-
             margin-top: 3px;
-
             color: var(--text-soft);
-
             font-size: 10px;
         }
 
@@ -121,11 +115,8 @@
         .chapter-hero {
             position: relative;
             overflow: hidden;
-
             padding: 25px 20px;
-
             border-radius: 24px;
-
             background:
                 linear-gradient(
                     135deg,
@@ -133,25 +124,18 @@
                     var(--primary),
                     var(--accent)
                 );
-
             color: white;
-
             box-shadow: var(--shadow-lg);
         }
 
         .chapter-hero::before {
             content: "";
-
             position: absolute;
-
             width: 170px;
             height: 170px;
-
             left: -75px;
             top: -80px;
-
             border-radius: 50%;
-
             background: rgba(255,255,255,.08);
         }
 
@@ -162,40 +146,30 @@
 
         .breadcrumb {
             margin-bottom: 10px;
-
             color: rgba(255,255,255,.72);
-
             font-size: 10px;
         }
 
         .chapter-hero h1 {
             margin: 0;
-
             font-size: clamp(25px, 6vw, 36px);
             font-weight: 950;
         }
 
         .chapter-hero p {
             max-width: 650px;
-
             margin: 8px 0 0;
-
             color: rgba(255,255,255,.88);
-
             font-size: 12px;
             line-height: 1.8;
         }
 
         .chapter-count {
             display: inline-flex;
-
             margin-top: 14px;
             padding: 6px 10px;
-
             border-radius: 999px;
-
             background: rgba(255,255,255,.14);
-
             font-size: 10px;
             font-weight: 800;
         }
@@ -214,16 +188,13 @@
 
         .section-head h2 {
             margin: 0;
-
             font-size: 20px;
             font-weight: 950;
         }
 
         .section-head p {
             margin: 4px 0 0;
-
             color: var(--text-soft);
-
             font-size: 11px;
         }
 
@@ -238,18 +209,12 @@
 
         .video-card {
             overflow: hidden;
-
             position: relative;
-
             background: var(--surface);
-
             border: 1px solid var(--border);
             border-radius: 18px;
-
             box-shadow: var(--shadow-sm);
-
             cursor: pointer;
-
             transition:
                 transform .2s ease,
                 box-shadow .2s ease,
@@ -258,15 +223,9 @@
 
         .video-card:hover {
             transform: translateY(-2px);
-
             border-color: #93c5fd;
-
             box-shadow: var(--shadow-md);
         }
-
-        /* =========================================
-           LOCKED VIDEO
-           ========================================= */
 
         .video-card.locked {
             cursor: pointer;
@@ -280,44 +239,30 @@
             filter: saturate(.65);
         }
 
-        .lock-badge {
+        /* =========================================
+           BADGES
+           ========================================= */
+
+        .lock-badge,
+        .free-badge {
             position: absolute;
-
             top: 10px;
-            left: 10px;
-
             z-index: 5;
-
             padding: 6px 9px;
-
             border-radius: 999px;
-
-            background: rgba(15,23,42,.85);
-
             color: white;
-
             font-size: 9px;
             font-weight: 900;
         }
 
-        .free-badge {
-            position: absolute;
-
-            top: 10px;
+        .lock-badge {
             left: 10px;
+            background: rgba(15,23,42,.85);
+        }
 
-            z-index: 5;
-
-            padding: 6px 9px;
-
-            border-radius: 999px;
-
+        .free-badge {
+            left: 10px;
             background: rgba(22,163,74,.95);
-
-            color: white;
-
-            font-size: 9px;
-            font-weight: 900;
         }
 
         /* =========================================
@@ -326,42 +271,30 @@
 
         .video-thumbnail {
             position: relative;
-
             aspect-ratio: 16 / 9;
-
             display: grid;
             place-items: center;
-
             background:
                 linear-gradient(
                     135deg,
                     #0f172a,
                     #1e293b
                 );
-
             color: white;
-
             overflow: hidden;
         }
 
         .video-thumbnail::before {
             content: "AI";
-
             position: absolute;
-
             top: 12px;
             right: 12px;
-
             display: grid;
             place-items: center;
-
             width: 34px;
             height: 34px;
-
             border-radius: 10px;
-
             background: rgba(255,255,255,.12);
-
             font-size: 9px;
             font-weight: 900;
         }
@@ -369,51 +302,34 @@
         .play-button {
             width: 54px;
             height: 54px;
-
             display: grid;
             place-items: center;
-
             border-radius: 50%;
-
             background: rgba(255,255,255,.95);
-
             color: var(--primary);
-
             font-size: 21px;
-
             box-shadow: 0 7px 25px rgba(0,0,0,.25);
         }
 
         .lock-icon {
             width: 54px;
             height: 54px;
-
             display: grid;
             place-items: center;
-
             border-radius: 50%;
-
             background: rgba(255,255,255,.15);
-
             color: white;
-
             font-size: 22px;
-
             box-shadow: 0 7px 25px rgba(0,0,0,.20);
         }
 
         .video-number {
             position: absolute;
-
             bottom: 9px;
             right: 9px;
-
             padding: 4px 7px;
-
             border-radius: 7px;
-
             background: rgba(0,0,0,.65);
-
             font-size: 9px;
             font-weight: 800;
         }
@@ -428,18 +344,14 @@
 
         .video-info h3 {
             margin: 0;
-
             font-size: 14px;
             font-weight: 900;
-
             line-height: 1.6;
         }
 
         .video-info p {
             margin: 5px 0 0;
-
             color: var(--text-soft);
-
             font-size: 10px;
             line-height: 1.6;
         }
@@ -448,11 +360,9 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-
+            gap: 8px;
             margin-top: 9px;
-
             color: var(--text-soft);
-
             font-size: 9px;
         }
 
@@ -472,11 +382,8 @@
 
         .empty-videos {
             padding: 40px 18px;
-
             text-align: center;
-
             background: var(--surface);
-
             border: 1px dashed var(--border);
             border-radius: 20px;
         }
@@ -487,18 +394,14 @@
 
         .empty-videos h3 {
             margin: 10px 0 5px;
-
             font-size: 17px;
             font-weight: 900;
         }
 
         .empty-videos p {
             max-width: 520px;
-
             margin: auto;
-
             color: var(--text-soft);
-
             font-size: 11px;
             line-height: 1.9;
         }
@@ -514,17 +417,17 @@
             }
 
             .videos-grid {
-                grid-template-columns:
-                    repeat(2, 1fr);
+                grid-template-columns: repeat(2, 1fr);
             }
+
         }
 
         @media (min-width: 950px) {
 
             .videos-grid {
-                grid-template-columns:
-                    repeat(3, 1fr);
+                grid-template-columns: repeat(3, 1fr);
             }
+
         }
 
         /* =========================================
@@ -553,12 +456,16 @@
             .video-info {
                 padding: 11px;
             }
+
         }
+
     </style>
+
 </head>
 
 
 <body>
+
 
 <header class="site-header">
 
@@ -569,7 +476,9 @@
             onclick="goHome()"
             type="button">
 
-            <span class="brand-icon">AI</span>
+            <span class="brand-icon">
+                AI
+            </span>
 
             <span>
                 EduNova AI
@@ -581,7 +490,8 @@
         <button
             class="btn btn-secondary"
             onclick="goLibrary()"
-            type="button">
+            type="button"
+            data-i18n="chapter.back_library">
 
             ← المكتبة
 
@@ -611,7 +521,7 @@
                     Afkrash AI
                 </strong>
 
-                <span>
+                <span data-i18n="chapter.teacher_description">
                     مدرسك الذكي في EduNova AI — تعلّم الرياضيات خطوة بخطوة.
                 </span>
 
@@ -640,8 +550,12 @@
                 </h1>
 
 
-                <p id="chapterDescription">
+                <p
+                    id="chapterDescription"
+                    data-i18n="chapter.default_description">
+
                     فيديوهات تعليمية مرتبة داخل هذا الـChapitre.
+
                 </p>
 
 
@@ -664,11 +578,11 @@
 
             <div class="section-head">
 
-                <h2>
+                <h2 data-i18n="chapter.videos_title">
                     فيديوهات الـChapitre
                 </h2>
 
-                <p>
+                <p data-i18n="chapter.videos_description">
                     الفيديو الأول مجاني، وبقية الفيديوهات متاحة ضمن الخطط التعليمية.
                 </p>
 
@@ -689,11 +603,11 @@
                     🎬
                 </div>
 
-                <h3>
+                <h3 data-i18n="chapter.empty_title">
                     الفيديوهات ستُضاف هنا
                 </h3>
 
-                <p>
+                <p data-i18n="chapter.empty_description">
                     لم تتم إضافة فيديوهات لهذا الـChapitre بعد.
                     يمكن أن يحتوي كل Chapitre على ما يصل إلى 20 فيديو،
                     ويكون الفيديو الأول مجانيًا للتجربة.
@@ -712,7 +626,126 @@
 <script>
 
     /* =========================================
-       CHAPTER
+       CHAPTER TRANSLATIONS
+       ========================================= */
+
+    const CHAPTER_TRANSLATIONS = {
+
+        ar: {
+
+            "chapter.back_library":
+                "← المكتبة",
+
+            "chapter.teacher_description":
+                "مدرسك الذكي في EduNova AI — تعلّم الرياضيات خطوة بخطوة.",
+
+            "chapter.default_description":
+                "فيديوهات تعليمية مرتبة داخل هذا الـChapitre.",
+
+            "chapter.videos_title":
+                "فيديوهات الـChapitre",
+
+            "chapter.videos_description":
+                "الفيديو الأول مجاني، وبقية الفيديوهات متاحة ضمن الخطط التعليمية.",
+
+            "chapter.empty_title":
+                "الفيديوهات ستُضاف هنا",
+
+            "chapter.empty_description":
+                "لم تتم إضافة فيديوهات لهذا الـChapitre بعد. يمكن أن يحتوي كل Chapitre على ما يصل إلى 20 فيديو، ويكون الفيديو الأول مجانيًا للتجربة.",
+
+            "chapter.math":
+                "الرياضيات",
+
+            "chapter.chapter":
+                "Chapitre",
+
+            "chapter.video":
+                "فيديو",
+
+            "chapter.videos":
+                "فيديوهات",
+
+            "chapter.free":
+                "🎁 مجاني",
+
+            "chapter.locked":
+                "🔒 مقفل",
+
+            "chapter.watch":
+                "مشاهدة ←",
+
+            "chapter.subscription":
+                "🔒 يتطلب اشتراكًا",
+
+            "chapter.coming_soon":
+                "🎬 سيتم إضافة هذا الفيديو قريبًا.",
+
+            "chapter.subscription_alert":
+                "🔒 هذا الفيديو متاح ضمن الخطط التعليمية في EduNova AI."
+
+        },
+
+        fr: {
+
+            "chapter.back_library":
+                "← Bibliothèque",
+
+            "chapter.teacher_description":
+                "Votre professeur intelligent dans EduNova AI — apprenez les mathématiques étape par étape.",
+
+            "chapter.default_description":
+                "Des vidéos éducatives organisées dans ce chapitre.",
+
+            "chapter.videos_title":
+                "Vidéos du chapitre",
+
+            "chapter.videos_description":
+                "La première vidéo est gratuite. Les autres vidéos sont disponibles dans les formules éducatives.",
+
+            "chapter.empty_title":
+                "Les vidéos seront ajoutées ici",
+
+            "chapter.empty_description":
+                "Aucune vidéo n'a encore été ajoutée à ce chapitre. Chaque chapitre peut contenir jusqu'à 20 vidéos, dont la première est gratuite pour découvrir le contenu.",
+
+            "chapter.math":
+                "Mathématiques",
+
+            "chapter.chapter":
+                "Chapitre",
+
+            "chapter.video":
+                "vidéo",
+
+            "chapter.videos":
+                "vidéos",
+
+            "chapter.free":
+                "🎁 Gratuit",
+
+            "chapter.locked":
+                "🔒 Verrouillé",
+
+            "chapter.watch":
+                "Regarder →",
+
+            "chapter.subscription":
+                "🔒 Abonnement requis",
+
+            "chapter.coming_soon":
+                "🎬 Cette vidéo sera ajoutée prochainement.",
+
+            "chapter.subscription_alert":
+                "🔒 Cette vidéo est disponible dans les formules éducatives d'EduNova AI."
+
+        }
+
+    };
+
+
+    /* =========================================
+       SELECTED CHAPTER
        ========================================= */
 
     const selectedChapter =
@@ -748,13 +781,19 @@
        الفيديو رقم 2 وما بعده = مقفل
     */
 
-
     const chapterData = {
 
         1: {
-            title: "Chapitre 1",
-            description:
-                "الفيديوهات التعليمية الخاصة بالفصل الأول.",
+
+            title: {
+                ar: "Chapitre 1",
+                fr: "Chapitre 1"
+            },
+
+            description: {
+                ar: "الفيديوهات التعليمية الخاصة بالفصل الأول.",
+                fr: "Les vidéos éducatives du premier chapitre."
+            },
 
             videos: [
 
@@ -763,29 +802,197 @@
 
                 {
                     id: 1,
-                    title: "الدرس الأول",
-                    description: "شرح الدرس الأول",
+
+                    title: {
+                        ar: "الدرس الأول",
+                        fr: "Première leçon"
+                    },
+
+                    description: {
+                        ar: "شرح الدرس الأول",
+                        fr: "Explication de la première leçon"
+                    },
+
                     duration: "12:30",
+
                     videoUrl: "رابط الفيديو"
                 },
 
                 {
                     id: 2,
-                    title: "الدرس الثاني",
-                    description: "شرح الدرس الثاني",
+
+                    title: {
+                        ar: "الدرس الثاني",
+                        fr: "Deuxième leçon"
+                    },
+
+                    description: {
+                        ar: "شرح الدرس الثاني",
+                        fr: "Explication de la deuxième leçon"
+                    },
+
                     duration: "15:20",
+
                     videoUrl: "رابط الفيديو"
                 }
                 */
 
             ]
+
         }
 
     };
 
 
     /* =========================================
-       LOAD
+       LANGUAGE
+       ========================================= */
+
+    function getChapterLanguage() {
+
+        if (
+            typeof getSiteLanguage ===
+            "function"
+        ) {
+
+            return getSiteLanguage() === "fr"
+                ? "fr"
+                : "ar";
+
+        }
+
+
+        return localStorage.getItem(
+            "site_language"
+        ) === "fr"
+            ? "fr"
+            : "ar";
+
+    }
+
+
+    function chapterText(key) {
+
+        const language =
+            getChapterLanguage();
+
+
+        return (
+            CHAPTER_TRANSLATIONS[language] &&
+            CHAPTER_TRANSLATIONS[language][key]
+        ) ||
+        CHAPTER_TRANSLATIONS.ar[key] ||
+        key;
+
+    }
+
+
+    function localizedValue(value) {
+
+        if (
+            value &&
+            typeof value === "object"
+        ) {
+
+            const language =
+                getChapterLanguage();
+
+            return (
+                value[language] ||
+                value.ar ||
+                value.fr ||
+                ""
+            );
+
+        }
+
+
+        return value || "";
+
+    }
+
+
+    /* =========================================
+       TRANSLATE PAGE
+       ========================================= */
+
+    function translateChapterPage() {
+
+        const language =
+            getChapterLanguage();
+
+
+        document
+            .querySelectorAll("[data-i18n]")
+            .forEach(
+                function(element) {
+
+                    const key =
+                        element.getAttribute(
+                            "data-i18n"
+                        );
+
+
+                    const translation =
+                        chapterText(key);
+
+
+                    if (
+                        translation !== undefined
+                    ) {
+
+                        element.textContent =
+                            translation;
+
+                    }
+
+                }
+            );
+
+
+        document.documentElement.lang =
+            language;
+
+
+        document.documentElement.dir =
+            language === "fr"
+                ? "ltr"
+                : "rtl";
+
+
+        loadChapter();
+
+    }
+
+
+    /* =========================================
+       CHAPTER TITLE
+       ========================================= */
+
+    function getChapterTitle(data) {
+
+        if (!data) {
+
+            return (
+                chapterText(
+                    "chapter.chapter"
+                ) +
+                " " +
+                selectedChapter
+            );
+
+        }
+
+
+        return localizedValue(
+            data.title
+        );
+
+    }
+
+
+    /* =========================================
+       LOAD CHAPTER
        ========================================= */
 
     function loadChapter() {
@@ -794,18 +1001,78 @@
             chapterData[selectedChapter];
 
 
-        if (!data) {
-
+        const titleElement =
             document.getElementById(
                 "chapterTitle"
-            ).textContent =
-                "Chapitre " +
-                selectedChapter;
+            );
 
+
+        const descriptionElement =
+            document.getElementById(
+                "chapterDescription"
+            );
+
+
+        const breadcrumbElement =
+            document.getElementById(
+                "breadcrumb"
+            );
+
+
+        const countElement =
             document.getElementById(
                 "chapterCount"
-            ).textContent =
-                "🎬 0 فيديو";
+            );
+
+
+        if (!data) {
+
+            if (titleElement) {
+
+                titleElement.textContent =
+                    chapterText(
+                        "chapter.chapter"
+                    ) +
+                    " " +
+                    selectedChapter;
+
+            }
+
+
+            if (descriptionElement) {
+
+                descriptionElement.textContent =
+                    chapterText(
+                        "chapter.default_description"
+                    );
+
+            }
+
+
+            if (breadcrumbElement) {
+
+                breadcrumbElement.textContent =
+                    chapterText(
+                        "chapter.math"
+                    ) +
+                    " ← " +
+                    chapterText(
+                        "chapter.chapter"
+                    );
+
+            }
+
+
+            if (countElement) {
+
+                countElement.textContent =
+                    "🎬 0 " +
+                    chapterText(
+                        "chapter.video"
+                    );
+
+            }
+
 
             showEmpty();
 
@@ -814,35 +1081,68 @@
         }
 
 
-        document.getElementById(
-            "chapterTitle"
-        ).textContent =
-            data.title;
+        const title =
+            getChapterTitle(data);
 
 
-        document.getElementById(
-            "chapterDescription"
-        ).textContent =
-            data.description;
+        if (titleElement) {
+
+            titleElement.textContent =
+                title;
+
+        }
 
 
-        document.getElementById(
-            "breadcrumb"
-        ).textContent =
-            "الرياضيات ← " +
-            data.title;
+        if (descriptionElement) {
+
+            descriptionElement.textContent =
+                localizedValue(
+                    data.description
+                );
+
+        }
 
 
-        document.getElementById(
-            "chapterCount"
-        ).textContent =
-            "🎬 " +
-            data.videos.length +
-            " فيديو";
+        if (breadcrumbElement) {
+
+            breadcrumbElement.textContent =
+                chapterText(
+                    "chapter.math"
+                ) +
+                " ← " +
+                title;
+
+        }
+
+
+        if (countElement) {
+
+            const count =
+                Math.min(
+                    (data.videos || []).length,
+                    20
+                );
+
+
+            countElement.textContent =
+                "🎬 " +
+                count +
+                " " +
+                (
+                    count === 1
+                        ? chapterText(
+                            "chapter.video"
+                        )
+                        : chapterText(
+                            "chapter.videos"
+                        )
+                );
+
+        }
 
 
         renderVideos(
-            data.videos
+            data.videos || []
         );
 
     }
@@ -859,10 +1159,16 @@
                 "videosGrid"
             );
 
+
         const empty =
             document.getElementById(
                 "emptyVideos"
             );
+
+
+        if (!grid || !empty) {
+            return;
+        }
 
 
         grid.innerHTML = "";
@@ -884,10 +1190,11 @@
         videos
             .slice(0, 20)
             .forEach(
-                (video, index) => {
+                function(video, index) {
 
                     const videoNumber =
                         index + 1;
+
 
                     const isFree =
                         videoNumber === 1;
@@ -908,6 +1215,49 @@
                         );
 
 
+                    const title =
+                        localizedValue(
+                            video.title
+                        );
+
+
+                    const description =
+                        localizedValue(
+                            video.description
+                        );
+
+
+                    const duration =
+                        video.duration ||
+                        "--:--";
+
+
+                    const badge =
+                        isFree
+                            ? chapterText(
+                                "chapter.free"
+                            )
+                            : chapterText(
+                                "chapter.locked"
+                            );
+
+
+                    const bottomLabel =
+                        isFree
+                            ? chapterText(
+                                "chapter.watch"
+                            )
+                            : chapterText(
+                                "chapter.subscription"
+                            );
+
+
+                    const videoLabel =
+                        getChapterLanguage() === "fr"
+                            ? "Vidéo "
+                            : "فيديو ";
+
+
                     card.innerHTML = `
 
                         <div class="video-thumbnail">
@@ -917,13 +1267,13 @@
 
                                 ? `
                                     <div class="free-badge">
-                                        🎁 مجاني
+                                        ${badge}
                                     </div>
                                 `
 
                                 : `
                                     <div class="lock-badge">
-                                        🔒 مقفل
+                                        ${badge}
                                     </div>
                                 `
                             }
@@ -947,7 +1297,7 @@
 
 
                             <div class="video-number">
-                                فيديو ${videoNumber}
+                                ${videoLabel}${videoNumber}
                             </div>
 
                         </div>
@@ -956,35 +1306,31 @@
                         <div class="video-info">
 
                             <h3>
-                                ${video.title}
+                                ${title}
                             </h3>
 
+
                             <p>
-                                ${video.description || ""}
+                                ${description}
                             </p>
+
 
                             <div class="video-meta">
 
                                 <span>
-                                    ⏱️ ${video.duration || "--:--"}
+                                    ⏱️ ${duration}
                                 </span>
 
 
-                                ${
+                                <span class="${
                                     isFree
+                                        ? "watch-label"
+                                        : "locked-label"
+                                }">
 
-                                    ? `
-                                        <span class="watch-label">
-                                            مشاهدة ←
-                                        </span>
-                                    `
+                                    ${bottomLabel}
 
-                                    : `
-                                        <span class="locked-label">
-                                            🔒 يتطلب اشتراكًا
-                                        </span>
-                                    `
-                                }
+                                </span>
 
                             </div>
 
@@ -994,7 +1340,7 @@
 
 
                     card.onclick =
-                        function () {
+                        function() {
 
                             openVideo(
                                 video,
@@ -1034,7 +1380,9 @@
         if (videoNumber > 1) {
 
             alert(
-                "🔒 هذا الفيديو متاح ضمن الخطط التعليمية في EduNova AI."
+                chapterText(
+                    "chapter.subscription_alert"
+                )
             );
 
             return;
@@ -1052,8 +1400,10 @@
                 JSON.stringify(video)
             );
 
+
             window.location.href =
                 "video.html";
+
 
             return;
 
@@ -1061,7 +1411,9 @@
 
 
         alert(
-            "🎬 سيتم إضافة هذا الفيديو قريبًا."
+            chapterText(
+                "chapter.coming_soon"
+            )
         );
 
     }
@@ -1073,10 +1425,18 @@
 
     function showEmpty() {
 
-        document.getElementById(
-            "emptyVideos"
-        ).style.display =
-            "block";
+        const empty =
+            document.getElementById(
+                "emptyVideos"
+            );
+
+
+        if (empty) {
+
+            empty.style.display =
+                "block";
+
+        }
 
     }
 
@@ -1102,12 +1462,75 @@
 
 
     /* =========================================
+       GLOBAL LANGUAGE EVENTS
+       ========================================= */
+
+    window.addEventListener(
+        "languageChanged",
+        function() {
+
+            translateChapterPage();
+
+        }
+    );
+
+
+    window.addEventListener(
+        "languagechange",
+        function() {
+
+            translateChapterPage();
+
+        }
+    );
+
+
+    /* =========================================
+       STORAGE SYNC
+       ========================================= */
+
+    window.addEventListener(
+        "storage",
+        function(event) {
+
+            if (
+                event.key === "site_language"
+            ) {
+
+                translateChapterPage();
+
+            }
+
+        }
+    );
+
+
+    /* =========================================
        START
        ========================================= */
 
-    loadChapter();
+    document.addEventListener(
+        "DOMContentLoaded",
+        function() {
+
+            if (
+                typeof initializeGlobalSettings ===
+                "function"
+            ) {
+
+                initializeGlobalSettings();
+
+            }
+
+
+            translateChapterPage();
+
+        }
+    );
 
 </script>
 
+
 </body>
-    </html>
+
+                </html>
