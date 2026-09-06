@@ -15,6 +15,8 @@
         rel="stylesheet"
         href="style.css">
 
+    <script src="script.js"></script>
+
     <style>
 
         /* =========================================
@@ -30,89 +32,63 @@
             margin: auto;
         }
 
-
         /* =========================================
            TEACHER IDENTITY
            ========================================= */
 
         .teacher-strip {
-
             display: flex;
             align-items: center;
             gap: 12px;
-
             margin-bottom: 18px;
             padding: 12px 14px;
-
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 18px;
-
             box-shadow: var(--shadow-sm);
         }
 
-
         .teacher-avatar {
-
             width: 46px;
             height: 46px;
-
             flex-shrink: 0;
-
             display: grid;
             place-items: center;
-
             border-radius: 14px;
-
             background:
                 linear-gradient(
                     135deg,
                     var(--primary),
                     var(--accent)
                 );
-
             color: white;
-
             font-size: 13px;
             font-weight: 900;
         }
 
-
         .teacher-strip strong {
-
             display: block;
-
             font-size: 14px;
             font-weight: 900;
         }
 
-
         .teacher-strip span {
-
             display: block;
-
             margin-top: 3px;
-
             color: var(--text-soft);
-
             font-size: 11px;
         }
-
 
         /* =========================================
            HERO
            ========================================= */
 
         .library-hero {
-
             position: relative;
             overflow: hidden;
-
             padding: 27px 22px;
             margin-bottom: 18px;
-
             border-radius: 25px;
-
             background:
                 linear-gradient(
                     135deg,
@@ -120,627 +96,368 @@
                     var(--primary),
                     var(--accent)
                 );
-
             color: white;
-
             box-shadow: var(--shadow-lg);
         }
 
-
         .library-hero::before,
         .library-hero::after {
-
             content: "";
-
             position: absolute;
-
             border-radius: 50%;
-
-            background:
-                rgba(255,255,255,.08);
+            background: rgba(255,255,255,.08);
         }
 
-
         .library-hero::before {
-
             width: 190px;
             height: 190px;
-
             left: -80px;
             top: -90px;
         }
 
-
         .library-hero::after {
-
             width: 140px;
             height: 140px;
-
             right: -50px;
             bottom: -60px;
         }
 
-
         .hero-content {
-
             position: relative;
-
             z-index: 1;
         }
 
-
         .hero-label {
-
             display: inline-flex;
-
             padding: 5px 10px;
-
             border-radius: 999px;
-
-            background:
-                rgba(255,255,255,.14);
-
+            background: rgba(255,255,255,.14);
             font-size: 10px;
             font-weight: 800;
         }
 
-
         .library-hero h1 {
-
             margin: 12px 0 7px;
-
-            font-size:
-                clamp(26px, 6vw, 38px);
-
+            font-size: clamp(26px, 6vw, 38px);
             line-height: 1.25;
-
             font-weight: 950;
         }
 
-
         .library-hero p {
-
             max-width: 650px;
-
             margin: 0;
-
-            color:
-                rgba(255,255,255,.88);
-
+            color: rgba(255,255,255,.88);
             font-size: 13px;
-
             line-height: 1.9;
         }
 
-
         .level-actions {
-
             display: flex;
             flex-wrap: wrap;
-
             gap: 8px;
-
             margin-top: 17px;
         }
 
-
         .level-actions button {
-
             padding: 9px 13px;
-
             border: 0;
             border-radius: 10px;
-
             background: white;
-
             color: var(--primary);
-
             font-family: inherit;
-
             font-size: 11px;
             font-weight: 850;
-
             cursor: pointer;
         }
-
 
         /* =========================================
            LEARNING PATH
            ========================================= */
 
         .learning-path {
-
             display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
+            grid-template-columns: repeat(3, 1fr);
             gap: 8px;
-
             margin-bottom: 18px;
         }
 
-
         .path-item {
-
             position: relative;
-
             padding: 11px 8px;
-
             text-align: center;
-
             background: var(--surface);
-
             border: 1px solid var(--border);
-
             border-radius: 15px;
-
             box-shadow: var(--shadow-sm);
         }
 
-
         .path-item.active {
-
-            border-color:
-                var(--primary);
-
-            background:
-                var(--primary-light);
+            border-color: var(--primary);
+            background: var(--primary-light);
         }
 
-
         .path-number {
-
             width: 28px;
             height: 28px;
-
             display: grid;
             place-items: center;
-
             margin: 0 auto 5px;
-
             border-radius: 9px;
-
-            background:
-                var(--primary);
-
+            background: var(--primary);
             color: white;
-
             font-size: 11px;
             font-weight: 900;
         }
 
-
-        .path-item:not(.active)
-        .path-number {
-
-            background:
-                var(--primary-light);
-
-            color:
-                var(--primary);
+        .path-item:not(.active) .path-number {
+            background: var(--primary-light);
+            color: var(--primary);
         }
 
-
         .path-item strong {
-
             display: block;
-
             font-size: 10px;
             font-weight: 900;
         }
 
-
         .path-item span {
-
             display: block;
-
             margin-top: 2px;
-
             color: var(--text-soft);
-
             font-size: 8px;
         }
-
 
         /* =========================================
            SUBJECT
            ========================================= */
 
         .subject-card {
-
             padding: 18px;
-
             background: var(--surface);
-
-            border:
-                1px solid var(--border);
-
+            border: 1px solid var(--border);
             border-radius: 22px;
-
             box-shadow: var(--shadow-md);
         }
 
-
         .subject-header {
-
             display: flex;
-
             align-items: center;
-
             gap: 13px;
         }
 
-
         .subject-icon {
-
             width: 58px;
             height: 58px;
-
             flex-shrink: 0;
-
             display: grid;
             place-items: center;
-
             border-radius: 17px;
-
-            background:
-                var(--primary-light);
-
-            color:
-                var(--primary);
-
+            background: var(--primary-light);
+            color: var(--primary);
             font-size: 27px;
             font-weight: 950;
         }
 
-
         .subject-header h2 {
-
             margin: 0;
-
             font-size: 20px;
-
             font-weight: 950;
         }
 
-
         .subject-header p {
-
             margin: 4px 0 0;
-
-            color:
-                var(--text-soft);
-
+            color: var(--text-soft);
             font-size: 11px;
-
             line-height: 1.7;
         }
 
-
         .subject-badge {
-
             display: inline-flex;
-
             margin-top: 7px;
-
             padding: 4px 8px;
-
             border-radius: 999px;
-
-            background:
-                var(--primary-light);
-
-            color:
-                var(--primary);
-
+            background: var(--primary-light);
+            color: var(--primary);
             font-size: 9px;
-
             font-weight: 900;
         }
-
 
         /* =========================================
            CHAPTER SECTION
            ========================================= */
 
         .chapter-section {
-
             margin-top: 24px;
         }
 
-
         .section-title {
-
             margin-bottom: 12px;
         }
 
-
         .section-title h2 {
-
             margin: 0;
-
             font-size: 20px;
-
             font-weight: 950;
         }
 
-
         .section-title p {
-
             margin: 4px 0 0;
-
-            color:
-                var(--text-soft);
-
+            color: var(--text-soft);
             font-size: 11px;
         }
-
 
         /* =========================================
            CHAPTERS
            ========================================= */
 
         .chapters {
-
             display: grid;
-
             gap: 12px;
         }
 
-
         .chapter-card {
-
             width: 100%;
-
             display: flex;
-
             align-items: center;
-
             gap: 13px;
-
             padding: 15px;
-
             text-align: right;
-
-            background:
-                var(--surface);
-
-            border:
-                1px solid var(--border);
-
+            background: var(--surface);
+            border: 1px solid var(--border);
             border-radius: 18px;
-
-            box-shadow:
-                var(--shadow-sm);
-
+            box-shadow: var(--shadow-sm);
             cursor: pointer;
-
             transition:
                 transform .2s ease,
                 border-color .2s ease,
                 box-shadow .2s ease;
         }
 
+        html[dir="ltr"] .chapter-card {
+            text-align: left;
+        }
 
         .chapter-card:hover {
-
-            transform:
-                translateY(-2px);
-
-            border-color:
-                #93c5fd;
-
-            box-shadow:
-                var(--shadow-md);
+            transform: translateY(-2px);
+            border-color: #93c5fd;
+            box-shadow: var(--shadow-md);
         }
-
 
         .chapter-card:active {
-
-            transform:
-                scale(.985);
+            transform: scale(.985);
         }
 
-
         .chapter-number {
-
             width: 50px;
             height: 50px;
-
             flex-shrink: 0;
-
             display: grid;
             place-items: center;
-
             border-radius: 15px;
-
-            background:
-                var(--primary-light);
-
-            color:
-                var(--primary);
-
+            background: var(--primary-light);
+            color: var(--primary);
             font-size: 15px;
-
             font-weight: 950;
         }
 
-
         .chapter-info {
-
             flex: 1;
-
             min-width: 0;
         }
 
-
         .chapter-info h3 {
-
             margin: 0;
-
             font-size: 15px;
-
             font-weight: 900;
         }
 
-
         .chapter-info p {
-
             margin: 4px 0 0;
-
-            color:
-                var(--text-soft);
-
+            color: var(--text-soft);
             font-size: 10px;
-
             line-height: 1.6;
         }
 
-
         .chapter-meta {
-
             display: inline-flex;
-
             align-items: center;
-
             gap: 5px;
-
             margin-top: 7px;
-
             padding: 4px 8px;
-
             border-radius: 999px;
-
-            background:
-                var(--primary-light);
-
-            color:
-                var(--primary);
-
+            background: var(--primary-light);
+            color: var(--primary);
             font-size: 9px;
-
             font-weight: 800;
         }
 
-
         .chapter-arrow {
-
             flex-shrink: 0;
-
-            color:
-                var(--primary);
-
+            color: var(--primary);
             font-size: 19px;
-
             font-weight: 900;
         }
-
 
         /* =========================================
            EMPTY CONTENT
            ========================================= */
 
         .empty-content {
-
             margin-top: 15px;
-
             padding: 28px 17px;
-
             text-align: center;
-
-            border:
-                1px dashed var(--border);
-
+            border: 1px dashed var(--border);
             border-radius: 18px;
-
-            background:
-                var(--surface);
+            background: var(--surface);
         }
 
-
         .empty-content-icon {
-
             font-size: 34px;
         }
 
-
         .empty-content h3 {
-
             margin: 8px 0 5px;
-
             font-size: 16px;
-
             font-weight: 900;
         }
 
-
         .empty-content p {
-
             max-width: 520px;
-
             margin: auto;
-
-            color:
-                var(--text-soft);
-
+            color: var(--text-soft);
             font-size: 11px;
-
             line-height: 1.8;
         }
-
 
         /* =========================================
            NO LEVEL
            ========================================= */
 
         .no-level {
-
             padding: 38px 20px;
-
             text-align: center;
-
-            background:
-                var(--surface);
-
-            border:
-                1px dashed var(--border);
-
+            background: var(--surface);
+            border: 1px dashed var(--border);
             border-radius: 22px;
         }
 
-
         .no-level-icon {
-
             font-size: 42px;
         }
 
-
         .no-level h2 {
-
             margin: 10px 0 6px;
-
             font-size: 20px;
-
             font-weight: 950;
         }
 
-
         .no-level p {
-
             max-width: 450px;
-
-            margin:
-                0 auto 17px;
-
-            color:
-                var(--text-soft);
-
+            margin: 0 auto 17px;
+            color: var(--text-soft);
             font-size: 12px;
-
             line-height: 1.8;
         }
-
 
         /* =========================================
            DESKTOP
@@ -749,25 +466,18 @@
         @media (min-width: 700px) {
 
             .library-page {
-
                 padding-top: 40px;
             }
 
-
             .chapters {
-
-                grid-template-columns:
-                    repeat(2, 1fr);
+                grid-template-columns: repeat(2, 1fr);
             }
 
-
             .chapter-card {
-
                 min-height: 100px;
             }
 
         }
-
 
         /* =========================================
            SMALL PHONES
@@ -776,49 +486,33 @@
         @media (max-width: 420px) {
 
             .library-page {
-
                 padding-top: 18px;
             }
 
-
             .library-hero {
-
-                padding:
-                    23px 17px;
-
+                padding: 23px 17px;
                 border-radius: 22px;
             }
 
-
             .library-hero h1 {
-
                 font-size: 26px;
             }
 
-
             .subject-card {
-
                 padding: 15px;
             }
 
-
             .chapter-card {
-
                 padding: 13px;
-
                 gap: 10px;
             }
 
-
             .chapter-number {
-
                 width: 44px;
                 height: 44px;
             }
 
-
             .chapter-info h3 {
-
                 font-size: 14px;
             }
 
@@ -859,7 +553,8 @@
         <button
             class="btn btn-secondary"
             onclick="goDashboard()"
-            type="button">
+            type="button"
+            data-i18n="library.student_dashboard">
 
             لوحة الطالب
 
@@ -893,12 +588,12 @@
             </div>
 
 
-            <h2>
+            <h2 data-i18n="library.choose_certificate">
                 اختر شهادتك الدراسية
             </h2>
 
 
-            <p>
+            <p data-i18n="library.choose_certificate_text">
 
                 اختر كونكور أو بريڤي أو باكالوريا
                 حتى نعرض لك المحتوى التعليمي المناسب.
@@ -909,7 +604,8 @@
             <button
                 class="btn btn-primary"
                 onclick="chooseLevel()"
-                type="button">
+                type="button"
+                data-i18n="library.choose_certificate_button">
 
                 اختيار الشهادة
 
@@ -945,7 +641,7 @@
                     </strong>
 
 
-                    <span>
+                    <span data-i18n="library.teacher_description">
 
                         مدرسك الذكي في EduNova AI
                         • اختر الشهادة ثم المادة ثم الـChapitre.
@@ -965,8 +661,12 @@
 
                 <div class="hero-content">
 
-                    <span class="hero-label">
+                    <span
+                        class="hero-label"
+                        data-i18n="library.hero_label">
+
                         📚 مكتبة EduNova AI
+
                     </span>
 
 
@@ -975,7 +675,7 @@
                     </h1>
 
 
-                    <p>
+                    <p data-i18n="library.hero_description">
 
                         اختر الـChapitre الذي تريد دراسته.
                         كل Chapitre سيحتوي لاحقًا على دروس
@@ -988,7 +688,8 @@
 
                         <button
                             onclick="chooseLevel()"
-                            type="button">
+                            type="button"
+                            data-i18n="library.change_certificate">
 
                             تغيير الشهادة
 
@@ -1013,11 +714,11 @@
                         1
                     </div>
 
-                    <strong>
+                    <strong data-i18n="library.path_certificate">
                         الشهادة
                     </strong>
 
-                    <span>
+                    <span data-i18n="library.path_certificate_sub">
                         اختيار المستوى
                     </span>
 
@@ -1030,11 +731,11 @@
                         2
                     </div>
 
-                    <strong>
+                    <strong data-i18n="library.path_math">
                         الرياضيات
                     </strong>
 
-                    <span>
+                    <span data-i18n="library.path_math_sub">
                         المادة الحالية
                     </span>
 
@@ -1051,7 +752,7 @@
                         Chapitres
                     </strong>
 
-                    <span>
+                    <span data-i18n="library.path_chapters_sub">
                         اختر الفصل
                     </span>
 
@@ -1075,18 +776,22 @@
 
                     <div>
 
-                        <h2>
+                        <h2 data-i18n="library.math">
                             الرياضيات
                         </h2>
 
 
-                        <p>
+                        <p data-i18n="library.math_description">
                             المادة الأساسية في السنة الأولى من EduNova AI
                         </p>
 
 
-                        <span class="subject-badge">
+                        <span
+                            class="subject-badge"
+                            data-i18n="library.available">
+
                             متاحة الآن
+
                         </span>
 
                     </div>
@@ -1102,12 +807,12 @@
 
                     <div class="section-title">
 
-                        <h2>
+                        <h2 data-i18n="library.chapters_title">
                             Chapitres الرياضيات
                         </h2>
 
 
-                        <p>
+                        <p data-i18n="library.chapters_description">
 
                             اختر الفصل للدخول إلى
                             الفيديوهات والدروس الخاصة به.
@@ -1135,12 +840,12 @@
                         </div>
 
 
-                        <h3>
+                        <h3 data-i18n="library.empty_title">
                             المحتوى التعليمي قيد الإعداد
                         </h3>
 
 
-                        <p>
+                        <p data-i18n="library.empty_description">
 
                             سيتم إضافة الـChapitres
                             والدروس تدريجيًا.
@@ -1174,6 +879,148 @@
 
 <script>
 
+    /* =========================================
+       LIBRARY TRANSLATIONS
+       ========================================= */
+
+    const LIBRARY_TRANSLATIONS = {
+
+        ar: {
+
+            "library.student_dashboard":
+                "لوحة الطالب",
+
+            "library.choose_certificate":
+                "اختر شهادتك الدراسية",
+
+            "library.choose_certificate_text":
+                "اختر كونكور أو بريڤي أو باكالوريا حتى نعرض لك المحتوى التعليمي المناسب.",
+
+            "library.choose_certificate_button":
+                "اختيار الشهادة",
+
+            "library.teacher_description":
+                "مدرسك الذكي في EduNova AI • اختر الشهادة ثم المادة ثم الـChapitre.",
+
+            "library.hero_label":
+                "📚 مكتبة EduNova AI",
+
+            "library.hero_description":
+                "اختر الـChapitre الذي تريد دراسته. كل Chapitre سيحتوي لاحقًا على دروس وفيديوهات تعليمية مع Afkrash AI.",
+
+            "library.change_certificate":
+                "تغيير الشهادة",
+
+            "library.path_certificate":
+                "الشهادة",
+
+            "library.path_certificate_sub":
+                "اختيار المستوى",
+
+            "library.path_math":
+                "الرياضيات",
+
+            "library.path_math_sub":
+                "المادة الحالية",
+
+            "library.path_chapters_sub":
+                "اختر الفصل",
+
+            "library.math":
+                "الرياضيات",
+
+            "library.math_description":
+                "المادة الأساسية في السنة الأولى من EduNova AI",
+
+            "library.available":
+                "متاحة الآن",
+
+            "library.chapters_title":
+                "Chapitres الرياضيات",
+
+            "library.chapters_description":
+                "اختر الفصل للدخول إلى الفيديوهات والدروس الخاصة به.",
+
+            "library.empty_title":
+                "المحتوى التعليمي قيد الإعداد",
+
+            "library.empty_description":
+                "سيتم إضافة الـChapitres والدروس تدريجيًا. كل Chapitre سيحتوي على ما يصل إلى 20 فيديو تعليمي، وسيكون أول فيديو مجانيًا للتجربة.",
+
+            "library.no_level_title":
+                "اختر شهادتك الدراسية"
+
+        },
+
+        fr: {
+
+            "library.student_dashboard":
+                "Tableau de l'élève",
+
+            "library.choose_certificate":
+                "Choisissez votre diplôme",
+
+            "library.choose_certificate_text":
+                "Choisissez Concours, Brevet ou Baccalauréat afin d'afficher le contenu éducatif adapté.",
+
+            "library.choose_certificate_button":
+                "Choisir le diplôme",
+
+            "library.teacher_description":
+                "Votre professeur intelligent dans EduNova AI • Choisissez le diplôme, puis la matière et le chapitre.",
+
+            "library.hero_label":
+                "📚 Bibliothèque EduNova AI",
+
+            "library.hero_description":
+                "Choisissez le chapitre que vous souhaitez étudier. Chaque chapitre contiendra progressivement des leçons et des vidéos éducatives avec Afkrash AI.",
+
+            "library.change_certificate":
+                "Changer de diplôme",
+
+            "library.path_certificate":
+                "Diplôme",
+
+            "library.path_certificate_sub":
+                "Choix du niveau",
+
+            "library.path_math":
+                "Mathématiques",
+
+            "library.path_math_sub":
+                "Matière actuelle",
+
+            "library.path_chapters_sub":
+                "Choisir le chapitre",
+
+            "library.math":
+                "Mathématiques",
+
+            "library.math_description":
+                "La matière principale de la première année d'EduNova AI",
+
+            "library.available":
+                "Disponible maintenant",
+
+            "library.chapters_title":
+                "Chapitres de mathématiques",
+
+            "library.chapters_description":
+                "Choisissez un chapitre pour accéder à ses vidéos et leçons.",
+
+            "library.empty_title":
+                "Contenu éducatif en préparation",
+
+            "library.empty_description":
+                "Les chapitres et les leçons seront ajoutés progressivement. Chaque chapitre pourra contenir jusqu'à 20 vidéos éducatives, dont la première sera gratuite pour vous permettre de découvrir le contenu.",
+
+            "library.no_level_title":
+                "Choisissez votre diplôme"
+
+        }
+
+    };
+
 
     /* =========================================
        LEVEL NAMES
@@ -1181,11 +1028,20 @@
 
     const levelNames = {
 
-        concours: "كونكور",
+        concours: {
+            ar: "كونكور",
+            fr: "Concours"
+        },
 
-        brevet: "بريڤي",
+        brevet: {
+            ar: "بريڤي",
+            fr: "Brevet"
+        },
 
-        bac: "باكالوريا"
+        bac: {
+            ar: "باكالوريا",
+            fr: "Baccalauréat"
+        }
 
     };
 
@@ -1224,8 +1080,130 @@
         ==========================================
     */
 
-
     const chapters = [];
+
+
+    /* =========================================
+       GET CURRENT LANGUAGE
+       ========================================= */
+
+    function getLibraryLanguage() {
+
+        if (typeof getSiteLanguage === "function") {
+
+            return getSiteLanguage() === "fr"
+                ? "fr"
+                : "ar";
+
+        }
+
+        return localStorage.getItem(
+            "site_language"
+        ) === "fr"
+            ? "fr"
+            : "ar";
+
+    }
+
+
+    /* =========================================
+       TRANSLATE LIBRARY PAGE
+       ========================================= */
+
+    function translateLibraryPage() {
+
+        const language =
+            getLibraryLanguage();
+
+        const translations =
+            LIBRARY_TRANSLATIONS[language] ||
+            LIBRARY_TRANSLATIONS.ar;
+
+
+        document
+            .querySelectorAll("[data-i18n]")
+            .forEach(function(element) {
+
+                const key =
+                    element.getAttribute(
+                        "data-i18n"
+                    );
+
+
+                if (
+                    translations[key] !== undefined
+                ) {
+
+                    element.textContent =
+                        translations[key];
+
+                }
+
+            });
+
+
+        document.documentElement.lang =
+            language;
+
+
+        document.documentElement.dir =
+            language === "fr"
+                ? "ltr"
+                : "rtl";
+
+
+        loadLibrary();
+
+    }
+
+
+    /* =========================================
+       GET LEVEL NAME
+       ========================================= */
+
+    function getLevelName(level) {
+
+        const language =
+            getLibraryLanguage();
+
+
+        if (
+            levelNames[level] &&
+            levelNames[level][language]
+        ) {
+
+            return levelNames[level][language];
+
+        }
+
+
+        return level || "-";
+
+    }
+
+
+    /* =========================================
+       VIDEO LABEL
+       ========================================= */
+
+    function getVideoLabel(number) {
+
+        const language =
+            getLibraryLanguage();
+
+
+        if (language === "fr") {
+
+            return number === 1
+                ? "vidéo"
+                : "vidéos";
+
+        }
+
+
+        return "فيديو";
+
+    }
 
 
     /* =========================================
@@ -1250,6 +1228,11 @@
             document.getElementById(
                 "libraryContent"
             );
+
+
+        if (!noLevel || !library) {
+            return;
+        }
 
 
         if (!level) {
@@ -1284,7 +1267,7 @@
         if (levelName) {
 
             levelName.textContent =
-                levelNames[level] || level;
+                getLevelName(level);
 
         }
 
@@ -1338,7 +1321,6 @@
         chapters.forEach(
             function(chapter) {
 
-
                 const card =
                     document.createElement(
                         "button"
@@ -1351,6 +1333,13 @@
 
                 card.className =
                     "chapter-card";
+
+
+                const videoCount =
+                    Math.min(
+                        chapter.videos || 0,
+                        20
+                    );
 
 
                 card.innerHTML = `
@@ -1375,11 +1364,8 @@
                         <span class="chapter-meta">
 
                             🎬
-                            ${Math.min(
-                                chapter.videos || 0,
-                                20
-                            )}
-                            فيديو
+                            ${videoCount}
+                            ${getVideoLabel(videoCount)}
 
                         </span>
 
@@ -1387,7 +1373,7 @@
 
 
                     <div class="chapter-arrow">
-                        ←
+                        ${getLibraryLanguage() === "fr" ? "→" : "←"}
                     </div>
 
                 `;
@@ -1460,14 +1446,75 @@
 
 
     /* =========================================
+       GLOBAL LANGUAGE EVENT
+       ========================================= */
+
+    window.addEventListener(
+        "languageChanged",
+        function() {
+
+            translateLibraryPage();
+
+        }
+    );
+
+
+    window.addEventListener(
+        "languagechange",
+        function() {
+
+            translateLibraryPage();
+
+        }
+    );
+
+
+    /* =========================================
+       STORAGE SYNC
+       ========================================= */
+
+    window.addEventListener(
+        "storage",
+        function(event) {
+
+            if (
+                event.key === "site_language"
+            ) {
+
+                translateLibraryPage();
+
+            }
+
+        }
+    );
+
+
+    /* =========================================
        START
        ========================================= */
 
-    loadLibrary();
+    document.addEventListener(
+        "DOMContentLoaded",
+        function() {
+
+            if (
+                typeof initializeGlobalSettings ===
+                "function"
+            ) {
+
+                initializeGlobalSettings();
+
+            }
+
+
+            translateLibraryPage();
+
+        }
+    );
 
 </script>
 
 
 </body>
 
-    </html>
+                </html>
