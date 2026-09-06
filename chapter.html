@@ -1,649 +1,789 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html><html lang="ar" dir="rtl"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>الفصل الأول | عالم شيخ الأساتذة</title>
 
-  <title>الفصل | عالم شيخ الأساتذة</title>
+<link rel="stylesheet" href="style.css">
 
-  <style>
-    * {
-      box-sizing: border-box;
+<style>
+    .chapter-page {
+        padding-bottom: 50px;
     }
 
-    body {
-      margin: 0;
-      font-family: Arial, Tahoma, sans-serif;
-      background: #f4f8ff;
-      color: #172033;
+    .chapter-hero {
+        position: relative;
+        overflow: hidden;
+
+        padding: 25px 21px;
+        margin-bottom: 22px;
+
+        color: white;
+
+        background:
+            linear-gradient(
+                135deg,
+                var(--primary),
+                var(--primary-dark)
+            );
+
+        border-radius: var(--radius-lg);
+
+        box-shadow:
+            0 14px 35px rgba(37, 99, 235, .16);
     }
 
-    header {
-      background: #1565d8;
-      color: white;
-      padding: 16px;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+    .chapter-hero-content {
+        position: relative;
+        z-index: 2;
     }
 
-    .header-inner {
-      max-width: 900px;
-      margin: auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
+    .chapter-label {
+        display: block;
+
+        margin-bottom: 6px;
+
+        font-size: 12px;
+
+        opacity: .85;
     }
 
-    .brand {
-      font-size: 18px;
-      font-weight: bold;
+    .chapter-hero h1 {
+        font-size: clamp(25px, 6vw, 32px);
+        font-weight: 850;
     }
 
-    .back-btn {
-      border: none;
-      background: rgba(255,255,255,0.15);
-      color: white;
-      padding: 9px 13px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 14px;
+    .chapter-hero p {
+        margin-top: 7px;
+
+        font-size: 13px;
+        line-height: 1.8;
+
+        opacity: .9;
     }
 
-    main {
-      max-width: 900px;
-      margin: auto;
-      padding: 20px 14px 40px;
+    .chapter-progress-box {
+        margin-top: 17px;
     }
 
-    .hero {
-      background: white;
-      border-radius: 20px;
-      padding: 22px;
-      margin-bottom: 16px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+    .chapter-progress-head {
+        display: flex;
+
+        justify-content: space-between;
+
+        margin-bottom: 7px;
+
+        font-size: 11px;
+
+        opacity: .9;
     }
 
-    .subject {
-      color: #1565d8;
-      font-size: 14px;
-      font-weight: bold;
-      margin-bottom: 8px;
+    .chapter-progress {
+        height: 7px;
+
+        overflow: hidden;
+
+        background: rgba(255,255,255,.25);
+
+        border-radius: 20px;
     }
 
-    h1 {
-      margin: 0 0 8px;
-      font-size: 25px;
+    .chapter-progress-bar {
+        width: 0%;
+        height: 100%;
+
+        background: white;
+
+        border-radius: inherit;
+
+        transition: width .3s ease;
     }
 
-    .description {
-      color: #64748b;
-      line-height: 1.7;
-      font-size: 14px;
+    .back-library {
+        margin-bottom: 20px;
     }
 
-    .info-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 9px;
-      margin-top: 18px;
+    .lessons-header {
+        display: flex;
+
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 10px;
+
+        margin-bottom: 13px;
     }
 
-    .info-box {
-      background: #f8fafc;
-      border-radius: 12px;
-      padding: 12px 7px;
-      text-align: center;
+    .lessons-header h2 {
+        font-size: 20px;
+        font-weight: 850;
     }
 
-    .info-number {
-      font-size: 18px;
-      font-weight: bold;
-      color: #1565d8;
+    .lessons-count {
+        color: var(--text-soft);
+
+        font-size: 11px;
     }
 
-    .info-label {
-      color: #64748b;
-      font-size: 11px;
-      margin-top: 4px;
-    }
+    .lessons-list {
+        display: grid;
 
-    .progress-card {
-      background: white;
-      border-radius: 18px;
-      padding: 18px;
-      margin-bottom: 16px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-    }
-
-    .progress-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-      font-weight: bold;
-    }
-
-    .progress-bar {
-      width: 100%;
-      height: 10px;
-      background: #e5e7eb;
-      border-radius: 20px;
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      width: 0%;
-      height: 100%;
-      background: #1565d8;
-      border-radius: 20px;
-      transition: width 0.3s ease;
-    }
-
-    .lessons-title {
-      font-size: 20px;
-      margin: 22px 0 12px;
-    }
-
-    .lesson-list {
-      display: grid;
-      gap: 11px;
+        gap: 10px;
     }
 
     .lesson-card {
-      background: white;
-      border-radius: 16px;
-      padding: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
+        width: 100%;
+
+        padding: 14px;
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 12px;
+
+        text-align: right;
+
+        background: var(--surface);
+
+        border: 1px solid var(--border);
+
+        border-radius: var(--radius-md);
+
+        box-shadow: var(--shadow-sm);
+
+        transition:
+            transform var(--transition),
+            box-shadow var(--transition),
+            border-color var(--transition);
     }
 
-    .lesson-main {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 0;
+    .lesson-card.lesson-open {
+        cursor: pointer;
+    }
+
+    .lesson-card.lesson-open:hover {
+        transform: translateY(-1px);
+
+        border-color: #bfdbfe;
+
+        box-shadow: var(--shadow-md);
+    }
+
+    .lesson-card.lesson-open:active {
+        transform: scale(.99);
     }
 
     .lesson-number {
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
-      background: #eaf3ff;
-      color: #1565d8;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      flex-shrink: 0;
+        width: 45px;
+        height: 45px;
+
+        flex-shrink: 0;
+
+        display: grid;
+        place-items: center;
+
+        border-radius: 13px;
+
+        background: var(--primary-light);
+
+        color: var(--primary);
+
+        font-size: 15px;
+        font-weight: 850;
     }
 
-    .lesson-name {
-      font-weight: bold;
-      font-size: 14px;
+    .lesson-card.completed .lesson-number {
+        background: #dcfce7;
+        color: #15803d;
     }
 
-    .lesson-status {
-      color: #64748b;
-      font-size: 12px;
-      margin-top: 5px;
+    .lesson-info {
+        min-width: 0;
+        flex: 1;
     }
 
-    .lesson-button {
-      border: none;
-      background: #1565d8;
-      color: white;
-      padding: 9px 12px;
-      border-radius: 10px;
-      cursor: pointer;
-      white-space: nowrap;
-      font-size: 13px;
+    .lesson-info h3 {
+        font-size: 14px;
+        font-weight: 800;
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
-    .lesson-button.completed {
-      background: #16a34a;
+    .lesson-info p {
+        margin-top: 4px;
+
+        color: var(--text-soft);
+
+        font-size: 11px;
     }
 
-    .locked {
-      opacity: 0.7;
+    .lesson-action {
+        flex-shrink: 0;
     }
 
-    .locked .lesson-number {
-      background: #f1f5f9;
-      color: #64748b;
+    .lesson-action span {
+        min-width: 37px;
+        height: 35px;
+
+        padding: 0 9px;
+
+        display: grid;
+        place-items: center;
+
+        border-radius: 9px;
+
+        font-size: 11px;
+        font-weight: 800;
     }
 
-    .locked .lesson-button {
-      background: #94a3b8;
+    .lesson-open .lesson-action span {
+        background: var(--primary);
+        color: white;
     }
 
-    .future-card {
-      background: #eaf3ff;
-      border: 1px solid #c9defd;
-      border-radius: 18px;
-      padding: 18px;
-      margin-top: 20px;
-      color: #334155;
-      line-height: 1.7;
+    .lesson-locked .lesson-action span {
+        background: #f1f5f9;
+        color: var(--text-soft);
     }
 
-    .footer-btn {
-      width: 100%;
-      margin-top: 18px;
-      padding: 13px;
-      border-radius: 13px;
-      border: 1px solid #1565d8;
-      background: white;
-      color: #1565d8;
-      cursor: pointer;
-      font-size: 15px;
+    .free-label {
+        display: inline-block;
+
+        margin-right: 5px;
+
+        padding: 3px 6px;
+
+        background: #dcfce7;
+
+        color: #15803d;
+
+        border-radius: 6px;
+
+        font-size: 9px;
+        font-weight: 850;
     }
 
-    @media (max-width: 480px) {
-      .info-row {
-        grid-template-columns: 1fr 1fr 1fr;
-      }
+    .chapter-note {
+        margin-top: 20px;
 
-      .lesson-card {
-        align-items: flex-start;
-      }
+        padding: 16px;
 
-      .lesson-button {
-        padding: 8px 9px;
-      }
+        background: var(--primary-light);
 
-      h1 {
-        font-size: 22px;
-      }
+        border: 1px solid #dbeafe;
+
+        border-radius: var(--radius-md);
+
+        color: var(--text-soft);
+
+        font-size: 12px;
+
+        line-height: 1.8;
     }
-  </style>
-</head>
 
-<body>
+    @media (min-width: 700px) {
 
-<header>
-  <div class="header-inner">
+        .chapter-page {
+            max-width: 850px;
 
-    <div class="brand">
-      عالم شيخ الأساتذة
+            margin: auto;
+        }
+
+        .lessons-list {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+    }
+</style>
+
+</head><body><!-- Header -->
+
+<header class="site-header">
+
+    <div class="container header-inner">
+
+        <button
+            class="brand"
+            onclick="goHome()"
+            aria-label="الصفحة الرئيسية">
+
+            <span class="brand-icon">
+                AI
+            </span>
+
+            <span>
+                عالم شيخ الأساتذة
+            </span>
+
+        </button>
+
+
+        <button
+            class="btn btn-secondary"
+            onclick="goLibrary()">
+
+            📚 مكتبتي
+
+        </button>
+
     </div>
 
-    <button
-      class="back-btn"
-      onclick="goLibrary()">
-      ← المكتبة
-    </button>
-
-  </div>
 </header>
 
 
-<main>
+<main class="page">
 
-  <section class="hero">
+    <div class="container chapter-page">
 
-    <div class="subject">
-      الرياضيات
+
+        <!-- Hero -->
+
+        <section class="chapter-hero">
+
+            <div class="chapter-hero-content">
+
+                <span class="chapter-label">
+                    الرياضيات • الفصل الأول
+                </span>
+
+                <h1>
+                    الفصل الأول
+                </h1>
+
+                <p>
+                    ابدأ بالدروس بالترتيب وتابع
+                    تقدمك خطوة بخطوة.
+                </p>
+
+
+                <div class="chapter-progress-box">
+
+                    <div class="chapter-progress-head">
+
+                        <span>
+                            تقدمك
+                        </span>
+
+                        <span id="progressText">
+                            0%
+                        </span>
+
+                    </div>
+
+                    <div class="chapter-progress">
+
+                        <div
+                            id="progressBar"
+                            class="chapter-progress-bar">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Back -->
+
+        <button
+            class="btn btn-secondary back-library"
+            onclick="goLibrary()">
+
+            ← العودة إلى مكتبتي
+
+        </button>
+
+
+        <!-- Lessons -->
+
+        <section>
+
+            <div class="lessons-header">
+
+                <h2>
+                    الدروس
+                </h2>
+
+                <span
+                    id="lessonsCount"
+                    class="lessons-count">
+
+                    0 / 20 مكتمل
+
+                </span>
+
+            </div>
+
+
+            <div
+                id="lessonsList"
+                class="lessons-list">
+            </div>
+
+
+            <div class="chapter-note">
+
+                💡 <strong>ملاحظة:</strong>
+                الدرس الأول متاح حاليًا للتجربة.
+                سيتم فتح بقية الدروس في المراحل
+                القادمة.
+
+            </div>
+
+        </section>
+
+
     </div>
-
-    <h1 id="chapterTitle">
-      الفصل الأول
-    </h1>
-
-    <div class="description">
-      تعلّم دروس هذا الفصل خطوة بخطوة،
-      وتابع تقدمك حتى إكمال جميع الدروس.
-    </div>
-
-    <div class="info-row">
-
-      <div class="info-box">
-        <div class="info-number">20</div>
-        <div class="info-label">درس</div>
-      </div>
-
-      <div class="info-box">
-        <div
-          class="info-number"
-          id="completedCount">
-          0
-        </div>
-        <div class="info-label">مكتمل</div>
-      </div>
-
-      <div class="info-box">
-        <div
-          class="info-number"
-          id="percentage">
-          0%
-        </div>
-        <div class="info-label">التقدم</div>
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <section class="progress-card">
-
-    <div class="progress-top">
-      <span>تقدمك في الفصل</span>
-      <span id="progressText">0%</span>
-    </div>
-
-    <div class="progress-bar">
-      <div
-        class="progress-fill"
-        id="progressFill">
-      </div>
-    </div>
-
-  </section>
-
-
-  <h2 class="lessons-title">
-    دروس الفصل
-  </h2>
-
-
-  <section
-    class="lesson-list"
-    id="lessonList">
-
-  </section>
-
-
-  <div class="future-card">
-
-    <strong>📚 ملاحظة</strong>
-
-    <br>
-
-    الدرس الأول متاح حاليًا للتجربة.
-    سيتم فتح بقية الدروس وفق نظام الوصول
-    والاشتراك الذي سنبنيه لاحقًا.
-
-  </div>
-
-
-  <button
-    class="footer-btn"
-    onclick="goLibrary()">
-    العودة إلى المكتبة
-  </button>
 
 </main>
 
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script>
 
-  const SUPABASE_URL =
-    "https://qkzdlxqledsznhbifaxy.supabase.co";
-
-  const SUPABASE_KEY =
-    "sb_publishable_ZdpHXwLlhpbXztsTXpAFTg_TgOji91v";
-
-  const supabaseClient =
-    supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
-    );
+    const TOTAL_LESSONS = 20;
 
 
-  let chapterNumber = 1;
+    /* =========================
+       LESSONS
+       ========================= */
+
+    function buildLessons() {
+
+        const container =
+            document.getElementById(
+                "lessonsList"
+            );
 
 
-  async function checkAuth() {
+        container.innerHTML = "";
 
-    const {
-      data: { session }
-    } = await supabaseClient.auth.getSession();
 
-    if (!session) {
+        let completed =
+            getCompletedLessons();
 
-      window.location.href =
-        "login.html";
 
-      return false;
+        for (
+            let number = 1;
+            number <= TOTAL_LESSONS;
+            number++
+        ) {
+
+            const isOpen =
+                number === 1;
+
+
+            const isCompleted =
+                completed.includes(number);
+
+
+            const card =
+                document.createElement(
+                    "button"
+                );
+
+
+            card.className =
+                "lesson-card " +
+                (isOpen
+                    ? "lesson-open "
+                    : "lesson-locked ") +
+                (isCompleted
+                    ? "completed"
+                    : "");
+
+
+            card.type = "button";
+
+
+            if (isOpen) {
+
+                card.onclick =
+                    () => openLesson(number);
+
+            } else {
+
+                card.onclick =
+                    () => lockedLesson();
+
+            }
+
+
+            const numberBox =
+                document.createElement(
+                    "div"
+                );
+
+
+            numberBox.className =
+                "lesson-number";
+
+
+            numberBox.innerHTML =
+                isCompleted
+                    ? "✓"
+                    : number;
+
+
+            const info =
+                document.createElement(
+                    "div"
+                );
+
+
+            info.className =
+                "lesson-info";
+
+
+            const title =
+                document.createElement(
+                    "h3"
+                );
+
+
+            title.textContent =
+                "الدرس " + number;
+
+
+            if (number === 1) {
+
+                const free =
+                    document.createElement(
+                        "span"
+                    );
+
+                free.className =
+                    "free-label";
+
+                free.textContent =
+                    "مجاني";
+
+                title.appendChild(
+                    free
+                );
+
+            }
+
+
+            const description =
+                document.createElement(
+                    "p"
+                );
+
+
+            description.textContent =
+                isOpen
+                    ? "متاح للمشاهدة الآن"
+                    : "هذا الدرس مقفل حاليًا";
+
+
+            info.appendChild(
+                title
+            );
+
+            info.appendChild(
+                description
+            );
+
+
+            const action =
+                document.createElement(
+                    "div"
+                );
+
+
+            action.className =
+                "lesson-action";
+
+
+            const actionText =
+                document.createElement(
+                    "span"
+                );
+
+
+            actionText.textContent =
+                isOpen
+                    ? "فتح"
+                    : "🔒";
+
+
+            action.appendChild(
+                actionText
+            );
+
+
+            card.appendChild(
+                numberBox
+            );
+
+            card.appendChild(
+                info
+            );
+
+            card.appendChild(
+                action
+            );
+
+
+            container.appendChild(
+                card
+            );
+
+        }
+
+
+        updateProgress();
+
     }
 
-    return true;
-  }
+
+    /* =========================
+       COMPLETED LESSONS
+       ========================= */
+
+    function getCompletedLessons() {
+
+        try {
+
+            const saved =
+                JSON.parse(
+                    localStorage.getItem(
+                        "completed_lessons_list"
+                    ) || "[]"
+                );
 
 
-  function loadChapter() {
+            return Array.isArray(saved)
+                ? saved
+                : [];
 
-    const storedChapter =
-      localStorage.getItem(
-        "selected_chapter_number"
-      );
+        } catch {
 
-    if (storedChapter) {
+            return [];
 
-      chapterNumber =
-        parseInt(storedChapter, 10);
-
-    }
-
-    if (
-      isNaN(chapterNumber) ||
-      chapterNumber < 1
-    ) {
-
-      chapterNumber = 1;
-
-    }
-
-
-    const chapterName =
-      localStorage.getItem(
-        "selected_chapter"
-      ) || "الفصل الأول";
-
-
-    document.getElementById(
-      "chapterTitle"
-    ).textContent = chapterName;
-
-
-    createLessons();
-
-    updateProgress();
-
-  }
-
-
-  function isCompleted(number) {
-
-    return localStorage.getItem(
-      "lesson_" +
-      number +
-      "_completed"
-    ) === "true";
-
-  }
-
-
-  function createLessons() {
-
-    const list =
-      document.getElementById(
-        "lessonList"
-      );
-
-    list.innerHTML = "";
-
-
-    for (let i = 1; i <= 20; i++) {
-
-      const completed =
-        isCompleted(i);
-
-      const card =
-        document.createElement("div");
-
-      card.className =
-        "lesson-card" +
-        (i > 1 ? " locked" : "");
-
-
-      const status =
-        completed
-          ? "✓ تم إكمال الدرس"
-          : i === 1
-            ? "متاح مجانًا"
-            : "مغلق";
-
-
-      const buttonText =
-        completed
-          ? "✓ مكتمل"
-          : i === 1
-            ? "ابدأ"
-            : "🔒";
-
-
-      card.innerHTML = `
-
-        <div class="lesson-main">
-
-          <div class="lesson-number">
-            ${i}
-          </div>
-
-          <div>
-
-            <div class="lesson-name">
-              الدرس ${i}
-            </div>
-
-            <div class="lesson-status">
-              ${status}
-            </div>
-
-          </div>
-
-        </div>
-
-        <button
-          class="lesson-button ${completed && i === 1 ? "completed" : ""}"
-          onclick="${i === 1 ? `openLesson(${i})` : `lockedLesson()`}">
-          ${buttonText}
-        </button>
-
-      `;
-
-
-      list.appendChild(card);
-
-    }
-
-  }
-
-
-  function updateProgress() {
-
-    let completed = 0;
-
-
-    for (let i = 1; i <= 20; i++) {
-
-      if (isCompleted(i)) {
-
-        completed++;
-
-      }
+        }
 
     }
 
 
-    const percentage =
-      Math.round(
-        (completed / 20) * 100
-      );
+    /* =========================
+       PROGRESS
+       ========================= */
+
+    function updateProgress() {
+
+        const completed =
+            getCompletedLessons();
 
 
-    document.getElementById(
-      "completedCount"
-    ).textContent =
-      completed;
+        const count =
+            completed.length;
 
 
-    document.getElementById(
-      "percentage"
-    ).textContent =
-      percentage + "%";
+        const progress =
+            Math.min(
+                100,
+                Math.round(
+                    (count / TOTAL_LESSONS) * 100
+                )
+            );
 
 
-    document.getElementById(
-      "progressText"
-    ).textContent =
-      percentage + "%";
+        document.getElementById(
+            "progressText"
+        ).textContent =
+            progress + "%";
 
 
-    document.getElementById(
-      "progressFill"
-    ).style.width =
-      percentage + "%";
-
-  }
+        document.getElementById(
+            "progressBar"
+        ).style.width =
+            progress + "%";
 
 
-  function openLesson(number) {
+        document.getElementById(
+            "lessonsCount"
+        ).textContent =
+            count +
+            " / " +
+            TOTAL_LESSONS +
+            " مكتمل";
 
-    localStorage.setItem(
-      "selected_lesson_number",
-      String(number)
-    );
-
-    window.location.href =
-      "lesson.html";
-
-  }
-
-
-  function lockedLesson() {
-
-    alert(
-      "هذا الدرس مغلق حاليًا 🔒\n\nسيتم فتحه لاحقًا وفق نظام الوصول والاشتراك."
-    );
-
-  }
-
-
-  function goLibrary() {
-
-    window.location.href =
-      "library.html";
-
-  }
-
-
-  async function startPage() {
-
-    const authenticated =
-      await checkAuth();
-
-    if (!authenticated) {
-      return;
     }
 
-    loadChapter();
 
-  }
+    /* =========================
+       OPEN LESSON
+       ========================= */
+
+    function openLesson(number) {
+
+        if (number !== 1) {
+
+            lockedLesson();
+
+            return;
+
+        }
 
 
-  startPage();
+        localStorage.setItem(
+            "selected_lesson_number",
+            number
+        );
+
+
+        window.location.href =
+            "lesson.html";
+
+    }
+
+
+    /* =========================
+       LOCKED
+       ========================= */
+
+    function lockedLesson() {
+
+        alert(
+            "هذا الدرس مقفل حاليًا 🔒\n\n" +
+            "الدرس الأول متاح مجانًا، " +
+            "وسيتم فتح بقية الدروس لاحقًا."
+        );
+
+    }
+
+
+    /* =========================
+       NAVIGATION
+       ========================= */
+
+    function goLibrary() {
+
+        window.location.href =
+            "library.html";
+
+    }
+
+
+    function goHome() {
+
+        window.location.href =
+            "index.html";
+
+    }
+
+
+    /* =========================
+       START
+       ========================= */
+
+    buildLessons();
 
 </script>
 
-</body>
-        </html>
+</body></html>
