@@ -1,772 +1,603 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html><html lang="ar" dir="rtl"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>اختيار المستوى | عالم شيخ الأساتذة</title>
 
-  <title>مكتبتي | عالم شيخ الأساتذة</title>
+<link rel="stylesheet" href="style.css">
 
-  <style>
-    * {
-      box-sizing: border-box;
+<style>
+    .levels-page {
+        min-height: calc(100vh - 70px);
+        display: flex;
+        align-items: center;
     }
 
-    body {
-      margin: 0;
-      font-family: Arial, Tahoma, sans-serif;
-      background: #f4f8ff;
-      color: #172033;
+    .levels-wrapper {
+        width: 100%;
+        max-width: 760px;
+        margin: auto;
     }
 
-    header {
-      background: #1565d8;
-      color: white;
-      padding: 16px;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+    .levels-hero {
+        text-align: center;
+        margin-bottom: 28px;
     }
 
-    .header-inner {
-      max-width: 900px;
-      margin: auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
+    .levels-icon {
+        width: 70px;
+        height: 70px;
+
+        margin: 0 auto 16px;
+
+        display: grid;
+        place-items: center;
+
+        border-radius: 22px;
+
+        background: var(--primary-light);
+        color: var(--primary);
+
+        font-size: 31px;
+
+        box-shadow: var(--shadow-sm);
     }
 
-    .brand {
-      font-size: 18px;
-      font-weight: bold;
+    .levels-hero h1 {
+        margin: 0;
+
+        font-size: clamp(25px, 6vw, 34px);
+        font-weight: 850;
     }
 
-    .back-btn {
-      border: none;
-      background: rgba(255,255,255,0.15);
-      color: white;
-      padding: 9px 13px;
-      border-radius: 10px;
-      color: white;
-      cursor: pointer;
-      font-size: 14px;
+    .levels-hero p {
+        max-width: 560px;
+
+        margin: 9px auto 0;
+
+        color: var(--text-soft);
+
+        font-size: 14px;
+        line-height: 1.8;
     }
 
-    main {
-      max-width: 900px;
-      margin: auto;
-      padding: 20px 14px 40px;
+    .level-options {
+        display: grid;
+        gap: 14px;
     }
 
-    .welcome {
-      background: white;
-      border-radius: 20px;
-      padding: 22px;
-      margin-bottom: 16px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+    .level-option {
+        position: relative;
+
+        width: 100%;
+
+        padding: 20px;
+
+        display: flex;
+        align-items: center;
+
+        gap: 16px;
+
+        text-align: right;
+
+        background: var(--surface);
+
+        border: 2px solid var(--border);
+
+        border-radius: var(--radius-lg);
+
+        cursor: pointer;
+
+        transition:
+            transform var(--transition),
+            border-color var(--transition),
+            box-shadow var(--transition),
+            background var(--transition);
     }
 
-    .welcome small {
-      color: #1565d8;
-      font-weight: bold;
+    .level-option:hover {
+        transform: translateY(-2px);
+
+        border-color: #bfdbfe;
+
+        box-shadow: var(--shadow-md);
     }
 
-    .welcome h1 {
-      margin: 8px 0;
-      font-size: 25px;
+    .level-option:active {
+        transform: scale(.99);
     }
 
-    .welcome p {
-      margin: 0;
-      color: #64748b;
-      line-height: 1.7;
-      font-size: 14px;
+    .level-option.selected {
+        border-color: var(--primary);
+
+        background: #f8fbff;
+
+        box-shadow:
+            0 0 0 3px rgba(37, 99, 235, .08);
     }
 
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 9px;
-      margin-top: 18px;
+    .level-option-icon {
+        width: 58px;
+        height: 58px;
+
+        flex-shrink: 0;
+
+        display: grid;
+        place-items: center;
+
+        border-radius: 17px;
+
+        background: var(--primary-light);
+
+        font-size: 27px;
     }
 
-    .stat {
-      background: #f8fafc;
-      border-radius: 13px;
-      padding: 12px 6px;
-      text-align: center;
+    .level-option-content {
+        min-width: 0;
+        flex: 1;
     }
 
-    .stat-number {
-      color: #1565d8;
-      font-size: 18px;
-      font-weight: bold;
+    .level-option-content h2 {
+        margin: 0;
+
+        font-size: 18px;
+        font-weight: 850;
     }
 
-    .stat-label {
-      color: #64748b;
-      font-size: 11px;
-      margin-top: 4px;
+    .level-option-content p {
+        margin: 5px 0 0;
+
+        color: var(--text-soft);
+
+        font-size: 12px;
+        line-height: 1.6;
     }
 
-    .section-title {
-      margin: 24px 0 12px;
-      font-size: 20px;
+    .level-check {
+        width: 27px;
+        height: 27px;
+
+        flex-shrink: 0;
+
+        display: grid;
+        place-items: center;
+
+        border: 2px solid #cbd5e1;
+
+        border-radius: 50%;
+
+        color: transparent;
+
+        font-size: 14px;
+        font-weight: 900;
     }
 
-    .subject-card {
-      background: white;
-      border-radius: 18px;
-      padding: 18px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-      margin-bottom: 14px;
+    .level-option.selected .level-check {
+        border-color: var(--primary);
+
+        background: var(--primary);
+
+        color: white;
     }
 
-    .subject-top {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 15px;
+    .levels-actions {
+        margin-top: 20px;
     }
 
-    .subject-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      background: #eaf3ff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 25px;
+    .continue-level {
+        width: 100%;
     }
 
-    .subject-name {
-      font-size: 18px;
-      font-weight: bold;
+    .continue-level:disabled {
+        opacity: .5;
+        cursor: not-allowed;
+        transform: none;
     }
 
-    .subject-note {
-      color: #64748b;
-      font-size: 12px;
-      margin-top: 4px;
+    .back-dashboard {
+        width: 100%;
+
+        margin-top: 10px;
     }
 
-    .chapter-card {
-      border: 1px solid #e2e8f0;
-      border-radius: 15px;
-      padding: 15px;
-      margin-top: 10px;
+    .current-level-note {
+        min-height: 20px;
+
+        margin-top: 12px;
+
+        text-align: center;
+
+        color: var(--text-soft);
+
+        font-size: 12px;
     }
 
-    .chapter-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 10px;
+    @media (min-width: 650px) {
+
+        .level-options {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .level-option {
+            min-height: 235px;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 22px 15px;
+        }
+
+        .level-option-content p {
+            margin-top: 8px;
+        }
+
+        .level-check {
+            position: absolute;
+
+            top: 14px;
+            left: 14px;
+        }
     }
+</style>
 
-    .chapter-title {
-      font-weight: bold;
-      font-size: 15px;
-    }
+</head><body><!-- Header -->
 
-    .chapter-status {
-      font-size: 12px;
-      color: #64748b;
-      margin-top: 5px;
-    }
+<header class="site-header">
 
-    .chapter-progress {
-      margin-top: 12px;
-    }
+    <div class="container header-inner">
 
-    .progress-line {
-      height: 8px;
-      background: #e5e7eb;
-      border-radius: 20px;
-      overflow: hidden;
-    }
+        <button
+            class="brand"
+            onclick="goHome()"
+            aria-label="الصفحة الرئيسية">
 
-    .progress-fill {
-      width: 0%;
-      height: 100%;
-      background: #1565d8;
-      border-radius: 20px;
-      transition: width 0.3s ease;
-    }
+            <span class="brand-icon">
+                AI
+            </span>
 
-    .progress-text {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 6px;
-      color: #64748b;
-      font-size: 11px;
-    }
+            <span>
+                عالم شيخ الأساتذة
+            </span>
 
-    .open-btn {
-      width: 100%;
-      border: none;
-      background: #1565d8;
-      color: white;
-      padding: 11px;
-      border-radius: 11px;
-      margin-top: 13px;
-      cursor: pointer;
-      font-size: 14px;
-    }
+        </button>
 
-    .open-btn.completed {
-      background: #16a34a;
-    }
+        <button
+            class="btn btn-secondary"
+            onclick="goDashboard()">
 
-    .locked-chapter {
-      background: #f8fafc;
-      opacity: 0.78;
-    }
+            ← الرئيسية
 
-    .locked-chapter .open-btn {
-      background: #94a3b8;
-    }
+        </button>
 
-    .future-card {
-      background: #eaf3ff;
-      border: 1px solid #c9defd;
-      border-radius: 18px;
-      padding: 18px;
-      margin-top: 18px;
-      line-height: 1.7;
-      color: #334155;
-    }
-
-    .footer-btn {
-      width: 100%;
-      margin-top: 18px;
-      padding: 13px;
-      border-radius: 13px;
-      border: 1px solid #1565d8;
-      background: white;
-      color: #1565d8;
-      cursor: pointer;
-      font-size: 15px;
-    }
-
-    @media (min-width: 700px) {
-      main {
-        padding-top: 30px;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-<header>
-  <div class="header-inner">
-
-    <div class="brand">
-      عالم شيخ الأساتذة
     </div>
 
-    <button
-      class="back-btn"
-      onclick="goDashboard()">
-      ← الرئيسية
-    </button>
-
-  </div>
 </header>
 
 
-<main>
+<main class="page levels-page">
 
-  <section class="welcome">
+    <div class="container levels-wrapper">
 
-    <small>مكتبتي التعليمية</small>
 
-    <h1 id="welcomeTitle">
-      مكتبتي
-    </h1>
+        <!-- Hero -->
 
-    <p>
-      هنا تجد الدروس والفصول التي تتابعها،
-      مع نسبة تقدمك في كل فصل.
-    </p>
+        <section class="levels-hero">
 
-    <div class="stats">
+            <div class="levels-icon">
+                🎓
+            </div>
 
-      <div class="stat">
+            <h1>
+                اختر مستواك الدراسي
+            </h1>
 
-        <div
-          class="stat-number"
-          id="completedLessons">
-          0
-        </div>
+            <p>
+                اختر المستوى الذي تستعد له حتى نتمكن
+                من عرض المحتوى المناسب لك.
+            </p>
 
-        <div class="stat-label">
-          دروس مكتملة
-        </div>
+        </section>
 
-      </div>
 
-      <div class="stat">
+        <!-- Levels -->
 
-        <div
-          class="stat-number"
-          id="overallProgress">
-          0%
-        </div>
+        <section
+            class="level-options"
+            aria-label="المستويات الدراسية">
 
-        <div class="stat-label">
-          التقدم
-        </div>
 
-      </div>
+            <!-- Concours -->
 
-      <div class="stat">
+            <button
+                class="level-option"
+                data-level="concours"
+                onclick="selectLevel('concours', this)">
 
-        <div
-          class="stat-number"
-          id="currentLevel">
-          —
-        </div>
+                <div class="level-option-icon">
+                    🏆
+                </div>
 
-        <div class="stat-label">
-          المستوى
-        </div>
+                <div class="level-option-content">
 
-      </div>
+                    <h2>
+                        كونكور
+                    </h2>
+
+                    <p>
+                        التحضير لمسابقة الكونكور
+                        والاختبارات المرتبطة بها.
+                    </p>
+
+                </div>
+
+                <span class="level-check">
+                    ✓
+                </span>
+
+            </button>
+
+
+            <!-- Brevet -->
+
+            <button
+                class="level-option"
+                data-level="brevet"
+                onclick="selectLevel('brevet', this)">
+
+                <div class="level-option-icon">
+                    📘
+                </div>
+
+                <div class="level-option-content">
+
+                    <h2>
+                        بريڤي
+                    </h2>
+
+                    <p>
+                        دروس وتمارين تساعدك على
+                        الاستعداد لشهادة ختم الدروس.
+                    </p>
+
+                </div>
+
+                <span class="level-check">
+                    ✓
+                </span>
+
+            </button>
+
+
+            <!-- Bac -->
+
+            <button
+                class="level-option"
+                data-level="bac"
+                onclick="selectLevel('bac', this)">
+
+                <div class="level-option-icon">
+                    🎓
+                </div>
+
+                <div class="level-option-content">
+
+                    <h2>
+                        باكالوريا
+                    </h2>
+
+                    <p>
+                        التحضير للباكالوريا مع الدروس
+                        والتمارين والمراجعة.
+                    </p>
+
+                </div>
+
+                <span class="level-check">
+                    ✓
+                </span>
+
+            </button>
+
+
+        </section>
+
+
+        <!-- Actions -->
+
+        <section class="levels-actions">
+
+            <button
+                id="continueButton"
+                class="btn btn-primary continue-level"
+                onclick="continueToLibrary()"
+                disabled>
+
+                اختر مستوى للمتابعة
+
+            </button>
+
+
+            <button
+                class="btn btn-secondary back-dashboard"
+                onclick="goDashboard()">
+
+                العودة إلى لوحة الطالب
+
+            </button>
+
+
+            <div
+                id="currentLevelNote"
+                class="current-level-note">
+            </div>
+
+        </section>
+
 
     </div>
-
-  </section>
-
-
-  <h2 class="section-title">
-    المواد الدراسية
-  </h2>
-
-
-  <section class="subject-card">
-
-    <div class="subject-top">
-
-      <div class="subject-icon">
-        📐
-      </div>
-
-      <div>
-
-        <div class="subject-name">
-          الرياضيات
-        </div>
-
-        <div class="subject-note">
-          المادة الأساسية حاليًا
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- الفصل الأول -->
-
-    <div class="chapter-card">
-
-      <div class="chapter-top">
-
-        <div>
-
-          <div class="chapter-title">
-            الفصل الأول
-          </div>
-
-          <div
-            class="chapter-status"
-            id="chapter1Status">
-            0 من 20 درس مكتمل
-          </div>
-
-        </div>
-
-        <span>
-          📖
-        </span>
-
-      </div>
-
-
-      <div class="chapter-progress">
-
-        <div class="progress-line">
-
-          <div
-            class="progress-fill"
-            id="chapter1Progress">
-          </div>
-
-        </div>
-
-        <div class="progress-text">
-
-          <span>
-            التقدم
-          </span>
-
-          <span id="chapter1Percentage">
-            0%
-          </span>
-
-        </div>
-
-      </div>
-
-
-      <button
-        class="open-btn"
-        id="chapter1Button"
-        onclick="openChapter(1)">
-        فتح الفصل
-      </button>
-
-    </div>
-
-
-    <!-- الفصل الثاني -->
-
-    <div class="chapter-card locked-chapter">
-
-      <div class="chapter-top">
-
-        <div>
-
-          <div class="chapter-title">
-            الفصل الثاني
-          </div>
-
-          <div class="chapter-status">
-            0 من 20 درس مكتمل
-          </div>
-
-        </div>
-
-        <span>
-          🔒
-        </span>
-
-      </div>
-
-      <button
-        class="open-btn"
-        onclick="lockedChapter()">
-        🔒 مغلق
-      </button>
-
-    </div>
-
-
-    <!-- الفصل الثالث -->
-
-    <div class="chapter-card locked-chapter">
-
-      <div class="chapter-top">
-
-        <div>
-
-          <div class="chapter-title">
-            الفصل الثالث
-          </div>
-
-          <div class="chapter-status">
-            0 من 20 درس مكتمل
-          </div>
-
-        </div>
-
-        <span>
-          🔒
-        </span>
-
-      </div>
-
-      <button
-        class="open-btn"
-        onclick="lockedChapter()">
-        🔒 مغلق
-      </button>
-
-    </div>
-
-  </section>
-
-
-  <div class="future-card">
-
-    <strong>🚀 القادم</strong>
-
-    <br>
-
-    سيتم لاحقًا إضافة بقية المواد الدراسية،
-    وفتح الفصول حسب نظام الوصول والاشتراكات،
-    مع حفظ تقدم الطالب بشكل دائم في حسابه.
-
-  </div>
-
-
-  <button
-    class="footer-btn"
-    onclick="goDashboard()">
-    العودة إلى الرئيسية
-  </button>
 
 </main>
 
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script>
 
-  const SUPABASE_URL =
-    "https://qkzdlxqledsznhbifaxy.supabase.co";
-
-  const SUPABASE_KEY =
-    "sb_publishable_ZdpHXwLlhpbXztsTXpAFTg_TgOji91v";
-
-  const supabaseClient =
-    supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
-    );
+    let selectedLevel = null;
 
 
-  async function checkAuth() {
+    /* =========================
+       LEVEL NAMES
+       ========================= */
 
-    const {
-      data: { session }
-    } = await supabaseClient.auth.getSession();
+    const levelNames = {
 
-    if (!session) {
+        concours: "كونكور",
 
-      window.location.href =
-        "login.html";
+        brevet: "بريڤي",
 
-      return false;
-    }
+        bac: "باكالوريا"
 
-    return true;
-  }
+    };
 
 
-  function getLevelName() {
+    /* =========================
+       SELECT LEVEL
+       ========================= */
 
-    const level =
-      localStorage.getItem(
-        "student_level"
-      );
+    function selectLevel(level, element) {
 
-    if (level === "concours") {
-      return "كونكور";
-    }
-
-    if (level === "brevet") {
-      return "بريڤي";
-    }
-
-    if (level === "bac") {
-      return "باكالوريا";
-    }
-
-    if (level === "كونكور") {
-      return "كونكور";
-    }
-
-    if (level === "بريڤي") {
-      return "بريڤي";
-    }
-
-    if (level === "باكالوريا") {
-      return "باكالوريا";
-    }
-
-    return "—";
-  }
+        selectedLevel = level;
 
 
-  function isCompleted(number) {
+        document
+            .querySelectorAll(".level-option")
+            .forEach(option => {
 
-    return localStorage.getItem(
-      "lesson_" +
-      number +
-      "_completed"
-    ) === "true";
+                option.classList.remove(
+                    "selected"
+                );
 
-  }
-
-
-  function loadProgress() {
-
-    let completed = 0;
+            });
 
 
-    for (let i = 1; i <= 20; i++) {
+        element.classList.add(
+            "selected"
+        );
 
-      if (isCompleted(i)) {
 
-        completed++;
+        const button =
+            document.getElementById(
+                "continueButton"
+            );
 
-      }
+
+        button.disabled = false;
+
+        button.textContent =
+            "متابعة مع " +
+            levelNames[level];
+
+
+        document.getElementById(
+            "currentLevelNote"
+        ).textContent =
+            "المستوى المحدد: " +
+            levelNames[level];
 
     }
 
 
-    const percentage =
-      Math.round(
-        (completed / 20) * 100
-      );
+    /* =========================
+       CONTINUE
+       ========================= */
+
+    function continueToLibrary() {
+
+        if (!selectedLevel) {
+
+            return;
+
+        }
 
 
-    document.getElementById(
-      "completedLessons"
-    ).textContent =
-      completed;
+        localStorage.setItem(
+            "student_level",
+            selectedLevel
+        );
 
 
-    document.getElementById(
-      "overallProgress"
-    ).textContent =
-      percentage + "%";
-
-
-    document.getElementById(
-      "currentLevel"
-    ).textContent =
-      getLevelName();
-
-
-    document.getElementById(
-      "chapter1Status"
-    ).textContent =
-      completed +
-      " من 20 درس مكتمل";
-
-
-    document.getElementById(
-      "chapter1Progress"
-    ).style.width =
-      percentage + "%";
-
-
-    document.getElementById(
-      "chapter1Percentage"
-    ).textContent =
-      percentage + "%";
-
-
-    const button =
-      document.getElementById(
-        "chapter1Button"
-      );
-
-
-    if (percentage === 100) {
-
-      button.textContent =
-        "✓ الفصل مكتمل";
-
-      button.classList.add(
-        "completed"
-      );
-
-    } else if (completed > 0) {
-
-      button.textContent =
-        "متابعة التعلم";
-
-      button.classList.remove(
-        "completed"
-      );
-
-    } else {
-
-      button.textContent =
-        "فتح الفصل";
-
-      button.classList.remove(
-        "completed"
-      );
+        window.location.href =
+            "library.html";
 
     }
 
-  }
+
+    /* =========================
+       LOAD SAVED LEVEL
+       ========================= */
+
+    function loadSavedLevel() {
+
+        const saved =
+            localStorage.getItem(
+                "student_level"
+            );
 
 
-  function openChapter(number) {
+        if (!saved) {
 
-    let chapterName =
-      "الفصل الأول";
+            return;
+
+        }
 
 
-    if (number === 2) {
-      chapterName = "الفصل الثاني";
+        const option =
+            document.querySelector(
+                `[data-level="${saved}"]`
+            );
+
+
+        if (!option) {
+
+            return;
+
+        }
+
+
+        selectLevel(
+            saved,
+            option
+        );
+
     }
 
-    if (number === 3) {
-      chapterName = "الفصل الثالث";
+
+    /* =========================
+       NAVIGATION
+       ========================= */
+
+    function goDashboard() {
+
+        window.location.href =
+            "dashboard.html";
+
     }
 
 
-    localStorage.setItem(
-      "selected_chapter",
-      chapterName
-    );
+    function goHome() {
 
-    localStorage.setItem(
-      "selected_chapter_number",
-      String(number)
-    );
+        window.location.href =
+            "index.html";
 
-
-    window.location.href =
-      "chapter.html";
-
-  }
-
-
-  function lockedChapter() {
-
-    alert(
-      "هذا الفصل مغلق حاليًا 🔒\n\nسيتم فتحه لاحقًا وفق نظام الوصول والاشتراك."
-    );
-
-  }
-
-
-  function goDashboard() {
-
-    window.location.href =
-      "dashboard.html";
-
-  }
-
-
-  async function startPage() {
-
-    const authenticated =
-      await checkAuth();
-
-    if (!authenticated) {
-      return;
     }
 
-    loadProgress();
 
-  }
+    /* =========================
+       START
+       ========================= */
 
-
-  startPage();
+    loadSavedLevel();
 
 </script>
 
-</body>
-              </html>
+</body></html>
