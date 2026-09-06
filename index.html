@@ -1,388 +1,600 @@
-<!DOCTYPE html><html lang="ar" dir="rtl">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
 <head>
-    <meta charset="UTF-8"><meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+    <meta charset="UTF-8">
 
-<meta
-    name="description"
-    content="عالم شيخ الأساتذة — منصة تعليمية يقدم محتواها الأستاذ AI بطريقة واضحة ومنظمة."
->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-<title>عالم شيخ الأساتذة | الأستاذ AI</title>
+    <meta name="description"
+          content="EduNova AI — منصة تعليمية بالذكاء الاصطناعي تساعدك على الاستعداد للشهادات الدراسية مع Afkrash AI.">
 
-<link rel="stylesheet" href="style.css">
+    <title>EduNova AI | التعليم بالذكاء الاصطناعي</title>
 
-<style>
-    /* =====================================================
-       الصفحة الرئيسية — تطوير الهوية
-       ===================================================== */
+    <link rel="stylesheet" href="style.css">
 
-    .home-page {
-        padding-bottom: 40px;
-    }
+    <style>
+        /* =====================================================
+           EduNova AI — الصفحة الرئيسية
+           المرحلة الأولى من تطوير المنصة
+        ===================================================== */
 
-    .home-hero {
-        position: relative;
-        overflow: hidden;
-        min-height: 500px;
-        display: flex;
-        align-items: center;
-        border-radius: 30px;
-        background:
-            radial-gradient(
-                circle at 15% 20%,
-                rgba(255,255,255,.16),
-                transparent 28%
-            ),
-            linear-gradient(
-                135deg,
-                #2563eb 0%,
-                #1d4ed8 55%,
-                #1e40af 100%
-            );
-        color: #fff;
-        box-shadow: 0 22px 55px rgba(37,99,235,.22);
-    }
-
-    .home-hero::before {
-        content: "";
-        position: absolute;
-        width: 260px;
-        height: 260px;
-        left: -120px;
-        top: -120px;
-        border-radius: 50%;
-        border: 1px solid rgba(255,255,255,.12);
-    }
-
-    .home-hero::after {
-        content: "";
-        position: absolute;
-        width: 360px;
-        height: 360px;
-        right: -190px;
-        bottom: -210px;
-        border-radius: 50%;
-        border: 1px solid rgba(255,255,255,.10);
-    }
-
-    .home-hero-inner {
-        position: relative;
-        z-index: 2;
-        width: 100%;
-        display: grid;
-        gap: 32px;
-        padding: 34px 24px;
-    }
-
-    .home-hero-content {
-        max-width: 650px;
-    }
-
-    .ai-label {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        width: fit-content;
-        margin-bottom: 16px;
-        padding: 8px 14px;
-        border: 1px solid rgba(255,255,255,.22);
-        border-radius: 999px;
-        background: rgba(255,255,255,.10);
-        color: #fff;
-        font-size: 14px;
-        font-weight: 700;
-        backdrop-filter: blur(10px);
-    }
-
-    .ai-dot {
-        width: 9px;
-        height: 9px;
-        border-radius: 50%;
-        background: #93c5fd;
-        box-shadow: 0 0 0 5px rgba(147,197,253,.12);
-    }
-
-    .home-hero h1 {
-        margin: 0 0 14px;
-        color: #fff;
-        font-size: clamp(34px, 9vw, 58px);
-        line-height: 1.2;
-        font-weight: 800;
-        letter-spacing: -.04em;
-    }
-
-    .home-hero h1 span {
-        display: block;
-        color: #dbeafe;
-    }
-
-    .home-hero-text {
-        max-width: 620px;
-        margin: 0 0 24px;
-        color: rgba(255,255,255,.84);
-        font-size: 17px;
-        line-height: 1.9;
-    }
-
-    .hero-actions {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .hero-actions .btn {
-        min-height: 50px;
-    }
-
-    .hero-secondary {
-        background: rgba(255,255,255,.11);
-        color: #fff;
-        border: 1px solid rgba(255,255,255,.20);
-    }
-
-    .hero-secondary:hover {
-        background: rgba(255,255,255,.18);
-        color: #fff;
-    }
-
-    .teacher-card {
-        width: min(100%, 330px);
-        margin-inline: auto;
-        padding: 20px;
-        border: 1px solid rgba(255,255,255,.16);
-        border-radius: 26px;
-        background: rgba(255,255,255,.10);
-        box-shadow: inset 0 1px 0 rgba(255,255,255,.10);
-        backdrop-filter: blur(14px);
-    }
-
-    .teacher-avatar {
-        width: 100%;
-        aspect-ratio: 1 / 1;
-        display: grid;
-        place-items: center;
-        margin-bottom: 16px;
-        border-radius: 22px;
-        background:
-            radial-gradient(
-                circle at 50% 35%,
-                rgba(255,255,255,.22),
-                rgba(255,255,255,.05) 55%,
-                transparent 70%
-            );
-        border: 1px solid rgba(255,255,255,.14);
-        font-size: 92px;
-    }
-
-    .teacher-card h2 {
-        margin: 0 0 4px;
-        color: #fff;
-        font-size: 23px;
-    }
-
-    .teacher-card p {
-        margin: 0;
-        color: rgba(255,255,255,.72);
-        font-size: 14px;
-    }
-
-    .teacher-logo {
-        display: inline-flex;
-        align-items: center;
-        gap: 7px;
-        margin-top: 15px;
-        padding: 7px 11px;
-        border-radius: 10px;
-        background: rgba(255,255,255,.12);
-        color: #fff;
-        font-size: 12px;
-        font-weight: 700;
-    }
-
-    .home-section {
-        padding-top: 10px;
-    }
-
-    .section-intro {
-        max-width: 650px;
-        margin-bottom: 20px;
-    }
-
-    .section-intro h2 {
-        margin-bottom: 5px;
-    }
-
-    .section-intro p {
-        margin-bottom: 0;
-    }
-
-    .identity-card {
-        position: relative;
-        overflow: hidden;
-        padding: 25px;
-        border-radius: 24px;
-        background: var(--surface);
-        border: 1px solid var(--border);
-        box-shadow: var(--shadow-sm);
-    }
-
-    .identity-card::before {
-        content: "";
-        position: absolute;
-        width: 120px;
-        height: 120px;
-        left: -50px;
-        bottom: -55px;
-        border-radius: 50%;
-        background: var(--primary-light);
-    }
-
-    .identity-icon {
-        width: 52px;
-        height: 52px;
-        display: grid;
-        place-items: center;
-        margin-bottom: 15px;
-        border-radius: 16px;
-        background: var(--primary-light);
-        font-size: 25px;
-    }
-
-    .identity-card h3 {
-        margin-bottom: 7px;
-    }
-
-    .identity-card p {
-        margin-bottom: 0;
-        line-height: 1.8;
-    }
-
-    .level-card {
-        position: relative;
-        overflow: hidden;
-    }
-
-    .level-number {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 38px;
-        height: 38px;
-        margin-bottom: 14px;
-        border-radius: 12px;
-        background: var(--primary-light);
-        color: var(--primary);
-        font-weight: 800;
-    }
-
-    .home-final {
-        position: relative;
-        overflow: hidden;
-        padding: 34px 24px;
-        border-radius: 28px;
-        background: linear-gradient(
-            135deg,
-            var(--primary),
-            var(--primary-dark)
-        );
-        color: #fff;
-        text-align: center;
-        box-shadow: 0 18px 40px rgba(37,99,235,.18);
-    }
-
-    .home-final h2 {
-        color: #fff;
-        margin-bottom: 8px;
-    }
-
-    .home-final p {
-        color: rgba(255,255,255,.82);
-        margin-bottom: 20px;
-    }
-
-    @media (min-width: 760px) {
-        .home-hero-inner {
-            grid-template-columns: minmax(0, 1fr) 330px;
-            align-items: center;
-            padding: 50px;
+        .home-page {
+            padding-bottom: 40px;
         }
 
+        /* ================= HERO ================= */
+
+        .home-hero {
+            position: relative;
+            overflow: hidden;
+            min-height: 520px;
+            display: flex;
+            align-items: center;
+
+            border-radius: 30px;
+
+            background:
+                radial-gradient(
+                    circle at 15% 20%,
+                    rgba(255,255,255,.16),
+                    transparent 28%
+                ),
+                linear-gradient(
+                    135deg,
+                    #2563eb 0%,
+                    #1d4ed8 55%,
+                    #1e40af 100%
+                );
+
+            color: #fff;
+
+            box-shadow:
+                0 22px 55px rgba(37,99,235,.22);
+        }
+
+        .home-hero::before {
+            content: "";
+            position: absolute;
+
+            width: 260px;
+            height: 260px;
+
+            left: -120px;
+            top: -120px;
+
+            border-radius: 50%;
+
+            border:
+                1px solid rgba(255,255,255,.12);
+        }
+
+        .home-hero::after {
+            content: "";
+            position: absolute;
+
+            width: 360px;
+            height: 360px;
+
+            right: -190px;
+            bottom: -210px;
+
+            border-radius: 50%;
+
+            border:
+                1px solid rgba(255,255,255,.10);
+        }
+
+        .home-hero-inner {
+            position: relative;
+            z-index: 2;
+
+            width: 100%;
+
+            display: grid;
+            gap: 32px;
+
+            padding: 34px 24px;
+        }
+
+        .home-hero-content {
+            max-width: 650px;
+        }
+
+        /* ================= AI LABEL ================= */
+
+        .ai-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            width: fit-content;
+
+            margin-bottom: 16px;
+            padding: 8px 14px;
+
+            border:
+                1px solid rgba(255,255,255,.22);
+
+            border-radius: 999px;
+
+            background:
+                rgba(255,255,255,.10);
+
+            color: #fff;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            backdrop-filter: blur(10px);
+        }
+
+        .ai-dot {
+            width: 9px;
+            height: 9px;
+
+            border-radius: 50%;
+
+            background: #93c5fd;
+
+            box-shadow:
+                0 0 0 5px
+                rgba(147,197,253,.12);
+        }
+
+        /* ================= TITLE ================= */
+
+        .home-hero h1 {
+            margin: 0 0 14px;
+
+            color: #fff;
+
+            font-size:
+                clamp(34px, 9vw, 58px);
+
+            line-height: 1.2;
+
+            font-weight: 800;
+
+            letter-spacing: -.04em;
+        }
+
+        .home-hero h1 span {
+            display: block;
+            color: #dbeafe;
+        }
+
+        .home-hero-text {
+            max-width: 620px;
+
+            margin: 0 0 24px;
+
+            color:
+                rgba(255,255,255,.84);
+
+            font-size: 17px;
+            line-height: 1.9;
+        }
+
+        /* ================= BUTTONS ================= */
+
         .hero-actions {
-            flex-direction: row;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
         .hero-actions .btn {
-            width: auto;
-            min-width: 150px;
+            min-height: 50px;
         }
+
+        .hero-primary {
+            background: #fff;
+            color: #1d4ed8;
+        }
+
+        .hero-primary:hover {
+            background: #eff6ff;
+            color: #1d4ed8;
+        }
+
+        .hero-secondary {
+            background:
+                rgba(255,255,255,.11);
+
+            color: #fff;
+
+            border:
+                1px solid rgba(255,255,255,.20);
+        }
+
+        .hero-secondary:hover {
+            background:
+                rgba(255,255,255,.18);
+
+            color: #fff;
+        }
+
+        /* ================= AFKRASH ================= */
 
         .teacher-card {
-            margin-inline-start: auto;
-            margin-inline-end: 0;
+            width: min(100%, 330px);
+
+            margin-inline: auto;
+
+            padding: 20px;
+
+            border:
+                1px solid rgba(255,255,255,.16);
+
+            border-radius: 26px;
+
+            background:
+                rgba(255,255,255,.10);
+
+            box-shadow:
+                inset 0 1px 0
+                rgba(255,255,255,.10);
+
+            backdrop-filter: blur(14px);
         }
-    }
-</style>
 
-</head><body><header class="site-header">
-    <div class="container header-inner">    <a href="index.html" class="brand">
-        <span class="brand-icon">🎓</span>
-        <span class="brand-name">عالم شيخ الأساتذة</span>
-    </a>
+        .teacher-avatar {
+            width: 100%;
 
-    <a href="login.html" class="btn btn-primary">
-        دخول
-    </a>
+            aspect-ratio: 1 / 1;
 
-</div>
+            display: grid;
+            place-items: center;
 
-</header><main class="home-page"><!-- =====================================================
+            margin-bottom: 16px;
+
+            border-radius: 22px;
+
+            background:
+                radial-gradient(
+                    circle at 50% 35%,
+                    rgba(255,255,255,.22),
+                    rgba(255,255,255,.05) 55%,
+                    transparent 70%
+                );
+
+            border:
+                1px solid rgba(255,255,255,.14);
+
+            font-size: 92px;
+        }
+
+        .teacher-card h2 {
+            margin: 0 0 4px;
+
+            color: #fff;
+
+            font-size: 23px;
+        }
+
+        .teacher-card p {
+            margin: 0;
+
+            color:
+                rgba(255,255,255,.72);
+
+            font-size: 14px;
+        }
+
+        .teacher-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            margin-top: 15px;
+            padding: 7px 11px;
+
+            border-radius: 10px;
+
+            background:
+                rgba(255,255,255,.12);
+
+            color: #fff;
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* ================= SECTIONS ================= */
+
+        .home-section {
+            padding-top: 10px;
+        }
+
+        .section-intro {
+            max-width: 650px;
+            margin-bottom: 20px;
+        }
+
+        .section-intro h2 {
+            margin-bottom: 5px;
+        }
+
+        .section-intro p {
+            margin-bottom: 0;
+        }
+
+        /* ================= IDENTITY ================= */
+
+        .identity-card {
+            position: relative;
+            overflow: hidden;
+
+            padding: 25px;
+
+            border-radius: 24px;
+
+            background: var(--surface);
+
+            border:
+                1px solid var(--border);
+
+            box-shadow:
+                var(--shadow-sm);
+        }
+
+        .identity-icon {
+            width: 52px;
+            height: 52px;
+
+            display: grid;
+            place-items: center;
+
+            margin-bottom: 15px;
+
+            border-radius: 16px;
+
+            background:
+                var(--primary-light);
+
+            font-size: 25px;
+        }
+
+        .identity-card h3 {
+            margin-bottom: 7px;
+        }
+
+        .identity-card p {
+            margin-bottom: 0;
+            line-height: 1.8;
+        }
+
+        /* ================= CERTIFICATES ================= */
+
+        .certificate-card {
+            position: relative;
+            overflow: hidden;
+
+            padding: 24px;
+
+            border-radius: 22px;
+
+            transition:
+                transform .2s ease,
+                box-shadow .2s ease;
+        }
+
+        .certificate-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .certificate-number {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            width: 42px;
+            height: 42px;
+
+            margin-bottom: 14px;
+
+            border-radius: 12px;
+
+            background:
+                var(--primary-light);
+
+            color:
+                var(--primary);
+
+            font-weight: 800;
+        }
+
+        .certificate-card .available {
+            display: inline-block;
+
+            margin-top: 10px;
+            padding: 5px 9px;
+
+            border-radius: 8px;
+
+            background:
+                #dcfce7;
+
+            color:
+                #166534;
+
+            font-size: 12px;
+
+            font-weight: 700;
+        }
+
+        /* ================= FUTURE ================= */
+
+        .future-card {
+            padding: 22px;
+        }
+
+        /* ================= CTA ================= */
+
+        .home-final {
+            position: relative;
+            overflow: hidden;
+
+            padding: 34px 24px;
+
+            border-radius: 28px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--primary-dark)
+                );
+
+            color: #fff;
+
+            text-align: center;
+
+            box-shadow:
+                0 18px 40px
+                rgba(37,99,235,.18);
+        }
+
+        .home-final h2 {
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .home-final p {
+            color:
+                rgba(255,255,255,.82);
+
+            margin-bottom: 20px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (min-width: 760px) {
+
+            .home-hero-inner {
+                grid-template-columns:
+                    minmax(0, 1fr) 330px;
+
+                align-items: center;
+
+                padding: 50px;
+            }
+
+            .hero-actions {
+                flex-direction: row;
+            }
+
+            .hero-actions .btn {
+                width: auto;
+                min-width: 150px;
+            }
+
+            .teacher-card {
+                margin-inline-start: auto;
+                margin-inline-end: 0;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<header class="site-header">
+
+    <div class="container header-inner">
+
+        <a href="index.html" class="brand">
+
+            <span class="brand-icon">🎓</span>
+
+            <span class="brand-name">
+                EduNova AI
+            </span>
+
+        </a>
+
+        <a href="login.html"
+           class="btn btn-primary">
+
+            دخول
+
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="home-page">
+
+
+<!-- =====================================================
      HERO
-     ===================================================== -->
+===================================================== -->
 
 <section class="section">
+
     <div class="container">
 
         <div class="home-hero">
 
             <div class="home-hero-inner">
 
+
                 <div class="home-hero-content">
 
                     <div class="ai-label">
+
                         <span class="ai-dot"></span>
-                        الأستاذ AI
+
+                        التعليم بالذكاء الاصطناعي
+
                     </div>
 
+
                     <h1>
+
                         مرحبًا بك في
-                        <span>عالم شيخ الأساتذة</span>
+
+                        <span>
+                            EduNova AI
+                        </span>
+
                     </h1>
 
+
                     <p class="home-hero-text">
-                        هنا تبدأ رحلتك التعليمية مع الأستاذ AI.
-                        محتوى تعليمي واضح، منظم، ومقدم بطريقة تساعدك
-                        على الفهم والتقدم خطوة بخطوة.
+
+                        منصة تعليمية جديدة تساعدك على الاستعداد
+                        لشهادتك الدراسية من خلال دروس منظمة
+                        وشروحات يقدمها مدرسك الافتراضي
+                        <strong>Afkrash AI</strong>.
+
                     </p>
+
 
                     <div class="hero-actions">
 
-                        <a
-                            href="login.html"
-                            class="btn btn-primary"
-                            style="background:#fff;color:#1d4ed8;"
-                        >
+                        <a href="login.html"
+                           class="btn hero-primary">
+
                             ابدأ التعلم
+
                             <span>←</span>
+
                         </a>
 
-                        <a
-                            href="#levels"
-                            class="btn hero-secondary"
-                        >
-                            اكتشف المستويات
+
+                        <a href="#certificates"
+                           class="btn hero-secondary">
+
+                            اختر شهادتك
+
                         </a>
 
                     </div>
@@ -390,112 +602,166 @@
                 </div>
 
 
-                <!-- شخصية مؤقتة -->
+                <!-- ================= AFKRASH ================= -->
+
                 <div class="teacher-card">
 
                     <div class="teacher-avatar">
-                        👨‍🏫
+
+                        🤖
+
                     </div>
 
+
                     <h2>
-                        شيخ الأساتذة
+
+                        Afkrash AI
+
                     </h2>
 
+
                     <p>
-                        الأستاذ AI — الشخصية التي ستقدم
-                        لك رحلتك التعليمية.
+
+                        مدرسك الافتراضي في
+                        EduNova AI
+
                     </p>
 
+
                     <div class="teacher-logo">
-                        🎓 شيخ الأساتذة • AI
+
+                        🎓 EduNova AI
+
                     </div>
 
                 </div>
+
 
             </div>
 
         </div>
 
     </div>
+
 </section>
 
 
 <!-- =====================================================
      IDENTITY
-     ===================================================== -->
+===================================================== -->
 
 <section class="section home-section">
 
     <div class="container">
 
+
         <div class="section-intro">
+
             <h2 class="section-title">
-                من هو شيخ الأساتذة؟
+
+                ما هي EduNova AI؟
+
             </h2>
 
+
             <p>
-                شخصية تعليمية بالذكاء الاصطناعي تقدم المحتوى
-                والشروحات للتلاميذ بأسلوب واضح ومنظم.
+
+                منصة تعليمية تعتمد على التكنولوجيا
+                والذكاء الاصطناعي لتقديم تجربة تعلم
+                بسيطة ومنظمة للطلاب.
+
             </p>
+
         </div>
 
 
         <div class="grid grid-2">
 
+
             <article class="identity-card">
-                <div class="identity-icon">🧠</div>
+
+                <div class="identity-icon">
+                    🧠
+                </div>
 
                 <h3>
-                    فهم قبل الحفظ
+                    افهم قبل أن تحفظ
                 </h3>
 
                 <p>
-                    نركز على فهم الفكرة وطريقة الوصول إلى الحل،
-                    وليس فقط حفظ الإجابة.
+
+                    نركز على فهم الفكرة وطريقة
+                    الوصول إلى الحل، وليس فقط
+                    حفظ الإجابة.
+
                 </p>
+
             </article>
 
 
             <article class="identity-card">
-                <div class="identity-icon">🎯</div>
+
+                <div class="identity-icon">
+                    🎯
+                </div>
 
                 <h3>
-                    طريق واضح
+                    طريق تعليمي واضح
                 </h3>
 
                 <p>
-                    دروس مرتبة حسب المستوى والفصول حتى يعرف
-                    الطالب دائمًا الخطوة التالية.
+
+                    دروس منظمة حسب الشهادة
+                    والمادة والـChapitres،
+                    حتى تعرف دائمًا أين أنت
+                    وإلى أين تتجه.
+
                 </p>
+
             </article>
 
 
             <article class="identity-card">
-                <div class="identity-icon">📚</div>
+
+                <div class="identity-icon">
+                    🎬
+                </div>
 
                 <h3>
-                    تعلم منظم
+                    شرح بواسطة Afkrash AI
                 </h3>
 
                 <p>
-                    نبدأ بالرياضيات ونبني المحتوى تدريجيًا،
-                    ثم نوسع عالم شيخ الأساتذة إلى مواد أخرى.
+
+                    مدرس افتراضي يقدم الدروس
+                    والشروحات بطريقة مبسطة
+                    ومناسبة للطالب.
+
                 </p>
+
             </article>
 
 
             <article class="identity-card">
-                <div class="identity-icon">🏆</div>
+
+                <div class="identity-icon">
+                    📈
+                </div>
 
                 <h3>
-                    تقدم وإنجاز
+                    تعلم خطوة بخطوة
                 </h3>
 
                 <p>
-                    تابع ما أنجزته، اختبر نفسك، وواصل التقدم
-                    نحو أهدافك الدراسية.
+
+                    تبدأ من الدرس المناسب لك
+                    وتتقدم تدريجيًا حتى تصل
+                    إلى هدفك الدراسي.
+
                 </p>
+
             </article>
+
 
         </div>
 
@@ -505,37 +771,43 @@
 
 
 <!-- =====================================================
-     LEVELS
-     ===================================================== -->
+     CERTIFICATES
+===================================================== -->
 
 <section
     class="section home-section"
-    id="levels"
+    id="certificates"
 >
 
     <div class="container">
 
+
         <div class="section-intro">
+
             <h2 class="section-title">
-                اختر مستواك
+
+                اختر شهادتك
+
             </h2>
 
+
             <p>
-                اختر المستوى الذي يناسبك وابدأ رحلتك مع
-                شيخ الأساتذة.
+
+                اختر الشهادة التي تستعد للحصول
+                عليها، ثم ابدأ رحلتك التعليمية.
+
             </p>
+
         </div>
 
 
         <div class="grid grid-3">
 
-            <a
-                href="login.html"
-                class="card card-hover level-card"
-                style="padding:24px;"
-            >
 
-                <span class="level-number">
+            <a href="login.html"
+               class="card card-hover certificate-card">
+
+                <span class="certificate-number">
                     01
                 </span>
 
@@ -544,20 +816,23 @@
                 </h3>
 
                 <p class="text-muted">
-                    استعداد منظم للمسابقة والتدرب على
-                    المهارات المطلوبة.
+
+                    دروس ومراجعة منظمة
+                    للاستعداد للكونكور.
+
                 </p>
+
+                <span class="available">
+                    متاح ضمن خطة المنصة
+                </span>
 
             </a>
 
 
-            <a
-                href="login.html"
-                class="card card-hover level-card"
-                style="padding:24px;"
-            >
+            <a href="login.html"
+               class="card card-hover certificate-card">
 
-                <span class="level-number">
+                <span class="certificate-number">
                     02
                 </span>
 
@@ -566,20 +841,23 @@
                 </h3>
 
                 <p class="text-muted">
-                    تعلم ومراجعة بطريقة منظمة تساعدك
-                    على تثبيت الأساسيات.
+
+                    تعلم ومراجعة بطريقة
+                    منظمة لتثبيت الأساسيات.
+
                 </p>
+
+                <span class="available">
+                    متاح ضمن خطة المنصة
+                </span>
 
             </a>
 
 
-            <a
-                href="login.html"
-                class="card card-hover level-card"
-                style="padding:24px;"
-            >
+            <a href="login.html"
+               class="card card-hover certificate-card">
 
-                <span class="level-number">
+                <span class="certificate-number">
                     03
                 </span>
 
@@ -588,11 +866,96 @@
                 </h3>
 
                 <p class="text-muted">
-                    تحضير تدريجي للباكالوريا مع دروس
-                    وتمارين منظمة.
+
+                    تحضير تدريجي للباكالوريا
+                    مع دروس وتمارين منظمة.
+
                 </p>
 
+                <span class="available">
+                    متاح ضمن خطة المنصة
+                </span>
+
             </a>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     YEAR ONE
+===================================================== -->
+
+<section class="section home-section">
+
+    <div class="container">
+
+
+        <div class="section-intro">
+
+            <h2 class="section-title">
+
+                السنة الأولى
+
+            </h2>
+
+
+            <p>
+
+                نبدأ بمادة واحدة ونبنيها
+                بعناية قبل التوسع.
+
+            </p>
+
+        </div>
+
+
+        <div class="grid grid-2">
+
+
+            <article class="card card-hover future-card">
+
+                <div style="font-size:32px;margin-bottom:10px;">
+                    🧮
+                </div>
+
+                <h3>
+                    الرياضيات
+                </h3>
+
+                <p class="text-muted">
+
+                    المادة الأساسية في السنة الأولى
+                    من EduNova AI.
+
+                </p>
+
+            </article>
+
+
+            <article class="card card-hover future-card">
+
+                <div style="font-size:32px;margin-bottom:10px;">
+                    🤖
+                </div>
+
+                <h3>
+                    Afkrash AI
+                </h3>
+
+                <p class="text-muted">
+
+                    المدرس الافتراضي الذي سيقدم
+                    الدروس والشروحات داخل المنصة.
+
+                </p>
+
+            </article>
+
 
         </div>
 
@@ -603,70 +966,94 @@
 
 <!-- =====================================================
      WHAT COMES NEXT
-     ===================================================== -->
+===================================================== -->
 
 <section class="section home-section">
 
     <div class="container">
 
+
         <div class="section-intro">
+
             <h2 class="section-title">
-                عالم يتطور معك
+
+                هذه مجرد البداية
+
             </h2>
 
+
             <p>
-                ما تراه الآن هو البداية. سنبني عالم شيخ الأساتذة
-                خطوة بخطوة ليصبح تجربة تعليمية متكاملة.
+
+                سنطور EduNova AI تدريجيًا لتصبح
+                منصة تعليمية متكاملة.
+
             </p>
+
         </div>
 
 
         <div class="grid grid-3">
 
-            <article class="card card-hover" style="padding:22px;">
+
+            <article class="card card-hover future-card">
+
                 <div style="font-size:30px;margin-bottom:10px;">
                     🎬
                 </div>
 
                 <h3>
-                    دروس وشروحات
+                    فيديوهات تعليمية
                 </h3>
 
                 <p class="text-muted">
-                    شروحات يقدمها الأستاذ AI بطريقة واضحة
-                    ومناسبة للطالب.
+
+                    دروس يقدمها Afkrash AI
+                    بطريقة واضحة ومنظمة.
+
                 </p>
+
             </article>
 
 
-            <article class="card card-hover" style="padding:22px;">
+            <article class="card card-hover future-card">
+
                 <div style="font-size:30px;margin-bottom:10px;">
-                    📈
+                    🔒
                 </div>
 
                 <h3>
-                    تابع تقدمك
+                    محتوى Premium
                 </h3>
 
                 <p class="text-muted">
-                    اعرف ما أنجزته واستمر من حيث توقفت.
+
+                    بعض الدروس ستكون متاحة
+                    للمشتركين فقط.
+
                 </p>
+
             </article>
 
 
-            <article class="card card-hover" style="padding:22px;">
+            <article class="card card-hover future-card">
+
                 <div style="font-size:30px;margin-bottom:10px;">
-                    🏆
+                    📱
                 </div>
 
                 <h3>
-                    تحديات وإنجازات
+                    تطبيق الهاتف
                 </h3>
 
                 <p class="text-muted">
-                    اختبر نفسك وطوّر مستواك مع استمرار رحلتك.
+
+                    بعد نجاح الموقع، ننتقل
+                    إلى تطبيق EduNova AI.
+
                 </p>
+
             </article>
+
 
         </div>
 
@@ -677,50 +1064,78 @@
 
 <!-- =====================================================
      FINAL CTA
-     ===================================================== -->
+===================================================== -->
 
 <section class="section">
 
     <div class="container">
 
+
         <div class="home-final">
 
             <h2>
+
                 مستعد لبدء رحلتك؟
+
             </h2>
 
+
             <p>
-                ادخل إلى عالم شيخ الأساتذة وابدأ التعلم.
+
+                اختر شهادتك وابدأ التعلم
+                مع EduNova AI.
+
             </p>
 
-            <a
-                href="login.html"
-                class="btn"
-                style="background:#fff;color:var(--primary);"
-            >
+
+            <a href="login.html"
+               class="btn"
+               style="background:#fff;color:var(--primary);">
+
                 ابدأ الآن
+
                 <span>←</span>
+
             </a>
 
         </div>
+
 
     </div>
 
 </section>
 
-</main><footer class="site-footer"><div class="container">
 
-    <p>
-        ©
-        <span data-current-year></span>
-        عالم شيخ الأساتذة
-    </p>
+</main>
 
-    <p style="margin-top:5px;">
-        الأستاذ AI • عالم تعليمي قيد البناء والتطوير
-    </p>
 
-</div>
+<footer class="site-footer">
 
-</footer><script src="script.js"></script></body>
+    <div class="container">
+
+        <p>
+
+            ©
+            <span data-current-year></span>
+            EduNova AI
+
+        </p>
+
+
+        <p style="margin-top:5px;">
+
+            Afkrash AI • مدرسك الافتراضي
+            بالذكاء الاصطناعي
+
+        </p>
+
+    </div>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+
     </html>
