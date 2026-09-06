@@ -9,6 +9,9 @@
 
     <link rel="stylesheet" href="style.css">
 
+    <!-- النظام العالمي للغة والوضع -->
+    <script src="script.js"></script>
+
     <style>
         /* ==================================================
            EDUNOVA AI — STUDENT DASHBOARD
@@ -567,7 +570,8 @@
         <button
             class="brand"
             onclick="goHome()"
-            aria-label="الصفحة الرئيسية">
+            aria-label="الصفحة الرئيسية"
+            data-dashboard-aria="home">
 
             <span class="brand-icon">
                 AI
@@ -585,7 +589,8 @@
                 class="btn btn-secondary"
                 style="min-height:42px;padding:8px 12px;"
                 onclick="showNotifications()"
-                aria-label="الإشعارات">
+                aria-label="الإشعارات"
+                data-dashboard-aria="notifications">
 
                 🔔
 
@@ -595,7 +600,8 @@
                 class="btn btn-secondary"
                 style="min-height:42px;padding:8px 12px;"
                 onclick="openAccount()"
-                aria-label="الحساب">
+                aria-label="الحساب"
+                data-dashboard-aria="account">
 
                 👤
 
@@ -640,7 +646,9 @@
 
                     </h1>
 
-                    <p class="dashboard-description">
+                    <p
+                        class="dashboard-description"
+                        data-dashboard-i18n="heroDescription">
 
                         واصل رحلتك التعليمية خطوة بخطوة،
                         وتعلّم مع Afkrash AI — مدرسك الذكي في EduNova AI.
@@ -662,7 +670,7 @@
                             Afkrash AI
                         </strong>
 
-                        <span>
+                        <span data-dashboard-i18n="teacherSubtitle">
                             مدرسك الذكي • رفيق رحلتك التعليمية
                         </span>
 
@@ -693,8 +701,12 @@
 
                 </strong>
 
-                <span class="dashboard-stat-label">
+                <span
+                    class="dashboard-stat-label"
+                    data-dashboard-i18n="points">
+
                     النقاط
+
                 </span>
 
             </div>
@@ -710,8 +722,12 @@
                     0
                 </strong>
 
-                <span class="dashboard-stat-label">
+                <span
+                    class="dashboard-stat-label"
+                    data-dashboard-i18n="streak">
+
                     أيام متتالية
+
                 </span>
 
             </div>
@@ -727,8 +743,12 @@
                     0
                 </strong>
 
-                <span class="dashboard-stat-label">
+                <span
+                    class="dashboard-stat-label"
+                    data-dashboard-i18n="badges">
+
                     الشارات
+
                 </span>
 
             </div>
@@ -748,8 +768,12 @@
 
                 </strong>
 
-                <span class="dashboard-stat-label">
+                <span
+                    class="dashboard-stat-label"
+                    data-dashboard-i18n="progress">
+
                     التقدم
+
                 </span>
 
             </div>
@@ -763,12 +787,20 @@
 
             <div class="dashboard-section-header">
 
-                <h2 class="dashboard-section-title">
+                <h2
+                    class="dashboard-section-title"
+                    data-dashboard-i18n="continueLearning">
+
                     متابعة التعلم
+
                 </h2>
 
-                <span class="dashboard-section-note">
+                <span
+                    class="dashboard-section-note"
+                    data-dashboard-i18n="lastActivity">
+
                     آخر نشاط
+
                 </span>
 
             </div>
@@ -784,7 +816,7 @@
 
                     <div class="continue-info">
 
-                        <h3>
+                        <h3 data-dashboard-i18n="mathematics">
                             الرياضيات
                         </h3>
 
@@ -801,7 +833,7 @@
 
                     <div class="continue-progress-head">
 
-                        <span>
+                        <span data-dashboard-i18n="progress">
                             التقدم
                         </span>
 
@@ -825,7 +857,8 @@
 
                 <button
                     class="btn btn-primary continue-button"
-                    onclick="startLearning()">
+                    onclick="startLearning()"
+                    data-dashboard-i18n="startLearning">
 
                     ابدأ التعلم
 
@@ -842,8 +875,12 @@
 
             <div class="dashboard-section-header">
 
-                <h2 class="dashboard-section-title">
+                <h2
+                    class="dashboard-section-title"
+                    data-dashboard-i18n="yourLevel">
+
                     مستواك الدراسي
+
                 </h2>
 
             </div>
@@ -859,11 +896,15 @@
 
                     <div>
 
-                        <h3 id="selectedLevel">
+                        <h3
+                            id="selectedLevel"
+                            data-dashboard-i18n="noLevel">
+
                             لم يتم اختيار المستوى
+
                         </h3>
 
-                        <p>
+                        <p data-dashboard-i18n="selectedLevelDescription">
                             المستوى المحدد لحسابك
                         </p>
 
@@ -874,7 +915,8 @@
 
                 <button
                     class="btn btn-secondary"
-                    onclick="changeLevel()">
+                    onclick="changeLevel()"
+                    data-dashboard-i18n="changeLevel">
 
                     تغيير المستوى
 
@@ -891,8 +933,12 @@
 
             <div class="dashboard-section-header">
 
-                <h2 class="dashboard-section-title">
+                <h2
+                    class="dashboard-section-title"
+                    data-dashboard-i18n="quickAccess">
+
                     الوصول السريع
+
                 </h2>
 
             </div>
@@ -908,11 +954,11 @@
                         📚
                     </span>
 
-                    <h3>
+                    <h3 data-dashboard-i18n="library">
                         مكتبتي
                     </h3>
 
-                    <p>
+                    <p data-dashboard-i18n="libraryDescription">
                         دروسي ومحتواي
                     </p>
 
@@ -927,11 +973,11 @@
                         💬
                     </span>
 
-                    <h3>
+                    <h3 data-dashboard-i18n="forum">
                         المنتدى
                     </h3>
 
-                    <p>
+                    <p data-dashboard-i18n="forumDescription">
                         أسئلة ونقاشات
                     </p>
 
@@ -946,11 +992,11 @@
                         🏆
                     </span>
 
-                    <h3>
+                    <h3 data-dashboard-i18n="weeklyChallenge">
                         التحدي الأسبوعي
                     </h3>
 
-                    <p>
+                    <p data-dashboard-i18n="challengeDescription">
                         تدرب واختبر نفسك
                     </p>
 
@@ -959,17 +1005,17 @@
 
                 <button
                     class="quick-card"
-                    onclick="showComingSoon('الترتيب')">
+                    onclick="showComingSoon('ranking')">
 
                     <span class="quick-icon">
                         📊
                     </span>
 
-                    <h3>
+                    <h3 data-dashboard-i18n="ranking">
                         الترتيب
                     </h3>
 
-                    <p>
+                    <p data-dashboard-i18n="rankingDescription">
                         أفضل الطلاب
                     </p>
 
@@ -978,17 +1024,17 @@
 
                 <button
                     class="quick-card"
-                    onclick="showComingSoon('الشارات')">
+                    onclick="showComingSoon('badges')">
 
                     <span class="quick-icon">
                         🥇
                     </span>
 
-                    <h3>
+                    <h3 data-dashboard-i18n="badges">
                         الشارات
                     </h3>
 
-                    <p>
+                    <p data-dashboard-i18n="badgesDescription">
                         إنجازاتك
                     </p>
 
@@ -997,17 +1043,17 @@
 
                 <button
                     class="quick-card"
-                    onclick="showComingSoon('الاشتراكات')">
+                    onclick="showComingSoon('subscriptions')">
 
                     <span class="quick-icon">
                         💳
                     </span>
 
-                    <h3>
+                    <h3 data-dashboard-i18n="subscriptions">
                         الاشتراكات
                     </h3>
 
-                    <p>
+                    <p data-dashboard-i18n="subscriptionsDescription">
                         الخطط التعليمية
                     </p>
 
@@ -1022,11 +1068,11 @@
                         ⚙️
                     </span>
 
-                    <h3>
+                    <h3 data-dashboard-i18n="settings">
                         الإعدادات
                     </h3>
 
-                    <p>
+                    <p data-dashboard-i18n="settingsDescription">
                         تخصيص حسابك
                     </p>
 
@@ -1041,11 +1087,11 @@
                         👤
                     </span>
 
-                    <h3>
+                    <h3 data-dashboard-i18n="myAccount">
                         حسابي
                     </h3>
 
-                    <p>
+                    <p data-dashboard-i18n="accountDescription">
                         الملف الشخصي
                     </p>
 
@@ -1079,11 +1125,15 @@
                     Afkrash AI
                 </h2>
 
-                <span class="ai-subtitle">
+                <span
+                    class="ai-subtitle"
+                    data-dashboard-i18n="aiSubtitle">
+
                     مدرسك الذكي في EduNova AI
+
                 </span>
 
-                <p>
+                <p data-dashboard-i18n="aiDescription">
 
                     شخصية تعليمية ذكية سترافقك في رحلتك
                     وتساعدك على فهم الرياضيات بطريقة واضحة
@@ -1099,7 +1149,8 @@
 
                 <button
                     class="btn btn-primary ai-button"
-                    onclick="showComingSoon('Afkrash AI')">
+                    onclick="showComingSoon('afkrash')"
+                    data-dashboard-i18n="comingSoonLessons">
 
                     قريبًا معك في الدروس
 
@@ -1125,7 +1176,11 @@
         onclick="goDashboard()">
 
         <span>🏠</span>
-        الرئيسية
+
+        <span
+            data-dashboard-i18n="home">
+            الرئيسية
+        </span>
 
     </button>
 
@@ -1135,7 +1190,11 @@
         onclick="openLibrary()">
 
         <span>📚</span>
-        مكتبتي
+
+        <span
+            data-dashboard-i18n="library">
+            مكتبتي
+        </span>
 
     </button>
 
@@ -1145,17 +1204,24 @@
         onclick="openForum()">
 
         <span>💬</span>
-        المنتدى
+
+        <span
+            data-dashboard-i18n="forum">
+            المنتدى
+        </span>
 
     </button>
 
 
     <button
         class="dashboard-nav-item"
-        onclick="showComingSoon('Afkrash AI')">
+        onclick="showComingSoon('afkrash')">
 
         <span>🤖</span>
-        Afkrash AI
+
+        <span>
+            Afkrash AI
+        </span>
 
     </button>
 
@@ -1165,7 +1231,11 @@
         onclick="openSettings()">
 
         <span>⚙️</span>
-        الإعدادات
+
+        <span
+            data-dashboard-i18n="settings">
+            الإعدادات
+        </span>
 
     </button>
 
@@ -1179,6 +1249,474 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
+
+    /* ==================================================
+       DASHBOARD TRANSLATIONS
+       ================================================== */
+
+    const DASHBOARD_TRANSLATIONS = {
+
+        ar: {
+
+            heroDescription:
+                "واصل رحلتك التعليمية خطوة بخطوة، وتعلّم مع Afkrash AI — مدرسك الذكي في EduNova AI.",
+
+            teacherSubtitle:
+                "مدرسك الذكي • رفيق رحلتك التعليمية",
+
+            points:
+                "النقاط",
+
+            streak:
+                "أيام متتالية",
+
+            badges:
+                "الشارات",
+
+            progress:
+                "التقدم",
+
+            continueLearning:
+                "متابعة التعلم",
+
+            lastActivity:
+                "آخر نشاط",
+
+            mathematics:
+                "الرياضيات",
+
+            chooseLevel:
+                "اختر مستواك للبدء",
+
+            startLearning:
+                "ابدأ التعلم",
+
+            yourLevel:
+                "مستواك الدراسي",
+
+            noLevel:
+                "لم يتم اختيار المستوى",
+
+            selectedLevelDescription:
+                "المستوى المحدد لحسابك",
+
+            changeLevel:
+                "تغيير المستوى",
+
+            quickAccess:
+                "الوصول السريع",
+
+            library:
+                "مكتبتي",
+
+            libraryDescription:
+                "دروسي ومحتواي",
+
+            forum:
+                "المنتدى",
+
+            forumDescription:
+                "أسئلة ونقاشات",
+
+            weeklyChallenge:
+                "التحدي الأسبوعي",
+
+            challengeDescription:
+                "تدرب واختبر نفسك",
+
+            ranking:
+                "الترتيب",
+
+            rankingDescription:
+                "أفضل الطلاب",
+
+            badgesDescription:
+                "إنجازاتك",
+
+            subscriptions:
+                "الاشتراكات",
+
+            subscriptionsDescription:
+                "الخطط التعليمية",
+
+            settings:
+                "الإعدادات",
+
+            settingsDescription:
+                "تخصيص حسابك",
+
+            myAccount:
+                "حسابي",
+
+            accountDescription:
+                "الملف الشخصي",
+
+            aiSubtitle:
+                "مدرسك الذكي في EduNova AI",
+
+            aiDescription:
+                "شخصية تعليمية ذكية سترافقك في رحلتك وتساعدك على فهم الرياضيات بطريقة واضحة ومنظمة.<br><br>Afkrash AI هو جزء أساسي من تجربة EduNova AI، وسيظهر لاحقًا في الدروس والفيديوهات التعليمية.",
+
+            comingSoonLessons:
+                "قريبًا معك في الدروس",
+
+            home:
+                "الرئيسية"
+
+        },
+
+        fr: {
+
+            heroDescription:
+                "Continue ton parcours éducatif étape par étape et apprends avec Afkrash AI — ton professeur intelligent dans EduNova AI.",
+
+            teacherSubtitle:
+                "Ton professeur intelligent • Ton compagnon d'apprentissage",
+
+            points:
+                "Points",
+
+            streak:
+                "Jours consécutifs",
+
+            badges:
+                "Badges",
+
+            progress:
+                "Progression",
+
+            continueLearning:
+                "Continuer l'apprentissage",
+
+            lastActivity:
+                "Dernière activité",
+
+            mathematics:
+                "Mathématiques",
+
+            chooseLevel:
+                "Choisis ton niveau pour commencer",
+
+            startLearning:
+                "Commencer à apprendre",
+
+            yourLevel:
+                "Ton niveau scolaire",
+
+            noLevel:
+                "Aucun niveau sélectionné",
+
+            selectedLevelDescription:
+                "Niveau sélectionné pour ton compte",
+
+            changeLevel:
+                "Changer de niveau",
+
+            quickAccess:
+                "Accès rapide",
+
+            library:
+                "Ma bibliothèque",
+
+            libraryDescription:
+                "Mes cours et contenus",
+
+            forum:
+                "Forum",
+
+            forumDescription:
+                "Questions et discussions",
+
+            weeklyChallenge:
+                "Défi hebdomadaire",
+
+            challengeDescription:
+                "Entraîne-toi et teste tes connaissances",
+
+            ranking:
+                "Classement",
+
+            rankingDescription:
+                "Meilleurs étudiants",
+
+            badgesDescription:
+                "Tes réalisations",
+
+            subscriptions:
+                "Abonnements",
+
+            subscriptionsDescription:
+                "Plans éducatifs",
+
+            settings:
+                "Paramètres",
+
+            settingsDescription:
+                "Personnaliser ton compte",
+
+            myAccount:
+                "Mon compte",
+
+            accountDescription:
+                "Profil personnel",
+
+            aiSubtitle:
+                "Ton professeur intelligent dans EduNova AI",
+
+            aiDescription:
+                "Une personnalité éducative intelligente qui t'accompagnera dans ton parcours et t'aidera à comprendre les mathématiques de manière claire et organisée.<br><br>Afkrash AI est une partie essentielle de l'expérience EduNova AI et apparaîtra prochainement dans les cours et les vidéos éducatives.",
+
+            comingSoonLessons:
+                "Bientôt dans tes cours",
+
+            home:
+                "Accueil"
+
+        }
+
+    };
+
+
+    /* ==================================================
+       GLOBAL PAGE TRANSLATION
+       ================================================== */
+
+    function getDashboardLanguage() {
+
+        if (typeof getSiteLanguage === "function") {
+
+            return getSiteLanguage();
+
+        }
+
+        return localStorage.getItem(
+            "site_language"
+        ) || "ar";
+
+    }
+
+
+    function translateDashboardPage() {
+
+        const lang =
+            getDashboardLanguage();
+
+        const translations =
+            DASHBOARD_TRANSLATIONS[lang] ||
+            DASHBOARD_TRANSLATIONS.ar;
+
+
+        document.documentElement.lang =
+            lang === "fr" ? "fr" : "ar";
+
+        document.documentElement.dir =
+            lang === "fr" ? "ltr" : "rtl";
+
+
+        document
+            .querySelectorAll("[data-dashboard-i18n]")
+            .forEach(element => {
+
+                const key =
+                    element.getAttribute(
+                        "data-dashboard-i18n"
+                    );
+
+                if (
+                    translations[key] !== undefined
+                ) {
+
+                    element.innerHTML =
+                        translations[key];
+
+                }
+
+            });
+
+
+        updateDynamicDashboardTexts();
+
+        updateDashboardAriaLabels();
+
+    }
+
+
+    function updateDynamicDashboardTexts() {
+
+        const lang =
+            getDashboardLanguage();
+
+        const translations =
+            DASHBOARD_TRANSLATIONS[lang] ||
+            DASHBOARD_TRANSLATIONS.ar;
+
+
+        const level =
+            localStorage.getItem(
+                "student_level"
+            );
+
+
+        const courseLevel =
+            document.getElementById(
+                "courseLevel"
+            );
+
+        const selectedLevel =
+            document.getElementById(
+                "selectedLevel"
+            );
+
+
+        if (level) {
+
+            if (selectedLevel) {
+
+                selectedLevel.textContent =
+                    level;
+
+            }
+
+            if (courseLevel) {
+
+                courseLevel.textContent =
+                    lang === "fr"
+                        ? "Niveau " + level
+                        : "مستوى " + level;
+
+            }
+
+        } else {
+
+            if (selectedLevel) {
+
+                selectedLevel.textContent =
+                    translations.noLevel;
+
+            }
+
+            if (courseLevel) {
+
+                courseLevel.textContent =
+                    translations.chooseLevel;
+
+            }
+
+        }
+
+
+        updateWelcomeName();
+
+    }
+
+
+    function updateWelcomeName() {
+
+        const welcome =
+            document.getElementById(
+                "welcomeName"
+            );
+
+
+        if (!welcome) {
+            return;
+        }
+
+
+        let name =
+            localStorage.getItem(
+                "dashboard_user_name"
+            );
+
+
+        if (!name) {
+
+            const current =
+                welcome.getAttribute(
+                    "data-user-name"
+                );
+
+            if (current) {
+                name = current;
+            }
+
+        }
+
+
+        if (!name) {
+
+            welcome.textContent =
+                getDashboardLanguage() === "fr"
+                    ? "Bienvenue 👋"
+                    : "مرحبًا بك 👋";
+
+            return;
+
+        }
+
+
+        welcome.textContent =
+            getDashboardLanguage() === "fr"
+                ? "Bienvenue " + name + " 👋"
+                : "مرحبًا " + name + " 👋";
+
+    }
+
+
+    function updateDashboardAriaLabels() {
+
+        const lang =
+            getDashboardLanguage();
+
+
+        const labels = {
+
+            home:
+                lang === "fr"
+                    ? "Accueil"
+                    : "الصفحة الرئيسية",
+
+            notifications:
+                lang === "fr"
+                    ? "Notifications"
+                    : "الإشعارات",
+
+            account:
+                lang === "fr"
+                    ? "Compte"
+                    : "الحساب"
+
+        };
+
+
+        document
+            .querySelectorAll(
+                "[data-dashboard-aria]"
+            )
+            .forEach(element => {
+
+                const key =
+                    element.getAttribute(
+                        "data-dashboard-aria"
+                    );
+
+                if (labels[key]) {
+
+                    element.setAttribute(
+                        "aria-label",
+                        labels[key]
+                    );
+
+                }
+
+            });
+
+    }
+
+
+    /* ==================================================
+       SUPABASE
+       ================================================== */
 
     const SUPABASE_URL =
         "https://qkzdlxqledsznhbifaxy.supabase.co";
@@ -1230,13 +1768,22 @@
 
 
         const welcome =
-            document.getElementById("welcomeName");
+            document.getElementById(
+                "welcomeName"
+            );
 
 
         if (name && welcome) {
 
-            welcome.textContent =
-                "مرحبًا " + name + " 👋";
+            welcome.setAttribute(
+                "data-user-name",
+                name
+            );
+
+            localStorage.setItem(
+                "dashboard_user_name",
+                name
+            );
 
         }
 
@@ -1244,6 +1791,8 @@
         loadSelectedLevel();
         loadProgress();
         loadPoints();
+
+        translateDashboardPage();
 
     }
 
@@ -1260,11 +1809,6 @@
             );
 
 
-        if (!level) {
-            return;
-        }
-
-
         const selected =
             document.getElementById(
                 "selectedLevel"
@@ -1274,6 +1818,15 @@
             document.getElementById(
                 "courseLevel"
             );
+
+
+        if (!level) {
+
+            updateDynamicDashboardTexts();
+
+            return;
+
+        }
 
 
         if (selected) {
@@ -1287,7 +1840,9 @@
         if (courseLevel) {
 
             courseLevel.textContent =
-                "مستوى " + level;
+                getDashboardLanguage() === "fr"
+                    ? "Niveau " + level
+                    : "مستوى " + level;
 
         }
 
@@ -1500,8 +2055,18 @@
 
     function showNotifications() {
 
+        const lang =
+            getDashboardLanguage();
+
+
         alert(
-            "لا توجد إشعارات جديدة حاليًا 🔔"
+
+            lang === "fr"
+
+                ? "Aucune nouvelle notification pour le moment 🔔"
+
+                : "لا توجد إشعارات جديدة حاليًا 🔔"
+
         );
 
     }
@@ -1511,23 +2076,124 @@
        TEMPORARY FEATURES
        ================================================== */
 
-    function showComingSoon(name) {
+    function showComingSoon(feature) {
+
+        const lang =
+            getDashboardLanguage();
+
+
+        const names = {
+
+            ar: {
+
+                ranking:
+                    "الترتيب",
+
+                badges:
+                    "الشارات",
+
+                subscriptions:
+                    "الاشتراكات",
+
+                afkrash:
+                    "Afkrash AI"
+
+            },
+
+            fr: {
+
+                ranking:
+                    "Classement",
+
+                badges:
+                    "Badges",
+
+                subscriptions:
+                    "Abonnements",
+
+                afkrash:
+                    "Afkrash AI"
+
+            }
+
+        };
+
+
+        const featureName =
+            names[lang]?.[feature] ||
+            feature;
+
 
         alert(
-            name +
-            " ستتوفر في مرحلة لاحقة من تطوير EduNova AI."
+
+            lang === "fr"
+
+                ? featureName +
+                  " sera disponible dans une prochaine étape du développement de EduNova AI."
+
+                : featureName +
+                  " ستتوفر في مرحلة لاحقة من تطوير EduNova AI."
+
         );
 
     }
 
 
     /* ==================================================
+       LANGUAGE EVENTS
+       ================================================== */
+
+    window.addEventListener(
+        "languageChanged",
+        translateDashboardPage
+    );
+
+    window.addEventListener(
+        "languagechange",
+        translateDashboardPage
+    );
+
+
+    window.addEventListener(
+        "storage",
+        function(event) {
+
+            if (
+                event.key === "site_language"
+            ) {
+
+                translateDashboardPage();
+
+            }
+
+            if (
+                event.key === "student_level"
+            ) {
+
+                loadSelectedLevel();
+
+            }
+
+        }
+    );
+
+
+    /* ==================================================
        START
        ================================================== */
 
-    checkAuth();
+    document.addEventListener(
+        "DOMContentLoaded",
+        function() {
+
+            translateDashboardPage();
+
+            checkAuth();
+
+        }
+    );
 
 </script>
 
 </body>
-                        </html>
+    </html>
