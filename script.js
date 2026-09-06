@@ -1,7 +1,7 @@
 /* =========================================================
    عالم شيخ الأساتذة
-   Global JavaScript
-   الإصدار الأساسي
+   GLOBAL JAVASCRIPT ENGINE
+   Navigation + Storage + Theme + Language
    ========================================================= */
 
 "use strict";
@@ -11,20 +11,11 @@
    1. NAVIGATION
    ========================================================= */
 
-/**
- * الانتقال إلى صفحة أخرى
- */
 function goTo(page) {
     if (!page) return;
-
     window.location.href = page;
 }
 
-
-/**
- * العودة للصفحة السابقة
- * وإذا لم توجد صفحة سابقة نعود للرئيسية
- */
 function goBack(fallback = "index.html") {
 
     if (window.history.length > 1) {
@@ -39,9 +30,6 @@ function goBack(fallback = "index.html") {
    2. LOCAL STORAGE
    ========================================================= */
 
-/**
- * حفظ قيمة
- */
 function saveData(key, value) {
 
     try {
@@ -65,9 +53,6 @@ function saveData(key, value) {
 }
 
 
-/**
- * قراءة قيمة
- */
 function getData(key, fallback = null) {
 
     try {
@@ -93,9 +78,6 @@ function getData(key, fallback = null) {
 }
 
 
-/**
- * حذف قيمة
- */
 function removeData(key) {
 
     try {
@@ -120,9 +102,6 @@ function removeData(key) {
    3. STUDENT LEVEL
    ========================================================= */
 
-/**
- * الحصول على مستوى الطالب
- */
 function getStudentLevel() {
 
     return localStorage.getItem(
@@ -131,9 +110,6 @@ function getStudentLevel() {
 }
 
 
-/**
- * حفظ مستوى الطالب
- */
 function setStudentLevel(level) {
 
     if (!level) return false;
@@ -148,15 +124,13 @@ function setStudentLevel(level) {
 
 
 /* =========================================================
-   4. LESSON PROGRESS
+   4. OLD LESSON SUPPORT
+   محفوظ للتوافق مع الصفحات القديمة
    ========================================================= */
 
 const TOTAL_LESSONS = 20;
 
 
-/**
- * هل الدرس مكتمل؟
- */
 function isLessonCompleted(number) {
 
     return localStorage.getItem(
@@ -165,9 +139,6 @@ function isLessonCompleted(number) {
 }
 
 
-/**
- * إكمال درس
- */
 function completeLesson(number) {
 
     if (!number) return false;
@@ -181,9 +152,6 @@ function completeLesson(number) {
 }
 
 
-/**
- * عدد الدروس المكتملة
- */
 function getCompletedLessons(
     total = TOTAL_LESSONS
 ) {
@@ -207,9 +175,6 @@ function getCompletedLessons(
 }
 
 
-/**
- * نسبة تقدم الطالب
- */
 function getLearningProgress(
     total = TOTAL_LESSONS
 ) {
@@ -229,9 +194,6 @@ function getLearningProgress(
    5. STUDENT POINTS
    ========================================================= */
 
-/**
- * الحصول على النقاط
- */
 function getStudentPoints() {
 
     return Number(
@@ -242,9 +204,6 @@ function getStudentPoints() {
 }
 
 
-/**
- * تحديد النقاط
- */
 function setStudentPoints(points) {
 
     const safePoints =
@@ -262,9 +221,6 @@ function setStudentPoints(points) {
 }
 
 
-/**
- * إضافة نقاط
- */
 function addStudentPoints(points) {
 
     const current =
@@ -278,79 +234,533 @@ function addStudentPoints(points) {
 
 
 /* =========================================================
-   6. DOM HELPERS
+   6. GLOBAL THEME
    ========================================================= */
 
-/**
- * تغيير نص عنصر
- */
+const GLOBAL_THEME_KEY =
+    "site_theme";
+
+
+function getSiteTheme() {
+
+    return (
+        localStorage.getItem(
+            GLOBAL_THEME_KEY
+        ) || "light"
+    );
+}
+
+
+function applySiteTheme(theme) {
+
+    const safeTheme =
+        theme === "dark"
+            ? "dark"
+            : "light";
+
+
+    const root =
+        document.documentElement;
+
+
+    root.classList.toggle(
+        "dark-mode",
+        safeTheme === "dark"
+    );
+
+
+    root.setAttribute(
+        "data-theme",
+        safeTheme
+    );
+
+
+    localStorage.setItem(
+        GLOBAL_THEME_KEY,
+        safeTheme
+    );
+
+
+    updateThemeControls(
+        safeTheme
+    );
+}
+
+
+function toggleDarkMode() {
+
+    const current =
+        getSiteTheme();
+
+    const next =
+        current === "dark"
+            ? "light"
+            : "dark";
+
+    applySiteTheme(next);
+
+    return next;
+}
+
+
+function updateThemeControls(theme) {
+
+    const checkbox =
+        document.getElementById(
+            "darkMode"
+        );
+
+    if (checkbox) {
+
+        checkbox.checked =
+            theme === "dark";
+
+    }
+
+
+    document
+        .querySelectorAll(
+            "[data-theme-toggle]"
+        )
+        .forEach(button => {
+
+            button.setAttribute(
+                "aria-pressed",
+                theme === "dark"
+                    ? "true"
+                    : "false"
+            );
+
+        });
+}
+
+
+/* =========================================================
+   7. GLOBAL LANGUAGE
+   ========================================================= */
+
+const GLOBAL_LANGUAGE_KEY =
+    "site_language";
+
+
+function getSiteLanguage() {
+
+    return (
+        localStorage.getItem(
+            GLOBAL_LANGUAGE_KEY
+        ) || "ar"
+    );
+}
+
+
+function applySiteLanguage(language) {
+
+    const safeLanguage =
+        language === "fr"
+            ? "fr"
+            : "ar";
+
+
+    const root =
+        document.documentElement;
+
+
+    root.lang =
+        safeLanguage;
+
+
+    root.dir =
+        safeLanguage === "fr"
+            ? "ltr"
+            : "rtl";
+
+
+    localStorage.setItem(
+        GLOBAL_LANGUAGE_KEY,
+        safeLanguage
+    );
+
+
+    document.body.classList.toggle(
+        "language-fr",
+        safeLanguage === "fr"
+    );
+
+
+    document.body.classList.toggle(
+        "language-ar",
+        safeLanguage === "ar"
+    );
+
+
+    translatePage(
+        safeLanguage
+    );
+
+
+    const selector =
+        document.getElementById(
+            "language"
+        );
+
+    if (selector) {
+        selector.value =
+            safeLanguage;
+    }
+}
+
+
+/* =========================================================
+   8. TRANSLATION ENGINE
+   ========================================================= */
+
+/*
+   الصفحات الجديدة ستستخدم:
+
+   data-i18n="home"
+
+   أو:
+
+   data-i18n-placeholder="email"
+
+   وسيتم ترجمتها تلقائيًا.
+*/
+
+
+const translations = {
+
+    ar: {
+
+        home:
+            "الرئيسية",
+
+        dashboard:
+            "لوحة التحكم",
+
+        library:
+            "المكتبة",
+
+        account:
+            "حسابي",
+
+        settings:
+            "الإعدادات",
+
+        mathematics:
+            "الرياضيات",
+
+        chapter:
+            "Chapitre",
+
+        videos:
+            "الفيديوهات",
+
+        free:
+            "مجاني",
+
+        subscribe:
+            "اشترك الآن",
+
+        logout:
+            "تسجيل الخروج",
+
+        language:
+            "اللغة",
+
+        darkMode:
+            "الوضع الداكن",
+
+        lightMode:
+            "الوضع النهاري",
+
+        watch:
+            "مشاهدة",
+
+        back:
+            "رجوع",
+
+        teacher:
+            "شيخ الأساتذة — الأستاذ AI"
+
+    },
+
+
+    fr: {
+
+        home:
+            "Accueil",
+
+        dashboard:
+            "Tableau de bord",
+
+        library:
+            "Bibliothèque",
+
+        account:
+            "Mon compte",
+
+        settings:
+            "Paramètres",
+
+        mathematics:
+            "Mathématiques",
+
+        chapter:
+            "Chapitre",
+
+        videos:
+            "Vidéos",
+
+        free:
+            "Gratuit",
+
+        subscribe:
+            "S'abonner",
+
+        logout:
+            "Se déconnecter",
+
+        language:
+            "Langue",
+
+        darkMode:
+            "Mode sombre",
+
+        lightMode:
+            "Mode clair",
+
+        watch:
+            "Regarder",
+
+        back:
+            "Retour",
+
+        teacher:
+            "Cheikh des professeurs — Professeur AI"
+
+    }
+
+};
+
+
+function translatePage(language) {
+
+    const dictionary =
+        translations[
+            language
+        ] || translations.ar;
+
+
+    document
+        .querySelectorAll(
+            "[data-i18n]"
+        )
+        .forEach(element => {
+
+            const key =
+                element.getAttribute(
+                    "data-i18n"
+                );
+
+            if (
+                dictionary[key] !== undefined
+            ) {
+
+                element.textContent =
+                    dictionary[key];
+
+            }
+
+        });
+
+
+    document
+        .querySelectorAll(
+            "[data-i18n-placeholder]"
+        )
+        .forEach(element => {
+
+            const key =
+                element.getAttribute(
+                    "data-i18n-placeholder"
+                );
+
+            if (
+                dictionary[key] !== undefined
+            ) {
+
+                element.placeholder =
+                    dictionary[key];
+
+            }
+
+        });
+
+
+    document
+        .querySelectorAll(
+            "[data-i18n-title]"
+        )
+        .forEach(element => {
+
+            const key =
+                element.getAttribute(
+                    "data-i18n-title"
+                );
+
+            if (
+                dictionary[key] !== undefined
+            ) {
+
+                element.title =
+                    dictionary[key];
+
+            }
+
+        });
+}
+
+
+/* =========================================================
+   9. SETTINGS CONTROLS
+   ========================================================= */
+
+function initializeGlobalSettings() {
+
+    const theme =
+        getSiteTheme();
+
+    const language =
+        getSiteLanguage();
+
+
+    applySiteTheme(theme);
+
+    applySiteLanguage(language);
+
+
+    const darkMode =
+        document.getElementById(
+            "darkMode"
+        );
+
+
+    if (darkMode) {
+
+        darkMode.checked =
+            theme === "dark";
+
+
+        darkMode.addEventListener(
+            "change",
+            function () {
+
+                applySiteTheme(
+                    this.checked
+                        ? "dark"
+                        : "light"
+                );
+
+            }
+        );
+
+    }
+
+
+    const languageSelect =
+        document.getElementById(
+            "language"
+        );
+
+
+    if (languageSelect) {
+
+        languageSelect.value =
+            language;
+
+
+        languageSelect.addEventListener(
+            "change",
+            function () {
+
+                applySiteLanguage(
+                    this.value
+                );
+
+            }
+        );
+
+    }
+}
+
+
+/* =========================================================
+   10. DOM HELPERS
+   ========================================================= */
+
 function setText(selector, text) {
 
     const element =
         document.querySelector(selector);
 
     if (element) {
+
         element.textContent =
             text ?? "";
+
     }
 }
 
 
-/**
- * إظهار عنصر
- */
 function show(selector) {
 
     const element =
         document.querySelector(selector);
 
     if (element) {
+
         element.classList.remove(
             "hidden"
         );
+
     }
 }
 
 
-/**
- * إخفاء عنصر
- */
 function hide(selector) {
 
     const element =
         document.querySelector(selector);
 
     if (element) {
+
         element.classList.add(
             "hidden"
         );
+
     }
 }
 
 
-/**
- * تبديل حالة العنصر
- */
 function toggle(selector) {
 
     const element =
         document.querySelector(selector);
 
     if (element) {
+
         element.classList.toggle(
             "hidden"
         );
+
     }
 }
 
 
 /* =========================================================
-   7. BUTTON STATE
+   11. BUTTON STATE
    ========================================================= */
 
-/**
- * تعطيل زر وإظهار حالة التحميل
- */
 function setButtonLoading(
     button,
     loadingText = "جارٍ التحميل..."
@@ -358,13 +768,16 @@ function setButtonLoading(
 
     if (!button) return;
 
+
     if (
         !button.dataset.originalText
     ) {
 
         button.dataset.originalText =
             button.innerHTML;
+
     }
+
 
     button.innerHTML =
         loadingText;
@@ -381,12 +794,10 @@ function setButtonLoading(
 }
 
 
-/**
- * إعادة الزر لحالته الطبيعية
- */
 function resetButton(button) {
 
     if (!button) return;
+
 
     if (
         button.dataset.originalText
@@ -394,7 +805,9 @@ function resetButton(button) {
 
         button.innerHTML =
             button.dataset.originalText;
+
     }
+
 
     button.disabled = false;
 
@@ -407,20 +820,19 @@ function resetButton(button) {
 
 
 /* =========================================================
-   8. NOTIFICATIONS
+   12. NOTIFICATIONS
    ========================================================= */
 
-/**
- * إشعار صغير أعلى الشاشة
- */
 function notify(message) {
 
     if (!message) return;
+
 
     const oldNotice =
         document.querySelector(
             ".global-notice"
         );
+
 
     if (oldNotice) {
         oldNotice.remove();
@@ -432,13 +844,16 @@ function notify(message) {
             "div"
         );
 
+
     notice.className =
         "global-notice";
+
 
     notice.setAttribute(
         "role",
         "status"
     );
+
 
     notice.textContent =
         message;
@@ -491,6 +906,7 @@ function notify(message) {
 
             transition:
                 "opacity .2s ease"
+
         }
     );
 
@@ -505,6 +921,7 @@ function notify(message) {
         notice.style.opacity =
             "0";
 
+
         setTimeout(() => {
 
             notice.remove();
@@ -516,12 +933,9 @@ function notify(message) {
 
 
 /* =========================================================
-   9. CONFIRMATION
+   13. CONFIRMATION
    ========================================================= */
 
-/**
- * تأكيد إجراء
- */
 function confirmAction(
     message,
     callback
@@ -535,17 +949,19 @@ function confirmAction(
         return;
     }
 
+
     if (
         window.confirm(message)
     ) {
 
         callback();
+
     }
 }
 
 
 /* =========================================================
-   10. CURRENT YEAR
+   14. CURRENT YEAR
    ========================================================= */
 
 function setCurrentYear() {
@@ -553,6 +969,7 @@ function setCurrentYear() {
     const year =
         new Date()
             .getFullYear();
+
 
     document
         .querySelectorAll(
@@ -562,12 +979,13 @@ function setCurrentYear() {
 
             element.textContent =
                 year;
+
         });
 }
 
 
 /* =========================================================
-   11. ACTIVE NAVIGATION
+   15. ACTIVE NAVIGATION
    ========================================================= */
 
 function setActiveNav() {
@@ -590,6 +1008,7 @@ function setActiveNav() {
                     "href"
                 );
 
+
             if (
                 target ===
                 currentPage
@@ -604,13 +1023,15 @@ function setActiveNav() {
                 link.classList.remove(
                     "active"
                 );
+
             }
+
         });
 }
 
 
 /* =========================================================
-   12. SMOOTH SCROLL
+   16. SMOOTH SCROLL
    ========================================================= */
 
 function scrollToElement(
@@ -622,7 +1043,9 @@ function scrollToElement(
             selector
         );
 
+
     if (!element) return;
+
 
     element.scrollIntoView({
         behavior: "smooth",
@@ -632,38 +1055,43 @@ function scrollToElement(
 
 
 /* =========================================================
-   13. SAFE HTML
+   17. SAFE HTML
    ========================================================= */
 
-/**
- * حماية النصوص التي سيتم وضعها داخل HTML
- */
 function escapeHTML(value) {
 
     if (
         value === null ||
         value === undefined
     ) {
+
         return "";
+
     }
 
+
     return String(value)
+
         .replace(
             /&/g,
             "&amp;"
         )
+
         .replace(
             /</g,
             "&lt;"
         )
+
         .replace(
             />/g,
             "&gt;"
         )
+
         .replace(
             /"/g,
             "&quot;"
         )
+
         .replace(
             /'/g,
             "&#039;"
@@ -672,12 +1100,9 @@ function escapeHTML(value) {
 
 
 /* =========================================================
-   14. PAGE UTILITIES
+   18. PAGE UTILITIES
    ========================================================= */
 
-/**
- * إضافة class لعنصر
- */
 function addClass(
     selector,
     className
@@ -688,6 +1113,7 @@ function addClass(
             selector
         );
 
+
     if (
         element &&
         className
@@ -696,13 +1122,11 @@ function addClass(
         element.classList.add(
             className
         );
+
     }
 }
 
 
-/**
- * إزالة class
- */
 function removeClass(
     selector,
     className
@@ -713,6 +1137,7 @@ function removeClass(
             selector
         );
 
+
     if (
         element &&
         className
@@ -721,13 +1146,11 @@ function removeClass(
         element.classList.remove(
             className
         );
+
     }
 }
 
 
-/**
- * معرفة هل العنصر موجود
- */
 function exists(selector) {
 
     return Boolean(
@@ -739,7 +1162,7 @@ function exists(selector) {
 
 
 /* =========================================================
-   15. DEVICE
+   19. DEVICE
    ========================================================= */
 
 function isMobile() {
@@ -751,16 +1174,99 @@ function isMobile() {
 
 
 /* =========================================================
-   16. GLOBAL INITIALIZATION
+   20. GLOBAL INITIALIZATION
    ========================================================= */
+
+function initializeGlobalEngine() {
+
+    /*
+       نطبق المظهر واللغة أولًا
+       حتى تكون الصفحة متناسقة.
+    */
+
+    initializeGlobalSettings();
+
+    setCurrentYear();
+
+    setActiveNav();
+}
+
+
+/*
+   التطبيق المبكر للوضع الليلي
+   قبل اكتمال تحميل الصفحة.
+*/
+
+(function earlyTheme() {
+
+    try {
+
+        const theme =
+            localStorage.getItem(
+                GLOBAL_THEME_KEY
+            ) || "light";
+
+
+        if (
+            theme === "dark"
+        ) {
+
+            document.documentElement
+                .classList.add(
+                    "dark-mode"
+                );
+
+        }
+
+    } catch (error) {
+
+        console.warn(
+            "تعذر تطبيق الوضع الليلي مبكرًا."
+        );
+
+    }
+
+})();
+
 
 document.addEventListener(
     "DOMContentLoaded",
-    () => {
+    initializeGlobalEngine
+);
 
-        setCurrentYear();
 
-        setActiveNav();
+/* =========================================================
+   21. LISTEN FOR SETTINGS CHANGES
+   ========================================================= */
+
+window.addEventListener(
+    "storage",
+    function(event) {
+
+        if (
+            event.key ===
+            GLOBAL_THEME_KEY
+        ) {
+
+            applySiteTheme(
+                event.newValue ||
+                "light"
+            );
+
+        }
+
+
+        if (
+            event.key ===
+            GLOBAL_LANGUAGE_KEY
+        ) {
+
+            applySiteLanguage(
+                event.newValue ||
+                "ar"
+            );
+
+        }
 
     }
 );
