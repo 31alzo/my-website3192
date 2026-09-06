@@ -1,824 +1,881 @@
-<!DOCTYPE html><html lang="ar" dir="rtl"><head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>حسابي | عالم شيخ الأساتذة</title>  <link rel="stylesheet" href="style.css">  <style>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 
-    .account-hero {
-      background: linear-gradient(135deg, #2563eb, #1d4ed8);
-      color: white;
-      border-radius: 24px;
-      padding: 25px 20px;
-      margin-bottom: 18px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 12px 30px rgba(37, 99, 235, .18);
-    }
+<head>
 
-    .account-hero::after {
-      content: "";
-      position: absolute;
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.08);
-      left: -70px;
-      top: -70px;
-    }
+    <meta charset="UTF-8">
 
-    .account-hero-content {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-    .avatar {
-      width: 68px;
-      height: 68px;
-      border-radius: 21px;
-      background: rgba(255,255,255,.18);
-      border: 2px solid rgba(255,255,255,.35);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 27px;
-      font-weight: 900;
-      flex-shrink: 0;
-    }
+    <title>حسابي | EduNova AI</title>
 
-    .account-name {
-      margin: 0;
-      font-size: 22px;
-    }
+    <link rel="stylesheet" href="style.css">
 
-    .account-email {
-      margin: 5px 0 0;
-      opacity: .85;
-      font-size: 12px;
-      direction: ltr;
-      text-align: right;
-    }
+    <style>
 
-    .level-pill {
-      display: inline-block;
-      margin-top: 8px;
-      padding: 5px 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.15);
-      font-size: 11px;
-      font-weight: 700;
-    }
+        .account-hero {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            border-radius: 24px;
+            padding: 25px 20px;
+            margin-bottom: 18px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 12px 30px rgba(37, 99, 235, .18);
+        }
 
-    .section-heading {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin: 24px 2px 12px;
-    }
+        .account-hero::after {
+            content: "";
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: rgba(255,255,255,.08);
+            left: -70px;
+            top: -70px;
+        }
 
-    .section-heading h2 {
-      margin: 0;
-      font-size: 19px;
-    }
+        .account-hero-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
 
-    .section-heading span {
-      color: var(--text-soft);
-      font-size: 12px;
-    }
+        .avatar {
+            width: 68px;
+            height: 68px;
+            border-radius: 21px;
+            background: rgba(255,255,255,.18);
+            border: 2px solid rgba(255,255,255,.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 27px;
+            font-weight: 900;
+            flex-shrink: 0;
+        }
 
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 11px;
-    }
+        .account-name {
+            margin: 0;
+            font-size: 22px;
+        }
 
-    .stat-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 16px;
-      text-align: center;
-      box-shadow: var(--shadow-sm);
-    }
+        .account-email {
+            margin: 5px 0 0;
+            opacity: .85;
+            font-size: 12px;
+            direction: ltr;
+            text-align: right;
+        }
 
-    .stat-icon {
-      font-size: 23px;
-      margin-bottom: 5px;
-    }
+        .level-pill {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 5px 10px;
+            border-radius: 999px;
+            background: rgba(255,255,255,.15);
+            font-size: 11px;
+            font-weight: 700;
+        }
 
-    .stat-number {
-      display: block;
-      color: var(--primary);
-      font-size: 21px;
-      font-weight: 900;
-    }
+        .section-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 24px 2px 12px;
+        }
 
-    .stat-label {
-      color: var(--text-soft);
-      font-size: 11px;
-    }
+        .section-heading h2 {
+            margin: 0;
+            font-size: 19px;
+        }
 
-    .account-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 19px;
-      overflow: hidden;
-      box-shadow: var(--shadow-sm);
-    }
+        .section-heading span {
+            color: var(--text-soft);
+            font-size: 12px;
+        }
 
-    .account-row {
-      min-height: 61px;
-      padding: 13px 15px;
-      border-bottom: 1px solid #eef2f7;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 11px;
+        }
 
-    .account-row:last-child {
-      border-bottom: none;
-    }
+        .stat-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 16px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+        }
 
-    .row-icon {
-      width: 38px;
-      height: 38px;
-      border-radius: 12px;
-      background: var(--primary-light);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
+        .stat-icon {
+            font-size: 23px;
+            margin-bottom: 5px;
+        }
 
-    .row-text {
-      flex: 1;
-      min-width: 0;
-    }
+        .stat-number {
+            display: block;
+            color: var(--primary);
+            font-size: 21px;
+            font-weight: 900;
+        }
 
-    .row-label {
-      color: var(--text-soft);
-      font-size: 11px;
-      margin-bottom: 3px;
-    }
+        .stat-label {
+            color: var(--text-soft);
+            font-size: 11px;
+        }
 
-    .row-value {
-      font-size: 14px;
-      font-weight: 800;
-      color: var(--text);
-      overflow-wrap: anywhere;
-    }
+        .account-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 19px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
 
-    .account-actions {
-      display: grid;
-      gap: 10px;
-    }
+        .account-row {
+            min-height: 61px;
+            padding: 13px 15px;
+            border-bottom: 1px solid #eef2f7;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
 
-    .account-action {
-      width: 100%;
-      min-height: 54px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      border-radius: 15px;
-      padding: 12px 14px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-family: inherit;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text);
-      cursor: pointer;
-      text-align: right;
-      transition: .2s;
-    }
+        .account-row:last-child {
+            border-bottom: none;
+        }
 
-    .account-action:hover {
-      border-color: var(--primary);
-      color: var(--primary);
-      transform: translateY(-1px);
-    }
+        .row-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
 
-    .action-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 11px;
-      background: #f8fafc;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      font-size: 17px;
-    }
+        .row-text {
+            flex: 1;
+            min-width: 0;
+        }
 
-    .action-arrow {
-      margin-right: auto;
-      color: var(--text-light);
-      font-size: 18px;
-    }
+        .row-label {
+            color: var(--text-soft);
+            font-size: 11px;
+            margin-bottom: 3px;
+        }
 
-    .logout-action {
-      color: var(--danger);
-      background: #fff7f7;
-      border-color: #fecaca;
-    }
+        .row-value {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--text);
+            overflow-wrap: anywhere;
+        }
 
-    .logout-action .action-icon {
-      background: #fee2e2;
-    }
+        .account-actions {
+            display: grid;
+            gap: 10px;
+        }
 
-    .logout-action:hover {
-      color: var(--danger);
-      border-color: var(--danger);
-    }
+        .account-action {
+            width: 100%;
+            min-height: 54px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            border-radius: 15px;
+            padding: 12px 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text);
+            cursor: pointer;
+            text-align: right;
+            transition: .2s;
+        }
 
-    .danger-action {
-      color: var(--danger);
-    }
+        .account-action:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-1px);
+        }
 
-    .loading-account {
-      text-align: center;
-      padding: 70px 20px;
-      color: var(--text-soft);
-    }
+        .action-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 11px;
+            background: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 17px;
+        }
 
-    .loading-icon {
-      font-size: 34px;
-      margin-bottom: 10px;
-    }
+        .action-arrow {
+            margin-right: auto;
+            color: var(--text-light);
+            font-size: 18px;
+        }
 
-    .account-message {
-      position: fixed;
-      bottom: 84px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 9999;
-      background: #172033;
-      color: white;
-      padding: 12px 18px;
-      border-radius: 12px;
-      font-size: 13px;
-      max-width: 90%;
-      text-align: center;
-      box-shadow: 0 8px 25px rgba(0,0,0,.18);
-      transition: .25s;
-    }
+        .logout-action {
+            color: var(--danger);
+            background: #fff7f7;
+            border-color: #fecaca;
+        }
 
-    .bottom-space {
-      height: 15px;
-    }
+        .logout-action .action-icon {
+            background: #fee2e2;
+        }
 
-    @media (min-width: 650px) {
+        .logout-action:hover {
+            color: var(--danger);
+            border-color: var(--danger);
+        }
 
-      .stats-grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
+        .danger-action {
+            color: var(--danger);
+        }
 
-      .account-actions {
-        grid-template-columns: repeat(2, 1fr);
-      }
+        .loading-account {
+            text-align: center;
+            padding: 70px 20px;
+            color: var(--text-soft);
+        }
 
-    }
+        .loading-icon {
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
 
-    @media (max-width: 600px) {
+        .account-message {
+            position: fixed;
+            bottom: 84px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+            background: #172033;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 12px;
+            font-size: 13px;
+            max-width: 90%;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,.18);
+            transition: .25s;
+        }
 
-      .account-hero {
-        border-radius: 20px;
-        padding: 21px 16px;
-      }
+        .bottom-space {
+            height: 15px;
+        }
 
-      .account-hero-content {
-        gap: 12px;
-      }
+        @media (min-width: 650px) {
 
-      .avatar {
-        width: 59px;
-        height: 59px;
-        border-radius: 18px;
-        font-size: 23px;
-      }
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
 
-      .account-name {
-        font-size: 19px;
-      }
+            .account-actions {
+                grid-template-columns: repeat(2, 1fr);
+            }
 
-    }
+        }
 
-  </style></head><body>  <!-- Header -->  <header class="site-header"><div class="container header-inner">
+        @media (max-width: 600px) {
 
-  <a href="dashboard.html" class="brand">
+            .account-hero {
+                border-radius: 20px;
+                padding: 21px 16px;
+            }
 
-    <span class="brand-icon">
-      🎓
-    </span>
+            .account-hero-content {
+                gap: 12px;
+            }
 
-    <span>
-      عالم شيخ الأساتذة
-    </span>
+            .avatar {
+                width: 59px;
+                height: 59px;
+                border-radius: 18px;
+                font-size: 23px;
+            }
 
-  </a>
+            .account-name {
+                font-size: 19px;
+            }
 
+        }
 
-  <button
-    class="btn btn-secondary btn-sm"
-    onclick="goDashboard()">
+    </style>
 
-    الرئيسية
-
-  </button>
-
-</div>
-
-  </header>  <main class="page"><div class="container">
+</head>
 
 
-  <!-- Loading -->
+<body>
 
-  <div
-    id="loading"
-    class="loading-account">
 
-    <div class="loading-icon">
-      ⏳
+<!-- Header -->
+
+<header class="site-header">
+
+    <div class="container header-inner">
+
+        <a
+            href="dashboard.html"
+            class="brand">
+
+            <span class="brand-icon">
+                AI
+            </span>
+
+            <span>
+                EduNova AI
+            </span>
+
+        </a>
+
+
+        <button
+            class="btn btn-secondary btn-sm"
+            onclick="goDashboard()">
+
+            الرئيسية
+
+        </button>
+
     </div>
 
-    جاري تحميل حسابك...
-
-  </div>
+</header>
 
 
-  <!-- Account -->
+<main class="page">
 
-  <div
-    id="accountContent"
-    style="display:none;">
+    <div class="container">
 
 
-    <!-- Hero -->
-
-    <section class="account-hero">
-
-      <div class="account-hero-content">
+        <!-- Loading -->
 
         <div
-          id="avatar"
-          class="avatar">
+            id="loading"
+            class="loading-account">
 
-          ط
+            <div class="loading-icon">
+                ⏳
+            </div>
 
-        </div>
-
-
-        <div>
-
-          <h1
-            id="studentName"
-            class="account-name">
-
-            الطالب
-
-          </h1>
-
-
-          <p
-            id="studentEmail"
-            class="account-email">
-
-            -
-
-          </p>
-
-
-          <span
-            id="studentLevel"
-            class="level-pill">
-
-            لم يتم اختيار المستوى
-
-          </span>
+            جاري تحميل حسابك...
 
         </div>
 
-      </div>
 
-    </section>
+        <!-- Account -->
+
+        <div
+            id="accountContent"
+            style="display:none;">
 
 
-    <!-- Stats -->
+            <!-- Hero -->
 
-    <div class="section-heading">
+            <section class="account-hero">
 
-      <h2>
-        إنجازاتي
-      </h2>
+                <div class="account-hero-content">
 
-      <span>
-        تقدمك الدراسي
-      </span>
+                    <div
+                        id="avatar"
+                        class="avatar">
+
+                        ط
+
+                    </div>
+
+
+                    <div>
+
+                        <h1
+                            id="studentName"
+                            class="account-name">
+
+                            الطالب
+
+                        </h1>
+
+
+                        <p
+                            id="studentEmail"
+                            class="account-email">
+
+                            -
+
+                        </p>
+
+
+                        <span
+                            id="studentLevel"
+                            class="level-pill">
+
+                            لم يتم اختيار المستوى
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- Stats -->
+
+            <div class="section-heading">
+
+                <h2>
+                    إنجازاتي
+                </h2>
+
+                <span>
+                    تقدمك الدراسي
+                </span>
+
+            </div>
+
+
+            <section class="stats-grid">
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        ⭐
+                    </div>
+
+                    <span
+                        id="points"
+                        class="stat-number">
+
+                        0
+
+                    </span>
+
+                    <span class="stat-label">
+                        النقاط
+                    </span>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        📚
+                    </div>
+
+                    <span
+                        id="lessons"
+                        class="stat-number">
+
+                        0
+
+                    </span>
+
+                    <span class="stat-label">
+                        الدروس المكتملة
+                    </span>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        🏆
+                    </div>
+
+                    <span
+                        id="badges"
+                        class="stat-number">
+
+                        0
+
+                    </span>
+
+                    <span class="stat-label">
+                        الشارات
+                    </span>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        🔥
+                    </div>
+
+                    <span
+                        id="streak"
+                        class="stat-number">
+
+                        0
+
+                    </span>
+
+                    <span class="stat-label">
+                        أيام متتالية
+                    </span>
+
+                </div>
+
+
+            </section>
+
+
+            <!-- Account information -->
+
+            <div class="section-heading">
+
+                <h2>
+                    معلومات الحساب
+                </h2>
+
+            </div>
+
+
+            <section class="account-card">
+
+
+                <div class="account-row">
+
+                    <div class="row-icon">
+                        👤
+                    </div>
+
+                    <div class="row-text">
+
+                        <div class="row-label">
+                            الاسم
+                        </div>
+
+                        <div
+                            id="infoName"
+                            class="row-value">
+
+                            -
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="account-row">
+
+                    <div class="row-icon">
+                        ✉️
+                    </div>
+
+                    <div class="row-text">
+
+                        <div class="row-label">
+                            البريد الإلكتروني
+                        </div>
+
+                        <div
+                            id="infoEmail"
+                            class="row-value"
+                            dir="ltr">
+
+                            -
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="account-row">
+
+                    <div class="row-icon">
+                        🎓
+                    </div>
+
+                    <div class="row-text">
+
+                        <div class="row-label">
+                            المستوى الدراسي
+                        </div>
+
+                        <div
+                            id="infoLevel"
+                            class="row-value">
+
+                            -
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+            <!-- Actions -->
+
+            <div class="section-heading">
+
+                <h2>
+                    إدارة الحساب
+                </h2>
+
+            </div>
+
+
+            <section class="account-actions">
+
+
+                <button
+                    class="account-action"
+                    onclick="changeLevel()">
+
+                    <span class="action-icon">
+                        🎓
+                    </span>
+
+                    <span>
+                        تغيير المستوى الدراسي
+                    </span>
+
+                    <span class="action-arrow">
+                        ‹
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="account-action"
+                    onclick="openSettings()">
+
+                    <span class="action-icon">
+                        ⚙️
+                    </span>
+
+                    <span>
+                        الإعدادات
+                    </span>
+
+                    <span class="action-arrow">
+                        ‹
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="account-action"
+                    onclick="showMessage('تعديل البيانات سيكون متاحًا قريبًا.')">
+
+                    <span class="action-icon">
+                        ✏️
+                    </span>
+
+                    <span>
+                        تعديل البيانات
+                    </span>
+
+                    <span class="action-arrow">
+                        ‹
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="account-action"
+                    onclick="showMessage('إدارة كلمة المرور ستكون متاحة عند اكتمال نظام الحسابات.')">
+
+                    <span class="action-icon">
+                        🔐
+                    </span>
+
+                    <span>
+                        كلمة المرور
+                    </span>
+
+                    <span class="action-arrow">
+                        ‹
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="account-action"
+                    onclick="showMessage('إدارة الاشتراكات والمدفوعات ستتم إضافتها لاحقًا.')">
+
+                    <span class="action-icon">
+                        💳
+                    </span>
+
+                    <span>
+                        الاشتراكات والمدفوعات
+                    </span>
+
+                    <span class="action-arrow">
+                        ‹
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="account-action danger-action"
+                    onclick="showMessage('حذف الحساب سيتم تفعيله بعد اكتمال النظام النهائي.')">
+
+                    <span class="action-icon">
+                        🗑️
+                    </span>
+
+                    <span>
+                        حذف الحساب
+                    </span>
+
+                    <span class="action-arrow">
+                        ‹
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="account-action logout-action"
+                    onclick="logout()">
+
+                    <span class="action-icon">
+                        🚪
+                    </span>
+
+                    <span>
+                        تسجيل الخروج
+                    </span>
+
+                    <span class="action-arrow">
+                        ‹
+                    </span>
+
+                </button>
+
+
+            </section>
+
+
+            <div class="bottom-space"></div>
+
+
+        </div>
 
     </div>
 
+</main>
 
-    <section class="stats-grid">
 
+<!-- Bottom navigation -->
 
-      <div class="stat-card">
+<nav class="bottom-nav">
 
-        <div class="stat-icon">
-          ⭐
-        </div>
 
-        <span
-          id="points"
-          class="stat-number">
-          0
-        </span>
-
-        <span class="stat-label">
-          النقاط
-        </span>
-
-      </div>
-
-
-      <div class="stat-card">
-
-        <div class="stat-icon">
-          📚
-        </div>
-
-        <span
-          id="lessons"
-          class="stat-number">
-          0
-        </span>
-
-        <span class="stat-label">
-          الدروس المكتملة
-        </span>
-
-      </div>
-
-
-      <div class="stat-card">
-
-        <div class="stat-icon">
-          🏆
-        </div>
-
-        <span
-          id="badges"
-          class="stat-number">
-          0
-        </span>
-
-        <span class="stat-label">
-          الشارات
-        </span>
-
-      </div>
-
-
-      <div class="stat-card">
-
-        <div class="stat-icon">
-          🔥
-        </div>
-
-        <span
-          id="streak"
-          class="stat-number">
-          0
-        </span>
-
-        <span class="stat-label">
-          أيام متتالية
-        </span>
-
-      </div>
-
-
-    </section>
-
-
-    <!-- Account information -->
-
-    <div class="section-heading">
-
-      <h2>
-        معلومات الحساب
-      </h2>
-
-    </div>
-
-
-    <section class="account-card">
-
-
-      <div class="account-row">
-
-        <div class="row-icon">
-          👤
-        </div>
-
-        <div class="row-text">
-
-          <div class="row-label">
-            الاسم
-          </div>
-
-          <div
-            id="infoName"
-            class="row-value">
-
-            -
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="account-row">
-
-        <div class="row-icon">
-          ✉️
-        </div>
-
-        <div class="row-text">
-
-          <div class="row-label">
-            البريد الإلكتروني
-          </div>
-
-          <div
-            id="infoEmail"
-            class="row-value"
-            dir="ltr">
-
-            -
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="account-row">
-
-        <div class="row-icon">
-          🎓
-        </div>
-
-        <div class="row-text">
-
-          <div class="row-label">
-            المستوى الدراسي
-          </div>
-
-          <div
-            id="infoLevel"
-            class="row-value">
-
-            -
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-    </section>
-
-
-    <!-- Actions -->
-
-    <div class="section-heading">
-
-      <h2>
-        إدارة الحساب
-      </h2>
-
-    </div>
-
-
-    <section class="account-actions">
-
-
-      <button
-        class="account-action"
-        onclick="changeLevel()">
-
-        <span class="action-icon">
-          🎓
-        </span>
+    <a href="dashboard.html">
 
         <span>
-          تغيير المستوى الدراسي
+            ⌂
         </span>
 
-        <span class="action-arrow">
-          ‹
-        </span>
+        <small>
+            الرئيسية
+        </small>
 
-      </button>
+    </a>
 
 
-      <button
-        class="account-action"
-        onclick="openSettings()">
-
-        <span class="action-icon">
-          ⚙️
-        </span>
+    <a href="library.html">
 
         <span>
-          الإعدادات
+            📚
         </span>
 
-        <span class="action-arrow">
-          ‹
-        </span>
+        <small>
+            مكتبتي
+        </small>
 
-      </button>
+    </a>
 
 
-      <button
-        class="account-action"
-        onclick="showMessage('تعديل البيانات سيكون متاحًا قريبًا.')">
-
-        <span class="action-icon">
-          ✏️
-        </span>
+    <a href="forum.html">
 
         <span>
-          تعديل البيانات
+            💬
         </span>
 
-        <span class="action-arrow">
-          ‹
-        </span>
+        <small>
+            المنتدى
+        </small>
 
-      </button>
+    </a>
 
 
-      <button
-        class="account-action"
-        onclick="showMessage('إدارة كلمة المرور ستكون متاحة عند اكتمال نظام الحسابات.')">
-
-        <span class="action-icon">
-          🔐
-        </span>
+    <a
+        href="account.html"
+        class="active">
 
         <span>
-          كلمة المرور
+            👤
         </span>
 
-        <span class="action-arrow">
-          ‹
-        </span>
+        <small>
+            حسابي
+        </small>
 
-      </button>
-
-
-      <button
-        class="account-action"
-        onclick="showMessage('إدارة الاشتراكات والمدفوعات ستتم إضافتها لاحقًا.')">
-
-        <span class="action-icon">
-          💳
-        </span>
-
-        <span>
-          الاشتراكات والمدفوعات
-        </span>
-
-        <span class="action-arrow">
-          ‹
-        </span>
-
-      </button>
+    </a>
 
 
-      <button
-        class="account-action danger-action"
-        onclick="showMessage('حذف الحساب سيتم تفعيله بعد اكتمال النظام النهائي.')">
-
-        <span class="action-icon">
-          🗑️
-        </span>
-
-        <span>
-          حذف الحساب
-        </span>
-
-        <span class="action-arrow">
-          ‹
-        </span>
-
-      </button>
+</nav>
 
 
-      <button
-        class="account-action logout-action"
-        onclick="logout()">
+<!-- Supabase -->
 
-        <span class="action-icon">
-          🚪
-        </span>
-
-        <span>
-          تسجيل الخروج
-        </span>
-
-        <span class="action-arrow">
-          ‹
-        </span>
-
-      </button>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
-    </section>
-
-
-    <div class="bottom-space"></div>
-
-
-  </div>
-
-</div>
-
-  </main>  <!-- Bottom navigation -->  <nav class="bottom-nav"><a href="dashboard.html">
-
-  <span>
-    ⌂
-  </span>
-
-  <small>
-    الرئيسية
-  </small>
-
-</a>
-
-
-<a href="library.html">
-
-  <span>
-    📚
-  </span>
-
-  <small>
-    مكتبتي
-  </small>
-
-</a>
-
-
-<a href="forum.html">
-
-  <span>
-    💬
-  </span>
-
-  <small>
-    المنتدى
-  </small>
-
-</a>
-
-
-<a
-  href="account.html"
-  class="active">
-
-  <span>
-    👤
-  </span>
-
-  <small>
-    حسابي
-  </small>
-
-</a>
-
-  </nav>  <!-- Supabase -->  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>  <script>
+<script>
 
 
     const SUPABASE_URL =
-      "https://qkzdlxqledsznhbifaxy.supabase.co";
+        "https://qkzdlxqledsznhbifaxy.supabase.co";
 
 
     const SUPABASE_KEY =
-      "sb_publishable_ZdpHXwLlhpbXztsTXpAFTg_TgOji91v";
+        "sb_publishable_ZdpHXwLlhpbXztsTXpAFTg_TgOji91v";
 
 
     const supabaseClient =
-      supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-      );
+        supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
 
 
     /* =========================================
@@ -827,169 +884,169 @@
 
     async function loadAccount() {
 
-      const {
-        data,
-        error
-      } =
-        await supabaseClient.auth.getSession();
+        const {
+            data,
+            error
+        } =
+            await supabaseClient.auth.getSession();
 
 
-      if (
-        error ||
-        !data.session
-      ) {
+        if (
+            error ||
+            !data.session
+        ) {
 
-        window.location.href =
-          "login.html";
+            window.location.href =
+                "login.html";
 
-        return;
+            return;
 
-      }
-
-
-      const user =
-        data.session.user;
+        }
 
 
-      let name =
-        user.user_metadata?.full_name ||
-        user.user_metadata?.name ||
-        user.user_metadata?.display_name;
+        const user =
+            data.session.user;
 
 
-      if (!name) {
-
-        name =
-          user.email
-            ? user.email.split("@")[0]
-            : "الطالب";
-
-      }
+        let name =
+            user.user_metadata?.full_name ||
+            user.user_metadata?.name ||
+            user.user_metadata?.display_name;
 
 
-      const email =
-        user.email || "-";
+        if (!name) {
+
+            name =
+                user.email
+                    ? user.email.split("@")[0]
+                    : "الطالب";
+
+        }
 
 
-      const level =
-        localStorage.getItem(
-          "student_level"
-        ) ||
-        "لم يتم اختيار المستوى";
+        const email =
+            user.email || "-";
 
 
-      /* Profile */
-
-      document.getElementById(
-        "studentName"
-      ).textContent = name;
-
-
-      document.getElementById(
-        "studentEmail"
-      ).textContent = email;
+        const level =
+            localStorage.getItem(
+                "student_level"
+            ) ||
+            "لم يتم اختيار المستوى";
 
 
-      document.getElementById(
-        "studentLevel"
-      ).textContent = level;
+        /* Profile */
+
+        document.getElementById(
+            "studentName"
+        ).textContent = name;
 
 
-      document.getElementById(
-        "infoName"
-      ).textContent = name;
+        document.getElementById(
+            "studentEmail"
+        ).textContent = email;
 
 
-      document.getElementById(
-        "infoEmail"
-      ).textContent = email;
+        document.getElementById(
+            "studentLevel"
+        ).textContent = level;
 
 
-      document.getElementById(
-        "infoLevel"
-      ).textContent = level;
+        document.getElementById(
+            "infoName"
+        ).textContent = name;
 
 
-      /* Avatar */
-
-      const firstLetter =
-        name.trim().charAt(0);
-
-
-      document.getElementById(
-        "avatar"
-      ).textContent =
-        firstLetter || "ط";
+        document.getElementById(
+            "infoEmail"
+        ).textContent = email;
 
 
-      /* Statistics */
-
-      const points =
-        parseInt(
-          localStorage.getItem(
-            "student_points"
-          ) || "0",
-          10
-        );
+        document.getElementById(
+            "infoLevel"
+        ).textContent = level;
 
 
-      const lessons =
-        parseInt(
-          localStorage.getItem(
-            "completed_lessons"
-          ) || "0",
-          10
-        );
+        /* Avatar */
+
+        const firstLetter =
+            name.trim().charAt(0);
 
 
-      const submitted =
-        localStorage.getItem(
-          "weekly_challenge_submitted"
-        ) === "true";
+        document.getElementById(
+            "avatar"
+        ).textContent =
+            firstLetter || "ط";
 
 
-      const badges =
-        points >= 50
-          ? 1
-          : 0;
+        /* Statistics */
+
+        const points =
+            parseInt(
+                localStorage.getItem(
+                    "student_points"
+                ) || "0",
+                10
+            );
 
 
-      const streak =
-        lessons > 0
-          ? 1
-          : 0;
+        const lessons =
+            parseInt(
+                localStorage.getItem(
+                    "completed_lessons"
+                ) || "0",
+                10
+            );
 
 
-      document.getElementById(
-        "points"
-      ).textContent = points;
+        const submitted =
+            localStorage.getItem(
+                "weekly_challenge_submitted"
+            ) === "true";
 
 
-      document.getElementById(
-        "lessons"
-      ).textContent = lessons;
+        const badges =
+            points >= 50
+                ? 1
+                : 0;
 
 
-      document.getElementById(
-        "badges"
-      ).textContent = badges;
+        const streak =
+            lessons > 0
+                ? 1
+                : 0;
 
 
-      document.getElementById(
-        "streak"
-      ).textContent = streak;
+        document.getElementById(
+            "points"
+        ).textContent = points;
 
 
-      /* Show */
-
-      document.getElementById(
-        "loading"
-      ).style.display = "none";
+        document.getElementById(
+            "lessons"
+        ).textContent = lessons;
 
 
-      document.getElementById(
-        "accountContent"
-      ).style.display = "block";
+        document.getElementById(
+            "badges"
+        ).textContent = badges;
+
+
+        document.getElementById(
+            "streak"
+        ).textContent = streak;
+
+
+        /* Show */
+
+        document.getElementById(
+            "loading"
+        ).style.display = "none";
+
+
+        document.getElementById(
+            "accountContent"
+        ).style.display = "block";
 
     }
 
@@ -1000,24 +1057,24 @@
 
     function goDashboard() {
 
-      window.location.href =
-        "dashboard.html";
+        window.location.href =
+            "dashboard.html";
 
     }
 
 
     function changeLevel() {
 
-      window.location.href =
-        "levels.html";
+        window.location.href =
+            "levels.html";
 
     }
 
 
     function openSettings() {
 
-      window.location.href =
-        "settings.html";
+        window.location.href =
+            "settings.html";
 
     }
 
@@ -1028,44 +1085,44 @@
 
     function showMessage(message) {
 
-      const old =
-        document.querySelector(
-          ".account-message"
-        );
+        const old =
+            document.querySelector(
+                ".account-message"
+            );
 
 
-      if (old) {
-        old.remove();
-      }
+        if (old) {
+            old.remove();
+        }
 
 
-      const box =
-        document.createElement("div");
+        const box =
+            document.createElement("div");
 
 
-      box.className =
-        "account-message";
+        box.className =
+            "account-message";
 
 
-      box.textContent =
-        message;
+        box.textContent =
+            message;
 
 
-      document.body.appendChild(box);
-
-
-      setTimeout(function() {
-
-        box.style.opacity = "0";
+        document.body.appendChild(box);
 
 
         setTimeout(function() {
 
-          box.remove();
+            box.style.opacity = "0";
 
-        }, 250);
 
-      }, 2300);
+            setTimeout(function() {
+
+                box.remove();
+
+            }, 250);
+
+        }, 2300);
 
     }
 
@@ -1076,47 +1133,47 @@
 
     async function logout() {
 
-      const confirmed =
-        window.confirm(
-          "هل تريد تسجيل الخروج من حسابك؟"
+        const confirmed =
+            window.confirm(
+                "هل تريد تسجيل الخروج من حسابك؟"
+            );
+
+
+        if (!confirmed) {
+            return;
+        }
+
+
+        const {
+            error
+        } =
+            await supabaseClient.auth.signOut();
+
+
+        if (error) {
+
+            showMessage(
+                "حدث خطأ أثناء تسجيل الخروج."
+            );
+
+            return;
+
+        }
+
+
+        /*
+         * نحذف بيانات الجلسة المحلية
+         * مع إبقاء بعض بيانات التعلم
+         * حتى لا تضيع عند تسجيل الدخول مجددًا.
+         */
+
+        localStorage.removeItem(
+            "student_level"
         );
 
 
-      if (!confirmed) {
-        return;
-      }
-
-
-      const {
-        error
-      } =
-        await supabaseClient.auth.signOut();
-
-
-      if (error) {
-
-        showMessage(
-          "حدث خطأ أثناء تسجيل الخروج."
-        );
-
-        return;
-
-      }
-
-
-      /*
-       * نحذف بيانات الجلسة المحلية
-       * مع إبقاء بعض بيانات التعلم
-       * حتى لا تضيع عند تسجيل الدخول مجددًا.
-       */
-
-      localStorage.removeItem(
-        "student_level"
-      );
-
-
-      window.location.href =
-        "login.html";
+        window.location.href =
+            "login.html";
 
     }
 
@@ -1128,4 +1185,8 @@
     loadAccount();
 
 
-  </script></body></html>
+</script>
+
+
+</body>
+  </html>
