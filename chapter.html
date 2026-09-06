@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Chapitre | عالم شيخ الأساتذة</title>
+    <title>Chapitre | EduNova AI</title>
 
     <link rel="stylesheet" href="style.css">
 
@@ -32,7 +32,6 @@
             align-items: center;
             justify-content: space-between;
             gap: 10px;
-
             margin-bottom: 16px;
         }
 
@@ -42,7 +41,6 @@
             color: var(--text);
 
             padding: 9px 12px;
-
             border-radius: 11px;
 
             font-family: inherit;
@@ -241,6 +239,8 @@
         .video-card {
             overflow: hidden;
 
+            position: relative;
+
             background: var(--surface);
 
             border: 1px solid var(--border);
@@ -262,6 +262,62 @@
             border-color: #93c5fd;
 
             box-shadow: var(--shadow-md);
+        }
+
+        /* =========================================
+           LOCKED VIDEO
+           ========================================= */
+
+        .video-card.locked {
+            cursor: pointer;
+        }
+
+        .video-card.locked:hover {
+            transform: translateY(-2px);
+        }
+
+        .video-card.locked .video-thumbnail {
+            filter: saturate(.65);
+        }
+
+        .lock-badge {
+            position: absolute;
+
+            top: 10px;
+            left: 10px;
+
+            z-index: 5;
+
+            padding: 6px 9px;
+
+            border-radius: 999px;
+
+            background: rgba(15,23,42,.85);
+
+            color: white;
+
+            font-size: 9px;
+            font-weight: 900;
+        }
+
+        .free-badge {
+            position: absolute;
+
+            top: 10px;
+            left: 10px;
+
+            z-index: 5;
+
+            padding: 6px 9px;
+
+            border-radius: 999px;
+
+            background: rgba(22,163,74,.95);
+
+            color: white;
+
+            font-size: 9px;
+            font-weight: 900;
         }
 
         /* =========================================
@@ -328,6 +384,24 @@
             box-shadow: 0 7px 25px rgba(0,0,0,.25);
         }
 
+        .lock-icon {
+            width: 54px;
+            height: 54px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,.15);
+
+            color: white;
+
+            font-size: 22px;
+
+            box-shadow: 0 7px 25px rgba(0,0,0,.20);
+        }
+
         .video-number {
             position: absolute;
 
@@ -384,6 +458,11 @@
 
         .watch-label {
             color: var(--primary);
+            font-weight: 900;
+        }
+
+        .locked-label {
+            color: #64748b;
             font-weight: 900;
         }
 
@@ -493,7 +572,7 @@
             <span class="brand-icon">AI</span>
 
             <span>
-                عالم شيخ الأساتذة
+                EduNova AI
             </span>
 
         </button>
@@ -529,11 +608,11 @@
             <div>
 
                 <strong>
-                    شيخ الأساتذة — الأستاذ AI
+                    Afkrash AI
                 </strong>
 
                 <span>
-                    شاهد فيديوهات الـChapitre بالترتيب الذي يناسبك.
+                    مدرسك الذكي في EduNova AI — تعلّم الرياضيات خطوة بخطوة.
                 </span>
 
             </div>
@@ -590,7 +669,7 @@
                 </h2>
 
                 <p>
-                    يمكنك مشاهدة الفيديوهات في أي وقت.
+                    الفيديو الأول مجاني، وبقية الفيديوهات متاحة ضمن الخطط التعليمية.
                 </p>
 
             </div>
@@ -616,8 +695,8 @@
 
                 <p>
                     لم تتم إضافة فيديوهات لهذا الـChapitre بعد.
-                    عندما تبدأ بإضافة المحتوى، يمكن أن يحتوي
-                    كل Chapitre على ما يصل إلى 20 فيديو.
+                    يمكن أن يحتوي كل Chapitre على ما يصل إلى 20 فيديو،
+                    ويكون الفيديو الأول مجانيًا للتجربة.
                 </p>
 
             </div>
@@ -663,6 +742,10 @@
 
        الحد الأقصى:
        20 فيديو لكل Chapitre.
+
+       القاعدة:
+       الفيديو رقم 1 = مجاني
+       الفيديو رقم 2 وما بعده = مقفل
     */
 
 
@@ -672,7 +755,30 @@
             title: "Chapitre 1",
             description:
                 "الفيديوهات التعليمية الخاصة بالفصل الأول.",
-            videos: []
+
+            videos: [
+
+                /*
+                مثال لاحقًا:
+
+                {
+                    id: 1,
+                    title: "الدرس الأول",
+                    description: "شرح الدرس الأول",
+                    duration: "12:30",
+                    videoUrl: "رابط الفيديو"
+                },
+
+                {
+                    id: 2,
+                    title: "الدرس الثاني",
+                    description: "شرح الدرس الثاني",
+                    duration: "15:20",
+                    videoUrl: "رابط الفيديو"
+                }
+                */
+
+            ]
         }
 
     };
@@ -780,28 +886,72 @@
             .forEach(
                 (video, index) => {
 
+                    const videoNumber =
+                        index + 1;
+
+                    const isFree =
+                        videoNumber === 1;
+
+
                     const card =
                         document.createElement(
                             "article"
                         );
 
+
                     card.className =
-                        "video-card";
+                        "video-card" +
+                        (
+                            isFree
+                                ? ""
+                                : " locked"
+                        );
 
 
                     card.innerHTML = `
 
                         <div class="video-thumbnail">
 
-                            <div class="play-button">
-                                ▶
-                            </div>
+                            ${
+                                isFree
+
+                                ? `
+                                    <div class="free-badge">
+                                        🎁 مجاني
+                                    </div>
+                                `
+
+                                : `
+                                    <div class="lock-badge">
+                                        🔒 مقفل
+                                    </div>
+                                `
+                            }
+
+
+                            ${
+                                isFree
+
+                                ? `
+                                    <div class="play-button">
+                                        ▶
+                                    </div>
+                                `
+
+                                : `
+                                    <div class="lock-icon">
+                                        🔒
+                                    </div>
+                                `
+                            }
+
 
                             <div class="video-number">
-                                فيديو ${index + 1}
+                                فيديو ${videoNumber}
                             </div>
 
                         </div>
+
 
                         <div class="video-info">
 
@@ -819,9 +969,22 @@
                                     ⏱️ ${video.duration || "--:--"}
                                 </span>
 
-                                <span class="watch-label">
-                                    مشاهدة ←
-                                </span>
+
+                                ${
+                                    isFree
+
+                                    ? `
+                                        <span class="watch-label">
+                                            مشاهدة ←
+                                        </span>
+                                    `
+
+                                    : `
+                                        <span class="locked-label">
+                                            🔒 يتطلب اشتراكًا
+                                        </span>
+                                    `
+                                }
 
                             </div>
 
@@ -834,7 +997,8 @@
                         function () {
 
                             openVideo(
-                                video
+                                video,
+                                videoNumber
                             );
 
                         };
@@ -854,14 +1018,29 @@
        OPEN VIDEO
        ========================================= */
 
-    function openVideo(video) {
+    function openVideo(
+        video,
+        videoNumber
+    ) {
 
         /*
-           لاحقًا سنربط هذه الوظيفة
-           بصفحة مشاهدة الفيديو الحقيقية.
+           الفيديو الأول مجاني.
 
-           حاليًا لا نضع فيديو حقيقي.
+           الفيديوهات التالية ستكون
+           مرتبطة بنظام الاشتراك لاحقًا.
         */
+
+
+        if (videoNumber > 1) {
+
+            alert(
+                "🔒 هذا الفيديو متاح ضمن الخطط التعليمية في EduNova AI."
+            );
+
+            return;
+
+        }
+
 
         if (
             video &&
@@ -882,7 +1061,7 @@
 
 
         alert(
-            "🎬 هذا الفيديو سيتم إضافته قريبًا."
+            "🎬 سيتم إضافة هذا الفيديو قريبًا."
         );
 
     }
