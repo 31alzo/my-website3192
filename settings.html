@@ -7,41 +7,46 @@
 
     <title>الإعدادات | عالم شيخ الأساتذة</title>
 
+    <!-- تطبيق المظهر قبل ظهور الصفحة -->
+    <script>
+        (function () {
+            try {
+                const settings = JSON.parse(
+                    localStorage.getItem("platform_settings") || "{}"
+                );
+
+                if (settings.darkMode === true) {
+                    document.documentElement.classList.add("dark-mode");
+                }
+
+                if (settings.language === "fr") {
+                    document.documentElement.lang = "fr";
+                    document.documentElement.dir = "ltr";
+                }
+            } catch (e) {}
+        })();
+    </script>
+
     <link rel="stylesheet" href="style.css">
 
     <style>
-        /* =========================
-           SETTINGS PAGE
-           ========================= */
-
         .settings-hero {
-            background: linear-gradient(
-                135deg,
-                #2563eb,
-                #1d4ed8
-            );
-
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
             color: white;
             border-radius: 24px;
             padding: 26px 22px;
             margin-bottom: 28px;
-
-            box-shadow:
-                0 12px 30px rgba(37, 99, 235, .18);
+            box-shadow: 0 12px 30px rgba(37, 99, 235, .18);
         }
 
         .settings-hero-icon {
             width: 58px;
             height: 58px;
-
             display: grid;
             place-items: center;
-
             background: rgba(255,255,255,.16);
             border: 1px solid rgba(255,255,255,.2);
-
             border-radius: 18px;
-
             font-size: 28px;
             margin-bottom: 16px;
         }
@@ -81,7 +86,6 @@
 
         .profile-box {
             padding: 20px;
-
             display: flex;
             align-items: center;
             gap: 14px;
@@ -90,22 +94,14 @@
         .profile-avatar {
             width: 58px;
             height: 58px;
-
             flex-shrink: 0;
-
             display: grid;
             place-items: center;
-
             background: var(--primary);
             color: white;
-
             border-radius: 18px;
-
             font-size: 23px;
             font-weight: 850;
-
-            box-shadow:
-                0 7px 18px rgba(37,99,235,.18);
         }
 
         .profile-name {
@@ -117,42 +113,35 @@
         .profile-email {
             direction: ltr;
             text-align: right;
-
             color: var(--text-soft);
-
             font-size: 12px;
-
             word-break: break-all;
         }
 
         .active-badge {
             display: inline-flex;
             align-items: center;
-
             margin-top: 8px;
-
             padding: 4px 9px;
-
             border-radius: 999px;
-
             background: #f0fdf4;
             color: #15803d;
-
             font-size: 11px;
             font-weight: 800;
         }
 
+        html.dark-mode .active-badge {
+            background: #12351f;
+            color: #86efac;
+        }
+
         .setting-row {
             min-height: 70px;
-
             padding: 14px 16px;
-
             display: flex;
             align-items: center;
             justify-content: space-between;
-
             gap: 14px;
-
             border-bottom: 1px solid var(--border);
         }
 
@@ -162,26 +151,19 @@
 
         .setting-info {
             min-width: 0;
-
             display: flex;
             align-items: center;
-
             gap: 12px;
         }
 
         .setting-icon {
             width: 42px;
             height: 42px;
-
             flex-shrink: 0;
-
             display: grid;
             place-items: center;
-
             background: var(--primary-light);
-
             border-radius: 13px;
-
             font-size: 20px;
         }
 
@@ -201,45 +183,28 @@
             line-height: 1.55;
         }
 
-        .setting-value {
-            flex-shrink: 0;
-
-            color: var(--primary);
-
-            font-size: 12px;
-            font-weight: 800;
-        }
-
         .settings-select {
-            min-width: 105px;
-
+            min-width: 110px;
             padding: 9px 11px;
-
             border: 1px solid var(--border);
             border-radius: 10px;
-
             background: var(--surface);
             color: var(--text);
-
             outline: none;
-
             cursor: pointer;
         }
 
         .settings-select:focus {
             border-color: var(--primary);
-            box-shadow:
-                0 0 0 3px rgba(37,99,235,.10);
+            box-shadow: 0 0 0 3px rgba(37,99,235,.10);
         }
 
-        /* Switch */
+        /* SWITCH */
 
         .switch {
             position: relative;
-
             width: 50px;
             height: 28px;
-
             flex-shrink: 0;
         }
 
@@ -250,34 +215,22 @@
         .switch-slider {
             position: absolute;
             inset: 0;
-
             background: #cbd5e1;
-
             border-radius: 999px;
-
             cursor: pointer;
-
             transition: .2s ease;
         }
 
         .switch-slider::before {
             content: "";
-
             position: absolute;
-
             width: 22px;
             height: 22px;
-
             top: 3px;
             right: 3px;
-
             background: white;
-
             border-radius: 50%;
-
-            box-shadow:
-                0 2px 6px rgba(0,0,0,.16);
-
+            box-shadow: 0 2px 6px rgba(0,0,0,.16);
             transition: .2s ease;
         }
 
@@ -289,7 +242,7 @@
             transform: translateX(-22px);
         }
 
-        /* Actions */
+        /* ACTIONS */
 
         .settings-actions {
             display: grid;
@@ -298,36 +251,23 @@
 
         .settings-action {
             width: 100%;
-
             min-height: 52px;
-
             display: flex;
             align-items: center;
             justify-content: space-between;
-
             gap: 12px;
-
             padding: 13px 15px;
-
             background: var(--surface);
             color: var(--text);
-
             border: 1px solid var(--border);
-            border-radius: var(--radius-md);
-
+            border-radius: 16px;
             box-shadow: var(--shadow-sm);
-
-            text-align: right;
-
-            transition:
-                transform .2s ease,
-                border-color .2s ease,
-                box-shadow .2s ease;
+            text-align: inherit;
+            transition: .2s ease;
         }
 
         .settings-action:hover {
             transform: translateY(-1px);
-            border-color: #bfdbfe;
             box-shadow: var(--shadow-md);
         }
 
@@ -340,23 +280,21 @@
         .settings-action-icon {
             width: 40px;
             height: 40px;
-
             display: grid;
             place-items: center;
-
             background: var(--primary-light);
-
             border-radius: 12px;
-
             font-size: 19px;
         }
 
         .settings-action-title {
+            display: block;
             font-size: 13px;
             font-weight: 800;
         }
 
         .settings-action-description {
+            display: block;
             color: var(--text-soft);
             font-size: 10px;
             margin-top: 2px;
@@ -373,74 +311,66 @@
             background: #fffafa;
         }
 
+        html.dark-mode .danger-action {
+            background: #27171b;
+            border-color: #57232b;
+        }
+
         .danger-action .settings-action-icon {
             background: #fef2f2;
         }
 
+        html.dark-mode .danger-action .settings-action-icon {
+            background: #3b1d22;
+        }
+
         .info-box {
             padding: 16px;
-
             background: var(--primary-light);
-
             border: 1px solid #dbeafe;
-
-            border-radius: var(--radius-md);
-
+            border-radius: 16px;
             color: var(--text);
-
             font-size: 12px;
             line-height: 1.8;
         }
 
+        html.dark-mode .info-box {
+            border-color: #294579;
+        }
+
         .toast {
             position: fixed;
-
             left: 50%;
             bottom: 82px;
-
             transform: translate(-50%, 20px);
-
             width: min(90%, 420px);
-
             padding: 13px 16px;
-
             background: #172033;
             color: white;
-
             border-radius: 14px;
-
             text-align: center;
-
             font-size: 13px;
             font-weight: 700;
-
             opacity: 0;
             visibility: hidden;
-
             transition: .25s ease;
-
-            z-index: 999;
+            z-index: 9999;
         }
 
         .toast.show {
             opacity: 1;
             visibility: visible;
-
             transform: translate(-50%, 0);
         }
 
         .version {
             text-align: center;
-
             color: var(--text-light);
-
             font-size: 11px;
-
             padding: 8px 0 100px;
         }
 
         @media (min-width: 700px) {
-
             .settings-hero {
                 padding: 34px;
             }
@@ -448,23 +378,6 @@
             .settings-actions {
                 grid-template-columns: repeat(2, 1fr);
             }
-
-        }
-
-        @media (max-width: 480px) {
-
-            .setting-row {
-                padding: 13px;
-            }
-
-            .setting-description {
-                max-width: 210px;
-            }
-
-            .settings-select {
-                min-width: 92px;
-            }
-
         }
     </style>
 </head>
@@ -476,14 +389,11 @@
 
         <a href="dashboard.html" class="brand">
             <span class="brand-icon">🎓</span>
-            <span>عالم شيخ الأساتذة</span>
+            <span data-i18n="brand">عالم شيخ الأساتذة</span>
         </a>
 
-        <button
-            class="btn btn-secondary"
-            onclick="goAccount()"
-        >
-            👤 حسابي
+        <button class="btn btn-secondary" onclick="goAccount()">
+            👤 <span data-i18n="myAccount">حسابي</span>
         </button>
 
     </div>
@@ -492,1318 +402,1693 @@
 
 <main class="page">
 
-    <div class="container">
+<div class="container">
 
-        <!-- Hero -->
+    <section class="settings-hero">
 
-        <section class="settings-hero">
+        <div class="settings-hero-icon">⚙️</div>
 
-            <div class="settings-hero-icon">
-                ⚙️
-            </div>
+        <h1 data-i18n="settings">
+            الإعدادات
+        </h1>
 
-            <h1>
-                الإعدادات
-            </h1>
+        <p data-i18n="settingsIntro">
+            خصص تجربة التعلم الخاصة بك وتحكم في إعدادات المنصة.
+        </p>
 
-            <p>
-                خصص تجربة التعلم الخاصة بك وتحكم في إعدادات المنصة.
-            </p>
-
-        </section>
+    </section>
 
 
-        <!-- الحساب -->
+    <!-- ACCOUNT -->
 
-        <section class="settings-section">
+    <section class="settings-section">
 
-            <h2 class="settings-section-title">
-                👤 حسابي
-            </h2>
+        <h2 class="settings-section-title" data-i18n="accountSection">
+            👤 حسابي
+        </h2>
 
-            <p class="settings-section-description">
-                معلومات حسابك الحالية.
-            </p>
+        <p class="settings-section-description" data-i18n="accountDescription">
+            معلومات حسابك الحالية.
+        </p>
 
-            <div class="card settings-card">
+        <div class="card settings-card">
 
-                <div class="profile-box">
+            <div class="profile-box">
 
-                    <div
-                        class="profile-avatar"
-                        id="avatar"
-                    >
-                        ط
+                <div class="profile-avatar" id="avatar">ط</div>
+
+                <div>
+
+                    <div class="profile-name" id="userName">
+                        الطالب
                     </div>
 
-                    <div>
-
-                        <div
-                            class="profile-name"
-                            id="userName"
-                        >
-                            الطالب
-                        </div>
-
-                        <div
-                            class="profile-email"
-                            id="userEmail"
-                        >
-                            -
-                        </div>
-
-                        <span class="active-badge">
-                            ● حساب نشط
-                        </span>
-
+                    <div class="profile-email" id="userEmail">
+                        -
                     </div>
 
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- المظهر -->
-
-        <section class="settings-section">
-
-            <h2 class="settings-section-title">
-                🎨 المظهر واللغة
-            </h2>
-
-            <div class="card settings-card">
-
-                <div class="setting-row">
-
-                    <div class="setting-info">
-
-                        <div class="setting-icon">
-                            🌐
-                        </div>
-
-                        <div class="setting-text">
-
-                            <div class="setting-name">
-                                اللغة
-                            </div>
-
-                            <div class="setting-description">
-                                لغة واجهة المنصة
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <select
-                        class="settings-select"
-                        id="language"
-                    >
-                        <option value="ar">
-                            العربية
-                        </option>
-
-                        <option value="fr">
-                            Français
-                        </option>
-                    </select>
-
-                </div>
-
-
-                <div class="setting-row">
-
-                    <div class="setting-info">
-
-                        <div class="setting-icon">
-                            🌓
-                        </div>
-
-                        <div class="setting-text">
-
-                            <div class="setting-name">
-                                الوضع الداكن
-                            </div>
-
-                            <div class="setting-description">
-                                حفظ اختيارك للمظهر لاحقًا
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <label class="switch">
-
-                        <input
-                            type="checkbox"
-                            id="darkMode"
-                        >
-
-                        <span class="switch-slider"></span>
-
-                    </label>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- الإشعارات -->
-
-        <section class="settings-section">
-
-            <h2 class="settings-section-title">
-                🔔 الإشعارات
-            </h2>
-
-            <div class="card settings-card">
-
-                <div class="setting-row">
-
-                    <div class="setting-info">
-
-                        <div class="setting-icon">
-                            📢
-                        </div>
-
-                        <div class="setting-text">
-
-                            <div class="setting-name">
-                                إشعارات المنصة
-                            </div>
-
-                            <div class="setting-description">
-                                أخبار المنصة والتحديثات المهمة
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <label class="switch">
-
-                        <input
-                            type="checkbox"
-                            id="platformNotifications"
-                            checked
-                        >
-
-                        <span class="switch-slider"></span>
-
-                    </label>
-
-                </div>
-
-
-                <div class="setting-row">
-
-                    <div class="setting-info">
-
-                        <div class="setting-icon">
-                            📚
-                        </div>
-
-                        <div class="setting-text">
-
-                            <div class="setting-name">
-                                تذكير بالدراسة
-                            </div>
-
-                            <div class="setting-description">
-                                تذكيرك بمتابعة دروسك
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <label class="switch">
-
-                        <input
-                            type="checkbox"
-                            id="studyNotifications"
-                            checked
-                        >
-
-                        <span class="switch-slider"></span>
-
-                    </label>
-
-                </div>
-
-
-                <div class="setting-row">
-
-                    <div class="setting-info">
-
-                        <div class="setting-icon">
-                            🏆
-                        </div>
-
-                        <div class="setting-text">
-
-                            <div class="setting-name">
-                                التحديات والإنجازات
-                            </div>
-
-                            <div class="setting-description">
-                                إشعارات التحديات والشارات والنقاط
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <label class="switch">
-
-                        <input
-                            type="checkbox"
-                            id="achievementNotifications"
-                            checked
-                        >
-
-                        <span class="switch-slider"></span>
-
-                    </label>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- التعلم -->
-
-        <section class="settings-section">
-
-            <h2 class="settings-section-title">
-                📚 التعلم
-            </h2>
-
-            <div class="card settings-card">
-
-                <div class="setting-row">
-
-                    <div class="setting-info">
-
-                        <div class="setting-icon">
-                            ▶️
-                        </div>
-
-                        <div class="setting-text">
-
-                            <div class="setting-name">
-                                متابعة التعلم تلقائيًا
-                            </div>
-
-                            <div class="setting-description">
-                                الاحتفاظ بآخر درس كنت تدرسه
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <label class="switch">
-
-                        <input
-                            type="checkbox"
-                            id="continueLearning"
-                            checked
-                        >
-
-                        <span class="switch-slider"></span>
-
-                    </label>
-
-                </div>
-
-
-                <div class="setting-row">
-
-                    <div class="setting-info">
-
-                        <div class="setting-icon">
-                            ⏰
-                        </div>
-
-                        <div class="setting-text">
-
-                            <div class="setting-name">
-                                مدة الدراسة المفضلة
-                            </div>
-
-                            <div class="setting-description">
-                                المدة المقترحة لجلسة الدراسة
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <select
-                        class="settings-select"
-                        id="studyDuration"
-                    >
-
-                        <option value="15">
-                            15 دقيقة
-                        </option>
-
-                        <option value="30" selected>
-                            30 دقيقة
-                        </option>
-
-                        <option value="45">
-                            45 دقيقة
-                        </option>
-
-                        <option value="60">
-                            ساعة
-                        </option>
-
-                        <option value="90">
-                            ساعة ونصف
-                        </option>
-
-                    </select>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- الأستاذ AI -->
-
-        <section class="settings-section">
-
-            <h2 class="settings-section-title">
-                🤖 الأستاذ AI
-            </h2>
-
-            <div class="card settings-card">
-
-                <div class="setting-row">
-
-                    <div class="setting-info">
-
-                        <div class="setting-icon">
-                            🧠
-                        </div>
-
-                        <div class="setting-text">
-
-                            <div class="setting-name">
-                                المساعدة الذكية
-                            </div>
-
-                            <div class="setting-description">
-                                السماح للأستاذ AI بمساعدتك في التعلم
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <label class="switch">
-
-                        <input
-                            type="checkbox"
-                            id="aiAssistant"
-                            checked
-                        >
-
-                        <span class="switch-slider"></span>
-
-                    </label>
-
-                </div>
-
-
-                <div style="padding:15px">
-
-                    <div class="info-box">
-
-                        🤖 الأستاذ AI سيتم تطويره لاحقًا ليكون
-                        مساعدك داخل الدروس، ويساعدك في فهم
-                        الشرح وحل التمارين والتدرب على الأسئلة.
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- المجتمع -->
-
-        <section class="settings-section">
-
-            <h2 class="settings-section-title">
-                👥 الخصوصية والمجتمع
-            </h2>
-
-            <div class="card settings-card">
-
-                <div class="setting-row">
-
-                    <div class="setting-info">
-
-                        <div class="setting-icon">
-                            🏅
-                        </div>
-
-                        <div class="setting-text">
-
-                            <div class="setting-name">
-                                الظهور في لوحة المتصدرين
-                            </div>
-
-                            <div class="setting-description">
-                                السماح بظهور حسابك في الترتيب العام
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <label class="switch">
-
-                        <input
-                            type="checkbox"
-                            id="leaderboard"
-                            checked
-                        >
-
-                        <span class="switch-slider"></span>
-
-                    </label>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- روابط سريعة -->
-
-        <section class="settings-section">
-
-            <h2 class="settings-section-title">
-                ⚡ الوصول السريع
-            </h2>
-
-            <div class="settings-actions">
-
-                <button
-                    class="settings-action"
-                    onclick="goLevels()"
-                >
-
-                    <span class="settings-action-content">
-
-                        <span class="settings-action-icon">
-                            🎓
-                        </span>
-
-                        <span>
-
-                            <span class="settings-action-title">
-                                تغيير المستوى الدراسي
-                            </span>
-
-                            <span class="settings-action-description">
-                                كونكور، بريڤي أو باكالوريا
-                            </span>
-
-                        </span>
-
-                    </span>
-
-                    <span class="arrow">
-                        ←
-                    </span>
-
-                </button>
-
-
-                <button
-                    class="settings-action"
-                    onclick="goLibrary()"
-                >
-
-                    <span class="settings-action-content">
-
-                        <span class="settings-action-icon">
-                            📚
-                        </span>
-
-                        <span>
-
-                            <span class="settings-action-title">
-                                مكتبتي
-                            </span>
-
-                            <span class="settings-action-description">
-                                متابعة الدروس والفصول
-                            </span>
-
-                        </span>
-
-                    </span>
-
-                    <span class="arrow">
-                        ←
-                    </span>
-
-                </button>
-
-
-                <button
-                    class="settings-action"
-                    onclick="goForum()"
-                >
-
-                    <span class="settings-action-content">
-
-                        <span class="settings-action-icon">
-                            💬
-                        </span>
-
-                        <span>
-
-                            <span class="settings-action-title">
-                                المنتدى
-                            </span>
-
-                            <span class="settings-action-description">
-                                التواصل مع الطلاب
-                            </span>
-
-                        </span>
-
-                    </span>
-
-                    <span class="arrow">
-                        ←
-                    </span>
-
-                </button>
-
-
-                <button
-                    class="settings-action"
-                    onclick="goDashboard()"
-                >
-
-                    <span class="settings-action-content">
-
-                        <span class="settings-action-icon">
-                            🏠
-                        </span>
-
-                        <span>
-
-                            <span class="settings-action-title">
-                                لوحة التحكم
-                            </span>
-
-                            <span class="settings-action-description">
-                                العودة إلى الصفحة الرئيسية
-                            </span>
-
-                        </span>
-
-                    </span>
-
-                    <span class="arrow">
-                        ←
-                    </span>
-
-                </button>
-
-            </div>
-
-        </section>
-
-
-        <!-- أقسام مستقبلية -->
-
-        <section class="settings-section">
-
-            <h2 class="settings-section-title">
-                🔐 الحساب والأمان
-            </h2>
-
-            <div class="settings-actions">
-
-                <button
-                    class="settings-action"
-                    onclick="comingSoon('تغيير كلمة المرور')"
-                >
-
-                    <span class="settings-action-content">
-
-                        <span class="settings-action-icon">
-                            🔑
-                        </span>
-
-                        <span>
-
-                            <span class="settings-action-title">
-                                تغيير كلمة المرور
-                            </span>
-
-                            <span class="settings-action-description">
-                                تحديث كلمة مرور الحساب
-                            </span>
-
-                        </span>
-
-                    </span>
-
-                    <span class="arrow">
-                        ←
-                    </span>
-
-                </button>
-
-
-                <button
-                    class="settings-action"
-                    onclick="comingSoon('الاشتراكات والمدفوعات')"
-                >
-
-                    <span class="settings-action-content">
-
-                        <span class="settings-action-icon">
-                            💳
-                        </span>
-
-                        <span>
-
-                            <span class="settings-action-title">
-                                الاشتراكات والمدفوعات
-                            </span>
-
-                            <span class="settings-action-description">
-                                سيتم تفعيلها في المرحلة القادمة
-                            </span>
-
-                        </span>
-
-                    </span>
-
-                    <span class="arrow">
-                        ←
-                    </span>
-
-                </button>
-
-            </div>
-
-        </section>
-
-
-        <!-- حول المنصة -->
-
-        <section class="settings-section">
-
-            <h2 class="settings-section-title">
-                ℹ️ حول المنصة
-            </h2>
-
-            <div class="card settings-card">
-
-                <div class="setting-row">
-
-                    <div class="setting-info">
-
-                        <div class="setting-icon">
-                            🎓
-                        </div>
-
-                        <div class="setting-text">
-
-                            <div class="setting-name">
-                                عالم شيخ الأساتذة
-                            </div>
-
-                            <div class="setting-description">
-                                منصة تعليمية رقمية
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <span class="setting-value">
-                        الإصدار 1.0
+                    <span class="active-badge" data-i18n="active">
+                        ● حساب نشط
                     </span>
 
                 </div>
 
             </div>
 
-        </section>
+        </div>
+
+    </section>
 
 
-        <!-- تسجيل الخروج -->
+    <!-- APPEARANCE -->
 
-        <section class="settings-section">
+    <section class="settings-section">
 
-            <button
-                class="settings-action danger-action"
-                onclick="logout()"
-            >
+        <h2 class="settings-section-title" data-i18n="appearance">
+            🎨 المظهر واللغة
+        </h2>
+
+        <div class="card settings-card">
+
+            <div class="setting-row">
+
+                <div class="setting-info">
+
+                    <div class="setting-icon">🌐</div>
+
+                    <div class="setting-text">
+
+                        <div class="setting-name" data-i18n="language">
+                            اللغة
+                        </div>
+
+                        <div class="setting-description" data-i18n="languageDescription">
+                            لغة واجهة المنصة
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <select class="settings-select" id="language">
+
+                    <option value="ar">العربية</option>
+
+                    <option value="fr">Français</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="setting-row">
+
+                <div class="setting-info">
+
+                    <div class="setting-icon">🌓</div>
+
+                    <div class="setting-text">
+
+                        <div class="setting-name" data-i18n="darkMode">
+                            الوضع الداكن
+                        </div>
+
+                        <div class="setting-description" data-i18n="darkDescription">
+                            تغيير مظهر الموقع إلى الوضع الداكن
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <label class="switch">
+
+                    <input type="checkbox" id="darkMode">
+
+                    <span class="switch-slider"></span>
+
+                </label>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- NOTIFICATIONS -->
+
+    <section class="settings-section">
+
+        <h2 class="settings-section-title" data-i18n="notifications">
+            🔔 الإشعارات
+        </h2>
+
+        <div class="card settings-card">
+
+            <div class="setting-row">
+
+                <div class="setting-info">
+
+                    <div class="setting-icon">📢</div>
+
+                    <div class="setting-text">
+
+                        <div class="setting-name" data-i18n="platformNotifications">
+                            إشعارات المنصة
+                        </div>
+
+                        <div class="setting-description" data-i18n="platformNotificationsDescription">
+                            أخبار المنصة والتحديثات المهمة
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <label class="switch">
+
+                    <input type="checkbox"
+                           id="platformNotifications"
+                           checked>
+
+                    <span class="switch-slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <div class="setting-row">
+
+                <div class="setting-info">
+
+                    <div class="setting-icon">📚</div>
+
+                    <div class="setting-text">
+
+                        <div class="setting-name" data-i18n="studyNotifications">
+                            تذكير بالدراسة
+                        </div>
+
+                        <div class="setting-description" data-i18n="studyNotificationsDescription">
+                            تذكيرك بمتابعة دروسك
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <label class="switch">
+
+                    <input type="checkbox"
+                           id="studyNotifications"
+                           checked>
+
+                    <span class="switch-slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <div class="setting-row">
+
+                <div class="setting-info">
+
+                    <div class="setting-icon">🏆</div>
+
+                    <div class="setting-text">
+
+                        <div class="setting-name" data-i18n="achievementNotifications">
+                            التحديات والإنجازات
+                        </div>
+
+                        <div class="setting-description" data-i18n="achievementNotificationsDescription">
+                            إشعارات التحديات والشارات والنقاط
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <label class="switch">
+
+                    <input type="checkbox"
+                           id="achievementNotifications"
+                           checked>
+
+                    <span class="switch-slider"></span>
+
+                </label>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- LEARNING -->
+
+    <section class="settings-section">
+
+        <h2 class="settings-section-title" data-i18n="learning">
+            📚 التعلم
+        </h2>
+
+        <div class="card settings-card">
+
+            <div class="setting-row">
+
+                <div class="setting-info">
+
+                    <div class="setting-icon">▶️</div>
+
+                    <div class="setting-text">
+
+                        <div class="setting-name" data-i18n="continueLearning">
+                            متابعة التعلم تلقائيًا
+                        </div>
+
+                        <div class="setting-description" data-i18n="continueLearningDescription">
+                            الاحتفاظ بآخر درس كنت تدرسه
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <label class="switch">
+
+                    <input type="checkbox"
+                           id="continueLearning"
+                           checked>
+
+                    <span class="switch-slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <div class="setting-row">
+
+                <div class="setting-info">
+
+                    <div class="setting-icon">⏰</div>
+
+                    <div class="setting-text">
+
+                        <div class="setting-name" data-i18n="studyDuration">
+                            مدة الدراسة المفضلة
+                        </div>
+
+                        <div class="setting-description" data-i18n="studyDurationDescription">
+                            المدة المقترحة لجلسة الدراسة
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <select class="settings-select" id="studyDuration">
+
+                    <option value="15">15 دقيقة</option>
+                    <option value="30" selected>30 دقيقة</option>
+                    <option value="45">45 دقيقة</option>
+                    <option value="60">ساعة</option>
+                    <option value="90">ساعة ونصف</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- AI -->
+
+    <section class="settings-section">
+
+        <h2 class="settings-section-title" data-i18n="aiSection">
+            🤖 الأستاذ AI
+        </h2>
+
+        <div class="card settings-card">
+
+            <div class="setting-row">
+
+                <div class="setting-info">
+
+                    <div class="setting-icon">🧠</div>
+
+                    <div class="setting-text">
+
+                        <div class="setting-name" data-i18n="aiAssistant">
+                            المساعدة الذكية
+                        </div>
+
+                        <div class="setting-description" data-i18n="aiDescription">
+                            السماح للأستاذ AI بمساعدتك في التعلم
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <label class="switch">
+
+                    <input type="checkbox"
+                           id="aiAssistant"
+                           checked>
+
+                    <span class="switch-slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <div style="padding:15px">
+
+                <div class="info-box" data-i18n="aiInfo">
+
+                    🤖 الأستاذ AI سيتم تطويره لاحقًا ليكون مساعدك داخل الدروس،
+                    ويساعدك في فهم الشرح وحل التمارين والتدرب على الأسئلة.
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- COMMUNITY -->
+
+    <section class="settings-section">
+
+        <h2 class="settings-section-title" data-i18n="community">
+            👥 الخصوصية والمجتمع
+        </h2>
+
+        <div class="card settings-card">
+
+            <div class="setting-row">
+
+                <div class="setting-info">
+
+                    <div class="setting-icon">🏅</div>
+
+                    <div class="setting-text">
+
+                        <div class="setting-name" data-i18n="leaderboard">
+                            الظهور في لوحة المتصدرين
+                        </div>
+
+                        <div class="setting-description" data-i18n="leaderboardDescription">
+                            السماح بظهور حسابك في الترتيب العام
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <label class="switch">
+
+                    <input type="checkbox"
+                           id="leaderboard"
+                           checked>
+
+                    <span class="switch-slider"></span>
+
+                </label>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- QUICK ACCESS -->
+
+    <section class="settings-section">
+
+        <h2 class="settings-section-title" data-i18n="quickAccess">
+            ⚡ الوصول السريع
+        </h2>
+
+        <div class="settings-actions">
+
+            <button class="settings-action" onclick="goLevels()">
 
                 <span class="settings-action-content">
 
-                    <span class="settings-action-icon">
-                        🚪
-                    </span>
+                    <span class="settings-action-icon">🎓</span>
 
                     <span>
 
-                        <span class="settings-action-title">
-                            تسجيل الخروج
+                        <span class="settings-action-title"
+                              data-i18n="changeLevel">
+                            تغيير المستوى الدراسي
                         </span>
 
-                        <span class="settings-action-description">
-                            الخروج من حسابك على هذا الجهاز
+                        <span class="settings-action-description"
+                              data-i18n="changeLevelDescription">
+                            كونكور، بريڤي أو باكالوريا
                         </span>
 
                     </span>
 
                 </span>
 
-                <span class="arrow">
-                    ←
-                </span>
+                <span class="arrow">←</span>
 
             </button>
 
-        </section>
+
+            <button class="settings-action" onclick="goLibrary()">
+
+                <span class="settings-action-content">
+
+                    <span class="settings-action-icon">📚</span>
+
+                    <span>
+
+                        <span class="settings-action-title"
+                              data-i18n="myLibrary">
+                            مكتبتي
+                        </span>
+
+                        <span class="settings-action-description"
+                              data-i18n="myLibraryDescription">
+                            متابعة الدروس والفصول
+                        </span>
+
+                    </span>
+
+                </span>
+
+                <span class="arrow">←</span>
+
+            </button>
 
 
-        <div class="version">
-            عالم شيخ الأساتذة — الأستاذ AI
-            <br>
-            الإصدار 1.0
+            <button class="settings-action" onclick="goForum()">
+
+                <span class="settings-action-content">
+
+                    <span class="settings-action-icon">💬</span>
+
+                    <span>
+
+                        <span class="settings-action-title"
+                              data-i18n="forum">
+                            المنتدى
+                        </span>
+
+                        <span class="settings-action-description"
+                              data-i18n="forumDescription">
+                            التواصل مع الطلاب
+                        </span>
+
+                    </span>
+
+                </span>
+
+                <span class="arrow">←</span>
+
+            </button>
+
+
+            <button class="settings-action" onclick="goDashboard()">
+
+                <span class="settings-action-content">
+
+                    <span class="settings-action-icon">🏠</span>
+
+                    <span>
+
+                        <span class="settings-action-title"
+                              data-i18n="dashboard">
+                            لوحة التحكم
+                        </span>
+
+                        <span class="settings-action-description"
+                              data-i18n="dashboardDescription">
+                            العودة إلى الصفحة الرئيسية
+                        </span>
+
+                    </span>
+
+                </span>
+
+                <span class="arrow">←</span>
+
+            </button>
+
         </div>
 
+    </section>
+
+
+    <!-- SECURITY -->
+
+    <section class="settings-section">
+
+        <h2 class="settings-section-title" data-i18n="security">
+            🔐 الحساب والأمان
+        </h2>
+
+        <div class="settings-actions">
+
+            <button class="settings-action"
+                    onclick="comingSoon('password')">
+
+                <span class="settings-action-content">
+
+                    <span class="settings-action-icon">🔑</span>
+
+                    <span>
+
+                        <span class="settings-action-title"
+                              data-i18n="changePassword">
+                            تغيير كلمة المرور
+                        </span>
+
+                        <span class="settings-action-description"
+                              data-i18n="changePasswordDescription">
+                            تحديث كلمة مرور الحساب
+                        </span>
+
+                    </span>
+
+                </span>
+
+                <span class="arrow">←</span>
+
+            </button>
+
+
+            <button class="settings-action"
+                    onclick="comingSoon('payments')">
+
+                <span class="settings-action-content">
+
+                    <span class="settings-action-icon">💳</span>
+
+                    <span>
+
+                        <span class="settings-action-title"
+                              data-i18n="payments">
+                            الاشتراكات والمدفوعات
+                        </span>
+
+                        <span class="settings-action-description"
+                              data-i18n="paymentsDescription">
+                            سيتم تفعيلها في المرحلة القادمة
+                        </span>
+
+                    </span>
+
+                </span>
+
+                <span class="arrow">←</span>
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- ABOUT -->
+
+    <section class="settings-section">
+
+        <h2 class="settings-section-title" data-i18n="about">
+            ℹ️ حول المنصة
+        </h2>
+
+        <div class="card settings-card">
+
+            <div class="setting-row">
+
+                <div class="setting-info">
+
+                    <div class="setting-icon">🎓</div>
+
+                    <div class="setting-text">
+
+                        <div class="setting-name">
+                            عالم شيخ الأساتذة
+                        </div>
+
+                        <div class="setting-description"
+                             data-i18n="platformDescription">
+                            منصة تعليمية رقمية
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <span class="setting-value">
+                    1.0
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- LOGOUT -->
+
+    <section class="settings-section">
+
+        <button class="settings-action danger-action"
+                onclick="logout()">
+
+            <span class="settings-action-content">
+
+                <span class="settings-action-icon">🚪</span>
+
+                <span>
+
+                    <span class="settings-action-title"
+                          data-i18n="logout">
+                        تسجيل الخروج
+                    </span>
+
+                    <span class="settings-action-description"
+                          data-i18n="logoutDescription">
+                        الخروج من حسابك على هذا الجهاز
+                    </span>
+
+                </span>
+
+            </span>
+
+            <span class="arrow">←</span>
+
+        </button>
+
+    </section>
+
+
+    <div class="version">
+        عالم شيخ الأساتذة — الأستاذ AI
+        <br>
+        <span data-i18n="version">الإصدار 1.0</span>
     </div>
+
+</div>
 
 </main>
 
 
-<!-- التنقل السفلي -->
+<!-- BOTTOM NAV -->
 
 <nav class="bottom-nav">
 
     <button onclick="goDashboard()">
         🏠
-        <span>الرئيسية</span>
+        <span data-i18n="home">الرئيسية</span>
     </button>
 
     <button onclick="goLibrary()">
         📚
-        <span>مكتبتي</span>
+        <span data-i18n="library">مكتبتي</span>
     </button>
 
     <button onclick="goForum()">
         💬
-        <span>المنتدى</span>
+        <span data-i18n="forum">المنتدى</span>
     </button>
 
     <button class="active" onclick="goAccount()">
         👤
-        <span>حسابي</span>
+        <span data-i18n="account">حسابي</span>
     </button>
 
 </nav>
 
 
-<div
-    class="toast"
-    id="toast"
->
-</div>
+<div class="toast" id="toast"></div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
-    /* =========================
-       SUPABASE
-       ========================= */
+const SUPABASE_URL =
+    "https://qkzdlxqledsznhbifaxy.supabase.co";
 
-    const SUPABASE_URL =
-        "https://qkzdlxqledsznhbifaxy.supabase.co";
+const SUPABASE_KEY =
+    "sb_publishable_ZdpHXwLlhpbXztsTXpAFTg_TgOji91v";
 
-    const SUPABASE_KEY =
-        "sb_publishable_ZdpHXwLlhpbXztsTXpAFTg_TgOji91v";
+const supabaseClient =
+    supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
 
-    const supabaseClient =
-        supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_KEY
+
+/* =========================================================
+   TRANSLATIONS
+   ========================================================= */
+
+const translations = {
+
+    ar: {
+
+        brand: "عالم شيخ الأساتذة",
+        myAccount: "حسابي",
+
+        settings: "الإعدادات",
+
+        settingsIntro:
+            "خصص تجربة التعلم الخاصة بك وتحكم في إعدادات المنصة.",
+
+        accountSection: "👤 حسابي",
+        accountDescription: "معلومات حسابك الحالية.",
+
+        active: "● حساب نشط",
+
+        appearance: "🎨 المظهر واللغة",
+
+        language: "اللغة",
+        languageDescription: "لغة واجهة المنصة",
+
+        darkMode: "الوضع الداكن",
+        darkDescription:
+            "تغيير مظهر الموقع إلى الوضع الداكن",
+
+        notifications: "🔔 الإشعارات",
+
+        platformNotifications: "إشعارات المنصة",
+        platformNotificationsDescription:
+            "أخبار المنصة والتحديثات المهمة",
+
+        studyNotifications: "تذكير بالدراسة",
+        studyNotificationsDescription:
+            "تذكيرك بمتابعة دروسك",
+
+        achievementNotifications:
+            "التحديات والإنجازات",
+
+        achievementNotificationsDescription:
+            "إشعارات التحديات والشارات والنقاط",
+
+        learning: "📚 التعلم",
+
+        continueLearning:
+            "متابعة التعلم تلقائيًا",
+
+        continueLearningDescription:
+            "الاحتفاظ بآخر درس كنت تدرسه",
+
+        studyDuration:
+            "مدة الدراسة المفضلة",
+
+        studyDurationDescription:
+            "المدة المقترحة لجلسة الدراسة",
+
+        aiSection: "🤖 الأستاذ AI",
+
+        aiAssistant: "المساعدة الذكية",
+
+        aiDescription:
+            "السماح للأستاذ AI بمساعدتك في التعلم",
+
+        aiInfo:
+            "🤖 الأستاذ AI سيتم تطويره لاحقًا ليكون مساعدك داخل الدروس، ويساعدك في فهم الشرح وحل التمارين والتدرب على الأسئلة.",
+
+        community: "👥 الخصوصية والمجتمع",
+
+        leaderboard:
+            "الظهور في لوحة المتصدرين",
+
+        leaderboardDescription:
+            "السماح بظهور حسابك في الترتيب العام",
+
+        quickAccess: "⚡ الوصول السريع",
+
+        changeLevel:
+            "تغيير المستوى الدراسي",
+
+        changeLevelDescription:
+            "كونكور، بريڤي أو باكالوريا",
+
+        myLibrary: "مكتبتي",
+
+        myLibraryDescription:
+            "متابعة الدروس والفصول",
+
+        forum: "المنتدى",
+
+        forumDescription:
+            "التواصل مع الطلاب",
+
+        dashboard: "لوحة التحكم",
+
+        dashboardDescription:
+            "العودة إلى الصفحة الرئيسية",
+
+        security: "🔐 الحساب والأمان",
+
+        changePassword:
+            "تغيير كلمة المرور",
+
+        changePasswordDescription:
+            "تحديث كلمة مرور الحساب",
+
+        payments:
+            "الاشتراكات والمدفوعات",
+
+        paymentsDescription:
+            "سيتم تفعيلها في المرحلة القادمة",
+
+        about: "ℹ️ حول المنصة",
+
+        platformDescription:
+            "منصة تعليمية رقمية",
+
+        logout: "تسجيل الخروج",
+
+        logoutDescription:
+            "الخروج من حسابك على هذا الجهاز",
+
+        home: "الرئيسية",
+
+        library: "مكتبتي",
+
+        account: "حسابي",
+
+        version: "الإصدار 1.0",
+
+        saved:
+            "تم حفظ الإعدادات ✓",
+
+        darkEnabled:
+            "تم تفعيل الوضع الداكن ✓",
+
+        darkDisabled:
+            "تم إيقاف الوضع الداكن ✓",
+
+        comingSoon:
+            "هذا القسم سيتم تفعيله في المرحلة القادمة.",
+
+        logoutConfirm:
+            "هل تريد تسجيل الخروج من حسابك؟",
+
+        logoutError:
+            "حدث خطأ أثناء تسجيل الخروج."
+
+    },
+
+
+    fr: {
+
+        brand: "Monde des Maîtres Enseignants",
+        myAccount: "Mon compte",
+
+        settings: "Paramètres",
+
+        settingsIntro:
+            "Personnalisez votre expérience d'apprentissage et contrôlez les paramètres de la plateforme.",
+
+        accountSection: "👤 Mon compte",
+        accountDescription:
+            "Informations actuelles de votre compte.",
+
+        active: "● Compte actif",
+
+        appearance: "🎨 Apparence et langue",
+
+        language: "Langue",
+        languageDescription:
+            "Langue de l'interface de la plateforme",
+
+        darkMode: "Mode sombre",
+        darkDescription:
+            "Activer l'apparence sombre du site",
+
+        notifications: "🔔 Notifications",
+
+        platformNotifications:
+            "Notifications de la plateforme",
+
+        platformNotificationsDescription:
+            "Actualités et mises à jour importantes",
+
+        studyNotifications:
+            "Rappels d'étude",
+
+        studyNotificationsDescription:
+            "Recevoir des rappels pour continuer vos études",
+
+        achievementNotifications:
+            "Défis et réalisations",
+
+        achievementNotificationsDescription:
+            "Notifications des défis, badges et points",
+
+        learning: "📚 Apprentissage",
+
+        continueLearning:
+            "Continuer automatiquement l'apprentissage",
+
+        continueLearningDescription:
+            "Conserver la dernière leçon étudiée",
+
+        studyDuration:
+            "Durée d'étude préférée",
+
+        studyDurationDescription:
+            "Durée recommandée pour une session d'étude",
+
+        aiSection: "🤖 Professeur AI",
+
+        aiAssistant:
+            "Assistant intelligent",
+
+        aiDescription:
+            "Autoriser le Professeur AI à vous aider dans votre apprentissage",
+
+        aiInfo:
+            "🤖 Le Professeur AI sera développé prochainement pour devenir votre assistant dans les cours et vous aider à comprendre les explications, résoudre les exercices et vous entraîner.",
+
+        community:
+            "👥 Confidentialité et communauté",
+
+        leaderboard:
+            "Apparaître dans le classement",
+
+        leaderboardDescription:
+            "Autoriser l'affichage de votre compte dans le classement général",
+
+        quickAccess:
+            "⚡ Accès rapide",
+
+        changeLevel:
+            "Changer de niveau scolaire",
+
+        changeLevelDescription:
+            "Concours, Brevet ou Baccalauréat",
+
+        myLibrary:
+            "Ma bibliothèque",
+
+        myLibraryDescription:
+            "Suivre les cours et les chapitres",
+
+        forum:
+            "Forum",
+
+        forumDescription:
+            "Communiquer avec les étudiants",
+
+        dashboard:
+            "Tableau de bord",
+
+        dashboardDescription:
+            "Retour à la page principale",
+
+        security:
+            "🔐 Compte et sécurité",
+
+        changePassword:
+            "Changer le mot de passe",
+
+        changePasswordDescription:
+            "Mettre à jour le mot de passe du compte",
+
+        payments:
+            "Abonnements et paiements",
+
+        paymentsDescription:
+            "Cette fonction sera activée prochainement",
+
+        about:
+            "ℹ️ À propos",
+
+        platformDescription:
+            "Plateforme éducative numérique",
+
+        logout:
+            "Se déconnecter",
+
+        logoutDescription:
+            "Quitter votre compte sur cet appareil",
+
+        home:
+            "Accueil",
+
+        library:
+            "Bibliothèque",
+
+        account:
+            "Compte",
+
+        version:
+            "Version 1.0",
+
+        saved:
+            "Paramètres enregistrés ✓",
+
+        darkEnabled:
+            "Mode sombre activé ✓",
+
+        darkDisabled:
+            "Mode sombre désactivé ✓",
+
+        comingSoon:
+            "Cette section sera activée prochainement.",
+
+        logoutConfirm:
+            "Voulez-vous vous déconnecter de votre compte ?",
+
+        logoutError:
+            "Une erreur est survenue lors de la déconnexion."
+
+    }
+
+};
+
+
+/* =========================================================
+   SETTINGS
+   ========================================================= */
+
+const defaultSettings = {
+
+    language: "ar",
+
+    darkMode: false,
+
+    platformNotifications: true,
+
+    studyNotifications: true,
+
+    achievementNotifications: true,
+
+    continueLearning: true,
+
+    studyDuration: "30",
+
+    aiAssistant: true,
+
+    leaderboard: true
+
+};
+
+
+function getSettings() {
+
+    try {
+
+        return {
+            ...defaultSettings,
+            ...JSON.parse(
+                localStorage.getItem(
+                    "platform_settings"
+                ) || "{}"
+            )
+        };
+
+    } catch (error) {
+
+        return {
+            ...defaultSettings
+        };
+
+    }
+}
+
+
+/* =========================================================
+   APPLY LANGUAGE
+   ========================================================= */
+
+function applyLanguage(language) {
+
+    const lang =
+        language === "fr"
+            ? "fr"
+            : "ar";
+
+    document.documentElement.lang =
+        lang;
+
+    document.documentElement.dir =
+        lang === "fr"
+            ? "ltr"
+            : "rtl";
+
+
+    document
+        .querySelectorAll("[data-i18n]")
+        .forEach(element => {
+
+            const key =
+                element.getAttribute(
+                    "data-i18n"
+                );
+
+            if (
+                translations[lang] &&
+                translations[lang][key]
+            ) {
+
+                element.textContent =
+                    translations[lang][key];
+
+            }
+
+        });
+
+
+    /* خيارات مدة الدراسة */
+
+    const duration =
+        document.getElementById(
+            "studyDuration"
         );
 
+    if (duration) {
 
-    /* =========================
-       TOAST
-       ========================= */
+        const value =
+            duration.value;
 
-    let toastTimer;
+        const options =
+            duration.options;
 
-    function showToast(message) {
+        if (lang === "fr") {
 
-        const toast =
-            document.getElementById("toast");
+            options[0].textContent =
+                "15 minutes";
 
-        toast.textContent = message;
+            options[1].textContent =
+                "30 minutes";
 
-        toast.classList.add("show");
+            options[2].textContent =
+                "45 minutes";
 
-        clearTimeout(toastTimer);
+            options[3].textContent =
+                "1 heure";
 
-        toastTimer = setTimeout(() => {
+            options[4].textContent =
+                "1 h 30";
 
-            toast.classList.remove("show");
+        } else {
 
-        }, 2200);
+            options[0].textContent =
+                "15 دقيقة";
+
+            options[1].textContent =
+                "30 دقيقة";
+
+            options[2].textContent =
+                "45 دقيقة";
+
+            options[3].textContent =
+                "ساعة";
+
+            options[4].textContent =
+                "ساعة ونصف";
+
+        }
+
+        duration.value = value;
 
     }
 
 
-    /* =========================
-       USER
-       ========================= */
+    /* اتجاه زر السهم */
 
-    async function loadUser() {
+    document
+        .querySelectorAll(".arrow")
+        .forEach(arrow => {
 
-        const {
-            data,
-            error
-        } =
-            await supabaseClient.auth.getSession();
+            arrow.textContent =
+                lang === "fr"
+                    ? "→"
+                    : "←";
 
-        if (
-            error ||
-            !data ||
-            !data.session
-        ) {
-
-            window.location.href =
-                "login.html";
-
-            return;
-        }
-
-        const user =
-            data.session.user;
-
-        let name =
-            user.user_metadata?.full_name ||
-            user.user_metadata?.name ||
-            user.user_metadata?.display_name;
-
-        if (!name) {
-
-            name =
-                user.email
-                    ? user.email.split("@")[0]
-                    : "الطالب";
-
-        }
-
-        const email =
-            user.email || "-";
+        });
 
 
-        document.getElementById(
-            "userName"
-        ).textContent = name;
+    document.title =
+        lang === "fr"
+            ? "Paramètres | Monde des Maîtres Enseignants"
+            : "الإعدادات | عالم شيخ الأساتذة";
+
+}
 
 
-        document.getElementById(
-            "userEmail"
-        ).textContent = email;
+/* =========================================================
+   APPLY DARK MODE
+   ========================================================= */
+
+function applyDarkMode(enabled) {
+
+    document.documentElement
+        .classList
+        .toggle(
+            "dark-mode",
+            enabled
+        );
+
+}
 
 
-        const firstLetter =
-            name.trim().charAt(0);
+/* =========================================================
+   SAVE
+   ========================================================= */
 
-        if (firstLetter) {
+function saveSettings(showMessage = true) {
 
+    const settings = {
+
+        language:
             document.getElementById(
-                "avatar"
-            ).textContent =
-                firstLetter;
+                "language"
+            ).value,
 
-        }
+        darkMode:
+            document.getElementById(
+                "darkMode"
+            ).checked,
 
+        platformNotifications:
+            document.getElementById(
+                "platformNotifications"
+            ).checked,
 
-        loadSettings();
+        studyNotifications:
+            document.getElementById(
+                "studyNotifications"
+            ).checked,
 
-    }
+        achievementNotifications:
+            document.getElementById(
+                "achievementNotifications"
+            ).checked,
 
+        continueLearning:
+            document.getElementById(
+                "continueLearning"
+            ).checked,
 
-    /* =========================
-       SETTINGS
-       ========================= */
+        studyDuration:
+            document.getElementById(
+                "studyDuration"
+            ).value,
 
-    const defaultSettings = {
+        aiAssistant:
+            document.getElementById(
+                "aiAssistant"
+            ).checked,
 
-        language: "ar",
-
-        darkMode: false,
-
-        platformNotifications: true,
-
-        studyNotifications: true,
-
-        achievementNotifications: true,
-
-        continueLearning: true,
-
-        studyDuration: "30",
-
-        aiAssistant: true,
-
-        leaderboard: true
+        leaderboard:
+            document.getElementById(
+                "leaderboard"
+            ).checked
 
     };
 
 
-    function getSettings() {
-
-        const saved =
-            localStorage.getItem(
-                "platform_settings"
-            );
-
-        if (!saved) {
-
-            return {
-                ...defaultSettings
-            };
-
-        }
-
-        try {
-
-            return {
-                ...defaultSettings,
-                ...JSON.parse(saved)
-            };
-
-        } catch (error) {
-
-            return {
-                ...defaultSettings
-            };
-
-        }
-
-    }
-
-
-    function saveSettings(showMessage = true) {
-
-        const settings = {
-
-            language:
-                document.getElementById(
-                    "language"
-                ).value,
-
-            darkMode:
-                document.getElementById(
-                    "darkMode"
-                ).checked,
-
-            platformNotifications:
-                document.getElementById(
-                    "platformNotifications"
-                ).checked,
-
-            studyNotifications:
-                document.getElementById(
-                    "studyNotifications"
-                ).checked,
-
-            achievementNotifications:
-                document.getElementById(
-                    "achievementNotifications"
-                ).checked,
-
-            continueLearning:
-                document.getElementById(
-                    "continueLearning"
-                ).checked,
-
-            studyDuration:
-                document.getElementById(
-                    "studyDuration"
-                ).value,
-
-            aiAssistant:
-                document.getElementById(
-                    "aiAssistant"
-                ).checked,
-
-            leaderboard:
-                document.getElementById(
-                    "leaderboard"
-                ).checked
-
-        };
-
-
-        localStorage.setItem(
-            "platform_settings",
-            JSON.stringify(settings)
-        );
-
-
-        if (showMessage) {
-
-            showToast(
-                "تم حفظ الإعدادات ✓"
-            );
-
-        }
-
-    }
-
-
-    function loadSettings() {
-
-        const settings =
-            getSettings();
-
-
-        document.getElementById(
-            "language"
-        ).value =
-            settings.language;
-
-
-        document.getElementById(
-            "darkMode"
-        ).checked =
-            settings.darkMode;
-
-
-        document.getElementById(
-            "platformNotifications"
-        ).checked =
-            settings.platformNotifications;
-
-
-        document.getElementById(
-            "studyNotifications"
-        ).checked =
-            settings.studyNotifications;
-
-
-        document.getElementById(
-            "achievementNotifications"
-        ).checked =
-            settings.achievementNotifications;
-
-
-        document.getElementById(
-            "continueLearning"
-        ).checked =
-            settings.continueLearning;
-
-
-        document.getElementById(
-            "studyDuration"
-        ).value =
-            settings.studyDuration;
-
-
-        document.getElementById(
-            "aiAssistant"
-        ).checked =
-            settings.aiAssistant;
-
-
-        document.getElementById(
-            "leaderboard"
-        ).checked =
-            settings.leaderboard;
-
-    }
-
-
-    /* =========================
-       CHANGE EVENTS
-       ========================= */
-
-    document.addEventListener(
-        "change",
-        function(event) {
-
-            saveSettings(true);
-
-            if (
-                event.target.id ===
-                "darkMode"
-            ) {
-
-                if (
-                    event.target.checked
-                ) {
-
-                    showToast(
-                        "تم تفعيل الوضع الداكن ✓"
-                    );
-
-                } else {
-
-                    showToast(
-                        "تم إيقاف الوضع الداكن ✓"
-                    );
-
-                }
-
-            }
-
-        }
+    localStorage.setItem(
+        "platform_settings",
+        JSON.stringify(settings)
     );
 
 
-    /* =========================
-       NAVIGATION
-       ========================= */
+    applyDarkMode(
+        settings.darkMode
+    );
 
-    function goDashboard() {
-
-        window.location.href =
-            "dashboard.html";
-
-    }
+    applyLanguage(
+        settings.language
+    );
 
 
-    function goAccount() {
-
-        window.location.href =
-            "account.html";
-
-    }
-
-
-    function goLibrary() {
-
-        window.location.href =
-            "library.html";
-
-    }
-
-
-    function goForum() {
-
-        window.location.href =
-            "forum.html";
-
-    }
-
-
-    function goLevels() {
-
-        window.location.href =
-            "levels.html";
-
-    }
-
-
-    /* =========================
-       COMING SOON
-       ========================= */
-
-    function comingSoon(section) {
+    if (showMessage) {
 
         showToast(
-            "قسم " +
-            section +
-            " سيتم تفعيله في المرحلة القادمة."
+            translations[
+                settings.language
+            ].saved
         );
 
     }
 
+}
 
-    /* =========================
-       LOGOUT
-       ========================= */
 
-    async function logout() {
+/* =========================================================
+   LOAD
+   ========================================================= */
 
-        const confirmed =
-            confirm(
-                "هل تريد تسجيل الخروج من حسابك؟"
+function loadSettings() {
+
+    const settings =
+        getSettings();
+
+
+    document.getElementById(
+        "language"
+    ).value =
+        settings.language;
+
+
+    document.getElementById(
+        "darkMode"
+    ).checked =
+        settings.darkMode;
+
+
+    document.getElementById(
+        "platformNotifications"
+    ).checked =
+        settings.platformNotifications;
+
+
+    document.getElementById(
+        "studyNotifications"
+    ).checked =
+        settings.studyNotifications;
+
+
+    document.getElementById(
+        "achievementNotifications"
+    ).checked =
+        settings.achievementNotifications;
+
+
+    document.getElementById(
+        "continueLearning"
+    ).checked =
+        settings.continueLearning;
+
+
+    document.getElementById(
+        "studyDuration"
+    ).value =
+        settings.studyDuration;
+
+
+    document.getElementById(
+        "aiAssistant"
+    ).checked =
+        settings.aiAssistant;
+
+
+    document.getElementById(
+        "leaderboard"
+    ).checked =
+        settings.leaderboard;
+
+
+    applyDarkMode(
+        settings.darkMode
+    );
+
+    applyLanguage(
+        settings.language
+    );
+
+}
+
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+
+let toastTimer;
+
+function showToast(message) {
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+    toast.textContent =
+        message;
+
+    toast.classList.add("show");
+
+    clearTimeout(toastTimer);
+
+    toastTimer =
+        setTimeout(() => {
+
+            toast.classList.remove(
+                "show"
             );
 
-        if (!confirmed) {
-            return;
-        }
+        }, 2200);
+
+}
 
 
-        const {
-            error
-        } =
-            await supabaseClient.auth.signOut();
+/* =========================================================
+   CHANGE EVENTS
+   ========================================================= */
 
+document.addEventListener(
+    "change",
+    function (event) {
 
-        if (error) {
+        if (
+            event.target.id ===
+            "darkMode"
+        ) {
+
+            const enabled =
+                event.target.checked;
+
+            saveSettings(false);
+
+            const lang =
+                document.getElementById(
+                    "language"
+                ).value;
 
             showToast(
-                "حدث خطأ أثناء تسجيل الخروج."
+                enabled
+                    ? translations[lang].darkEnabled
+                    : translations[lang].darkDisabled
             );
 
             return;
-
         }
 
 
-        localStorage.removeItem(
-            "student_level"
+        if (
+            event.target.id ===
+            "language"
+        ) {
+
+            saveSettings(false);
+
+            return;
+        }
+
+
+        saveSettings(true);
+
+    }
+);
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+function goDashboard() {
+    window.location.href =
+        "dashboard.html";
+}
+
+function goAccount() {
+    window.location.href =
+        "account.html";
+}
+
+function goLibrary() {
+    window.location.href =
+        "library.html";
+}
+
+function goForum() {
+    window.location.href =
+        "forum.html";
+}
+
+function goLevels() {
+    window.location.href =
+        "levels.html";
+}
+
+
+/* =========================================================
+   COMING SOON
+   ========================================================= */
+
+function comingSoon() {
+
+    const lang =
+        document.getElementById(
+            "language"
+        ).value;
+
+    showToast(
+        translations[lang].comingSoon
+    );
+
+}
+
+
+/* =========================================================
+   LOGOUT
+   ========================================================= */
+
+async function logout() {
+
+    const lang =
+        document.getElementById(
+            "language"
+        ).value;
+
+    const confirmed =
+        confirm(
+            translations[lang].logoutConfirm
         );
 
-        localStorage.removeItem(
-            "platform_settings"
+    if (!confirmed) {
+        return;
+    }
+
+
+    const {
+        error
+    } =
+        await supabaseClient.auth.signOut();
+
+
+    if (error) {
+
+        showToast(
+            translations[lang].logoutError
         );
 
+        return;
+
+    }
+
+
+    localStorage.removeItem(
+        "student_level"
+    );
+
+    localStorage.removeItem(
+        "platform_settings"
+    );
+
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+/* =========================================================
+   LOAD USER
+   ========================================================= */
+
+async function loadUser() {
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient.auth.getSession();
+
+
+    if (
+        error ||
+        !data ||
+        !data.session
+    ) {
 
         window.location.href =
             "login.html";
 
+        return;
+
     }
 
 
-    /* =========================
-       START
-       ========================= */
+    const user =
+        data.session.user;
 
-    loadUser();
+
+    let name =
+        user.user_metadata?.full_name ||
+        user.user_metadata?.name ||
+        user.user_metadata?.display_name;
+
+
+    if (!name) {
+
+        name =
+            user.email
+                ? user.email.split("@")[0]
+                : "الطالب";
+
+    }
+
+
+    document.getElementById(
+        "userName"
+    ).textContent =
+        name;
+
+
+    document.getElementById(
+        "userEmail"
+    ).textContent =
+        user.email || "-";
+
+
+    document.getElementById(
+        "avatar"
+    ).textContent =
+        name.trim().charAt(0) || "ط";
+
+
+    loadSettings();
+
+}
+
+
+/* =========================================================
+   START
+   ========================================================= */
+
+loadUser();
 
 </script>
 
 </body>
-                    </html>
+    </html>
