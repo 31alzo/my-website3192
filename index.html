@@ -1,841 +1,404 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
 
-  <title>عالم شيخ الأساتذة | الأستاذ AI</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    <meta
+        name="description"
+        content="عالم شيخ الأساتذة — منصة تعليمية بسيطة تساعد الطلاب على التعلم والتقدم."
+    >
 
-    body {
-      font-family: Arial, Tahoma, sans-serif;
-      background: #f5f9ff;
-      color: #14213d;
-      line-height: 1.6;
-    }
+    <title>عالم شيخ الأساتذة</title>
 
-    header {
-      background: rgba(255,255,255,.96);
-      border-bottom: 1px solid #e5edf8;
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: blur(10px);
-    }
-
-    .header-inner {
-      max-width: 1100px;
-      margin: auto;
-      padding: 12px 16px;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-
-      color: #075dcc;
-      font-weight: bold;
-    }
-
-    .brand-icon {
-      width: 43px;
-      height: 43px;
-
-      background: #1677ff;
-      color: white;
-
-      border-radius: 13px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-weight: bold;
-    }
-
-    .brand-text {
-      font-size: 15px;
-    }
-
-    .brand-text small {
-      display: block;
-      color: #667085;
-      font-size: 10px;
-      font-weight: normal;
-    }
-
-    .login-btn {
-      border: none;
-      background: #1677ff;
-      color: white;
-
-      padding: 10px 15px;
-      border-radius: 11px;
-
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    main {
-      overflow: hidden;
-    }
-
-    .hero {
-      max-width: 1100px;
-      margin: auto;
-
-      padding: 55px 18px 45px;
-
-      display: grid;
-      gap: 35px;
-      align-items: center;
-    }
-
-    .hero-text h1 {
-      font-size: 34px;
-      line-height: 1.25;
-
-      color: #0d2854;
-    }
-
-    .hero-text h1 span {
-      color: #1677ff;
-    }
-
-    .hero-text p {
-      margin-top: 15px;
-
-      color: #667085;
-
-      font-size: 16px;
-      max-width: 600px;
-    }
-
-    .hero-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-
-      margin-top: 24px;
-    }
-
-    .primary-btn,
-    .secondary-btn {
-      padding: 13px 20px;
-
-      border-radius: 12px;
-
-      font-weight: bold;
-
-      cursor: pointer;
-      text-decoration: none;
-
-      display: inline-block;
-    }
-
-    .primary-btn {
-      background: #1677ff;
-      color: white;
-    }
-
-    .secondary-btn {
-      background: white;
-      color: #1268dc;
-
-      border: 1px solid #cfe1fa;
-    }
-
-    .hero-card {
-      background: white;
-
-      border: 1px solid #e1ebf8;
-
-      border-radius: 26px;
-
-      padding: 25px;
-
-      box-shadow:
-        0 20px 50px rgba(0,70,160,.1);
-    }
-
-    .teacher-avatar {
-      width: 75px;
-      height: 75px;
-
-      border-radius: 22px;
-
-      background: #1677ff;
-      color: white;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-size: 27px;
-      font-weight: bold;
-
-      margin-bottom: 15px;
-    }
-
-    .hero-card h2 {
-      font-size: 21px;
-    }
-
-    .hero-card p {
-      color: #667085;
-
-      font-size: 14px;
-
-      margin-top: 7px;
-    }
-
-    .ai-line {
-      margin-top: 18px;
-
-      padding: 13px;
-
-      background: #eef6ff;
-
-      border-radius: 13px;
-
-      color: #315b8a;
-
-      font-size: 13px;
-    }
-
-    .section {
-      max-width: 1100px;
-      margin: auto;
-
-      padding: 35px 18px;
-    }
-
-    .section-heading {
-      text-align: center;
-
-      margin-bottom: 25px;
-    }
-
-    .section-heading h2 {
-      font-size: 25px;
-    }
-
-    .section-heading p {
-      color: #667085;
-
-      font-size: 14px;
-
-      margin-top: 5px;
-    }
-
-    .features {
-      display: grid;
-      grid-template-columns: 1fr;
-
-      gap: 15px;
-    }
-
-    .feature {
-      background: white;
-
-      border: 1px solid #e5edf8;
-
-      border-radius: 19px;
-
-      padding: 21px;
-    }
-
-    .feature-icon {
-      font-size: 28px;
-      margin-bottom: 10px;
-    }
-
-    .feature h3 {
-      font-size: 17px;
-    }
-
-    .feature p {
-      color: #667085;
-
-      font-size: 13px;
-
-      margin-top: 6px;
-    }
-
-    .levels {
-      display: grid;
-      grid-template-columns: 1fr;
-
-      gap: 15px;
-    }
-
-    .level {
-      background: white;
-
-      border: 1px solid #e5edf8;
-
-      border-radius: 20px;
-
-      padding: 24px;
-
-      text-align: center;
-
-      cursor: pointer;
-
-      transition: .2s;
-    }
-
-    .level:hover {
-      transform: translateY(-3px);
-      border-color: #1677ff;
-    }
-
-    .level-icon {
-      width: 60px;
-      height: 60px;
-
-      margin: auto auto 13px;
-
-      border-radius: 18px;
-
-      background: #eaf3ff;
-      color: #1268dc;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-size: 28px;
-    }
-
-    .level h3 {
-      font-size: 18px;
-    }
-
-    .level p {
-      color: #667085;
-      font-size: 13px;
-
-      margin-top: 5px;
-    }
-
-    .community {
-      display: grid;
-      grid-template-columns: 1fr;
-
-      gap: 15px;
-    }
-
-    .community-card {
-      background: white;
-
-      border: 1px solid #e5edf8;
-
-      border-radius: 20px;
-
-      padding: 23px;
-    }
-
-    .community-card h3 {
-      font-size: 18px;
-    }
-
-    .community-card p {
-      color: #667085;
-
-      font-size: 13px;
-
-      margin-top: 6px;
-    }
-
-    .cta {
-      max-width: 1050px;
-      margin: 25px auto 50px;
-
-      padding: 35px 20px;
-
-      border-radius: 25px;
-
-      background: linear-gradient(
-        135deg,
-        #1677ff,
-        #075dcc
-      );
-
-      color: white;
-
-      text-align: center;
-    }
-
-    .cta h2 {
-      font-size: 25px;
-    }
-
-    .cta p {
-      opacity: .9;
-
-      margin-top: 7px;
-
-      font-size: 14px;
-    }
-
-    .cta a {
-      display: inline-block;
-
-      margin-top: 18px;
-
-      background: white;
-
-      color: #075dcc;
-
-      padding: 12px 24px;
-
-      border-radius: 12px;
-
-      text-decoration: none;
-
-      font-weight: bold;
-    }
-
-    footer {
-      background: white;
-
-      border-top: 1px solid #e5edf8;
-
-      text-align: center;
-
-      padding: 25px 15px;
-
-      color: #667085;
-
-      font-size: 12px;
-    }
-
-    @media (min-width: 650px) {
-
-      .hero {
-        grid-template-columns: 1.2fr .8fr;
-        padding-top: 75px;
-        padding-bottom: 65px;
-      }
-
-      .hero-text h1 {
-        font-size: 44px;
-      }
-
-      .features {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      .levels {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      .community {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-  </style>
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
-
 
 <body>
 
+    <!-- =========================
+         HEADER
+    ========================== -->
 
-<header>
+    <header class="site-header">
+        <div class="container header-inner">
 
-  <div class="header-inner">
+            <a href="index.html" class="brand">
+                <span class="brand-icon">🎓</span>
+                <span>عالم شيخ الأساتذة</span>
+            </a>
 
-    <div class="brand">
+            <a
+                href="login.html"
+                class="btn btn-primary"
+            >
+                دخول
+            </a>
 
-      <div class="brand-icon">
-        AI
-      </div>
-
-      <div class="brand-text">
-        عالم شيخ الأساتذة
-        <small>
-          الأستاذ AI
-        </small>
-      </div>
-
-    </div>
-
-
-    <button
-      class="login-btn"
-      onclick="openLogin()">
-
-      دخول الطالب
-
-    </button>
-
-  </div>
-
-</header>
+        </div>
+    </header>
 
 
+    <!-- =========================
+         HERO
+    ========================== -->
 
-<main>
+    <main>
+
+        <section class="section">
+            <div class="container">
+
+                <div
+                    class="card"
+                    style="
+                        padding: 32px 22px;
+                        text-align: center;
+                        overflow: hidden;
+                    "
+                >
+
+                    <div
+                        style="
+                            width: 72px;
+                            height: 72px;
+                            margin: 0 auto 18px;
+                            display: grid;
+                            place-items: center;
+                            background: var(--primary-light);
+                            border-radius: 22px;
+                            font-size: 36px;
+                        "
+                    >
+                        🎓
+                    </div>
+
+                    <span class="badge badge-primary">
+                        الأستاذ AI
+                    </span>
+
+                    <h1
+                        style="
+                            font-size: clamp(30px, 8vw, 52px);
+                            line-height: 1.25;
+                            margin: 16px 0 12px;
+                            font-weight: 900;
+                        "
+                    >
+                        مرحبًا بك في
+                        <br>
+                        عالم شيخ الأساتذة
+                    </h1>
+
+                    <p
+                        style="
+                            max-width: 620px;
+                            margin: 0 auto;
+                            color: var(--text-soft);
+                            font-size: 16px;
+                        "
+                    >
+                        تعلّم بطريقة بسيطة، منظمة، وممتعة.
+                        اختر مستواك وابدأ رحلتك التعليمية.
+                    </p>
+
+                    <div
+                        style="
+                            display: flex;
+                            flex-direction: column;
+                            gap: 10px;
+                            margin-top: 26px;
+                        "
+                    >
+
+                        <a
+                            href="login.html"
+                            class="btn btn-primary"
+                        >
+                            ابدأ التعلم
+                            <span>←</span>
+                        </a>
+
+                        <a
+                            href="#levels"
+                            class="btn btn-secondary"
+                        >
+                            اكتشف المستويات
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
 
 
-  <!-- HERO -->
+        <!-- =========================
+             FEATURES
+        ========================== -->
 
-  <section class="hero">
+        <section class="section">
+            <div class="container">
 
-    <div class="hero-text">
+                <div class="section-header text-center">
+                    <h2 class="section-title">
+                        كل ما تحتاجه في مكان واحد
+                    </h2>
 
-      <h1>
-        مرحبًا بك في
-        <span>
-          عالم شيخ الأساتذة
-        </span>
-      </h1>
-
-      <p>
-        منصة تعليمية تساعدك على فهم دروسك،
-        التدريب، حل التمارين، ومتابعة تقدمك
-        خطوة بخطوة مع الأستاذ AI.
-      </p>
+                    <p class="section-description">
+                        تجربة تعليمية واضحة بدون تعقيد.
+                    </p>
+                </div>
 
 
-      <div class="hero-buttons">
+                <div class="grid grid-2">
 
-        <a
-          href="login.html"
-          class="primary-btn">
+                    <article class="card card-hover" style="padding: 22px;">
+                        <div style="font-size: 30px; margin-bottom: 10px;">
+                            📚
+                        </div>
 
-          ابدأ التعلم
+                        <h3 style="margin-bottom: 6px;">
+                            تعلم منظم
+                        </h3>
 
-        </a>
-
-        <a
-          href="#levels"
-          class="secondary-btn">
-
-          اكتشف المستويات
-
-        </a>
-
-      </div>
-
-    </div>
+                        <p class="text-muted">
+                            دروس مرتبة حسب المستوى والفصول لتعرف دائمًا ماذا تتعلم.
+                        </p>
+                    </article>
 
 
-    <div class="hero-card">
+                    <article class="card card-hover" style="padding: 22px;">
+                        <div style="font-size: 30px; margin-bottom: 10px;">
+                            📈
+                        </div>
 
-      <div class="teacher-avatar">
-        AI
-      </div>
+                        <h3 style="margin-bottom: 6px;">
+                            تابع تقدمك
+                        </h3>
 
-      <h2>
-        الأستاذ AI 🤖
-      </h2>
-
-      <p>
-        مساعدك التعليمي لفهم الدروس
-        والتدرب على التمارين بطريقة منظمة.
-      </p>
-
-      <div class="ai-line">
-        🎓 تعلم • تدرب • تقدم
-      </div>
-
-    </div>
-
-  </section>
+                        <p class="text-muted">
+                            اعرف أين وصلت وما الذي أنجزته أثناء رحلتك التعليمية.
+                        </p>
+                    </article>
 
 
+                    <article class="card card-hover" style="padding: 22px;">
+                        <div style="font-size: 30px; margin-bottom: 10px;">
+                            🏆
+                        </div>
 
-  <!-- FEATURES -->
+                        <h3 style="margin-bottom: 6px;">
+                            تحديات وإنجازات
+                        </h3>
 
-  <section class="section">
-
-    <div class="section-heading">
-
-      <h2>
-        ماذا ستجد في المنصة؟
-      </h2>
-
-      <p>
-        بيئة تعليمية مصممة للطالب
-      </p>
-
-    </div>
+                        <p class="text-muted">
+                            اختبر نفسك وشارك في التحديات لتطوير مستواك.
+                        </p>
+                    </article>
 
 
-    <div class="features">
+                    <article class="card card-hover" style="padding: 22px;">
+                        <div style="font-size: 30px; margin-bottom: 10px;">
+                            🤖
+                        </div>
+
+                        <h3 style="margin-bottom: 6px;">
+                            الأستاذ AI
+                        </h3>
+
+                        <p class="text-muted">
+                            مساعد تعليمي ذكي سيكون جزءًا من تجربتك التعليمية مستقبلًا.
+                        </p>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
 
 
-      <div class="feature">
+        <!-- =========================
+             LEVELS
+        ========================== -->
 
-        <div class="feature-icon">
-          📚
+        <section
+            class="section"
+            id="levels"
+        >
+
+            <div class="container">
+
+                <div class="section-header text-center">
+
+                    <h2 class="section-title">
+                        اختر مستواك
+                    </h2>
+
+                    <p class="section-description">
+                        سنبني المحتوى لكل مستوى خطوة بخطوة.
+                    </p>
+
+                </div>
+
+
+                <div class="grid grid-3">
+
+                    <a
+                        href="login.html"
+                        class="card card-hover"
+                        style="padding: 24px;"
+                    >
+
+                        <div style="font-size: 34px; margin-bottom: 12px;">
+                            🎯
+                        </div>
+
+                        <h3 style="margin-bottom: 6px;">
+                            كونكور
+                        </h3>
+
+                        <p class="text-muted">
+                            استعداد منظم للمسابقة.
+                        </p>
+
+                    </a>
+
+
+                    <a
+                        href="login.html"
+                        class="card card-hover"
+                        style="padding: 24px;"
+                    >
+
+                        <div style="font-size: 34px; margin-bottom: 12px;">
+                            📘
+                        </div>
+
+                        <h3 style="margin-bottom: 6px;">
+                            بريڤي
+                        </h3>
+
+                        <p class="text-muted">
+                            تعلم ومراجعة بطريقة منظمة.
+                        </p>
+
+                    </a>
+
+
+                    <a
+                        href="login.html"
+                        class="card card-hover"
+                        style="padding: 24px;"
+                    >
+
+                        <div style="font-size: 34px; margin-bottom: 12px;">
+                            🎓
+                        </div>
+
+                        <h3 style="margin-bottom: 6px;">
+                            باكالوريا
+                        </h3>
+
+                        <p class="text-muted">
+                            تحضير تدريجي للباكالوريا.
+                        </p>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             FINAL CTA
+        ========================== -->
+
+        <section class="section">
+
+            <div class="container">
+
+                <div
+                    class="card"
+                    style="
+                        padding: 32px 22px;
+                        text-align: center;
+                        background: var(--primary);
+                        color: white;
+                        border: 0;
+                    "
+                >
+
+                    <h2
+                        style="
+                            font-size: 25px;
+                            margin-bottom: 8px;
+                        "
+                    >
+                        مستعد لبدء التعلم؟
+                    </h2>
+
+                    <p
+                        style="
+                            opacity: 0.9;
+                            margin-bottom: 20px;
+                        "
+                    >
+                        أنشئ حسابك وابدأ رحلتك التعليمية.
+                    </p>
+
+                    <a
+                        href="login.html"
+                        class="btn"
+                        style="
+                            background: white;
+                            color: var(--primary);
+                        "
+                    >
+                        إنشاء حساب
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer class="site-footer">
+
+        <div class="container">
+
+            <p>
+                © <span data-current-year></span>
+                عالم شيخ الأساتذة
+            </p>
+
+            <p style="margin-top: 5px;">
+                منصة تعليمية قيد التطوير
+            </p>
+
         </div>
 
-        <h3>
-          تعلم منظم
-        </h3>
+    </footer>
 
-        <p>
-          الدروس مرتبة حسب المستوى
-          والفصول التعليمية.
-        </p>
 
-      </div>
-
-
-      <div class="feature">
-
-        <div class="feature-icon">
-          🤖
-        </div>
-
-        <h3>
-          الأستاذ AI
-        </h3>
-
-        <p>
-          مساعد ذكي يساعدك على فهم
-          الدروس والتمارين.
-        </p>
-
-      </div>
-
-
-      <div class="feature">
-
-        <div class="feature-icon">
-          🏆
-        </div>
-
-        <h3>
-          نقاط وإنجازات
-        </h3>
-
-        <p>
-          تابع تقدمك واحصل على
-          الشارات والإنجازات.
-        </p>
-
-      </div>
-
-
-    </div>
-
-  </section>
-
-
-
-  <!-- LEVELS -->
-
-  <section
-    class="section"
-    id="levels">
-
-    <div class="section-heading">
-
-      <h2>
-        اختر مستواك
-      </h2>
-
-      <p>
-        ابدأ من المستوى الدراسي المناسب لك
-      </p>
-
-    </div>
-
-
-    <div class="levels">
-
-
-      <div
-        class="level"
-        onclick="openLevels()">
-
-        <div class="level-icon">
-          🏫
-        </div>
-
-        <h3>
-          كونكور
-        </h3>
-
-        <p>
-          التحضير والدروس والتمارين
-        </p>
-
-      </div>
-
-
-      <div
-        class="level"
-        onclick="openLevels()">
-
-        <div class="level-icon">
-          📘
-        </div>
-
-        <h3>
-          بريڤي
-        </h3>
-
-        <p>
-          الدروس والتمارين الخاصة بالمستوى
-        </p>
-
-      </div>
-
-
-      <div
-        class="level"
-        onclick="openLevels()">
-
-        <div class="level-icon">
-          🎓
-        </div>
-
-        <h3>
-          باكالوريا
-        </h3>
-
-        <p>
-          التحضير والدروس والتمارين
-        </p>
-
-      </div>
-
-
-    </div>
-
-  </section>
-
-
-
-  <!-- COMMUNITY -->
-
-  <section class="section">
-
-    <div class="section-heading">
-
-      <h2>
-        تعلم مع الآخرين
-      </h2>
-
-      <p>
-        التعليم ليس مجرد مشاهدة الدروس
-      </p>
-
-    </div>
-
-
-    <div class="community">
-
-
-      <div class="community-card">
-
-        <h3>
-          💬 منتدى الطلاب
-        </h3>
-
-        <p>
-          اطرح أسئلتك وشارك أفكارك
-          وتناقش مع الطلاب.
-        </p>
-
-      </div>
-
-
-      <div class="community-card">
-
-        <h3>
-          🏆 التحدي الأسبوعي
-        </h3>
-
-        <p>
-          حل تمرين الأسبوع، اجمع النقاط
-          ونافس أفضل الطلاب.
-        </p>
-
-      </div>
-
-
-    </div>
-
-  </section>
-
-
-
-  <!-- CTA -->
-
-  <section class="cta">
-
-    <h2>
-      مستعد لبدء رحلتك؟
-    </h2>
-
-    <p>
-      أنشئ حسابك وابدأ التعلم.
-    </p>
-
-    <a href="login.html">
-      إنشاء حساب
-    </a>
-
-  </section>
-
-
-</main>
-
-
-
-<footer>
-
-  <p>
-    © 2026 عالم شيخ الأساتذة — الأستاذ AI
-  </p>
-
-  <p style="margin-top:5px;">
-    منصة تعليمية قيد التطوير
-  </p>
-
-</footer>
-
-
-
-<script>
-
-  function openLogin() {
-
-    window.location.href =
-      "login.html";
-
-  }
-
-
-  function openLevels() {
-
-    window.location.href =
-      "levels.html";
-
-  }
-
-</script>
-
+    <!-- Global JS -->
+    <script src="script.js"></script>
 
 </body>
-    </html>
+          </html>
