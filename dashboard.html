@@ -1,1376 +1,1390 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!DOCTYPE html><html lang="ar" dir="rtl"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>لوحة الطالب | عالم شيخ الأساتذة</title>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
 
-  <title>لوحة الطالب | عالم شيخ الأساتذة</title>
+<style>
+    /* =========================
+       DASHBOARD ONLY
+       ========================= */
 
-  <style>
+    .dashboard-hero {
+        position: relative;
+        overflow: hidden;
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+        padding: 28px 24px;
+        margin-bottom: 24px;
+
+        background:
+            linear-gradient(
+                135deg,
+                var(--primary),
+                var(--primary-dark)
+            );
+
+        color: #fff;
+        border-radius: var(--radius-lg);
+
+        box-shadow:
+            0 14px 35px rgba(37, 99, 235, 0.18);
     }
 
-    body {
-      font-family: Arial, Tahoma, sans-serif;
-      background: #f5f9ff;
-      color: #14213d;
-      min-height: 100vh;
+    .dashboard-hero::after {
+        content: "";
+        position: absolute;
+
+        width: 180px;
+        height: 180px;
+
+        left: -60px;
+        top: -80px;
+
+        border-radius: 50%;
+
+        background: rgba(255,255,255,0.08);
     }
 
-    header {
-      background: white;
-      border-bottom: 1px solid #e5edf8;
-      position: sticky;
-      top: 0;
-      z-index: 20;
+    .dashboard-hero-content {
+        position: relative;
+        z-index: 2;
     }
 
-    .header-inner {
-      max-width: 1000px;
-      margin: auto;
-      padding: 12px 16px;
+    .dashboard-label {
+        display: inline-block;
 
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
+        margin-bottom: 7px;
+
+        font-size: 13px;
+        opacity: .85;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: #075dcc;
-      font-weight: bold;
-      font-size: 16px;
+    .dashboard-title {
+        font-size: clamp(25px, 6vw, 34px);
+        font-weight: 850;
+        line-height: 1.35;
     }
 
-    .brand-icon {
-      width: 42px;
-      height: 42px;
+    .dashboard-description {
+        max-width: 620px;
 
-      background: #1677ff;
-      color: white;
+        margin-top: 8px;
 
-      border-radius: 12px;
+        font-size: 14px;
+        line-height: 1.8;
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-weight: bold;
+        opacity: .9;
     }
 
-    .header-actions {
-      display: flex;
-      gap: 8px;
+    /* Statistics */
+
+    .dashboard-stats {
+        display: grid;
+
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 12px;
+
+        margin-bottom: 28px;
     }
 
-    .icon-btn {
-      width: 42px;
-      height: 42px;
+    .dashboard-stat {
+        padding: 17px;
 
-      border: none;
-      border-radius: 12px;
+        text-align: center;
 
-      background: #eef5ff;
-      color: #1268dc;
+        background: var(--surface);
 
-      font-size: 19px;
-      cursor: pointer;
+        border: 1px solid var(--border);
+
+        border-radius: var(--radius-md);
+
+        box-shadow: var(--shadow-sm);
     }
 
-    main {
-      max-width: 1000px;
-      margin: auto;
+    .dashboard-stat-icon {
+        width: 42px;
+        height: 42px;
 
-      padding: 25px 16px 90px;
+        margin: 0 auto 9px;
+
+        display: grid;
+        place-items: center;
+
+        border-radius: 12px;
+
+        background: var(--primary-light);
+
+        font-size: 20px;
     }
 
-    /* الترحيب */
+    .dashboard-stat-value {
+        display: block;
 
-    .welcome {
-      background: linear-gradient(135deg, #1677ff, #075dcc);
-      color: white;
+        font-size: 21px;
+        font-weight: 850;
 
-      border-radius: 24px;
-
-      padding: 25px 20px;
-
-      margin-bottom: 20px;
-
-      box-shadow: 0 12px 30px rgba(22,119,255,.2);
+        color: var(--primary);
     }
 
-    .welcome small {
-      opacity: .85;
-      font-size: 13px;
+    .dashboard-stat-label {
+        display: block;
+
+        margin-top: 2px;
+
+        color: var(--text-soft);
+
+        font-size: 12px;
     }
 
-    .welcome h1 {
-      margin-top: 8px;
-      font-size: 25px;
+    /* Section */
+
+    .dashboard-section {
+        margin-top: 30px;
     }
 
-    .welcome p {
-      margin-top: 8px;
-      line-height: 1.6;
-      font-size: 14px;
-      opacity: .9;
+    .dashboard-section-header {
+        display: flex;
+
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 12px;
+
+        margin-bottom: 13px;
     }
 
-    /* الإحصائيات */
-
-    .stats {
-      display: grid;
-
-      grid-template-columns:
-        repeat(2, 1fr);
-
-      gap: 12px;
-
-      margin-bottom: 25px;
+    .dashboard-section-title {
+        font-size: 20px;
+        font-weight: 850;
     }
 
-    .stat {
-      background: white;
-
-      border: 1px solid #e5edf8;
-
-      border-radius: 18px;
-
-      padding: 17px;
-
-      text-align: center;
+    .dashboard-section-note {
+        color: var(--text-soft);
+        font-size: 12px;
     }
 
-    .stat-icon {
-      font-size: 24px;
-      margin-bottom: 7px;
-    }
-
-    .stat strong {
-      display: block;
-
-      font-size: 21px;
-
-      color: #1268dc;
-    }
-
-    .stat span {
-      display: block;
-
-      margin-top: 4px;
-
-      color: #667085;
-
-      font-size: 12px;
-    }
-
-    /* العناوين */
-
-    .section-title {
-      display: flex;
-
-      align-items: center;
-      justify-content: space-between;
-
-      margin: 28px 2px 13px;
-    }
-
-    .section-title h2 {
-      font-size: 19px;
-    }
-
-    .section-title span {
-      color: #667085;
-      font-size: 12px;
-    }
-
-    /* متابعة التعلم */
+    /* Continue */
 
     .continue-card {
-      background: white;
+        padding: 20px;
 
-      border: 1px solid #e5edf8;
+        background: var(--surface);
 
-      border-radius: 20px;
+        border: 1px solid var(--border);
 
-      padding: 20px;
+        border-radius: var(--radius-md);
 
-      box-shadow: 0 7px 22px rgba(0,70,160,.05);
+        box-shadow: var(--shadow-sm);
     }
 
-    .course-top {
-      display: flex;
+    .continue-top {
+        display: flex;
 
-      align-items: center;
+        align-items: center;
 
-      gap: 14px;
+        gap: 14px;
     }
 
-    .course-icon {
-      width: 58px;
-      height: 58px;
+    .continue-icon {
+        width: 58px;
+        height: 58px;
 
-      flex-shrink: 0;
+        flex-shrink: 0;
 
-      background: #eaf3ff;
-      color: #1268dc;
+        display: grid;
+        place-items: center;
 
-      border-radius: 16px;
+        border-radius: 16px;
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
+        background: var(--primary-light);
 
-      font-size: 27px;
+        color: var(--primary);
+
+        font-size: 28px;
+        font-weight: 800;
     }
 
-    .course-info h3 {
-      font-size: 17px;
-      margin-bottom: 5px;
+    .continue-info h3 {
+        font-size: 17px;
+        font-weight: 800;
     }
 
-    .course-info p {
-      color: #667085;
-      font-size: 13px;
+    .continue-info p {
+        margin-top: 2px;
+
+        color: var(--text-soft);
+
+        font-size: 13px;
     }
 
-    .progress-area {
-      margin-top: 18px;
+    .continue-progress {
+        margin-top: 19px;
     }
 
-    .progress-label {
-      display: flex;
+    .continue-progress-head {
+        display: flex;
 
-      justify-content: space-between;
+        justify-content: space-between;
 
-      color: #667085;
+        margin-bottom: 7px;
 
-      font-size: 12px;
+        color: var(--text-soft);
 
-      margin-bottom: 7px;
+        font-size: 12px;
     }
 
-    .progress {
-      height: 8px;
+    .continue-button {
+        width: 100%;
 
-      background: #edf2f7;
-
-      border-radius: 20px;
-
-      overflow: hidden;
+        margin-top: 16px;
     }
 
-    .progress-bar {
-      width: 0%;
-
-      height: 100%;
-
-      background: #1677ff;
-
-      border-radius: 20px;
-    }
-
-    .continue-btn {
-      width: 100%;
-
-      margin-top: 16px;
-
-      padding: 13px;
-
-      border: none;
-
-      border-radius: 12px;
-
-      background: #1677ff;
-
-      color: white;
-
-      font-weight: bold;
-
-      cursor: pointer;
-    }
-
-    /* المستوى */
+    /* Level */
 
     .level-card {
-      background: white;
+        padding: 18px;
 
-      border: 1px solid #e5edf8;
+        display: flex;
 
-      border-radius: 20px;
+        align-items: center;
+        justify-content: space-between;
 
-      padding: 20px;
+        gap: 15px;
 
-      display: flex;
+        background: var(--surface);
 
-      align-items: center;
+        border: 1px solid var(--border);
 
-      justify-content: space-between;
+        border-radius: var(--radius-md);
 
-      gap: 15px;
+        box-shadow: var(--shadow-sm);
     }
 
-    .level-info {
-      display: flex;
+    .level-content {
+        display: flex;
 
-      align-items: center;
+        align-items: center;
 
-      gap: 13px;
+        gap: 12px;
+
+        min-width: 0;
     }
 
     .level-icon {
-      width: 52px;
-      height: 52px;
+        width: 50px;
+        height: 50px;
 
-      background: #eaf3ff;
-      color: #1268dc;
+        flex-shrink: 0;
 
-      border-radius: 15px;
+        display: grid;
+        place-items: center;
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
+        background: var(--primary-light);
 
-      font-size: 24px;
+        border-radius: 14px;
+
+        font-size: 23px;
     }
 
-    .level-info h3 {
-      font-size: 16px;
-      margin-bottom: 5px;
+    .level-content h3 {
+        font-size: 15px;
+        font-weight: 800;
     }
 
-    .level-info p {
-      color: #667085;
-      font-size: 12px;
+    .level-content p {
+        margin-top: 2px;
+
+        color: var(--text-soft);
+
+        font-size: 12px;
     }
 
-    .change-level {
-      border: none;
-
-      background: #eef5ff;
-
-      color: #1268dc;
-
-      padding: 10px 13px;
-
-      border-radius: 10px;
-
-      font-weight: bold;
-
-      cursor: pointer;
-
-      white-space: nowrap;
-    }
-
-    /* القائمة */
+    /* Quick access */
 
     .quick-grid {
-      display: grid;
+        display: grid;
 
-      grid-template-columns:
-        repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr);
 
-      gap: 12px;
+        gap: 12px;
     }
 
     .quick-card {
-      background: white;
+        min-height: 135px;
 
-      border: 1px solid #e5edf8;
+        padding: 18px 12px;
 
-      border-radius: 18px;
+        display: flex;
 
-      padding: 18px 12px;
+        flex-direction: column;
 
-      text-align: center;
+        align-items: center;
+        justify-content: center;
 
-      cursor: pointer;
+        text-align: center;
 
-      transition: .2s;
+        background: var(--surface);
+
+        border: 1px solid var(--border);
+
+        border-radius: var(--radius-md);
+
+        box-shadow: var(--shadow-sm);
+
+        transition:
+            transform var(--transition),
+            box-shadow var(--transition),
+            border-color var(--transition);
     }
 
     .quick-card:hover {
-      transform: translateY(-2px);
+        transform: translateY(-2px);
 
-      border-color: #1677ff;
+        border-color: #bfdbfe;
+
+        box-shadow: var(--shadow-md);
+    }
+
+    .quick-card:active {
+        transform: scale(.98);
     }
 
     .quick-icon {
-      font-size: 26px;
+        width: 48px;
+        height: 48px;
 
-      margin-bottom: 9px;
+        display: grid;
+        place-items: center;
+
+        margin-bottom: 9px;
+
+        border-radius: 14px;
+
+        background: var(--primary-light);
+
+        font-size: 23px;
     }
 
     .quick-card h3 {
-      font-size: 14px;
+        font-size: 14px;
+        font-weight: 800;
     }
 
     .quick-card p {
-      color: #667085;
+        margin-top: 3px;
 
-      font-size: 11px;
+        color: var(--text-soft);
 
-      margin-top: 4px;
+        font-size: 11px;
     }
 
-    /* الأستاذ AI */
+    /* AI */
 
     .ai-card {
-      background: white;
+        position: relative;
+        overflow: hidden;
 
-      border: 1px solid #dceaff;
+        padding: 25px 20px;
 
-      border-radius: 22px;
+        text-align: center;
 
-      padding: 22px;
+        background: var(--surface);
 
-      text-align: center;
+        border: 1px solid #dbeafe;
+
+        border-radius: var(--radius-lg);
+
+        box-shadow: var(--shadow-sm);
     }
 
     .ai-avatar {
-      width: 65px;
-      height: 65px;
+        width: 62px;
+        height: 62px;
 
-      margin: auto;
+        margin: 0 auto;
 
-      border-radius: 20px;
+        display: grid;
+        place-items: center;
 
-      background: #1677ff;
+        background: var(--primary);
 
-      color: white;
+        color: white;
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
+        border-radius: 18px;
 
-      font-size: 25px;
+        font-size: 21px;
+        font-weight: 850;
 
-      font-weight: bold;
+        box-shadow:
+            0 8px 20px rgba(37, 99, 235, .18);
     }
 
     .ai-card h2 {
-      margin-top: 12px;
+        margin-top: 12px;
 
-      font-size: 19px;
+        font-size: 20px;
+        font-weight: 850;
     }
 
     .ai-card p {
-      color: #667085;
+        max-width: 550px;
 
-      font-size: 13px;
+        margin: 7px auto 0;
 
-      line-height: 1.7;
+        color: var(--text-soft);
 
-      margin-top: 7px;
+        font-size: 13px;
+
+        line-height: 1.8;
     }
 
-    .ai-btn {
-      margin-top: 15px;
-
-      border: none;
-
-      background: #1677ff;
-
-      color: white;
-
-      padding: 12px 25px;
-
-      border-radius: 11px;
-
-      font-weight: bold;
-
-      cursor: pointer;
+    .ai-button {
+        margin-top: 16px;
     }
 
-    /* التنقل السفلي */
+    /* Mobile bottom navigation */
 
-    .bottom-nav {
-      position: fixed;
+    .dashboard-bottom-nav {
+        position: fixed;
 
-      bottom: 0;
-      left: 0;
-      right: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
 
-      background: white;
+        z-index: 100;
 
-      border-top: 1px solid #e5edf8;
+        height: 66px;
 
-      height: 65px;
+        display: grid;
 
-      display: flex;
+        grid-template-columns: repeat(5, 1fr);
 
-      justify-content: space-around;
+        background: rgba(255,255,255,.96);
 
-      align-items: center;
+        border-top: 1px solid var(--border);
 
-      z-index: 30;
+        backdrop-filter: blur(12px);
     }
 
-    .nav-item {
-      border: none;
+    .dashboard-nav-item {
+        display: flex;
 
-      background: none;
+        flex-direction: column;
 
-      color: #667085;
+        align-items: center;
+        justify-content: center;
 
-      font-size: 11px;
+        gap: 1px;
 
-      text-align: center;
+        background: transparent;
 
-      cursor: pointer;
+        color: var(--text-soft);
+
+        font-size: 10px;
     }
 
-    .nav-item div {
-      font-size: 21px;
-
-      margin-bottom: 2px;
+    .dashboard-nav-item span {
+        font-size: 20px;
     }
 
-    .nav-item.active {
-      color: #1268dc;
+    .dashboard-nav-item.active {
+        color: var(--primary);
 
-      font-weight: bold;
+        font-weight: 800;
     }
 
     @media (min-width: 650px) {
 
-      .stats {
-        grid-template-columns:
-          repeat(4, 1fr);
-      }
+        .dashboard-stats {
+            grid-template-columns: repeat(4, 1fr);
+        }
 
-      .quick-grid {
-        grid-template-columns:
-          repeat(4, 1fr);
-      }
+        .quick-grid {
+            grid-template-columns: repeat(4, 1fr);
+        }
 
-      .bottom-nav {
-        display: none;
-      }
+        .dashboard-bottom-nav {
+            display: none;
+        }
 
-      main {
-        padding-bottom: 40px;
-      }
-
+        .dashboard-main {
+            padding-bottom: 40px;
+        }
     }
 
-  </style>
-</head>
+    @media (max-width: 480px) {
 
+        .dashboard-hero {
+            padding: 23px 18px;
+        }
 
-<body>
+        .dashboard-title {
+            font-size: 24px;
+        }
 
+        .level-card {
+            align-items: flex-start;
 
-<header>
+            flex-direction: column;
+        }
 
-  <div class="header-inner">
+        .level-card .btn {
+            width: 100%;
+        }
+    }
+</style>
 
-    <div class="brand">
+</head><body><!-- Header -->
+<header class="site-header">
 
-      <div class="brand-icon">
-        AI
-      </div>
+    <div class="container header-inner">
 
-      <span>
-        عالم شيخ الأساتذة
-      </span>
+        <button
+            class="brand"
+            onclick="goHome()"
+            aria-label="الصفحة الرئيسية">
+
+            <span class="brand-icon">AI</span>
+
+            <span>
+                عالم شيخ الأساتذة
+            </span>
+
+        </button>
+
+        <div style="display:flex; gap:8px;">
+
+            <button
+                class="btn btn-secondary"
+                style="min-height:42px; padding:8px 12px;"
+                onclick="showNotifications()"
+                aria-label="الإشعارات">
+
+                🔔
+
+            </button>
+
+            <button
+                class="btn btn-secondary"
+                style="min-height:42px; padding:8px 12px;"
+                onclick="openAccount()"
+                aria-label="الحساب">
+
+                👤
+
+            </button>
+
+        </div>
 
     </div>
-
-
-    <div class="header-actions">
-
-      <button
-        class="icon-btn"
-        onclick="showNotifications()"
-        title="الإشعارات">
-
-        🔔
-
-      </button>
-
-
-      <button
-        class="icon-btn"
-        onclick="openAccount()"
-        title="الحساب">
-
-        👤
-
-      </button>
-
-    </div>
-
-  </div>
 
 </header>
 
 
+<main class="page dashboard-main">
 
-<main>
-
-
-  <!-- الترحيب -->
-
-  <section class="welcome">
-
-    <small>
-      لوحة الطالب
-    </small>
-
-    <h1 id="welcomeName">
-      مرحبًا بك 👋
-    </h1>
-
-    <p>
-      ابدأ رحلتك التعليمية اليوم،
-      وتقدم خطوة جديدة نحو هدفك.
-    </p>
-
-  </section>
+    <div class="container">
 
 
+        <!-- Welcome -->
 
-  <!-- الإحصائيات -->
+        <section class="dashboard-hero">
 
-  <section class="stats">
+            <div class="dashboard-hero-content">
+
+                <span class="dashboard-label">
+                    لوحة الطالب
+                </span>
+
+                <h1
+                    class="dashboard-title"
+                    id="welcomeName">
+
+                    مرحبًا بك 👋
+
+                </h1>
+
+                <p class="dashboard-description">
+
+                    ابدأ رحلتك التعليمية اليوم،
+                    وتقدم خطوة جديدة نحو هدفك.
+
+                </p>
+
+            </div>
+
+        </section>
 
 
-    <div class="stat">
+        <!-- Statistics -->
 
-      <div class="stat-icon">
-        ⭐
-      </div>
+        <section class="dashboard-stats">
 
-      <strong>
-        0
-      </strong>
+            <div class="dashboard-stat">
 
-      <span>
-        النقاط
-      </span>
+                <div class="dashboard-stat-icon">
+                    ⭐
+                </div>
+
+                <strong
+                    class="dashboard-stat-value"
+                    id="pointsValue">
+
+                    0
+
+                </strong>
+
+                <span class="dashboard-stat-label">
+                    النقاط
+                </span>
+
+            </div>
+
+
+            <div class="dashboard-stat">
+
+                <div class="dashboard-stat-icon">
+                    🔥
+                </div>
+
+                <strong class="dashboard-stat-value">
+                    0
+                </strong>
+
+                <span class="dashboard-stat-label">
+                    أيام متتالية
+                </span>
+
+            </div>
+
+
+            <div class="dashboard-stat">
+
+                <div class="dashboard-stat-icon">
+                    🏅
+                </div>
+
+                <strong class="dashboard-stat-value">
+                    0
+                </strong>
+
+                <span class="dashboard-stat-label">
+                    الشارات
+                </span>
+
+            </div>
+
+
+            <div class="dashboard-stat">
+
+                <div class="dashboard-stat-icon">
+                    📈
+                </div>
+
+                <strong
+                    class="dashboard-stat-value"
+                    id="progressValue">
+
+                    0%
+
+                </strong>
+
+                <span class="dashboard-stat-label">
+                    التقدم
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- Continue Learning -->
+
+        <section class="dashboard-section">
+
+            <div class="dashboard-section-header">
+
+                <h2 class="dashboard-section-title">
+                    متابعة التعلم
+                </h2>
+
+                <span class="dashboard-section-note">
+                    آخر نشاط
+                </span>
+
+            </div>
+
+
+            <div class="continue-card">
+
+                <div class="continue-top">
+
+                    <div class="continue-icon">
+                        ∑
+                    </div>
+
+                    <div class="continue-info">
+
+                        <h3>
+                            الرياضيات
+                        </h3>
+
+                        <p id="courseLevel">
+                            اختر مستواك للبدء
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="continue-progress">
+
+                    <div class="continue-progress-head">
+
+                        <span>
+                            التقدم
+                        </span>
+
+                        <span id="courseProgress">
+                            0%
+                        </span>
+
+                    </div>
+
+                    <div class="progress">
+
+                        <div
+                            class="progress-bar"
+                            id="courseProgressBar">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="btn btn-primary continue-button"
+                    onclick="startLearning()">
+
+                    ابدأ التعلم
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- Level -->
+
+        <section class="dashboard-section">
+
+            <div class="dashboard-section-header">
+
+                <h2 class="dashboard-section-title">
+                    مستواك الدراسي
+                </h2>
+
+            </div>
+
+
+            <div class="level-card">
+
+                <div class="level-content">
+
+                    <div class="level-icon">
+                        🎓
+                    </div>
+
+                    <div>
+
+                        <h3 id="selectedLevel">
+                            لم يتم اختيار المستوى
+                        </h3>
+
+                        <p>
+                            المستوى المحدد لحسابك
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="btn btn-secondary"
+                    onclick="changeLevel()">
+
+                    تغيير المستوى
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- Quick Access -->
+
+        <section class="dashboard-section">
+
+            <div class="dashboard-section-header">
+
+                <h2 class="dashboard-section-title">
+                    الوصول السريع
+                </h2>
+
+            </div>
+
+
+            <div class="quick-grid">
+
+
+                <button
+                    class="quick-card"
+                    onclick="openLibrary()">
+
+                    <span class="quick-icon">
+                        📚
+                    </span>
+
+                    <h3>
+                        مكتبتي
+                    </h3>
+
+                    <p>
+                        دروسي ومحتواي
+                    </p>
+
+                </button>
+
+
+                <button
+                    class="quick-card"
+                    onclick="openForum()">
+
+                    <span class="quick-icon">
+                        💬
+                    </span>
+
+                    <h3>
+                        المنتدى
+                    </h3>
+
+                    <p>
+                        أسئلة ونقاشات
+                    </p>
+
+                </button>
+
+
+                <button
+                    class="quick-card"
+                    onclick="openChallenge()">
+
+                    <span class="quick-icon">
+                        🏆
+                    </span>
+
+                    <h3>
+                        التحدي الأسبوعي
+                    </h3>
+
+                    <p>
+                        تدرب واختبر نفسك
+                    </p>
+
+                </button>
+
+
+                <button
+                    class="quick-card"
+                    onclick="showComingSoon('الترتيب')">
+
+                    <span class="quick-icon">
+                        📊
+                    </span>
+
+                    <h3>
+                        الترتيب
+                    </h3>
+
+                    <p>
+                        أفضل الطلاب
+                    </p>
+
+                </button>
+
+
+                <button
+                    class="quick-card"
+                    onclick="showComingSoon('الشارات')">
+
+                    <span class="quick-icon">
+                        🥇
+                    </span>
+
+                    <h3>
+                        الشارات
+                    </h3>
+
+                    <p>
+                        إنجازاتك
+                    </p>
+
+                </button>
+
+
+                <button
+                    class="quick-card"
+                    onclick="showComingSoon('الاشتراكات')">
+
+                    <span class="quick-icon">
+                        💳
+                    </span>
+
+                    <h3>
+                        الاشتراكات
+                    </h3>
+
+                    <p>
+                        ستتوفر لاحقًا
+                    </p>
+
+                </button>
+
+
+                <button
+                    class="quick-card"
+                    onclick="openSettings()">
+
+                    <span class="quick-icon">
+                        ⚙️
+                    </span>
+
+                    <h3>
+                        الإعدادات
+                    </h3>
+
+                    <p>
+                        تخصيص حسابك
+                    </p>
+
+                </button>
+
+
+                <button
+                    class="quick-card"
+                    onclick="openAccount()">
+
+                    <span class="quick-icon">
+                        👤
+                    </span>
+
+                    <h3>
+                        حسابي
+                    </h3>
+
+                    <p>
+                        الملف الشخصي
+                    </p>
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- AI -->
+
+        <section class="dashboard-section">
+
+            <div class="dashboard-section-header">
+
+                <h2 class="dashboard-section-title">
+                    الأستاذ AI
+                </h2>
+
+            </div>
+
+
+            <div class="ai-card">
+
+                <div class="ai-avatar">
+                    AI
+                </div>
+
+                <h2>
+                    اسأل الأستاذ AI 🤖
+                </h2>
+
+                <p>
+
+                    مساعدك التعليمي لشرح الدروس
+                    وحل التمارين ومساعدتك على فهم
+                    الرياضيات.
+
+                </p>
+
+                <button
+                    class="btn btn-primary ai-button"
+                    onclick="showComingSoon('الأستاذ AI')">
+
+                    ابدأ المحادثة
+
+                </button>
+
+            </div>
+
+        </section>
+
 
     </div>
-
-
-    <div class="stat">
-
-      <div class="stat-icon">
-        🔥
-      </div>
-
-      <strong>
-        0
-      </strong>
-
-      <span>
-        أيام متتالية
-      </span>
-
-    </div>
-
-
-    <div class="stat">
-
-      <div class="stat-icon">
-        🏅
-      </div>
-
-      <strong>
-        0
-      </strong>
-
-      <span>
-        الشارات
-      </span>
-
-    </div>
-
-
-    <div class="stat">
-
-      <div class="stat-icon">
-        📈
-      </div>
-
-      <strong>
-        0%
-      </strong>
-
-      <span>
-        التقدم
-      </span>
-
-    </div>
-
-  </section>
-
-
-
-  <!-- متابعة التعلم -->
-
-  <div class="section-title">
-
-    <h2>
-      متابعة التعلم
-    </h2>
-
-    <span>
-      آخر نشاط
-    </span>
-
-  </div>
-
-
-  <section class="continue-card">
-
-    <div class="course-top">
-
-      <div class="course-icon">
-        ∑
-      </div>
-
-      <div class="course-info">
-
-        <h3>
-          الرياضيات
-        </h3>
-
-        <p id="courseLevel">
-          اختر مستواك للبدء
-        </p>
-
-      </div>
-
-    </div>
-
-
-    <div class="progress-area">
-
-      <div class="progress-label">
-
-        <span>
-          التقدم
-        </span>
-
-        <span>
-          0%
-        </span>
-
-      </div>
-
-      <div class="progress">
-
-        <div class="progress-bar"></div>
-
-      </div>
-
-    </div>
-
-
-    <button
-      class="continue-btn"
-      onclick="startLearning()">
-
-      ابدأ التعلم
-
-    </button>
-
-  </section>
-
-
-
-  <!-- المستوى -->
-
-  <div class="section-title">
-
-    <h2>
-      مستواك الدراسي
-    </h2>
-
-  </div>
-
-
-  <section class="level-card">
-
-    <div class="level-info">
-
-      <div class="level-icon">
-        🎓
-      </div>
-
-      <div>
-
-        <h3 id="selectedLevel">
-          لم يتم اختيار المستوى
-        </h3>
-
-        <p>
-          اختر المستوى المناسب لك
-        </p>
-
-      </div>
-
-    </div>
-
-
-    <button
-      class="change-level"
-      onclick="changeLevel()">
-
-      تغيير المستوى
-
-    </button>
-
-  </section>
-
-
-
-  <!-- القائمة -->
-
-  <div class="section-title">
-
-    <h2>
-      الوصول السريع
-    </h2>
-
-  </div>
-
-
-  <section class="quick-grid">
-
-
-    <div
-      class="quick-card"
-      onclick="openLibrary()">
-
-      <div class="quick-icon">
-        📚
-      </div>
-
-      <h3>
-        مكتبتي
-      </h3>
-
-      <p>
-        دروسي ومحتواي
-      </p>
-
-    </div>
-
-
-    <div
-      class="quick-card"
-      onclick="openForum()">
-
-      <div class="quick-icon">
-        💬
-      </div>
-
-      <h3>
-        المنتدى
-      </h3>
-
-      <p>
-        أسئلة ونقاشات
-      </p>
-
-    </div>
-
-
-    <div
-      class="quick-card"
-      onclick="openChallenge()">
-
-      <div class="quick-icon">
-        🏆
-      </div>
-
-      <h3>
-        التحدي الأسبوعي
-      </h3>
-
-      <p>
-        نافس زملاءك
-      </p>
-
-    </div>
-
-
-    <div
-      class="quick-card"
-      onclick="openLeaderboard()">
-
-      <div class="quick-icon">
-        📊
-      </div>
-
-      <h3>
-        الترتيب
-      </h3>
-
-      <p>
-        أفضل الطلاب
-      </p>
-
-    </div>
-
-
-    <div
-      class="quick-card"
-      onclick="openBadges()">
-
-      <div class="quick-icon">
-        🥇
-      </div>
-
-      <h3>
-        الشارات
-      </h3>
-
-      <p>
-        إنجازاتك
-      </p>
-
-    </div>
-
-
-    <div
-      class="quick-card"
-      onclick="openSubscriptions()">
-
-      <div class="quick-icon">
-        💳
-      </div>
-
-      <h3>
-        الاشتراكات
-      </h3>
-
-      <p>
-        حالة اشتراكك
-      </p>
-
-    </div>
-
-
-    <div
-      class="quick-card"
-      onclick="openSettings()">
-
-      <div class="quick-icon">
-        ⚙️
-      </div>
-
-      <h3>
-        الإعدادات
-      </h3>
-
-      <p>
-        تخصيص حسابك
-      </p>
-
-    </div>
-
-
-    <div
-      class="quick-card"
-      onclick="openAccount()">
-
-      <div class="quick-icon">
-        👤
-      </div>
-
-      <h3>
-        حسابي
-      </h3>
-
-      <p>
-        الملف الشخصي
-      </p>
-
-    </div>
-
-  </section>
-
-
-
-  <!-- الأستاذ AI -->
-
-  <div class="section-title">
-
-    <h2>
-      الأستاذ AI
-    </h2>
-
-  </div>
-
-
-  <section class="ai-card">
-
-    <div class="ai-avatar">
-      AI
-    </div>
-
-    <h2>
-      اسأل الأستاذ AI 🤖
-    </h2>
-
-    <p>
-      مساعدك التعليمي لشرح الدروس،
-      حل التمارين، وإنشاء تمارين مشابهة
-      ومساعدتك على فهم الرياضيات.
-    </p>
-
-    <button
-      class="ai-btn"
-      onclick="openAI()">
-
-      ابدأ المحادثة
-
-    </button>
-
-  </section>
-
 
 </main>
 
 
+<!-- Mobile Navigation -->
 
-<!-- التنقل السفلي -->
+<nav class="dashboard-bottom-nav">
 
-<nav class="bottom-nav">
+    <button
+        class="dashboard-nav-item active"
+        onclick="goDashboard()">
 
+        <span>🏠</span>
+        الرئيسية
 
-  <button
-    class="nav-item active"
-    onclick="goDashboard()">
-
-    <div>
-      🏠
-    </div>
-
-    الرئيسية
-
-  </button>
+    </button>
 
 
-  <button
-    class="nav-item"
-    onclick="openLibrary()">
+    <button
+        class="dashboard-nav-item"
+        onclick="openLibrary()">
 
-    <div>
-      📚
-    </div>
+        <span>📚</span>
+        مكتبتي
 
-    مكتبتي
-
-  </button>
+    </button>
 
 
-  <button
-    class="nav-item"
-    onclick="openForum()">
+    <button
+        class="dashboard-nav-item"
+        onclick="openForum()">
 
-    <div>
-      💬
-    </div>
+        <span>💬</span>
+        المنتدى
 
-    المنتدى
-
-  </button>
+    </button>
 
 
-  <button
-    class="nav-item"
-    onclick="openAI()">
+    <button
+        class="dashboard-nav-item"
+        onclick="showComingSoon('الأستاذ AI')">
 
-    <div>
-      🤖
-    </div>
+        <span>🤖</span>
+        الأستاذ AI
 
-    الأستاذ AI
-
-  </button>
+    </button>
 
 
-  <button
-    class="nav-item"
-    onclick="openSettings()">
+    <button
+        class="dashboard-nav-item"
+        onclick="openSettings()">
 
-    <div>
-      ⚙️
-    </div>
+        <span>⚙️</span>
+        الإعدادات
 
-    الإعدادات
-
-  </button>
+    </button>
 
 </nav>
 
 
-
-<!-- SUPABASE -->
+<!-- Supabase -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
 <script>
 
-  const SUPABASE_URL =
-    "https://qkzdlxqledsznhbifaxy.supabase.co";
+    const SUPABASE_URL =
+        "https://qkzdlxqledsznhbifaxy.supabase.co";
 
-  const SUPABASE_KEY =
-    "sb_publishable_ZdpHXwLlhpbXztsTXpAFTg_TgOji91v";
+    const SUPABASE_KEY =
+        "sb_publishable_ZdpHXwLlhpbXztsTXpAFTg_TgOji91v";
 
-
-  const supabaseClient =
-    supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
-    );
-
+    const supabaseClient =
+        supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
 
 
-  // حماية لوحة الطالب
+    /* =========================
+       AUTH
+       ========================= */
 
-  async function checkAuth() {
+    async function checkAuth() {
 
-    const { data } =
-      await supabaseClient.auth.getSession();
+        const { data } =
+            await supabaseClient.auth.getSession();
 
-    if (!data.session) {
+        if (!data.session) {
 
-      window.location.href =
-        "login.html";
+            window.location.href =
+                "login.html";
 
-      return;
+            return;
+        }
+
+
+        const user =
+            data.session.user;
+
+
+        let name =
+            user.user_metadata?.full_name ||
+            user.user_metadata?.name ||
+            user.user_metadata?.display_name;
+
+
+        if (!name && user.email) {
+
+            name =
+                user.email.split("@")[0];
+
+        }
+
+
+        if (name) {
+
+            document.getElementById(
+                "welcomeName"
+            ).textContent =
+                "مرحبًا " + name + " 👋";
+
+        }
+
+
+        loadSelectedLevel();
+
+        loadProgress();
+
+    }
+
+
+    /* =========================
+       LEVEL
+       ========================= */
+
+    function loadSelectedLevel() {
+
+        const level =
+            localStorage.getItem(
+                "student_level"
+            );
+
+
+        if (!level) {
+
+            return;
+        }
+
+
+        document.getElementById(
+            "selectedLevel"
+        ).textContent = level;
+
+
+        document.getElementById(
+            "courseLevel"
+        ).textContent =
+            "مستوى " + level;
 
     }
 
 
-    const user =
-      data.session.user;
+    function changeLevel() {
 
-
-    let name =
-      user.user_metadata?.full_name ||
-      user.user_metadata?.name ||
-      user.user_metadata?.display_name;
-
-
-    if (!name && user.email) {
-
-      name =
-        user.email.split("@")[0];
+        window.location.href =
+            "levels.html";
 
     }
 
 
-    if (name) {
+    /* =========================
+       PROGRESS
+       ========================= */
 
-      document.getElementById(
-        "welcomeName"
-      ).textContent =
-        "مرحبًا " + name + " 👋";
+    function loadProgress() {
 
-    }
-
-
-    loadSelectedLevel();
-
-  }
-
-
-
-  // قراءة المستوى المختار
-
-  function loadSelectedLevel() {
-
-    const level =
-      localStorage.getItem(
-        "student_level"
-      );
+        const completed =
+            parseInt(
+                localStorage.getItem(
+                    "completed_lessons"
+                ) || "0",
+                10
+            );
 
 
-    if (level) {
-
-      document.getElementById(
-        "selectedLevel"
-      ).textContent = level;
+        const total = 20;
 
 
-      document.getElementById(
-        "courseLevel"
-      ).textContent =
-        "مستوى " + level;
-
-    }
-
-  }
+        let progress =
+            Math.round(
+                (completed / total) * 100
+            );
 
 
-
-  // زر تغيير المستوى
-
-  function changeLevel() {
-
-    window.location.href =
-      "levels.html";
-
-  }
+        if (progress > 100) {
+            progress = 100;
+        }
 
 
-
-  // الصفحة الرئيسية
-
-  function goDashboard() {
-
-    window.location.href =
-      "dashboard.html";
-
-  }
+        document.getElementById(
+            "courseProgress"
+        ).textContent =
+            progress + "%";
 
 
-
-  // الحساب
-
-  function openAccount() {
-
-    window.location.href =
-      "account.html";
-
-  }
+        document.getElementById(
+            "progressValue"
+        ).textContent =
+            progress + "%";
 
 
-
-  // الإشعارات
-
-  function showNotifications() {
-
-    alert(
-      "قسم الإشعارات سيتم تفعيله لاحقًا 🔔"
-    );
-
-  }
-
-
-
-  // بدء التعلم
-
-  function startLearning() {
-
-    const level =
-      localStorage.getItem(
-        "student_level"
-      );
-
-
-    if (!level) {
-
-      window.location.href =
-        "levels.html";
-
-      return;
+        document.getElementById(
+            "courseProgressBar"
+        ).style.width =
+            progress + "%";
 
     }
 
 
-    alert(
-      "سيتم فتح دروس " +
-      level +
-      " بعد بناء قسم الدروس."
-    );
+    /* =========================
+       NAVIGATION
+       ========================= */
 
-  }
+    function goHome() {
 
+        window.location.href =
+            "index.html";
 
-
-  // الصفحات التي سنبنيها لاحقًا
-
-  function openLibrary() {
-
-    alert(
-      "مكتبتي سيتم تفعيلها في المرحلة القادمة 📚"
-    );
-
-  }
+    }
 
 
-  function openForum() {
+    function goDashboard() {
 
-    alert(
-      "المنتدى سيتم تفعيله في المرحلة القادمة 💬"
-    );
+        window.location.href =
+            "dashboard.html";
 
-  }
-
-
-  function openChallenge() {
-
-    alert(
-      "التحدي الأسبوعي سيتم تفعيله لاحقًا 🏆"
-    );
-
-  }
+    }
 
 
-  function openLeaderboard() {
+    function openAccount() {
 
-    alert(
-      "الترتيب سيتم تفعيله لاحقًا 📊"
-    );
+        window.location.href =
+            "account.html";
 
-  }
-
-
-  function openBadges() {
-
-    alert(
-      "الشارات سيتم تفعيلها لاحقًا 🥇"
-    );
-
-  }
+    }
 
 
-  function openSubscriptions() {
+    function openLibrary() {
 
-    alert(
-      "الاشتراكات سيتم تفعيلها لاحقًا 💳"
-    );
+        window.location.href =
+            "library.html";
 
-  }
-
-
-  function openSettings() {
-
-    alert(
-      "الإعدادات سيتم تفعيلها لاحقًا ⚙️"
-    );
-
-  }
+    }
 
 
-  function openAI() {
+    function openForum() {
 
-    alert(
-      "الأستاذ AI سيتم تفعيله في مرحلة الذكاء الاصطناعي 🤖"
-    );
+        window.location.href =
+            "forum.html";
 
-  }
+    }
 
 
-  checkAuth();
+    function openChallenge() {
+
+        window.location.href =
+            "challenge.html";
+
+    }
+
+
+    function openSettings() {
+
+        window.location.href =
+            "settings.html";
+
+    }
+
+
+    /* =========================
+       LEARNING
+       ========================= */
+
+    function startLearning() {
+
+        const level =
+            localStorage.getItem(
+                "student_level"
+            );
+
+
+        if (!level) {
+
+            window.location.href =
+                "levels.html";
+
+            return;
+        }
+
+
+        window.location.href =
+            "library.html";
+
+    }
+
+
+    /* =========================
+       NOTIFICATIONS
+       ========================= */
+
+    function showNotifications() {
+
+        alert(
+            "لا توجد إشعارات جديدة حاليًا 🔔"
+        );
+
+    }
+
+
+    /* =========================
+       TEMPORARY FEATURES
+       ========================= */
+
+    function showComingSoon(name) {
+
+        alert(
+            name +
+            " ستتوفر في مرحلة لاحقة من تطوير الموقع."
+        );
+
+    }
+
+
+    /* =========================
+       START
+       ========================= */
+
+    checkAuth();
 
 </script>
 
-</body>
-    </html>
+</body></html>
