@@ -1,425 +1,415 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html><html lang="ar" dir="rtl"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>مكتبتي | عالم شيخ الأساتذة</title>
 
-<title>مكتبتي | عالم شيخ الأساتذة</title>
+<link rel="stylesheet" href="style.css">
 
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-body{
-    font-family:Arial,Tahoma,sans-serif;
-    background:#f5f9ff;
-    color:#14213d;
-    min-height:100vh;
-}
-
-header{
-    background:#fff;
-    border-bottom:1px solid #e5edf8;
-    position:sticky;
-    top:0;
-    z-index:20;
-}
-
-.header-inner{
-    max-width:950px;
-    margin:auto;
-    padding:12px 16px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-}
-
-.brand{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    color:#075dcc;
-    font-weight:bold;
-}
-
-.brand-icon{
-    width:42px;
-    height:42px;
-    background:#1677ff;
-    color:white;
-    border-radius:12px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:bold;
-}
-
-.header-btn{
-    border:none;
-    background:#eef5ff;
-    color:#1268dc;
-    padding:10px 14px;
-    border-radius:10px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-main{
-    max-width:950px;
-    margin:auto;
-    padding:25px 16px 70px;
-}
-
-h1{
-    font-size:27px;
-    margin-bottom:6px;
-}
-
-.subtitle{
-    color:#667085;
-    font-size:14px;
-    line-height:1.7;
-    margin-bottom:24px;
-}
-
-
-/* المستوى الحالي */
-
-.current-level{
-    background:linear-gradient(135deg,#1677ff,#075dcc);
-    color:white;
-    border-radius:20px;
-    padding:20px;
-    margin-bottom:25px;
-    box-shadow:0 10px 25px rgba(22,119,255,.15);
-}
-
-.level-label{
-    font-size:12px;
-    opacity:.85;
-    margin-bottom:7px;
-}
-
-.level-name{
-    font-size:23px;
-    font-weight:bold;
-}
-
-.level-action{
-    margin-top:15px;
-    border:none;
-    background:white;
-    color:#1268dc;
-    padding:10px 14px;
-    border-radius:10px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-
-/* الإحصائيات */
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:10px;
-    margin-bottom:28px;
-}
-
-.stat{
-    background:white;
-    border:1px solid #e5edf8;
-    border-radius:15px;
-    padding:15px 10px;
-    text-align:center;
-}
-
-.stat-icon{
-    font-size:21px;
-    margin-bottom:7px;
-}
-
-.stat-number{
-    font-size:20px;
-    font-weight:bold;
-    color:#1268dc;
-}
-
-.stat-label{
-    color:#667085;
-    font-size:11px;
-    margin-top:4px;
-}
-
-
-/* العناوين */
-
-.section{
-    margin-bottom:28px;
-}
-
-.section-title{
-    font-size:19px;
-    margin-bottom:12px;
-}
-
-
-/* بطاقة المادة */
-
-.subject-card{
-    background:white;
-    border:1px solid #e5edf8;
-    border-radius:19px;
-    padding:18px;
-}
-
-.subject-top{
-    display:flex;
-    align-items:center;
-    gap:14px;
-    margin-bottom:16px;
-}
-
-.subject-icon{
-    width:54px;
-    height:54px;
-    border-radius:16px;
-    background:#eef5ff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:28px;
-}
-
-.subject-name{
-    font-size:18px;
-    font-weight:bold;
-}
-
-.subject-description{
-    color:#667085;
-    font-size:12px;
-    margin-top:5px;
-}
-
-.progress-container{
-    margin-bottom:15px;
-}
-
-.progress-info{
-    display:flex;
-    justify-content:space-between;
-    color:#667085;
-    font-size:11px;
-    margin-bottom:7px;
-}
-
-.progress{
-    width:100%;
-    height:8px;
-    background:#e8eef6;
-    border-radius:20px;
-    overflow:hidden;
-}
-
-.progress-bar{
-    height:100%;
-    width:0%;
-    background:#1677ff;
-    border-radius:20px;
-}
-
-
-/* الفصول */
-
-.chapters{
-    display:grid;
-    gap:12px;
-}
-
-.chapter{
-    border:1px solid #e5edf8;
-    border-radius:15px;
-    padding:15px;
-    background:#fbfdff;
-    display:flex;
-    align-items:center;
-    gap:13px;
-}
-
-.chapter-icon{
-    width:46px;
-    height:46px;
-    border-radius:13px;
-    background:#eef5ff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:22px;
-    flex-shrink:0;
-}
-
-.chapter-content{
-    flex:1;
-    min-width:0;
-}
-
-.chapter-name{
-    font-size:14px;
-    font-weight:bold;
-    margin-bottom:5px;
-}
-
-.chapter-info{
-    color:#667085;
-    font-size:11px;
-}
-
-.chapter-status{
-    font-size:18px;
-    flex-shrink:0;
-}
-
-.open{
-    color:#12b76a;
-}
-
-.locked{
-    color:#98a2b3;
-}
-
-.chapter-btn{
-    border:none;
-    background:#1677ff;
-    color:white;
-    padding:8px 11px;
-    border-radius:9px;
-    font-size:11px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.locked-btn{
-    background:#edf1f5;
-    color:#667085;
-}
-
-
-/* لا يوجد مستوى */
-
-.no-level{
-    background:white;
-    border:1px dashed #b8c9df;
-    border-radius:18px;
-    padding:30px 20px;
-    text-align:center;
-    margin-bottom:25px;
-}
-
-.no-level-icon{
-    font-size:42px;
-    margin-bottom:10px;
-}
-
-.no-level h2{
-    font-size:18px;
-    margin-bottom:8px;
-}
-
-.no-level p{
-    color:#667085;
-    font-size:13px;
-    line-height:1.7;
-    margin-bottom:17px;
-}
-
-.primary-btn{
-    border:none;
-    background:#1677ff;
-    color:white;
-    padding:12px 18px;
-    border-radius:11px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-
-/* رسالة التطوير */
-
-.future-box{
-    background:#eef5ff;
-    border:1px solid #d7e7ff;
-    border-radius:16px;
-    padding:16px;
-    color:#344054;
-    font-size:13px;
-    line-height:1.8;
-}
-
-.footer{
-    text-align:center;
-    color:#98a2b3;
-    font-size:11px;
-    margin-top:30px;
-}
-
-
-@media(max-width:500px){
-
-    h1{
-        font-size:24px;
+    .library-page {
+        padding-bottom: 50px;
     }
 
-    .stats{
-        gap:7px;
+    .library-hero {
+        position: relative;
+        overflow: hidden;
+
+        padding: 25px 22px;
+        margin-bottom: 22px;
+
+        color: white;
+
+        background:
+            linear-gradient(
+                135deg,
+                var(--primary),
+                var(--primary-dark)
+            );
+
+        border-radius: var(--radius-lg);
+
+        box-shadow:
+            0 14px 35px rgba(37, 99, 235, .16);
     }
 
-    .stat{
-        padding:13px 7px;
+    .library-hero-content {
+        position: relative;
+        z-index: 2;
     }
 
-    .chapter{
-        padding:12px;
+    .library-hero-label {
+        display: block;
+
+        margin-bottom: 6px;
+
+        font-size: 12px;
+
+        opacity: .85;
     }
 
-    .chapter-btn{
-        padding:7px 8px;
+    .library-hero h1 {
+        font-size: clamp(25px, 6vw, 32px);
+        font-weight: 850;
     }
 
-    .brand span{
-        display:none;
+    .library-hero p {
+        margin-top: 7px;
+
+        font-size: 13px;
+        line-height: 1.8;
+
+        opacity: .9;
     }
-}
+
+    .level-change {
+        margin-top: 15px;
+    }
+
+    .level-change button {
+        border: none;
+
+        padding: 9px 14px;
+
+        background: white;
+        color: var(--primary);
+
+        border-radius: 10px;
+
+        font-weight: 800;
+
+        cursor: pointer;
+    }
+
+    .library-stats {
+        display: grid;
+
+        grid-template-columns: repeat(3, 1fr);
+
+        gap: 10px;
+
+        margin-bottom: 28px;
+    }
+
+    .library-stat {
+        padding: 15px 8px;
+
+        text-align: center;
+
+        background: var(--surface);
+
+        border: 1px solid var(--border);
+
+        border-radius: var(--radius-md);
+
+        box-shadow: var(--shadow-sm);
+    }
+
+    .library-stat-icon {
+        font-size: 21px;
+    }
+
+    .library-stat-value {
+        display: block;
+
+        margin-top: 4px;
+
+        color: var(--primary);
+
+        font-size: 20px;
+        font-weight: 850;
+    }
+
+    .library-stat-label {
+        display: block;
+
+        margin-top: 3px;
+
+        color: var(--text-soft);
+
+        font-size: 11px;
+    }
+
+    .library-section {
+        margin-top: 28px;
+    }
+
+    .library-section-title {
+        margin-bottom: 13px;
+
+        font-size: 20px;
+        font-weight: 850;
+    }
+
+    .subject-card {
+        padding: 18px;
+
+        background: var(--surface);
+
+        border: 1px solid var(--border);
+
+        border-radius: var(--radius-lg);
+
+        box-shadow: var(--shadow-sm);
+    }
+
+    .subject-header {
+        display: flex;
+
+        align-items: center;
+
+        gap: 13px;
+
+        margin-bottom: 18px;
+    }
+
+    .subject-icon {
+        width: 55px;
+        height: 55px;
+
+        flex-shrink: 0;
+
+        display: grid;
+        place-items: center;
+
+        background: var(--primary-light);
+
+        border-radius: 16px;
+
+        color: var(--primary);
+
+        font-size: 27px;
+        font-weight: 850;
+    }
+
+    .subject-header h2 {
+        font-size: 18px;
+        font-weight: 850;
+    }
+
+    .subject-header p {
+        margin-top: 4px;
+
+        color: var(--text-soft);
+
+        font-size: 12px;
+    }
+
+    .math-progress {
+        margin-bottom: 18px;
+    }
+
+    .progress-head {
+        display: flex;
+
+        justify-content: space-between;
+
+        margin-bottom: 7px;
+
+        color: var(--text-soft);
+
+        font-size: 11px;
+    }
+
+    .chapters {
+        display: grid;
+
+        gap: 11px;
+    }
+
+    .chapter-card {
+        width: 100%;
+
+        padding: 15px;
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 12px;
+
+        text-align: right;
+
+        background: #fbfdff;
+
+        border: 1px solid var(--border);
+
+        border-radius: var(--radius-md);
+    }
+
+    .chapter-icon {
+        width: 47px;
+        height: 47px;
+
+        flex-shrink: 0;
+
+        display: grid;
+        place-items: center;
+
+        background: var(--primary-light);
+
+        border-radius: 13px;
+
+        color: var(--primary);
+
+        font-size: 20px;
+        font-weight: 850;
+    }
+
+    .chapter-info {
+        min-width: 0;
+        flex: 1;
+    }
+
+    .chapter-info h3 {
+        font-size: 14px;
+        font-weight: 850;
+    }
+
+    .chapter-info p {
+        margin-top: 4px;
+
+        color: var(--text-soft);
+
+        font-size: 11px;
+    }
+
+    .chapter-action {
+        flex-shrink: 0;
+    }
+
+    .chapter-action button {
+        min-height: 38px;
+
+        padding: 7px 11px;
+
+        border: none;
+
+        border-radius: 9px;
+
+        font-size: 11px;
+        font-weight: 800;
+
+        cursor: pointer;
+    }
+
+    .chapter-open {
+        background: var(--primary);
+        color: white;
+    }
+
+    .chapter-locked {
+        background: #eef2f6;
+        color: var(--text-soft);
+    }
+
+    .future-box {
+        padding: 17px;
+
+        background: var(--primary-light);
+
+        border: 1px solid #dbeafe;
+
+        border-radius: var(--radius-md);
+
+        color: var(--text-soft);
+
+        font-size: 13px;
+
+        line-height: 1.8;
+    }
+
+    .empty-library {
+        padding: 35px 20px;
+
+        text-align: center;
+
+        background: var(--surface);
+
+        border: 1px dashed #bfdbfe;
+
+        border-radius: var(--radius-lg);
+    }
+
+    .empty-library-icon {
+        font-size: 42px;
+
+        margin-bottom: 9px;
+    }
+
+    .empty-library h2 {
+        font-size: 19px;
+        font-weight: 850;
+    }
+
+    .empty-library p {
+        max-width: 430px;
+
+        margin: 8px auto 17px;
+
+        color: var(--text-soft);
+
+        font-size: 13px;
+
+        line-height: 1.8;
+    }
+
+    @media (max-width: 480px) {
+
+        .chapter-card {
+            padding: 12px;
+        }
+
+        .chapter-icon {
+            width: 43px;
+            height: 43px;
+        }
+
+        .chapter-action button {
+            padding: 7px 9px;
+        }
+    }
+
+    @media (min-width: 700px) {
+
+        .library-page {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .chapters {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+    }
 </style>
-</head>
 
-<body>
+</head><body><!-- Header -->
 
-<header>
+<header class="site-header">
 
-    <div class="header-inner">
+    <div class="container header-inner">
 
-        <div class="brand">
+        <button
+            class="brand"
+            onclick="goHome()"
+            aria-label="الصفحة الرئيسية">
 
-            <div class="brand-icon">
+            <span class="brand-icon">
                 AI
-            </div>
+            </span>
 
             <span>
                 عالم شيخ الأساتذة
             </span>
 
-        </div>
+        </button>
+
 
         <button
-            class="header-btn"
-            onclick="goDashboard()"
-        >
+            class="btn btn-secondary"
+            onclick="goDashboard()">
+
             لوحة الطالب
+
         </button>
 
     </div>
@@ -427,484 +417,555 @@ h1{
 </header>
 
 
-<main>
+<main class="page">
 
-    <h1>
-        📚 مكتبتي
-    </h1>
-
-    <p class="subtitle">
-        هنا ستجد دروسك وفصولك وتقدمك الدراسي في مكان واحد.
-    </p>
+    <div class="container library-page">
 
 
-    <!-- حالة عدم اختيار مستوى -->
+        <!-- لا يوجد مستوى -->
 
-    <div
-        class="no-level"
-        id="noLevel"
-        style="display:none;"
-    >
+        <section
+            id="noLevel"
+            class="empty-library"
+            style="display:none;">
 
-        <div class="no-level-icon">
-            🎓
-        </div>
-
-        <h2>
-            اختر مستواك الدراسي
-        </h2>
-
-        <p>
-            حتى نتمكن من عرض المواد والفصول المناسبة لك،
-            يجب عليك اختيار المستوى الذي تدرس فيه.
-        </p>
-
-        <button
-            class="primary-btn"
-            onclick="chooseLevel()"
-        >
-            اختيار المستوى
-        </button>
-
-    </div>
-
-
-    <!-- المحتوى بعد اختيار المستوى -->
-
-    <div id="libraryContent" style="display:none;">
-
-
-        <!-- المستوى -->
-
-        <div class="current-level">
-
-            <div class="level-label">
-                مستواي الدراسي
+            <div class="empty-library-icon">
+                🎓
             </div>
 
-            <div
-                class="level-name"
-                id="levelName"
-            >
-                -
-            </div>
+            <h2>
+                اختر مستواك الدراسي
+            </h2>
+
+            <p>
+                اختر كونكور أو بريڤي أو باكالوريا
+                حتى نعرض لك المحتوى المناسب.
+            </p>
 
             <button
-                class="level-action"
-                onclick="chooseLevel()"
-            >
-                تغيير المستوى
+                class="btn btn-primary"
+                onclick="chooseLevel()">
+
+                اختيار المستوى
+
             </button>
 
-        </div>
-
-
-        <!-- الإحصائيات -->
-
-        <div class="stats">
-
-            <div class="stat">
-
-                <div class="stat-icon">
-                    📖
-                </div>
-
-                <div
-                    class="stat-number"
-                    id="completedLessons"
-                >
-                    0
-                </div>
-
-                <div class="stat-label">
-                    دروس مكتملة
-                </div>
-
-            </div>
-
-
-            <div class="stat">
-
-                <div class="stat-icon">
-                    🎯
-                </div>
-
-                <div
-                    class="stat-number"
-                    id="progressNumber"
-                >
-                    0%
-                </div>
-
-                <div class="stat-label">
-                    التقدم
-                </div>
-
-            </div>
-
-
-            <div class="stat">
-
-                <div class="stat-icon">
-                    🔓
-                </div>
-
-                <div
-                    class="stat-number"
-                    id="openChapters"
-                >
-                    0
-                </div>
-
-                <div class="stat-label">
-                    فصول مفتوحة
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- الرياضيات -->
-
-        <section class="section">
-
-            <h2 class="section-title">
-                المواد الدراسية
-            </h2>
-
-
-            <div class="subject-card">
-
-                <div class="subject-top">
-
-                    <div class="subject-icon">
-                        ∑
-                    </div>
-
-                    <div>
-
-                        <div class="subject-name">
-                            الرياضيات
-                        </div>
-
-                        <div class="subject-description">
-                            المادة الأولى في المرحلة الحالية
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="progress-container">
-
-                    <div class="progress-info">
-
-                        <span>
-                            التقدم في الرياضيات
-                        </span>
-
-                        <span id="mathProgressText">
-                            0%
-                        </span>
-
-                    </div>
-
-                    <div class="progress">
-
-                        <div
-                            class="progress-bar"
-                            id="mathProgress"
-                        ></div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- الفصول -->
-
-                <div class="chapters">
-
-
-                    <div class="chapter">
-
-                        <div class="chapter-icon">
-                            ①
-                        </div>
-
-                        <div class="chapter-content">
-
-                            <div class="chapter-name">
-                                الفصل الأول
-                            </div>
-
-                            <div class="chapter-info">
-                                0 / 20 درس
-                            </div>
-
-                        </div>
-
-                        <div
-                            class="chapter-status locked"
-                        >
-                            🔒
-                        </div>
-
-                        <button
-                            class="chapter-btn locked-btn"
-                            onclick="chapterMessage()"
-                        >
-                            مقفل
-                        </button>
-
-                    </div>
-
-
-                    <div class="chapter">
-
-                        <div class="chapter-icon">
-                            ②
-                        </div>
-
-                        <div class="chapter-content">
-
-                            <div class="chapter-name">
-                                الفصل الثاني
-                            </div>
-
-                            <div class="chapter-info">
-                                0 / 20 درس
-                            </div>
-
-                        </div>
-
-                        <div
-                            class="chapter-status locked"
-                        >
-                            🔒
-                        </div>
-
-                        <button
-                            class="chapter-btn locked-btn"
-                            onclick="chapterMessage()"
-                        >
-                            مقفل
-                        </button>
-
-                    </div>
-
-
-                    <div class="chapter">
-
-                        <div class="chapter-icon">
-                            ③
-                        </div>
-
-                        <div class="chapter-content">
-
-                            <div class="chapter-name">
-                                الفصل الثالث
-                            </div>
-
-                            <div class="chapter-info">
-                                0 / 20 درس
-                            </div>
-
-                        </div>
-
-                        <div
-                            class="chapter-status locked"
-                        >
-                            🔒
-                        </div>
-
-                        <button
-                            class="chapter-btn locked-btn"
-                            onclick="chapterMessage()"
-                        >
-                            مقفل
-                        </button>
-
-                    </div>
-
-
-                </div>
-
-            </div>
-
         </section>
 
 
-        <!-- قسم قريبًا -->
+        <!-- المكتبة -->
 
-        <section class="section">
-
-            <h2 class="section-title">
-                🚀 قادمًا
-            </h2>
-
-            <div class="future-box">
-
-                سيتم إضافة بقية المواد والفصول والدروس
-                تدريجيًا. كما سيتم لاحقًا ربط هذه الصفحة
-                بقاعدة البيانات والفيديوهات الحقيقية،
-                مع حفظ تقدمك تلقائيًا.
-
-            </div>
-
-        </section>
-
-    </div>
+        <div
+            id="libraryContent"
+            style="display:none;">
 
 
-    <div class="footer">
-        عالم شيخ الأساتذة — الأستاذ AI
+            <!-- Hero -->
+
+            <section class="library-hero">
+
+                <div class="library-hero-content">
+
+                    <span class="library-hero-label">
+                        📚 مكتبتي
+                    </span>
+
+                    <h1 id="levelName">
+                        -
+                    </h1>
+
+                    <p>
+                        دروسك وفصولك التعليمية
+                        في مكان واحد.
+                    </p>
+
+                    <div class="level-change">
+
+                        <button
+                            onclick="chooseLevel()">
+
+                            تغيير المستوى
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- Statistics -->
+
+            <section class="library-stats">
+
+                <div class="library-stat">
+
+                    <span class="library-stat-icon">
+                        📖
+                    </span>
+
+                    <strong
+                        class="library-stat-value"
+                        id="completedLessons">
+
+                        0
+
+                    </strong>
+
+                    <span class="library-stat-label">
+                        دروس مكتملة
+                    </span>
+
+                </div>
+
+
+                <div class="library-stat">
+
+                    <span class="library-stat-icon">
+                        🎯
+                    </span>
+
+                    <strong
+                        class="library-stat-value"
+                        id="progressNumber">
+
+                        0%
+
+                    </strong>
+
+                    <span class="library-stat-label">
+                        التقدم
+                    </span>
+
+                </div>
+
+
+                <div class="library-stat">
+
+                    <span class="library-stat-icon">
+                        🔓
+                    </span>
+
+                    <strong
+                        class="library-stat-value">
+
+                        1
+
+                    </strong>
+
+                    <span class="library-stat-label">
+                        فصل متاح
+                    </span>
+
+                </div>
+
+            </section>
+
+
+            <!-- Subjects -->
+
+            <section class="library-section">
+
+                <h2 class="library-section-title">
+                    المواد الدراسية
+                </h2>
+
+
+                <div class="subject-card">
+
+
+                    <!-- Mathematics -->
+
+                    <div class="subject-header">
+
+                        <div class="subject-icon">
+                            ∑
+                        </div>
+
+                        <div>
+
+                            <h2>
+                                الرياضيات
+                            </h2>
+
+                            <p>
+                                المادة التعليمية الحالية
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Progress -->
+
+                    <div class="math-progress">
+
+                        <div class="progress-head">
+
+                            <span>
+                                التقدم في الرياضيات
+                            </span>
+
+                            <span id="mathProgressText">
+                                0%
+                            </span>
+
+                        </div>
+
+
+                        <div class="progress">
+
+                            <div
+                                id="mathProgress"
+                                class="progress-bar">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Chapters -->
+
+                    <div class="chapters">
+
+
+                        <!-- Chapter 1 -->
+
+                        <div class="chapter-card">
+
+                            <div class="chapter-icon">
+                                ①
+                            </div>
+
+                            <div class="chapter-info">
+
+                                <h3>
+                                    الفصل الأول
+                                </h3>
+
+                                <p id="chapter1Progress">
+                                    0 / 20 درس
+                                </p>
+
+                            </div>
+
+                            <div class="chapter-action">
+
+                                <button
+                                    class="chapter-open"
+                                    onclick="openChapter(1)">
+
+                                    فتح
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Chapter 2 -->
+
+                        <div class="chapter-card">
+
+                            <div class="chapter-icon">
+                                ②
+                            </div>
+
+                            <div class="chapter-info">
+
+                                <h3>
+                                    الفصل الثاني
+                                </h3>
+
+                                <p>
+                                    0 / 20 درس
+                                </p>
+
+                            </div>
+
+                            <div class="chapter-action">
+
+                                <button
+                                    class="chapter-locked"
+                                    onclick="lockedChapter()">
+
+                                    🔒
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Chapter 3 -->
+
+                        <div class="chapter-card">
+
+                            <div class="chapter-icon">
+                                ③
+                            </div>
+
+                            <div class="chapter-info">
+
+                                <h3>
+                                    الفصل الثالث
+                                </h3>
+
+                                <p>
+                                    0 / 20 درس
+                                </p>
+
+                            </div>
+
+                            <div class="chapter-action">
+
+                                <button
+                                    class="chapter-locked"
+                                    onclick="lockedChapter()">
+
+                                    🔒
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- Future -->
+
+            <section class="library-section">
+
+                <h2 class="library-section-title">
+                    🚀 قادمًا
+                </h2>
+
+                <div class="future-box">
+
+                    سيتم إضافة بقية المواد والفصول
+                    والدروس تدريجيًا.
+                    هدفنا الآن بناء واجهة تعليمية
+                    قوية وسهلة الاستخدام قبل إضافة
+                    الأنظمة المتقدمة.
+
+                </div>
+
+            </section>
+
+
+        </div>
+
     </div>
 
 </main>
 
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script>
 
-const SUPABASE_URL =
-"https://qkzdlxqledsznhbifaxy.supabase.co";
+    /* =========================
+       LEVEL NAMES
+       ========================= */
 
-const SUPABASE_KEY =
-"sb_publishable_ZdpHXwLlhpbXztsTXpAFTg_TgOji91v";
+    const levelNames = {
 
-const supabaseClient =
-supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
+        concours: "كونكور",
 
+        brevet: "بريڤي",
 
-// التحقق من الحساب
+        bac: "باكالوريا"
 
-async function checkAuth(){
-
-    const {data,error} =
-        await supabaseClient.auth.getSession();
-
-    if(error || !data.session){
-
-        window.location.href =
-            "login.html";
-
-        return;
-    }
-
-    loadLibrary();
-
-}
+    };
 
 
-// تحميل المكتبة
+    /* =========================
+       LOAD LIBRARY
+       ========================= */
 
-function loadLibrary(){
+    function loadLibrary() {
 
-    const level =
-        localStorage.getItem(
-            "student_level"
-        );
+        const level =
+            localStorage.getItem(
+                "student_level"
+            );
 
 
-    if(!level){
+        if (!level) {
+
+            document.getElementById(
+                "noLevel"
+            ).style.display = "block";
+
+            document.getElementById(
+                "libraryContent"
+            ).style.display = "none";
+
+            return;
+
+        }
+
 
         document.getElementById(
             "noLevel"
-        ).style.display =
-            "block";
+        ).style.display = "none";
+
 
         document.getElementById(
             "libraryContent"
-        ).style.display =
-            "none";
+        ).style.display = "block";
 
-        return;
+
+        document.getElementById(
+            "levelName"
+        ).textContent =
+            levelNames[level] || level;
+
+
+        loadProgress();
+
     }
 
 
-    document.getElementById(
-        "noLevel"
-    ).style.display =
-        "none";
+    /* =========================
+       PROGRESS
+       ========================= */
 
-    document.getElementById(
-        "libraryContent"
-    ).style.display =
-        "block";
+    function loadProgress() {
 
-
-    document.getElementById(
-        "levelName"
-    ).textContent =
-        getLevelName(level);
-
-}
+        const completed =
+            parseInt(
+                localStorage.getItem(
+                    "completed_lessons"
+                ) || "0",
+                10
+            );
 
 
-// تحويل اسم المستوى
+        const total = 20;
 
-function getLevelName(level){
 
-    if(level === "concours"){
-        return "كونكور";
+        let progress =
+            Math.round(
+                (completed / total) * 100
+            );
+
+
+        if (progress > 100) {
+
+            progress = 100;
+
+        }
+
+
+        document.getElementById(
+            "completedLessons"
+        ).textContent =
+            completed;
+
+
+        document.getElementById(
+            "progressNumber"
+        ).textContent =
+            progress + "%";
+
+
+        document.getElementById(
+            "mathProgressText"
+        ).textContent =
+            progress + "%";
+
+
+        document.getElementById(
+            "mathProgress"
+        ).style.width =
+            progress + "%";
+
+
+        document.getElementById(
+            "chapter1Progress"
+        ).textContent =
+            completed +
+            " / 20 درس";
+
     }
 
-    if(level === "brevet"){
-        return "بريڤي";
+
+    /* =========================
+       NAVIGATION
+       ========================= */
+
+    function chooseLevel() {
+
+        window.location.href =
+            "levels.html";
+
     }
 
-    if(level === "bac"){
-        return "باكالوريا";
+
+    function goDashboard() {
+
+        window.location.href =
+            "dashboard.html";
+
     }
 
-    return level;
 
-}
+    function goHome() {
 
+        window.location.href =
+            "index.html";
 
-// اختيار المستوى
-
-function chooseLevel(){
-
-    window.location.href =
-        "levels.html";
-
-}
+    }
 
 
-// لوحة الطالب
+    /* =========================
+       CHAPTER
+       ========================= */
 
-function goDashboard(){
+    function openChapter(number) {
 
-    window.location.href =
-        "dashboard.html";
+        if (number !== 1) {
 
-}
+            lockedChapter();
 
+            return;
 
-// رسالة الفصول
-
-function chapterMessage(){
-
-    alert(
-        "هذا الفصل مقفل حاليًا.\n\n" +
-        "سيتم لاحقًا ربط الفصول بنظام الدفع " +
-        "والتحقق من التحويلات وفتح المحتوى."
-    );
-
-}
+        }
 
 
-checkAuth();
+        window.location.href =
+            "chapter.html";
+
+    }
+
+
+    function lockedChapter() {
+
+        alert(
+            "هذا الفصل غير متاح حاليًا 🔒\n\n" +
+            "سيتم فتحه في مرحلة لاحقة."
+        );
+
+    }
+
+
+    /* =========================
+       START
+       ========================= */
+
+    loadLibrary();
 
 </script>
 
-</body>
-  </html>
+</body></html>
