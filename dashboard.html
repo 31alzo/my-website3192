@@ -1,1130 +1,1184 @@
-<!DOCTYPE html><html lang="ar" dir="rtl">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>لوحة الطالب | عالم شيخ الأساتذة</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="style.css">
+    <title>لوحة الطالب | EduNova AI</title>
 
-<style>
-    /* ==================================================
-       DASHBOARD — تطوير فوق الأساس الموجود
-       ================================================== */
+    <link rel="stylesheet" href="style.css">
 
-    .dashboard-main {
-        padding-top: 24px;
-        padding-bottom: 90px;
-    }
-
-    /* ---------- Hero ---------- */
-
-    .dashboard-hero {
-        position: relative;
-        overflow: hidden;
-        margin-bottom: 24px;
-        padding: 26px 22px;
-        border-radius: 28px;
-        color: #fff;
-        background:
-            radial-gradient(
-                circle at 10% 15%,
-                rgba(255,255,255,.15),
-                transparent 28%
-            ),
-            linear-gradient(
-                135deg,
-                var(--primary),
-                var(--primary-dark)
-            );
-        box-shadow: 0 18px 42px rgba(37,99,235,.18);
-    }
-
-    .dashboard-hero::before {
-        content: "";
-        position: absolute;
-        width: 210px;
-        height: 210px;
-        left: -120px;
-        top: -120px;
-        border: 1px solid rgba(255,255,255,.14);
-        border-radius: 50%;
-    }
-
-    .dashboard-hero::after {
-        content: "";
-        position: absolute;
-        width: 280px;
-        height: 280px;
-        right: -180px;
-        bottom: -210px;
-        border: 1px solid rgba(255,255,255,.10);
-        border-radius: 50%;
-    }
-
-    .dashboard-hero-inner {
-        position: relative;
-        z-index: 2;
-        display: grid;
-        gap: 22px;
-    }
-
-    .dashboard-label {
-        display: inline-flex;
-        align-items: center;
-        gap: 7px;
-        width: fit-content;
-        margin-bottom: 9px;
-        padding: 6px 11px;
-        border: 1px solid rgba(255,255,255,.18);
-        border-radius: 999px;
-        background: rgba(255,255,255,.10);
-        color: rgba(255,255,255,.90);
-        font-size: 12px;
-        font-weight: 700;
-    }
-
-    .dashboard-label-dot {
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background: #bfdbfe;
-    }
-
-    .dashboard-title {
-        margin: 0;
-        color: #fff;
-        font-size: clamp(25px, 7vw, 38px);
-        line-height: 1.3;
-        font-weight: 800;
-    }
-
-    .dashboard-description {
-        max-width: 650px;
-        margin: 9px 0 0;
-        color: rgba(255,255,255,.82);
-        font-size: 14px;
-        line-height: 1.9;
-    }
-
-    .dashboard-teacher-mini {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        width: fit-content;
-        padding: 10px 12px;
-        border: 1px solid rgba(255,255,255,.15);
-        border-radius: 18px;
-        background: rgba(255,255,255,.09);
-        backdrop-filter: blur(10px);
-    }
-
-    .dashboard-teacher-avatar {
-        width: 48px;
-        height: 48px;
-        display: grid;
-        place-items: center;
-        flex-shrink: 0;
-        border-radius: 15px;
-        background: rgba(255,255,255,.14);
-        font-size: 25px;
-    }
-
-    .dashboard-teacher-info strong {
-        display: block;
-        color: #fff;
-        font-size: 14px;
-    }
-
-    .dashboard-teacher-info span {
-        display: block;
-        margin-top: 2px;
-        color: rgba(255,255,255,.68);
-        font-size: 11px;
-    }
-
-    /* ---------- Statistics ---------- */
-
-    .dashboard-stats {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-        margin-bottom: 30px;
-    }
-
-    .dashboard-stat {
-        padding: 17px 12px;
-        text-align: center;
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 20px;
-        box-shadow: var(--shadow-sm);
-    }
-
-    .dashboard-stat-icon {
-        width: 42px;
-        height: 42px;
-        display: grid;
-        place-items: center;
-        margin: 0 auto 8px;
-        border-radius: 13px;
-        background: var(--primary-light);
-        font-size: 20px;
-    }
-
-    .dashboard-stat-value {
-        display: block;
-        color: var(--primary);
-        font-size: 21px;
-        font-weight: 800;
-    }
-
-    .dashboard-stat-label {
-        display: block;
-        margin-top: 3px;
-        color: var(--text-soft);
-        font-size: 11px;
-    }
-
-    /* ---------- Sections ---------- */
-
-    .dashboard-section {
-        margin-top: 30px;
-    }
-
-    .dashboard-section-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 10px;
-        margin-bottom: 13px;
-    }
-
-    .dashboard-section-title {
-        margin: 0;
-        font-size: 20px;
-        font-weight: 800;
-    }
-
-    .dashboard-section-note {
-        color: var(--text-soft);
-        font-size: 12px;
-    }
-
-    /* ---------- Continue ---------- */
-
-    .continue-card {
-        padding: 20px;
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 22px;
-        box-shadow: var(--shadow-sm);
-    }
-
-    .continue-top {
-        display: flex;
-        align-items: center;
-        gap: 14px;
-    }
-
-    .continue-icon {
-        width: 58px;
-        height: 58px;
-        display: grid;
-        place-items: center;
-        flex-shrink: 0;
-        border-radius: 17px;
-        background: var(--primary-light);
-        color: var(--primary);
-        font-size: 27px;
-        font-weight: 800;
-    }
-
-    .continue-info h3 {
-        margin: 0;
-        font-size: 17px;
-        font-weight: 800;
-    }
-
-    .continue-info p {
-        margin: 3px 0 0;
-        color: var(--text-soft);
-        font-size: 13px;
-    }
-
-    .continue-progress {
-        margin-top: 19px;
-    }
-
-    .continue-progress-head {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 7px;
-        color: var(--text-soft);
-        font-size: 12px;
-    }
-
-    .continue-button {
-        width: 100%;
-        margin-top: 16px;
-    }
-
-    /* ---------- Level ---------- */
-
-    .level-card {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 15px;
-        padding: 18px;
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 22px;
-        box-shadow: var(--shadow-sm);
-    }
-
-    .level-content {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        min-width: 0;
-    }
-
-    .level-icon {
-        width: 50px;
-        height: 50px;
-        display: grid;
-        place-items: center;
-        flex-shrink: 0;
-        border-radius: 15px;
-        background: var(--primary-light);
-        font-size: 23px;
-    }
-
-    .level-content h3 {
-        margin: 0;
-        font-size: 15px;
-        font-weight: 800;
-    }
-
-    .level-content p {
-        margin: 3px 0 0;
-        color: var(--text-soft);
-        font-size: 12px;
-    }
-
-    /* ---------- Quick access ---------- */
-
-    .quick-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-    }
-
-    .quick-card {
-        min-height: 135px;
-        padding: 18px 12px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 20px;
-        color: var(--text);
-        box-shadow: var(--shadow-sm);
-        cursor: pointer;
-        transition:
-            transform .2s ease,
-            box-shadow .2s ease,
-            border-color .2s ease;
-    }
-
-    .quick-card:hover {
-        transform: translateY(-2px);
-        border-color: #bfdbfe;
-        box-shadow: var(--shadow-md);
-    }
-
-    .quick-card:active {
-        transform: scale(.98);
-    }
-
-    .quick-icon {
-        width: 48px;
-        height: 48px;
-        display: grid;
-        place-items: center;
-        margin-bottom: 9px;
-        border-radius: 14px;
-        background: var(--primary-light);
-        font-size: 23px;
-    }
-
-    .quick-card h3 {
-        margin: 0;
-        font-size: 14px;
-        font-weight: 800;
-    }
-
-    .quick-card p {
-        margin: 3px 0 0;
-        color: var(--text-soft);
-        font-size: 11px;
-    }
-
-    /* ---------- Sheikh / AI ---------- */
-
-    .ai-card {
-        position: relative;
-        overflow: hidden;
-        padding: 24px 20px;
-        border: 1px solid var(--border);
-        border-radius: 25px;
-        background:
-            radial-gradient(
-                circle at 50% -20%,
-                var(--primary-light),
-                transparent 55%
-            ),
-            var(--surface);
-        box-shadow: var(--shadow-sm);
-        text-align: center;
-    }
-
-    .ai-card::after {
-        content: "AI";
-        position: absolute;
-        left: 15px;
-        bottom: -25px;
-        color: var(--primary-light);
-        font-size: 80px;
-        font-weight: 900;
-        pointer-events: none;
-    }
-
-    .ai-avatar {
-        position: relative;
-        z-index: 1;
-        width: 76px;
-        height: 76px;
-        display: grid;
-        place-items: center;
-        margin: 0 auto 13px;
-        border: 4px solid var(--surface);
-        border-radius: 24px;
-        background: var(--primary);
-        color: #fff;
-        font-size: 30px;
-        font-weight: 900;
-        box-shadow: 0 10px 25px rgba(37,99,235,.20);
-    }
-
-    .ai-card h2 {
-        position: relative;
-        z-index: 1;
-        margin: 0;
-        font-size: 21px;
-        font-weight: 800;
-    }
-
-    .ai-subtitle {
-        position: relative;
-        z-index: 1;
-        display: block;
-        margin-top: 3px;
-        color: var(--primary);
-        font-size: 12px;
-        font-weight: 700;
-    }
-
-    .ai-card p {
-        position: relative;
-        z-index: 1;
-        max-width: 570px;
-        margin: 10px auto 0;
-        color: var(--text-soft);
-        font-size: 13px;
-        line-height: 1.9;
-    }
-
-    .ai-button {
-        position: relative;
-        z-index: 1;
-        margin-top: 16px;
-    }
-
-    /* ---------- Mobile navigation ---------- */
-
-    .dashboard-bottom-nav {
-        position: fixed;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        z-index: 100;
-        height: 66px;
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        background: rgba(255,255,255,.96);
-        border-top: 1px solid var(--border);
-        backdrop-filter: blur(12px);
-    }
-
-    html.dark-mode .dashboard-bottom-nav {
-        background: rgba(15,23,42,.94);
-    }
-
-    .dashboard-nav-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 2px;
-        border: 0;
-        background: transparent;
-        color: var(--text-soft);
-        font-size: 10px;
-        cursor: pointer;
-    }
-
-    .dashboard-nav-item span {
-        font-size: 19px;
-    }
-
-    .dashboard-nav-item.active {
-        color: var(--primary);
-        font-weight: 800;
-    }
-
-    @media (min-width: 650px) {
+    <style>
+        /* ==================================================
+           EDUNOVA AI — STUDENT DASHBOARD
+           ================================================== */
 
         .dashboard-main {
-            padding-bottom: 40px;
+            padding-top: 24px;
+            padding-bottom: 90px;
         }
 
-        .dashboard-stats {
-            grid-template-columns: repeat(4, 1fr);
-        }
-
-        .quick-grid {
-            grid-template-columns: repeat(4, 1fr);
-        }
-
-        .dashboard-bottom-nav {
-            display: none;
-        }
-    }
-
-    @media (min-width: 800px) {
-
-        .dashboard-hero-inner {
-            grid-template-columns: minmax(0, 1fr) auto;
-            align-items: center;
-        }
-
-        .dashboard-teacher-mini {
-            margin-left: 10px;
-        }
-    }
-
-    @media (max-width: 480px) {
+        /* ---------- Hero ---------- */
 
         .dashboard-hero {
-            padding: 22px 18px;
-            border-radius: 23px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 24px;
+            padding: 26px 22px;
+            border-radius: 28px;
+            color: #fff;
+            background:
+                radial-gradient(
+                    circle at 10% 15%,
+                    rgba(255,255,255,.15),
+                    transparent 28%
+                ),
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--primary-dark)
+                );
+            box-shadow: 0 18px 42px rgba(37,99,235,.18);
+        }
+
+        .dashboard-hero::before {
+            content: "";
+            position: absolute;
+            width: 210px;
+            height: 210px;
+            left: -120px;
+            top: -120px;
+            border: 1px solid rgba(255,255,255,.14);
+            border-radius: 50%;
+        }
+
+        .dashboard-hero::after {
+            content: "";
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            right: -180px;
+            bottom: -210px;
+            border: 1px solid rgba(255,255,255,.10);
+            border-radius: 50%;
+        }
+
+        .dashboard-hero-inner {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            gap: 22px;
+        }
+
+        .dashboard-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            width: fit-content;
+            margin-bottom: 9px;
+            padding: 6px 11px;
+            border: 1px solid rgba(255,255,255,.18);
+            border-radius: 999px;
+            background: rgba(255,255,255,.10);
+            color: rgba(255,255,255,.90);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .dashboard-label-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #bfdbfe;
         }
 
         .dashboard-title {
-            font-size: 24px;
+            margin: 0;
+            color: #fff;
+            font-size: clamp(25px, 7vw, 38px);
+            line-height: 1.3;
+            font-weight: 800;
         }
+
+        .dashboard-description {
+            max-width: 650px;
+            margin: 9px 0 0;
+            color: rgba(255,255,255,.82);
+            font-size: 14px;
+            line-height: 1.9;
+        }
+
+        .dashboard-teacher-mini {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: fit-content;
+            padding: 10px 12px;
+            border: 1px solid rgba(255,255,255,.15);
+            border-radius: 18px;
+            background: rgba(255,255,255,.09);
+            backdrop-filter: blur(10px);
+        }
+
+        .dashboard-teacher-avatar {
+            width: 48px;
+            height: 48px;
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            border-radius: 15px;
+            background: rgba(255,255,255,.14);
+            font-size: 25px;
+        }
+
+        .dashboard-teacher-info strong {
+            display: block;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .dashboard-teacher-info span {
+            display: block;
+            margin-top: 2px;
+            color: rgba(255,255,255,.68);
+            font-size: 11px;
+        }
+
+        /* ---------- Statistics ---------- */
+
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .dashboard-stat {
+            padding: 17px 12px;
+            text-align: center;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .dashboard-stat-icon {
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
+            margin: 0 auto 8px;
+            border-radius: 13px;
+            background: var(--primary-light);
+            font-size: 20px;
+        }
+
+        .dashboard-stat-value {
+            display: block;
+            color: var(--primary);
+            font-size: 21px;
+            font-weight: 800;
+        }
+
+        .dashboard-stat-label {
+            display: block;
+            margin-top: 3px;
+            color: var(--text-soft);
+            font-size: 11px;
+        }
+
+        /* ---------- Sections ---------- */
+
+        .dashboard-section {
+            margin-top: 30px;
+        }
+
+        .dashboard-section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 13px;
+        }
+
+        .dashboard-section-title {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .dashboard-section-note {
+            color: var(--text-soft);
+            font-size: 12px;
+        }
+
+        /* ---------- Continue ---------- */
+
+        .continue-card {
+            padding: 20px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .continue-top {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .continue-icon {
+            width: 58px;
+            height: 58px;
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            border-radius: 17px;
+            background: var(--primary-light);
+            color: var(--primary);
+            font-size: 27px;
+            font-weight: 800;
+        }
+
+        .continue-info h3 {
+            margin: 0;
+            font-size: 17px;
+            font-weight: 800;
+        }
+
+        .continue-info p {
+            margin: 3px 0 0;
+            color: var(--text-soft);
+            font-size: 13px;
+        }
+
+        .continue-progress {
+            margin-top: 19px;
+        }
+
+        .continue-progress-head {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 7px;
+            color: var(--text-soft);
+            font-size: 12px;
+        }
+
+        .continue-button {
+            width: 100%;
+            margin-top: 16px;
+        }
+
+        /* ---------- Level ---------- */
 
         .level-card {
-            align-items: stretch;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 18px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .level-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 0;
+        }
+
+        .level-icon {
+            width: 50px;
+            height: 50px;
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            border-radius: 15px;
+            background: var(--primary-light);
+            font-size: 23px;
+        }
+
+        .level-content h3 {
+            margin: 0;
+            font-size: 15px;
+            font-weight: 800;
+        }
+
+        .level-content p {
+            margin: 3px 0 0;
+            color: var(--text-soft);
+            font-size: 12px;
+        }
+
+        /* ---------- Quick access ---------- */
+
+        .quick-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .quick-card {
+            min-height: 135px;
+            padding: 18px 12px;
+            display: flex;
             flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            color: var(--text);
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            transition:
+                transform .2s ease,
+                box-shadow .2s ease,
+                border-color .2s ease;
         }
 
-        .level-card .btn {
-            width: 100%;
+        .quick-card:hover {
+            transform: translateY(-2px);
+            border-color: #bfdbfe;
+            box-shadow: var(--shadow-md);
         }
-    }
-</style>
 
-</head><body><!-- =====================================================
+        .quick-card:active {
+            transform: scale(.98);
+        }
+
+        .quick-icon {
+            width: 48px;
+            height: 48px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 9px;
+            border-radius: 14px;
+            background: var(--primary-light);
+            font-size: 23px;
+        }
+
+        .quick-card h3 {
+            margin: 0;
+            font-size: 14px;
+            font-weight: 800;
+        }
+
+        .quick-card p {
+            margin: 3px 0 0;
+            color: var(--text-soft);
+            font-size: 11px;
+        }
+
+        /* ---------- Afkrash AI ---------- */
+
+        .ai-card {
+            position: relative;
+            overflow: hidden;
+            padding: 24px 20px;
+            border: 1px solid var(--border);
+            border-radius: 25px;
+            background:
+                radial-gradient(
+                    circle at 50% -20%,
+                    var(--primary-light),
+                    transparent 55%
+                ),
+                var(--surface);
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+        }
+
+        .ai-card::after {
+            content: "AI";
+            position: absolute;
+            left: 15px;
+            bottom: -25px;
+            color: var(--primary-light);
+            font-size: 80px;
+            font-weight: 900;
+            pointer-events: none;
+        }
+
+        .ai-avatar {
+            position: relative;
+            z-index: 1;
+            width: 76px;
+            height: 76px;
+            display: grid;
+            place-items: center;
+            margin: 0 auto 13px;
+            border: 4px solid var(--surface);
+            border-radius: 24px;
+            background: var(--primary);
+            color: #fff;
+            font-size: 30px;
+            font-weight: 900;
+            box-shadow: 0 10px 25px rgba(37,99,235,.20);
+        }
+
+        .ai-card h2 {
+            position: relative;
+            z-index: 1;
+            margin: 0;
+            font-size: 21px;
+            font-weight: 800;
+        }
+
+        .ai-subtitle {
+            position: relative;
+            z-index: 1;
+            display: block;
+            margin-top: 3px;
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .ai-card p {
+            position: relative;
+            z-index: 1;
+            max-width: 570px;
+            margin: 10px auto 0;
+            color: var(--text-soft);
+            font-size: 13px;
+            line-height: 1.9;
+        }
+
+        .ai-button {
+            position: relative;
+            z-index: 1;
+            margin-top: 16px;
+        }
+
+        /* ---------- Mobile navigation ---------- */
+
+        .dashboard-bottom-nav {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 100;
+            height: 66px;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            background: rgba(255,255,255,.96);
+            border-top: 1px solid var(--border);
+            backdrop-filter: blur(12px);
+        }
+
+        html.dark-mode .dashboard-bottom-nav {
+            background: rgba(15,23,42,.94);
+        }
+
+        .dashboard-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            border: 0;
+            background: transparent;
+            color: var(--text-soft);
+            font-size: 10px;
+            cursor: pointer;
+        }
+
+        .dashboard-nav-item span {
+            font-size: 19px;
+        }
+
+        .dashboard-nav-item.active {
+            color: var(--primary);
+            font-weight: 800;
+        }
+
+        @media (min-width: 650px) {
+
+            .dashboard-main {
+                padding-bottom: 40px;
+            }
+
+            .dashboard-stats {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .quick-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .dashboard-bottom-nav {
+                display: none;
+            }
+        }
+
+        @media (min-width: 800px) {
+
+            .dashboard-hero-inner {
+                grid-template-columns: minmax(0, 1fr) auto;
+                align-items: center;
+            }
+
+            .dashboard-teacher-mini {
+                margin-left: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .dashboard-hero {
+                padding: 22px 18px;
+                border-radius: 23px;
+            }
+
+            .dashboard-title {
+                font-size: 24px;
+            }
+
+            .level-card {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .level-card .btn {
+                width: 100%;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+<!-- =====================================================
      HEADER
-     ===================================================== --><header class="site-header"><div class="container header-inner">
+     ===================================================== -->
 
-    <button
-        class="brand"
-        onclick="goHome()"
-        aria-label="الصفحة الرئيسية">
+<header class="site-header">
 
-        <span class="brand-icon">AI</span>
-
-        <span>
-            عالم شيخ الأساتذة
-        </span>
-
-    </button>
-
-    <div style="display:flex;gap:8px;">
+    <div class="container header-inner">
 
         <button
-            class="btn btn-secondary"
-            style="min-height:42px;padding:8px 12px;"
-            onclick="showNotifications()"
-            aria-label="الإشعارات">
-            🔔
+            class="brand"
+            onclick="goHome()"
+            aria-label="الصفحة الرئيسية">
+
+            <span class="brand-icon">
+                AI
+            </span>
+
+            <span>
+                EduNova AI
+            </span>
+
         </button>
 
-        <button
-            class="btn btn-secondary"
-            style="min-height:42px;padding:8px 12px;"
-            onclick="openAccount()"
-            aria-label="الحساب">
-            👤
-        </button>
+        <div style="display:flex;gap:8px;">
+
+            <button
+                class="btn btn-secondary"
+                style="min-height:42px;padding:8px 12px;"
+                onclick="showNotifications()"
+                aria-label="الإشعارات">
+
+                🔔
+
+            </button>
+
+            <button
+                class="btn btn-secondary"
+                style="min-height:42px;padding:8px 12px;"
+                onclick="openAccount()"
+                aria-label="الحساب">
+
+                👤
+
+            </button>
+
+        </div>
 
     </div>
 
-</div>
+</header>
 
-</header><!-- =====================================================
+
+<!-- =====================================================
      MAIN
-     ===================================================== --><main class="page dashboard-main"><div class="container">
+     ===================================================== -->
 
-    <!-- HERO -->
+<main class="page dashboard-main">
 
-    <section class="dashboard-hero">
+    <div class="container">
 
-        <div class="dashboard-hero-inner">
+        <!-- HERO -->
 
-            <div>
+        <section class="dashboard-hero">
 
-                <span class="dashboard-label">
-                    <span class="dashboard-label-dot"></span>
-                    عالم شيخ الأساتذة
-                </span>
+            <div class="dashboard-hero-inner">
 
-                <h1
-                    class="dashboard-title"
-                    id="welcomeName">
-                    مرحبًا بك 👋
-                </h1>
+                <div>
 
-                <p class="dashboard-description">
-                    واصل رحلتك التعليمية خطوة بخطوة،
-                    وتعلّم مع شيخ الأساتذة — الأستاذ AI.
-                </p>
+                    <span class="dashboard-label">
 
-            </div>
+                        <span class="dashboard-label-dot"></span>
 
+                        EduNova AI
 
-            <div class="dashboard-teacher-mini">
-
-                <div class="dashboard-teacher-avatar">
-                    👨‍🏫
-                </div>
-
-                <div class="dashboard-teacher-info">
-
-                    <strong>
-                        شيخ الأساتذة
-                    </strong>
-
-                    <span>
-                        الأستاذ AI • رفيق رحلتك التعليمية
                     </span>
 
-                </div>
+                    <h1
+                        class="dashboard-title"
+                        id="welcomeName">
 
-            </div>
+                        مرحبًا بك 👋
 
-        </div>
+                    </h1>
 
-    </section>
+                    <p class="dashboard-description">
 
+                        واصل رحلتك التعليمية خطوة بخطوة،
+                        وتعلّم مع Afkrash AI — مدرسك الذكي في EduNova AI.
 
-    <!-- STATISTICS -->
-
-    <section class="dashboard-stats">
-
-        <div class="dashboard-stat">
-
-            <div class="dashboard-stat-icon">
-                ⭐
-            </div>
-
-            <strong
-                class="dashboard-stat-value"
-                id="pointsValue">
-                0
-            </strong>
-
-            <span class="dashboard-stat-label">
-                النقاط
-            </span>
-
-        </div>
-
-
-        <div class="dashboard-stat">
-
-            <div class="dashboard-stat-icon">
-                🔥
-            </div>
-
-            <strong class="dashboard-stat-value">
-                0
-            </strong>
-
-            <span class="dashboard-stat-label">
-                أيام متتالية
-            </span>
-
-        </div>
-
-
-        <div class="dashboard-stat">
-
-            <div class="dashboard-stat-icon">
-                🏅
-            </div>
-
-            <strong class="dashboard-stat-value">
-                0
-            </strong>
-
-            <span class="dashboard-stat-label">
-                الشارات
-            </span>
-
-        </div>
-
-
-        <div class="dashboard-stat">
-
-            <div class="dashboard-stat-icon">
-                📈
-            </div>
-
-            <strong
-                class="dashboard-stat-value"
-                id="progressValue">
-                0%
-            </strong>
-
-            <span class="dashboard-stat-label">
-                التقدم
-            </span>
-
-        </div>
-
-    </section>
-
-
-    <!-- CONTINUE LEARNING -->
-
-    <section class="dashboard-section">
-
-        <div class="dashboard-section-header">
-
-            <h2 class="dashboard-section-title">
-                متابعة التعلم
-            </h2>
-
-            <span class="dashboard-section-note">
-                آخر نشاط
-            </span>
-
-        </div>
-
-
-        <div class="continue-card">
-
-            <div class="continue-top">
-
-                <div class="continue-icon">
-                    ∑
-                </div>
-
-                <div class="continue-info">
-
-                    <h3>
-                        الرياضيات
-                    </h3>
-
-                    <p id="courseLevel">
-                        اختر مستواك للبدء
                     </p>
 
                 </div>
 
-            </div>
 
+                <div class="dashboard-teacher-mini">
 
-            <div class="continue-progress">
+                    <div class="dashboard-teacher-avatar">
+                        🤖
+                    </div>
 
-                <div class="continue-progress-head">
+                    <div class="dashboard-teacher-info">
 
-                    <span>
-                        التقدم
-                    </span>
+                        <strong>
+                            Afkrash AI
+                        </strong>
 
-                    <span id="courseProgress">
-                        0%
-                    </span>
+                        <span>
+                            مدرسك الذكي • رفيق رحلتك التعليمية
+                        </span>
 
-                </div>
-
-                <div class="progress">
-
-                    <div
-                        class="progress-bar"
-                        id="courseProgressBar">
                     </div>
 
                 </div>
 
             </div>
 
-
-            <button
-                class="btn btn-primary continue-button"
-                onclick="startLearning()">
-
-                ابدأ التعلم
-
-            </button>
-
-        </div>
-
-    </section>
+        </section>
 
 
-    <!-- LEVEL -->
+        <!-- STATISTICS -->
 
-    <section class="dashboard-section">
+        <section class="dashboard-stats">
 
-        <div class="dashboard-section-header">
+            <div class="dashboard-stat">
 
-            <h2 class="dashboard-section-title">
-                مستواك الدراسي
-            </h2>
-
-        </div>
-
-
-        <div class="level-card">
-
-            <div class="level-content">
-
-                <div class="level-icon">
-                    🎓
+                <div class="dashboard-stat-icon">
+                    ⭐
                 </div>
 
-                <div>
+                <strong
+                    class="dashboard-stat-value"
+                    id="pointsValue">
 
-                    <h3 id="selectedLevel">
-                        لم يتم اختيار المستوى
+                    0
+
+                </strong>
+
+                <span class="dashboard-stat-label">
+                    النقاط
+                </span>
+
+            </div>
+
+
+            <div class="dashboard-stat">
+
+                <div class="dashboard-stat-icon">
+                    🔥
+                </div>
+
+                <strong class="dashboard-stat-value">
+                    0
+                </strong>
+
+                <span class="dashboard-stat-label">
+                    أيام متتالية
+                </span>
+
+            </div>
+
+
+            <div class="dashboard-stat">
+
+                <div class="dashboard-stat-icon">
+                    🏅
+                </div>
+
+                <strong class="dashboard-stat-value">
+                    0
+                </strong>
+
+                <span class="dashboard-stat-label">
+                    الشارات
+                </span>
+
+            </div>
+
+
+            <div class="dashboard-stat">
+
+                <div class="dashboard-stat-icon">
+                    📈
+                </div>
+
+                <strong
+                    class="dashboard-stat-value"
+                    id="progressValue">
+
+                    0%
+
+                </strong>
+
+                <span class="dashboard-stat-label">
+                    التقدم
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- CONTINUE LEARNING -->
+
+        <section class="dashboard-section">
+
+            <div class="dashboard-section-header">
+
+                <h2 class="dashboard-section-title">
+                    متابعة التعلم
+                </h2>
+
+                <span class="dashboard-section-note">
+                    آخر نشاط
+                </span>
+
+            </div>
+
+
+            <div class="continue-card">
+
+                <div class="continue-top">
+
+                    <div class="continue-icon">
+                        ∑
+                    </div>
+
+                    <div class="continue-info">
+
+                        <h3>
+                            الرياضيات
+                        </h3>
+
+                        <p id="courseLevel">
+                            اختر مستواك للبدء
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="continue-progress">
+
+                    <div class="continue-progress-head">
+
+                        <span>
+                            التقدم
+                        </span>
+
+                        <span id="courseProgress">
+                            0%
+                        </span>
+
+                    </div>
+
+                    <div class="progress">
+
+                        <div
+                            class="progress-bar"
+                            id="courseProgressBar">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="btn btn-primary continue-button"
+                    onclick="startLearning()">
+
+                    ابدأ التعلم
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- LEVEL -->
+
+        <section class="dashboard-section">
+
+            <div class="dashboard-section-header">
+
+                <h2 class="dashboard-section-title">
+                    مستواك الدراسي
+                </h2>
+
+            </div>
+
+
+            <div class="level-card">
+
+                <div class="level-content">
+
+                    <div class="level-icon">
+                        🎓
+                    </div>
+
+                    <div>
+
+                        <h3 id="selectedLevel">
+                            لم يتم اختيار المستوى
+                        </h3>
+
+                        <p>
+                            المستوى المحدد لحسابك
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="btn btn-secondary"
+                    onclick="changeLevel()">
+
+                    تغيير المستوى
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- QUICK ACCESS -->
+
+        <section class="dashboard-section">
+
+            <div class="dashboard-section-header">
+
+                <h2 class="dashboard-section-title">
+                    الوصول السريع
+                </h2>
+
+            </div>
+
+
+            <div class="quick-grid">
+
+                <button
+                    class="quick-card"
+                    onclick="openLibrary()">
+
+                    <span class="quick-icon">
+                        📚
+                    </span>
+
+                    <h3>
+                        مكتبتي
                     </h3>
 
                     <p>
-                        المستوى المحدد لحسابك
+                        دروسي ومحتواي
                     </p>
 
+                </button>
+
+
+                <button
+                    class="quick-card"
+                    onclick="openForum()">
+
+                    <span class="quick-icon">
+                        💬
+                    </span>
+
+                    <h3>
+                        المنتدى
+                    </h3>
+
+                    <p>
+                        أسئلة ونقاشات
+                    </p>
+
+                </button>
+
+
+                <button
+                    class="quick-card"
+                    onclick="openChallenge()">
+
+                    <span class="quick-icon">
+                        🏆
+                    </span>
+
+                    <h3>
+                        التحدي الأسبوعي
+                    </h3>
+
+                    <p>
+                        تدرب واختبر نفسك
+                    </p>
+
+                </button>
+
+
+                <button
+                    class="quick-card"
+                    onclick="showComingSoon('الترتيب')">
+
+                    <span class="quick-icon">
+                        📊
+                    </span>
+
+                    <h3>
+                        الترتيب
+                    </h3>
+
+                    <p>
+                        أفضل الطلاب
+                    </p>
+
+                </button>
+
+
+                <button
+                    class="quick-card"
+                    onclick="showComingSoon('الشارات')">
+
+                    <span class="quick-icon">
+                        🥇
+                    </span>
+
+                    <h3>
+                        الشارات
+                    </h3>
+
+                    <p>
+                        إنجازاتك
+                    </p>
+
+                </button>
+
+
+                <button
+                    class="quick-card"
+                    onclick="showComingSoon('الاشتراكات')">
+
+                    <span class="quick-icon">
+                        💳
+                    </span>
+
+                    <h3>
+                        الاشتراكات
+                    </h3>
+
+                    <p>
+                        الخطط التعليمية
+                    </p>
+
+                </button>
+
+
+                <button
+                    class="quick-card"
+                    onclick="openSettings()">
+
+                    <span class="quick-icon">
+                        ⚙️
+                    </span>
+
+                    <h3>
+                        الإعدادات
+                    </h3>
+
+                    <p>
+                        تخصيص حسابك
+                    </p>
+
+                </button>
+
+
+                <button
+                    class="quick-card"
+                    onclick="openAccount()">
+
+                    <span class="quick-icon">
+                        👤
+                    </span>
+
+                    <h3>
+                        حسابي
+                    </h3>
+
+                    <p>
+                        الملف الشخصي
+                    </p>
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- AFKRASH AI -->
+
+        <section class="dashboard-section">
+
+            <div class="dashboard-section-header">
+
+                <h2 class="dashboard-section-title">
+                    Afkrash AI
+                </h2>
+
+            </div>
+
+
+            <div class="ai-card">
+
+                <div class="ai-avatar">
+                    AI
                 </div>
 
+                <h2>
+                    Afkrash AI
+                </h2>
+
+                <span class="ai-subtitle">
+                    مدرسك الذكي في EduNova AI
+                </span>
+
+                <p>
+
+                    شخصية تعليمية ذكية سترافقك في رحلتك
+                    وتساعدك على فهم الرياضيات بطريقة واضحة
+                    ومنظمة.
+
+                    <br>
+
+                    Afkrash AI هو جزء أساسي من تجربة
+                    EduNova AI، وسيظهر لاحقًا في الدروس
+                    والفيديوهات التعليمية.
+
+                </p>
+
+                <button
+                    class="btn btn-primary ai-button"
+                    onclick="showComingSoon('Afkrash AI')">
+
+                    قريبًا معك في الدروس
+
+                </button>
+
             </div>
 
+        </section>
 
-            <button
-                class="btn btn-secondary"
-                onclick="changeLevel()">
+    </div>
 
-                تغيير المستوى
+</main>
 
-            </button>
 
-        </div>
-
-    </section>
-
-
-    <!-- QUICK ACCESS -->
-
-    <section class="dashboard-section">
-
-        <div class="dashboard-section-header">
-
-            <h2 class="dashboard-section-title">
-                الوصول السريع
-            </h2>
-
-        </div>
-
-
-        <div class="quick-grid">
-
-            <button
-                class="quick-card"
-                onclick="openLibrary()">
-
-                <span class="quick-icon">
-                    📚
-                </span>
-
-                <h3>
-                    مكتبتي
-                </h3>
-
-                <p>
-                    دروسي ومحتواي
-                </p>
-
-            </button>
-
-
-            <button
-                class="quick-card"
-                onclick="openForum()">
-
-                <span class="quick-icon">
-                    💬
-                </span>
-
-                <h3>
-                    المنتدى
-                </h3>
-
-                <p>
-                    أسئلة ونقاشات
-                </p>
-
-            </button>
-
-
-            <button
-                class="quick-card"
-                onclick="openChallenge()">
-
-                <span class="quick-icon">
-                    🏆
-                </span>
-
-                <h3>
-                    التحدي الأسبوعي
-                </h3>
-
-                <p>
-                    تدرب واختبر نفسك
-                </p>
-
-            </button>
-
-
-            <button
-                class="quick-card"
-                onclick="showComingSoon('الترتيب')">
-
-                <span class="quick-icon">
-                    📊
-                </span>
-
-                <h3>
-                    الترتيب
-                </h3>
-
-                <p>
-                    أفضل الطلاب
-                </p>
-
-            </button>
-
-
-            <button
-                class="quick-card"
-                onclick="showComingSoon('الشارات')">
-
-                <span class="quick-icon">
-                    🥇
-                </span>
-
-                <h3>
-                    الشارات
-                </h3>
-
-                <p>
-                    إنجازاتك
-                </p>
-
-            </button>
-
-
-            <button
-                class="quick-card"
-                onclick="showComingSoon('الاشتراكات')">
-
-                <span class="quick-icon">
-                    💳
-                </span>
-
-                <h3>
-                    الاشتراكات
-                </h3>
-
-                <p>
-                    ستتوفر لاحقًا
-                </p>
-
-            </button>
-
-
-            <button
-                class="quick-card"
-                onclick="openSettings()">
-
-                <span class="quick-icon">
-                    ⚙️
-                </span>
-
-                <h3>
-                    الإعدادات
-                </h3>
-
-                <p>
-                    تخصيص حسابك
-                </p>
-
-            </button>
-
-
-            <button
-                class="quick-card"
-                onclick="openAccount()">
-
-                <span class="quick-icon">
-                    👤
-                </span>
-
-                <h3>
-                    حسابي
-                </h3>
-
-                <p>
-                    الملف الشخصي
-                </p>
-
-            </button>
-
-        </div>
-
-    </section>
-
-
-    <!-- SHEIKH AL-ASATITHA -->
-
-    <section class="dashboard-section">
-
-        <div class="dashboard-section-header">
-
-            <h2 class="dashboard-section-title">
-                شيخ الأساتذة
-            </h2>
-
-        </div>
-
-
-        <div class="ai-card">
-
-            <div class="ai-avatar">
-                AI
-            </div>
-
-            <h2>
-                شيخ الأساتذة
-            </h2>
-
-            <span class="ai-subtitle">
-                الأستاذ AI
-            </span>
-
-            <p>
-                الشخصية التعليمية التي سترافقك في رحلتك
-                وتقدم لك الدروس والشروحات بطريقة واضحة
-                ومنظمة.
-                <br>
-                وجود الأستاذ AI هنا هو بداية لما سيصبح
-                لاحقًا جزءًا أساسيًا من تجربة التعلم
-                والفيديوهات التعليمية.
-            </p>
-
-            <button
-                class="btn btn-primary ai-button"
-                onclick="showComingSoon('الأستاذ AI')">
-
-                قريبًا معك في الدروس
-
-            </button>
-
-        </div>
-
-    </section>
-
-</div>
-
-</main><!-- =====================================================
+<!-- =====================================================
      MOBILE NAVIGATION
-     ===================================================== --><nav class="dashboard-bottom-nav"><button
-    class="dashboard-nav-item active"
-    onclick="goDashboard()">
+     ===================================================== -->
 
-    <span>🏠</span>
-    الرئيسية
+<nav class="dashboard-bottom-nav">
 
-</button>
+    <button
+        class="dashboard-nav-item active"
+        onclick="goDashboard()">
 
+        <span>🏠</span>
+        الرئيسية
 
-<button
-    class="dashboard-nav-item"
-    onclick="openLibrary()">
-
-    <span>📚</span>
-    مكتبتي
-
-</button>
+    </button>
 
 
-<button
-    class="dashboard-nav-item"
-    onclick="openForum()">
+    <button
+        class="dashboard-nav-item"
+        onclick="openLibrary()">
 
-    <span>💬</span>
-    المنتدى
+        <span>📚</span>
+        مكتبتي
 
-</button>
-
-
-<button
-    class="dashboard-nav-item"
-    onclick="showComingSoon('الأستاذ AI')">
-
-    <span>🤖</span>
-    الأستاذ AI
-
-</button>
+    </button>
 
 
-<button
-    class="dashboard-nav-item"
-    onclick="openSettings()">
+    <button
+        class="dashboard-nav-item"
+        onclick="openForum()">
 
-    <span>⚙️</span>
-    الإعدادات
+        <span>💬</span>
+        المنتدى
 
-</button>
+    </button>
 
-</nav><!-- =====================================================
+
+    <button
+        class="dashboard-nav-item"
+        onclick="showComingSoon('Afkrash AI')">
+
+        <span>🤖</span>
+        Afkrash AI
+
+    </button>
+
+
+    <button
+        class="dashboard-nav-item"
+        onclick="openSettings()">
+
+        <span>⚙️</span>
+        الإعدادات
+
+    </button>
+
+</nav>
+
+
+<!-- =====================================================
      SUPABASE
-     ===================================================== --><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
+     ===================================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
 
     const SUPABASE_URL =
         "https://qkzdlxqledsznhbifaxy.supabase.co";
@@ -1189,7 +1243,6 @@
 
         loadSelectedLevel();
         loadProgress();
-
         loadPoints();
 
     }
@@ -1224,7 +1277,10 @@
 
 
         if (selected) {
-            selected.textContent = level;
+
+            selected.textContent =
+                level;
+
         }
 
 
@@ -1271,7 +1327,9 @@
 
 
         if (progress > 100) {
+
             progress = 100;
+
         }
 
 
@@ -1457,7 +1515,7 @@
 
         alert(
             name +
-            " ستتوفر في مرحلة لاحقة من تطوير الموقع."
+            " ستتوفر في مرحلة لاحقة من تطوير EduNova AI."
         );
 
     }
@@ -1469,5 +1527,7 @@
 
     checkAuth();
 
-</script></body>
-    </html>
+</script>
+
+</body>
+                        </html>
