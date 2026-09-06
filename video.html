@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>مشاهدة الفيديو | عالم شيخ الأساتذة</title>
+    <title>مشاهدة الفيديو | EduNova AI</title>
 
     <link rel="stylesheet" href="style.css">
 
@@ -37,6 +37,11 @@
             font-size: 11px;
             font-weight: 800;
             cursor: pointer;
+        }
+
+        .back-btn:hover {
+            color: var(--primary);
+            border-color: #93c5fd;
         }
 
         .teacher-strip {
@@ -87,7 +92,9 @@
             font-size: 10px;
         }
 
-        /* VIDEO PLAYER */
+        /* =========================================
+           VIDEO PLAYER
+           ========================================= */
 
         .player-card {
             overflow: hidden;
@@ -171,7 +178,25 @@
             font-weight: 900;
         }
 
-        /* INFO */
+        .locked-player-label {
+            display: inline-block;
+
+            margin-top: 12px;
+            padding: 6px 10px;
+
+            border-radius: 999px;
+
+            background: rgba(239,68,68,.15);
+
+            color: #fca5a5;
+
+            font-size: 9px;
+            font-weight: 900;
+        }
+
+        /* =========================================
+           INFO
+           ========================================= */
 
         .video-info-card {
             margin-top: 17px;
@@ -237,7 +262,9 @@
             font-weight: 700;
         }
 
-        /* SUBSCRIPTION */
+        /* =========================================
+           SUBSCRIPTION
+           ========================================= */
 
         .subscription-box {
             margin-top: 17px;
@@ -297,7 +324,9 @@
             background: var(--primary-dark);
         }
 
-        /* NAVIGATION */
+        /* =========================================
+           NAVIGATION
+           ========================================= */
 
         .video-navigation {
             display: flex;
@@ -366,10 +395,11 @@
             <span class="brand-icon">AI</span>
 
             <span>
-                عالم شيخ الأساتذة
+                EduNova AI
             </span>
 
         </button>
+
 
         <button
             class="back-btn"
@@ -401,11 +431,11 @@
             <div>
 
                 <strong>
-                    شيخ الأساتذة — الأستاذ AI
+                    Afkrash AI
                 </strong>
 
                 <span>
-                    تعلم بالشرح المرئي وبالطريقة التي تناسبك.
+                    مدرسك الذكي في EduNova AI — تعلّم الرياضيات بطريقة بسيطة.
                 </span>
 
             </div>
@@ -431,7 +461,7 @@
                         الفيديو الأول
                     </h2>
 
-                    <p>
+                    <p id="playerMessage">
                         الفيديو سيظهر هنا عند ربط المحتوى الحقيقي.
                     </p>
 
@@ -458,9 +488,11 @@
                 الرياضيات
             </span>
 
+
             <h1 id="videoTitle">
                 الفيديو الأول
             </h1>
+
 
             <p
                 class="video-description"
@@ -481,6 +513,7 @@
 
                 </span>
 
+
                 <span
                     class="meta-item"
                     id="videoNumber">
@@ -488,6 +521,7 @@
                     🎬 فيديو 1
 
                 </span>
+
 
                 <span
                     class="meta-item"
@@ -516,8 +550,9 @@
             <p>
                 الفيديو الأول من كل Chapitre مجاني.
                 للوصول إلى بقية الفيديوهات، يحتاج الطالب
-                إلى الاشتراك في المنصة.
+                إلى الاشتراك في إحدى الخطط التعليمية في EduNova AI.
             </p>
+
 
             <button
                 class="subscribe-btn"
@@ -544,6 +579,7 @@
 
             </button>
 
+
             <button
                 class="nav-video-btn"
                 onclick="goChapter()"
@@ -552,6 +588,7 @@
                 قائمة الفيديوهات
 
             </button>
+
 
             <button
                 class="nav-video-btn"
@@ -577,6 +614,7 @@
        ========================================= */
 
     let selectedVideo = null;
+
 
     try {
 
@@ -636,9 +674,9 @@
 
 
     /*
-       القاعدة الأساسية:
+       القاعدة الحالية:
        الفيديو رقم 1 مجاني.
-       كل ما بعده يحتاج اشتراكًا.
+       الفيديوهات من 2 إلى 20 تحتاج اشتراكًا.
     */
 
     const isFree =
@@ -687,16 +725,25 @@
             );
 
 
-        /* FREE / PAID */
+        /* =====================================
+           FREE / LOCKED
+           ===================================== */
 
         const freeLabel =
             document.getElementById(
                 "freeLabel"
             );
 
+
         const subscriptionBox =
             document.getElementById(
                 "subscriptionBox"
+            );
+
+
+        const playerMessage =
+            document.getElementById(
+                "playerMessage"
             );
 
 
@@ -711,13 +758,25 @@
             subscriptionBox.style.display =
                 "none";
 
+            playerMessage.textContent =
+                "الفيديو المجاني الأول في هذا الـChapitre.";
+
         } else {
 
             freeLabel.style.display =
-                "none";
+                "inline-block";
+
+            freeLabel.className =
+                "locked-player-label";
+
+            freeLabel.textContent =
+                "🔒 يتطلب اشتراكًا";
 
             subscriptionBox.style.display =
                 "block";
+
+            playerMessage.textContent =
+                "هذا الفيديو متاح ضمن الخطط التعليمية.";
 
         }
 
@@ -736,11 +795,13 @@
                     "videoPlayer"
                 );
 
+
             player.innerHTML = `
 
                 <video
                     controls
                     playsinline
+                    preload="metadata"
                     style="
                         width:100%;
                         height:100%;
@@ -788,12 +849,19 @@
     function goSubscribe() {
 
         /*
-           صفحة الاشتراك سنبنيها لاحقًا
-           عندما نصل إلى نظام الاشتراكات.
+           صفحة الاشتراك والدفع سنبنيها
+           في مرحلة لاحقة.
+
+           لاحقًا ستكون هنا:
+           - الخطط الأسبوعية
+           - الشهرية
+           - السنوية
+           - فتح Chapitre كامل
+           - الدفع عبر Bankily / Masrivi / Sedad
         */
 
         alert(
-            "صفحة الاشتراك سيتم تجهيزها لاحقًا."
+            "صفحة الاشتراك في EduNova AI سيتم تجهيزها في الخطوة القادمة."
         );
 
     }
@@ -826,4 +894,4 @@
 </script>
 
 </body>
-  </html>
+    </html>
