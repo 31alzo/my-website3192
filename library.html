@@ -2,16 +2,23 @@
 <html lang="ar" dir="rtl">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>المكتبة | عالم شيخ الأساتذة</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="style.css">
+    <title>المكتبة | EduNova AI</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css">
 
     <style>
+
         /* =========================================
-           LIBRARY
+           EDUNOVA AI — LIBRARY
            ========================================= */
 
         .library-page {
@@ -23,11 +30,13 @@
             margin: auto;
         }
 
+
         /* =========================================
            TEACHER IDENTITY
            ========================================= */
 
         .teacher-strip {
+
             display: flex;
             align-items: center;
             gap: 12px;
@@ -42,9 +51,12 @@
             box-shadow: var(--shadow-sm);
         }
 
+
         .teacher-avatar {
+
             width: 46px;
             height: 46px;
+
             flex-shrink: 0;
 
             display: grid;
@@ -60,29 +72,39 @@
                 );
 
             color: white;
+
             font-size: 13px;
             font-weight: 900;
         }
 
+
         .teacher-strip strong {
+
             display: block;
+
             font-size: 14px;
             font-weight: 900;
         }
 
+
         .teacher-strip span {
+
             display: block;
+
             margin-top: 3px;
 
             color: var(--text-soft);
+
             font-size: 11px;
         }
+
 
         /* =========================================
            HERO
            ========================================= */
 
         .library-hero {
+
             position: relative;
             overflow: hidden;
 
@@ -104,18 +126,23 @@
             box-shadow: var(--shadow-lg);
         }
 
+
         .library-hero::before,
         .library-hero::after {
+
             content: "";
 
             position: absolute;
 
             border-radius: 50%;
 
-            background: rgba(255,255,255,.08);
+            background:
+                rgba(255,255,255,.08);
         }
 
+
         .library-hero::before {
+
             width: 190px;
             height: 190px;
 
@@ -123,7 +150,9 @@
             top: -90px;
         }
 
+
         .library-hero::after {
+
             width: 140px;
             height: 140px;
 
@@ -131,90 +160,223 @@
             bottom: -60px;
         }
 
+
         .hero-content {
+
             position: relative;
+
             z-index: 1;
         }
 
+
         .hero-label {
+
             display: inline-flex;
 
             padding: 5px 10px;
 
             border-radius: 999px;
 
-            background: rgba(255,255,255,.14);
+            background:
+                rgba(255,255,255,.14);
 
             font-size: 10px;
             font-weight: 800;
         }
 
+
         .library-hero h1 {
+
             margin: 12px 0 7px;
 
-            font-size: clamp(26px, 6vw, 38px);
+            font-size:
+                clamp(26px, 6vw, 38px);
+
             line-height: 1.25;
+
             font-weight: 950;
         }
 
+
         .library-hero p {
+
             max-width: 650px;
 
             margin: 0;
 
-            color: rgba(255,255,255,.88);
+            color:
+                rgba(255,255,255,.88);
 
             font-size: 13px;
+
             line-height: 1.9;
         }
 
+
         .level-actions {
+
             display: flex;
             flex-wrap: wrap;
+
             gap: 8px;
 
             margin-top: 17px;
         }
 
+
         .level-actions button {
+
             padding: 9px 13px;
 
             border: 0;
             border-radius: 10px;
 
             background: white;
+
             color: var(--primary);
 
             font-family: inherit;
+
             font-size: 11px;
             font-weight: 850;
 
             cursor: pointer;
         }
 
+
+        /* =========================================
+           LEARNING PATH
+           ========================================= */
+
+        .learning-path {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 8px;
+
+            margin-bottom: 18px;
+        }
+
+
+        .path-item {
+
+            position: relative;
+
+            padding: 11px 8px;
+
+            text-align: center;
+
+            background: var(--surface);
+
+            border: 1px solid var(--border);
+
+            border-radius: 15px;
+
+            box-shadow: var(--shadow-sm);
+        }
+
+
+        .path-item.active {
+
+            border-color:
+                var(--primary);
+
+            background:
+                var(--primary-light);
+        }
+
+
+        .path-number {
+
+            width: 28px;
+            height: 28px;
+
+            display: grid;
+            place-items: center;
+
+            margin: 0 auto 5px;
+
+            border-radius: 9px;
+
+            background:
+                var(--primary);
+
+            color: white;
+
+            font-size: 11px;
+            font-weight: 900;
+        }
+
+
+        .path-item:not(.active)
+        .path-number {
+
+            background:
+                var(--primary-light);
+
+            color:
+                var(--primary);
+        }
+
+
+        .path-item strong {
+
+            display: block;
+
+            font-size: 10px;
+            font-weight: 900;
+        }
+
+
+        .path-item span {
+
+            display: block;
+
+            margin-top: 2px;
+
+            color: var(--text-soft);
+
+            font-size: 8px;
+        }
+
+
         /* =========================================
            SUBJECT
            ========================================= */
 
         .subject-card {
+
             padding: 18px;
 
             background: var(--surface);
-            border: 1px solid var(--border);
+
+            border:
+                1px solid var(--border);
+
             border-radius: 22px;
 
             box-shadow: var(--shadow-md);
         }
 
+
         .subject-header {
+
             display: flex;
+
             align-items: center;
+
             gap: 13px;
         }
 
+
         .subject-icon {
+
             width: 58px;
             height: 58px;
+
             flex-shrink: 0;
 
             display: grid;
@@ -222,94 +384,135 @@
 
             border-radius: 17px;
 
-            background: var(--primary-light);
-            color: var(--primary);
+            background:
+                var(--primary-light);
+
+            color:
+                var(--primary);
 
             font-size: 27px;
             font-weight: 950;
         }
 
+
         .subject-header h2 {
+
             margin: 0;
 
             font-size: 20px;
+
             font-weight: 950;
         }
 
+
         .subject-header p {
+
             margin: 4px 0 0;
 
-            color: var(--text-soft);
+            color:
+                var(--text-soft);
+
             font-size: 11px;
+
             line-height: 1.7;
         }
 
+
         .subject-badge {
+
             display: inline-flex;
 
             margin-top: 7px;
+
             padding: 4px 8px;
 
             border-radius: 999px;
 
-            background: var(--primary-light);
-            color: var(--primary);
+            background:
+                var(--primary-light);
+
+            color:
+                var(--primary);
 
             font-size: 9px;
+
             font-weight: 900;
         }
+
 
         /* =========================================
            CHAPTER SECTION
            ========================================= */
 
         .chapter-section {
+
             margin-top: 24px;
         }
 
+
         .section-title {
+
             margin-bottom: 12px;
         }
 
+
         .section-title h2 {
+
             margin: 0;
 
             font-size: 20px;
+
             font-weight: 950;
         }
 
+
         .section-title p {
+
             margin: 4px 0 0;
 
-            color: var(--text-soft);
+            color:
+                var(--text-soft);
+
             font-size: 11px;
         }
+
 
         /* =========================================
            CHAPTERS
            ========================================= */
 
         .chapters {
+
             display: grid;
+
             gap: 12px;
         }
 
+
         .chapter-card {
+
             width: 100%;
 
             display: flex;
+
             align-items: center;
+
             gap: 13px;
 
             padding: 15px;
 
             text-align: right;
 
-            background: var(--surface);
-            border: 1px solid var(--border);
+            background:
+                var(--surface);
+
+            border:
+                1px solid var(--border);
+
             border-radius: 18px;
 
-            box-shadow: var(--shadow-sm);
+            box-shadow:
+                var(--shadow-sm);
 
             cursor: pointer;
 
@@ -319,21 +522,32 @@
                 box-shadow .2s ease;
         }
 
+
         .chapter-card:hover {
-            transform: translateY(-2px);
 
-            border-color: #93c5fd;
+            transform:
+                translateY(-2px);
 
-            box-shadow: var(--shadow-md);
+            border-color:
+                #93c5fd;
+
+            box-shadow:
+                var(--shadow-md);
         }
+
 
         .chapter-card:active {
-            transform: scale(.985);
+
+            transform:
+                scale(.985);
         }
 
+
         .chapter-number {
+
             width: 50px;
             height: 50px;
+
             flex-shrink: 0;
 
             display: grid;
@@ -341,134 +555,192 @@
 
             border-radius: 15px;
 
-            background: var(--primary-light);
-            color: var(--primary);
+            background:
+                var(--primary-light);
+
+            color:
+                var(--primary);
 
             font-size: 15px;
+
             font-weight: 950;
         }
 
+
         .chapter-info {
+
             flex: 1;
+
             min-width: 0;
         }
 
+
         .chapter-info h3 {
+
             margin: 0;
 
             font-size: 15px;
+
             font-weight: 900;
         }
 
+
         .chapter-info p {
+
             margin: 4px 0 0;
 
-            color: var(--text-soft);
+            color:
+                var(--text-soft);
 
             font-size: 10px;
+
             line-height: 1.6;
         }
 
+
         .chapter-meta {
+
             display: inline-flex;
+
             align-items: center;
+
             gap: 5px;
 
             margin-top: 7px;
+
             padding: 4px 8px;
 
             border-radius: 999px;
 
-            background: var(--primary-light);
-            color: var(--primary);
+            background:
+                var(--primary-light);
+
+            color:
+                var(--primary);
 
             font-size: 9px;
+
             font-weight: 800;
         }
 
+
         .chapter-arrow {
+
             flex-shrink: 0;
 
-            color: var(--primary);
+            color:
+                var(--primary);
 
             font-size: 19px;
+
             font-weight: 900;
         }
+
 
         /* =========================================
            EMPTY CONTENT
            ========================================= */
 
         .empty-content {
+
             margin-top: 15px;
-            padding: 22px 17px;
+
+            padding: 28px 17px;
 
             text-align: center;
 
-            border: 1px dashed var(--border);
+            border:
+                1px dashed var(--border);
+
             border-radius: 18px;
 
-            background: var(--surface);
+            background:
+                var(--surface);
         }
+
 
         .empty-content-icon {
-            font-size: 29px;
+
+            font-size: 34px;
         }
 
+
         .empty-content h3 {
+
             margin: 8px 0 5px;
 
-            font-size: 15px;
+            font-size: 16px;
+
             font-weight: 900;
         }
 
+
         .empty-content p {
+
             max-width: 520px;
 
             margin: auto;
 
-            color: var(--text-soft);
+            color:
+                var(--text-soft);
 
             font-size: 11px;
+
             line-height: 1.8;
         }
+
 
         /* =========================================
            NO LEVEL
            ========================================= */
 
         .no-level {
+
             padding: 38px 20px;
 
             text-align: center;
 
-            background: var(--surface);
-            border: 1px dashed var(--border);
+            background:
+                var(--surface);
+
+            border:
+                1px dashed var(--border);
 
             border-radius: 22px;
         }
 
+
         .no-level-icon {
+
             font-size: 42px;
         }
 
+
         .no-level h2 {
+
             margin: 10px 0 6px;
 
             font-size: 20px;
+
             font-weight: 950;
         }
 
+
         .no-level p {
+
             max-width: 450px;
 
-            margin: 0 auto 17px;
+            margin:
+                0 auto 17px;
 
-            color: var(--text-soft);
+            color:
+                var(--text-soft);
 
             font-size: 12px;
+
             line-height: 1.8;
         }
+
 
         /* =========================================
            DESKTOP
@@ -477,17 +749,25 @@
         @media (min-width: 700px) {
 
             .library-page {
+
                 padding-top: 40px;
             }
 
+
             .chapters {
-                grid-template-columns: repeat(2, 1fr);
+
+                grid-template-columns:
+                    repeat(2, 1fr);
             }
 
+
             .chapter-card {
+
                 min-height: 100px;
             }
+
         }
+
 
         /* =========================================
            SMALL PHONES
@@ -496,41 +776,65 @@
         @media (max-width: 420px) {
 
             .library-page {
+
                 padding-top: 18px;
             }
 
+
             .library-hero {
-                padding: 23px 17px;
+
+                padding:
+                    23px 17px;
+
                 border-radius: 22px;
             }
 
+
             .library-hero h1 {
+
                 font-size: 26px;
             }
 
+
             .subject-card {
+
                 padding: 15px;
             }
 
+
             .chapter-card {
+
                 padding: 13px;
+
                 gap: 10px;
             }
 
+
             .chapter-number {
+
                 width: 44px;
                 height: 44px;
             }
 
+
             .chapter-info h3 {
+
                 font-size: 14px;
             }
+
         }
+
     </style>
+
 </head>
 
 
 <body>
+
+
+<!-- =====================================================
+     HEADER
+     ===================================================== -->
 
 <header class="site-header">
 
@@ -541,10 +845,12 @@
             onclick="goHome()"
             type="button">
 
-            <span class="brand-icon">AI</span>
+            <span class="brand-icon">
+                AI
+            </span>
 
             <span>
-                عالم شيخ الأساتذة
+                EduNova AI
             </span>
 
         </button>
@@ -564,12 +870,18 @@
 </header>
 
 
+<!-- =====================================================
+     MAIN
+     ===================================================== -->
+
 <main class="page library-page">
 
     <div class="container library-wrapper">
 
 
-        <!-- NO LEVEL -->
+        <!-- =========================================
+             NO LEVEL
+             ========================================= -->
 
         <section
             id="noLevel"
@@ -580,35 +892,44 @@
                 🎓
             </div>
 
+
             <h2>
-                اختر مستواك الدراسي
+                اختر شهادتك الدراسية
             </h2>
 
+
             <p>
+
                 اختر كونكور أو بريڤي أو باكالوريا
-                حتى نعرض لك المكتبة التعليمية المناسبة.
+                حتى نعرض لك المحتوى التعليمي المناسب.
+
             </p>
+
 
             <button
                 class="btn btn-primary"
                 onclick="chooseLevel()"
                 type="button">
 
-                اختيار المستوى
+                اختيار الشهادة
 
             </button>
 
         </section>
 
 
-        <!-- LIBRARY -->
+        <!-- =========================================
+             LIBRARY CONTENT
+             ========================================= -->
 
         <div
             id="libraryContent"
             style="display:none;">
 
 
-            <!-- TEACHER -->
+            <!-- =====================================
+                 TEACHER
+                 ===================================== -->
 
             <div class="teacher-strip">
 
@@ -616,14 +937,19 @@
                     AI
                 </div>
 
+
                 <div>
 
                     <strong>
-                        شيخ الأساتذة — الأستاذ AI
+                        Afkrash AI
                     </strong>
 
+
                     <span>
-                        اختر المادة ثم اختر الـChapitre الذي تريد دراسته.
+
+                        مدرسك الذكي في EduNova AI
+                        • اختر الشهادة ثم المادة ثم الـChapitre.
+
                     </span>
 
                 </div>
@@ -631,24 +957,30 @@
             </div>
 
 
-            <!-- HERO -->
+            <!-- =====================================
+                 HERO
+                 ===================================== -->
 
             <section class="library-hero">
 
                 <div class="hero-content">
 
                     <span class="hero-label">
-                        📚 المكتبة التعليمية
+                        📚 مكتبة EduNova AI
                     </span>
+
 
                     <h1 id="levelName">
                         -
                     </h1>
 
+
                     <p>
-                        هذه مكتبتك التعليمية.
-                        ستجد داخل كل مادة الـChapitres،
-                        وداخل كل Chapitre الفيديوهات الخاصة به.
+
+                        اختر الـChapitre الذي تريد دراسته.
+                        كل Chapitre سيحتوي لاحقًا على دروس
+                        وفيديوهات تعليمية مع Afkrash AI.
+
                     </p>
 
 
@@ -658,7 +990,7 @@
                             onclick="chooseLevel()"
                             type="button">
 
-                            تغيير المستوى
+                            تغيير الشهادة
 
                         </button>
 
@@ -669,7 +1001,68 @@
             </section>
 
 
-            <!-- SUBJECT -->
+            <!-- =====================================
+                 LEARNING PATH
+                 ===================================== -->
+
+            <div class="learning-path">
+
+                <div class="path-item active">
+
+                    <div class="path-number">
+                        1
+                    </div>
+
+                    <strong>
+                        الشهادة
+                    </strong>
+
+                    <span>
+                        اختيار المستوى
+                    </span>
+
+                </div>
+
+
+                <div class="path-item active">
+
+                    <div class="path-number">
+                        2
+                    </div>
+
+                    <strong>
+                        الرياضيات
+                    </strong>
+
+                    <span>
+                        المادة الحالية
+                    </span>
+
+                </div>
+
+
+                <div class="path-item active">
+
+                    <div class="path-number">
+                        3
+                    </div>
+
+                    <strong>
+                        Chapitres
+                    </strong>
+
+                    <span>
+                        اختر الفصل
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- =====================================
+                 SUBJECT
+                 ===================================== -->
 
             <section class="subject-card">
 
@@ -679,18 +1072,21 @@
                         ∑
                     </div>
 
+
                     <div>
 
                         <h2>
                             الرياضيات
                         </h2>
 
+
                         <p>
-                            المادة التعليمية الحالية
+                            المادة الأساسية في السنة الأولى من EduNova AI
                         </p>
 
+
                         <span class="subject-badge">
-                            متاحة
+                            متاحة الآن
                         </span>
 
                     </div>
@@ -698,7 +1094,9 @@
                 </div>
 
 
-                <!-- CHAPTERS -->
+                <!-- =================================
+                     CHAPTERS
+                     ================================= -->
 
                 <section class="chapter-section">
 
@@ -708,8 +1106,12 @@
                             Chapitres الرياضيات
                         </h2>
 
+
                         <p>
-                            اختر الـChapitre للدخول إلى الفيديوهات الخاصة به.
+
+                            اختر الفصل للدخول إلى
+                            الفيديوهات والدروس الخاصة به.
+
                         </p>
 
                     </div>
@@ -718,12 +1120,6 @@
                     <div
                         id="chapters"
                         class="chapters">
-
-                        <!--
-                            الفصول ستضاف هنا لاحقًا.
-                            كل Chapitre يمكن أن يحتوي
-                            على 1 إلى 20 فيديو.
-                        -->
 
                     </div>
 
@@ -738,15 +1134,24 @@
                             🎬
                         </div>
 
+
                         <h3>
-                            المحتوى سيُضاف هنا
+                            المحتوى التعليمي قيد الإعداد
                         </h3>
 
+
                         <p>
-                            لم تتم إضافة الـChapitres بعد.
-                            عندما تبدأ بتقسيم المادة،
-                            سنضيف كل Chapitre هنا، ثم نضع داخله
-                            الفيديوهات الخاصة به.
+
+                            سيتم إضافة الـChapitres
+                            والدروس تدريجيًا.
+
+                            <br>
+
+                            كل Chapitre سيحتوي على
+                            ما يصل إلى 20 فيديو تعليمي،
+                            وسيكون أول فيديو مجانيًا
+                            للتجربة.
+
                         </p>
 
                     </div>
@@ -763,7 +1168,12 @@
 </main>
 
 
+<!-- =====================================================
+     JAVASCRIPT
+     ===================================================== -->
+
 <script>
+
 
     /* =========================================
        LEVEL NAMES
@@ -778,6 +1188,44 @@
         bac: "باكالوريا"
 
     };
+
+
+    /* =========================================
+       CHAPTER DATA
+       ========================================= */
+
+    /*
+        ==========================================
+        بنية المحتوى المستقبلية
+        ==========================================
+
+        كل Chapitre سيكون بهذا الشكل:
+
+        {
+            id: 1,
+
+            title: "اسم الفصل",
+
+            description:
+                "وصف مختصر للفصل",
+
+            videos: 20
+        }
+
+        الحد الأقصى للفيديوهات:
+        20 فيديو لكل Chapitre.
+
+        الفيديو رقم 1:
+        مجاني.
+
+        الفيديوهات التالية:
+        تحتاج إلى صلاحية / اشتراك.
+
+        ==========================================
+    */
+
+
+    const chapters = [];
 
 
     /* =========================================
@@ -797,6 +1245,7 @@
                 "noLevel"
             );
 
+
         const library =
             document.getElementById(
                 "libraryContent"
@@ -808,8 +1257,10 @@
             noLevel.style.display =
                 "block";
 
+
             library.style.display =
                 "none";
+
 
             return;
 
@@ -819,43 +1270,28 @@
         noLevel.style.display =
             "none";
 
+
         library.style.display =
             "block";
 
 
-        document.getElementById(
-            "levelName"
-        ).textContent =
-            levelNames[level] || level;
+        const levelName =
+            document.getElementById(
+                "levelName"
+            );
+
+
+        if (levelName) {
+
+            levelName.textContent =
+                levelNames[level] || level;
+
+        }
 
 
         loadChapters();
 
     }
-
-
-    /* =========================================
-       CHAPTER DATA
-       ========================================= */
-
-    /*
-       لا نضيف فصولًا الآن.
-
-       عندما تبدأ بإضافة المحتوى،
-       سيكون النظام بهذا الشكل:
-
-       {
-           id: 1,
-           title: "اسم الفصل",
-           description: "وصف الفصل",
-           videos: 10
-       }
-
-       videos = عدد الفيديوهات داخل الفصل.
-       الحد الأقصى: 20.
-    */
-
-    const chapters = [];
 
 
     /* =========================================
@@ -869,10 +1305,16 @@
                 "chapters"
             );
 
+
         const empty =
             document.getElementById(
                 "emptyChapters"
             );
+
+
+        if (!container || !empty) {
+            return;
+        }
 
 
         container.innerHTML = "";
@@ -882,6 +1324,7 @@
 
             empty.style.display =
                 "block";
+
 
             return;
 
@@ -893,7 +1336,8 @@
 
 
         chapters.forEach(
-            chapter => {
+            function(chapter) {
+
 
                 const card =
                     document.createElement(
@@ -901,7 +1345,9 @@
                     );
 
 
-                card.type = "button";
+                card.type =
+                    "button";
+
 
                 card.className =
                     "chapter-card";
@@ -913,21 +1359,32 @@
                         ${chapter.id}
                     </div>
 
+
                     <div class="chapter-info">
 
                         <h3>
                             ${chapter.title}
                         </h3>
 
+
                         <p>
                             ${chapter.description || ""}
                         </p>
 
+
                         <span class="chapter-meta">
-                            🎬 ${chapter.videos} فيديو
+
+                            🎬
+                            ${Math.min(
+                                chapter.videos || 0,
+                                20
+                            )}
+                            فيديو
+
                         </span>
 
                     </div>
+
 
                     <div class="chapter-arrow">
                         ←
@@ -936,13 +1393,14 @@
                 `;
 
 
-                card.onclick = function () {
+                card.onclick =
+                    function() {
 
-                    openChapter(
-                        chapter.id
-                    );
+                        openChapter(
+                            chapter.id
+                        );
 
-                };
+                    };
 
 
                 container.appendChild(
@@ -1009,5 +1467,7 @@
 
 </script>
 
+
 </body>
+
     </html>
