@@ -1,1272 +1,1280 @@
 /* =========================================================
-   عالم شيخ الأساتذة
-   GLOBAL JAVASCRIPT ENGINE
-   Navigation + Storage + Theme + Language
-   ========================================================= */
+عالم شيخ الأساتذة
+GLOBAL JAVASCRIPT
+Navigation + Storage + Theme + Language + Utilities
+========================================================= */
 
 "use strict";
 
-
 /* =========================================================
-   1. NAVIGATION
+
+1. GLOBAL SETTINGS
    ========================================================= */
 
+const GLOBAL_THEME_KEY = "site_theme";
+const GLOBAL_LANGUAGE_KEY = "site_language";
+
+const DEFAULT_THEME = "light";
+const DEFAULT_LANGUAGE = "ar";
+
+/* =========================================================
+2. NAVIGATION
+========================================================= */
+
 function goTo(page) {
-    if (!page) return;
-    window.location.href = page;
+if (!page) return;
+window.location.href = page;
 }
 
 function goBack(fallback = "index.html") {
-
-    if (window.history.length > 1) {
-        window.history.back();
-    } else {
-        goTo(fallback);
-    }
+if (window.history.length > 1) {
+window.history.back();
+} else {
+goTo(fallback);
+}
 }
 
-
 /* =========================================================
-   2. LOCAL STORAGE
-   ========================================================= */
+3. LOCAL STORAGE
+========================================================= */
 
 function saveData(key, value) {
-
-    try {
-
-        localStorage.setItem(
-            key,
-            JSON.stringify(value)
-        );
-
-        return true;
-
-    } catch (error) {
-
-        console.error(
-            "خطأ أثناء حفظ البيانات:",
-            error
-        );
-
-        return false;
-    }
+try {
+localStorage.setItem(key, JSON.stringify(value));
+return true;
+} catch (error) {
+console.error("خطأ أثناء حفظ البيانات:", error);
+return false;
 }
-
+}
 
 function getData(key, fallback = null) {
+try {
+const value = localStorage.getItem(key);
 
-    try {
-
-        const value =
-            localStorage.getItem(key);
-
-        if (value === null) {
-            return fallback;
-        }
-
-        return JSON.parse(value);
-
-    } catch (error) {
-
-        console.error(
-            "خطأ أثناء قراءة البيانات:",
-            error
-        );
-
+    if (value === null) {
         return fallback;
     }
+
+    return JSON.parse(value);
+
+} catch (error) {
+    console.error("خطأ أثناء قراءة البيانات:", error);
+    return fallback;
 }
 
+}
 
 function removeData(key) {
-
-    try {
-
-        localStorage.removeItem(key);
-
-        return true;
-
-    } catch (error) {
-
-        console.error(
-            "خطأ أثناء حذف البيانات:",
-            error
-        );
-
-        return false;
-    }
+try {
+localStorage.removeItem(key);
+return true;
+} catch (error) {
+console.error("خطأ أثناء حذف البيانات:", error);
+return false;
+}
 }
 
-
 /* =========================================================
-   3. STUDENT LEVEL
-   ========================================================= */
+4. STUDENT LEVEL
+========================================================= */
 
 function getStudentLevel() {
-
-    return localStorage.getItem(
-        "student_level"
-    ) || "";
+return localStorage.getItem("student_level") || "";
 }
-
 
 function setStudentLevel(level) {
+if (!level) return false;
 
-    if (!level) return false;
+localStorage.setItem("student_level", level);
 
-    localStorage.setItem(
-        "student_level",
-        level
-    );
+return true;
 
-    return true;
 }
 
-
 /* =========================================================
-   4. OLD LESSON SUPPORT
-   محفوظ للتوافق مع الصفحات القديمة
-   ========================================================= */
+5. LEGACY LESSON COMPATIBILITY
+
+نحافظ عليها حتى لا تتعطل الصفحات القديمة.
+النظام الجديد يعتمد:
+المستوى → المادة → Chapitre → الفيديوهات
+========================================================= */
 
 const TOTAL_LESSONS = 20;
 
-
 function isLessonCompleted(number) {
-
-    return localStorage.getItem(
-        `lesson_${number}_completed`
-    ) === "true";
+return localStorage.getItem(
+"lesson_${number}_completed"
+) === "true";
 }
-
 
 function completeLesson(number) {
+if (!number) return false;
 
-    if (!number) return false;
+localStorage.setItem(
+    `lesson_${number}_completed`,
+    "true"
+);
 
-    localStorage.setItem(
-        `lesson_${number}_completed`,
-        "true"
-    );
+return true;
 
-    return true;
 }
 
+function getCompletedLessons(total = TOTAL_LESSONS) {
+let completed = 0;
 
-function getCompletedLessons(
-    total = TOTAL_LESSONS
-) {
-
-    let completed = 0;
-
-    for (
-        let i = 1;
-        i <= total;
-        i++
-    ) {
-
-        if (
-            isLessonCompleted(i)
-        ) {
-            completed++;
-        }
+for (let i = 1; i <= total; i++) {
+    if (isLessonCompleted(i)) {
+        completed++;
     }
-
-    return completed;
 }
 
+return completed;
 
-function getLearningProgress(
-    total = TOTAL_LESSONS
-) {
-
-    if (!total) return 0;
-
-    const completed =
-        getCompletedLessons(total);
-
-    return Math.round(
-        (completed / total) * 100
-    );
 }
 
+function getLearningProgress(total = TOTAL_LESSONS) {
+if (!total) return 0;
+
+const completed = getCompletedLessons(total);
+
+return Math.round(
+    (completed / total) * 100
+);
+
+}
 
 /* =========================================================
-   5. STUDENT POINTS
-   ========================================================= */
+6. STUDENT POINTS
+========================================================= */
 
 function getStudentPoints() {
-
-    return Number(
-        localStorage.getItem(
-            "student_points"
-        ) || 0
-    );
+return Number(
+localStorage.getItem("student_points") || 0
+);
 }
-
 
 function setStudentPoints(points) {
+const safePoints = Math.max(
+0,
+Number(points) || 0
+);
 
-    const safePoints =
-        Math.max(
-            0,
-            Number(points) || 0
-        );
+localStorage.setItem(
+    "student_points",
+    String(safePoints)
+);
 
-    localStorage.setItem(
-        "student_points",
-        String(safePoints)
-    );
+return safePoints;
 
-    return safePoints;
 }
-
 
 function addStudentPoints(points) {
+const current = getStudentPoints();
 
-    const current =
-        getStudentPoints();
+return setStudentPoints(
+    current + (Number(points) || 0)
+);
 
-    return setStudentPoints(
-        current +
-        (Number(points) || 0)
-    );
 }
 
-
 /* =========================================================
-   6. GLOBAL THEME
-   ========================================================= */
-
-const GLOBAL_THEME_KEY =
-    "site_theme";
-
+7. GLOBAL THEME
+========================================================= */
 
 function getSiteTheme() {
 
-    return (
-        localStorage.getItem(
-            GLOBAL_THEME_KEY
-        ) || "light"
+const saved = localStorage.getItem(
+    GLOBAL_THEME_KEY
+);
+
+if (
+    saved === "dark" ||
+    saved === "light"
+) {
+    return saved;
+}
+
+/* توافق مع settings.html القديم */
+try {
+    const oldSettings =
+        JSON.parse(
+            localStorage.getItem(
+                "platform_settings"
+            ) || "null"
+        );
+
+    if (
+        oldSettings &&
+        oldSettings.darkMode === true
+    ) {
+        return "dark";
+    }
+
+} catch (error) {
+    console.warn(
+        "تعذر قراءة إعداد الوضع الليلي القديم"
     );
 }
 
+return DEFAULT_THEME;
 
-function applySiteTheme(theme) {
-
-    const safeTheme =
-        theme === "dark"
-            ? "dark"
-            : "light";
-
-
-    const root =
-        document.documentElement;
-
-
-    root.classList.toggle(
-        "dark-mode",
-        safeTheme === "dark"
-    );
-
-
-    root.setAttribute(
-        "data-theme",
-        safeTheme
-    );
-
-
-    localStorage.setItem(
-        GLOBAL_THEME_KEY,
-        safeTheme
-    );
-
-
-    updateThemeControls(
-        safeTheme
-    );
 }
 
+function applySiteTheme(theme = getSiteTheme()) {
+
+const safeTheme =
+    theme === "dark"
+        ? "dark"
+        : "light";
+
+document.documentElement.classList.toggle(
+    "dark-mode",
+    safeTheme === "dark"
+);
+
+document.documentElement.setAttribute(
+    "data-theme",
+    safeTheme
+);
+
+document.documentElement.style.colorScheme =
+    safeTheme;
+
+localStorage.setItem(
+    GLOBAL_THEME_KEY,
+    safeTheme
+);
+
+updateThemeControls();
+
+return safeTheme;
+
+}
 
 function toggleDarkMode() {
 
-    const current =
-        getSiteTheme();
+const current =
+    getSiteTheme();
 
-    const next =
-        current === "dark"
-            ? "light"
-            : "dark";
+const next =
+    current === "dark"
+        ? "light"
+        : "dark";
 
-    applySiteTheme(next);
+applySiteTheme(next);
 
-    return next;
+return next;
+
 }
 
+function updateThemeControls() {
 
-function updateThemeControls(theme) {
+const theme =
+    getSiteTheme();
 
-    const checkbox =
-        document.getElementById(
-            "darkMode"
+const isDark =
+    theme === "dark";
+
+const checkbox =
+    document.querySelector("#darkMode");
+
+if (checkbox) {
+    checkbox.checked = isDark;
+}
+
+document
+    .querySelectorAll(
+        "[data-theme-toggle]"
+    )
+    .forEach(button => {
+
+        button.setAttribute(
+            "aria-pressed",
+            String(isDark)
         );
 
-    if (checkbox) {
+        button.dataset.theme =
+            theme;
+    });
 
-        checkbox.checked =
-            theme === "dark";
-
-    }
-
-
-    document
-        .querySelectorAll(
-            "[data-theme-toggle]"
-        )
-        .forEach(button => {
-
-            button.setAttribute(
-                "aria-pressed",
-                theme === "dark"
-                    ? "true"
-                    : "false"
-            );
-
-        });
 }
 
-
 /* =========================================================
-   7. GLOBAL LANGUAGE
-   ========================================================= */
-
-const GLOBAL_LANGUAGE_KEY =
-    "site_language";
-
+8. GLOBAL LANGUAGE
+========================================================= */
 
 function getSiteLanguage() {
 
-    return (
-        localStorage.getItem(
-            GLOBAL_LANGUAGE_KEY
-        ) || "ar"
+const saved =
+    localStorage.getItem(
+        GLOBAL_LANGUAGE_KEY
     );
+
+if (
+    saved === "ar" ||
+    saved === "fr"
+) {
+    return saved;
 }
 
+/* توافق مع settings.html القديم */
+try {
 
-function applySiteLanguage(language) {
-
-    const safeLanguage =
-        language === "fr"
-            ? "fr"
-            : "ar";
-
-
-    const root =
-        document.documentElement;
-
-
-    root.lang =
-        safeLanguage;
-
-
-    root.dir =
-        safeLanguage === "fr"
-            ? "ltr"
-            : "rtl";
-
-
-    localStorage.setItem(
-        GLOBAL_LANGUAGE_KEY,
-        safeLanguage
-    );
-
-
-    document.body.classList.toggle(
-        "language-fr",
-        safeLanguage === "fr"
-    );
-
-
-    document.body.classList.toggle(
-        "language-ar",
-        safeLanguage === "ar"
-    );
-
-
-    translatePage(
-        safeLanguage
-    );
-
-
-    const selector =
-        document.getElementById(
-            "language"
+    const oldSettings =
+        JSON.parse(
+            localStorage.getItem(
+                "platform_settings"
+            ) || "null"
         );
 
-    if (selector) {
-        selector.value =
-            safeLanguage;
+    if (
+        oldSettings &&
+        (
+            oldSettings.language === "fr" ||
+            oldSettings.language === "ar"
+        )
+    ) {
+        return oldSettings.language;
     }
+
+} catch (error) {
+    console.warn(
+        "تعذر قراءة إعداد اللغة القديم"
+    );
 }
 
+return DEFAULT_LANGUAGE;
+
+}
 
 /* =========================================================
-   8. TRANSLATION ENGINE
-   ========================================================= */
+9. TRANSLATIONS
+========================================================= */
 
-/*
-   الصفحات الجديدة ستستخدم:
+const GLOBAL_TRANSLATIONS = {
 
-   data-i18n="home"
+ar: {
 
-   أو:
+    /* General */
+    "home": "الرئيسية",
+    "dashboard": "لوحة التحكم",
+    "levels": "المستويات",
+    "library": "المكتبة",
+    "account": "حسابي",
+    "settings": "الإعدادات",
+    "forum": "المجتمع",
+    "login": "تسجيل الدخول",
+    "logout": "تسجيل الخروج",
+    "back": "رجوع",
+    "next": "التالي",
+    "previous": "السابق",
+    "continue": "متابعة",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "close": "إغلاق",
+    "search": "بحث",
 
-   data-i18n-placeholder="email"
+    /* Identity */
+    "site_name": "عالم شيخ الأساتذة",
+    "ai_teacher": "الأستاذ AI",
+    "master_teacher": "شيخ الأساتذة",
 
-   وسيتم ترجمتها تلقائيًا.
-*/
+    /* Education */
+    "mathematics": "الرياضيات",
+    "chapter": "Chapitre",
+    "video": "فيديو",
+    "videos": "فيديوهات",
+    "free": "مجاني",
+    "subscriber": "للمشتركين",
+    "subscription": "الاشتراك",
 
+    /* Settings */
+    "language": "اللغة",
+    "arabic": "العربية",
+    "french": "Français",
+    "dark_mode": "الوضع الليلي",
+    "light_mode": "الوضع النهاري",
 
-const translations = {
+    /* Messages */
+    "loading": "جارٍ التحميل...",
+    "coming_soon": "قريبًا",
+    "no_content": "المحتوى سيُضاف هنا",
+    "first_video_free":
+        "الفيديو الأول مجاني",
+    "subscription_required":
+        "هذا الفيديو متاح للمشتركين فقط"
+},
 
-    ar: {
+fr: {
 
-        home:
-            "الرئيسية",
+    /* General */
+    "home": "Accueil",
+    "dashboard": "Tableau de bord",
+    "levels": "Niveaux",
+    "library": "Bibliothèque",
+    "account": "Mon compte",
+    "settings": "Paramètres",
+    "forum": "Communauté",
+    "login": "Connexion",
+    "logout": "Déconnexion",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "continue": "Continuer",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "close": "Fermer",
+    "search": "Rechercher",
 
-        dashboard:
-            "لوحة التحكم",
+    /* Identity */
+    "site_name": "Monde des Maîtres Enseignants",
+    "ai_teacher": "Professeur AI",
+    "master_teacher": "Maître des Enseignants",
 
-        library:
-            "المكتبة",
+    /* Education */
+    "mathematics": "Mathématiques",
+    "chapter": "Chapitre",
+    "video": "Vidéo",
+    "videos": "Vidéos",
+    "free": "Gratuit",
+    "subscriber": "Abonnés",
+    "subscription": "Abonnement",
 
-        account:
-            "حسابي",
+    /* Settings */
+    "language": "Langue",
+    "arabic": "العربية",
+    "french": "Français",
+    "dark_mode": "Mode sombre",
+    "light_mode": "Mode clair",
 
-        settings:
-            "الإعدادات",
-
-        mathematics:
-            "الرياضيات",
-
-        chapter:
-            "Chapitre",
-
-        videos:
-            "الفيديوهات",
-
-        free:
-            "مجاني",
-
-        subscribe:
-            "اشترك الآن",
-
-        logout:
-            "تسجيل الخروج",
-
-        language:
-            "اللغة",
-
-        darkMode:
-            "الوضع الداكن",
-
-        lightMode:
-            "الوضع النهاري",
-
-        watch:
-            "مشاهدة",
-
-        back:
-            "رجوع",
-
-        teacher:
-            "شيخ الأساتذة — الأستاذ AI"
-
-    },
-
-
-    fr: {
-
-        home:
-            "Accueil",
-
-        dashboard:
-            "Tableau de bord",
-
-        library:
-            "Bibliothèque",
-
-        account:
-            "Mon compte",
-
-        settings:
-            "Paramètres",
-
-        mathematics:
-            "Mathématiques",
-
-        chapter:
-            "Chapitre",
-
-        videos:
-            "Vidéos",
-
-        free:
-            "Gratuit",
-
-        subscribe:
-            "S'abonner",
-
-        logout:
-            "Se déconnecter",
-
-        language:
-            "Langue",
-
-        darkMode:
-            "Mode sombre",
-
-        lightMode:
-            "Mode clair",
-
-        watch:
-            "Regarder",
-
-        back:
-            "Retour",
-
-        teacher:
-            "Cheikh des professeurs — Professeur AI"
-
-    }
+    /* Messages */
+    "loading": "Chargement...",
+    "coming_soon": "Bientôt disponible",
+    "no_content": "Le contenu sera ajouté ici",
+    "first_video_free":
+        "La première vidéo est gratuite",
+    "subscription_required":
+        "Cette vidéo est réservée aux abonnés"
+}
 
 };
 
+/* =========================================================
+10. APPLY LANGUAGE
+========================================================= */
 
-function translatePage(language) {
+function translateText(key) {
 
-    const dictionary =
-        translations[
-            language
-        ] || translations.ar;
+const language =
+    getSiteLanguage();
 
+return (
+    GLOBAL_TRANSLATIONS[language] &&
+    GLOBAL_TRANSLATIONS[language][key]
+) || (
+    GLOBAL_TRANSLATIONS.ar[key]
+) || key;
 
-    document
-        .querySelectorAll(
-            "[data-i18n]"
-        )
-        .forEach(element => {
-
-            const key =
-                element.getAttribute(
-                    "data-i18n"
-                );
-
-            if (
-                dictionary[key] !== undefined
-            ) {
-
-                element.textContent =
-                    dictionary[key];
-
-            }
-
-        });
-
-
-    document
-        .querySelectorAll(
-            "[data-i18n-placeholder]"
-        )
-        .forEach(element => {
-
-            const key =
-                element.getAttribute(
-                    "data-i18n-placeholder"
-                );
-
-            if (
-                dictionary[key] !== undefined
-            ) {
-
-                element.placeholder =
-                    dictionary[key];
-
-            }
-
-        });
-
-
-    document
-        .querySelectorAll(
-            "[data-i18n-title]"
-        )
-        .forEach(element => {
-
-            const key =
-                element.getAttribute(
-                    "data-i18n-title"
-                );
-
-            if (
-                dictionary[key] !== undefined
-            ) {
-
-                element.title =
-                    dictionary[key];
-
-            }
-
-        });
 }
 
+function applySiteLanguage(
+language = getSiteLanguage()
+) {
 
-/* =========================================================
-   9. SETTINGS CONTROLS
-   ========================================================= */
+const safeLanguage =
+    language === "fr"
+        ? "fr"
+        : "ar";
 
-function initializeGlobalSettings() {
+localStorage.setItem(
+    GLOBAL_LANGUAGE_KEY,
+    safeLanguage
+);
 
-    const theme =
-        getSiteTheme();
+document.documentElement.setAttribute(
+    "lang",
+    safeLanguage
+);
 
-    const language =
-        getSiteLanguage();
+document.documentElement.setAttribute(
+    "dir",
+    safeLanguage === "ar"
+        ? "rtl"
+        : "ltr"
+);
 
+/* النصوص */
+document
+    .querySelectorAll(
+        "[data-i18n]"
+    )
+    .forEach(element => {
 
-    applySiteTheme(theme);
+        const key =
+            element.dataset.i18n;
 
-    applySiteLanguage(language);
+        const translated =
+            translateText(key);
 
+        if (translated) {
+            element.textContent =
+                translated;
+        }
+    });
 
-    const darkMode =
-        document.getElementById(
-            "darkMode"
+/* Placeholder */
+document
+    .querySelectorAll(
+        "[data-i18n-placeholder]"
+    )
+    .forEach(element => {
+
+        const key =
+            element.dataset
+                .i18nPlaceholder;
+
+        element.placeholder =
+            translateText(key);
+    });
+
+/* Title */
+document
+    .querySelectorAll(
+        "[data-i18n-title]"
+    )
+    .forEach(element => {
+
+        const key =
+            element.dataset
+                .i18nTitle;
+
+        element.title =
+            translateText(key);
+    });
+
+/* عناصر اختيار اللغة */
+document
+    .querySelectorAll(
+        "[data-language]"
+    )
+    .forEach(element => {
+
+        element.classList.toggle(
+            "active",
+            element.dataset.language ===
+                safeLanguage
         );
+    });
 
+const languageSelect =
+    document.querySelector(
+        "#language"
+    );
 
-    if (darkMode) {
-
-        darkMode.checked =
-            theme === "dark";
-
-
-        darkMode.addEventListener(
-            "change",
-            function () {
-
-                applySiteTheme(
-                    this.checked
-                        ? "dark"
-                        : "light"
-                );
-
-            }
-        );
-
-    }
-
-
-    const languageSelect =
-        document.getElementById(
-            "language"
-        );
-
-
-    if (languageSelect) {
-
-        languageSelect.value =
-            language;
-
-
-        languageSelect.addEventListener(
-            "change",
-            function () {
-
-                applySiteLanguage(
-                    this.value
-                );
-
-            }
-        );
-
-    }
+if (languageSelect) {
+    languageSelect.value =
+        safeLanguage;
 }
 
+return safeLanguage;
+
+}
+
+function toggleLanguage() {
+
+const current =
+    getSiteLanguage();
+
+const next =
+    current === "ar"
+        ? "fr"
+        : "ar";
+
+applySiteLanguage(next);
+
+return next;
+
+}
 
 /* =========================================================
-   10. DOM HELPERS
-   ========================================================= */
+11. DOM HELPERS
+========================================================= */
 
 function setText(selector, text) {
 
-    const element =
-        document.querySelector(selector);
+const element =
+    document.querySelector(selector);
 
-    if (element) {
-
-        element.textContent =
-            text ?? "";
-
-    }
+if (element) {
+    element.textContent =
+        text ?? "";
 }
 
+}
 
 function show(selector) {
 
-    const element =
-        document.querySelector(selector);
+const element =
+    document.querySelector(selector);
 
-    if (element) {
-
-        element.classList.remove(
-            "hidden"
-        );
-
-    }
+if (element) {
+    element.classList.remove("hidden");
 }
 
+}
 
 function hide(selector) {
 
-    const element =
-        document.querySelector(selector);
+const element =
+    document.querySelector(selector);
 
-    if (element) {
-
-        element.classList.add(
-            "hidden"
-        );
-
-    }
+if (element) {
+    element.classList.add("hidden");
 }
 
+}
 
 function toggle(selector) {
 
-    const element =
-        document.querySelector(selector);
+const element =
+    document.querySelector(selector);
 
-    if (element) {
-
-        element.classList.toggle(
-            "hidden"
-        );
-
-    }
+if (element) {
+    element.classList.toggle("hidden");
 }
 
+}
 
 /* =========================================================
-   11. BUTTON STATE
-   ========================================================= */
+12. BUTTON STATE
+========================================================= */
 
 function setButtonLoading(
-    button,
-    loadingText = "جارٍ التحميل..."
+button,
+loadingText = "جارٍ التحميل..."
 ) {
 
-    if (!button) return;
+if (!button) return;
 
-
-    if (
-        !button.dataset.originalText
-    ) {
-
-        button.dataset.originalText =
-            button.innerHTML;
-
-    }
-
-
-    button.innerHTML =
-        loadingText;
-
-    button.disabled = true;
-
-    button.setAttribute(
-        "aria-busy",
-        "true"
-    );
-
-    button.style.opacity =
-        "0.7";
+if (!button.dataset.originalText) {
+    button.dataset.originalText =
+        button.innerHTML;
 }
 
+button.innerHTML =
+    loadingText;
+
+button.disabled = true;
+
+button.setAttribute(
+    "aria-busy",
+    "true"
+);
+
+button.style.opacity = "0.7";
+
+}
 
 function resetButton(button) {
 
-    if (!button) return;
+if (!button) return;
 
+if (button.dataset.originalText) {
 
-    if (
-        button.dataset.originalText
-    ) {
-
-        button.innerHTML =
-            button.dataset.originalText;
-
-    }
-
-
-    button.disabled = false;
-
-    button.removeAttribute(
-        "aria-busy"
-    );
-
-    button.style.opacity = "";
+    button.innerHTML =
+        button.dataset.originalText;
 }
 
+button.disabled = false;
+
+button.removeAttribute(
+    "aria-busy"
+);
+
+button.style.opacity = "";
+
+}
 
 /* =========================================================
-   12. NOTIFICATIONS
-   ========================================================= */
+13. NOTIFICATIONS
+========================================================= */
 
 function notify(message) {
 
-    if (!message) return;
+if (!message) return;
 
+const oldNotice =
+    document.querySelector(
+        ".global-notice"
+    );
 
-    const oldNotice =
-        document.querySelector(
-            ".global-notice"
-        );
+if (oldNotice) {
+    oldNotice.remove();
+}
 
+const notice =
+    document.createElement("div");
 
-    if (oldNotice) {
-        oldNotice.remove();
+notice.className =
+    "global-notice";
+
+notice.setAttribute(
+    "role",
+    "status"
+);
+
+notice.textContent =
+    message;
+
+Object.assign(
+    notice.style,
+    {
+
+        position: "fixed",
+
+        top: "18px",
+
+        left: "50%",
+
+        transform:
+            "translateX(-50%)",
+
+        zIndex: "9999",
+
+        width:
+            "min(90%, 420px)",
+
+        padding:
+            "13px 16px",
+
+        background:
+            "#172033",
+
+        color:
+            "#ffffff",
+
+        borderRadius:
+            "12px",
+
+        textAlign:
+            "center",
+
+        fontSize:
+            "14px",
+
+        fontWeight:
+            "700",
+
+        boxShadow:
+            "0 10px 30px rgba(0,0,0,.15)",
+
+        opacity:
+            "1",
+
+        transition:
+            "opacity .2s ease"
     }
+);
 
+document.body.appendChild(
+    notice
+);
 
-    const notice =
-        document.createElement(
-            "div"
-        );
+setTimeout(() => {
 
-
-    notice.className =
-        "global-notice";
-
-
-    notice.setAttribute(
-        "role",
-        "status"
-    );
-
-
-    notice.textContent =
-        message;
-
-
-    Object.assign(
-        notice.style,
-        {
-
-            position: "fixed",
-
-            top: "18px",
-
-            left: "50%",
-
-            transform:
-                "translateX(-50%)",
-
-            zIndex: "9999",
-
-            width:
-                "min(90%, 420px)",
-
-            padding:
-                "13px 16px",
-
-            background:
-                "#172033",
-
-            color:
-                "#ffffff",
-
-            borderRadius:
-                "12px",
-
-            textAlign:
-                "center",
-
-            fontSize:
-                "14px",
-
-            fontWeight:
-                "700",
-
-            boxShadow:
-                "0 10px 30px rgba(0,0,0,.15)",
-
-            opacity:
-                "1",
-
-            transition:
-                "opacity .2s ease"
-
-        }
-    );
-
-
-    document.body.appendChild(
-        notice
-    );
-
+    notice.style.opacity = "0";
 
     setTimeout(() => {
+        notice.remove();
+    }, 200);
 
-        notice.style.opacity =
-            "0";
+}, 2500);
 
-
-        setTimeout(() => {
-
-            notice.remove();
-
-        }, 200);
-
-    }, 2500);
 }
 
-
 /* =========================================================
-   13. CONFIRMATION
-   ========================================================= */
+14. CONFIRMATION
+========================================================= */
 
 function confirmAction(
-    message,
-    callback
+message,
+callback
 ) {
 
-    if (
-        !message ||
-        typeof callback !==
-        "function"
-    ) {
-        return;
-    }
-
-
-    if (
-        window.confirm(message)
-    ) {
-
-        callback();
-
-    }
+if (
+    !message ||
+    typeof callback !== "function"
+) {
+    return;
 }
 
+if (window.confirm(message)) {
+    callback();
+}
+
+}
 
 /* =========================================================
-   14. CURRENT YEAR
-   ========================================================= */
+15. CURRENT YEAR
+========================================================= */
 
 function setCurrentYear() {
 
-    const year =
-        new Date()
-            .getFullYear();
+const year =
+    new Date().getFullYear();
 
+document
+    .querySelectorAll(
+        "[data-current-year]"
+    )
+    .forEach(element => {
 
-    document
-        .querySelectorAll(
-            "[data-current-year]"
-        )
-        .forEach(element => {
+        element.textContent =
+            year;
+    });
 
-            element.textContent =
-                year;
-
-        });
 }
 
-
 /* =========================================================
-   15. ACTIVE NAVIGATION
-   ========================================================= */
+16. ACTIVE NAVIGATION
+========================================================= */
 
 function setActiveNav() {
 
-    const currentPage =
-        window.location.pathname
-            .split("/")
-            .pop() ||
-        "index.html";
+const currentPage =
+    window.location.pathname
+        .split("/")
+        .pop() ||
+    "index.html";
 
+document
+    .querySelectorAll(
+        "[data-nav]"
+    )
+    .forEach(link => {
 
-    document
-        .querySelectorAll(
-            "[data-nav]"
-        )
-        .forEach(link => {
+        const target =
+            link.getAttribute("href");
 
-            const target =
-                link.getAttribute(
-                    "href"
-                );
+        if (
+            target === currentPage
+        ) {
 
+            link.classList.add(
+                "active"
+            );
 
-            if (
-                target ===
-                currentPage
-            ) {
+        } else {
 
-                link.classList.add(
-                    "active"
-                );
+            link.classList.remove(
+                "active"
+            );
+        }
+    });
 
-            } else {
-
-                link.classList.remove(
-                    "active"
-                );
-
-            }
-
-        });
 }
 
-
 /* =========================================================
-   16. SMOOTH SCROLL
-   ========================================================= */
+17. SMOOTH SCROLL
+========================================================= */
 
 function scrollToElement(
-    selector
+selector
 ) {
 
-    const element =
-        document.querySelector(
-            selector
-        );
+const element =
+    document.querySelector(
+        selector
+    );
 
+if (!element) return;
 
-    if (!element) return;
+element.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+});
 
-
-    element.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-    });
 }
 
-
 /* =========================================================
-   17. SAFE HTML
-   ========================================================= */
+18. SAFE HTML
+========================================================= */
 
 function escapeHTML(value) {
 
-    if (
-        value === null ||
-        value === undefined
-    ) {
-
-        return "";
-
-    }
-
-
-    return String(value)
-
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-
-        .replace(
-            /</g,
-            "&lt;"
-        )
-
-        .replace(
-            />/g,
-            "&gt;"
-        )
-
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-
-        .replace(
-            /'/g,
-            "&#039;"
-        );
+if (
+    value === null ||
+    value === undefined
+) {
+    return "";
 }
 
+return String(value)
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
 
 /* =========================================================
-   18. PAGE UTILITIES
-   ========================================================= */
+19. PAGE UTILITIES
+========================================================= */
 
 function addClass(
-    selector,
+selector,
+className
+) {
+
+const element =
+    document.querySelector(
+        selector
+    );
+
+if (
+    element &&
     className
 ) {
 
-    const element =
-        document.querySelector(
-            selector
-        );
-
-
-    if (
-        element &&
+    element.classList.add(
         className
-    ) {
-
-        element.classList.add(
-            className
-        );
-
-    }
-}
-
-
-function removeClass(
-    selector,
-    className
-) {
-
-    const element =
-        document.querySelector(
-            selector
-        );
-
-
-    if (
-        element &&
-        className
-    ) {
-
-        element.classList.remove(
-            className
-        );
-
-    }
-}
-
-
-function exists(selector) {
-
-    return Boolean(
-        document.querySelector(
-            selector
-        )
     );
 }
 
+}
+
+function removeClass(
+selector,
+className
+) {
+
+const element =
+    document.querySelector(
+        selector
+    );
+
+if (
+    element &&
+    className
+) {
+
+    element.classList.remove(
+        className
+    );
+}
+
+}
+
+function exists(selector) {
+
+return Boolean(
+    document.querySelector(
+        selector
+    )
+);
+
+}
 
 /* =========================================================
-   19. DEVICE
-   ========================================================= */
+20. DEVICE
+========================================================= */
 
 function isMobile() {
 
-    return window.matchMedia(
-        "(max-width: 639px)"
-    ).matches;
+return window.matchMedia(
+    "(max-width: 639px)"
+).matches;
+
 }
 
+/* =========================================================
+21. GLOBAL SETTINGS CONTROLS
+========================================================= */
+
+function initializeGlobalSettings() {
+
+/* الوضع الليلي */
+const darkMode =
+    document.querySelector(
+        "#darkMode"
+    );
+
+if (darkMode) {
+
+    darkMode.checked =
+        getSiteTheme() === "dark";
+
+    darkMode.addEventListener(
+        "change",
+        function () {
+
+            applySiteTheme(
+                this.checked
+                    ? "dark"
+                    : "light"
+            );
+
+            /*
+             * مزامنة إعدادات settings.html
+             */
+            try {
+
+                const settings =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "platform_settings"
+                        ) || "{}"
+                    );
+
+                settings.darkMode =
+                    this.checked;
+
+                localStorage.setItem(
+                    "platform_settings",
+                    JSON.stringify(
+                        settings
+                    )
+                );
+
+            } catch (error) {
+                console.warn(
+                    "تعذر مزامنة الوضع الليلي"
+                );
+            }
+        }
+    );
+}
+
+/* اللغة */
+const language =
+    document.querySelector(
+        "#language"
+    );
+
+if (language) {
+
+    language.value =
+        getSiteLanguage();
+
+    language.addEventListener(
+        "change",
+        function () {
+
+            applySiteLanguage(
+                this.value
+            );
+
+            /*
+             * مزامنة إعدادات settings.html
+             */
+            try {
+
+                const settings =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "platform_settings"
+                        ) || "{}"
+                    );
+
+                settings.language =
+                    this.value;
+
+                localStorage.setItem(
+                    "platform_settings",
+                    JSON.stringify(
+                        settings
+                    )
+                );
+
+            } catch (error) {
+                console.warn(
+                    "تعذر مزامنة اللغة"
+                );
+            }
+        }
+    );
+}
+
+/* أزرار الوضع الليلي */
+document
+    .querySelectorAll(
+        "[data-theme-toggle]"
+    )
+    .forEach(button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+                toggleDarkMode();
+            }
+        );
+    });
+
+/* أزرار اللغة */
+document
+    .querySelectorAll(
+        "[data-language]"
+    )
+    .forEach(button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                const language =
+                    button.dataset.language;
+
+                if (
+                    language === "ar" ||
+                    language === "fr"
+                ) {
+                    applySiteLanguage(
+                        language
+                    );
+                }
+            }
+        );
+    });
+
+}
 
 /* =========================================================
-   20. GLOBAL INITIALIZATION
-   ========================================================= */
+22. EARLY THEME
 
-function initializeGlobalEngine() {
+يتم تطبيق الوضع قبل ظهور الصفحة قدر الإمكان.
+========================================================= */
+
+(function earlyTheme() {
+
+try {
+
+    const theme =
+        localStorage.getItem(
+            GLOBAL_THEME_KEY
+        );
+
+    if (theme === "dark") {
+
+        document.documentElement
+            .classList.add(
+                "dark-mode"
+            );
+
+        document.documentElement
+            .setAttribute(
+                "data-theme",
+                "dark"
+            );
+
+        document.documentElement
+            .style.colorScheme =
+            "dark";
+
+    } else {
+
+        document.documentElement
+            .setAttribute(
+                "data-theme",
+                "light"
+            );
+
+        document.documentElement
+            .style.colorScheme =
+            "light";
+    }
+
+} catch (error) {
+
+    console.warn(
+        "تعذر تطبيق الوضع المبكر"
+    );
+}
+
+})();
+
+/* =========================================================
+23. CROSS-TAB / CROSS-PAGE SYNC
+========================================================= */
+
+window.addEventListener(
+"storage",
+function (event) {
+
+    if (
+        event.key ===
+        GLOBAL_THEME_KEY
+    ) {
+
+        applySiteTheme(
+            event.newValue ||
+            DEFAULT_THEME
+        );
+    }
+
+    if (
+        event.key ===
+        GLOBAL_LANGUAGE_KEY
+    ) {
+
+        applySiteLanguage(
+            event.newValue ||
+            DEFAULT_LANGUAGE
+        );
+    }
+}
+
+);
+
+/* =========================================================
+24. GLOBAL INITIALIZATION
+========================================================= */
+
+document.addEventListener(
+"DOMContentLoaded",
+() => {
 
     /*
-       نطبق المظهر واللغة أولًا
-       حتى تكون الصفحة متناسقة.
-    */
+     * نطبق الإعدادات أولًا
+     */
+    applySiteTheme(
+        getSiteTheme()
+    );
 
+    applySiteLanguage(
+        getSiteLanguage()
+    );
+
+    /*
+     * ثم بقية وظائف الموقع
+     */
     initializeGlobalSettings();
 
     setCurrentYear();
 
     setActiveNav();
+
+    updateThemeControls();
 }
 
-
-/*
-   التطبيق المبكر للوضع الليلي
-   قبل اكتمال تحميل الصفحة.
-*/
-
-(function earlyTheme() {
-
-    try {
-
-        const theme =
-            localStorage.getItem(
-                GLOBAL_THEME_KEY
-            ) || "light";
-
-
-        if (
-            theme === "dark"
-        ) {
-
-            document.documentElement
-                .classList.add(
-                    "dark-mode"
-                );
-
-        }
-
-    } catch (error) {
-
-        console.warn(
-            "تعذر تطبيق الوضع الليلي مبكرًا."
-        );
-
-    }
-
-})();
-
-
-document.addEventListener(
-    "DOMContentLoaded",
-    initializeGlobalEngine
 );
-
 
 /* =========================================================
-   21. LISTEN FOR SETTINGS CHANGES
-   ========================================================= */
-
-window.addEventListener(
-    "storage",
-    function(event) {
-
-        if (
-            event.key ===
-            GLOBAL_THEME_KEY
-        ) {
-
-            applySiteTheme(
-                event.newValue ||
-                "light"
-            );
-
-        }
-
-
-        if (
-            event.key ===
-            GLOBAL_LANGUAGE_KEY
-        ) {
-
-            applySiteLanguage(
-                event.newValue ||
-                "ar"
-            );
-
-        }
-
-    }
-);
+END
+========================================================= */
