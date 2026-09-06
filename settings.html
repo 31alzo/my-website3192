@@ -5,28 +5,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>الإعدادات | عالم شيخ الأساتذة</title>
+    <title>الإعدادات | EduNova AI</title>
 
-    <!-- تطبيق الإعدادات قبل ظهور الصفحة -->
+    <!--
+        النظام العالمي الجديد:
+        Theme + Language + Storage + Utilities
+    -->
+    <script src="script.js"></script>
+
+    <!-- تطبيق المظهر مبكرًا قبل ظهور الصفحة -->
     <script>
         (function () {
             try {
-                const settings = JSON.parse(
-                    localStorage.getItem("platform_settings") || "{}"
-                );
-
                 const theme =
-                    localStorage.getItem("site_theme") ||
-                    (settings.darkMode ? "dark" : "light");
+                    localStorage.getItem("site_theme") || "light";
 
                 const language =
-                    localStorage.getItem("site_language") ||
-                    settings.language ||
-                    "ar";
+                    localStorage.getItem("site_language") || "ar";
 
                 if (theme === "dark") {
                     document.documentElement.classList.add("dark-mode");
                 }
+
+                document.documentElement.setAttribute(
+                    "data-theme",
+                    theme === "dark" ? "dark" : "light"
+                );
 
                 document.documentElement.lang =
                     language === "fr" ? "fr" : "ar";
@@ -34,7 +38,7 @@
                 document.documentElement.dir =
                     language === "fr" ? "ltr" : "rtl";
 
-            } catch (e) {}
+            } catch (error) {}
         })();
     </script>
 
@@ -573,7 +577,7 @@
             </span>
 
             <span data-i18n="brand">
-                عالم شيخ الأساتذة
+                EduNova AI
             </span>
 
         </a>
@@ -741,12 +745,20 @@
                     class="settings-select"
                     id="language">
 
-                    <option value="ar">
+                    <option
+                        value="ar"
+                        data-i18n="arabic">
+
                         العربية
+
                     </option>
 
-                    <option value="fr">
+                    <option
+                        value="fr"
+                        data-i18n="french">
+
                         Français
+
                     </option>
 
                 </select>
@@ -1094,7 +1106,7 @@
             class="settings-section-title"
             data-i18n="aiSection">
 
-            🤖 الأستاذ AI
+            🤖 Afkrash AI
 
         </h2>
 
@@ -1123,7 +1135,7 @@
                             class="setting-description"
                             data-i18n="aiDescription">
 
-                            السماح للأستاذ AI بمساعدتك في التعلم
+                            السماح لـ Afkrash AI بمساعدتك في التعلم
 
                         </div>
 
@@ -1152,9 +1164,9 @@
                     class="info-box"
                     data-i18n="aiInfo">
 
-                    🤖 الأستاذ AI سيتم تطويره لاحقًا ليكون مساعدك
-                    داخل المحتوى التعليمي، ويساعدك في فهم الشرح
-                    وحل التمارين والتدرب على الأسئلة.
+                    🤖 Afkrash AI سيتم تطويره لاحقًا ليكون
+                    مساعدك داخل المحتوى التعليمي، ويساعدك
+                    في فهم الشرح وحل التمارين والتدرب على الأسئلة.
 
                 </div>
 
@@ -1533,8 +1545,12 @@
 
                     <div class="setting-text">
 
-                        <div class="setting-name">
-                            عالم شيخ الأساتذة
+                        <div
+                            class="setting-name"
+                            data-i18n="platformName">
+
+                            EduNova AI
+
                         </div>
 
                         <div
@@ -1609,7 +1625,7 @@
 
     <div class="version">
 
-        عالم شيخ الأساتذة — الأستاذ AI
+        EduNova AI — Afkrash AI
 
         <br>
 
@@ -1672,9 +1688,17 @@
 </div>
 
 
+<!-- Supabase -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
+
+"use strict";
+
+
+/* =========================================================
+   SUPABASE
+========================================================= */
 
 const SUPABASE_URL =
     "https://qkzdlxqledsznhbifaxy.supabase.co";
@@ -1690,15 +1714,16 @@ const supabaseClient =
 
 
 /* =========================================================
-   TRANSLATIONS
-   ========================================================= */
+   SETTINGS TRANSLATIONS
+   إعدادات خاصة بهذه الصفحة فقط
+========================================================= */
 
-const translations = {
+const SETTINGS_TRANSLATIONS = {
 
     ar: {
 
         brand:
-            "عالم شيخ الأساتذة",
+            "EduNova AI",
 
         myAccount:
             "حسابي",
@@ -1726,6 +1751,12 @@ const translations = {
 
         languageDescription:
             "لغة واجهة المنصة",
+
+        arabic:
+            "العربية",
+
+        french:
+            "Français",
 
         darkMode:
             "الوضع الداكن",
@@ -1770,16 +1801,16 @@ const translations = {
             "المدة المقترحة لجلسة الدراسة",
 
         aiSection:
-            "🤖 الأستاذ AI",
+            "🤖 Afkrash AI",
 
         aiAssistant:
             "المساعدة الذكية",
 
         aiDescription:
-            "السماح للأستاذ AI بمساعدتك في التعلم",
+            "السماح لـ Afkrash AI بمساعدتك في التعلم",
 
         aiInfo:
-            "🤖 الأستاذ AI سيتم تطويره لاحقًا ليكون مساعدك داخل المحتوى التعليمي، ويساعدك في فهم الشرح وحل التمارين والتدرب على الأسئلة.",
+            "🤖 Afkrash AI سيتم تطويره لاحقًا ليكون مساعدك داخل المحتوى التعليمي، ويساعدك في فهم الشرح وحل التمارين والتدرب على الأسئلة.",
 
         community:
             "👥 الخصوصية والمجتمع",
@@ -1835,6 +1866,9 @@ const translations = {
         about:
             "ℹ️ حول المنصة",
 
+        platformName:
+            "EduNova AI",
+
         platformDescription:
             "منصة تعليمية رقمية",
 
@@ -1880,7 +1914,7 @@ const translations = {
     fr: {
 
         brand:
-            "Monde des Maîtres Enseignants",
+            "EduNova AI",
 
         myAccount:
             "Mon compte",
@@ -1908,6 +1942,12 @@ const translations = {
 
         languageDescription:
             "Langue de l'interface de la plateforme",
+
+        arabic:
+            "العربية",
+
+        french:
+            "Français",
 
         darkMode:
             "Mode sombre",
@@ -1952,16 +1992,16 @@ const translations = {
             "Durée recommandée pour une session d'étude",
 
         aiSection:
-            "🤖 Professeur AI",
+            "🤖 Afkrash AI",
 
         aiAssistant:
             "Assistant intelligent",
 
         aiDescription:
-            "Autoriser le Professeur AI à vous aider dans votre apprentissage",
+            "Autoriser Afkrash AI à vous aider dans votre apprentissage",
 
         aiInfo:
-            "🤖 Le Professeur AI sera développé prochainement pour devenir votre assistant dans le contenu éducatif et vous aider à comprendre les explications, résoudre les exercices et vous entraîner.",
+            "🤖 Afkrash AI sera développé prochainement pour devenir votre assistant dans le contenu éducatif et vous aider à comprendre les explications, résoudre les exercices et vous entraîner.",
 
         community:
             "👥 Confidentialité et communauté",
@@ -2017,6 +2057,9 @@ const translations = {
         about:
             "ℹ️ À propos",
 
+        platformName:
+            "EduNova AI",
+
         platformDescription:
             "Plateforme éducative numérique",
 
@@ -2063,13 +2106,9 @@ const translations = {
 
 /* =========================================================
    DEFAULT SETTINGS
-   ========================================================= */
+========================================================= */
 
 const defaultSettings = {
-
-    language: "ar",
-
-    darkMode: false,
 
     platformNotifications: true,
 
@@ -2089,10 +2128,10 @@ const defaultSettings = {
 
 
 /* =========================================================
-   READ SETTINGS
-   ========================================================= */
+   READ PAGE SETTINGS
+========================================================= */
 
-function getSettings() {
+function getPageSettings() {
 
     try {
 
@@ -2120,81 +2159,33 @@ function getSettings() {
 
 
 /* =========================================================
-   GLOBAL THEME
-   ========================================================= */
+   SETTINGS PAGE TRANSLATION
+========================================================= */
 
-function applyDarkMode(enabled) {
+function translateSettingsPage() {
 
-    const isDark =
-        Boolean(enabled);
+    const language =
+        getSiteLanguage();
 
-    document.documentElement
-        .classList
-        .toggle(
-            "dark-mode",
-            isDark
-        );
+    const dictionary =
+        SETTINGS_TRANSLATIONS[
+            language
+        ] || SETTINGS_TRANSLATIONS.ar;
 
-
-    localStorage.setItem(
-        "site_theme",
-        isDark
-            ? "dark"
-            : "light"
-    );
-
-}
-
-
-/* =========================================================
-   GLOBAL LANGUAGE
-   ========================================================= */
-
-function applyLanguage(language) {
-
-    const lang =
-        language === "fr"
-            ? "fr"
-            : "ar";
-
-
-    document.documentElement.lang =
-        lang;
-
-    document.documentElement.dir =
-        lang === "fr"
-            ? "ltr"
-            : "rtl";
-
-
-    /* النظام العالمي */
-
-    localStorage.setItem(
-        "site_language",
-        lang
-    );
-
-
-    /* ترجمة صفحة الإعدادات */
 
     document
-        .querySelectorAll(
-            "[data-i18n]"
-        )
+        .querySelectorAll("[data-i18n]")
         .forEach(element => {
 
             const key =
-                element.getAttribute(
-                    "data-i18n"
-                );
+                element.dataset.i18n;
 
             if (
-                translations[lang] &&
-                translations[lang][key]
+                dictionary[key] !== undefined
             ) {
 
                 element.textContent =
-                    translations[lang][key];
+                    dictionary[key];
 
             }
 
@@ -2208,18 +2199,15 @@ function applyLanguage(language) {
             "studyDuration"
         );
 
-
     if (duration) {
 
         const value =
             duration.value;
 
-
         const options =
             duration.options;
 
-
-        if (lang === "fr") {
+        if (language === "fr") {
 
             options[0].textContent =
                 "15 minutes";
@@ -2255,9 +2243,7 @@ function applyLanguage(language) {
 
         }
 
-
-        duration.value =
-            value;
+        duration.value = value;
 
     }
 
@@ -2265,13 +2251,11 @@ function applyLanguage(language) {
     /* اتجاه الأسهم */
 
     document
-        .querySelectorAll(
-            ".arrow"
-        )
+        .querySelectorAll(".arrow")
         .forEach(arrow => {
 
             arrow.textContent =
-                lang === "fr"
+                language === "fr"
                     ? "→"
                     : "←";
 
@@ -2279,32 +2263,31 @@ function applyLanguage(language) {
 
 
     document.title =
-        lang === "fr"
-            ? "Paramètres | Monde des Maîtres Enseignants"
-            : "الإعدادات | عالم شيخ الأساتذة";
+        language === "fr"
+            ? "Paramètres | EduNova AI"
+            : "الإعدادات | EduNova AI";
 
 }
 
 
 /* =========================================================
-   SAVE SETTINGS
-   ========================================================= */
+   SAVE STUDENT SETTINGS
+========================================================= */
 
-function saveSettings(
+function savePageSettings(
     showMessage = true
 ) {
+
+    const language =
+        getSiteLanguage();
 
     const settings = {
 
         language:
-            document.getElementById(
-                "language"
-            ).value,
+            language,
 
         darkMode:
-            document.getElementById(
-                "darkMode"
-            ).checked,
+            getSiteTheme() === "dark",
 
         platformNotifications:
             document.getElementById(
@@ -2344,7 +2327,11 @@ function saveSettings(
     };
 
 
-    /* الإعدادات القديمة */
+    /*
+     * نحفظ الإعدادات الإضافية فقط هنا.
+     * Theme و Language مصدرهما الحقيقي:
+     * site_theme + site_language
+     */
 
     localStorage.setItem(
         "platform_settings",
@@ -2352,36 +2339,15 @@ function saveSettings(
     );
 
 
-    /* الإعدادات العالمية */
-
-    localStorage.setItem(
-        "site_language",
-        settings.language
-    );
-
-    localStorage.setItem(
-        "site_theme",
-        settings.darkMode
-            ? "dark"
-            : "light"
-    );
-
-
-    applyDarkMode(
-        settings.darkMode
-    );
-
-    applyLanguage(
-        settings.language
-    );
-
-
     if (showMessage) {
 
+        const dictionary =
+            SETTINGS_TRANSLATIONS[
+                language
+            ] || SETTINGS_TRANSLATIONS.ar;
+
         showToast(
-            translations[
-                settings.language
-            ].saved
+            dictionary.saved
         );
 
     }
@@ -2391,36 +2357,20 @@ function saveSettings(
 
 /* =========================================================
    LOAD SETTINGS
-   ========================================================= */
+========================================================= */
 
 function loadSettings() {
 
     const settings =
-        getSettings();
-
-
-    const globalLanguage =
-        localStorage.getItem(
-            "site_language"
-        );
-
-
-    const globalTheme =
-        localStorage.getItem(
-            "site_theme"
-        );
+        getPageSettings();
 
 
     const language =
-        globalLanguage ||
-        settings.language ||
-        "ar";
+        getSiteLanguage();
 
 
-    const darkMode =
-        globalTheme
-            ? globalTheme === "dark"
-            : settings.darkMode;
+    const theme =
+        getSiteTheme();
 
 
     document.getElementById(
@@ -2432,7 +2382,7 @@ function loadSettings() {
     document.getElementById(
         "darkMode"
     ).checked =
-        darkMode;
+        theme === "dark";
 
 
     document.getElementById(
@@ -2477,20 +2427,22 @@ function loadSettings() {
         settings.leaderboard;
 
 
-    applyDarkMode(
-        darkMode
-    );
+    /*
+     * النظام العالمي
+     */
 
-    applyLanguage(
-        language
-    );
+    applySiteTheme(theme);
+
+    applySiteLanguage(language);
+
+    translateSettingsPage();
 
 }
 
 
 /* =========================================================
    TOAST
-   ========================================================= */
+========================================================= */
 
 let toastTimer;
 
@@ -2536,8 +2488,8 @@ function showToast(message) {
 
 
 /* =========================================================
-   CHANGE EVENTS
-   ========================================================= */
+   THEME CHANGE
+========================================================= */
 
 document.addEventListener(
     "change",
@@ -2552,26 +2504,34 @@ document.addEventListener(
                 event.target.checked;
 
 
-            saveSettings(false);
+            /*
+             * النظام العالمي الجديد
+             */
+
+            applySiteTheme(
+                enabled
+                    ? "dark"
+                    : "light"
+            );
 
 
-            const lang =
-                document.getElementById(
-                    "language"
-                ).value;
+            savePageSettings(false);
+
+
+            const language =
+                getSiteLanguage();
+
+
+            const dictionary =
+                SETTINGS_TRANSLATIONS[
+                    language
+                ] || SETTINGS_TRANSLATIONS.ar;
 
 
             showToast(
-
                 enabled
-                    ? translations[
-                        lang
-                    ].darkEnabled
-
-                    : translations[
-                        lang
-                    ].darkDisabled
-
+                    ? dictionary.darkEnabled
+                    : dictionary.darkDisabled
             );
 
 
@@ -2584,14 +2544,39 @@ document.addEventListener(
             "language"
         ) {
 
-            saveSettings(false);
+            const language =
+                event.target.value;
+
+
+            /*
+             * النظام العالمي الجديد
+             */
+
+            applySiteLanguage(
+                language
+            );
+
+
+            /*
+             * ترجمة صفحة الإعدادات
+             */
+
+            translateSettingsPage();
+
+
+            savePageSettings(false);
+
 
             return;
 
         }
 
 
-        saveSettings(true);
+        /*
+         * بقية الإعدادات
+         */
+
+        savePageSettings(true);
 
     }
 );
@@ -2599,50 +2584,66 @@ document.addEventListener(
 
 /* =========================================================
    NAVIGATION
-   ========================================================= */
+========================================================= */
 
 function goDashboard() {
+
     window.location.href =
         "dashboard.html";
+
 }
+
 
 function goAccount() {
+
     window.location.href =
         "account.html";
+
 }
+
 
 function goLibrary() {
+
     window.location.href =
         "library.html";
+
 }
+
 
 function goForum() {
+
     window.location.href =
         "forum.html";
+
 }
 
+
 function goLevels() {
+
     window.location.href =
         "levels.html";
+
 }
 
 
 /* =========================================================
    COMING SOON
-   ========================================================= */
+========================================================= */
 
 function comingSoon() {
 
-    const lang =
-        document.getElementById(
-            "language"
-        ).value;
+    const language =
+        getSiteLanguage();
+
+
+    const dictionary =
+        SETTINGS_TRANSLATIONS[
+            language
+        ] || SETTINGS_TRANSLATIONS.ar;
 
 
     showToast(
-        translations[
-            lang
-        ].comingSoon
+        dictionary.comingSoon
     );
 
 }
@@ -2650,21 +2651,23 @@ function comingSoon() {
 
 /* =========================================================
    LOGOUT
-   ========================================================= */
+========================================================= */
 
 async function logout() {
 
-    const lang =
-        document.getElementById(
-            "language"
-        ).value;
+    const language =
+        getSiteLanguage();
+
+
+    const dictionary =
+        SETTINGS_TRANSLATIONS[
+            language
+        ] || SETTINGS_TRANSLATIONS.ar;
 
 
     const confirmed =
-        confirm(
-            translations[
-                lang
-            ].logoutConfirm
+        window.confirm(
+            dictionary.logoutConfirm
         );
 
 
@@ -2684,9 +2687,7 @@ async function logout() {
     if (error) {
 
         showToast(
-            translations[
-                lang
-            ].logoutError
+            dictionary.logoutError
         );
 
         return;
@@ -2719,7 +2720,7 @@ async function logout() {
 
 /* =========================================================
    LOAD USER
-   ========================================================= */
+========================================================= */
 
 async function loadUser() {
 
@@ -2792,9 +2793,16 @@ async function loadUser() {
 
 /* =========================================================
    START
-   ========================================================= */
+========================================================= */
 
-loadUser();
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        loadUser();
+
+    }
+);
 
 </script>
 
