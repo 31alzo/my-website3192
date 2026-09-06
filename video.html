@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>مشاهدة الفيديو | عالم شيخ الأساتذة</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .video-page {
+            padding: 20px 0 60px;
+        }
+
+        .video-wrapper {
+            max-width: 950px;
+            margin: auto;
+        }
+
+        .video-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .back-btn {
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            padding: 9px 13px;
+            border-radius: 11px;
+            font-family: inherit;
+            font-size: 11px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .teacher-strip {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            margin-bottom: 17px;
+
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .teacher-avatar {
+            width: 45px;
+            height: 45px;
+            flex-shrink: 0;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 14px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--accent)
+                );
+
+            color: white;
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+        .teacher-strip strong {
+            display: block;
+            font-size: 14px;
+            font-weight: 900;
+        }
+
+        .teacher-strip span {
+            display: block;
+            margin-top: 3px;
+            color: var(--text-soft);
+            font-size: 10px;
+        }
+
+        /* VIDEO PLAYER */
+
+        .player-card {
+            overflow: hidden;
+
+            background: #050b18;
+
+            border-radius: 22px;
+
+            box-shadow: var(--shadow-lg);
+        }
+
+        .video-player {
+            position: relative;
+
+            aspect-ratio: 16 / 9;
+
+            display: grid;
+            place-items: center;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    #263449 0%,
+                    #0f172a 48%,
+                    #020617 100%
+                );
+
+            color: white;
+        }
+
+        .player-placeholder {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .player-icon {
+            width: 70px;
+            height: 70px;
+
+            display: grid;
+            place-items: center;
+
+            margin: auto;
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,.12);
+
+            font-size: 27px;
+        }
+
+        .player-placeholder h2 {
+            margin: 13px 0 5px;
+
+            color: white;
+
+            font-size: 17px;
+        }
+
+        .player-placeholder p {
+            margin: 0;
+
+            color: rgba(255,255,255,.65);
+
+            font-size: 10px;
+        }
+
+        .free-label {
+            display: inline-block;
+
+            margin-top: 12px;
+            padding: 6px 10px;
+
+            border-radius: 999px;
+
+            background: rgba(34,197,94,.18);
+
+            color: #86efac;
+
+            font-size: 9px;
+            font-weight: 900;
+        }
+
+        /* INFO */
+
+        .video-info-card {
+            margin-top: 17px;
+            padding: 20px;
+
+            background: var(--surface);
+
+            border: 1px solid var(--border);
+            border-radius: 20px;
+
+            box-shadow: var(--shadow-sm);
+        }
+
+        .video-badge {
+            display: inline-block;
+
+            padding: 5px 9px;
+
+            border-radius: 999px;
+
+            background: var(--primary-light);
+
+            color: var(--primary);
+
+            font-size: 9px;
+            font-weight: 900;
+        }
+
+        .video-info-card h1 {
+            margin: 10px 0 7px;
+
+            font-size: clamp(21px, 5vw, 30px);
+            font-weight: 950;
+        }
+
+        .video-description {
+            margin: 0;
+
+            color: var(--text-soft);
+
+            font-size: 12px;
+            line-height: 1.9;
+        }
+
+        .video-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+
+            margin-top: 15px;
+        }
+
+        .meta-item {
+            padding: 7px 10px;
+
+            border-radius: 9px;
+
+            background: var(--background);
+
+            color: var(--text-soft);
+
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        /* SUBSCRIPTION */
+
+        .subscription-box {
+            margin-top: 17px;
+            padding: 20px;
+
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary-light),
+                    var(--surface)
+                );
+
+            border: 1px solid #bfdbfe;
+
+            border-radius: 20px;
+        }
+
+        .subscription-box h2 {
+            margin: 0 0 6px;
+
+            font-size: 18px;
+            font-weight: 950;
+        }
+
+        .subscription-box p {
+            margin: 0 auto 14px;
+
+            max-width: 600px;
+
+            color: var(--text-soft);
+
+            font-size: 11px;
+            line-height: 1.8;
+        }
+
+        .subscribe-btn {
+            display: inline-block;
+
+            padding: 11px 18px;
+
+            border: 0;
+            border-radius: 12px;
+
+            background: var(--primary);
+            color: white;
+
+            font-family: inherit;
+            font-size: 11px;
+            font-weight: 900;
+
+            cursor: pointer;
+        }
+
+        .subscribe-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* NAVIGATION */
+
+        .video-navigation {
+            display: flex;
+            gap: 10px;
+
+            margin-top: 17px;
+        }
+
+        .nav-video-btn {
+            flex: 1;
+
+            padding: 11px;
+
+            border: 1px solid var(--border);
+            border-radius: 12px;
+
+            background: var(--surface);
+            color: var(--text);
+
+            font-family: inherit;
+            font-size: 10px;
+            font-weight: 800;
+
+            cursor: pointer;
+        }
+
+        .nav-video-btn:hover {
+            border-color: #93c5fd;
+            color: var(--primary);
+        }
+
+        @media (max-width: 500px) {
+
+            .video-page {
+                padding-top: 15px;
+            }
+
+            .player-card {
+                border-radius: 17px;
+            }
+
+            .video-info-card,
+            .subscription-box {
+                padding: 16px;
+            }
+
+            .video-navigation {
+                gap: 7px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+<header class="site-header">
+
+    <div class="container header-inner">
+
+        <button
+            class="brand"
+            onclick="goHome()"
+            type="button">
+
+            <span class="brand-icon">AI</span>
+
+            <span>
+                عالم شيخ الأساتذة
+            </span>
+
+        </button>
+
+        <button
+            class="back-btn"
+            onclick="goChapter()"
+            type="button">
+
+            ← الـChapitre
+
+        </button>
+
+    </div>
+
+</header>
+
+
+<main class="page video-page">
+
+    <div class="container video-wrapper">
+
+
+        <!-- TEACHER -->
+
+        <div class="teacher-strip">
+
+            <div class="teacher-avatar">
+                AI
+            </div>
+
+            <div>
+
+                <strong>
+                    شيخ الأساتذة — الأستاذ AI
+                </strong>
+
+                <span>
+                    تعلم بالشرح المرئي وبالطريقة التي تناسبك.
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- PLAYER -->
+
+        <section class="player-card">
+
+            <div
+                class="video-player"
+                id="videoPlayer">
+
+                <div class="player-placeholder">
+
+                    <div class="player-icon">
+                        ▶
+                    </div>
+
+                    <h2 id="playerTitle">
+                        الفيديو الأول
+                    </h2>
+
+                    <p>
+                        الفيديو سيظهر هنا عند ربط المحتوى الحقيقي.
+                    </p>
+
+                    <span
+                        class="free-label"
+                        id="freeLabel">
+
+                        🎁 مجاني
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- INFO -->
+
+        <section class="video-info-card">
+
+            <span class="video-badge">
+                الرياضيات
+            </span>
+
+            <h1 id="videoTitle">
+                الفيديو الأول
+            </h1>
+
+            <p
+                class="video-description"
+                id="videoDescription">
+
+                المحتوى التعليمي سيُضاف هنا لاحقًا.
+
+            </p>
+
+
+            <div class="video-meta">
+
+                <span
+                    class="meta-item"
+                    id="videoChapter">
+
+                    📚 Chapitre 1
+
+                </span>
+
+                <span
+                    class="meta-item"
+                    id="videoNumber">
+
+                    🎬 فيديو 1
+
+                </span>
+
+                <span
+                    class="meta-item"
+                    id="videoDuration">
+
+                    ⏱️ --:--
+
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- SUBSCRIPTION -->
+
+        <section
+            class="subscription-box"
+            id="subscriptionBox"
+            style="display:none;">
+
+            <h2>
+                🔒 هذا الفيديو للمشتركين
+            </h2>
+
+            <p>
+                الفيديو الأول من كل Chapitre مجاني.
+                للوصول إلى بقية الفيديوهات، يحتاج الطالب
+                إلى الاشتراك في المنصة.
+            </p>
+
+            <button
+                class="subscribe-btn"
+                onclick="goSubscribe()"
+                type="button">
+
+                اشترك الآن
+
+            </button>
+
+        </section>
+
+
+        <!-- NAVIGATION -->
+
+        <div class="video-navigation">
+
+            <button
+                class="nav-video-btn"
+                onclick="previousVideo()"
+                type="button">
+
+                → الفيديو السابق
+
+            </button>
+
+            <button
+                class="nav-video-btn"
+                onclick="goChapter()"
+                type="button">
+
+                قائمة الفيديوهات
+
+            </button>
+
+            <button
+                class="nav-video-btn"
+                onclick="nextVideo()"
+                type="button">
+
+                الفيديو التالي ←
+
+            </button>
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+<script>
+
+    /* =========================================
+       VIDEO DATA
+       ========================================= */
+
+    let selectedVideo = null;
+
+    try {
+
+        selectedVideo =
+            JSON.parse(
+                localStorage.getItem(
+                    "selected_video"
+                )
+            );
+
+    } catch (error) {
+
+        selectedVideo = null;
+
+    }
+
+
+    /*
+       إذا لم توجد بيانات فيديو،
+       نستخدم فيديو تجريبي رقم 1.
+    */
+
+    if (!selectedVideo) {
+
+        selectedVideo = {
+
+            id: 1,
+
+            title: "الفيديو الأول",
+
+            description:
+                "هذا مكان الفيديو المجاني الأول في الـChapitre.",
+
+            duration: "--:--",
+
+            videoUrl: "",
+
+            isFree: true,
+
+            number: 1
+
+        };
+
+    }
+
+
+    /* =========================================
+       VIDEO NUMBER
+       ========================================= */
+
+    const videoNumber =
+        Number(
+            selectedVideo.number ||
+            selectedVideo.id ||
+            1
+        );
+
+
+    /*
+       القاعدة الأساسية:
+       الفيديو رقم 1 مجاني.
+       كل ما بعده يحتاج اشتراكًا.
+    */
+
+    const isFree =
+        videoNumber === 1;
+
+
+    /* =========================================
+       LOAD VIDEO
+       ========================================= */
+
+    function loadVideo() {
+
+        document.getElementById(
+            "playerTitle"
+        ).textContent =
+            selectedVideo.title;
+
+
+        document.getElementById(
+            "videoTitle"
+        ).textContent =
+            selectedVideo.title;
+
+
+        document.getElementById(
+            "videoDescription"
+        ).textContent =
+            selectedVideo.description ||
+            "لا يوجد وصف لهذا الفيديو حاليًا.";
+
+
+        document.getElementById(
+            "videoNumber"
+        ).textContent =
+            "🎬 فيديو " +
+            videoNumber;
+
+
+        document.getElementById(
+            "videoDuration"
+        ).textContent =
+            "⏱️ " +
+            (
+                selectedVideo.duration ||
+                "--:--"
+            );
+
+
+        /* FREE / PAID */
+
+        const freeLabel =
+            document.getElementById(
+                "freeLabel"
+            );
+
+        const subscriptionBox =
+            document.getElementById(
+                "subscriptionBox"
+            );
+
+
+        if (isFree) {
+
+            freeLabel.style.display =
+                "inline-block";
+
+            freeLabel.textContent =
+                "🎁 الفيديو الأول مجاني";
+
+            subscriptionBox.style.display =
+                "none";
+
+        } else {
+
+            freeLabel.style.display =
+                "none";
+
+            subscriptionBox.style.display =
+                "block";
+
+        }
+
+
+        /* =====================================
+           REAL VIDEO
+           ===================================== */
+
+        if (
+            isFree &&
+            selectedVideo.videoUrl
+        ) {
+
+            const player =
+                document.getElementById(
+                    "videoPlayer"
+                );
+
+            player.innerHTML = `
+
+                <video
+                    controls
+                    playsinline
+                    style="
+                        width:100%;
+                        height:100%;
+                        display:block;
+                        background:#000;
+                    "
+                >
+
+                    <source
+                        src="${selectedVideo.videoUrl}"
+                        type="video/mp4"
+                    >
+
+                    متصفحك لا يدعم تشغيل الفيديو.
+
+                </video>
+
+            `;
+
+        }
+
+    }
+
+
+    /* =========================================
+       NAVIGATION
+       ========================================= */
+
+    function goChapter() {
+
+        window.location.href =
+            "chapter.html";
+
+    }
+
+
+    function goHome() {
+
+        window.location.href =
+            "index.html";
+
+    }
+
+
+    function goSubscribe() {
+
+        /*
+           صفحة الاشتراك سنبنيها لاحقًا
+           عندما نصل إلى نظام الاشتراكات.
+        */
+
+        alert(
+            "صفحة الاشتراك سيتم تجهيزها لاحقًا."
+        );
+
+    }
+
+
+    function previousVideo() {
+
+        alert(
+            "سيتم تفعيل الانتقال بين الفيديوهات عند إضافة المحتوى."
+        );
+
+    }
+
+
+    function nextVideo() {
+
+        alert(
+            "سيتم تفعيل الانتقال بين الفيديوهات عند إضافة المحتوى."
+        );
+
+    }
+
+
+    /* =========================================
+       START
+       ========================================= */
+
+    loadVideo();
+
+</script>
+
+</body>
+  </html>
