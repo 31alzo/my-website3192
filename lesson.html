@@ -1,739 +1,1278 @@
-<!DOCTYPE html><html lang="ar" dir="rtl"><head>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>الدرس | عالم شيخ الأساتذة</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="style.css">
+    <title>الدرس | EduNova AI</title>
 
-<style>
-    .lesson-page {
-        padding-bottom: 55px;
-    }
+    <link rel="stylesheet" href="style.css">
 
-    .lesson-top {
-        margin-bottom: 18px;
-    }
-
-    .lesson-breadcrumb {
-        display: flex;
-
-        align-items: center;
-
-        flex-wrap: wrap;
-
-        gap: 6px;
-
-        margin-bottom: 12px;
-
-        color: var(--text-soft);
-
-        font-size: 11px;
-    }
-
-    .lesson-breadcrumb button {
-        padding: 0;
-
-        border: none;
-
-        background: transparent;
-
-        color: var(--primary);
-
-        font-size: inherit;
-
-        cursor: pointer;
-    }
-
-    .lesson-title-box {
-        padding: 21px;
-
-        background: var(--surface);
-
-        border: 1px solid var(--border);
-
-        border-radius: var(--radius-lg);
-
-        box-shadow: var(--shadow-sm);
-    }
-
-    .lesson-number-label {
-        display: inline-block;
-
-        margin-bottom: 7px;
-
-        padding: 5px 9px;
-
-        background: var(--primary-light);
-
-        color: var(--primary);
-
-        border-radius: 8px;
-
-        font-size: 10px;
-        font-weight: 850;
-    }
-
-    .lesson-title {
-        margin: 0;
-
-        font-size: clamp(23px, 6vw, 31px);
-
-        font-weight: 900;
-
-        line-height: 1.45;
-    }
-
-    .lesson-description {
-        margin-top: 7px;
-
-        color: var(--text-soft);
-
-        font-size: 13px;
-
-        line-height: 1.8;
-    }
-
-    /* Video */
-
-    .video-card {
-        margin-top: 18px;
-
-        overflow: hidden;
-
-        background: #0f172a;
-
-        border-radius: var(--radius-lg);
-
-        box-shadow:
-            0 14px 35px rgba(15, 23, 42, .16);
-    }
-
-    .video-container {
-        position: relative;
-
-        width: 100%;
-
-        aspect-ratio: 16 / 9;
-
-        display: grid;
-
-        place-items: center;
-
-        background:
-            radial-gradient(
-                circle at center,
-                #1e293b,
-                #0f172a
-            );
-    }
-
-    .video-placeholder {
-        padding: 25px;
-
-        text-align: center;
-
-        color: white;
-    }
-
-    .video-icon {
-        width: 66px;
-        height: 66px;
-
-        margin: 0 auto 13px;
-
-        display: grid;
-        place-items: center;
-
-        background: rgba(255,255,255,.1);
-
-        border: 1px solid rgba(255,255,255,.12);
-
-        border-radius: 50%;
-
-        font-size: 27px;
-    }
-
-    .video-placeholder h2 {
-        font-size: 17px;
-        font-weight: 850;
-    }
-
-    .video-placeholder p {
-        max-width: 400px;
-
-        margin: 6px auto 0;
-
-        color: rgba(255,255,255,.65);
-
-        font-size: 11px;
-
-        line-height: 1.7;
-    }
-
-    .video-status {
-        padding: 11px 14px;
-
-        background: #111c2e;
-
-        color: rgba(255,255,255,.7);
-
-        text-align: center;
-
-        font-size: 10px;
-    }
-
-    /* Lesson information */
-
-    .lesson-info-grid {
-        display: grid;
-
-        gap: 12px;
-
-        margin-top: 18px;
-    }
-
-    .info-card {
-        padding: 17px;
-
-        background: var(--surface);
-
-        border: 1px solid var(--border);
-
-        border-radius: var(--radius-md);
-
-        box-shadow: var(--shadow-sm);
-    }
-
-    .info-card h2 {
-        margin-bottom: 7px;
-
-        font-size: 15px;
-        font-weight: 850;
-    }
-
-    .info-card p {
-        color: var(--text-soft);
-
-        font-size: 12px;
-
-        line-height: 1.8;
-    }
-
-    /* Complete */
-
-    .complete-card {
-        margin-top: 18px;
-
-        padding: 19px;
-
-        background: var(--surface);
-
-        border: 1px solid var(--border);
-
-        border-radius: var(--radius-lg);
-
-        box-shadow: var(--shadow-sm);
-    }
-
-    .complete-status {
-        display: flex;
-
-        align-items: center;
-
-        gap: 10px;
-
-        margin-bottom: 13px;
-    }
-
-    .complete-icon {
-        width: 43px;
-        height: 43px;
-
-        display: grid;
-        place-items: center;
-
-        border-radius: 12px;
-
-        background: var(--primary-light);
-
-        color: var(--primary);
-
-        font-size: 20px;
-    }
-
-    .complete-status h2 {
-        font-size: 15px;
-        font-weight: 850;
-    }
-
-    .complete-status p {
-        margin-top: 2px;
-
-        color: var(--text-soft);
-
-        font-size: 11px;
-    }
-
-    .complete-button {
-        width: 100%;
-    }
-
-    .complete-button.done {
-        background: #16a34a;
-        border-color: #16a34a;
-    }
-
-    .lesson-navigation {
-        display: grid;
-
-        grid-template-columns: 1fr 1fr;
-
-        gap: 10px;
-
-        margin-top: 12px;
-    }
-
-    .lesson-navigation button {
-        width: 100%;
-    }
-
-    .locked-message {
-        margin-top: 18px;
-
-        padding: 16px;
-
-        text-align: center;
-
-        background: #fff7ed;
-
-        border: 1px solid #fed7aa;
-
-        border-radius: var(--radius-md);
-
-        color: #9a3412;
-
-        font-size: 12px;
-
-        line-height: 1.8;
-    }
-
-    @media (min-width: 700px) {
+    <style>
 
         .lesson-page {
-            max-width: 850px;
-
-            margin: auto;
+            padding-bottom: 55px;
         }
+
+        .lesson-top {
+            margin-bottom: 18px;
+        }
+
+        .lesson-breadcrumb {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 12px;
+            color: var(--text-soft);
+            font-size: 11px;
+        }
+
+        .lesson-breadcrumb button {
+            padding: 0;
+            border: none;
+            background: transparent;
+            color: var(--primary);
+            font-size: inherit;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .lesson-title-box {
+            padding: 21px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .lesson-number-label {
+            display: inline-block;
+            margin-bottom: 7px;
+            padding: 5px 9px;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: 8px;
+            font-size: 10px;
+            font-weight: 850;
+        }
+
+        .lesson-title {
+            margin: 0;
+            font-size: clamp(23px, 6vw, 31px);
+            font-weight: 900;
+            line-height: 1.45;
+        }
+
+        .lesson-description {
+            margin-top: 7px;
+            color: var(--text-soft);
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        /* Video */
+
+        .video-card {
+            margin-top: 18px;
+            overflow: hidden;
+            background: #0f172a;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 14px 35px rgba(15, 23, 42, .16);
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            display: grid;
+            place-items: center;
+            background:
+                radial-gradient(
+                    circle at center,
+                    #1e293b,
+                    #0f172a
+                );
+        }
+
+        .video-placeholder {
+            padding: 25px;
+            text-align: center;
+            color: white;
+        }
+
+        .video-icon {
+            width: 66px;
+            height: 66px;
+            margin: 0 auto 13px;
+            display: grid;
+            place-items: center;
+            background: rgba(255,255,255,.1);
+            border: 1px solid rgba(255,255,255,.12);
+            border-radius: 50%;
+            font-size: 27px;
+        }
+
+        .video-placeholder h2 {
+            margin: 0;
+            font-size: 17px;
+            font-weight: 850;
+        }
+
+        .video-placeholder p {
+            max-width: 400px;
+            margin: 6px auto 0;
+            color: rgba(255,255,255,.65);
+            font-size: 11px;
+            line-height: 1.7;
+        }
+
+        .video-status {
+            padding: 11px 14px;
+            background: #111c2e;
+            color: rgba(255,255,255,.7);
+            text-align: center;
+            font-size: 10px;
+        }
+
+        /* Lesson information */
 
         .lesson-info-grid {
-            grid-template-columns: repeat(2, 1fr);
+            display: grid;
+            gap: 12px;
+            margin-top: 18px;
         }
 
-    }
-</style>
+        .info-card {
+            padding: 17px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .info-card h2 {
+            margin: 0 0 7px;
+            font-size: 15px;
+            font-weight: 850;
+        }
+
+        .info-card p {
+            margin: 0;
+            color: var(--text-soft);
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        /* Complete */
+
+        .complete-card {
+            margin-top: 18px;
+            padding: 19px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .complete-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 13px;
+        }
+
+        .complete-icon {
+            width: 43px;
+            height: 43px;
+            display: grid;
+            place-items: center;
+            border-radius: 12px;
+            background: var(--primary-light);
+            color: var(--primary);
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .complete-status h2 {
+            margin: 0;
+            font-size: 15px;
+            font-weight: 850;
+        }
+
+        .complete-status p {
+            margin: 2px 0 0;
+            color: var(--text-soft);
+            font-size: 11px;
+        }
+
+        .complete-button {
+            width: 100%;
+        }
+
+        .complete-button.done {
+            background: #16a34a;
+            border-color: #16a34a;
+        }
+
+        .lesson-navigation {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .lesson-navigation button {
+            width: 100%;
+        }
+
+        .locked-message {
+            margin-top: 18px;
+            padding: 16px;
+            text-align: center;
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            border-radius: var(--radius-md);
+            color: #9a3412;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        html.dark-mode .locked-message {
+            background: rgba(154, 52, 18, .15);
+            border-color: rgba(251, 146, 60, .25);
+            color: #fdba74;
+        }
+
+        @media (min-width: 700px) {
 
-</head><body><!-- Header -->
+            .lesson-page {
+                max-width: 850px;
+                margin: auto;
+            }
 
-<header class="site-header">
+            .lesson-info-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
 
-    <div class="container header-inner">
+        }
 
-        <button
-            class="brand"
-            onclick="goHome()"
-            aria-label="الصفحة الرئيسية">
+    </style>
 
-            <span class="brand-icon">
-                AI
-            </span>
+</head>
 
-            <span>
-                عالم شيخ الأساتذة
-            </span>
 
-        </button>
+<body>
 
+    <!-- Header -->
 
-        <button
-            class="btn btn-secondary"
-            onclick="goChapter()">
+    <header class="site-header">
 
-            ← الفصل
-
-        </button>
-
-    </div>
-
-</header>
-
-
-<main class="page">
-
-    <div class="container lesson-page">
-
-
-        <!-- Top -->
-
-        <section class="lesson-top">
-
-            <div class="lesson-breadcrumb">
-
-                <button onclick="goLibrary()">
-                    مكتبتي
-                </button>
-
-                <span>
-                    /
-                </span>
-
-                <button onclick="goChapter()">
-                    الفصل الأول
-                </button>
-
-                <span>
-                    /
-                </span>
-
-                <span>
-                    الدرس
-                </span>
-
-            </div>
-
-
-            <div class="lesson-title-box">
-
-                <span class="lesson-number-label">
-                    الدرس <span id="lessonNumber">1</span>
-                </span>
-
-                <h1
-                    id="lessonTitle"
-                    class="lesson-title">
-
-                    الدرس الأول
-
-                </h1>
-
-                <p class="lesson-description">
-                    شاهد الدرس بتركيز، ثم قم بإتمامه
-                    لحفظ تقدمك.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- Video -->
-
-        <section class="video-card">
-
-            <div class="video-container">
-
-                <div class="video-placeholder">
-
-                    <div class="video-icon">
-                        ▶
-                    </div>
-
-                    <h2>
-                        الفيديو التعليمي
-                    </h2>
-
-                    <p>
-                        مكان الفيديو جاهز.
-                        سيتم ربط الفيديو الحقيقي
-                        في مرحلة لاحقة.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="video-status">
-                🎬 الفيديو التعليمي — قادمًا
-            </div>
-
-        </section>
-
-
-        <!-- Information -->
-
-        <section class="lesson-info-grid">
-
-
-            <div class="info-card">
-
-                <h2>
-                    📖 ماذا ستتعلم؟
-                </h2>
-
-                <p>
-                    ستتعرف على المفاهيم الأساسية
-                    للدرس وتتعلم طريقة التعامل
-                    مع التمارين المرتبطة به.
-                </p>
-
-            </div>
-
-
-            <div class="info-card">
-
-                <h2>
-                    🎯 هدف الدرس
-                </h2>
-
-                <p>
-                    بناء فهم واضح للمادة قبل
-                    الانتقال إلى الدروس التالية.
-                </p>
-
-            </div>
-
-
-        </section>
-
-
-        <!-- Complete -->
-
-        <section class="complete-card">
-
-            <div class="complete-status">
-
-                <div class="complete-icon">
-                    ✓
-                </div>
-
-                <div>
-
-                    <h2>
-                        إتمام الدرس
-                    </h2>
-
-                    <p id="completeDescription">
-                        بعد إنهاء الدرس اضغط
-                        على الزر لحفظ تقدمك.
-                    </p>
-
-                </div>
-
-            </div>
-
+        <div class="container header-inner">
 
             <button
-                id="completeButton"
-                class="btn btn-primary complete-button"
-                onclick="completeLesson()">
+                class="brand"
+                onclick="goHome()"
+                aria-label="EduNova AI">
 
-                إتمام الدرس
+                <span class="brand-icon">
+                    AI
+                </span>
+
+                <span>
+                    EduNova AI
+                </span>
 
             </button>
 
 
-            <div class="lesson-navigation">
+            <button
+                class="btn btn-secondary"
+                onclick="goChapter()"
+                data-i18n="chapter">
 
-                <button
-                    class="btn btn-secondary"
-                    onclick="goChapter()">
+                ← الفصل
 
-                    ← قائمة الدروس
-
-                </button>
-
-
-                <button
-                    class="btn btn-secondary"
-                    onclick="goLibrary()">
-
-                    📚 مكتبتي
-
-                </button>
-
-            </div>
-
-        </section>
-
-
-        <!-- Locked future lessons -->
-
-        <div class="locked-message">
-
-            🔒 الدروس التالية ستتوفر تدريجيًا
-            مع تطوير المنصة.
+            </button>
 
         </div>
 
-
-    </div>
-
-</main>
+    </header>
 
 
-<script>
+    <main class="page">
 
-    /* =========================
-       LESSON
-       ========================= */
-
-    const lessonNumber =
-        parseInt(
-            localStorage.getItem(
-                "selected_lesson_number"
-            ) || "1",
-            10
-        );
+        <div class="container lesson-page">
 
 
-    const lessonTitle =
-        "الدرس " + lessonNumber;
+            <!-- Top -->
+
+            <section class="lesson-top">
+
+                <div class="lesson-breadcrumb">
+
+                    <button
+                        onclick="goLibrary()"
+                        data-i18n="library">
+
+                        مكتبتي
+
+                    </button>
+
+                    <span>
+                        /
+                    </span>
+
+                    <button onclick="goChapter()">
+
+                        <span data-i18n="chapter">
+                            الفصل
+                        </span>
+
+                        <span id="chapterNumberLabel">
+                            الأول
+                        </span>
+
+                    </button>
+
+                    <span>
+                        /
+                    </span>
+
+                    <span data-i18n="lesson">
+                        الدرس
+                    </span>
+
+                </div>
 
 
-    document.getElementById(
-        "lessonNumber"
-    ).textContent =
-        lessonNumber;
+                <div class="lesson-title-box">
+
+                    <span class="lesson-number-label">
+
+                        <span data-i18n="lesson">
+                            الدرس
+                        </span>
+
+                        <span id="lessonNumber">
+                            1
+                        </span>
+
+                    </span>
 
 
-    document.getElementById(
-        "lessonTitle"
-    ).textContent =
-        lessonTitle;
+                    <h1
+                        id="lessonTitle"
+                        class="lesson-title">
+
+                        الدرس الأول
+
+                    </h1>
 
 
-    /* =========================
-       COMPLETION
-       ========================= */
+                    <p
+                        class="lesson-description"
+                        data-i18n="lesson_description">
 
-    function getCompletedLessons() {
+                        شاهد الدرس بتركيز، ثم قم بإتمامه لحفظ تقدمك.
 
-        try {
+                    </p>
 
-            const saved =
-                JSON.parse(
-                    localStorage.getItem(
-                        "completed_lessons_list"
-                    ) || "[]"
+                </div>
+
+            </section>
+
+
+            <!-- Video -->
+
+            <section class="video-card">
+
+                <div class="video-container">
+
+                    <div class="video-placeholder">
+
+                        <div class="video-icon">
+                            ▶
+                        </div>
+
+                        <h2 data-i18n="educational_video">
+                            الفيديو التعليمي
+                        </h2>
+
+                        <p data-i18n="video_coming_description">
+                            مكان الفيديو جاهز. سيتم ربط الفيديو الحقيقي في مرحلة لاحقة.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="video-status"
+                    data-i18n="video_coming">
+
+                    🎬 الفيديو التعليمي — قادمًا
+
+                </div>
+
+            </section>
+
+
+            <!-- Information -->
+
+            <section class="lesson-info-grid">
+
+
+                <div class="info-card">
+
+                    <h2 data-i18n="what_you_learn">
+                        📖 ماذا ستتعلم؟
+                    </h2>
+
+                    <p data-i18n="what_you_learn_text">
+                        ستتعرف على المفاهيم الأساسية للدرس وتتعلم طريقة التعامل مع التمارين المرتبطة به.
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <h2 data-i18n="lesson_goal">
+                        🎯 هدف الدرس
+                    </h2>
+
+                    <p data-i18n="lesson_goal_text">
+                        بناء فهم واضح للمادة قبل الانتقال إلى الدروس التالية.
+                    </p>
+
+                </div>
+
+
+            </section>
+
+
+            <!-- Complete -->
+
+            <section class="complete-card">
+
+                <div class="complete-status">
+
+                    <div class="complete-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <h2 data-i18n="complete_lesson">
+                            إتمام الدرس
+                        </h2>
+
+                        <p
+                            id="completeDescription"
+                            data-i18n="complete_description">
+
+                            بعد إنهاء الدرس اضغط على الزر لحفظ تقدمك.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    id="completeButton"
+                    class="btn btn-primary complete-button"
+                    onclick="completeCurrentLesson()"
+                    data-i18n="complete_lesson">
+
+                    إتمام الدرس
+
+                </button>
+
+
+                <div class="lesson-navigation">
+
+                    <button
+                        class="btn btn-secondary"
+                        onclick="goChapter()"
+                        data-i18n="lesson_list">
+
+                        ← قائمة الدروس
+
+                    </button>
+
+
+                    <button
+                        class="btn btn-secondary"
+                        onclick="goLibrary()"
+                        data-i18n="library">
+
+                        📚 مكتبتي
+
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- Future lessons -->
+
+            <div
+                class="locked-message"
+                data-i18n="future_lessons">
+
+                🔒 الدروس التالية ستتوفر تدريجيًا مع تطوير المنصة.
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+    <!-- Global system -->
+
+    <script src="script.js"></script>
+
+
+    <script>
+
+        /* =========================================
+           EduNova AI — Lesson translations
+           ========================================= */
+
+        const LESSON_TRANSLATIONS = {
+
+            ar: {
+
+                lesson: "الدرس",
+
+                chapter: "الفصل",
+
+                library: "مكتبتي",
+
+                lesson_description:
+                    "شاهد الدرس بتركيز، ثم قم بإتمامه لحفظ تقدمك.",
+
+                educational_video:
+                    "الفيديو التعليمي",
+
+                video_coming_description:
+                    "مكان الفيديو جاهز. سيتم ربط الفيديو الحقيقي في مرحلة لاحقة.",
+
+                video_coming:
+                    "🎬 الفيديو التعليمي — قادمًا",
+
+                what_you_learn:
+                    "📖 ماذا ستتعلم؟",
+
+                what_you_learn_text:
+                    "ستتعرف على المفاهيم الأساسية للدرس وتتعلم طريقة التعامل مع التمارين المرتبطة به.",
+
+                lesson_goal:
+                    "🎯 هدف الدرس",
+
+                lesson_goal_text:
+                    "بناء فهم واضح للمادة قبل الانتقال إلى الدروس التالية.",
+
+                complete_lesson:
+                    "إتمام الدرس",
+
+                complete_description:
+                    "بعد إنهاء الدرس اضغط على الزر لحفظ تقدمك.",
+
+                lesson_list:
+                    "← قائمة الدروس",
+
+                future_lessons:
+                    "🔒 الدروس التالية ستتوفر تدريجيًا مع تطوير المنصة.",
+
+                completed:
+                    "✓ تم إتمام الدرس",
+
+                progress_saved:
+                    "تم حفظ تقدمك بنجاح."
+
+            },
+
+
+            fr: {
+
+                lesson:
+                    "Leçon",
+
+                chapter:
+                    "Chapitre",
+
+                library:
+                    "Ma bibliothèque",
+
+                lesson_description:
+                    "Regardez la leçon attentivement, puis terminez-la pour enregistrer votre progression.",
+
+                educational_video:
+                    "Vidéo éducative",
+
+                video_coming_description:
+                    "L’espace vidéo est prêt. La vraie vidéo sera ajoutée à une étape ultérieure.",
+
+                video_coming:
+                    "🎬 Vidéo éducative — bientôt disponible",
+
+                what_you_learn:
+                    "📖 Que allez-vous apprendre ?",
+
+                what_you_learn_text:
+                    "Vous découvrirez les concepts essentiels de la leçon et apprendrez à résoudre les exercices associés.",
+
+                lesson_goal:
+                    "🎯 Objectif de la leçon",
+
+                lesson_goal_text:
+                    "Construire une compréhension claire de la matière avant de passer aux leçons suivantes.",
+
+                complete_lesson:
+                    "Terminer la leçon",
+
+                complete_description:
+                    "Après avoir terminé la leçon, appuyez sur le bouton pour enregistrer votre progression.",
+
+                lesson_list:
+                    "← Liste des leçons",
+
+                future_lessons:
+                    "🔒 Les prochaines leçons seront disponibles progressivement avec le développement de la plateforme.",
+
+                completed:
+                    "✓ Leçon terminée",
+
+                progress_saved:
+                    "Votre progression a été enregistrée."
+
+            }
+
+        };
+
+
+        function getLessonLanguage() {
+
+            if (
+                typeof getSiteLanguage ===
+                "function"
+            ) {
+
+                return getSiteLanguage();
+
+            }
+
+            return (
+                localStorage.getItem(
+                    "site_language"
+                ) || "ar"
+            );
+
+        }
+
+
+        function lessonText(key) {
+
+            const language =
+                getLessonLanguage();
+
+
+            return (
+                LESSON_TRANSLATIONS[language]?.[key] ||
+                LESSON_TRANSLATIONS.ar[key] ||
+                key
+            );
+
+        }
+
+
+        function getLessonOrdinal(number) {
+
+            const ar = [
+                "",
+                "الأول",
+                "الثاني",
+                "الثالث",
+                "الرابع",
+                "الخامس",
+                "السادس",
+                "السابع",
+                "الثامن",
+                "التاسع",
+                "العاشر",
+                "الحادي عشر",
+                "الثاني عشر",
+                "الثالث عشر",
+                "الرابع عشر",
+                "الخامس عشر",
+                "السادس عشر",
+                "السابع عشر",
+                "الثامن عشر",
+                "التاسع عشر",
+                "العشرون"
+            ];
+
+
+            if (
+                getLessonLanguage() ===
+                "fr"
+            ) {
+
+                return `n° ${number}`;
+
+            }
+
+
+            return (
+                ar[number] ||
+                String(number)
+            );
+
+        }
+
+
+        /* =========================================
+           Lesson data
+           ========================================= */
+
+        const lessonNumber =
+            parseInt(
+                localStorage.getItem(
+                    "selected_lesson_number"
+                ) || "1",
+                10
+            );
+
+
+        const selectedChapter =
+            parseInt(
+                localStorage.getItem(
+                    "selected_chapter"
+                ) || "1",
+                10
+            );
+
+
+        function updateLessonHeader() {
+
+            const numberElement =
+                document.getElementById(
+                    "lessonNumber"
                 );
 
 
-            return Array.isArray(saved)
-                ? saved
-                : [];
+            const titleElement =
+                document.getElementById(
+                    "lessonTitle"
+                );
 
-        } catch {
 
-            return [];
+            const chapterElement =
+                document.getElementById(
+                    "chapterNumberLabel"
+                );
+
+
+            if (numberElement) {
+
+                numberElement.textContent =
+                    lessonNumber;
+
+            }
+
+
+            if (titleElement) {
+
+                if (
+                    getLessonLanguage() ===
+                    "fr"
+                ) {
+
+                    titleElement.textContent =
+                        `${lessonText("lesson")} ${getLessonOrdinal(lessonNumber)}`;
+
+                } else {
+
+                    titleElement.textContent =
+                        `${lessonText("lesson")} ${getLessonOrdinal(lessonNumber)}`;
+
+                }
+
+            }
+
+
+            if (chapterElement) {
+
+                if (
+                    getLessonLanguage() ===
+                    "fr"
+                ) {
+
+                    chapterElement.textContent =
+                        selectedChapter;
+
+                } else {
+
+                    chapterElement.textContent =
+                        getLessonOrdinal(
+                            selectedChapter
+                        );
+
+                }
+
+            }
 
         }
 
-    }
+
+        /* =========================================
+           Completion
+           ========================================= */
+
+        function isCurrentLessonCompleted() {
+
+            if (
+                typeof isLessonCompleted ===
+                "function"
+            ) {
+
+                return isLessonCompleted(
+                    lessonNumber
+                );
+
+            }
 
 
-    function completeLesson() {
+            try {
 
-        let completed =
-            getCompletedLessons();
+                const saved =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "completed_lessons_list"
+                        ) || "[]"
+                    );
 
 
-        if (
-            !completed.includes(
-                lessonNumber
-            )
-        ) {
+                return (
+                    Array.isArray(saved) &&
+                    saved.includes(
+                        lessonNumber
+                    )
+                );
 
-            completed.push(
-                lessonNumber
+            } catch {
+
+                return false;
+
+            }
+
+        }
+
+
+        function updateCompletionUI() {
+
+            const button =
+                document.getElementById(
+                    "completeButton"
+                );
+
+
+            const description =
+                document.getElementById(
+                    "completeDescription"
+                );
+
+
+            if (!button || !description) {
+                return;
+            }
+
+
+            if (
+                isCurrentLessonCompleted()
+            ) {
+
+                button.classList.add(
+                    "done"
+                );
+
+
+                button.textContent =
+                    lessonText(
+                        "completed"
+                    );
+
+
+                description.textContent =
+                    lessonText(
+                        "progress_saved"
+                    );
+
+
+            } else {
+
+                button.classList.remove(
+                    "done"
+                );
+
+
+                button.textContent =
+                    lessonText(
+                        "complete_lesson"
+                    );
+
+
+                description.textContent =
+                    lessonText(
+                        "complete_description"
+                    );
+
+            }
+
+        }
+
+
+        function completeCurrentLesson() {
+
+            if (
+                typeof completeLesson ===
+                "function"
+            ) {
+
+                completeLesson(
+                    lessonNumber
+                );
+
+            } else {
+
+                try {
+
+                    let completed =
+                        JSON.parse(
+                            localStorage.getItem(
+                                "completed_lessons_list"
+                            ) || "[]"
+                        );
+
+
+                    if (
+                        !Array.isArray(
+                            completed
+                        )
+                    ) {
+
+                        completed = [];
+
+                    }
+
+
+                    if (
+                        !completed.includes(
+                            lessonNumber
+                        )
+                    ) {
+
+                        completed.push(
+                            lessonNumber
+                        );
+
+                    }
+
+
+                    localStorage.setItem(
+                        "completed_lessons_list",
+                        JSON.stringify(
+                            completed
+                        )
+                    );
+
+
+                    localStorage.setItem(
+                        "completed_lessons",
+                        completed.length
+                    );
+
+                } catch (error) {
+
+                    console.error(
+                        "Lesson completion error:",
+                        error
+                    );
+
+                }
+
+            }
+
+
+            updateCompletionUI();
+
+
+            setTimeout(
+                function() {
+
+                    goChapter();
+
+                },
+                700
             );
 
         }
 
 
-        localStorage.setItem(
-            "completed_lessons_list",
-            JSON.stringify(
-                completed
-            )
+        /* =========================================
+           Translation
+           ========================================= */
+
+        function translateLessonPage() {
+
+            const language =
+                getLessonLanguage();
+
+
+            document.documentElement.lang =
+                language;
+
+
+            document.documentElement.dir =
+                language === "fr"
+                    ? "ltr"
+                    : "rtl";
+
+
+            document.title =
+                language === "fr"
+                    ? "Leçon | EduNova AI"
+                    : "الدرس | EduNova AI";
+
+
+            document
+                .querySelectorAll(
+                    "[data-i18n]"
+                )
+                .forEach(
+                    function(element) {
+
+                        const key =
+                            element.getAttribute(
+                                "data-i18n"
+                            );
+
+
+                        const translated =
+                            lessonText(key);
+
+
+                        if (translated) {
+
+                            element.textContent =
+                                translated;
+
+                        }
+
+                    }
+                );
+
+
+            updateLessonHeader();
+
+            updateCompletionUI();
+
+        }
+
+
+        /* =========================================
+           Navigation
+           ========================================= */
+
+        function goChapter() {
+
+            if (
+                typeof goTo ===
+                "function"
+            ) {
+
+                goTo(
+                    "chapter.html"
+                );
+
+                return;
+
+            }
+
+
+            window.location.href =
+                "chapter.html";
+
+        }
+
+
+        function goLibrary() {
+
+            if (
+                typeof goTo ===
+                "function"
+            ) {
+
+                goTo(
+                    "library.html"
+                );
+
+                return;
+
+            }
+
+
+            window.location.href =
+                "library.html";
+
+        }
+
+
+        function goHome() {
+
+            if (
+                typeof goTo ===
+                "function"
+            ) {
+
+                goTo(
+                    "index.html"
+                );
+
+                return;
+
+            }
+
+
+            window.location.href =
+                "index.html";
+
+        }
+
+
+        /* =========================================
+           Global synchronization
+           ========================================= */
+
+        window.addEventListener(
+            "storage",
+            function(event) {
+
+                if (
+                    event.key ===
+                    "site_language"
+                ) {
+
+                    translateLessonPage();
+
+                }
+
+
+                if (
+                    event.key ===
+                    "site_theme"
+                ) {
+
+                    if (
+                        typeof applySiteTheme ===
+                        "function"
+                    ) {
+
+                        applySiteTheme(
+                            event.newValue ||
+                            "light"
+                        );
+
+                    }
+
+                }
+
+            }
         );
 
 
-        /*
-         * متوافق مع النظام القديم
-         * المستخدم في بعض الصفحات.
-         */
+        window.addEventListener(
+            "languageChanged",
+            function() {
 
-        localStorage.setItem(
-            "completed_lessons",
-            completed.length
+                translateLessonPage();
+
+            }
         );
 
 
-        const button =
-            document.getElementById(
-                "completeButton"
-            );
+        window.addEventListener(
+            "languagechange",
+            function() {
 
+                translateLessonPage();
 
-        button.classList.add(
-            "done"
+            }
         );
 
 
-        button.textContent =
-            "✓ تم إتمام الدرس";
+        /* =========================================
+           Start
+           ========================================= */
+
+        function startLessonPage() {
+
+            if (
+                typeof initializeGlobalSettings ===
+                "function"
+            ) {
+
+                initializeGlobalSettings();
+
+            }
 
 
-        document.getElementById(
-            "completeDescription"
-        ).textContent =
-            "تم حفظ تقدمك بنجاح.";
+            if (
+                typeof applySiteTheme ===
+                "function"
+            ) {
+
+                applySiteTheme(
+                    typeof getSiteTheme ===
+                    "function"
+                        ? getSiteTheme()
+                        : "light"
+                );
+
+            }
 
 
-        /*
-         * بعد لحظة نعيد الطالب
-         * إلى قائمة الدروس.
-         */
+            if (
+                typeof applySiteLanguage ===
+                "function"
+            ) {
 
-        setTimeout(
-            () => {
+                applySiteLanguage(
+                    getLessonLanguage()
+                );
 
-                window.location.href =
-                    "chapter.html";
-
-            },
-            700
-        );
-
-    }
+            }
 
 
-    /* =========================
-       NAVIGATION
-       ========================= */
+            translateLessonPage();
 
-    function goChapter() {
-
-        window.location.href =
-            "chapter.html";
-
-    }
+        }
 
 
-    function goLibrary() {
+        startLessonPage();
 
-        window.location.href =
-            "library.html";
+    </script>
 
-    }
+</body>
 
-
-    function goHome() {
-
-        window.location.href =
-            "index.html";
-
-    }
-
-</script>
-
-</body></html>
+    </html>
