@@ -8,6 +8,7 @@
     <title>اختيار المستوى | EduNova AI</title>
 
     <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
 
     <style>
         /* =========================
@@ -290,6 +291,147 @@
         }
 
         /* =========================
+           BAC BRANCHES
+           ========================= */
+
+        .bac-branches {
+            display: none;
+            margin-top: 18px;
+            gap: 15px;
+            animation: fadeIn .25s ease;
+        }
+
+        .bac-branches.visible {
+            display: grid;
+        }
+
+        .bac-branch {
+            position: relative;
+
+            width: 100%;
+            min-height: 120px;
+
+            padding: 18px;
+
+            display: flex;
+            align-items: center;
+            gap: 14px;
+
+            text-align: right;
+
+            background: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: var(--radius-lg);
+
+            cursor: pointer;
+
+            transition:
+                transform .2s ease,
+                border-color .2s ease,
+                box-shadow .2s ease,
+                background .2s ease;
+        }
+
+        .bac-branch:hover {
+            transform: translateY(-3px);
+            border-color: #93c5fd;
+            box-shadow: var(--shadow-md);
+        }
+
+        .bac-branch.selected {
+            border-color: var(--primary);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--surface),
+                    var(--primary-light)
+                );
+
+            box-shadow:
+                0 0 0 4px rgba(37, 99, 235, .08),
+                var(--shadow-md);
+        }
+
+        .bac-branch-icon {
+            width: 58px;
+            height: 58px;
+
+            flex-shrink: 0;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 17px;
+
+            background: var(--primary-light);
+
+            color: var(--primary);
+
+            font-size: 25px;
+            font-weight: 900;
+        }
+
+        .bac-branch.selected .bac-branch-icon {
+            background: var(--primary);
+            color: white;
+        }
+
+        .bac-branch-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .bac-branch-content h3 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 900;
+        }
+
+        .bac-branch-content p {
+            margin: 5px 0 0;
+            color: var(--text-soft);
+            font-size: 11px;
+            line-height: 1.7;
+        }
+
+        .bac-branch-check {
+            width: 28px;
+            height: 28px;
+
+            flex-shrink: 0;
+
+            display: grid;
+            place-items: center;
+
+            border: 2px solid #cbd5e1;
+            border-radius: 50%;
+
+            color: transparent;
+
+            font-size: 13px;
+            font-weight: 900;
+        }
+
+        .bac-branch.selected .bac-branch-check {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: white;
+        }
+
+        .bac-note {
+            display: none;
+            margin-top: 10px;
+            text-align: center;
+            color: var(--text-soft);
+            font-size: 11px;
+        }
+
+        .bac-note.visible {
+            display: block;
+        }
+
+        /* =========================
            ACTIONS
            ========================= */
 
@@ -392,6 +534,23 @@
                 top: 14px;
                 left: 14px;
             }
+
+            .bac-branches {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .bac-branch {
+                min-height: 150px;
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .bac-branch-check {
+                position: absolute;
+                top: 14px;
+                left: 14px;
+            }
         }
 
         /* =========================
@@ -451,6 +610,17 @@
 
             .level-option-content p {
                 font-size: 11px;
+            }
+
+            .bac-branch {
+                min-height: 105px;
+                padding: 14px;
+            }
+
+            .bac-branch-icon {
+                width: 50px;
+                height: 50px;
+                border-radius: 15px;
             }
         }
     </style>
@@ -527,7 +697,7 @@
             </h1>
 
             <p>
-                اختر مستواك الدراسي، وسنجهز لك
+                اختر شهادتك الدراسية، وسنجهز لك
                 الطريق المناسب لتعلم الرياضيات
                 داخل EduNova AI مع Afkrash AI.
             </p>
@@ -535,14 +705,14 @@
         </section>
 
 
-        <!-- Levels -->
+        <!-- Certificates -->
 
         <section
             class="level-options"
-            aria-label="المستويات الدراسية">
+            aria-label="الشهادات الدراسية">
 
 
-            <!-- Concours -->
+            <!-- 6AF / Concours -->
 
             <button
                 class="level-option"
@@ -561,12 +731,12 @@
                     </h2>
 
                     <p>
-                        التحضير للمسابقة والاختبارات
-                        مع دروس وتمارين مركزة.
+                        شهادة ختم الدروس الابتدائية
+                        والتحضير للمسابقة والاختبارات.
                     </p>
 
                     <span class="level-tag">
-                        مسابقة
+                        6AF
                     </span>
 
                 </div>
@@ -578,7 +748,7 @@
             </button>
 
 
-            <!-- Brevet -->
+            <!-- 4ème / Brevet -->
 
             <button
                 class="level-option"
@@ -597,12 +767,12 @@
                     </h2>
 
                     <p>
-                        دروس وتمارين تساعدك على بناء
-                        أساس قوي والاستعداد للشهادة.
+                        شهادة ختم الدروس الإعدادية
+                        والاستعداد للـ Brevet.
                     </p>
 
                     <span class="level-tag">
-                        شهادة ختم الدروس
+                        4ème année secondaire
                     </span>
 
                 </div>
@@ -614,7 +784,7 @@
             </button>
 
 
-            <!-- Bac -->
+            <!-- Baccalauréat -->
 
             <button
                 class="level-option"
@@ -633,12 +803,12 @@
                     </h2>
 
                     <p>
-                        دروس وتمارين ومراجعة منظمة
-                        للاستعداد للباكالوريا.
+                        اختر شعبة البكالوريا للوصول
+                        إلى برنامج الرياضيات الصحيح.
                     </p>
 
                     <span class="level-tag">
-                        باكالوريا
+                        Baccalauréat
                     </span>
 
                 </div>
@@ -649,8 +819,90 @@
 
             </button>
 
+        </section>
+
+
+        <!-- Bac Branches -->
+
+        <section
+            id="bacBranches"
+            class="bac-branches"
+            aria-label="شعبة البكالوريا">
+
+
+            <!-- Bac C -->
+
+            <button
+                class="bac-branch"
+                data-branch="C"
+                onclick="selectBacBranch('C', this)"
+                type="button">
+
+                <div class="bac-branch-icon">
+                    C
+                </div>
+
+                <div class="bac-branch-content">
+
+                    <h3>
+                        Bac C
+                    </h3>
+
+                    <p>
+                        الرياضيات الخاصة بشعبة
+                        البكالوريا C.
+                    </p>
+
+                </div>
+
+                <span class="bac-branch-check">
+                    ✓
+                </span>
+
+            </button>
+
+
+            <!-- Bac D -->
+
+            <button
+                class="bac-branch"
+                data-branch="D"
+                onclick="selectBacBranch('D', this)"
+                type="button">
+
+                <div class="bac-branch-icon">
+                    D
+                </div>
+
+                <div class="bac-branch-content">
+
+                    <h3>
+                        Bac D
+                    </h3>
+
+                    <p>
+                        الرياضيات الخاصة بشعبة
+                        البكالوريا D.
+                    </p>
+
+                </div>
+
+                <span class="bac-branch-check">
+                    ✓
+                </span>
+
+            </button>
 
         </section>
+
+
+        <div
+            id="bacNote"
+            class="bac-note">
+
+            اختر Bac C أو Bac D لأن لكل شعبة برنامج رياضيات مختلف.
+            
+        </div>
 
 
         <!-- Actions -->
@@ -703,7 +955,12 @@
 
 <script>
 
+    /* =========================
+       STATE
+       ========================= */
+
     let selectedLevel = null;
+    let selectedBacBranch = null;
 
 
     /* =========================
@@ -712,9 +969,9 @@
 
     const levelNames = {
 
-        concours: "كونكور",
+        concours: "كونكور — 6AF",
 
-        brevet: "بريڤي",
+        brevet: "بريڤي — 4ème",
 
         bac: "باكالوريا"
 
@@ -729,6 +986,22 @@
 
         selectedLevel = level;
 
+        /*
+         * إذا انتقل الطالب من الباك إلى مستوى آخر،
+         * نحذف اختيار C/D من الحالة الحالية.
+         */
+        if (level !== "bac") {
+
+            selectedBacBranch = null;
+
+            localStorage.removeItem("bac_branch");
+
+        }
+
+
+        /*
+         * إزالة التحديد من الشهادات
+         */
 
         document
             .querySelectorAll(".level-option")
@@ -742,22 +1015,190 @@
         element.classList.add("selected");
 
 
-        const button =
-            document.getElementById("continueButton");
+        /*
+         * Bac يحتاج خطوة إضافية
+         */
 
+        const bacBranches =
+            document.getElementById("bacBranches");
+
+        const bacNote =
+            document.getElementById("bacNote");
+
+
+        if (level === "bac") {
+
+            bacBranches.classList.add("visible");
+            bacNote.classList.add("visible");
+
+        } else {
+
+            bacBranches.classList.remove("visible");
+            bacNote.classList.remove("visible");
+
+        }
+
+
+        /*
+         * تحديث الزر
+         */
+
+        updateContinueButton();
+
+        updateCurrentLevelNote();
+
+    }
+
+
+    /* =========================
+       SELECT BAC BRANCH
+       ========================= */
+
+    function selectBacBranch(branch, element) {
+
+        selectedBacBranch = branch;
+
+
+        document
+            .querySelectorAll(".bac-branch")
+            .forEach(option => {
+
+                option.classList.remove("selected");
+
+            });
+
+
+        element.classList.add("selected");
+
+
+        localStorage.setItem(
+            "bac_branch",
+            branch
+        );
+
+
+        updateContinueButton();
+
+        updateCurrentLevelNote();
+
+    }
+
+
+    /* =========================
+       UPDATE CONTINUE BUTTON
+       ========================= */
+
+    function updateContinueButton() {
+
+        const button =
+            document.getElementById(
+                "continueButton"
+            );
+
+
+        /*
+         * لا يوجد مستوى
+         */
+
+        if (!selectedLevel) {
+
+            button.disabled = true;
+
+            button.textContent =
+                "اختر مستواك للمتابعة";
+
+            return;
+
+        }
+
+
+        /*
+         * Bac بدون C/D
+         */
+
+        if (
+            selectedLevel === "bac" &&
+            !selectedBacBranch
+        ) {
+
+            button.disabled = true;
+
+            button.textContent =
+                "اختر Bac C أو Bac D";
+
+            return;
+
+        }
+
+
+        /*
+         * المستوى جاهز
+         */
 
         button.disabled = false;
 
-        button.textContent =
-            "متابعة مع " +
-            levelNames[level];
+
+        if (selectedLevel === "bac") {
+
+            button.textContent =
+                "متابعة مع Bac " +
+                selectedBacBranch;
+
+        } else {
+
+            button.textContent =
+                "متابعة مع " +
+                levelNames[selectedLevel];
+
+        }
+
+    }
 
 
-        document.getElementById(
-            "currentLevelNote"
-        ).textContent =
+    /* =========================
+       CURRENT LEVEL NOTE
+       ========================= */
+
+    function updateCurrentLevelNote() {
+
+        const note =
+            document.getElementById(
+                "currentLevelNote"
+            );
+
+
+        if (!selectedLevel) {
+
+            note.textContent = "";
+
+            return;
+
+        }
+
+
+        if (selectedLevel === "bac") {
+
+            if (!selectedBacBranch) {
+
+                note.textContent =
+                    "المستوى المحدد: باكالوريا — اختر الشعبة";
+
+            } else {
+
+                note.textContent =
+                    "المستوى المحدد: باكالوريا " +
+                    selectedBacBranch;
+
+            }
+
+            return;
+
+        }
+
+
+        note.textContent =
             "المستوى المحدد: " +
-            levelNames[level];
+            levelNames[selectedLevel];
 
     }
 
@@ -773,11 +1214,53 @@
         }
 
 
+        /*
+         * Bac يجب أن يحتوي على شعبة
+         */
+
+        if (
+            selectedLevel === "bac" &&
+            !selectedBacBranch
+        ) {
+
+            return;
+
+        }
+
+
+        /*
+         * حفظ الشهادة
+         */
+
         localStorage.setItem(
             "student_level",
             selectedLevel
         );
 
+
+        /*
+         * حفظ الشعبة فقط للباكالوريا
+         */
+
+        if (selectedLevel === "bac") {
+
+            localStorage.setItem(
+                "bac_branch",
+                selectedBacBranch
+            );
+
+        } else {
+
+            localStorage.removeItem(
+                "bac_branch"
+            );
+
+        }
+
+
+        /*
+         * الانتقال إلى المواد
+         */
 
         window.location.href =
             "library.html";
@@ -818,6 +1301,43 @@
             option
         );
 
+
+        /*
+         * استرجاع شعبة الباك
+         */
+
+        if (saved === "bac") {
+
+            const savedBranch =
+                localStorage.getItem(
+                    "bac_branch"
+                );
+
+
+            if (
+                savedBranch === "C" ||
+                savedBranch === "D"
+            ) {
+
+                const branchElement =
+                    document.querySelector(
+                        `[data-branch="${savedBranch}"]`
+                    );
+
+
+                if (branchElement) {
+
+                    selectBacBranch(
+                        savedBranch,
+                        branchElement
+                    );
+
+                }
+
+            }
+
+        }
+
     }
 
 
@@ -827,6 +1347,15 @@
 
     function goDashboard() {
 
+        if (typeof goTo === "function") {
+
+            goTo("dashboard.html");
+
+            return;
+
+        }
+
+
         window.location.href =
             "dashboard.html";
 
@@ -835,6 +1364,15 @@
 
     function goHome() {
 
+        if (typeof goTo === "function") {
+
+            goTo("index.html");
+
+            return;
+
+        }
+
+
         window.location.href =
             "index.html";
 
@@ -842,12 +1380,29 @@
 
 
     /* =========================
-       START
+       GLOBAL LANGUAGE / THEME
        ========================= */
 
-    loadSavedLevel();
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+
+            if (
+                typeof initializeGlobalSettings ===
+                "function"
+            ) {
+
+                initializeGlobalSettings();
+
+            }
+
+            loadSavedLevel();
+
+        }
+    );
 
 </script>
 
 </body>
-                </html>
+
+    </html>
