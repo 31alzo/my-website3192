@@ -4,212 +4,215 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>تسجيل الدخول | عالم شيخ الأساتذة</title>
+  <title>تسجيل الدخول | EduNova AI</title>
+
+  <link rel="stylesheet" href="style.css">
 
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: Arial, Tahoma, sans-serif;
-      background: linear-gradient(135deg, #eef6ff, #ffffff);
-      color: #123;
+    .auth-page {
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      padding: 24px 16px;
     }
 
-    .container {
+    .auth-container {
       width: 100%;
       max-width: 430px;
     }
 
-    .logo {
+    .auth-logo {
       text-align: center;
-      margin-bottom: 25px;
+      margin-bottom: 24px;
     }
 
-    .logo-icon {
+    .auth-logo-icon {
       width: 70px;
       height: 70px;
-      margin: auto;
-      background: #1677ff;
-      color: white;
+      margin: 0 auto;
       border-radius: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 32px;
-      font-weight: bold;
-      box-shadow: 0 10px 25px rgba(22,119,255,.25);
+      background: var(--primary);
+      color: #fff;
+      font-size: 28px;
+      font-weight: 800;
+      box-shadow: var(--shadow-lg);
     }
 
-    .logo h1 {
+    .auth-logo h1 {
       margin-top: 12px;
+      color: var(--text);
       font-size: 25px;
-      color: #0757c9;
+      font-weight: 800;
     }
 
-    .logo p {
+    .auth-logo p {
       margin-top: 6px;
-      color: #667085;
+      color: var(--text-muted);
       font-size: 14px;
     }
 
-    .card {
-      background: white;
-      border-radius: 24px;
-      padding: 25px;
-      box-shadow: 0 15px 45px rgba(0, 70, 160, .12);
-      border: 1px solid #e7effa;
+    .auth-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      box-shadow: var(--shadow-lg);
     }
 
-    .tabs {
+    .auth-tabs {
       display: flex;
-      background: #f1f6fd;
+      gap: 5px;
+      background: var(--surface-alt);
       padding: 5px;
-      border-radius: 14px;
-      margin-bottom: 25px;
+      border-radius: var(--radius-md);
+      margin-bottom: 24px;
     }
 
-    .tab {
+    .auth-tab {
       flex: 1;
-      border: none;
+      border: 0;
       background: transparent;
+      color: var(--text-muted);
       padding: 12px;
-      border-radius: 10px;
+      border-radius: var(--radius-sm);
       font-size: 15px;
+      font-weight: 700;
       cursor: pointer;
-      color: #667085;
-      font-weight: bold;
+      transition: var(--transition-fast);
     }
 
-    .tab.active {
-      background: white;
-      color: #1268dc;
-      box-shadow: 0 3px 10px rgba(0,0,0,.06);
+    .auth-tab.active {
+      background: var(--surface);
+      color: var(--primary);
+      box-shadow: var(--shadow-sm);
     }
 
-    .form-title {
+    .auth-form-title {
+      color: var(--text);
       font-size: 22px;
       margin-bottom: 8px;
-      color: #14213d;
     }
 
-    .form-description {
-      color: #667085;
+    .auth-form-description {
+      color: var(--text-muted);
       font-size: 14px;
+      line-height: 1.7;
       margin-bottom: 22px;
-      line-height: 1.6;
     }
 
-    .field {
+    .auth-field {
       margin-bottom: 16px;
     }
 
-    label {
+    .auth-field label {
       display: block;
       margin-bottom: 7px;
+      color: var(--text);
       font-size: 14px;
-      font-weight: bold;
-      color: #344054;
+      font-weight: 700;
     }
 
-    input {
+    .auth-field input {
       width: 100%;
       padding: 14px;
-      border: 1px solid #d0d5dd;
-      border-radius: 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      color: var(--text);
       font-size: 15px;
       outline: none;
-      transition: .2s;
-      background: white;
+      transition: var(--transition-fast);
     }
 
-    input:focus {
-      border-color: #1677ff;
-      box-shadow: 0 0 0 3px rgba(22,119,255,.1);
+    .auth-field input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-soft);
     }
 
-    .main-btn {
+    .auth-main-btn {
       width: 100%;
-      border: none;
-      background: #1677ff;
-      color: white;
+      border: 0;
+      background: var(--primary);
+      color: #fff;
       padding: 15px;
-      border-radius: 13px;
+      border-radius: var(--radius-md);
       font-size: 16px;
-      font-weight: bold;
+      font-weight: 800;
       cursor: pointer;
       margin-top: 5px;
-      transition: .2s;
+      transition: var(--transition-fast);
     }
 
-    .main-btn:hover {
-      background: #075dcc;
+    .auth-main-btn:hover {
+      filter: brightness(.94);
     }
 
-    .main-btn:disabled {
+    .auth-main-btn:disabled {
       opacity: .6;
       cursor: not-allowed;
     }
 
-    .message {
+    .auth-message {
       display: none;
       padding: 12px;
-      border-radius: 12px;
+      border-radius: var(--radius-md);
       margin-bottom: 16px;
       font-size: 14px;
-      line-height: 1.6;
+      line-height: 1.7;
     }
 
-    .message.success {
+    .auth-message.success {
       display: block;
-      background: #ecfdf3;
-      color: #067647;
-      border: 1px solid #abefc6;
+      background: var(--success-soft);
+      color: var(--success);
+      border: 1px solid var(--success);
     }
 
-    .message.error {
+    .auth-message.error {
       display: block;
-      background: #fef3f2;
-      color: #b42318;
-      border: 1px solid #fecdca;
+      background: var(--danger-soft);
+      color: var(--danger);
+      border: 1px solid var(--danger);
     }
 
-    .back {
+    .auth-back {
       text-align: center;
       margin-top: 18px;
     }
 
-    .back a {
-      color: #1677ff;
-      text-decoration: none;
+    .auth-back button {
+      border: 0;
+      background: transparent;
+      color: var(--primary);
       font-size: 14px;
+      cursor: pointer;
     }
 
-    .footer {
+    .auth-footer {
       text-align: center;
-      color: #98a2b3;
+      color: var(--text-muted);
       font-size: 12px;
       margin-top: 20px;
     }
 
+    html.dark-mode .auth-logo-icon {
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
+    }
+
     @media (max-width: 480px) {
-      body {
-        padding: 15px;
+      .auth-page {
+        padding: 16px 12px;
       }
 
-      .card {
+      .auth-card {
         padding: 20px;
       }
 
-      .logo h1 {
+      .auth-logo h1 {
         font-size: 22px;
       }
     }
@@ -218,135 +221,295 @@
 
 <body>
 
-  <div class="container">
+  <main class="auth-page">
 
-    <div class="logo">
-      <div class="logo-icon">AI</div>
-      <h1>عالم شيخ الأساتذة</h1>
-      <p>الأستاذ AI — طريقك نحو تعلم أفضل</p>
-    </div>
+    <div class="auth-container">
 
-    <div class="card">
+      <!-- LOGO -->
 
-      <div class="tabs">
-        <button class="tab active" id="loginTab" onclick="showLogin()">
-          تسجيل الدخول
-        </button>
+      <div class="auth-logo">
 
-        <button class="tab" id="registerTab" onclick="showRegister()">
-          إنشاء حساب
-        </button>
-      </div>
+        <div class="auth-logo-icon">
+          AI
+        </div>
 
-      <div id="message" class="message"></div>
+        <h1 data-i18n="site_name">
+          EduNova AI
+        </h1>
 
-      <!-- LOGIN -->
-
-      <div id="loginForm">
-
-        <h2 class="form-title">مرحبًا بعودتك 👋</h2>
-
-        <p class="form-description">
-          سجل الدخول للانتقال إلى لوحة الطالب ومتابعة تعلمك.
+        <p data-i18n="teacher_description">
+          الأستاذ AI — طريقك نحو تعلم أفضل
         </p>
 
-        <div class="field">
-          <label for="loginEmail">البريد الإلكتروني</label>
-          <input
-            type="email"
-            id="loginEmail"
-            placeholder="example@email.com"
-            autocomplete="email"
+      </div>
+
+
+      <!-- CARD -->
+
+      <div class="auth-card">
+
+        <!-- TABS -->
+
+        <div class="auth-tabs">
+
+          <button
+            type="button"
+            class="auth-tab active"
+            id="loginTab"
+            onclick="showLogin()"
+            data-i18n="login"
           >
+            تسجيل الدخول
+          </button>
+
+          <button
+            type="button"
+            class="auth-tab"
+            id="registerTab"
+            onclick="showRegister()"
+            data-i18n="register"
+          >
+            إنشاء حساب
+          </button>
+
         </div>
 
-        <div class="field">
-          <label for="loginPassword">كلمة المرور</label>
-          <input
-            type="password"
-            id="loginPassword"
-            placeholder="أدخل كلمة المرور"
-            autocomplete="current-password"
+
+        <!-- MESSAGE -->
+
+        <div
+          id="message"
+          class="auth-message"
+          role="alert"
+          aria-live="polite"
+        ></div>
+
+
+        <!-- LOGIN -->
+
+        <div id="loginForm">
+
+          <h2
+            class="auth-form-title"
+            data-i18n="welcome_back"
           >
+            مرحبًا بعودتك 👋
+          </h2>
+
+          <p
+            class="auth-form-description"
+            data-i18n="login_description"
+          >
+            سجل الدخول للانتقال إلى لوحة الطالب ومتابعة تعلمك.
+          </p>
+
+
+          <div class="auth-field">
+
+            <label
+              for="loginEmail"
+              data-i18n="email"
+            >
+              البريد الإلكتروني
+            </label>
+
+            <input
+              type="email"
+              id="loginEmail"
+              placeholder="example@email.com"
+              data-i18n-placeholder="email_placeholder"
+              autocomplete="email"
+            >
+
+          </div>
+
+
+          <div class="auth-field">
+
+            <label
+              for="loginPassword"
+              data-i18n="password"
+            >
+              كلمة المرور
+            </label>
+
+            <input
+              type="password"
+              id="loginPassword"
+              placeholder="أدخل كلمة المرور"
+              data-i18n-placeholder="password_placeholder"
+              autocomplete="current-password"
+            >
+
+          </div>
+
+
+          <button
+            type="button"
+            class="auth-main-btn"
+            id="loginButton"
+            onclick="login()"
+            data-i18n="login"
+          >
+            تسجيل الدخول
+          </button>
+
         </div>
 
-        <button class="main-btn" id="loginButton" onclick="login()">
-          تسجيل الدخول
-        </button>
+
+        <!-- REGISTER -->
+
+        <div
+          id="registerForm"
+          style="display:none;"
+        >
+
+          <h2
+            class="auth-form-title"
+            data-i18n="create_account"
+          >
+            إنشاء حساب جديد 🎓
+          </h2>
+
+          <p
+            class="auth-form-description"
+            data-i18n="register_description"
+          >
+            أنشئ حسابك وابدأ رحلتك التعليمية مع الأستاذ AI.
+          </p>
+
+
+          <div class="auth-field">
+
+            <label
+              for="registerName"
+              data-i18n="name"
+            >
+              الاسم
+            </label>
+
+            <input
+              type="text"
+              id="registerName"
+              placeholder="اكتب اسمك"
+              data-i18n-placeholder="name_placeholder"
+              autocomplete="name"
+            >
+
+          </div>
+
+
+          <div class="auth-field">
+
+            <label
+              for="registerEmail"
+              data-i18n="email"
+            >
+              البريد الإلكتروني
+            </label>
+
+            <input
+              type="email"
+              id="registerEmail"
+              placeholder="example@email.com"
+              data-i18n-placeholder="email_placeholder"
+              autocomplete="email"
+            >
+
+          </div>
+
+
+          <div class="auth-field">
+
+            <label
+              for="registerPassword"
+              data-i18n="password"
+            >
+              كلمة المرور
+            </label>
+
+            <input
+              type="password"
+              id="registerPassword"
+              placeholder="6 أحرف على الأقل"
+              data-i18n-placeholder="password_min"
+              autocomplete="new-password"
+            >
+
+          </div>
+
+
+          <button
+            type="button"
+            class="auth-main-btn"
+            id="registerButton"
+            onclick="register()"
+            data-i18n="register"
+          >
+            إنشاء الحساب
+          </button>
+
+        </div>
+
+
+        <!-- BACK -->
+
+        <div class="auth-back">
+
+          <button
+            type="button"
+            onclick="goHome()"
+            data-i18n="back_home"
+          >
+            ← العودة إلى الصفحة الرئيسية
+          </button>
+
+        </div>
 
       </div>
 
 
-      <!-- REGISTER -->
+      <!-- FOOTER -->
 
-      <div id="registerForm" style="display:none;">
+      <div class="auth-footer">
 
-        <h2 class="form-title">إنشاء حساب جديد 🎓</h2>
+        © <span id="currentYear">2026</span>
+        <span data-i18n="site_name">EduNova AI</span>
+        —
+        <span data-i18n="ai_teacher">الأستاذ AI</span>
 
-        <p class="form-description">
-          أنشئ حسابك وابدأ رحلتك التعليمية مع الأستاذ AI.
-        </p>
-
-        <div class="field">
-          <label for="registerName">الاسم</label>
-          <input
-            type="text"
-            id="registerName"
-            placeholder="اكتب اسمك"
-            autocomplete="name"
-          >
-        </div>
-
-        <div class="field">
-          <label for="registerEmail">البريد الإلكتروني</label>
-          <input
-            type="email"
-            id="registerEmail"
-            placeholder="example@email.com"
-            autocomplete="email"
-          >
-        </div>
-
-        <div class="field">
-          <label for="registerPassword">كلمة المرور</label>
-          <input
-            type="password"
-            id="registerPassword"
-            placeholder="6 أحرف على الأقل"
-            autocomplete="new-password"
-          >
-        </div>
-
-        <button class="main-btn" id="registerButton" onclick="register()">
-          إنشاء الحساب
-        </button>
-
-      </div>
-
-      <div class="back">
-        <a href="index.html">← العودة إلى الصفحة الرئيسية</a>
       </div>
 
     </div>
 
-    <div class="footer">
-      © 2026 عالم شيخ الأساتذة — الأستاذ AI
-    </div>
+  </main>
 
-  </div>
+
+  <!-- GLOBAL SCRIPT -->
+
+  <script src="script.js"></script>
 
 
   <!-- SUPABASE -->
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+
   <script>
+
+    /* =========================================================
+       LOGIN PAGE
+       EduNova AI
+       Arabic / French • Global Theme • Supabase
+       ========================================================= */
+
 
     const SUPABASE_URL =
       "https://qkzdlxqledsznhbifaxy.supabase.co";
 
     const SUPABASE_KEY =
       "sb_publishable_ZdpHXwLlhpbXztsTXpAFTg_TgOji91v";
+
 
     const supabaseClient =
       supabase.createClient(
@@ -355,39 +518,298 @@
       );
 
 
-    // تغيير بين تسجيل الدخول وإنشاء الحساب
+    /* =========================================================
+       TRANSLATIONS
+       ========================================================= */
+
+    const LOGIN_TRANSLATIONS = {
+
+      ar: {
+
+        register: "إنشاء حساب",
+        welcome_back: "مرحبًا بعودتك 👋",
+        login_description:
+          "سجل الدخول للانتقال إلى لوحة الطالب ومتابعة تعلمك.",
+
+        create_account:
+          "إنشاء حساب جديد 🎓",
+
+        register_description:
+          "أنشئ حسابك وابدأ رحلتك التعليمية مع الأستاذ AI.",
+
+        email:
+          "البريد الإلكتروني",
+
+        password:
+          "كلمة المرور",
+
+        name:
+          "الاسم",
+
+        email_placeholder:
+          "example@email.com",
+
+        password_placeholder:
+          "أدخل كلمة المرور",
+
+        password_min:
+          "6 أحرف على الأقل",
+
+        name_placeholder:
+          "اكتب اسمك",
+
+        back_home:
+          "← العودة إلى الصفحة الرئيسية",
+
+        login_loading:
+          "جاري تسجيل الدخول...",
+
+        register_loading:
+          "جاري إنشاء الحساب...",
+
+        login_success:
+          "تم تسجيل الدخول بنجاح. جاري فتح لوحة الطالب...",
+
+        session_error:
+          "تم تسجيل الدخول، لكن لم يتم إنشاء جلسة.",
+
+        fill_all:
+          "الرجاء ملء جميع البيانات.",
+
+        password_short:
+          "كلمة المرور يجب أن تحتوي على 6 أحرف على الأقل.",
+
+        register_success:
+          "تم إنشاء الحساب بنجاح. تحقق من بريدك الإلكتروني لتأكيد الحساب، ثم سجل الدخول.",
+
+        unknown_error:
+          "حدث خطأ غير معروف.",
+
+        invalid_credentials:
+          "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
+
+        email_not_confirmed:
+          "يجب تأكيد البريد الإلكتروني أولًا.",
+
+        already_registered:
+          "هذا البريد الإلكتروني مسجل بالفعل.",
+
+        password_too_short:
+          "كلمة المرور قصيرة جدًا.",
+
+        invalid_email:
+          "البريد الإلكتروني غير صالح.",
+
+        generic_error:
+          "حدث خطأ. حاول مرة أخرى."
+
+      },
+
+
+      fr: {
+
+        register: "Créer un compte",
+        welcome_back: "Bon retour 👋",
+        login_description:
+          "Connectez-vous pour accéder à votre tableau de bord et continuer votre apprentissage.",
+
+        create_account:
+          "Créer un nouveau compte 🎓",
+
+        register_description:
+          "Créez votre compte et commencez votre parcours éducatif avec le professeur AI.",
+
+        email:
+          "Adresse e-mail",
+
+        password:
+          "Mot de passe",
+
+        name:
+          "Nom",
+
+        email_placeholder:
+          "example@email.com",
+
+        password_placeholder:
+          "Entrez votre mot de passe",
+
+        password_min:
+          "6 caractères minimum",
+
+        name_placeholder:
+          "Entrez votre nom",
+
+        back_home:
+          "→ Retour à l'accueil",
+
+        login_loading:
+          "Connexion en cours...",
+
+        register_loading:
+          "Création du compte...",
+
+        login_success:
+          "Connexion réussie. Ouverture du tableau de bord...",
+
+        session_error:
+          "Connexion réussie, mais aucune session n'a été créée.",
+
+        fill_all:
+          "Veuillez remplir tous les champs.",
+
+        password_short:
+          "Le mot de passe doit contenir au moins 6 caractères.",
+
+        register_success:
+          "Compte créé avec succès. Vérifiez votre e-mail pour confirmer votre compte, puis connectez-vous.",
+
+        unknown_error:
+          "Une erreur inconnue s'est produite.",
+
+        invalid_credentials:
+          "L'adresse e-mail ou le mot de passe est incorrect.",
+
+        email_not_confirmed:
+          "Vous devez d'abord confirmer votre adresse e-mail.",
+
+        already_registered:
+          "Cette adresse e-mail est déjà enregistrée.",
+
+        password_too_short:
+          "Le mot de passe est trop court.",
+
+        invalid_email:
+          "L'adresse e-mail n'est pas valide.",
+
+        generic_error:
+          "Une erreur s'est produite. Veuillez réessayer."
+
+      }
+
+    };
+
+
+    /* =========================================================
+       LANGUAGE
+       ========================================================= */
+
+    function getLoginLanguage() {
+
+      if (
+        typeof getSiteLanguage === "function"
+      ) {
+        return getSiteLanguage();
+      }
+
+      return localStorage.getItem("site_language") || "ar";
+    }
+
+
+    function loginText(key) {
+
+      const language =
+        getLoginLanguage();
+
+      return (
+        LOGIN_TRANSLATIONS[language]?.[key] ||
+        LOGIN_TRANSLATIONS.ar[key] ||
+        key
+      );
+
+    }
+
+
+    function translateLoginPage() {
+
+      const language =
+        getLoginLanguage();
+
+
+      if (
+        typeof applySiteLanguage === "function"
+      ) {
+        applySiteLanguage(language);
+      }
+
+
+      document.documentElement.lang =
+        language;
+
+      document.documentElement.dir =
+        language === "fr" ? "ltr" : "rtl";
+
+
+      document.title =
+        language === "fr"
+          ? "Connexion | EduNova AI"
+          : "تسجيل الدخول | EduNova AI";
+
+    }
+
+
+    /* =========================================================
+       TABS
+       ========================================================= */
 
     function showLogin() {
 
-      document.getElementById("loginForm").style.display = "block";
-      document.getElementById("registerForm").style.display = "none";
+      document.getElementById("loginForm")
+        .style.display = "block";
 
-      document.getElementById("loginTab").classList.add("active");
-      document.getElementById("registerTab").classList.remove("active");
+      document.getElementById("registerForm")
+        .style.display = "none";
+
+
+      document.getElementById("loginTab")
+        .classList.add("active");
+
+      document.getElementById("registerTab")
+        .classList.remove("active");
+
 
       clearMessage();
+
     }
 
 
     function showRegister() {
 
-      document.getElementById("loginForm").style.display = "none";
-      document.getElementById("registerForm").style.display = "block";
+      document.getElementById("loginForm")
+        .style.display = "none";
 
-      document.getElementById("loginTab").classList.remove("active");
-      document.getElementById("registerTab").classList.add("active");
+      document.getElementById("registerForm")
+        .style.display = "block";
+
+
+      document.getElementById("loginTab")
+        .classList.remove("active");
+
+      document.getElementById("registerTab")
+        .classList.add("active");
+
 
       clearMessage();
+
     }
 
+
+    /* =========================================================
+       MESSAGES
+       ========================================================= */
 
     function showMessage(text, type) {
 
       const message =
         document.getElementById("message");
 
-      message.textContent = text;
-      message.className = "message " + type;
+
+      message.textContent =
+        text;
+
+      message.className =
+        "auth-message " + type;
+
     }
 
 
@@ -396,20 +818,32 @@
       const message =
         document.getElementById("message");
 
-      message.textContent = "";
-      message.className = "message";
+
+      message.textContent =
+        "";
+
+      message.className =
+        "auth-message";
+
     }
 
 
-    // تسجيل الدخول
+    /* =========================================================
+       LOGIN
+       ========================================================= */
 
     async function login() {
 
       const email =
-        document.getElementById("loginEmail").value.trim();
+        document.getElementById("loginEmail")
+          .value
+          .trim();
+
 
       const password =
-        document.getElementById("loginPassword").value;
+        document.getElementById("loginPassword")
+          .value;
+
 
       const button =
         document.getElementById("loginButton");
@@ -418,7 +852,7 @@
       if (!email || !password) {
 
         showMessage(
-          "الرجاء إدخال البريد الإلكتروني وكلمة المرور.",
+          loginText("fill_all"),
           "error"
         );
 
@@ -427,14 +861,19 @@
 
 
       button.disabled = true;
-      button.textContent = "جاري تسجيل الدخول...";
+
+      button.textContent =
+        loginText("login_loading");
 
 
       const { data, error } =
-        await supabaseClient.auth.signInWithPassword({
-          email: email,
-          password: password
-        });
+        await supabaseClient.auth
+          .signInWithPassword({
+
+            email: email,
+            password: password
+
+          });
 
 
       if (error) {
@@ -444,8 +883,12 @@
           "error"
         );
 
+
         button.disabled = false;
-        button.textContent = "تسجيل الدخول";
+
+        button.textContent =
+          loginText("login");
+
 
         return;
       }
@@ -454,38 +897,58 @@
       if (data.session) {
 
         showMessage(
-          "تم تسجيل الدخول بنجاح. جاري فتح لوحة الطالب...",
+          loginText("login_success"),
           "success"
         );
 
-        // الانتقال إلى لوحة الطالب
-        window.location.href = "dashboard.html";
+
+        setTimeout(() => {
+
+          window.location.href =
+            "dashboard.html";
+
+        }, 500);
+
 
       } else {
 
         showMessage(
-          "تم تسجيل الدخول، لكن لم يتم إنشاء جلسة.",
+          loginText("session_error"),
           "error"
         );
 
+
         button.disabled = false;
-        button.textContent = "تسجيل الدخول";
+
+        button.textContent =
+          loginText("login");
+
       }
+
     }
 
 
-    // إنشاء حساب
+    /* =========================================================
+       REGISTER
+       ========================================================= */
 
     async function register() {
 
       const name =
-        document.getElementById("registerName").value.trim();
+        document.getElementById("registerName")
+          .value
+          .trim();
+
 
       const email =
-        document.getElementById("registerEmail").value.trim();
+        document.getElementById("registerEmail")
+          .value
+          .trim();
+
 
       const password =
-        document.getElementById("registerPassword").value;
+        document.getElementById("registerPassword")
+          .value;
 
 
       const button =
@@ -495,7 +958,7 @@
       if (!name || !email || !password) {
 
         showMessage(
-          "الرجاء ملء جميع البيانات.",
+          loginText("fill_all"),
           "error"
         );
 
@@ -506,7 +969,7 @@
       if (password.length < 6) {
 
         showMessage(
-          "كلمة المرور يجب أن تحتوي على 6 أحرف على الأقل.",
+          loginText("password_short"),
           "error"
         );
 
@@ -515,7 +978,9 @@
 
 
       button.disabled = true;
-      button.textContent = "جاري إنشاء الحساب...";
+
+      button.textContent =
+        loginText("register_loading");
 
 
       const { data, error } =
@@ -528,7 +993,9 @@
           options: {
 
             data: {
+
               full_name: name
+
             }
 
           }
@@ -543,104 +1010,298 @@
           "error"
         );
 
+
         button.disabled = false;
-        button.textContent = "إنشاء الحساب";
+
+        button.textContent =
+          loginText("register");
+
 
         return;
       }
 
-
-      /*
-        إذا كان تأكيد البريد الإلكتروني مفعلاً
-        فسيطلب Supabase من الطالب تأكيد بريده.
-      */
 
       if (!data.session) {
 
         showMessage(
-          "تم إنشاء الحساب بنجاح. تحقق من بريدك الإلكتروني لتأكيد الحساب، ثم سجل الدخول.",
+          loginText("register_success"),
           "success"
         );
 
+
         button.disabled = false;
-        button.textContent = "إنشاء الحساب";
+
+        button.textContent =
+          loginText("register");
+
 
         return;
       }
 
 
-      // إذا كان الدخول تلقائيًا بعد التسجيل
-      window.location.href = "dashboard.html";
+      window.location.href =
+        "dashboard.html";
+
     }
 
 
-    // ترجمة أخطاء Supabase إلى العربية
+    /* =========================================================
+       SUPABASE ERROR TRANSLATION
+       ========================================================= */
 
     function translateError(message) {
 
       if (!message) {
-        return "حدث خطأ غير معروف.";
+
+        return loginText("unknown_error");
+
       }
 
 
       if (
-        message.includes("Invalid login credentials")
+        message.includes(
+          "Invalid login credentials"
+        )
       ) {
-        return "البريد الإلكتروني أو كلمة المرور غير صحيحة.";
+
+        return loginText(
+          "invalid_credentials"
+        );
+
       }
 
 
       if (
-        message.includes("Email not confirmed")
+        message.includes(
+          "Email not confirmed"
+        )
       ) {
-        return "يجب تأكيد البريد الإلكتروني أولًا.";
+
+        return loginText(
+          "email_not_confirmed"
+        );
+
       }
 
 
       if (
-        message.includes("User already registered")
+        message.includes(
+          "User already registered"
+        )
       ) {
-        return "هذا البريد الإلكتروني مسجل بالفعل.";
+
+        return loginText(
+          "already_registered"
+        );
+
       }
 
 
       if (
-        message.includes("Password should be at least")
+        message.includes(
+          "Password should be at least"
+        )
       ) {
-        return "كلمة المرور قصيرة جدًا.";
+
+        return loginText(
+          "password_too_short"
+        );
+
       }
 
 
       if (
-        message.includes("Unable to validate email")
+        message.includes(
+          "Unable to validate email"
+        )
       ) {
-        return "البريد الإلكتروني غير صالح.";
+
+        return loginText(
+          "invalid_email"
+        );
+
       }
 
 
-      return "حدث خطأ. حاول مرة أخرى.";
+      return loginText(
+        "generic_error"
+      );
+
     }
 
 
-    // إذا كان الطالب مسجل الدخول أصلًا
-    // لا حاجة لإظهار صفحة الدخول
+    /* =========================================================
+       HOME
+       ========================================================= */
+
+    function goHome() {
+
+      if (
+        typeof goTo === "function"
+      ) {
+
+        goTo("index.html");
+
+      } else {
+
+        window.location.href =
+          "index.html";
+
+      }
+
+    }
+
+
+    /* =========================================================
+       EXISTING SESSION
+       ========================================================= */
 
     async function checkExistingSession() {
 
-      const { data } =
-        await supabaseClient.auth.getSession();
+      try {
 
-      if (data.session) {
+        const { data } =
+          await supabaseClient.auth
+            .getSession();
 
-        window.location.href = "dashboard.html";
+
+        if (data.session) {
+
+          window.location.href =
+            "dashboard.html";
+
+        }
+
+      } catch (error) {
+
+        console.error(
+          "Session check error:",
+          error
+        );
 
       }
+
     }
 
 
-    checkExistingSession();
+    /* =========================================================
+       GLOBAL SETTINGS
+       ========================================================= */
+
+    function initializeLoginPage() {
+
+      if (
+        typeof initializeGlobalSettings === "function"
+      ) {
+
+        initializeGlobalSettings();
+
+      }
+
+
+      if (
+        typeof applySiteTheme === "function"
+      ) {
+
+        applySiteTheme(
+          getSiteTheme()
+        );
+
+      }
+
+
+      translateLoginPage();
+
+
+      if (
+        typeof setCurrentYear === "function"
+      ) {
+
+        setCurrentYear(
+          "currentYear"
+        );
+
+      } else {
+
+        document.getElementById(
+          "currentYear"
+        ).textContent =
+          new Date().getFullYear();
+
+      }
+
+    }
+
+
+    window.addEventListener(
+      "storage",
+      function(event) {
+
+        if (
+          event.key === "site_language"
+        ) {
+
+          translateLoginPage();
+
+        }
+
+
+        if (
+          event.key === "site_theme"
+        ) {
+
+          if (
+            typeof applySiteTheme === "function"
+          ) {
+
+            applySiteTheme(
+              event.newValue || "light"
+            );
+
+          }
+
+        }
+
+      }
+    );
+
+
+    window.addEventListener(
+      "languageChanged",
+      function() {
+
+        translateLoginPage();
+
+      }
+    );
+
+
+    window.addEventListener(
+      "languagechange",
+      function() {
+
+        translateLoginPage();
+
+      }
+    );
+
+
+    /* =========================================================
+       START
+       ========================================================= */
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      function() {
+
+        initializeLoginPage();
+
+        checkExistingSession();
+
+      }
+    );
 
   </script>
 
 </body>
-              </html>
+  </html>
