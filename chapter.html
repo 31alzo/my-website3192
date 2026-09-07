@@ -230,14 +230,6 @@
             box-shadow: var(--shadow-md);
         }
 
-        .video-card.locked {
-            cursor: pointer;
-        }
-
-        .video-card.locked:hover {
-            transform: translateY(-2px);
-        }
-
         .video-card.locked .video-thumbnail {
             filter: saturate(.65);
         }
@@ -316,28 +308,26 @@
             left: 12px;
         }
 
-        .play-button {
-            width: 54px;
-            height: 54px;
-            display: grid;
-            place-items: center;
-            border-radius: 50%;
-            background: rgba(255,255,255,.95);
-            color: var(--primary);
-            font-size: 21px;
-            box-shadow: 0 7px 25px rgba(0,0,0,.25);
-        }
-
+        .play-button,
         .lock-icon {
             width: 54px;
             height: 54px;
             display: grid;
             place-items: center;
             border-radius: 50%;
+            box-shadow: 0 7px 25px rgba(0,0,0,.22);
+        }
+
+        .play-button {
+            background: rgba(255,255,255,.95);
+            color: var(--primary);
+            font-size: 21px;
+        }
+
+        .lock-icon {
             background: rgba(255,255,255,.15);
             color: white;
             font-size: 22px;
-            box-shadow: 0 7px 25px rgba(0,0,0,.20);
         }
 
         .video-number {
@@ -547,7 +537,7 @@
             type="button"
             data-i18n="chapter.back_library">
 
-            ← المكتبة
+            ← المواد
 
         </button>
 
@@ -590,16 +580,16 @@
              HERO
              ===================================== -->
 
-        <section class="chapter-hero">
+        <section
+            class="chapter-hero"
+            id="chapterHero">
 
             <div class="chapter-hero-content">
 
                 <div
                     class="breadcrumb"
                     id="breadcrumb">
-
                     Mathématiques ← Chapitre
-
                 </div>
 
 
@@ -630,7 +620,9 @@
              VIDEOS
              ===================================== -->
 
-        <section class="videos-section">
+        <section
+            class="videos-section"
+            id="videosSection">
 
             <div class="section-head">
 
@@ -779,11 +771,11 @@
             "chapter.subscription":
                 "🔒 يتطلب اشتراكًا",
 
-            "chapter.coming_soon":
-                "🎬 سيتم إضافة هذا الفيديو قريبًا.",
-
             "chapter.subscription_alert":
-                "🔒 هذا الفيديو متاح ضمن الخطط التعليمية في EduNova AI."
+                "🔒 هذا الفيديو متاح ضمن الخطط التعليمية في EduNova AI.",
+
+            "chapter.no_video_url":
+                "🎬 سيتم إضافة هذا الفيديو قريبًا."
 
         },
 
@@ -846,11 +838,11 @@
             "chapter.subscription":
                 "🔒 Abonnement requis",
 
-            "chapter.coming_soon":
-                "🎬 Cette vidéo sera ajoutée prochainement.",
-
             "chapter.subscription_alert":
-                "🔒 Cette vidéo est disponible dans les formules éducatives d'EduNova AI."
+                "🔒 Cette vidéo est disponible dans les formules éducatives d'EduNova AI.",
+
+            "chapter.no_video_url":
+                "🎬 Cette vidéo sera ajoutée prochainement."
 
         }
 
@@ -858,16 +850,19 @@
 
 
     /* =========================================
-       SELECTED DATA
+       SELECTED STUDENT PATH
        ========================================= */
 
-    const selectedChapter =
-        parseInt(
-            localStorage.getItem(
-                "selected_chapter"
-            ) || "0",
-            10
-        );
+    const selectedLevel =
+        localStorage.getItem(
+            "student_level"
+        ) || "";
+
+
+    const selectedBranch =
+        localStorage.getItem(
+            "bac_branch"
+        ) || "";
 
 
     const selectedSubject =
@@ -882,94 +877,91 @@
         ) || "";
 
 
-    const selectedLevel =
-        localStorage.getItem(
-            "student_level"
-        ) || "";
-
-
-    const selectedBranch =
-        localStorage.getItem(
-            "bac_branch"
-        ) || "";
+    const selectedChapter =
+        Number(
+            localStorage.getItem(
+                "selected_chapter"
+            ) || "0"
+        );
 
 
     /* =========================================
-       CHAPTER DATA
+       CURRICULUM DATA
        ========================================= */
 
     /*
-     * =========================================
-     * بنية الفصول
-     * =========================================
+     * مهم:
      *
-     * كل مادة لها فصول مستقلة.
+     * كل مسار له بياناته الخاصة.
      *
-     * كل فصل:
+     * 6AF:
+     * concours → mathematics
      *
-     * {
-     *     id: 1,
+     * 4ème:
+     * brevet → mathematics
      *
-     *     title: {
-     *         ar: "...",
-     *         fr: "..."
-     *     },
+     * Bac C:
+     * bac + C → mathematics_c
      *
-     *     description: {
-     *         ar: "...",
-     *         fr: "..."
-     *     },
+     * Bac D:
+     * bac + D → mathematics_d
      *
-     *     videos: [
+     * لا يتم استعمال بيانات Bac C
+     * داخل Bac D أو العكس.
      *
-     *         {
-     *             id: 1,
-     *
-     *             title: {
-     *                 ar: "...",
-     *                 fr: "..."
-     *             },
-     *
-     *             description: {
-     *                 ar: "...",
-     *                 fr: "..."
-     *             },
-     *
-     *             duration: "15:30",
-     *
-     *             videoUrl: "..."
-     *         }
-     *
-     *     ]
-     * }
-     *
-     * الحد الأقصى:
-     * 20 فيديو لكل فصل.
-     *
-     * الفيديو 1:
-     * مجاني.
-     *
-     * الفيديو 2 إلى 20:
-     * مقفلة.
-     *
-     * =========================================
-     *
-     * حاليًا نترك البيانات فارغة حتى نضع
-     * أسماء الفصول الحقيقية والمحتوى الحقيقي
-     * لاحقًا بدون اختلاق المنهج.
-     *
-     * =========================================
+     * نترك أسماء الفصول والفيديوهات
+     * فارغة حاليًا حتى نضع المنهج الحقيقي
+     * لاحقًا بدون اختلاق محتوى.
      */
 
-    const CHAPTERS_BY_SUBJECT = {
+    const CURRICULUM_DATA = {
 
-        math_concours: [],
+        concours: {
 
-        math_brevet: [],
+            mathematics: {
 
-        math_bac_c: [],
+                chapters: []
 
-        math_bac_d: []
+            }
+
+        },
+
+
+        brevet: {
+
+            mathematics: {
+
+                chapters: []
+
+            }
+
+        },
+
+
+        bac: {
+
+            C: {
+
+                mathematics_c: {
+
+                    chapters: []
+
+                }
+
+            },
+
+
+            D: {
+
+                mathematics_d: {
+
+                    chapters: []
+
+                }
+
+            }
+
+        }
 
     };
 
@@ -1044,20 +1036,248 @@
 
 
     /* =========================================
+       CURRENT SUBJECT KEY
+       ========================================= */
+
+    function getCurrentSubjectKey() {
+
+        /*
+         * نعتمد على selected_subject
+         * الذي تختاره صفحة المواد.
+         */
+
+        if (
+            selectedSubject ===
+            "math_bac_c" ||
+            selectedSubject ===
+            "mathematics_c" ||
+            selectedSubjectType ===
+            "math_c"
+        ) {
+
+            return "mathematics_c";
+
+        }
+
+
+        if (
+            selectedSubject ===
+            "math_bac_d" ||
+            selectedSubject ===
+            "mathematics_d" ||
+            selectedSubjectType ===
+            "math_d"
+        ) {
+
+            return "mathematics_d";
+
+        }
+
+
+        if (
+            selectedSubject ===
+            "math_brevet"
+        ) {
+
+            return "mathematics";
+
+        }
+
+
+        if (
+            selectedSubject ===
+            "math_concours"
+        ) {
+
+            return "mathematics";
+
+        }
+
+
+        /*
+         * توافق إضافي مع الأسماء التي
+         * قد تستخدمها library.html.
+         */
+
+        if (
+            selectedSubject ===
+            "mathematics"
+        ) {
+
+            return "mathematics";
+
+        }
+
+
+        return "";
+
+    }
+
+
+    /* =========================================
+       CURRENT CURRICULUM
+       ========================================= */
+
+    function getCurrentCurriculum() {
+
+        const subjectKey =
+            getCurrentSubjectKey();
+
+
+        /*
+         * 6AF
+         */
+
+        if (
+            selectedLevel ===
+            "concours"
+        ) {
+
+            if (
+                subjectKey !==
+                "mathematics"
+            ) {
+
+                return null;
+
+            }
+
+
+            return (
+                CURRICULUM_DATA
+                    .concours
+                    .mathematics
+            );
+
+        }
+
+
+        /*
+         * 4ème
+         */
+
+        if (
+            selectedLevel ===
+            "brevet"
+        ) {
+
+            if (
+                subjectKey !==
+                "mathematics"
+            ) {
+
+                return null;
+
+            }
+
+
+            return (
+                CURRICULUM_DATA
+                    .brevet
+                    .mathematics
+            );
+
+        }
+
+
+        /*
+         * Bac
+         */
+
+        if (
+            selectedLevel ===
+            "bac"
+        ) {
+
+            /*
+             * لا نسمح بفتح Bac بدون
+             * تحديد C أو D.
+             */
+
+            if (
+                selectedBranch !== "C" &&
+                selectedBranch !== "D"
+            ) {
+
+                return null;
+
+            }
+
+
+            /*
+             * Bac C
+             */
+
+            if (
+                selectedBranch === "C"
+            ) {
+
+                if (
+                    subjectKey !==
+                    "mathematics_c"
+                ) {
+
+                    return null;
+
+                }
+
+
+                return (
+                    CURRICULUM_DATA
+                        .bac
+                        .C
+                        .mathematics_c
+                );
+
+            }
+
+
+            /*
+             * Bac D
+             */
+
+            if (
+                selectedBranch === "D"
+            ) {
+
+                if (
+                    subjectKey !==
+                    "mathematics_d"
+                ) {
+
+                    return null;
+
+                }
+
+
+                return (
+                    CURRICULUM_DATA
+                        .bac
+                        .D
+                        .mathematics_d
+                );
+
+            }
+
+        }
+
+
+        return null;
+
+    }
+
+
+    /* =========================================
        SUBJECT LABEL
        ========================================= */
 
     function getSubjectLabel() {
 
-        const language =
-            getChapterLanguage();
-
-
         if (
-            selectedSubject ===
-            "math_bac_c" ||
-            selectedSubjectType ===
-            "math_c"
+            selectedLevel ===
+            "bac" &&
+            selectedBranch ===
+            "C"
         ) {
 
             return chapterText(
@@ -1068,10 +1288,10 @@
 
 
         if (
-            selectedSubject ===
-            "math_bac_d" ||
-            selectedSubjectType ===
-            "math_d"
+            selectedLevel ===
+            "bac" &&
+            selectedBranch ===
+            "D"
         ) {
 
             return chapterText(
@@ -1089,31 +1309,28 @@
 
 
     /* =========================================
-       GET CHAPTERS FOR SUBJECT
-       ========================================= */
-
-    function getCurrentChapters() {
-
-        return (
-            CHAPTERS_BY_SUBJECT[
-                selectedSubject
-            ] || []
-        );
-
-    }
-
-
-    /* =========================================
-       GET CURRENT CHAPTER
+       CURRENT CHAPTER
        ========================================= */
 
     function getCurrentChapter() {
 
-        const chapters =
-            getCurrentChapters();
+        const curriculum =
+            getCurrentCurriculum();
 
 
-        return chapters.find(
+        if (
+            !curriculum ||
+            !Array.isArray(
+                curriculum.chapters
+            )
+        ) {
+
+            return null;
+
+        }
+
+
+        return curriculum.chapters.find(
             function(chapter) {
 
                 return Number(
@@ -1129,7 +1346,7 @@
 
 
     /* =========================================
-       TRANSLATE PAGE
+       PAGE TRANSLATION
        ========================================= */
 
     function translateChapterPage() {
@@ -1139,7 +1356,9 @@
 
 
         document
-            .querySelectorAll("[data-i18n]")
+            .querySelectorAll(
+                "[data-i18n]"
+            )
             .forEach(
                 function(element) {
 
@@ -1154,7 +1373,8 @@
 
 
                     if (
-                        translation !== undefined
+                        translation !==
+                        undefined
                     ) {
 
                         element.textContent =
@@ -1192,14 +1412,14 @@
 
 
         const hero =
-            document.querySelector(
-                ".chapter-hero"
+            document.getElementById(
+                "chapterHero"
             );
 
 
         const videosSection =
-            document.querySelector(
-                ".videos-section"
+            document.getElementById(
+                "videosSection"
             );
 
 
@@ -1209,7 +1429,13 @@
             );
 
 
+        /*
+         * إذا كانت البيانات غير صحيحة
+         * نعرض صفحة الخطأ.
+         */
+
         if (
+            !selectedLevel ||
             !selectedSubject ||
             !selectedChapter ||
             !currentChapter
@@ -1244,6 +1470,10 @@
         }
 
 
+        /*
+         * المسار صحيح.
+         */
+
         if (hero) {
 
             hero.style.display =
@@ -1271,13 +1501,21 @@
         const title =
             localizedValue(
                 currentChapter.title
+            ) ||
+            (
+                chapterText(
+                    "chapter.chapter"
+                ) +
+                " " +
+                selectedChapter
             );
 
 
         const description =
             localizedValue(
                 currentChapter.description
-            );
+            ) ||
+            "";
 
 
         const titleElement =
@@ -1329,6 +1567,10 @@
 
         }
 
+
+        /*
+         * الحد الأقصى 20 فيديو.
+         */
 
         const videos =
             Array.isArray(
@@ -1390,7 +1632,10 @@
             );
 
 
-        if (!grid || !empty) {
+        if (
+            !grid ||
+            !empty
+        ) {
 
             return;
 
@@ -1400,7 +1645,13 @@
         grid.innerHTML = "";
 
 
-        if (!videos.length) {
+        /*
+         * لا توجد فيديوهات بعد.
+         */
+
+        if (
+            !videos.length
+        ) {
 
             empty.style.display =
                 "block";
@@ -1419,15 +1670,20 @@
             .forEach(
                 function(video, index) {
 
+                    /*
+                     * رقم الفيديو الحقيقي داخل
+                     * هذا الشابتر.
+                     */
+
                     const videoNumber =
                         index + 1;
 
 
                     /*
-                     * القاعدة الأساسية:
+                     * القاعدة التجارية:
                      *
-                     * فيديو 1 = مجاني
-                     * فيديو 2+ = مقفل
+                     * الفيديو 1 مجاني.
+                     * الفيديوهات 2 إلى 20 مقفلة.
                      */
 
                     const isFree =
@@ -1465,7 +1721,8 @@
                     const description =
                         localizedValue(
                             video.description
-                        );
+                        ) ||
+                        "";
 
 
                     const duration =
@@ -1494,7 +1751,8 @@
 
 
                     const videoLabel =
-                        getChapterLanguage() === "fr"
+                        getChapterLanguage() ===
+                        "fr"
                             ? "Vidéo "
                             : "فيديو ";
 
@@ -1505,16 +1763,14 @@
 
                             ${
                                 isFree
-
                                 ? `
                                     <div class="free-badge">
-                                        ${badge}
+                                        ${escapeVideoText(badge)}
                                     </div>
                                 `
-
                                 : `
                                     <div class="lock-badge">
-                                        ${badge}
+                                        ${escapeVideoText(badge)}
                                     </div>
                                 `
                             }
@@ -1522,13 +1778,11 @@
 
                             ${
                                 isFree
-
                                 ? `
                                     <div class="play-button">
                                         ▶
                                     </div>
                                 `
-
                                 : `
                                     <div class="lock-icon">
                                         🔒
@@ -1538,7 +1792,10 @@
 
 
                             <div class="video-number">
-                                ${videoLabel}${videoNumber}
+                                ${escapeVideoText(
+                                    videoLabel +
+                                    videoNumber
+                                )}
                             </div>
 
                         </div>
@@ -1576,7 +1833,9 @@
                                         : "locked-label"
                                 }">
 
-                                    ${bottomLabel}
+                                    ${escapeVideoText(
+                                        bottomLabel
+                                    )}
 
                                 </span>
 
@@ -1665,7 +1924,7 @@
     ) {
 
         /*
-         * فيديو 1 مجاني.
+         * الفيديو الأول مجاني.
          */
 
         if (
@@ -1696,6 +1955,23 @@
             );
 
 
+            /*
+             * نحتفظ أيضًا بالمسار الدراسي
+             * حتى لا يحدث خلط في الصفحة التالية.
+             */
+
+            localStorage.setItem(
+                "selected_subject",
+                selectedSubject
+            );
+
+
+            localStorage.setItem(
+                "selected_subject_type",
+                selectedSubjectType
+            );
+
+
             window.location.href =
                 "video.html";
 
@@ -1707,10 +1983,8 @@
 
         /*
          * الفيديوهات 2 إلى 20
-         * مقفلة حاليًا.
-         *
-         * نظام الاشتراك الحقيقي
-         * سيتم ربطه لاحقًا بالـBackend.
+         * مقفلة حتى يتم ربط الاشتراك
+         * الحقيقي بالـBackend.
          */
 
         alert(
@@ -1855,4 +2129,4 @@
 
 </body>
 
-    </html>
+                </html>
