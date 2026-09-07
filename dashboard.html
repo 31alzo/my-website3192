@@ -470,7 +470,7 @@
             z-index: 100;
             height: 66px;
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             background: rgba(255,255,255,.96);
             border-top: 1px solid var(--border);
             backdrop-filter: blur(12px);
@@ -1169,11 +1169,16 @@
      MOBILE NAVIGATION
      ===================================================== -->
 
-<nav class="dashboard-bottom-nav">
+<nav
+    class="dashboard-bottom-nav"
+    aria-label="التنقل الرئيسي">
+
+    <!-- 1. الرئيسية -->
 
     <button
         class="dashboard-nav-item active"
-        onclick="goDashboard()">
+        onclick="goDashboard()"
+        type="button">
 
         <span>🏠</span>
 
@@ -1185,23 +1190,12 @@
     </button>
 
 
-    <button
-        class="dashboard-nav-item"
-        onclick="openLibrary()">
-
-        <span>📚</span>
-
-        <span
-            data-dashboard-i18n="library">
-            مكتبتي
-        </span>
-
-    </button>
-
+    <!-- 2. المنتدى -->
 
     <button
         class="dashboard-nav-item"
-        onclick="openForum()">
+        onclick="openForum()"
+        type="button">
 
         <span>💬</span>
 
@@ -1213,9 +1207,12 @@
     </button>
 
 
+    <!-- 3. Afkrash AI -->
+
     <button
         class="dashboard-nav-item"
-        onclick="showComingSoon('afkrash')">
+        onclick="showComingSoon('afkrash')"
+        type="button">
 
         <span>🤖</span>
 
@@ -1226,9 +1223,12 @@
     </button>
 
 
+    <!-- 4. الإعدادات -->
+
     <button
         class="dashboard-nav-item"
-        onclick="openSettings()">
+        onclick="openSettings()"
+        type="button">
 
         <span>⚙️</span>
 
@@ -1863,13 +1863,56 @@
 
     function loadProgress() {
 
-        const completed =
-            parseInt(
-                localStorage.getItem(
-                    "completed_lessons"
-                ) || "0",
-                10
-            );
+        let completed = 0;
+
+        /*
+         * استخدام النظام العالمي الموجود في script.js
+         * إذا كان متاحًا.
+         */
+
+        if (
+            typeof getLearningProgress === "function"
+        ) {
+
+            const progressData =
+                getLearningProgress();
+
+            if (
+                progressData &&
+                typeof progressData.completed === "number"
+            ) {
+
+                completed =
+                    progressData.completed;
+
+            } else if (
+                progressData &&
+                typeof progressData.completedLessons === "number"
+            ) {
+
+                completed =
+                    progressData.completedLessons;
+
+            }
+
+        }
+
+
+        /*
+         * توافق مع البيانات القديمة.
+         */
+
+        if (completed === 0) {
+
+            completed =
+                parseInt(
+                    localStorage.getItem(
+                        "completed_lessons"
+                    ) || "0",
+                    10
+                );
+
+        }
 
 
         const total = 20;
@@ -1879,6 +1922,13 @@
             Math.round(
                 (completed / total) * 100
             );
+
+
+        if (progress < 0) {
+
+            progress = 0;
+
+        }
 
 
         if (progress > 100) {
@@ -1936,13 +1986,30 @@
 
     function loadPoints() {
 
-        const points =
-            parseInt(
-                localStorage.getItem(
-                    "student_points"
-                ) || "0",
-                10
-            );
+        let points = 0;
+
+
+        if (
+            typeof getStudentPoints === "function"
+        ) {
+
+            points =
+                parseInt(
+                    getStudentPoints() || "0",
+                    10
+                );
+
+        } else {
+
+            points =
+                parseInt(
+                    localStorage.getItem(
+                        "student_points"
+                    ) || "0",
+                    10
+                );
+
+        }
 
 
         const pointsElement =
@@ -2148,6 +2215,7 @@
         translateDashboardPage
     );
 
+
     window.addEventListener(
         "languagechange",
         translateDashboardPage
@@ -2166,11 +2234,32 @@
 
             }
 
+
             if (
                 event.key === "student_level"
             ) {
 
                 loadSelectedLevel();
+
+            }
+
+
+            if (
+                event.key === "student_points"
+            ) {
+
+                loadPoints();
+
+            }
+
+
+            if (
+                event.key === "completed_lessons" ||
+                (event.key &&
+                 event.key.endsWith("_completed"))
+            ) {
+
+                loadProgress();
 
             }
 
@@ -2196,4 +2285,4 @@
 </script>
 
 </body>
-    </html>
+                </html>
