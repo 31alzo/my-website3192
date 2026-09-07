@@ -11,7 +11,9 @@
 
     <title>حسابي | EduNova AI</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css">
 
     <style>
 
@@ -205,6 +207,10 @@
             transition: .2s;
         }
 
+        html[dir="ltr"] .account-action {
+            text-align: left;
+        }
+
         .account-action:hover {
             border-color: var(--primary);
             color: var(--primary);
@@ -227,6 +233,11 @@
             margin-right: auto;
             color: var(--text-light);
             font-size: 18px;
+        }
+
+        html[dir="ltr"] .action-arrow {
+            margin-right: 0;
+            margin-left: auto;
         }
 
         .logout-action {
@@ -324,7 +335,9 @@
 <body>
 
 
-<!-- Header -->
+<!-- =========================================
+     HEADER
+========================================= -->
 
 <header class="site-header">
 
@@ -347,7 +360,9 @@
 
         <button
             class="btn btn-secondary btn-sm"
-            onclick="goDashboard()">
+            onclick="goDashboard()"
+            id="dashboardButton"
+            type="button">
 
             الرئيسية
 
@@ -358,12 +373,17 @@
 </header>
 
 
+
+<!-- =========================================
+     MAIN
+========================================= -->
+
 <main class="page">
 
     <div class="container">
 
 
-        <!-- Loading -->
+        <!-- LOADING -->
 
         <div
             id="loading"
@@ -373,19 +393,22 @@
                 ⏳
             </div>
 
-            جاري تحميل حسابك...
+            <span id="loadingText">
+                جاري تحميل حسابك...
+            </span>
 
         </div>
 
 
-        <!-- Account -->
+
+        <!-- ACCOUNT -->
 
         <div
             id="accountContent"
             style="display:none;">
 
 
-            <!-- Hero -->
+            <!-- HERO -->
 
             <section class="account-hero">
 
@@ -435,15 +458,16 @@
             </section>
 
 
-            <!-- Stats -->
+
+            <!-- STATS -->
 
             <div class="section-heading">
 
-                <h2>
+                <h2 id="achievementsTitle">
                     إنجازاتي
                 </h2>
 
-                <span>
+                <span id="progressText">
                     تقدمك الدراسي
                 </span>
 
@@ -467,11 +491,16 @@
 
                     </span>
 
-                    <span class="stat-label">
+                    <span
+                        class="stat-label"
+                        id="pointsLabel">
+
                         النقاط
+
                     </span>
 
                 </div>
+
 
 
                 <div class="stat-card">
@@ -488,11 +517,16 @@
 
                     </span>
 
-                    <span class="stat-label">
+                    <span
+                        class="stat-label"
+                        id="lessonsLabel">
+
                         الدروس المكتملة
+
                     </span>
 
                 </div>
+
 
 
                 <div class="stat-card">
@@ -509,11 +543,16 @@
 
                     </span>
 
-                    <span class="stat-label">
+                    <span
+                        class="stat-label"
+                        id="badgesLabel">
+
                         الشارات
+
                     </span>
 
                 </div>
+
 
 
                 <div class="stat-card">
@@ -530,8 +569,12 @@
 
                     </span>
 
-                    <span class="stat-label">
+                    <span
+                        class="stat-label"
+                        id="streakLabel">
+
                         أيام متتالية
+
                     </span>
 
                 </div>
@@ -540,11 +583,12 @@
             </section>
 
 
-            <!-- Account information -->
+
+            <!-- ACCOUNT INFORMATION -->
 
             <div class="section-heading">
 
-                <h2>
+                <h2 id="accountInfoTitle">
                     معلومات الحساب
                 </h2>
 
@@ -562,8 +606,12 @@
 
                     <div class="row-text">
 
-                        <div class="row-label">
+                        <div
+                            class="row-label"
+                            id="nameLabel">
+
                             الاسم
+
                         </div>
 
                         <div
@@ -579,6 +627,7 @@
                 </div>
 
 
+
                 <div class="account-row">
 
                     <div class="row-icon">
@@ -587,8 +636,12 @@
 
                     <div class="row-text">
 
-                        <div class="row-label">
+                        <div
+                            class="row-label"
+                            id="emailLabel">
+
                             البريد الإلكتروني
+
                         </div>
 
                         <div
@@ -605,6 +658,7 @@
                 </div>
 
 
+
                 <div class="account-row">
 
                     <div class="row-icon">
@@ -613,8 +667,12 @@
 
                     <div class="row-text">
 
-                        <div class="row-label">
+                        <div
+                            class="row-label"
+                            id="levelLabel">
+
                             المستوى الدراسي
+
                         </div>
 
                         <div
@@ -633,11 +691,12 @@
             </section>
 
 
-            <!-- Actions -->
+
+            <!-- ACCOUNT ACTIONS -->
 
             <div class="section-heading">
 
-                <h2>
+                <h2 id="accountManagementTitle">
                     إدارة الحساب
                 </h2>
 
@@ -649,13 +708,14 @@
 
                 <button
                     class="account-action"
-                    onclick="changeLevel()">
+                    onclick="changeLevel()"
+                    type="button">
 
                     <span class="action-icon">
                         🎓
                     </span>
 
-                    <span>
+                    <span id="changeLevelText">
                         تغيير المستوى الدراسي
                     </span>
 
@@ -666,15 +726,17 @@
                 </button>
 
 
+
                 <button
                     class="account-action"
-                    onclick="openSettings()">
+                    onclick="openSettings()"
+                    type="button">
 
                     <span class="action-icon">
                         ⚙️
                     </span>
 
-                    <span>
+                    <span id="settingsText">
                         الإعدادات
                     </span>
 
@@ -685,15 +747,17 @@
                 </button>
 
 
+
                 <button
                     class="account-action"
-                    onclick="showMessage('تعديل البيانات سيكون متاحًا قريبًا.')">
+                    onclick="showMessage('editData')"
+                    type="button">
 
                     <span class="action-icon">
                         ✏️
                     </span>
 
-                    <span>
+                    <span id="editDataText">
                         تعديل البيانات
                     </span>
 
@@ -704,15 +768,17 @@
                 </button>
 
 
+
                 <button
                     class="account-action"
-                    onclick="showMessage('إدارة كلمة المرور ستكون متاحة عند اكتمال نظام الحسابات.')">
+                    onclick="showMessage('password')"
+                    type="button">
 
                     <span class="action-icon">
                         🔐
                     </span>
 
-                    <span>
+                    <span id="passwordText">
                         كلمة المرور
                     </span>
 
@@ -723,15 +789,17 @@
                 </button>
 
 
+
                 <button
                     class="account-action"
-                    onclick="showMessage('إدارة الاشتراكات والمدفوعات ستتم إضافتها لاحقًا.')">
+                    onclick="showMessage('payments')"
+                    type="button">
 
                     <span class="action-icon">
                         💳
                     </span>
 
-                    <span>
+                    <span id="paymentsText">
                         الاشتراكات والمدفوعات
                     </span>
 
@@ -742,15 +810,17 @@
                 </button>
 
 
+
                 <button
                     class="account-action danger-action"
-                    onclick="showMessage('حذف الحساب سيتم تفعيله بعد اكتمال النظام النهائي.')">
+                    onclick="showMessage('delete')"
+                    type="button">
 
                     <span class="action-icon">
                         🗑️
                     </span>
 
-                    <span>
+                    <span id="deleteText">
                         حذف الحساب
                     </span>
 
@@ -761,15 +831,17 @@
                 </button>
 
 
+
                 <button
                     class="account-action logout-action"
-                    onclick="logout()">
+                    onclick="logout()"
+                    type="button">
 
                     <span class="action-icon">
                         🚪
                     </span>
 
-                    <span>
+                    <span id="logoutText">
                         تسجيل الخروج
                     </span>
 
@@ -793,7 +865,10 @@
 </main>
 
 
-<!-- Bottom navigation -->
+
+<!-- =========================================
+     BOTTOM NAVIGATION
+========================================= -->
 
 <nav class="bottom-nav">
 
@@ -804,11 +879,12 @@
             ⌂
         </span>
 
-        <small>
+        <small id="navHome">
             الرئيسية
         </small>
 
     </a>
+
 
 
     <a href="library.html">
@@ -817,11 +893,12 @@
             📚
         </span>
 
-        <small>
+        <small id="navLibrary">
             مكتبتي
         </small>
 
     </a>
+
 
 
     <a href="forum.html">
@@ -830,11 +907,12 @@
             💬
         </span>
 
-        <small>
+        <small id="navForum">
             المنتدى
         </small>
 
     </a>
+
 
 
     <a
@@ -845,7 +923,7 @@
             👤
         </span>
 
-        <small>
+        <small id="navAccount">
             حسابي
         </small>
 
@@ -855,13 +933,29 @@
 </nav>
 
 
-<!-- Supabase -->
+
+<!-- =========================================
+     GLOBAL SCRIPT
+========================================= -->
+
+<script src="script.js"></script>
+
+
+
+<!-- =========================================
+     SUPABASE
+========================================= -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
+
 <script>
 
+
+    /* =========================================
+       SUPABASE
+    ========================================= */
 
     const SUPABASE_URL =
         "https://qkzdlxqledsznhbifaxy.supabase.co";
@@ -878,182 +972,776 @@
         );
 
 
+
     /* =========================================
-       Load account
-       ========================================= */
+       TRANSLATIONS
+    ========================================= */
 
-    async function loadAccount() {
+    const ACCOUNT_TRANSLATIONS = {
 
-        const {
-            data,
-            error
-        } =
-            await supabaseClient.auth.getSession();
+        ar: {
 
+            pageTitle:
+                "حسابي | EduNova AI",
+
+            dashboard:
+                "الرئيسية",
+
+            loading:
+                "جاري تحميل حسابك...",
+
+            student:
+                "الطالب",
+
+            noLevel:
+                "لم يتم اختيار المستوى",
+
+            achievements:
+                "إنجازاتي",
+
+            progress:
+                "تقدمك الدراسي",
+
+            points:
+                "النقاط",
+
+            lessons:
+                "الدروس المكتملة",
+
+            badges:
+                "الشارات",
+
+            streak:
+                "أيام متتالية",
+
+            accountInfo:
+                "معلومات الحساب",
+
+            name:
+                "الاسم",
+
+            email:
+                "البريد الإلكتروني",
+
+            level:
+                "المستوى الدراسي",
+
+            accountManagement:
+                "إدارة الحساب",
+
+            changeLevel:
+                "تغيير المستوى الدراسي",
+
+            settings:
+                "الإعدادات",
+
+            editData:
+                "تعديل البيانات",
+
+            password:
+                "كلمة المرور",
+
+            payments:
+                "الاشتراكات والمدفوعات",
+
+            delete:
+                "حذف الحساب",
+
+            logout:
+                "تسجيل الخروج",
+
+            navHome:
+                "الرئيسية",
+
+            navLibrary:
+                "مكتبتي",
+
+            navForum:
+                "المنتدى",
+
+            navAccount:
+                "حسابي",
+
+            editDataMessage:
+                "تعديل البيانات سيكون متاحًا قريبًا.",
+
+            passwordMessage:
+                "إدارة كلمة المرور ستكون متاحة عند اكتمال نظام الحسابات.",
+
+            paymentsMessage:
+                "إدارة الاشتراكات والمدفوعات ستتم إضافتها لاحقًا.",
+
+            deleteMessage:
+                "حذف الحساب سيتم تفعيله بعد اكتمال النظام النهائي.",
+
+            logoutConfirm:
+                "هل تريد تسجيل الخروج من حسابك؟",
+
+            logoutError:
+                "حدث خطأ أثناء تسجيل الخروج.",
+
+            defaultStudent:
+                "الطالب"
+
+        },
+
+
+        fr: {
+
+            pageTitle:
+                "Mon compte | EduNova AI",
+
+            dashboard:
+                "Accueil",
+
+            loading:
+                "Chargement de votre compte...",
+
+            student:
+                "Étudiant",
+
+            noLevel:
+                "Aucun niveau sélectionné",
+
+            achievements:
+                "Mes progrès",
+
+            progress:
+                "Votre progression",
+
+            points:
+                "Points",
+
+            lessons:
+                "Leçons terminées",
+
+            badges:
+                "Badges",
+
+            streak:
+                "Jours consécutifs",
+
+            accountInfo:
+                "Informations du compte",
+
+            name:
+                "Nom",
+
+            email:
+                "Adresse e-mail",
+
+            level:
+                "Niveau scolaire",
+
+            accountManagement:
+                "Gestion du compte",
+
+            changeLevel:
+                "Changer le niveau scolaire",
+
+            settings:
+                "Paramètres",
+
+            editData:
+                "Modifier les informations",
+
+            password:
+                "Mot de passe",
+
+            payments:
+                "Abonnements et paiements",
+
+            delete:
+                "Supprimer le compte",
+
+            logout:
+                "Se déconnecter",
+
+            navHome:
+                "Accueil",
+
+            navLibrary:
+                "Ma bibliothèque",
+
+            navForum:
+                "Forum",
+
+            navAccount:
+                "Compte",
+
+            editDataMessage:
+                "La modification des informations sera disponible prochainement.",
+
+            passwordMessage:
+                "La gestion du mot de passe sera disponible lorsque le système de compte sera terminé.",
+
+            paymentsMessage:
+                "La gestion des abonnements et des paiements sera ajoutée prochainement.",
+
+            deleteMessage:
+                "La suppression du compte sera activée après la finalisation du système.",
+
+            logoutConfirm:
+                "Voulez-vous vous déconnecter de votre compte ?",
+
+            logoutError:
+                "Une erreur s'est produite lors de la déconnexion.",
+
+            defaultStudent:
+                "Étudiant"
+
+        }
+
+    };
+
+
+
+    /* =========================================
+       LANGUAGE
+    ========================================= */
+
+    function getAccountLanguage() {
 
         if (
-            error ||
-            !data.session
+            typeof getSiteLanguage ===
+            "function"
         ) {
 
-            window.location.href =
-                "login.html";
-
-            return;
+            return getSiteLanguage();
 
         }
 
 
-        const user =
-            data.session.user;
-
-
-        let name =
-            user.user_metadata?.full_name ||
-            user.user_metadata?.name ||
-            user.user_metadata?.display_name;
-
-
-        if (!name) {
-
-            name =
-                user.email
-                    ? user.email.split("@")[0]
-                    : "الطالب";
-
-        }
-
-
-        const email =
-            user.email || "-";
-
-
-        const level =
+        return (
             localStorage.getItem(
-                "student_level"
-            ) ||
-            "لم يتم اختيار المستوى";
-
-
-        /* Profile */
-
-        document.getElementById(
-            "studentName"
-        ).textContent = name;
-
-
-        document.getElementById(
-            "studentEmail"
-        ).textContent = email;
-
-
-        document.getElementById(
-            "studentLevel"
-        ).textContent = level;
-
-
-        document.getElementById(
-            "infoName"
-        ).textContent = name;
-
-
-        document.getElementById(
-            "infoEmail"
-        ).textContent = email;
-
-
-        document.getElementById(
-            "infoLevel"
-        ).textContent = level;
-
-
-        /* Avatar */
-
-        const firstLetter =
-            name.trim().charAt(0);
-
-
-        document.getElementById(
-            "avatar"
-        ).textContent =
-            firstLetter || "ط";
-
-
-        /* Statistics */
-
-        const points =
-            parseInt(
-                localStorage.getItem(
-                    "student_points"
-                ) || "0",
-                10
-            );
-
-
-        const lessons =
-            parseInt(
-                localStorage.getItem(
-                    "completed_lessons"
-                ) || "0",
-                10
-            );
-
-
-        const submitted =
-            localStorage.getItem(
-                "weekly_challenge_submitted"
-            ) === "true";
-
-
-        const badges =
-            points >= 50
-                ? 1
-                : 0;
-
-
-        const streak =
-            lessons > 0
-                ? 1
-                : 0;
-
-
-        document.getElementById(
-            "points"
-        ).textContent = points;
-
-
-        document.getElementById(
-            "lessons"
-        ).textContent = lessons;
-
-
-        document.getElementById(
-            "badges"
-        ).textContent = badges;
-
-
-        document.getElementById(
-            "streak"
-        ).textContent = streak;
-
-
-        /* Show */
-
-        document.getElementById(
-            "loading"
-        ).style.display = "none";
-
-
-        document.getElementById(
-            "accountContent"
-        ).style.display = "block";
+                "site_language"
+            ) || "ar"
+        );
 
     }
 
 
+    function accountText(key) {
+
+        const language =
+            getAccountLanguage();
+
+
+        return (
+            ACCOUNT_TRANSLATIONS[language]?.[key] ||
+            ACCOUNT_TRANSLATIONS.ar[key] ||
+            key
+        );
+
+    }
+
+
+
     /* =========================================
-       Navigation
-       ========================================= */
+       LEVEL TRANSLATION
+    ========================================= */
+
+    function translateLevel(level) {
+
+        if (!level) {
+
+            return accountText(
+                "noLevel"
+            );
+
+        }
+
+
+        const value =
+            String(level)
+                .trim()
+                .toLowerCase();
+
+
+        const levels = {
+
+            "كونكور":
+                "Concours",
+
+            "conconcours":
+                "Concours",
+
+            "concours":
+                "Concours",
+
+            "بريفيه":
+                "Brevet",
+
+            "brevet":
+                "Brevet",
+
+            "باكالوريا":
+                "Baccalauréat",
+
+            "baccalaureat":
+                "Baccalauréat",
+
+            "baccalauréat":
+                "Baccalauréat"
+
+        };
+
+
+        if (
+            getAccountLanguage() === "fr" &&
+            levels[value]
+        ) {
+
+            return levels[value];
+
+        }
+
+
+        return level;
+
+    }
+
+
+
+    /* =========================================
+       APPLY LANGUAGE
+    ========================================= */
+
+    function translateAccountPage() {
+
+        const language =
+            getAccountLanguage();
+
+
+        document.documentElement.lang =
+            language;
+
+
+        document.documentElement.dir =
+            language === "fr"
+                ? "ltr"
+                : "rtl";
+
+
+        document.title =
+            accountText("pageTitle");
+
+
+        document.getElementById(
+            "dashboardButton"
+        ).textContent =
+            accountText("dashboard");
+
+
+        document.getElementById(
+            "loadingText"
+        ).textContent =
+            accountText("loading");
+
+
+        document.getElementById(
+            "achievementsTitle"
+        ).textContent =
+            accountText("achievements");
+
+
+        document.getElementById(
+            "progressText"
+        ).textContent =
+            accountText("progress");
+
+
+        document.getElementById(
+            "pointsLabel"
+        ).textContent =
+            accountText("points");
+
+
+        document.getElementById(
+            "lessonsLabel"
+        ).textContent =
+            accountText("lessons");
+
+
+        document.getElementById(
+            "badgesLabel"
+        ).textContent =
+            accountText("badges");
+
+
+        document.getElementById(
+            "streakLabel"
+        ).textContent =
+            accountText("streak");
+
+
+        document.getElementById(
+            "accountInfoTitle"
+        ).textContent =
+            accountText("accountInfo");
+
+
+        document.getElementById(
+            "nameLabel"
+        ).textContent =
+            accountText("name");
+
+
+        document.getElementById(
+            "emailLabel"
+        ).textContent =
+            accountText("email");
+
+
+        document.getElementById(
+            "levelLabel"
+        ).textContent =
+            accountText("level");
+
+
+        document.getElementById(
+            "accountManagementTitle"
+        ).textContent =
+            accountText("accountManagement");
+
+
+        document.getElementById(
+            "changeLevelText"
+        ).textContent =
+            accountText("changeLevel");
+
+
+        document.getElementById(
+            "settingsText"
+        ).textContent =
+            accountText("settings");
+
+
+        document.getElementById(
+            "editDataText"
+        ).textContent =
+            accountText("editData");
+
+
+        document.getElementById(
+            "passwordText"
+        ).textContent =
+            accountText("password");
+
+
+        document.getElementById(
+            "paymentsText"
+        ).textContent =
+            accountText("payments");
+
+
+        document.getElementById(
+            "deleteText"
+        ).textContent =
+            accountText("delete");
+
+
+        document.getElementById(
+            "logoutText"
+        ).textContent =
+            accountText("logout");
+
+
+        document.getElementById(
+            "navHome"
+        ).textContent =
+            accountText("navHome");
+
+
+        document.getElementById(
+            "navLibrary"
+        ).textContent =
+            accountText("navLibrary");
+
+
+        document.getElementById(
+            "navForum"
+        ).textContent =
+            accountText("navForum");
+
+
+        document.getElementById(
+            "navAccount"
+        ).textContent =
+            accountText("navAccount");
+
+
+        /*
+           تحديث المستوى إذا كان الحساب
+           ظاهرًا بالفعل.
+        */
+
+        const storedLevel =
+            localStorage.getItem(
+                "student_level"
+            );
+
+
+        if (
+            storedLevel
+        ) {
+
+            document.getElementById(
+                "studentLevel"
+            ).textContent =
+                translateLevel(
+                    storedLevel
+                );
+
+
+            document.getElementById(
+                "infoLevel"
+            ).textContent =
+                translateLevel(
+                    storedLevel
+                );
+
+        }
+
+
+        /*
+           تحديث الوضع العالمي
+        */
+
+        if (
+            typeof updateThemeControls ===
+            "function"
+        ) {
+
+            updateThemeControls();
+
+        }
+
+    }
+
+
+
+    /* =========================================
+       LOAD ACCOUNT
+    ========================================= */
+
+    async function loadAccount() {
+
+        try {
+
+            const {
+                data,
+                error
+            } =
+                await supabaseClient.auth.getSession();
+
+
+            if (
+                error ||
+                !data.session
+            ) {
+
+                window.location.href =
+                    "login.html";
+
+                return;
+
+            }
+
+
+            const user =
+                data.session.user;
+
+
+            let name =
+                user.user_metadata?.full_name ||
+                user.user_metadata?.name ||
+                user.user_metadata?.display_name;
+
+
+            if (!name) {
+
+                name =
+                    user.email
+                        ? user.email.split("@")[0]
+                        : accountText("defaultStudent");
+
+            }
+
+
+            const email =
+                user.email || "-";
+
+
+            const level =
+                localStorage.getItem(
+                    "student_level"
+                ) ||
+                accountText("noLevel");
+
+
+            /* =====================================
+               PROFILE
+            ===================================== */
+
+            document.getElementById(
+                "studentName"
+            ).textContent =
+                name;
+
+
+            document.getElementById(
+                "studentEmail"
+            ).textContent =
+                email;
+
+
+            document.getElementById(
+                "studentLevel"
+            ).textContent =
+                translateLevel(level);
+
+
+            document.getElementById(
+                "infoName"
+            ).textContent =
+                name;
+
+
+            document.getElementById(
+                "infoEmail"
+            ).textContent =
+                email;
+
+
+            document.getElementById(
+                "infoLevel"
+            ).textContent =
+                translateLevel(level);
+
+
+
+            /* =====================================
+               AVATAR
+            ===================================== */
+
+            const firstLetter =
+                name
+                    .trim()
+                    .charAt(0);
+
+
+            document.getElementById(
+                "avatar"
+            ).textContent =
+                firstLetter ||
+                (
+                    getAccountLanguage() === "fr"
+                        ? "É"
+                        : "ط"
+                );
+
+
+
+            /* =====================================
+               STATISTICS
+            ===================================== */
+
+            const points =
+                parseInt(
+                    localStorage.getItem(
+                        "student_points"
+                    ) || "0",
+                    10
+                );
+
+
+            const lessons =
+                parseInt(
+                    localStorage.getItem(
+                        "completed_lessons"
+                    ) || "0",
+                    10
+                );
+
+
+            const badges =
+                points >= 50
+                    ? 1
+                    : 0;
+
+
+            const streak =
+                lessons > 0
+                    ? 1
+                    : 0;
+
+
+            document.getElementById(
+                "points"
+            ).textContent =
+                points;
+
+
+            document.getElementById(
+                "lessons"
+            ).textContent =
+                lessons;
+
+
+            document.getElementById(
+                "badges"
+            ).textContent =
+                badges;
+
+
+            document.getElementById(
+                "streak"
+            ).textContent =
+                streak;
+
+
+
+            /* =====================================
+               SHOW
+            ===================================== */
+
+            document.getElementById(
+                "loading"
+            ).style.display =
+                "none";
+
+
+            document.getElementById(
+                "accountContent"
+            ).style.display =
+                "block";
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Account loading error:",
+                error
+            );
+
+
+            showMessage(
+                getAccountLanguage() === "fr"
+                    ? "Impossible de charger le compte."
+                    : "تعذر تحميل الحساب."
+            );
+
+        }
+
+    }
+
+
+
+    /* =========================================
+       NAVIGATION
+    ========================================= */
 
     function goDashboard() {
 
@@ -1079,11 +1767,34 @@
     }
 
 
-    /* =========================================
-       Message
-       ========================================= */
 
-    function showMessage(message) {
+    /* =========================================
+       MESSAGE
+    ========================================= */
+
+    function showMessage(type) {
+
+        const messages = {
+
+            editData:
+                accountText("editDataMessage"),
+
+            password:
+                accountText("passwordMessage"),
+
+            payments:
+                accountText("paymentsMessage"),
+
+            delete:
+                accountText("deleteMessage")
+
+        };
+
+
+        const message =
+            messages[type] ||
+            type;
+
 
         const old =
             document.querySelector(
@@ -1092,12 +1803,16 @@
 
 
         if (old) {
+
             old.remove();
+
         }
 
 
         const box =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
 
         box.className =
@@ -1108,39 +1823,51 @@
             message;
 
 
-        document.body.appendChild(box);
+        document.body.appendChild(
+            box
+        );
 
 
-        setTimeout(function() {
+        setTimeout(
+            function() {
 
-            box.style.opacity = "0";
+                box.style.opacity =
+                    "0";
 
 
-            setTimeout(function() {
+                setTimeout(
+                    function() {
 
-                box.remove();
+                        box.remove();
 
-            }, 250);
+                    },
+                    250
+                );
 
-        }, 2300);
+            },
+            2300
+        );
 
     }
 
 
+
     /* =========================================
-       Logout
-       ========================================= */
+       LOGOUT
+    ========================================= */
 
     async function logout() {
 
         const confirmed =
             window.confirm(
-                "هل تريد تسجيل الخروج من حسابك؟"
+                accountText("logoutConfirm")
             );
 
 
         if (!confirmed) {
+
             return;
+
         }
 
 
@@ -1153,7 +1880,7 @@
         if (error) {
 
             showMessage(
-                "حدث خطأ أثناء تسجيل الخروج."
+                accountText("logoutError")
             );
 
             return;
@@ -1162,10 +1889,10 @@
 
 
         /*
-         * نحذف بيانات الجلسة المحلية
-         * مع إبقاء بعض بيانات التعلم
-         * حتى لا تضيع عند تسجيل الدخول مجددًا.
-         */
+           نحذف المستوى فقط.
+           إعدادات اللغة والوضع تبقى محفوظة
+           لأنها إعدادات عامة للموقع.
+        */
 
         localStorage.removeItem(
             "student_level"
@@ -1178,15 +1905,78 @@
     }
 
 
+
     /* =========================================
-       Start
-       ========================================= */
+       GLOBAL LANGUAGE EVENTS
+    ========================================= */
 
-    loadAccount();
+    window.addEventListener(
+        "languageChanged",
+        function() {
 
+            translateAccountPage();
+
+        }
+    );
+
+
+    window.addEventListener(
+        "languagechange",
+        function() {
+
+            translateAccountPage();
+
+        }
+    );
+
+
+    window.addEventListener(
+        "storage",
+        function(event) {
+
+            if (
+                event.key ===
+                "site_language"
+            ) {
+
+                translateAccountPage();
+
+            }
+
+        }
+    );
+
+
+
+    /* =========================================
+       START
+    ========================================= */
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function() {
+
+            if (
+                typeof initializeGlobalSettings ===
+                "function"
+            ) {
+
+                initializeGlobalSettings();
+
+            }
+
+
+            translateAccountPage();
+
+
+            loadAccount();
+
+        }
+    );
 
 </script>
 
 
 </body>
-  </html>
+
+                    </html>
