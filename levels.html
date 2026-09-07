@@ -635,7 +635,8 @@
         <button
             class="brand"
             onclick="goHome()"
-            aria-label="الصفحة الرئيسية">
+            aria-label="الصفحة الرئيسية"
+            data-i18n-aria-label="home">
 
             <span class="brand-icon">AI</span>
 
@@ -645,7 +646,8 @@
 
         <button
             class="btn btn-secondary"
-            onclick="goDashboard()">
+            onclick="goDashboard()"
+            data-i18n="home">
 
             ← الرئيسية
 
@@ -675,7 +677,7 @@
                     Afkrash AI
                 </strong>
 
-                <span>
+                <span data-i18n="teacher_subtitle">
                     مدرسك الذكي في EduNova AI
                 </span>
 
@@ -692,11 +694,11 @@
                 🎓
             </div>
 
-            <h1>
+            <h1 data-i18n="levels_title">
                 أين تبدأ <span>رحلتك؟</span>
             </h1>
 
-            <p>
+            <p data-i18n="levels_description">
                 اختر شهادتك الدراسية، وسنجهز لك
                 الطريق المناسب لتعلم الرياضيات
                 داخل EduNova AI مع Afkrash AI.
@@ -709,7 +711,8 @@
 
         <section
             class="level-options"
-            aria-label="الشهادات الدراسية">
+            aria-label="الشهادات الدراسية"
+            data-i18n-aria-label="levels_certificates">
 
 
             <!-- 6AF / Concours -->
@@ -726,16 +729,18 @@
 
                 <div class="level-option-content">
 
-                    <h2>
+                    <h2 data-i18n="concours_title">
                         كونكور
                     </h2>
 
-                    <p>
+                    <p data-i18n="concours_description">
                         شهادة ختم الدروس الابتدائية
                         والتحضير للمسابقة والاختبارات.
                     </p>
 
-                    <span class="level-tag">
+                    <span
+                        class="level-tag"
+                        data-i18n="concours_tag">
                         6AF
                     </span>
 
@@ -762,16 +767,18 @@
 
                 <div class="level-option-content">
 
-                    <h2>
+                    <h2 data-i18n="brevet_title">
                         بريڤي
                     </h2>
 
-                    <p>
+                    <p data-i18n="brevet_description">
                         شهادة ختم الدروس الإعدادية
                         والاستعداد للـ Brevet.
                     </p>
 
-                    <span class="level-tag">
+                    <span
+                        class="level-tag"
+                        data-i18n="brevet_tag">
                         4ème année secondaire
                     </span>
 
@@ -798,16 +805,18 @@
 
                 <div class="level-option-content">
 
-                    <h2>
+                    <h2 data-i18n="bac_title">
                         باكالوريا
                     </h2>
 
-                    <p>
+                    <p data-i18n="bac_description">
                         اختر شعبة البكالوريا للوصول
                         إلى برنامج الرياضيات الصحيح.
                     </p>
 
-                    <span class="level-tag">
+                    <span
+                        class="level-tag"
+                        data-i18n="bac_tag">
                         Baccalauréat
                     </span>
 
@@ -827,7 +836,8 @@
         <section
             id="bacBranches"
             class="bac-branches"
-            aria-label="شعبة البكالوريا">
+            aria-label="شعبة البكالوريا"
+            data-i18n-aria-label="bac_branches">
 
 
             <!-- Bac C -->
@@ -848,7 +858,7 @@
                         Bac C
                     </h3>
 
-                    <p>
+                    <p data-i18n="bac_c_description">
                         الرياضيات الخاصة بشعبة
                         البكالوريا C.
                     </p>
@@ -880,7 +890,7 @@
                         Bac D
                     </h3>
 
-                    <p>
+                    <p data-i18n="bac_d_description">
                         الرياضيات الخاصة بشعبة
                         البكالوريا D.
                     </p>
@@ -898,10 +908,11 @@
 
         <div
             id="bacNote"
-            class="bac-note">
+            class="bac-note"
+            data-i18n="bac_note">
 
             اختر Bac C أو Bac D لأن لكل شعبة برنامج رياضيات مختلف.
-            
+
         </div>
 
 
@@ -914,7 +925,8 @@
                 class="btn btn-primary continue-level"
                 onclick="continueToLibrary()"
                 disabled
-                type="button">
+                type="button"
+                data-i18n="select_level_continue">
 
                 اختر مستواك للمتابعة
 
@@ -924,7 +936,8 @@
             <button
                 class="btn btn-secondary back-dashboard"
                 onclick="goDashboard()"
-                type="button">
+                type="button"
+                data-i18n="back_to_dashboard">
 
                 العودة إلى لوحة الطالب
 
@@ -939,7 +952,9 @@
         </section>
 
 
-        <p class="levels-footer-note">
+        <p
+            class="levels-footer-note"
+            data-i18n="levels_footer">
 
             EduNova AI يساعدك على اختيار طريقك،
             وAfkrash AI يرافقك في تعلم الرياضيات
@@ -969,13 +984,319 @@
 
     const levelNames = {
 
-        concours: "كونكور — 6AF",
+        concours: {
+            ar: "كونكور — 6AF",
+            fr: "Concours — 6AF"
+        },
 
-        brevet: "بريڤي — 4ème",
+        brevet: {
+            ar: "بريڤي — 4ème",
+            fr: "Brevet — 4ème"
+        },
 
-        bac: "باكالوريا"
+        bac: {
+            ar: "باكالوريا",
+            fr: "Baccalauréat"
+        }
 
     };
+
+
+    /* =========================
+       LOCAL LEVEL TRANSLATIONS
+       ========================= */
+
+    const LEVEL_TRANSLATIONS = {
+
+        ar: {
+
+            home: "← الرئيسية",
+
+            teacher_subtitle:
+                "مدرسك الذكي في EduNova AI",
+
+            levels_title:
+                'أين تبدأ <span>رحلتك؟</span>',
+
+            levels_description:
+                "اختر شهادتك الدراسية، وسنجهز لك الطريق المناسب لتعلم الرياضيات داخل EduNova AI مع Afkrash AI.",
+
+            levels_certificates:
+                "الشهادات الدراسية",
+
+            concours_title:
+                "كونكور",
+
+            concours_description:
+                "شهادة ختم الدروس الابتدائية والتحضير للمسابقة والاختبارات.",
+
+            concours_tag:
+                "6AF",
+
+            brevet_title:
+                "بريڤي",
+
+            brevet_description:
+                "شهادة ختم الدروس الإعدادية والاستعداد للـ Brevet.",
+
+            brevet_tag:
+                "4ème année secondaire",
+
+            bac_title:
+                "باكالوريا",
+
+            bac_description:
+                "اختر شعبة البكالوريا للوصول إلى برنامج الرياضيات الصحيح.",
+
+            bac_tag:
+                "Baccalauréat",
+
+            bac_branches:
+                "شعبة البكالوريا",
+
+            bac_c_description:
+                "الرياضيات الخاصة بشعبة البكالوريا C.",
+
+            bac_d_description:
+                "الرياضيات الخاصة بشعبة البكالوريا D.",
+
+            bac_note:
+                "اختر Bac C أو Bac D لأن لكل شعبة برنامج رياضيات مختلف.",
+
+            select_level_continue:
+                "اختر مستواك للمتابعة",
+
+            select_bac_branch:
+                "اختر Bac C أو Bac D",
+
+            continue_bac:
+                "متابعة مع Bac ",
+
+            continue_with:
+                "متابعة مع ",
+
+            back_to_dashboard:
+                "العودة إلى لوحة الطالب",
+
+            current_level:
+                "المستوى المحدد: ",
+
+            bac_choose_branch:
+                "المستوى المحدد: باكالوريا — اختر الشعبة",
+
+            current_bac:
+                "المستوى المحدد: باكالوريا ",
+
+            levels_footer:
+                "EduNova AI يساعدك على اختيار طريقك، وAfkrash AI يرافقك في تعلم الرياضيات خطوة بخطوة."
+
+        },
+
+        fr: {
+
+            home: "← Accueil",
+
+            teacher_subtitle:
+                "Votre professeur intelligent dans EduNova AI",
+
+            levels_title:
+                'Où commence votre <span>parcours ?</span>',
+
+            levels_description:
+                "Choisissez votre diplôme scolaire et nous préparerons le parcours adapté pour apprendre les mathématiques avec EduNova AI et Afkrash AI.",
+
+            levels_certificates:
+                "Diplômes scolaires",
+
+            concours_title:
+                "Concours",
+
+            concours_description:
+                "Certificat de fin des études primaires et préparation aux concours et aux examens.",
+
+            concours_tag:
+                "6AF",
+
+            brevet_title:
+                "Brevet",
+
+            brevet_description:
+                "Certificat de fin des études secondaires et préparation au Brevet.",
+
+            brevet_tag:
+                "4ème année secondaire",
+
+            bac_title:
+                "Baccalauréat",
+
+            bac_description:
+                "Choisissez la série du baccalauréat pour accéder au programme de mathématiques approprié.",
+
+            bac_tag:
+                "Baccalauréat",
+
+            bac_branches:
+                "Séries du baccalauréat",
+
+            bac_c_description:
+                "Mathématiques de la série Baccalauréat C.",
+
+            bac_d_description:
+                "Mathématiques de la série Baccalauréat D.",
+
+            bac_note:
+                "Choisissez Bac C ou Bac D car chaque série possède un programme de mathématiques différent.",
+
+            select_level_continue:
+                "Choisissez votre niveau pour continuer",
+
+            select_bac_branch:
+                "Choisissez Bac C ou Bac D",
+
+            continue_bac:
+                "Continuer avec Bac ",
+
+            continue_with:
+                "Continuer avec ",
+
+            back_to_dashboard:
+                "Retour au tableau de bord",
+
+            current_level:
+                "Niveau sélectionné : ",
+
+            bac_choose_branch:
+                "Niveau sélectionné : Baccalauréat — choisissez la série",
+
+            current_bac:
+                "Niveau sélectionné : Baccalauréat ",
+
+            levels_footer:
+                "EduNova AI vous aide à choisir votre parcours, et Afkrash AI vous accompagne dans l’apprentissage des mathématiques étape par étape."
+
+        }
+
+    };
+
+
+    /* =========================
+       CURRENT LANGUAGE
+       ========================= */
+
+    function getCurrentPageLanguage() {
+
+        if (typeof getSiteLanguage === "function") {
+
+            const language = getSiteLanguage();
+
+            return language === "fr" ? "fr" : "ar";
+
+        }
+
+        return localStorage.getItem("site_language") === "fr"
+            ? "fr"
+            : "ar";
+
+    }
+
+
+    /* =========================
+       APPLY LEVELS TRANSLATION
+       ========================= */
+
+    function applyLevelsLanguage() {
+
+        const language =
+            getCurrentPageLanguage();
+
+        const translations =
+            LEVEL_TRANSLATIONS[language];
+
+
+        /*
+         * HTML translations
+         */
+
+        document
+            .querySelectorAll("[data-i18n]")
+            .forEach(element => {
+
+                const key =
+                    element.getAttribute("data-i18n");
+
+                if (
+                    translations[key] !== undefined
+                ) {
+
+                    element.innerHTML =
+                        translations[key];
+
+                }
+
+            });
+
+
+        /*
+         * aria-label translations
+         */
+
+        document
+            .querySelectorAll("[data-i18n-aria-label]")
+            .forEach(element => {
+
+                const key =
+                    element.getAttribute(
+                        "data-i18n-aria-label"
+                    );
+
+                if (
+                    translations[key] !== undefined
+                ) {
+
+                    element.setAttribute(
+                        "aria-label",
+                        translations[key]
+                    );
+
+                }
+
+            });
+
+
+        /*
+         * تحديث اتجاه الصفحة
+         */
+
+        document.documentElement.lang =
+            language === "fr"
+                ? "fr"
+                : "ar";
+
+        document.documentElement.dir =
+            language === "fr"
+                ? "ltr"
+                : "rtl";
+
+
+        /*
+         * تحديث العنوان
+         */
+
+        document.title =
+            language === "fr"
+                ? "Choix du niveau | EduNova AI"
+                : "اختيار المستوى | EduNova AI";
+
+
+        /*
+         * تحديث النصوص الديناميكية
+         */
+
+        updateContinueButton();
+
+        updateCurrentLevelNote();
+
+    }
 
 
     /* =========================
@@ -986,15 +1307,29 @@
 
         selectedLevel = level;
 
+
         /*
          * إذا انتقل الطالب من الباك إلى مستوى آخر،
          * نحذف اختيار C/D من الحالة الحالية.
          */
+
         if (level !== "bac") {
 
             selectedBacBranch = null;
 
-            localStorage.removeItem("bac_branch");
+            localStorage.removeItem(
+                "bac_branch"
+            );
+
+            document
+                .querySelectorAll(".bac-branch")
+                .forEach(option => {
+
+                    option.classList.remove(
+                        "selected"
+                    );
+
+                });
 
         }
 
@@ -1007,7 +1342,9 @@
             .querySelectorAll(".level-option")
             .forEach(option => {
 
-                option.classList.remove("selected");
+                option.classList.remove(
+                    "selected"
+                );
 
             });
 
@@ -1020,31 +1357,40 @@
          */
 
         const bacBranches =
-            document.getElementById("bacBranches");
+            document.getElementById(
+                "bacBranches"
+            );
 
         const bacNote =
-            document.getElementById("bacNote");
+            document.getElementById(
+                "bacNote"
+            );
 
 
         if (level === "bac") {
 
-            bacBranches.classList.add("visible");
-            bacNote.classList.add("visible");
+            bacBranches.classList.add(
+                "visible"
+            );
+
+            bacNote.classList.add(
+                "visible"
+            );
 
         } else {
 
-            bacBranches.classList.remove("visible");
-            bacNote.classList.remove("visible");
+            bacBranches.classList.remove(
+                "visible"
+            );
+
+            bacNote.classList.remove(
+                "visible"
+            );
 
         }
 
 
-        /*
-         * تحديث الزر
-         */
-
         updateContinueButton();
-
         updateCurrentLevelNote();
 
     }
@@ -1054,7 +1400,10 @@
        SELECT BAC BRANCH
        ========================= */
 
-    function selectBacBranch(branch, element) {
+    function selectBacBranch(
+        branch,
+        element
+    ) {
 
         selectedBacBranch = branch;
 
@@ -1063,12 +1412,16 @@
             .querySelectorAll(".bac-branch")
             .forEach(option => {
 
-                option.classList.remove("selected");
+                option.classList.remove(
+                    "selected"
+                );
 
             });
 
 
-        element.classList.add("selected");
+        element.classList.add(
+            "selected"
+        );
 
 
         localStorage.setItem(
@@ -1078,7 +1431,6 @@
 
 
         updateContinueButton();
-
         updateCurrentLevelNote();
 
     }
@@ -1095,6 +1447,17 @@
                 "continueButton"
             );
 
+        if (!button) {
+            return;
+        }
+
+
+        const language =
+            getCurrentPageLanguage();
+
+        const t =
+            LEVEL_TRANSLATIONS[language];
+
 
         /*
          * لا يوجد مستوى
@@ -1105,7 +1468,7 @@
             button.disabled = true;
 
             button.textContent =
-                "اختر مستواك للمتابعة";
+                t.select_level_continue;
 
             return;
 
@@ -1124,7 +1487,7 @@
             button.disabled = true;
 
             button.textContent =
-                "اختر Bac C أو Bac D";
+                t.select_bac_branch;
 
             return;
 
@@ -1141,14 +1504,16 @@
         if (selectedLevel === "bac") {
 
             button.textContent =
-                "متابعة مع Bac " +
+                t.continue_bac +
                 selectedBacBranch;
 
         } else {
 
             button.textContent =
-                "متابعة مع " +
-                levelNames[selectedLevel];
+                t.continue_with +
+                levelNames[selectedLevel][
+                    language
+                ];
 
         }
 
@@ -1166,6 +1531,17 @@
                 "currentLevelNote"
             );
 
+        if (!note) {
+            return;
+        }
+
+
+        const language =
+            getCurrentPageLanguage();
+
+        const t =
+            LEVEL_TRANSLATIONS[language];
+
 
         if (!selectedLevel) {
 
@@ -1181,12 +1557,12 @@
             if (!selectedBacBranch) {
 
                 note.textContent =
-                    "المستوى المحدد: باكالوريا — اختر الشعبة";
+                    t.bac_choose_branch;
 
             } else {
 
                 note.textContent =
-                    "المستوى المحدد: باكالوريا " +
+                    t.current_bac +
                     selectedBacBranch;
 
             }
@@ -1197,8 +1573,10 @@
 
 
         note.textContent =
-            "المستوى المحدد: " +
-            levelNames[selectedLevel];
+            t.current_level +
+            levelNames[selectedLevel][
+                language
+            ];
 
     }
 
@@ -1347,9 +1725,14 @@
 
     function goDashboard() {
 
-        if (typeof goTo === "function") {
+        if (
+            typeof goTo ===
+            "function"
+        ) {
 
-            goTo("dashboard.html");
+            goTo(
+                "dashboard.html"
+            );
 
             return;
 
@@ -1364,9 +1747,14 @@
 
     function goHome() {
 
-        if (typeof goTo === "function") {
+        if (
+            typeof goTo ===
+            "function"
+        ) {
 
-            goTo("index.html");
+            goTo(
+                "index.html"
+            );
 
             return;
 
@@ -1387,6 +1775,10 @@
         "DOMContentLoaded",
         function () {
 
+            /*
+             * تشغيل النظام العالمي
+             */
+
             if (
                 typeof initializeGlobalSettings ===
                 "function"
@@ -1396,13 +1788,113 @@
 
             }
 
+
+            /*
+             * تطبيق لغة الصفحة مباشرة
+             */
+
+            applyLevelsLanguage();
+
+
+            /*
+             * استرجاع المستوى المحفوظ
+             */
+
             loadSavedLevel();
 
+
+            /*
+             * إعادة تطبيق اللغة بعد
+             * تحميل الحالة المحفوظة
+             */
+
+            applyLevelsLanguage();
+
         }
+    );
+
+
+    /* =========================
+       LANGUAGE / THEME STORAGE SYNC
+       ========================= */
+
+    window.addEventListener(
+        "storage",
+        function (event) {
+
+            if (
+                event.key ===
+                "site_language"
+            ) {
+
+                applyLevelsLanguage();
+
+            }
+
+
+            /*
+             * theme handled globally
+             * by script.js
+             */
+
+            if (
+                event.key ===
+                "site_theme"
+            ) {
+
+                if (
+                    typeof applySiteTheme ===
+                    "function"
+                ) {
+
+                    applySiteTheme(
+                        event.newValue ||
+                        "light"
+                    );
+
+                }
+
+            }
+
+        }
+    );
+
+
+    /*
+     * بعض نسخ script.js قد تغير اللغة
+     * بدون إطلاق storage event داخل نفس الصفحة.
+     * لذلك نراقب تغير اللغة بشكل خفيف.
+     */
+
+    let lastKnownLanguage =
+        getCurrentPageLanguage();
+
+
+    setInterval(
+        function () {
+
+            const currentLanguage =
+                getCurrentPageLanguage();
+
+
+            if (
+                currentLanguage !==
+                lastKnownLanguage
+            ) {
+
+                lastKnownLanguage =
+                    currentLanguage;
+
+                applyLevelsLanguage();
+
+            }
+
+        },
+        300
     );
 
 </script>
 
 </body>
 
-    </html>
+                    </html>
