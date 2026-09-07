@@ -1,7 +1,17 @@
-<!DOCTYPE html><html lang="ar" dir="rtl">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>التحدي الأسبوعي | عالم شيخ الأساتذة</title>  <link rel="stylesheet" href="style.css">  <style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title data-i18n="weekly_challenge">
+    التحدي الأسبوعي | EduNova AI
+  </title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
     .challenge-hero {
       background: linear-gradient(135deg, #2563eb, #1d4ed8);
       color: white;
@@ -102,6 +112,11 @@
       margin-right: 4px;
     }
 
+    html[dir="ltr"] .points-unit {
+      margin-right: 0;
+      margin-left: 4px;
+    }
+
     .challenge-card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -151,6 +166,11 @@
       margin-bottom: 18px;
     }
 
+    html[dir="ltr"] .question {
+      border-right: 0;
+      border-left: 4px solid var(--primary);
+    }
+
     .question-label {
       color: var(--primary);
       font-size: 12px;
@@ -191,6 +211,7 @@
       line-height: 1.8;
       outline: none;
       transition: .2s;
+      box-sizing: border-box;
     }
 
     .answer-textarea:focus {
@@ -242,6 +263,11 @@
       font-size: 13px;
     }
 
+    html[dir="ltr"] .rules ul {
+      padding-right: 0;
+      padding-left: 20px;
+    }
+
     .rules li {
       margin-bottom: 4px;
     }
@@ -272,6 +298,7 @@
         opacity: 0;
         transform: translate(-50%, 8px);
       }
+
       to {
         opacity: 1;
         transform: translate(-50%, 0);
@@ -315,237 +342,652 @@
         font-size: 24px;
       }
     }
-  </style></head><body>  <!-- Header -->  <header class="site-header">
-    <div class="container header-inner">  <a href="dashboard.html" class="brand">
-    <span class="brand-icon">🎓</span>
-    <span>عالم شيخ الأساتذة</span>
-  </a>
 
-  <button
-    class="btn btn-secondary btn-sm"
-    onclick="goDashboard()">
-    الرئيسية
-  </button>
+    html.dark-mode .points-icon,
+    html.dark-mode .difficulty {
+      background: rgba(251, 146, 60, .14);
+    }
 
-</div>
+    html.dark-mode .equation {
+      background: var(--surface);
+      border-color: var(--border);
+      color: var(--text);
+    }
 
-  </header>  <main class="page"><div class="container">
+    html.dark-mode .answer-textarea {
+      background: var(--surface-2, var(--surface));
+      color: var(--text);
+    }
 
-  <!-- Hero -->
-  <section class="challenge-hero">
+    html.dark-mode .answer-textarea:focus {
+      background: var(--surface);
+    }
 
-    <div class="challenge-hero-content">
+    html.dark-mode .submitted {
+      background: rgba(34, 197, 94, .10);
+      border-color: rgba(34, 197, 94, .30);
+      color: #86efac;
+    }
+  </style>
+</head>
 
-      <span class="hero-badge">
-        🏆 تحدي هذا الأسبوع
-      </span>
+<body>
 
-      <h1>
-        تحدَّ نفسك وتعلّم أكثر
-      </h1>
+  <!-- Header -->
+  <header class="site-header">
 
-      <p>
-        حل التمرين الأسبوعي واكتب خطواتك بوضوح.
-        الهدف ليس النقاط فقط، بل تطوير طريقة تفكيرك الرياضية.
-      </p>
+    <div class="container header-inner">
+
+      <a href="dashboard.html" class="brand">
+        <span class="brand-icon">🎓</span>
+        <span data-i18n="site_name">EduNova AI</span>
+      </a>
+
+      <button
+        class="btn btn-secondary btn-sm"
+        type="button"
+        onclick="goDashboard()"
+        data-i18n="home">
+        الرئيسية
+      </button>
 
     </div>
 
-  </section>
+  </header>
 
 
-  <!-- Points -->
-  <section class="points-card">
+  <main class="page">
 
-    <div class="points-info">
+    <div class="container">
 
-      <div class="points-icon">
-        ⭐
-      </div>
+      <!-- Hero -->
+      <section class="challenge-hero">
 
-      <div>
+        <div class="challenge-hero-content">
 
-        <div class="points-label">
-          نقاطك الحالية
-        </div>
-
-        <div>
-          <span
-            id="points"
-            class="points-number">
-            0
+          <span class="hero-badge">
+            🏆
+            <span data-i18n="weekly_challenge">
+              تحدي هذا الأسبوع
+            </span>
           </span>
 
-          <span class="points-unit">
-            نقطة
+          <h1 data-i18n="challenge_title">
+            تحدَّ نفسك وتعلّم أكثر
+          </h1>
+
+          <p data-i18n="challenge_description">
+            حل التمرين الأسبوعي واكتب خطواتك بوضوح.
+            الهدف ليس النقاط فقط، بل تطوير طريقة تفكيرك الرياضية.
+          </p>
+
+        </div>
+
+      </section>
+
+
+      <!-- Points -->
+      <section class="points-card">
+
+        <div class="points-info">
+
+          <div class="points-icon">
+            ⭐
+          </div>
+
+          <div>
+
+            <div
+              class="points-label"
+              data-i18n="current_points">
+              نقاطك الحالية
+            </div>
+
+            <div>
+
+              <span
+                id="points"
+                class="points-number">
+                0
+              </span>
+
+              <span
+                class="points-unit"
+                data-i18n="point">
+                نقطة
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div
+          class="badge"
+          data-i18n="hardworking_student">
+          طالب مجتهد
+        </div>
+
+      </section>
+
+
+      <!-- Challenge -->
+      <section class="challenge-card">
+
+        <div class="challenge-top">
+
+          <div>
+
+            <div
+              class="challenge-title"
+              data-i18n="math_challenge">
+              تحدي الرياضيات
+            </div>
+
+            <div
+              class="challenge-date"
+              data-i18n="weekly_participation">
+              هذا الأسبوع • المشاركة = 10 نقاط
+            </div>
+
+          </div>
+
+          <div
+            class="difficulty"
+            data-i18n="medium">
+            متوسط
+          </div>
+
+        </div>
+
+
+        <div class="question">
+
+          <div
+            class="question-label"
+            data-i18n="question">
+            🧠 السؤال
+          </div>
+
+          <span data-i18n="challenge_question_intro">
+            إذا كان لدينا العدد:
           </span>
+
+          <span class="equation">
+            3x + 5 = 20
+          </span>
+
+          <span data-i18n="challenge_question_text">
+            أوجد قيمة <strong>x</strong>،
+            ثم اشرح خطوات الحل بطريقة واضحة.
+          </span>
+
         </div>
 
-      </div>
 
-    </div>
-
-    <div class="badge">
-      طالب مجتهد
-    </div>
-
-  </section>
-
-
-  <!-- Challenge -->
-  <section class="challenge-card">
-
-    <div class="challenge-top">
-
-      <div>
-
-        <div class="challenge-title">
-          تحدي الرياضيات
+        <div
+          class="answer-title"
+          data-i18n="write_solution">
+          ✍️ اكتب حلك
         </div>
 
-        <div class="challenge-date">
-          هذا الأسبوع • المشاركة = 10 نقاط
+
+        <textarea
+          id="answer"
+          class="answer-textarea"
+          maxlength="3000"
+          data-i18n-placeholder="solution_placeholder"
+          placeholder="اكتب خطوات الحل هنا..."></textarea>
+
+
+        <button
+          class="btn btn-primary submit-btn"
+          id="submitBtn"
+          type="button"
+          onclick="submitAnswer()"
+          data-i18n="send_solution">
+          إرسال الحل
+        </button>
+
+
+        <div
+          class="submitted"
+          id="submittedMessage">
+
+          ✓
+          <span data-i18n="solution_sent">
+            تم إرسال حلك بنجاح.
+          </span>
+
+          <br>
+
+          <span data-i18n="participation_points">
+            حصلت على 10 نقاط للمشاركة.
+          </span>
+
+          <span data-i18n="evaluation_later">
+            سيتم تقييم جودة الحل لاحقًا عند ربط النظام الكامل.
+          </span>
+
         </div>
 
+      </section>
+
+
+      <!-- Rules -->
+      <section class="rules">
+
+        <h2 data-i18n="how_challenge_works">
+          📋 كيف يعمل التحدي؟
+        </h2>
+
+        <ul>
+
+          <li data-i18n="challenge_rule_1">
+            ينشر الأستاذ تمرينًا جديدًا كل أسبوع.
+          </li>
+
+          <li data-i18n="challenge_rule_2">
+            تحاول حل التمرين بنفسك.
+          </li>
+
+          <li data-i18n="challenge_rule_3">
+            تكتب خطوات الحل بوضوح.
+          </li>
+
+          <li data-i18n="challenge_rule_4">
+            تحصل على نقاط مقابل المشاركة.
+          </li>
+
+          <li data-i18n="challenge_rule_5">
+            لاحقًا ستتم إضافة البادجات والميداليات.
+          </li>
+
+          <li data-i18n="challenge_rule_6">
+            أفضل المشاركات يمكن أن تظهر في لوحة المتصدرين.
+          </li>
+
+        </ul>
+
+      </section>
+
+
+      <div class="bottom-action">
+
+        <button
+          class="btn btn-outline"
+          style="width:100%;"
+          type="button"
+          onclick="goDashboard()">
+
+          <span data-i18n="back_to_home">
+            ← العودة إلى الرئيسية
+          </span>
+
+        </button>
+
       </div>
 
-      <div class="difficulty">
-        متوسط
-      </div>
-
     </div>
 
-
-    <div class="question">
-
-      <div class="question-label">
-        🧠 السؤال
-      </div>
-
-      إذا كان لدينا العدد:
-
-      <span class="equation">
-        3x + 5 = 20
-      </span>
-
-      أوجد قيمة <strong>x</strong>،
-      ثم اشرح خطوات الحل بطريقة واضحة.
-
-    </div>
+  </main>
 
 
-    <div class="answer-title">
-      ✍️ اكتب حلك
-    </div>
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+
+    <a
+      href="dashboard.html"
+      data-nav="dashboard.html">
+
+      <span>⌂</span>
+
+      <small data-i18n="home">
+        الرئيسية
+      </small>
+
+    </a>
 
 
-    <textarea
-      id="answer"
-      class="answer-textarea"
-      maxlength="3000"
-      placeholder="اكتب خطوات الحل هنا..."></textarea>
+    <a
+      href="library.html"
+      data-nav="library.html">
+
+      <span>📚</span>
+
+      <small data-i18n="library">
+        مكتبتي
+      </small>
+
+    </a>
 
 
-    <button
-      class="btn btn-primary submit-btn"
-      id="submitBtn"
-      onclick="submitAnswer()">
+    <a
+      href="forum.html"
+      data-nav="forum.html">
 
-      إرسال الحل
+      <span>💬</span>
 
-    </button>
+      <small data-i18n="forum">
+        المنتدى
+      </small>
 
-
-    <div
-      class="submitted"
-      id="submittedMessage">
-
-      ✓ تم إرسال حلك بنجاح.
-
-      <br>
-
-      حصلت على 10 نقاط للمشاركة.
-      سيتم تقييم جودة الحل لاحقًا عند ربط النظام الكامل.
-
-    </div>
-
-  </section>
+    </a>
 
 
-  <!-- Rules -->
-  <section class="rules">
+    <a
+      href="account.html"
+      data-nav="account.html">
 
-    <h2>
-      📋 كيف يعمل التحدي؟
-    </h2>
+      <span>👤</span>
 
-    <ul>
+      <small data-i18n="account">
+        حسابي
+      </small>
 
-      <li>
-        ينشر الأستاذ تمرينًا جديدًا كل أسبوع.
-      </li>
+    </a>
 
-      <li>
-        تحاول حل التمرين بنفسك.
-      </li>
-
-      <li>
-        تكتب خطوات الحل بوضوح.
-      </li>
-
-      <li>
-        تحصل على نقاط مقابل المشاركة.
-      </li>
-
-      <li>
-        لاحقًا ستتم إضافة البادجات والميداليات.
-      </li>
-
-      <li>
-        أفضل المشاركات يمكن أن تظهر في لوحة المتصدرين.
-      </li>
-
-    </ul>
-
-  </section>
+  </nav>
 
 
-  <div class="bottom-action">
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <button
-      class="btn btn-outline"
-      style="width:100%;"
-      onclick="goDashboard()">
+  <!-- Global System -->
+  <script src="script.js"></script>
 
-      ← العودة إلى الرئيسية
 
-    </button>
+  <script>
 
-  </div>
+    /* =========================================
+       Challenge Translations
+       ========================================= */
 
-</div>
+    const CHALLENGE_TRANSLATIONS = {
 
-  </main>  <!-- Bottom Navigation -->  <nav class="bottom-nav"><a href="dashboard.html">
-  <span>⌂</span>
-  <small>الرئيسية</small>
-</a>
+      ar: {
 
-<a href="library.html">
-  <span>📚</span>
-  <small>مكتبتي</small>
-</a>
+        weekly_challenge:
+          "تحدي هذا الأسبوع",
 
-<a href="forum.html">
-  <span>💬</span>
-  <small>المنتدى</small>
-</a>
+        challenge_title:
+          "تحدَّ نفسك وتعلّم أكثر",
 
-<a href="account.html">
-  <span>👤</span>
-  <small>حسابي</small>
-</a>
+        challenge_description:
+          "حل التمرين الأسبوعي واكتب خطواتك بوضوح. الهدف ليس النقاط فقط، بل تطوير طريقة تفكيرك الرياضية.",
 
-  </nav>  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>  <script>
+        current_points:
+          "نقاطك الحالية",
+
+        point:
+          "نقطة",
+
+        hardworking_student:
+          "طالب مجتهد",
+
+        math_challenge:
+          "تحدي الرياضيات",
+
+        weekly_participation:
+          "هذا الأسبوع • المشاركة = 10 نقاط",
+
+        medium:
+          "متوسط",
+
+        question:
+          "🧠 السؤال",
+
+        challenge_question_intro:
+          "إذا كان لدينا العدد:",
+
+        challenge_question_text:
+          "أوجد قيمة x، ثم اشرح خطوات الحل بطريقة واضحة.",
+
+        write_solution:
+          "✍️ اكتب حلك",
+
+        solution_placeholder:
+          "اكتب خطوات الحل هنا...",
+
+        send_solution:
+          "إرسال الحل",
+
+        solution_sent:
+          "تم إرسال حلك بنجاح.",
+
+        participation_points:
+          "حصلت على 10 نقاط للمشاركة.",
+
+        evaluation_later:
+          " سيتم تقييم جودة الحل لاحقًا عند ربط النظام الكامل.",
+
+        how_challenge_works:
+          "📋 كيف يعمل التحدي؟",
+
+        challenge_rule_1:
+          "ينشر الأستاذ تمرينًا جديدًا كل أسبوع.",
+
+        challenge_rule_2:
+          "تحاول حل التمرين بنفسك.",
+
+        challenge_rule_3:
+          "تكتب خطوات الحل بوضوح.",
+
+        challenge_rule_4:
+          "تحصل على نقاط مقابل المشاركة.",
+
+        challenge_rule_5:
+          "لاحقًا ستتم إضافة البادجات والميداليات.",
+
+        challenge_rule_6:
+          "أفضل المشاركات يمكن أن تظهر في لوحة المتصدرين.",
+
+        back_to_home:
+          "← العودة إلى الرئيسية",
+
+        write_first:
+          "اكتب الحل أولًا قبل الإرسال.",
+
+        already_submitted:
+          "لقد أرسلت حل هذا الأسبوع بالفعل.",
+
+        solution_sent_points:
+          "تم إرسال الحل وإضافة 10 نقاط ✓",
+
+        sent_button:
+          "✓ تم إرسال الحل"
+      },
+
+      fr: {
+
+        weekly_challenge:
+          "Défi de la semaine",
+
+        challenge_title:
+          "Défiez-vous et apprenez davantage",
+
+        challenge_description:
+          "Résolvez l’exercice de la semaine et écrivez clairement vos étapes. L’objectif n’est pas seulement de gagner des points, mais de développer votre raisonnement mathématique.",
+
+        current_points:
+          "Vos points actuels",
+
+        point:
+          "point",
+
+        hardworking_student:
+          "Élève assidu",
+
+        math_challenge:
+          "Défi de mathématiques",
+
+        weekly_participation:
+          "Cette semaine • participation = 10 points",
+
+        medium:
+          "Moyen",
+
+        question:
+          "🧠 Question",
+
+        challenge_question_intro:
+          "Si nous avons l’équation :",
+
+        challenge_question_text:
+          "Trouvez la valeur de x, puis expliquez clairement les étapes de votre solution.",
+
+        write_solution:
+          "✍️ Écrivez votre solution",
+
+        solution_placeholder:
+          "Écrivez les étapes de votre solution ici...",
+
+        send_solution:
+          "Envoyer la solution",
+
+        solution_sent:
+          "Votre solution a été envoyée avec succès.",
+
+        participation_points:
+          "Vous avez obtenu 10 points pour votre participation.",
+
+        evaluation_later:
+          " La qualité de la solution sera évaluée ultérieurement lorsque le système complet sera connecté.",
+
+        how_challenge_works:
+          "📋 Comment fonctionne le défi ?",
+
+        challenge_rule_1:
+          "Le professeur publie un nouvel exercice chaque semaine.",
+
+        challenge_rule_2:
+          "Vous essayez de résoudre l’exercice vous-même.",
+
+        challenge_rule_3:
+          "Vous écrivez clairement les étapes de votre solution.",
+
+        challenge_rule_4:
+          "Vous gagnez des points pour votre participation.",
+
+        challenge_rule_5:
+          "Des badges et des médailles seront ajoutés ultérieurement.",
+
+        challenge_rule_6:
+          "Les meilleures participations pourront apparaître dans le classement.",
+
+        back_to_home:
+          "← Retour à l’accueil",
+
+        write_first:
+          "Écrivez d’abord votre solution avant de l’envoyer.",
+
+        already_submitted:
+          "Vous avez déjà envoyé la solution de cette semaine.",
+
+        solution_sent_points:
+          "Solution envoyée et 10 points ajoutés ✓",
+
+        sent_button:
+          "✓ Solution envoyée"
+      }
+
+    };
+
+
+    /* =========================================
+       Local Challenge Translation
+       ========================================= */
+
+    function getChallengeLanguage() {
+
+      const language =
+        typeof getSiteLanguage === "function"
+          ? getSiteLanguage()
+          : (
+              localStorage.getItem("site_language") || "ar"
+            );
+
+      return language === "fr"
+        ? "fr"
+        : "ar";
+    }
+
+
+    function challengeText(key) {
+
+      const language =
+        getChallengeLanguage();
+
+      return (
+        CHALLENGE_TRANSLATIONS[language] &&
+        CHALLENGE_TRANSLATIONS[language][key]
+      ) ||
+      (
+        CHALLENGE_TRANSLATIONS.ar[key]
+      ) ||
+      key;
+    }
+
+
+    function translateChallengePage() {
+
+      const language =
+        getChallengeLanguage();
+
+      document.documentElement.lang =
+        language;
+
+      document.documentElement.dir =
+        language === "fr"
+          ? "ltr"
+          : "rtl";
+
+
+      document
+        .querySelectorAll("[data-i18n]")
+        .forEach(element => {
+
+          const key =
+            element.dataset.i18n;
+
+          const translated =
+            challengeText(key);
+
+          if (
+            translated !== key
+          ) {
+            element.textContent =
+              translated;
+          }
+
+        });
+
+
+      document
+        .querySelectorAll("[data-i18n-placeholder]")
+        .forEach(element => {
+
+          const key =
+            element.dataset.i18nPlaceholder;
+
+          element.placeholder =
+            challengeText(key);
+
+        });
+
+
+      document.title =
+        language === "fr"
+          ? "Défi de la semaine | EduNova AI"
+          : "التحدي الأسبوعي | EduNova AI";
+
+    }
+
+
+    /* =========================================
+       Authentication
+       ========================================= */
 
     const SUPABASE_URL =
       "https://qkzdlxqledsznhbifaxy.supabase.co";
@@ -560,28 +1002,36 @@
       );
 
 
-    /* =========================================
-       Authentication
-       ========================================= */
-
     async function checkAuth() {
 
-      const {
-        data: { session }
-      } =
-        await supabaseClient.auth.getSession();
+      try {
+
+        const {
+          data: { session }
+        } =
+          await supabaseClient.auth.getSession();
 
 
-      if (!session) {
+        if (!session) {
 
-        window.location.href =
-          "login.html";
+          window.location.href =
+            "login.html";
+
+          return false;
+        }
+
+
+        return true;
+
+      } catch (error) {
+
+        console.error(
+          "Authentication error:",
+          error
+        );
 
         return false;
       }
-
-
-      return true;
 
     }
 
@@ -593,17 +1043,23 @@
     function loadPoints() {
 
       const points =
-        parseInt(
-          localStorage.getItem(
-            "student_points"
-          ) || "0",
-          10
-        );
+        typeof getStudentPoints === "function"
+          ? getStudentPoints()
+          : parseInt(
+              localStorage.getItem(
+                "student_points"
+              ) || "0",
+              10
+            );
 
 
-      document.getElementById(
-        "points"
-      ).textContent = points;
+      const pointsElement =
+        document.getElementById("points");
+
+      if (pointsElement) {
+        pointsElement.textContent =
+          points;
+      }
 
     }
 
@@ -614,16 +1070,22 @@
 
     function submitAnswer() {
 
+      const answerElement =
+        document.getElementById("answer");
+
+      if (!answerElement) {
+        return;
+      }
+
+
       const answer =
-        document.getElementById(
-          "answer"
-        ).value.trim();
+        answerElement.value.trim();
 
 
       if (!answer) {
 
         showMessage(
-          "اكتب الحل أولًا قبل الإرسال."
+          challengeText("write_first")
         );
 
         return;
@@ -639,7 +1101,7 @@
       if (alreadySubmitted) {
 
         showMessage(
-          "لقد أرسلت حل هذا الأسبوع بالفعل."
+          challengeText("already_submitted")
         );
 
         return;
@@ -662,26 +1124,41 @@
 
       /* Add participation points */
 
-      const currentPoints =
-        parseInt(
-          localStorage.getItem(
-            "student_points"
-          ) || "0",
-          10
+      if (
+        typeof addStudentPoints === "function"
+      ) {
+
+        addStudentPoints(10);
+
+      } else {
+
+        const currentPoints =
+          parseInt(
+            localStorage.getItem(
+              "student_points"
+            ) || "0",
+            10
+          );
+
+        localStorage.setItem(
+          "student_points",
+          String(currentPoints + 10)
         );
 
-
-      localStorage.setItem(
-        "student_points",
-        String(currentPoints + 10)
-      );
+      }
 
 
       /* Update UI */
 
-      document.getElementById(
-        "submittedMessage"
-      ).style.display = "block";
+      const submittedMessage =
+        document.getElementById(
+          "submittedMessage"
+        );
+
+      if (submittedMessage) {
+        submittedMessage.style.display =
+          "block";
+      }
 
 
       const button =
@@ -690,22 +1167,25 @@
         );
 
 
-      button.disabled = true;
+      if (button) {
 
-      button.textContent =
-        "✓ تم إرسال الحل";
+        button.disabled = true;
+
+        button.textContent =
+          challengeText("sent_button");
+
+      }
 
 
-      document.getElementById(
-        "answer"
-      ).disabled = true;
+      answerElement.disabled =
+        true;
 
 
       loadPoints();
 
 
       showMessage(
-        "تم إرسال الحل وإضافة 10 نقاط ✓"
+        challengeText("solution_sent_points")
       );
 
     }
@@ -734,18 +1214,33 @@
       }
 
 
-      if (answer) {
+      const answerElement =
+        document.getElementById("answer");
 
-        document.getElementById(
-          "answer"
-        ).value = answer;
+
+      if (
+        answerElement &&
+        answer
+      ) {
+
+        answerElement.value =
+          answer;
 
       }
 
 
-      document.getElementById(
-        "submittedMessage"
-      ).style.display = "block";
+      const submittedMessage =
+        document.getElementById(
+          "submittedMessage"
+        );
+
+
+      if (submittedMessage) {
+
+        submittedMessage.style.display =
+          "block";
+
+      }
 
 
       const button =
@@ -754,15 +1249,23 @@
         );
 
 
-      button.disabled = true;
+      if (button) {
 
-      button.textContent =
-        "✓ تم إرسال الحل";
+        button.disabled =
+          true;
+
+        button.textContent =
+          challengeText("sent_button");
+
+      }
 
 
-      document.getElementById(
-        "answer"
-      ).disabled = true;
+      if (answerElement) {
+
+        answerElement.disabled =
+          true;
+
+      }
 
     }
 
@@ -772,6 +1275,11 @@
        ========================================= */
 
     function showMessage(message) {
+
+      if (!message) {
+        return;
+      }
+
 
       const old =
         document.querySelector(
@@ -792,17 +1300,29 @@
         "challenge-message";
 
 
+      box.setAttribute(
+        "role",
+        "status"
+      );
+
+
       box.textContent =
         message;
 
 
-      document.body.appendChild(box);
+      document.body.appendChild(
+        box
+      );
 
 
       setTimeout(function() {
 
-        box.style.opacity = "0";
-        box.style.transition = ".25s";
+        box.style.opacity =
+          "0";
+
+        box.style.transition =
+          ".25s";
+
 
         setTimeout(function() {
 
@@ -821,10 +1341,95 @@
 
     function goDashboard() {
 
-      window.location.href =
-        "dashboard.html";
+      if (
+        typeof goTo === "function"
+      ) {
+
+        goTo("dashboard.html");
+
+      } else {
+
+        window.location.href =
+          "dashboard.html";
+
+      }
 
     }
+
+
+    /* =========================================
+       Language Events
+       ========================================= */
+
+    window.addEventListener(
+      "languageChanged",
+      function() {
+
+        translateChallengePage();
+
+        const submitted =
+          localStorage.getItem(
+            "weekly_challenge_submitted"
+          ) === "true";
+
+        if (submitted) {
+          restoreSubmission();
+        }
+
+      }
+    );
+
+
+    window.addEventListener(
+      "languagechange",
+      function() {
+
+        translateChallengePage();
+
+        const submitted =
+          localStorage.getItem(
+            "weekly_challenge_submitted"
+          ) === "true";
+
+        if (submitted) {
+          restoreSubmission();
+        }
+
+      }
+    );
+
+
+    window.addEventListener(
+      "storage",
+      function(event) {
+
+        if (
+          event.key === "site_language"
+        ) {
+
+          translateChallengePage();
+
+          const submitted =
+            localStorage.getItem(
+              "weekly_challenge_submitted"
+            ) === "true";
+
+          if (submitted) {
+            restoreSubmission();
+          }
+
+        }
+
+        if (
+          event.key === "student_points"
+        ) {
+
+          loadPoints();
+
+        }
+
+      }
+    );
 
 
     /* =========================================
@@ -832,6 +1437,8 @@
        ========================================= */
 
     async function startPage() {
+
+      translateChallengePage();
 
       const authenticated =
         await checkAuth();
@@ -849,7 +1456,12 @@
     }
 
 
-    startPage();
+    document.addEventListener(
+      "DOMContentLoaded",
+      startPage
+    );
 
-  </script></body>
-  </html>
+  </script>
+
+</body>
+    </html>
