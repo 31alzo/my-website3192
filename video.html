@@ -2,14 +2,21 @@
 <html lang="ar" dir="rtl">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
     <title>مشاهدة الفيديو | EduNova AI</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css">
 
     <style>
+
         .video-page {
             padding: 20px 0 60px;
         }
@@ -31,11 +38,15 @@
             border: 1px solid var(--border);
             background: var(--surface);
             color: var(--text);
+
             padding: 9px 13px;
+
             border-radius: 11px;
+
             font-family: inherit;
             font-size: 11px;
             font-weight: 800;
+
             cursor: pointer;
         }
 
@@ -44,22 +55,29 @@
             border-color: #93c5fd;
         }
 
+        /* =========================================
+           TEACHER
+        ========================================= */
+
         .teacher-strip {
             display: flex;
             align-items: center;
             gap: 12px;
+
             padding: 12px 14px;
             margin-bottom: 17px;
 
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 18px;
+
             box-shadow: var(--shadow-sm);
         }
 
         .teacher-avatar {
             width: 45px;
             height: 45px;
+
             flex-shrink: 0;
 
             display: grid;
@@ -75,26 +93,32 @@
                 );
 
             color: white;
+
             font-size: 12px;
             font-weight: 900;
         }
 
         .teacher-strip strong {
             display: block;
+
             font-size: 14px;
             font-weight: 900;
         }
 
         .teacher-strip span {
             display: block;
+
             margin-top: 3px;
+
             color: var(--text-soft);
+
             font-size: 10px;
+            line-height: 1.7;
         }
 
         /* =========================================
            VIDEO PLAYER
-           ========================================= */
+        ========================================= */
 
         .player-card {
             overflow: hidden;
@@ -127,6 +151,7 @@
 
         .player-placeholder {
             text-align: center;
+
             padding: 20px;
         }
 
@@ -160,12 +185,15 @@
             color: rgba(255,255,255,.65);
 
             font-size: 10px;
+
+            line-height: 1.7;
         }
 
         .free-label {
             display: inline-block;
 
             margin-top: 12px;
+
             padding: 6px 10px;
 
             border-radius: 999px;
@@ -182,6 +210,7 @@
             display: inline-block;
 
             margin-top: 12px;
+
             padding: 6px 10px;
 
             border-radius: 999px;
@@ -196,15 +225,17 @@
 
         /* =========================================
            INFO
-           ========================================= */
+        ========================================= */
 
         .video-info-card {
             margin-top: 17px;
+
             padding: 20px;
 
             background: var(--surface);
 
             border: 1px solid var(--border);
+
             border-radius: 20px;
 
             box-shadow: var(--shadow-sm);
@@ -229,6 +260,7 @@
             margin: 10px 0 7px;
 
             font-size: clamp(21px, 5vw, 30px);
+
             font-weight: 950;
         }
 
@@ -238,12 +270,14 @@
             color: var(--text-soft);
 
             font-size: 12px;
+
             line-height: 1.9;
         }
 
         .video-meta {
             display: flex;
             flex-wrap: wrap;
+
             gap: 8px;
 
             margin-top: 15px;
@@ -264,10 +298,11 @@
 
         /* =========================================
            SUBSCRIPTION
-           ========================================= */
+        ========================================= */
 
         .subscription-box {
             margin-top: 17px;
+
             padding: 20px;
 
             text-align: center;
@@ -288,6 +323,7 @@
             margin: 0 0 6px;
 
             font-size: 18px;
+
             font-weight: 950;
         }
 
@@ -299,6 +335,7 @@
             color: var(--text-soft);
 
             font-size: 11px;
+
             line-height: 1.8;
         }
 
@@ -308,12 +345,15 @@
             padding: 11px 18px;
 
             border: 0;
+
             border-radius: 12px;
 
             background: var(--primary);
+
             color: white;
 
             font-family: inherit;
+
             font-size: 11px;
             font-weight: 900;
 
@@ -325,11 +365,12 @@
         }
 
         /* =========================================
-           NAVIGATION
-           ========================================= */
+           VIDEO NAVIGATION
+        ========================================= */
 
         .video-navigation {
             display: flex;
+
             gap: 10px;
 
             margin-top: 17px;
@@ -341,12 +382,15 @@
             padding: 11px;
 
             border: 1px solid var(--border);
+
             border-radius: 12px;
 
             background: var(--surface);
+
             color: var(--text);
 
             font-family: inherit;
+
             font-size: 10px;
             font-weight: 800;
 
@@ -355,8 +399,169 @@
 
         .nav-video-btn:hover {
             border-color: #93c5fd;
+
             color: var(--primary);
         }
+
+        .nav-video-btn:disabled {
+            opacity: .45;
+
+            cursor: not-allowed;
+        }
+
+        /* =========================================
+           VIDEO LIST
+        ========================================= */
+
+        .video-list-card {
+            margin-top: 17px;
+
+            padding: 18px;
+
+            background: var(--surface);
+
+            border: 1px solid var(--border);
+
+            border-radius: 20px;
+
+            box-shadow: var(--shadow-sm);
+        }
+
+        .video-list-header {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin-bottom: 13px;
+        }
+
+        .video-list-header h2 {
+            margin: 0;
+
+            font-size: 16px;
+
+            font-weight: 950;
+        }
+
+        .video-list-header span {
+            color: var(--text-soft);
+
+            font-size: 9px;
+
+            font-weight: 700;
+        }
+
+        .video-items {
+            display: grid;
+
+            gap: 8px;
+        }
+
+        .video-item {
+            width: 100%;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            padding: 11px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 13px;
+
+            background: var(--background);
+
+            color: var(--text);
+
+            font-family: inherit;
+
+            text-align: inherit;
+
+            cursor: pointer;
+
+            transition: .2s ease;
+        }
+
+        .video-item:hover {
+            border-color: #93c5fd;
+
+            transform: translateY(-1px);
+        }
+
+        .video-item.active {
+            border-color: var(--primary);
+
+            background: var(--primary-light);
+        }
+
+        .video-item.locked {
+            opacity: .72;
+        }
+
+        .video-item-number {
+            width: 32px;
+            height: 32px;
+
+            flex-shrink: 0;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 10px;
+
+            background: var(--surface);
+
+            color: var(--primary);
+
+            font-size: 10px;
+
+            font-weight: 950;
+        }
+
+        .video-item-content {
+            flex: 1;
+
+            min-width: 0;
+        }
+
+        .video-item-title {
+            display: block;
+
+            font-size: 11px;
+
+            font-weight: 900;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+        }
+
+        .video-item-status {
+            display: block;
+
+            margin-top: 3px;
+
+            color: var(--text-soft);
+
+            font-size: 8px;
+        }
+
+        .video-item-icon {
+            font-size: 14px;
+        }
+
+        /* =========================================
+           MOBILE
+        ========================================= */
 
         @media (max-width: 500px) {
 
@@ -369,19 +574,30 @@
             }
 
             .video-info-card,
-            .subscription-box {
+            .subscription-box,
+            .video-list-card {
                 padding: 16px;
             }
 
             .video-navigation {
                 gap: 7px;
             }
+
+            .nav-video-btn {
+                padding: 10px 6px;
+
+                font-size: 9px;
+            }
+
         }
+
     </style>
+
 </head>
 
 
 <body>
+
 
 <header class="site-header">
 
@@ -392,7 +608,9 @@
             onclick="goHome()"
             type="button">
 
-            <span class="brand-icon">AI</span>
+            <span class="brand-icon">
+                AI
+            </span>
 
             <span>
                 EduNova AI
@@ -404,7 +622,8 @@
         <button
             class="back-btn"
             onclick="goChapter()"
-            type="button">
+            type="button"
+            id="backChapterButton">
 
             ← الـChapitre
 
@@ -415,12 +634,15 @@
 </header>
 
 
+
 <main class="page video-page">
 
     <div class="container video-wrapper">
 
 
-        <!-- TEACHER -->
+        <!-- =====================================
+             TEACHER
+        ====================================== -->
 
         <div class="teacher-strip">
 
@@ -434,7 +656,7 @@
                     Afkrash AI
                 </strong>
 
-                <span>
+                <span id="teacherDescription">
                     مدرسك الذكي في EduNova AI — تعلّم الرياضيات بطريقة بسيطة.
                 </span>
 
@@ -443,7 +665,10 @@
         </div>
 
 
-        <!-- PLAYER -->
+
+        <!-- =====================================
+             PLAYER
+        ====================================== -->
 
         <section class="player-card">
 
@@ -480,12 +705,19 @@
         </section>
 
 
-        <!-- INFO -->
+
+        <!-- =====================================
+             VIDEO INFORMATION
+        ====================================== -->
 
         <section class="video-info-card">
 
-            <span class="video-badge">
+            <span
+                class="video-badge"
+                id="videoSubject">
+
                 الرياضيات
+
             </span>
 
 
@@ -536,28 +768,34 @@
         </section>
 
 
-        <!-- SUBSCRIPTION -->
+
+        <!-- =====================================
+             SUBSCRIPTION
+        ====================================== -->
 
         <section
             class="subscription-box"
             id="subscriptionBox"
             style="display:none;">
 
-            <h2>
+            <h2 id="subscriptionTitle">
                 🔒 هذا الفيديو للمشتركين
             </h2>
 
-            <p>
+            <p id="subscriptionDescription">
+
                 الفيديو الأول من كل Chapitre مجاني.
                 للوصول إلى بقية الفيديوهات، يحتاج الطالب
                 إلى الاشتراك في إحدى الخطط التعليمية في EduNova AI.
+
             </p>
 
 
             <button
                 class="subscribe-btn"
                 onclick="goSubscribe()"
-                type="button">
+                type="button"
+                id="subscribeButton">
 
                 اشترك الآن
 
@@ -566,14 +804,18 @@
         </section>
 
 
-        <!-- NAVIGATION -->
+
+        <!-- =====================================
+             VIDEO NAVIGATION
+        ====================================== -->
 
         <div class="video-navigation">
 
             <button
                 class="nav-video-btn"
                 onclick="previousVideo()"
-                type="button">
+                type="button"
+                id="previousButton">
 
                 → الفيديو السابق
 
@@ -583,7 +825,8 @@
             <button
                 class="nav-video-btn"
                 onclick="goChapter()"
-                type="button">
+                type="button"
+                id="listButton">
 
                 قائمة الفيديوهات
 
@@ -593,7 +836,8 @@
             <button
                 class="nav-video-btn"
                 onclick="nextVideo()"
-                type="button">
+                type="button"
+                id="nextButton">
 
                 الفيديو التالي ←
 
@@ -602,16 +846,267 @@
         </div>
 
 
+
+        <!-- =====================================
+             VIDEO LIST
+        ====================================== -->
+
+        <section class="video-list-card">
+
+            <div class="video-list-header">
+
+                <h2 id="videoListTitle">
+                    فيديوهات الـChapitre
+                </h2>
+
+                <span id="videoListCount">
+                    0 / 20
+                </span>
+
+            </div>
+
+
+            <div
+                class="video-items"
+                id="videoItems">
+
+            </div>
+
+        </section>
+
+
     </div>
 
 </main>
 
 
+
+<script src="script.js"></script>
+
+
 <script>
 
     /* =========================================
-       VIDEO DATA
-       ========================================= */
+       TRANSLATIONS
+    ========================================= */
+
+    const VIDEO_TRANSLATIONS = {
+
+        ar: {
+
+            backChapter:
+                "← الـChapitre",
+
+            teacherDescription:
+                "مدرسك الذكي في EduNova AI — تعلّم الرياضيات بطريقة بسيطة.",
+
+            subject:
+                "الرياضيات",
+
+            video:
+                "فيديو",
+
+            chapter:
+                "Chapitre",
+
+            free:
+                "🎁 الفيديو الأول مجاني",
+
+            locked:
+                "🔒 يتطلب اشتراكًا",
+
+            firstVideo:
+                "الفيديو الأول",
+
+            freeMessage:
+                "الفيديو المجاني الأول في هذا الـChapitre.",
+
+            lockedMessage:
+                "هذا الفيديو متاح ضمن الخطط التعليمية.",
+
+            noDescription:
+                "لا يوجد وصف لهذا الفيديو حاليًا.",
+
+            placeholder:
+                "الفيديو سيظهر هنا عند ربط المحتوى الحقيقي.",
+
+            subscriptionTitle:
+                "🔒 هذا الفيديو للمشتركين",
+
+            subscriptionDescription:
+                "الفيديو الأول من كل Chapitre مجاني. للوصول إلى بقية الفيديوهات، يحتاج الطالب إلى الاشتراك في إحدى الخطط التعليمية في EduNova AI.",
+
+            subscribe:
+                "اشترك الآن",
+
+            previous:
+                "→ الفيديو السابق",
+
+            list:
+                "قائمة الفيديوهات",
+
+            next:
+                "الفيديو التالي ←",
+
+            videoList:
+                "فيديوهات الـChapitre",
+
+            freeStatus:
+                "مجاني",
+
+            lockedStatus:
+                "مغلق",
+
+            selectedStatus:
+                "الفيديو الحالي",
+
+            videoCount:
+                "فيديو",
+
+            subscriptionAlert:
+                "هذا الفيديو يحتاج إلى اشتراك في EduNova AI.",
+
+            subscribeAlert:
+                "صفحة الاشتراك في EduNova AI سيتم تجهيزها في الخطوة القادمة.",
+
+            navigationAlert:
+                "سيتم تفعيل الانتقال بين الفيديوهات عند إضافة المحتوى.",
+
+            comingSoon:
+                "سيتم إضافة محتوى هذا الفيديو لاحقًا."
+
+        },
+
+
+        fr: {
+
+            backChapter:
+                "← Chapitre",
+
+            teacherDescription:
+                "Votre professeur intelligent dans EduNova AI — apprenez les mathématiques simplement.",
+
+            subject:
+                "Mathématiques",
+
+            video:
+                "Vidéo",
+
+            chapter:
+                "Chapitre",
+
+            free:
+                "🎁 Première vidéo gratuite",
+
+            locked:
+                "🔒 Abonnement requis",
+
+            firstVideo:
+                "Première vidéo",
+
+            freeMessage:
+                "Première vidéo gratuite de ce chapitre.",
+
+            lockedMessage:
+                "Cette vidéo est disponible avec les plans éducatifs.",
+
+            noDescription:
+                "Aucune description disponible pour cette vidéo.",
+
+            placeholder:
+                "La vidéo apparaîtra ici lorsque le contenu réel sera connecté.",
+
+            subscriptionTitle:
+                "🔒 Cette vidéo est réservée aux abonnés",
+
+            subscriptionDescription:
+                "La première vidéo de chaque chapitre est gratuite. Pour accéder aux autres vidéos, l'élève doit souscrire à l'un des plans éducatifs d'EduNova AI.",
+
+            subscribe:
+                "S'abonner maintenant",
+
+            previous:
+                "→ Vidéo précédente",
+
+            list:
+                "Liste des vidéos",
+
+            next:
+                "Vidéo suivante ←",
+
+            videoList:
+                "Vidéos du chapitre",
+
+            freeStatus:
+                "Gratuit",
+
+            lockedStatus:
+                "Verrouillé",
+
+            selectedStatus:
+                "Vidéo actuelle",
+
+            videoCount:
+                "vidéos",
+
+            subscriptionAlert:
+                "Cette vidéo nécessite un abonnement à EduNova AI.",
+
+            subscribeAlert:
+                "La page d'abonnement d'EduNova AI sera préparée dans une prochaine étape.",
+
+            navigationAlert:
+                "La navigation entre les vidéos sera activée lorsque le contenu sera ajouté.",
+
+            comingSoon:
+                "Le contenu de cette vidéo sera ajouté prochainement."
+
+        }
+
+    };
+
+
+
+    /* =========================================
+       LANGUAGE
+    ========================================= */
+
+    function getVideoLanguage() {
+
+        if (
+            typeof getSiteLanguage === "function"
+        ) {
+
+            return getSiteLanguage();
+
+        }
+
+        return (
+            localStorage.getItem(
+                "site_language"
+            ) || "ar"
+        );
+
+    }
+
+
+    function videoText(key) {
+
+        const language =
+            getVideoLanguage();
+
+        return (
+            VIDEO_TRANSLATIONS[language]?.[key] ||
+            VIDEO_TRANSLATIONS.ar[key] ||
+            key
+        );
+
+    }
+
+
+    /* =========================================
+       SELECTED VIDEO
+    ========================================= */
 
     let selectedVideo = null;
 
@@ -633,8 +1128,9 @@
 
 
     /*
-       إذا لم توجد بيانات فيديو،
-       نستخدم فيديو تجريبي رقم 1.
+       في حالة فتح الصفحة مباشرة
+       بدون اختيار فيديو من Chapter،
+       نستخدم الفيديو الأول.
     */
 
     if (!selectedVideo) {
@@ -643,29 +1139,46 @@
 
             id: 1,
 
-            title: "الفيديو الأول",
+            number: 1,
 
-            description:
-                "هذا مكان الفيديو المجاني الأول في الـChapitre.",
+            title: {
+                ar: "الفيديو الأول",
+                fr: "Première vidéo"
+            },
+
+            description: {
+                ar: "هذا مكان الفيديو المجاني الأول في الـChapitre.",
+                fr: "Ceci est l'emplacement de la première vidéo gratuite du chapitre."
+            },
 
             duration: "--:--",
 
             videoUrl: "",
 
-            isFree: true,
-
-            number: 1
+            isFree: true
 
         };
 
     }
 
 
+
+    /* =========================================
+       CHAPTER
+    ========================================= */
+
+    const selectedChapter =
+        localStorage.getItem(
+            "selected_chapter"
+        ) || "1";
+
+
+
     /* =========================================
        VIDEO NUMBER
-       ========================================= */
+    ========================================= */
 
-    const videoNumber =
+    let videoNumber =
         Number(
             selectedVideo.number ||
             selectedVideo.id ||
@@ -673,45 +1186,274 @@
         );
 
 
+    if (
+        !Number.isFinite(videoNumber) ||
+        videoNumber < 1
+    ) {
+
+        videoNumber = 1;
+
+    }
+
+
     /*
-       القاعدة الحالية:
-       الفيديو رقم 1 مجاني.
-       الفيديوهات من 2 إلى 20 تحتاج اشتراكًا.
+       القاعدة الأساسية:
+
+       الفيديو 1 = مجاني
+
+       الفيديوهات 2 إلى 20 = تحتاج اشتراكًا
     */
 
     const isFree =
         videoNumber === 1;
 
 
+
+    /* =========================================
+       CHAPTER VIDEO DATA
+       
+       لاحقًا سيتم استبدال هذه البيانات
+       ببيانات قاعدة البيانات.
+
+       يمكن أن يصل العدد إلى 20 فيديو.
+    ========================================= */
+
+    const chapterVideos = [];
+
+
+    for (
+        let i = 1;
+        i <= 20;
+        i++
+    ) {
+
+        chapterVideos.push({
+
+            id: i,
+
+            number: i,
+
+            title: {
+
+                ar:
+                    i === 1
+                        ? "الفيديو الأول"
+                        : `الفيديو ${i}`,
+
+                fr:
+                    i === 1
+                        ? "Première vidéo"
+                        : `Vidéo ${i}`
+
+            },
+
+            description: {
+
+                ar:
+                    i === 1
+                        ? "هذا هو الفيديو المجاني الأول في الـChapitre."
+                        : `المحتوى التعليمي للفيديو ${i} سيُضاف لاحقًا.`,
+
+                fr:
+                    i === 1
+                        ? "Voici la première vidéo gratuite du chapitre."
+                        : `Le contenu pédagogique de la vidéo ${i} sera ajouté prochainement.`
+
+            },
+
+            duration:
+                "--:--",
+
+            videoUrl:
+                "",
+
+            isFree:
+                i === 1
+
+        });
+
+    }
+
+
+
+    /* =========================================
+       LOCALIZED VALUE
+    ========================================= */
+
+    function localizedVideoValue(value) {
+
+        if (
+            typeof value === "string"
+        ) {
+
+            return value;
+
+        }
+
+        if (
+            value &&
+            typeof value === "object"
+        ) {
+
+            const language =
+                getVideoLanguage();
+
+            return (
+                value[language] ||
+                value.ar ||
+                value.fr ||
+                ""
+            );
+
+        }
+
+        return "";
+
+    }
+
+
+
+    /* =========================================
+       APPLY PAGE LANGUAGE
+    ========================================= */
+
+    function translateVideoPage() {
+
+        const language =
+            getVideoLanguage();
+
+
+        document.documentElement.lang =
+            language;
+
+
+        document.documentElement.dir =
+            language === "fr"
+                ? "ltr"
+                : "rtl";
+
+
+        document.getElementById(
+            "backChapterButton"
+        ).textContent =
+            videoText("backChapter");
+
+
+        document.getElementById(
+            "teacherDescription"
+        ).textContent =
+            videoText("teacherDescription");
+
+
+        document.getElementById(
+            "videoSubject"
+        ).textContent =
+            videoText("subject");
+
+
+        document.getElementById(
+            "subscriptionTitle"
+        ).textContent =
+            videoText("subscriptionTitle");
+
+
+        document.getElementById(
+            "subscriptionDescription"
+        ).textContent =
+            videoText("subscriptionDescription");
+
+
+        document.getElementById(
+            "subscribeButton"
+        ).textContent =
+            videoText("subscribe");
+
+
+        document.getElementById(
+            "previousButton"
+        ).textContent =
+            videoText("previous");
+
+
+        document.getElementById(
+            "listButton"
+        ).textContent =
+            videoText("list");
+
+
+        document.getElementById(
+            "nextButton"
+        ).textContent =
+            videoText("next");
+
+
+        document.getElementById(
+            "videoListTitle"
+        ).textContent =
+            videoText("videoList");
+
+
+        loadVideo();
+
+        renderVideoList();
+
+    }
+
+
+
     /* =========================================
        LOAD VIDEO
-       ========================================= */
+    ========================================= */
 
     function loadVideo() {
+
+        const title =
+            localizedVideoValue(
+                selectedVideo.title
+            ) ||
+            videoText("firstVideo");
+
+
+        const description =
+            localizedVideoValue(
+                selectedVideo.description
+            ) ||
+            videoText("noDescription");
+
 
         document.getElementById(
             "playerTitle"
         ).textContent =
-            selectedVideo.title;
+            title;
 
 
         document.getElementById(
             "videoTitle"
         ).textContent =
-            selectedVideo.title;
+            title;
 
 
         document.getElementById(
             "videoDescription"
         ).textContent =
-            selectedVideo.description ||
-            "لا يوجد وصف لهذا الفيديو حاليًا.";
+            description;
+
+
+        document.getElementById(
+            "videoChapter"
+        ).textContent =
+            "📚 " +
+            videoText("chapter") +
+            " " +
+            selectedChapter;
 
 
         document.getElementById(
             "videoNumber"
         ).textContent =
-            "🎬 فيديو " +
+            "🎬 " +
+            videoText("video") +
+            " " +
             videoNumber;
 
 
@@ -724,10 +1466,6 @@
                 "--:--"
             );
 
-
-        /* =====================================
-           FREE / LOCKED
-           ===================================== */
 
         const freeLabel =
             document.getElementById(
@@ -747,21 +1485,37 @@
             );
 
 
+        /* =====================================
+           FREE
+        ===================================== */
+
         if (isFree) {
 
             freeLabel.style.display =
                 "inline-block";
 
+            freeLabel.className =
+                "free-label";
+
             freeLabel.textContent =
-                "🎁 الفيديو الأول مجاني";
+                videoText("free");
+
 
             subscriptionBox.style.display =
                 "none";
 
-            playerMessage.textContent =
-                "الفيديو المجاني الأول في هذا الـChapitre.";
 
-        } else {
+            playerMessage.textContent =
+                videoText("freeMessage");
+
+        }
+
+
+        /* =====================================
+           LOCKED
+        ===================================== */
+
+        else {
 
             freeLabel.style.display =
                 "inline-block";
@@ -770,31 +1524,58 @@
                 "locked-player-label";
 
             freeLabel.textContent =
-                "🔒 يتطلب اشتراكًا";
+                videoText("locked");
+
 
             subscriptionBox.style.display =
                 "block";
 
+
             playerMessage.textContent =
-                "هذا الفيديو متاح ضمن الخطط التعليمية.";
+                videoText("lockedMessage");
 
         }
 
 
         /* =====================================
            REAL VIDEO
-           ===================================== */
+        ===================================== */
+
+        renderRealVideo();
+
+    }
+
+
+
+    /* =========================================
+       REAL VIDEO PLAYER
+    ========================================= */
+
+    function renderRealVideo() {
+
+        const player =
+            document.getElementById(
+                "videoPlayer"
+            );
+
+
+        /*
+           لا نسمح بتشغيل الفيديو
+           إذا كان مقفلاً.
+        */
 
         if (
-            isFree &&
-            selectedVideo.videoUrl
+            !isFree
         ) {
 
-            const player =
-                document.getElementById(
-                    "videoPlayer"
-                );
+            return;
 
+        }
+
+
+        if (
+            selectedVideo.videoUrl
+        ) {
 
             player.innerHTML = `
 
@@ -815,7 +1596,7 @@
                         type="video/mp4"
                     >
 
-                    متصفحك لا يدعم تشغيل الفيديو.
+                    ${videoText("placeholder")}
 
                 </video>
 
@@ -826,9 +1607,205 @@
     }
 
 
+
+    /* =========================================
+       VIDEO LIST
+    ========================================= */
+
+    function renderVideoList() {
+
+        const container =
+            document.getElementById(
+                "videoItems"
+            );
+
+
+        container.innerHTML = "";
+
+
+        const language =
+            getVideoLanguage();
+
+
+        document.getElementById(
+            "videoListCount"
+        ).textContent =
+            "20 " +
+            videoText("videoCount");
+
+
+        chapterVideos.forEach(
+            video => {
+
+                const item =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                item.type =
+                    "button";
+
+
+                item.className =
+                    "video-item";
+
+
+                if (
+                    video.number === videoNumber
+                ) {
+
+                    item.classList.add(
+                        "active"
+                    );
+
+                }
+
+
+                if (
+                    video.number > 1
+                ) {
+
+                    item.classList.add(
+                        "locked"
+                    );
+
+                }
+
+
+                const title =
+                    localizedVideoValue(
+                        video.title
+                    );
+
+
+                const isCurrent =
+                    video.number === videoNumber;
+
+
+                const status =
+                    isCurrent
+                        ? videoText("selectedStatus")
+                        : video.number === 1
+                            ? videoText("freeStatus")
+                            : videoText("lockedStatus");
+
+
+                const icon =
+                    video.number === 1
+                        ? "🎁"
+                        : "🔒";
+
+
+                item.innerHTML = `
+
+                    <span class="video-item-number">
+                        ${video.number}
+                    </span>
+
+                    <span class="video-item-content">
+
+                        <span class="video-item-title">
+                            ${title}
+                        </span>
+
+                        <span class="video-item-status">
+                            ${status}
+                        </span>
+
+                    </span>
+
+                    <span class="video-item-icon">
+                        ${icon}
+                    </span>
+
+                `;
+
+
+                item.onclick =
+                    function () {
+
+                        selectVideo(
+                            video.number
+                        );
+
+                    };
+
+
+                container.appendChild(
+                    item
+                );
+
+            }
+        );
+
+    }
+
+
+
+    /* =========================================
+       SELECT VIDEO
+    ========================================= */
+
+    function selectVideo(number) {
+
+        const video =
+            chapterVideos.find(
+                item =>
+                    item.number === number
+            );
+
+
+        if (!video) {
+
+            return;
+
+        }
+
+
+        /*
+           الفيديوهات من 2 إلى 20
+           مقفلة حاليًا.
+        */
+
+        if (
+            number > 1
+        ) {
+
+            alert(
+                videoText("subscriptionAlert")
+            );
+
+
+            goSubscribe();
+
+            return;
+
+        }
+
+
+        /*
+           حفظ الفيديو المختار
+        */
+
+        localStorage.setItem(
+            "selected_video",
+            JSON.stringify(
+                video
+            )
+        );
+
+
+        window.location.href =
+            "video.html";
+
+    }
+
+
+
     /* =========================================
        NAVIGATION
-       ========================================= */
+    ========================================= */
 
     function goChapter() {
 
@@ -848,50 +1825,168 @@
 
     function goSubscribe() {
 
-        /*
-           صفحة الاشتراك والدفع سنبنيها
-           في مرحلة لاحقة.
-
-           لاحقًا ستكون هنا:
-           - الخطط الأسبوعية
-           - الشهرية
-           - السنوية
-           - فتح Chapitre كامل
-           - الدفع عبر Bankily / Masrivi / Sedad
-        */
-
         alert(
-            "صفحة الاشتراك في EduNova AI سيتم تجهيزها في الخطوة القادمة."
+            videoText("subscribeAlert")
         );
 
     }
 
+
+
+    /* =========================================
+       PREVIOUS VIDEO
+    ========================================= */
 
     function previousVideo() {
 
-        alert(
-            "سيتم تفعيل الانتقال بين الفيديوهات عند إضافة المحتوى."
+        if (
+            videoNumber <= 1
+        ) {
+
+            return;
+
+        }
+
+
+        const previous =
+            videoNumber - 1;
+
+
+        selectVideo(
+            previous
         );
 
     }
 
+
+
+    /* =========================================
+       NEXT VIDEO
+    ========================================= */
 
     function nextVideo() {
 
-        alert(
-            "سيتم تفعيل الانتقال بين الفيديوهات عند إضافة المحتوى."
+        if (
+            videoNumber >= 20
+        ) {
+
+            return;
+
+        }
+
+
+        const next =
+            videoNumber + 1;
+
+
+        selectVideo(
+            next
         );
 
     }
+
+
+
+    /* =========================================
+       UPDATE NAVIGATION BUTTONS
+    ========================================= */
+
+    function updateNavigationButtons() {
+
+        const previousButton =
+            document.getElementById(
+                "previousButton"
+            );
+
+
+        const nextButton =
+            document.getElementById(
+                "nextButton"
+            );
+
+
+        previousButton.disabled =
+            videoNumber <= 1;
+
+
+        nextButton.disabled =
+            videoNumber >= 20;
+
+    }
+
+
+
+    /* =========================================
+       LANGUAGE EVENTS
+    ========================================= */
+
+    window.addEventListener(
+        "languageChanged",
+        function () {
+
+            translateVideoPage();
+
+        }
+    );
+
+
+    window.addEventListener(
+        "languagechange",
+        function () {
+
+            translateVideoPage();
+
+        }
+    );
+
+
+    window.addEventListener(
+        "storage",
+        function (event) {
+
+            if (
+                event.key ===
+                "site_language"
+            ) {
+
+                translateVideoPage();
+
+            }
+
+        }
+    );
+
 
 
     /* =========================================
        START
-       ========================================= */
+    ========================================= */
 
-    loadVideo();
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+
+            if (
+                typeof initializeGlobalSettings ===
+                "function"
+            ) {
+
+                initializeGlobalSettings();
+
+            }
+
+
+            translateVideoPage();
+
+
+            updateNavigationButtons();
+
+        }
+    );
 
 </script>
 
+
 </body>
-    </html>
+
+            </html>
