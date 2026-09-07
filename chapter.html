@@ -551,10 +551,6 @@
     <div class="container chapter-wrapper">
 
 
-        <!-- =====================================
-             TEACHER
-             ===================================== -->
-
         <div class="teacher-strip">
 
             <div class="teacher-avatar">
@@ -575,10 +571,6 @@
 
         </div>
 
-
-        <!-- =====================================
-             HERO
-             ===================================== -->
 
         <section
             class="chapter-hero"
@@ -615,10 +607,6 @@
 
         </section>
 
-
-        <!-- =====================================
-             VIDEOS
-             ===================================== -->
 
         <section
             class="videos-section"
@@ -666,10 +654,6 @@
         </section>
 
 
-        <!-- =====================================
-             INVALID CHAPTER
-             ===================================== -->
-
         <section
             id="invalidChapter"
             class="invalid-chapter">
@@ -707,7 +691,7 @@
 <script>
 
     /* =========================================
-       CHAPTER TRANSLATIONS
+       TRANSLATIONS
        ========================================= */
 
     const CHAPTER_TRANSLATIONS = {
@@ -772,10 +756,7 @@
                 "🔒 يتطلب اشتراكًا",
 
             "chapter.subscription_alert":
-                "🔒 هذا الفيديو متاح ضمن الخطط التعليمية في EduNova AI.",
-
-            "chapter.no_video_url":
-                "🎬 سيتم إضافة هذا الفيديو قريبًا."
+                "🔒 هذا الفيديو متاح ضمن الخطط التعليمية في EduNova AI."
 
         },
 
@@ -839,10 +820,7 @@
                 "🔒 Abonnement requis",
 
             "chapter.subscription_alert":
-                "🔒 Cette vidéo est disponible dans les formules éducatives d'EduNova AI.",
-
-            "chapter.no_video_url":
-                "🎬 Cette vidéo sera ajoutée prochainement."
+                "🔒 Cette vidéo est disponible dans les formules éducatives d'EduNova AI."
 
         }
 
@@ -850,38 +828,43 @@
 
 
     /* =========================================
-       SELECTED STUDENT PATH
+       READ CURRENT PATH
        ========================================= */
 
+    function readStorage(key) {
+
+        try {
+
+            return localStorage.getItem(key) || "";
+
+        } catch (error) {
+
+            return "";
+
+        }
+
+    }
+
+
     const selectedLevel =
-        localStorage.getItem(
-            "student_level"
-        ) || "";
+        readStorage("student_level");
 
 
     const selectedBranch =
-        localStorage.getItem(
-            "bac_branch"
-        ) || "";
+        readStorage("bac_branch");
 
 
     const selectedSubject =
-        localStorage.getItem(
-            "selected_subject"
-        ) || "";
+        readStorage("selected_subject");
 
 
     const selectedSubjectType =
-        localStorage.getItem(
-            "selected_subject_type"
-        ) || "";
+        readStorage("selected_subject_type");
 
 
     const selectedChapter =
         Number(
-            localStorage.getItem(
-                "selected_chapter"
-            ) || "0"
+            readStorage("selected_chapter") || "0"
         );
 
 
@@ -890,28 +873,23 @@
        ========================================= */
 
     /*
-     * مهم:
+     * المنهج الحقيقي سيتم وضعه هنا لاحقًا.
      *
-     * كل مسار له بياناته الخاصة.
+     * لا نختلق أسماء الفصول أو الفيديوهات.
      *
-     * 6AF:
+     * كل مسار مستقل:
+     *
+     * 6AF
      * concours → mathematics
      *
-     * 4ème:
+     * 4ème
      * brevet → mathematics
      *
-     * Bac C:
-     * bac + C → mathematics_c
+     * Bac C
+     * bac → C → mathematics_c
      *
-     * Bac D:
-     * bac + D → mathematics_d
-     *
-     * لا يتم استعمال بيانات Bac C
-     * داخل Bac D أو العكس.
-     *
-     * نترك أسماء الفصول والفيديوهات
-     * فارغة حاليًا حتى نضع المنهج الحقيقي
-     * لاحقًا بدون اختلاق محتوى.
+     * Bac D
+     * bac → D → mathematics_d
      */
 
     const CURRICULUM_DATA = {
@@ -984,7 +962,7 @@
         }
 
 
-        return localStorage.getItem(
+        return readStorage(
             "site_language"
         ) === "fr"
             ? "fr"
@@ -1036,23 +1014,29 @@
 
 
     /* =========================================
-       CURRENT SUBJECT KEY
+       CURRENT SUBJECT
        ========================================= */
 
     function getCurrentSubjectKey() {
 
+        const subject =
+            selectedSubject.toLowerCase();
+
+
+        const subjectType =
+            selectedSubjectType.toLowerCase();
+
+
         /*
-         * نعتمد على selected_subject
-         * الذي تختاره صفحة المواد.
+         * Bac C
          */
 
         if (
-            selectedSubject ===
-            "math_bac_c" ||
-            selectedSubject ===
-            "mathematics_c" ||
-            selectedSubjectType ===
-            "math_c"
+            subject === "mathematics_c" ||
+            subject === "math_bac_c" ||
+            subject === "math_c" ||
+            subjectType === "math_c" ||
+            subjectType === "mathematics_c"
         ) {
 
             return "mathematics_c";
@@ -1060,13 +1044,16 @@
         }
 
 
+        /*
+         * Bac D
+         */
+
         if (
-            selectedSubject ===
-            "math_bac_d" ||
-            selectedSubject ===
-            "mathematics_d" ||
-            selectedSubjectType ===
-            "math_d"
+            subject === "mathematics_d" ||
+            subject === "math_bac_d" ||
+            subject === "math_d" ||
+            subjectType === "math_d" ||
+            subjectType === "mathematics_d"
         ) {
 
             return "mathematics_d";
@@ -1074,34 +1061,17 @@
         }
 
 
-        if (
-            selectedSubject ===
-            "math_brevet"
-        ) {
-
-            return "mathematics";
-
-        }
-
-
-        if (
-            selectedSubject ===
-            "math_concours"
-        ) {
-
-            return "mathematics";
-
-        }
-
-
         /*
-         * توافق إضافي مع الأسماء التي
-         * قد تستخدمها library.html.
+         * 6AF / 4ème
          */
 
         if (
-            selectedSubject ===
-            "mathematics"
+            subject === "mathematics" ||
+            subject === "math" ||
+            subject === "math_concours" ||
+            subject === "math_brevet" ||
+            subjectType === "mathematics" ||
+            subjectType === "math"
         ) {
 
             return "mathematics";
@@ -1143,11 +1113,10 @@
             }
 
 
-            return (
+            return
                 CURRICULUM_DATA
                     .concours
-                    .mathematics
-            );
+                    .mathematics;
 
         }
 
@@ -1171,11 +1140,10 @@
             }
 
 
-            return (
+            return
                 CURRICULUM_DATA
                     .brevet
-                    .mathematics
-            );
+                    .mathematics;
 
         }
 
@@ -1188,21 +1156,6 @@
             selectedLevel ===
             "bac"
         ) {
-
-            /*
-             * لا نسمح بفتح Bac بدون
-             * تحديد C أو D.
-             */
-
-            if (
-                selectedBranch !== "C" &&
-                selectedBranch !== "D"
-            ) {
-
-                return null;
-
-            }
-
 
             /*
              * Bac C
@@ -1222,12 +1175,11 @@
                 }
 
 
-                return (
+                return
                     CURRICULUM_DATA
                         .bac
                         .C
-                        .mathematics_c
-                );
+                        .mathematics_c;
 
             }
 
@@ -1250,12 +1202,11 @@
                 }
 
 
-                return (
+                return
                     CURRICULUM_DATA
                         .bac
                         .D
-                        .mathematics_d
-                );
+                        .mathematics_d;
 
             }
 
@@ -1274,10 +1225,8 @@
     function getSubjectLabel() {
 
         if (
-            selectedLevel ===
-            "bac" &&
-            selectedBranch ===
-            "C"
+            selectedLevel === "bac" &&
+            selectedBranch === "C"
         ) {
 
             return chapterText(
@@ -1288,10 +1237,8 @@
 
 
         if (
-            selectedLevel ===
-            "bac" &&
-            selectedBranch ===
-            "D"
+            selectedLevel === "bac" &&
+            selectedBranch === "D"
         ) {
 
             return chapterText(
@@ -1346,7 +1293,7 @@
 
 
     /* =========================================
-       PAGE TRANSLATION
+       TRANSLATE PAGE
        ========================================= */
 
     function translateChapterPage() {
@@ -1373,8 +1320,7 @@
 
 
                     if (
-                        translation !==
-                        undefined
+                        translation
                     ) {
 
                         element.textContent =
@@ -1430,8 +1376,7 @@
 
 
         /*
-         * إذا كانت البيانات غير صحيحة
-         * نعرض صفحة الخطأ.
+         * لا يوجد مسار صالح.
          */
 
         if (
@@ -1471,7 +1416,7 @@
 
 
         /*
-         * المسار صحيح.
+         * مسار صالح.
          */
 
         if (hero) {
@@ -1562,7 +1507,11 @@
 
             breadcrumbElement.textContent =
                 getSubjectLabel() +
-                " ← " +
+                (
+                    getChapterLanguage() === "fr"
+                        ? " ← "
+                        : " ← "
+                ) +
                 title;
 
         }
@@ -1576,18 +1525,17 @@
             Array.isArray(
                 currentChapter.videos
             )
-                ? currentChapter.videos
+                ? currentChapter.videos.slice(
+                    0,
+                    20
+                )
                 : [];
-
-
-        const limitedVideos =
-            videos.slice(0, 20);
 
 
         if (countElement) {
 
             const count =
-                limitedVideos.length;
+                videos.length;
 
 
             countElement.textContent =
@@ -1608,7 +1556,7 @@
 
 
         renderVideos(
-            limitedVideos
+            videos
         );
 
     }
@@ -1645,10 +1593,6 @@
         grid.innerHTML = "";
 
 
-        /*
-         * لا توجد فيديوهات بعد.
-         */
-
         if (
             !videos.length
         ) {
@@ -1670,20 +1614,12 @@
             .forEach(
                 function(video, index) {
 
-                    /*
-                     * رقم الفيديو الحقيقي داخل
-                     * هذا الشابتر.
-                     */
-
                     const videoNumber =
                         index + 1;
 
 
                     /*
-                     * القاعدة التجارية:
-                     *
-                     * الفيديو 1 مجاني.
-                     * الفيديوهات 2 إلى 20 مقفلة.
+                     * الفيديو الأول فقط مجاني.
                      */
 
                     const isFree =
@@ -1751,30 +1687,29 @@
 
 
                     const videoLabel =
-                        getChapterLanguage() ===
-                        "fr"
+                        getChapterLanguage() === "fr"
                             ? "Vidéo "
                             : "فيديو ";
 
 
                     card.innerHTML = `
 
+                        ${
+                            isFree
+                            ? `
+                                <div class="free-badge">
+                                    ${escapeVideoText(badge)}
+                                </div>
+                            `
+                            : `
+                                <div class="lock-badge">
+                                    ${escapeVideoText(badge)}
+                                </div>
+                            `
+                        }
+
+
                         <div class="video-thumbnail">
-
-                            ${
-                                isFree
-                                ? `
-                                    <div class="free-badge">
-                                        ${escapeVideoText(badge)}
-                                    </div>
-                                `
-                                : `
-                                    <div class="lock-badge">
-                                        ${escapeVideoText(badge)}
-                                    </div>
-                                `
-                            }
-
 
                             ${
                                 isFree
@@ -1955,11 +1890,6 @@
             );
 
 
-            /*
-             * نحتفظ أيضًا بالمسار الدراسي
-             * حتى لا يحدث خلط في الصفحة التالية.
-             */
-
             localStorage.setItem(
                 "selected_subject",
                 selectedSubject
@@ -1983,8 +1913,8 @@
 
         /*
          * الفيديوهات 2 إلى 20
-         * مقفلة حتى يتم ربط الاشتراك
-         * الحقيقي بالـBackend.
+         * ستبقى مقفلة إلى أن نربط
+         * نظام الاشتراك الحقيقي.
          */
 
         alert(
@@ -2008,6 +1938,7 @@
         ) {
 
             goTo("library.html");
+
             return;
 
         }
@@ -2027,6 +1958,7 @@
         ) {
 
             goTo("index.html");
+
             return;
 
         }
@@ -2129,4 +2061,4 @@
 
 </body>
 
-                </html>
+    </html>
