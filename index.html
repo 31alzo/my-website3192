@@ -19,13 +19,12 @@
     <style>
         /* =====================================================
            EduNova AI — الصفحة الرئيسية
+           الحفاظ على التصميم الأصلي
         ===================================================== */
 
         .home-page {
             padding-bottom: 40px;
         }
-
-        /* ================= HERO ================= */
 
         .home-hero {
             position: relative;
@@ -33,7 +32,6 @@
             min-height: 520px;
             display: flex;
             align-items: center;
-
             border-radius: 30px;
 
             background:
@@ -58,44 +56,31 @@
         .home-hero::before {
             content: "";
             position: absolute;
-
             width: 260px;
             height: 260px;
-
             left: -120px;
             top: -120px;
-
             border-radius: 50%;
-
-            border:
-                1px solid rgba(255,255,255,.12);
+            border: 1px solid rgba(255,255,255,.12);
         }
 
         .home-hero::after {
             content: "";
             position: absolute;
-
             width: 360px;
             height: 360px;
-
             right: -190px;
             bottom: -210px;
-
             border-radius: 50%;
-
-            border:
-                1px solid rgba(255,255,255,.10);
+            border: 1px solid rgba(255,255,255,.10);
         }
 
         .home-hero-inner {
             position: relative;
             z-index: 2;
-
             width: 100%;
-
             display: grid;
             gap: 32px;
-
             padding: 34px 24px;
         }
 
@@ -103,61 +88,36 @@
             max-width: 650px;
         }
 
-        /* ================= AI LABEL ================= */
-
         .ai-label {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-
             width: fit-content;
-
             margin-bottom: 16px;
             padding: 8px 14px;
-
-            border:
-                1px solid rgba(255,255,255,.22);
-
+            border: 1px solid rgba(255,255,255,.22);
             border-radius: 999px;
-
-            background:
-                rgba(255,255,255,.10);
-
+            background: rgba(255,255,255,.10);
             color: #fff;
-
             font-size: 14px;
             font-weight: 700;
-
             backdrop-filter: blur(10px);
         }
 
         .ai-dot {
             width: 9px;
             height: 9px;
-
             border-radius: 50%;
-
             background: #93c5fd;
-
-            box-shadow:
-                0 0 0 5px
-                rgba(147,197,253,.12);
+            box-shadow: 0 0 0 5px rgba(147,197,253,.12);
         }
-
-        /* ================= TITLE ================= */
 
         .home-hero h1 {
             margin: 0 0 14px;
-
             color: #fff;
-
-            font-size:
-                clamp(34px, 9vw, 58px);
-
+            font-size: clamp(34px, 9vw, 58px);
             line-height: 1.2;
-
             font-weight: 800;
-
             letter-spacing: -.04em;
         }
 
@@ -168,17 +128,11 @@
 
         .home-hero-text {
             max-width: 620px;
-
             margin: 0 0 24px;
-
-            color:
-                rgba(255,255,255,.84);
-
+            color: rgba(255,255,255,.84);
             font-size: 17px;
             line-height: 1.9;
         }
-
-        /* ================= BUTTONS ================= */
 
         .hero-actions {
             display: flex;
@@ -201,58 +155,34 @@
         }
 
         .hero-secondary {
-            background:
-                rgba(255,255,255,.11);
-
+            background: rgba(255,255,255,.11);
             color: #fff;
-
-            border:
-                1px solid rgba(255,255,255,.20);
+            border: 1px solid rgba(255,255,255,.20);
         }
 
         .hero-secondary:hover {
-            background:
-                rgba(255,255,255,.18);
-
+            background: rgba(255,255,255,.18);
             color: #fff;
         }
 
-        /* ================= AFKRASH ================= */
-
         .teacher-card {
             width: min(100%, 330px);
-
             margin-inline: auto;
-
             padding: 20px;
-
-            border:
-                1px solid rgba(255,255,255,.16);
-
+            border: 1px solid rgba(255,255,255,.16);
             border-radius: 26px;
-
-            background:
-                rgba(255,255,255,.10);
-
-            box-shadow:
-                inset 0 1px 0
-                rgba(255,255,255,.10);
-
+            background: rgba(255,255,255,.10);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.10);
             backdrop-filter: blur(14px);
         }
 
         .teacher-avatar {
             width: 100%;
-
             aspect-ratio: 1 / 1;
-
             display: grid;
             place-items: center;
-
             margin-bottom: 16px;
-
             border-radius: 22px;
-
             background:
                 radial-gradient(
                     circle at 50% 35%,
@@ -260,27 +190,19 @@
                     rgba(255,255,255,.05) 55%,
                     transparent 70%
                 );
-
-            border:
-                1px solid rgba(255,255,255,.14);
-
+            border: 1px solid rgba(255,255,255,.14);
             font-size: 92px;
         }
 
         .teacher-card h2 {
             margin: 0 0 4px;
-
             color: #fff;
-
             font-size: 23px;
         }
 
         .teacher-card p {
             margin: 0;
-
-            color:
-                rgba(255,255,255,.72);
-
+            color: rgba(255,255,255,.72);
             font-size: 14px;
         }
 
@@ -288,22 +210,14 @@
             display: inline-flex;
             align-items: center;
             gap: 7px;
-
             margin-top: 15px;
             padding: 7px 11px;
-
             border-radius: 10px;
-
-            background:
-                rgba(255,255,255,.12);
-
+            background: rgba(255,255,255,.12);
             color: #fff;
-
             font-size: 12px;
             font-weight: 700;
         }
-
-        /* ================= SECTIONS ================= */
 
         .home-section {
             padding-top: 10px;
@@ -322,39 +236,24 @@
             margin-bottom: 0;
         }
 
-        /* ================= IDENTITY ================= */
-
         .identity-card {
             position: relative;
             overflow: hidden;
-
             padding: 25px;
-
             border-radius: 24px;
-
             background: var(--surface);
-
-            border:
-                1px solid var(--border);
-
-            box-shadow:
-                var(--shadow-sm);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
         }
 
         .identity-icon {
             width: 52px;
             height: 52px;
-
             display: grid;
             place-items: center;
-
             margin-bottom: 15px;
-
             border-radius: 16px;
-
-            background:
-                var(--primary-light);
-
+            background: var(--primary-light);
             font-size: 25px;
         }
 
@@ -367,16 +266,11 @@
             line-height: 1.8;
         }
 
-        /* ================= CERTIFICATES ================= */
-
         .certificate-card {
             position: relative;
             overflow: hidden;
-
             padding: 24px;
-
             border-radius: 22px;
-
             transition:
                 transform .2s ease,
                 box-shadow .2s ease;
@@ -388,75 +282,47 @@
 
         .certificate-number {
             display: inline-flex;
-
             align-items: center;
             justify-content: center;
-
             width: 42px;
             height: 42px;
-
             margin-bottom: 14px;
-
             border-radius: 12px;
-
-            background:
-                var(--primary-light);
-
-            color:
-                var(--primary);
-
+            background: var(--primary-light);
+            color: var(--primary);
             font-weight: 800;
         }
 
         .certificate-card .available {
             display: inline-block;
-
             margin-top: 10px;
             padding: 5px 9px;
-
             border-radius: 8px;
-
-            background:
-                #dcfce7;
-
-            color:
-                #166534;
-
+            background: #dcfce7;
+            color: #166534;
             font-size: 12px;
-
             font-weight: 700;
         }
-
-        /* ================= FUTURE ================= */
 
         .future-card {
             padding: 22px;
         }
 
-        /* ================= CTA ================= */
-
         .home-final {
             position: relative;
             overflow: hidden;
-
             padding: 34px 24px;
-
             border-radius: 28px;
-
             background:
                 linear-gradient(
                     135deg,
                     var(--primary),
                     var(--primary-dark)
                 );
-
             color: #fff;
-
             text-align: center;
-
             box-shadow:
-                0 18px 40px
-                rgba(37,99,235,.18);
+                0 18px 40px rgba(37,99,235,.18);
         }
 
         .home-final h2 {
@@ -465,22 +331,16 @@
         }
 
         .home-final p {
-            color:
-                rgba(255,255,255,.82);
-
+            color: rgba(255,255,255,.82);
             margin-bottom: 20px;
         }
-
-        /* ================= RESPONSIVE ================= */
 
         @media (min-width: 760px) {
 
             .home-hero-inner {
                 grid-template-columns:
                     minmax(0, 1fr) 330px;
-
                 align-items: center;
-
                 padding: 50px;
             }
 
@@ -498,9 +358,7 @@
                 margin-inline-end: 0;
             }
         }
-
     </style>
-
 </head>
 
 <body>
@@ -522,9 +380,7 @@
         <a href="login.html"
            class="btn btn-primary"
            data-i18n="login">
-
             دخول
-
         </a>
 
     </div>
@@ -533,10 +389,6 @@
 
 
 <main class="home-page">
-
-<!-- =====================================================
-     HERO
-===================================================== -->
 
 <section class="section">
 
@@ -610,36 +462,25 @@
                 </div>
 
 
-                <!-- ================= AFKRASH ================= -->
-
                 <div class="teacher-card">
 
                     <div class="teacher-avatar">
                         🤖
                     </div>
 
-
                     <h2>
                         Afkrash AI
                     </h2>
 
-
                     <p data-i18n="virtual_teacher_edunova">
-
-                        مدرسك الافتراضي في
-                        EduNova AI
-
+                        مدرسك الافتراضي في EduNova AI
                     </p>
 
-
                     <div class="teacher-logo">
-
                         🎓 EduNova AI
-
                     </div>
 
                 </div>
-
 
             </div>
 
@@ -650,10 +491,6 @@
 </section>
 
 
-<!-- =====================================================
-     IDENTITY
-===================================================== -->
-
 <section class="section home-section">
 
     <div class="container">
@@ -662,25 +499,19 @@
 
             <h2 class="section-title"
                 data-i18n="what_is_edunova">
-
                 ما هي EduNova AI؟
-
             </h2>
 
-
             <p data-i18n="edunova_intro">
-
                 منصة تعليمية تعتمد على التكنولوجيا
                 والذكاء الاصطناعي لتقديم تجربة تعلم
                 بسيطة ومنظمة للطلاب.
-
             </p>
 
         </div>
 
 
         <div class="grid grid-2">
-
 
             <article class="identity-card">
 
@@ -693,11 +524,9 @@
                 </h3>
 
                 <p data-i18n="understand_before_memorize_desc">
-
                     نركز على فهم الفكرة وطريقة
                     الوصول إلى الحل، وليس فقط
                     حفظ الإجابة.
-
                 </p>
 
             </article>
@@ -714,12 +543,10 @@
                 </h3>
 
                 <p data-i18n="clear_learning_path_desc">
-
                     دروس منظمة حسب الشهادة
                     والمادة والـChapitres،
                     حتى تعرف دائمًا أين أنت
                     وإلى أين تتجه.
-
                 </p>
 
             </article>
@@ -736,11 +563,9 @@
                 </h3>
 
                 <p data-i18n="afkrash_explanations_desc">
-
                     مدرس افتراضي يقدم الدروس
                     والشروحات بطريقة مبسطة
                     ومناسبة للطالب.
-
                 </p>
 
             </article>
@@ -757,15 +582,12 @@
                 </h3>
 
                 <p data-i18n="step_by_step_desc">
-
                     تبدأ من الدرس المناسب لك
                     وتتقدم تدريجيًا حتى تصل
                     إلى هدفك الدراسي.
-
                 </p>
 
             </article>
-
 
         </div>
 
@@ -774,14 +596,7 @@
 </section>
 
 
-<!-- =====================================================
-     CERTIFICATES
-===================================================== -->
-
-<section
-    class="section home-section"
-    id="certificates"
->
+<section class="section home-section" id="certificates">
 
     <div class="container">
 
@@ -789,24 +604,18 @@
 
             <h2 class="section-title"
                 data-i18n="choose_certificate">
-
                 اختر شهادتك
-
             </h2>
 
-
             <p data-i18n="certificate_intro">
-
                 اختر الشهادة التي تستعد للحصول
                 عليها، ثم ابدأ رحلتك التعليمية.
-
             </p>
 
         </div>
 
 
         <div class="grid grid-3">
-
 
             <a href="login.html"
                class="card card-hover certificate-card">
@@ -821,17 +630,13 @@
 
                 <p class="text-muted"
                    data-i18n="concours_desc">
-
                     دروس ومراجعة منظمة
                     للاستعداد للكونكور.
-
                 </p>
 
                 <span class="available"
                       data-i18n="available_plan">
-
                     متاح ضمن خطة المنصة
-
                 </span>
 
             </a>
@@ -850,17 +655,13 @@
 
                 <p class="text-muted"
                    data-i18n="brevet_desc">
-
                     تعلم ومراجعة بطريقة
                     منظمة لتثبيت الأساسيات.
-
                 </p>
 
                 <span class="available"
                       data-i18n="available_plan">
-
                     متاح ضمن خطة المنصة
-
                 </span>
 
             </a>
@@ -879,21 +680,16 @@
 
                 <p class="text-muted"
                    data-i18n="baccalaureate_desc">
-
                     تحضير تدريجي للباكالوريا
                     مع دروس وتمارين منظمة.
-
                 </p>
 
                 <span class="available"
                       data-i18n="available_plan">
-
                     متاح ضمن خطة المنصة
-
                 </span>
 
             </a>
-
 
         </div>
 
@@ -901,10 +697,6 @@
 
 </section>
 
-
-<!-- =====================================================
-     YEAR ONE
-===================================================== -->
 
 <section class="section home-section">
 
@@ -914,24 +706,18 @@
 
             <h2 class="section-title"
                 data-i18n="first_year">
-
                 السنة الأولى
-
             </h2>
 
-
             <p data-i18n="first_year_desc">
-
                 نبدأ بمادة واحدة ونبنيها
                 بعناية قبل التوسع.
-
             </p>
 
         </div>
 
 
         <div class="grid grid-2">
-
 
             <article class="card card-hover future-card">
 
@@ -945,10 +731,8 @@
 
                 <p class="text-muted"
                    data-i18n="mathematics_year_one">
-
                     المادة الأساسية في السنة الأولى
                     من EduNova AI.
-
                 </p>
 
             </article>
@@ -966,14 +750,11 @@
 
                 <p class="text-muted"
                    data-i18n="afkrash_year_one">
-
                     المدرس الافتراضي الذي سيقدم
                     الدروس والشروحات داخل المنصة.
-
                 </p>
 
             </article>
-
 
         </div>
 
@@ -981,10 +762,6 @@
 
 </section>
 
-
-<!-- =====================================================
-     WHAT COMES NEXT
-===================================================== -->
 
 <section class="section home-section">
 
@@ -994,24 +771,18 @@
 
             <h2 class="section-title"
                 data-i18n="just_beginning">
-
                 هذه مجرد البداية
-
             </h2>
 
-
             <p data-i18n="future_intro">
-
                 سنطور EduNova AI تدريجيًا لتصبح
                 منصة تعليمية متكاملة.
-
             </p>
 
         </div>
 
 
         <div class="grid grid-3">
-
 
             <article class="card card-hover future-card">
 
@@ -1025,10 +796,8 @@
 
                 <p class="text-muted"
                    data-i18n="educational_videos_desc">
-
                     دروس يقدمها Afkrash AI
                     بطريقة واضحة ومنظمة.
-
                 </p>
 
             </article>
@@ -1046,10 +815,8 @@
 
                 <p class="text-muted"
                    data-i18n="premium_content_desc">
-
                     بعض الدروس ستكون متاحة
                     للمشتركين فقط.
-
                 </p>
 
             </article>
@@ -1067,14 +834,11 @@
 
                 <p class="text-muted"
                    data-i18n="mobile_app_desc">
-
                     بعد نجاح الموقع، ننتقل
                     إلى تطبيق EduNova AI.
-
                 </p>
 
             </article>
-
 
         </div>
 
@@ -1083,10 +847,6 @@
 </section>
 
 
-<!-- =====================================================
-     FINAL CTA
-===================================================== -->
-
 <section class="section">
 
     <div class="container">
@@ -1094,19 +854,13 @@
         <div class="home-final">
 
             <h2 data-i18n="ready_to_start">
-
                 مستعد لبدء رحلتك؟
-
             </h2>
 
-
             <p data-i18n="start_journey">
-
                 اختر شهادتك وابدأ التعلم
                 مع EduNova AI.
-
             </p>
-
 
             <a href="login.html"
                class="btn"
@@ -1126,7 +880,6 @@
 
 </section>
 
-
 </main>
 
 
@@ -1135,20 +888,15 @@
     <div class="container">
 
         <p>
-
             ©
             <span data-current-year></span>
             EduNova AI
-
         </p>
-
 
         <p style="margin-top:5px;"
            data-i18n="footer_teacher">
-
             Afkrash AI • مدرسك الافتراضي
             بالذكاء الاصطناعي
-
         </p>
 
     </div>
@@ -1161,8 +909,8 @@
 
 <script>
 /* =====================================================
-   EduNova AI — الصفحة الرئيسية
-   ترجمات خاصة بالصفحة
+   EduNova AI — Home Page
+   Global language + theme integration
 ===================================================== */
 
 const HOME_TRANSLATIONS = {
@@ -1436,19 +1184,31 @@ const HOME_TRANSLATIONS = {
 
 
 /* =====================================================
-   تطبيق ترجمات الصفحة
+   اللغة الحالية
+===================================================== */
+
+function getHomeLanguage() {
+
+    if (typeof getSiteLanguage === "function") {
+        return getSiteLanguage();
+    }
+
+    return localStorage.getItem("site_language") || "ar";
+}
+
+
+/* =====================================================
+   تطبيق اللغة
 ===================================================== */
 
 function translateHomePage() {
 
-    const language =
-        typeof getSiteLanguage === "function"
-            ? getSiteLanguage()
-            : (localStorage.getItem("site_language") || "ar");
+    const language = getHomeLanguage();
 
     const translations =
         HOME_TRANSLATIONS[language] ||
         HOME_TRANSLATIONS.ar;
+
 
     document
         .querySelectorAll("[data-i18n]")
@@ -1457,7 +1217,7 @@ function translateHomePage() {
             const key =
                 element.getAttribute("data-i18n");
 
-            if (!translations[key]) {
+            if (!Object.prototype.hasOwnProperty.call(translations, key)) {
                 return;
             }
 
@@ -1467,29 +1227,23 @@ function translateHomePage() {
         });
 
 
-    /* عنوان الصفحة */
-
     const title =
-        document.querySelector("title[data-i18n='page_title']");
+        document.querySelector(
+            "title[data-i18n='page_title']"
+        );
 
-    if (title && translations.page_title) {
+    if (title) {
         title.textContent =
             translations.page_title;
     }
 
 
-    /* اتجاه الصفحة */
-
     document.documentElement.lang =
-        language;
+        language === "fr" ? "fr" : "ar";
 
     document.documentElement.dir =
-        language === "fr"
-            ? "ltr"
-            : "rtl";
+        language === "fr" ? "ltr" : "rtl";
 
-
-    /* اتجاه الأسهم */
 
     document
         .querySelectorAll(".hero-arrow")
@@ -1505,29 +1259,111 @@ function translateHomePage() {
 
 
 /* =====================================================
-   تشغيل الترجمة
+   تطبيق الوضع العام
+===================================================== */
+
+function applyHomeTheme() {
+
+    const theme =
+        typeof getSiteTheme === "function"
+            ? getSiteTheme()
+            : (localStorage.getItem("site_theme") || "light");
+
+
+    if (typeof applySiteTheme === "function") {
+
+        applySiteTheme(theme);
+
+    } else {
+
+        document.documentElement.dataset.theme =
+            theme;
+
+        document.body.classList.toggle(
+            "dark-mode",
+            theme === "dark"
+        );
+
+    }
+}
+
+
+/* =====================================================
+   التهيئة
+===================================================== */
+
+function initializeHomePage() {
+
+    if (typeof initializeGlobalSettings === "function") {
+        initializeGlobalSettings();
+    }
+
+    applyHomeTheme();
+    translateHomePage();
+
+    if (typeof setCurrentYear === "function") {
+        setCurrentYear();
+    } else {
+
+        document
+            .querySelectorAll("[data-current-year]")
+            .forEach(element => {
+                element.textContent =
+                    new Date().getFullYear();
+            });
+    }
+}
+
+
+/* =====================================================
+   عند تحميل الصفحة
 ===================================================== */
 
 document.addEventListener(
     "DOMContentLoaded",
-    translateHomePage
+    initializeHomePage
 );
 
 
 /* =====================================================
-   مراقبة تغيير اللغة
+   أحداث اللغة
+   دعم النظام الحالي والأنظمة السابقة
 ===================================================== */
+
+window.addEventListener(
+    "languageChanged",
+    translateHomePage
+);
 
 window.addEventListener(
     "siteLanguageChanged",
     translateHomePage
 );
 
+window.addEventListener(
+    "languagechange",
+    translateHomePage
+);
 
-/*
-   دعم إضافي إذا قام script.js
-   بتغيير اللغة دون إطلاق الحدث.
-*/
+
+/* =====================================================
+   أحداث الثيم
+===================================================== */
+
+window.addEventListener(
+    "themeChanged",
+    applyHomeTheme
+);
+
+window.addEventListener(
+    "siteThemeChanged",
+    applyHomeTheme
+);
+
+
+/* =====================================================
+   مزامنة localStorage
+===================================================== */
 
 window.addEventListener(
     "storage",
@@ -1537,6 +1373,10 @@ window.addEventListener(
             translateHomePage();
         }
 
+        if (event.key === "site_theme") {
+            applyHomeTheme();
+        }
+
     }
 );
 
@@ -1544,4 +1384,4 @@ window.addEventListener(
 
 </body>
 
-    </html>
+                    </html>
