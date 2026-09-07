@@ -782,7 +782,9 @@
                 </div>
 
 
-                <div class="path-item active">
+                <div
+                    id="pathSubject"
+                    class="path-item active">
 
                     <div class="path-number">
                         2
@@ -799,7 +801,9 @@
                 </div>
 
 
-                <div class="path-item">
+                <div
+                    id="pathChapters"
+                    class="path-item">
 
                     <div class="path-number">
                         3
@@ -889,7 +893,7 @@
                 "📚 مواد EduNova AI",
 
             "library.hero_description":
-                "اختر المادة المتاحة لهذا المستوى. في السنة الأولى، الرياضيات هي المادة التعليمية المتاحة.",
+                "اختر المادة المناسبة لمستواك. في السنة الأولى، الرياضيات هي المادة التعليمية المتاحة.",
 
             "library.change_certificate":
                 "تغيير الشهادة",
@@ -921,8 +925,11 @@
             "library.available":
                 "متاحة الآن",
 
-            "library.math_description":
-                "المادة الأساسية في السنة الأولى من EduNova AI",
+            "library.math_concours_description":
+                "رياضيات شهادة ختم الدروس الابتدائية — 6AF",
+
+            "library.math_brevet_description":
+                "رياضيات شهادة ختم الدروس الإعدادية — 4ème",
 
             "library.math_c_description":
                 "رياضيات شعبة الباكالوريا C",
@@ -934,10 +941,10 @@
                 "فصول الرياضيات",
 
             "library.chapters_description":
-                "اختر الفصل للدخول إلى الفيديوهات الخاصة به.",
+                "اختر الفصل للدخول إلى صفحة الفيديوهات الخاصة به.",
 
             "library.no_chapters":
-                "لم تتم إضافة الفصول لهذا المستوى بعد.",
+                "لم تتم إضافة الفصول لهذا المسار بعد.",
 
             "library.no_chapters_text":
                 "سيتم إضافة الفصول تدريجيًا. يمكن أن يحتوي كل فصل على فيديو واحد إلى 20 فيديو كحد أقصى، والفيديو الأول مجاني.",
@@ -945,8 +952,11 @@
             "library.chapter":
                 "فصل",
 
-            "library.videos":
+            "library.video":
                 "فيديو",
+
+            "library.videos":
+                "فيديوهات",
 
             "library.choose_subject":
                 "اختر المادة أولًا",
@@ -977,7 +987,7 @@
                 "📚 Matières EduNova AI",
 
             "library.hero_description":
-                "Choisissez la matière disponible pour votre niveau. En première année, les mathématiques sont la matière disponible.",
+                "Choisissez la matière adaptée à votre niveau. En première année, les mathématiques sont la matière disponible.",
 
             "library.change_certificate":
                 "Changer de diplôme",
@@ -1009,8 +1019,11 @@
             "library.available":
                 "Disponible maintenant",
 
-            "library.math_description":
-                "La matière principale de la première année d'EduNova AI",
+            "library.math_concours_description":
+                "Mathématiques du certificat de fin d'études primaires — 6AF",
+
+            "library.math_brevet_description":
+                "Mathématiques du certificat de fin d'études préparatoires — 4ème",
 
             "library.math_c_description":
                 "Mathématiques de la série Baccalauréat C",
@@ -1022,16 +1035,19 @@
                 "Chapitres de mathématiques",
 
             "library.chapters_description":
-                "Choisissez un chapitre pour accéder à ses vidéos.",
+                "Choisissez un chapitre pour accéder à sa page vidéo.",
 
             "library.no_chapters":
-                "Les chapitres de ce niveau n'ont pas encore été ajoutés.",
+                "Les chapitres de ce parcours n'ont pas encore été ajoutés.",
 
             "library.no_chapters_text":
                 "Les chapitres seront ajoutés progressivement. Chaque chapitre pourra contenir de 1 à 20 vidéos maximum, dont la première sera gratuite.",
 
             "library.chapter":
                 "Chapitre",
+
+            "library.video":
+                "vidéo",
 
             "library.videos":
                 "vidéos",
@@ -1073,6 +1089,15 @@
 
     /* =========================================
        SUBJECT DATA
+       =========================================
+       
+       مهم جدًا:
+       IDs هنا متوافقة مع chapter.html.
+
+       concours  → mathematics
+       brevet    → mathematics
+       bac C     → mathematics_c
+       bac D     → mathematics_d
        ========================================= */
 
     function getSubjectsForCurrentLevel() {
@@ -1082,35 +1107,34 @@
                 "student_level"
             );
 
-
         const branch =
             localStorage.getItem(
                 "bac_branch"
             );
 
 
-        /*
-         * السنة الأولى:
-         *
-         * 6AF  → Mathématiques
-         * 4ème → Mathématiques
-         * Bac C → Mathématiques C
-         * Bac D → Mathématiques D
-         */
-
         if (level === "concours") {
 
             return [
                 {
-                    id: "math_concours",
-                    type: "math",
+                    id: "mathematics",
+                    type: "mathematics",
+
                     title: {
                         ar: "الرياضيات",
                         fr: "Mathématiques"
                     },
+
                     description: {
-                        ar: "رياضيات شهادة ختم الدروس الابتدائية — 6AF",
-                        fr: "Mathématiques du Concours — 6AF"
+                        ar:
+                            LIBRARY_TRANSLATIONS.ar[
+                                "library.math_concours_description"
+                            ],
+
+                        fr:
+                            LIBRARY_TRANSLATIONS.fr[
+                                "library.math_concours_description"
+                            ]
                     }
                 }
             ];
@@ -1122,15 +1146,24 @@
 
             return [
                 {
-                    id: "math_brevet",
-                    type: "math",
+                    id: "mathematics",
+                    type: "mathematics",
+
                     title: {
                         ar: "الرياضيات",
                         fr: "Mathématiques"
                     },
+
                     description: {
-                        ar: "رياضيات شهادة ختم الدروس الإعدادية — 4ème",
-                        fr: "Mathématiques du Brevet — 4ème"
+                        ar:
+                            LIBRARY_TRANSLATIONS.ar[
+                                "library.math_brevet_description"
+                            ],
+
+                        fr:
+                            LIBRARY_TRANSLATIONS.fr[
+                                "library.math_brevet_description"
+                            ]
                     }
                 }
             ];
@@ -1144,15 +1177,24 @@
 
                 return [
                     {
-                        id: "math_bac_c",
-                        type: "math_c",
+                        id: "mathematics_c",
+                        type: "mathematics_c",
+
                         title: {
                             ar: "الرياضيات C",
                             fr: "Mathématiques C"
                         },
+
                         description: {
-                            ar: "رياضيات شعبة الباكالوريا C",
-                            fr: "Mathématiques de la série Baccalauréat C"
+                            ar:
+                                LIBRARY_TRANSLATIONS.ar[
+                                    "library.math_c_description"
+                                ],
+
+                            fr:
+                                LIBRARY_TRANSLATIONS.fr[
+                                    "library.math_c_description"
+                                ]
                         }
                     }
                 ];
@@ -1164,15 +1206,24 @@
 
                 return [
                     {
-                        id: "math_bac_d",
-                        type: "math_d",
+                        id: "mathematics_d",
+                        type: "mathematics_d",
+
                         title: {
                             ar: "الرياضيات D",
                             fr: "Mathématiques D"
                         },
+
                         description: {
-                            ar: "رياضيات شعبة الباكالوريا D",
-                            fr: "Mathématiques de la série Baccalauréat D"
+                            ar:
+                                LIBRARY_TRANSLATIONS.ar[
+                                    "library.math_d_description"
+                                ],
+
+                            fr:
+                                LIBRARY_TRANSLATIONS.fr[
+                                    "library.math_d_description"
+                                ]
                         }
                     }
                 ];
@@ -1189,29 +1240,41 @@
 
     /* =========================================
        CHAPTER DATA
+       =========================================
+       
+       لا نضع أسماء فصول من عندنا.
+       سيتم إدخال المنهج الحقيقي لاحقًا.
+
+       كل مسار مستقل:
+       6AF mathematics
+       4ème mathematics
+       Bac C mathematics_c
+       Bac D mathematics_d
+
+       كل chapter يمكن أن يحتوي 1 إلى 20 فيديو.
        ========================================= */
 
-    /*
-     * هنا سيتم وضع الفصول الحقيقية لاحقًا.
-     *
-     * مهم:
-     * - كل فصل هو مجلد مستقل.
-     * - عدد الفيديوهات من 1 إلى 20.
-     * - الفيديو 1 مجاني.
-     * - الفيديوهات 2 إلى 20 تحتاج صلاحية.
-     *
-     * لا يتم خلط Bac C مع Bac D.
-     */
+    const CHAPTERS_BY_PATH = {
 
-    const CHAPTERS_BY_SUBJECT = {
+        concours: {
+            mathematics: []
+        },
 
-        math_concours: [],
+        brevet: {
+            mathematics: []
+        },
 
-        math_brevet: [],
+        bac: {
 
-        math_bac_c: [],
+            C: {
+                mathematics_c: []
+            },
 
-        math_bac_d: []
+            D: {
+                mathematics_d: []
+            }
+
+        }
 
     };
 
@@ -1319,9 +1382,40 @@
                 "student_level"
             );
 
+        const branch =
+            localStorage.getItem(
+                "bac_branch"
+            );
 
         const language =
             getLibraryLanguage();
+
+
+        if (level === "bac") {
+
+            if (
+                branch === "C" ||
+                branch === "D"
+            ) {
+
+                if (language === "fr") {
+
+                    return (
+                        "Baccalauréat — Série " +
+                        branch
+                    );
+
+                }
+
+
+                return (
+                    "باكالوريا — شعبة " +
+                    branch
+                );
+
+            }
+
+        }
 
 
         if (
@@ -1340,6 +1434,118 @@
 
 
     /* =========================================
+       GET CURRENT PATH
+       ========================================= */
+
+    function getCurrentPath() {
+
+        const level =
+            localStorage.getItem(
+                "student_level"
+            );
+
+        const branch =
+            localStorage.getItem(
+                "bac_branch"
+            );
+
+
+        if (
+            level === "concours" ||
+            level === "brevet"
+        ) {
+
+            return {
+                level: level,
+                branch: null
+            };
+
+        }
+
+
+        if (
+            level === "bac" &&
+            (
+                branch === "C" ||
+                branch === "D"
+            )
+        ) {
+
+            return {
+                level: "bac",
+                branch: branch
+            };
+
+        }
+
+
+        return null;
+
+    }
+
+
+    /* =========================================
+       GET CHAPTERS FOR SUBJECT
+       ========================================= */
+
+    function getChaptersForSubject(
+        subject
+    ) {
+
+        const path =
+            getCurrentPath();
+
+
+        if (!path) {
+            return [];
+        }
+
+
+        if (
+            path.level === "bac"
+        ) {
+
+            const branchData =
+                CHAPTERS_BY_PATH.bac[
+                    path.branch
+                ];
+
+
+            if (!branchData) {
+                return [];
+            }
+
+
+            return Array.isArray(
+                branchData[subject.id]
+            )
+                ? branchData[subject.id]
+                : [];
+
+        }
+
+
+        const levelData =
+            CHAPTERS_BY_PATH[
+                path.level
+            ];
+
+
+        if (!levelData) {
+            return [];
+        }
+
+
+        return Array.isArray(
+            levelData[subject.id]
+        )
+            ? levelData[subject.id]
+            : [];
+
+    }
+
+
+    /* =========================================
        VIDEO LABEL
        ========================================= */
 
@@ -1351,9 +1557,13 @@
 
         if (language === "fr") {
 
-            return number <= 1
-                ? "vidéo"
-                : "vidéos";
+            return number === 1
+                ? libraryText(
+                    "library.video"
+                )
+                : libraryText(
+                    "library.videos"
+                );
 
         }
 
@@ -1397,6 +1607,10 @@
         }
 
 
+        /*
+         * لا توجد شهادة.
+         */
+
         if (!level) {
 
             noLevel.style.display =
@@ -1413,9 +1627,8 @@
 
 
         /*
-         * حماية إضافية:
-         * إذا كان Bac بدون C أو D،
-         * نعيد الطالب إلى اختيار الشهادة.
+         * Bac بدون C أو D:
+         * لا نسمح بالدخول إلى المواد.
          */
 
         if (
@@ -1426,6 +1639,25 @@
                 )
             )
         ) {
+
+            noLevel.style.display =
+                "block";
+
+
+            library.style.display =
+                "none";
+
+
+            return;
+
+        }
+
+
+        const path =
+            getCurrentPath();
+
+
+        if (!path) {
 
             noLevel.style.display =
                 "block";
@@ -1458,6 +1690,50 @@
 
             levelName.textContent =
                 getLevelName();
+
+        }
+
+
+        /*
+         * نتحقق من المادة المحفوظة.
+         * إذا تغيّر المستوى أو الفرع،
+         * لا نحتفظ بمادة قديمة غير صحيحة.
+         */
+
+        const subjects =
+            getSubjectsForCurrentLevel();
+
+
+        const savedSubject =
+            localStorage.getItem(
+                "selected_subject"
+            );
+
+
+        const validSubject =
+            subjects.some(
+                function(subject) {
+
+                    return subject.id ===
+                        savedSubject;
+
+                }
+            );
+
+
+        if (!validSubject) {
+
+            localStorage.removeItem(
+                "selected_subject"
+            );
+
+            localStorage.removeItem(
+                "selected_subject_type"
+            );
+
+            localStorage.removeItem(
+                "selected_chapter"
+            );
 
         }
 
@@ -1496,6 +1772,12 @@
             return;
 
         }
+
+
+        const savedSubject =
+            localStorage.getItem(
+                "selected_subject"
+            );
 
 
         subjects.forEach(
@@ -1556,9 +1838,9 @@
 
 
                 title.textContent =
-                    subject.title[
-                        getLibraryLanguage()
-                    ];
+                    getLocalizedValue(
+                        subject.title
+                    );
 
 
                 const description =
@@ -1568,9 +1850,9 @@
 
 
                 description.textContent =
-                    subject.description[
-                        getLibraryLanguage()
-                    ];
+                    getLocalizedValue(
+                        subject.description
+                    );
 
 
                 const badge =
@@ -1654,8 +1936,33 @@
                     card
                 );
 
+
+                /*
+                 * إذا كانت المادة محفوظة،
+                 * نفتحها تلقائيًا بعد إعادة تحميل الصفحة.
+                 */
+
+                if (
+                    savedSubject ===
+                    subject.id
+                ) {
+
+                    renderChapters(
+                        subject,
+                        chaptersPanel
+                    );
+
+                    chaptersPanel.classList.add(
+                        "visible"
+                    );
+
+                }
+
             }
         );
+
+
+        updateLearningPath();
 
     }
 
@@ -1675,6 +1982,16 @@
         localStorage.setItem(
             "selected_subject_type",
             subject.type
+        );
+
+
+        /*
+         * عند اختيار مادة جديدة،
+         * الفصل السابق لم يعد صالحًا.
+         */
+
+        localStorage.removeItem(
+            "selected_chapter"
         );
 
 
@@ -1713,6 +2030,8 @@
 
         if (alreadyVisible) {
 
+            updateLearningPath();
+
             return;
 
         }
@@ -1729,29 +2048,7 @@
         );
 
 
-        const path =
-            document.querySelector(
-                ".learning-path"
-            );
-
-
-        if (path) {
-
-            const items =
-                path.querySelectorAll(
-                    ".path-item"
-                );
-
-
-            if (items[2]) {
-
-                items[2].classList.add(
-                    "active"
-                );
-
-            }
-
-        }
+        updateLearningPath();
 
 
         setTimeout(
@@ -1764,6 +2061,56 @@
 
             },
             80
+        );
+
+    }
+
+
+    /* =========================================
+       UPDATE LEARNING PATH
+       ========================================= */
+
+    function updateLearningPath() {
+
+        const pathChapters =
+            document.getElementById(
+                "pathChapters"
+            );
+
+
+        if (!pathChapters) {
+            return;
+        }
+
+
+        const selectedSubject =
+            localStorage.getItem(
+                "selected_subject"
+            );
+
+
+        const visiblePanel =
+            document.querySelector(
+                ".chapters-panel.visible"
+            );
+
+
+        if (
+            selectedSubject &&
+            visiblePanel
+        ) {
+
+            pathChapters.classList.add(
+                "active"
+            );
+
+            return;
+
+        }
+
+
+        pathChapters.classList.remove(
+            "active"
         );
 
     }
@@ -1783,9 +2130,9 @@
 
 
         const chapters =
-            CHAPTERS_BY_SUBJECT[
-                subject.id
-            ] || [];
+            getChaptersForSubject(
+                subject
+            );
 
 
         panel.innerHTML = "";
@@ -1832,6 +2179,10 @@
         panel.appendChild(header);
 
 
+        /*
+         * لا توجد فصول حاليًا.
+         */
+
         if (!chapters.length) {
 
             const empty =
@@ -1844,25 +2195,47 @@
                 "empty-content";
 
 
-            empty.innerHTML = `
+            const icon =
+                document.createElement(
+                    "div"
+                );
 
-                <div class="empty-content-icon">
-                    📚
-                </div>
 
-                <h3>
-                    ${libraryText(
-                        "library.no_chapters"
-                    )}
-                </h3>
+            icon.className =
+                "empty-content-icon";
 
-                <p>
-                    ${libraryText(
-                        "library.no_chapters_text"
-                    )}
-                </p>
 
-            `;
+            icon.textContent =
+                "📚";
+
+
+            const emptyTitle =
+                document.createElement(
+                    "h3"
+                );
+
+
+            emptyTitle.textContent =
+                libraryText(
+                    "library.no_chapters"
+                );
+
+
+            const emptyText =
+                document.createElement(
+                    "p"
+                );
+
+
+            emptyText.textContent =
+                libraryText(
+                    "library.no_chapters_text"
+                );
+
+
+            empty.appendChild(icon);
+            empty.appendChild(emptyTitle);
+            empty.appendChild(emptyText);
 
 
             panel.appendChild(
@@ -1885,8 +2258,22 @@
             "chapters";
 
 
+        /*
+         * حماية إضافية:
+         * الحد الأقصى للفصول المعروضة
+         * ليس له علاقة بعدد الفيديوهات.
+         *
+         * الفيديوهات نفسها:
+         * 1 إلى 20 فقط.
+         */
+
         chapters.forEach(
             function(chapter) {
+
+                if (!chapter) {
+                    return;
+                }
+
 
                 const card =
                     document.createElement(
@@ -1938,13 +2325,13 @@
                     );
 
 
-                const description =
+                const chapterDescription =
                     document.createElement(
                         "p"
                     );
 
 
-                description.textContent =
+                chapterDescription.textContent =
                     getLocalizedValue(
                         chapter.description
                     );
@@ -1982,7 +2369,9 @@
 
 
                 info.appendChild(title);
-                info.appendChild(description);
+                info.appendChild(
+                    chapterDescription
+                );
                 info.appendChild(meta);
 
 
@@ -2108,6 +2497,19 @@
        ========================================= */
 
     function chooseLevel() {
+
+        localStorage.removeItem(
+            "selected_subject"
+        );
+
+        localStorage.removeItem(
+            "selected_subject_type"
+        );
+
+        localStorage.removeItem(
+            "selected_chapter"
+        );
+
 
         if (
             typeof goTo ===
