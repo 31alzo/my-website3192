@@ -9,7 +9,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-    <title>المكتبة | EduNova AI</title>
+    <title>المواد | EduNova AI</title>
 
     <link
         rel="stylesheet"
@@ -20,7 +20,7 @@
     <style>
 
         /* =========================================
-           EDUNOVA AI — LIBRARY
+           EDUNOVA AI — LIBRARY / SUBJECTS
            ========================================= */
 
         .library-page {
@@ -77,6 +77,7 @@
             margin-top: 3px;
             color: var(--text-soft);
             font-size: 11px;
+            line-height: 1.7;
         }
 
         /* =========================================
@@ -228,21 +229,61 @@
         }
 
         /* =========================================
-           SUBJECT
+           SUBJECTS
            ========================================= */
 
+        .subjects-section {
+            margin-top: 4px;
+        }
+
+        .section-title {
+            margin-bottom: 12px;
+        }
+
+        .section-title h2 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 950;
+        }
+
+        .section-title p {
+            margin: 4px 0 0;
+            color: var(--text-soft);
+            font-size: 11px;
+            line-height: 1.7;
+        }
+
+        .subjects {
+            display: grid;
+            gap: 12px;
+        }
+
         .subject-card {
+            width: 100%;
             padding: 18px;
+            text-align: right;
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 22px;
             box-shadow: var(--shadow-md);
         }
 
-        .subject-header {
+        html[dir="ltr"] .subject-card {
+            text-align: left;
+        }
+
+        .subject-button {
+            width: 100%;
             display: flex;
             align-items: center;
             gap: 13px;
+            padding: 0;
+            border: 0;
+            background: transparent;
+            color: inherit;
+            font-family: inherit;
+            text-align: inherit;
+            cursor: pointer;
         }
 
         .subject-icon {
@@ -258,13 +299,18 @@
             font-weight: 950;
         }
 
-        .subject-header h2 {
+        .subject-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .subject-info h3 {
             margin: 0;
             font-size: 20px;
             font-weight: 950;
         }
 
-        .subject-header p {
+        .subject-info p {
             margin: 4px 0 0;
             color: var(--text-soft);
             font-size: 11px;
@@ -282,33 +328,44 @@
             font-weight: 900;
         }
 
-        /* =========================================
-           CHAPTER SECTION
-           ========================================= */
-
-        .chapter-section {
-            margin-top: 24px;
-        }
-
-        .section-title {
-            margin-bottom: 12px;
-        }
-
-        .section-title h2 {
-            margin: 0;
+        .subject-arrow {
+            flex-shrink: 0;
+            color: var(--primary);
             font-size: 20px;
-            font-weight: 950;
-        }
-
-        .section-title p {
-            margin: 4px 0 0;
-            color: var(--text-soft);
-            font-size: 11px;
+            font-weight: 900;
         }
 
         /* =========================================
            CHAPTERS
            ========================================= */
+
+        .chapters-panel {
+            display: none;
+            margin-top: 18px;
+            padding-top: 18px;
+            border-top: 1px solid var(--border);
+        }
+
+        .chapters-panel.visible {
+            display: block;
+        }
+
+        .chapters-panel-header {
+            margin-bottom: 12px;
+        }
+
+        .chapters-panel-header h3 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 950;
+        }
+
+        .chapters-panel-header p {
+            margin: 4px 0 0;
+            color: var(--text-soft);
+            font-size: 10px;
+            line-height: 1.7;
+        }
 
         .chapters {
             display: grid;
@@ -365,7 +422,7 @@
             min-width: 0;
         }
 
-        .chapter-info h3 {
+        .chapter-info h4 {
             margin: 0;
             font-size: 15px;
             font-weight: 900;
@@ -399,7 +456,7 @@
         }
 
         /* =========================================
-           EMPTY CONTENT
+           EMPTY CHAPTERS
            ========================================= */
 
         .empty-content {
@@ -512,7 +569,7 @@
                 height: 44px;
             }
 
-            .chapter-info h3 {
+            .chapter-info h4 {
                 font-size: 14px;
             }
 
@@ -596,7 +653,7 @@
             <p data-i18n="library.choose_certificate_text">
 
                 اختر كونكور أو بريڤي أو باكالوريا
-                حتى نعرض لك المحتوى التعليمي المناسب.
+                حتى نعرض لك المادة المناسبة.
 
             </p>
 
@@ -643,8 +700,8 @@
 
                     <span data-i18n="library.teacher_description">
 
-                        مدرسك الذكي في EduNova AI
-                        • اختر الشهادة ثم المادة ثم الـChapitre.
+                        مدرسك الذكي في EduNova AI •
+                        اختر المادة للوصول إلى الفصول.
 
                     </span>
 
@@ -665,7 +722,7 @@
                         class="hero-label"
                         data-i18n="library.hero_label">
 
-                        📚 مكتبة EduNova AI
+                        📚 مواد EduNova AI
 
                     </span>
 
@@ -677,9 +734,9 @@
 
                     <p data-i18n="library.hero_description">
 
-                        اختر الـChapitre الذي تريد دراسته.
-                        كل Chapitre سيحتوي لاحقًا على دروس
-                        وفيديوهات تعليمية مع Afkrash AI.
+                        اختر المادة المتاحة لهذا المستوى.
+                        في السنة الأولى، الرياضيات هي المادة
+                        التعليمية المتاحة.
 
                     </p>
 
@@ -719,7 +776,7 @@
                     </strong>
 
                     <span data-i18n="library.path_certificate_sub">
-                        اختيار المستوى
+                        المستوى المختار
                     </span>
 
                 </div>
@@ -731,29 +788,29 @@
                         2
                     </div>
 
-                    <strong data-i18n="library.path_math">
-                        الرياضيات
+                    <strong data-i18n="library.path_subject">
+                        المادة
                     </strong>
 
-                    <span data-i18n="library.path_math_sub">
-                        المادة الحالية
+                    <span data-i18n="library.path_subject_sub">
+                        اختر المادة
                     </span>
 
                 </div>
 
 
-                <div class="path-item active">
+                <div class="path-item">
 
                     <div class="path-number">
                         3
                     </div>
 
-                    <strong>
-                        Chapitres
+                    <strong data-i18n="library.path_chapters">
+                        الفصول
                     </strong>
 
                     <span data-i18n="library.path_chapters_sub">
-                        اختر الفصل
+                        بعد اختيار المادة
                     </span>
 
                 </div>
@@ -762,106 +819,32 @@
 
 
             <!-- =====================================
-                 SUBJECT
+                 SUBJECTS
                  ===================================== -->
 
-            <section class="subject-card">
+            <section class="subjects-section">
 
-                <div class="subject-header">
+                <div class="section-title">
 
-                    <div class="subject-icon">
-                        ∑
-                    </div>
-
-
-                    <div>
-
-                        <h2 data-i18n="library.math">
-                            الرياضيات
-                        </h2>
+                    <h2 data-i18n="library.subjects_title">
+                        المواد
+                    </h2>
 
 
-                        <p data-i18n="library.math_description">
-                            المادة الأساسية في السنة الأولى من EduNova AI
-                        </p>
+                    <p data-i18n="library.subjects_description">
 
+                        اختر المادة التي تريد دراستها.
 
-                        <span
-                            class="subject-badge"
-                            data-i18n="library.available">
-
-                            متاحة الآن
-
-                        </span>
-
-                    </div>
+                    </p>
 
                 </div>
 
 
-                <!-- =================================
-                     CHAPTERS
-                     ================================= -->
+                <div
+                    id="subjects"
+                    class="subjects">
 
-                <section class="chapter-section">
-
-                    <div class="section-title">
-
-                        <h2 data-i18n="library.chapters_title">
-                            Chapitres الرياضيات
-                        </h2>
-
-
-                        <p data-i18n="library.chapters_description">
-
-                            اختر الفصل للدخول إلى
-                            الفيديوهات والدروس الخاصة به.
-
-                        </p>
-
-                    </div>
-
-
-                    <div
-                        id="chapters"
-                        class="chapters">
-
-                    </div>
-
-
-                    <!-- EMPTY -->
-
-                    <div
-                        id="emptyChapters"
-                        class="empty-content">
-
-                        <div class="empty-content-icon">
-                            🎬
-                        </div>
-
-
-                        <h3 data-i18n="library.empty_title">
-                            المحتوى التعليمي قيد الإعداد
-                        </h3>
-
-
-                        <p data-i18n="library.empty_description">
-
-                            سيتم إضافة الـChapitres
-                            والدروس تدريجيًا.
-
-                            <br>
-
-                            كل Chapitre سيحتوي على
-                            ما يصل إلى 20 فيديو تعليمي،
-                            وسيكون أول فيديو مجانيًا
-                            للتجربة.
-
-                        </p>
-
-                    </div>
-
-                </section>
+                </div>
 
             </section>
 
@@ -880,7 +863,7 @@
 <script>
 
     /* =========================================
-       LIBRARY TRANSLATIONS
+       TRANSLATIONS
        ========================================= */
 
     const LIBRARY_TRANSLATIONS = {
@@ -894,19 +877,19 @@
                 "اختر شهادتك الدراسية",
 
             "library.choose_certificate_text":
-                "اختر كونكور أو بريڤي أو باكالوريا حتى نعرض لك المحتوى التعليمي المناسب.",
+                "اختر كونكور أو بريڤي أو باكالوريا حتى نعرض لك المادة المناسبة.",
 
             "library.choose_certificate_button":
                 "اختيار الشهادة",
 
             "library.teacher_description":
-                "مدرسك الذكي في EduNova AI • اختر الشهادة ثم المادة ثم الـChapitre.",
+                "مدرسك الذكي في EduNova AI • اختر المادة للوصول إلى الفصول.",
 
             "library.hero_label":
-                "📚 مكتبة EduNova AI",
+                "📚 مواد EduNova AI",
 
             "library.hero_description":
-                "اختر الـChapitre الذي تريد دراسته. كل Chapitre سيحتوي لاحقًا على دروس وفيديوهات تعليمية مع Afkrash AI.",
+                "اختر المادة المتاحة لهذا المستوى. في السنة الأولى، الرياضيات هي المادة التعليمية المتاحة.",
 
             "library.change_certificate":
                 "تغيير الشهادة",
@@ -915,37 +898,58 @@
                 "الشهادة",
 
             "library.path_certificate_sub":
-                "اختيار المستوى",
+                "المستوى المختار",
 
-            "library.path_math":
-                "الرياضيات",
+            "library.path_subject":
+                "المادة",
 
-            "library.path_math_sub":
-                "المادة الحالية",
+            "library.path_subject_sub":
+                "اختر المادة",
+
+            "library.path_chapters":
+                "الفصول",
 
             "library.path_chapters_sub":
-                "اختر الفصل",
+                "بعد اختيار المادة",
 
-            "library.math":
-                "الرياضيات",
+            "library.subjects_title":
+                "المواد",
 
-            "library.math_description":
-                "المادة الأساسية في السنة الأولى من EduNova AI",
+            "library.subjects_description":
+                "اختر المادة التي تريد دراستها.",
 
             "library.available":
                 "متاحة الآن",
 
+            "library.math_description":
+                "المادة الأساسية في السنة الأولى من EduNova AI",
+
+            "library.math_c_description":
+                "رياضيات شعبة الباكالوريا C",
+
+            "library.math_d_description":
+                "رياضيات شعبة الباكالوريا D",
+
             "library.chapters_title":
-                "Chapitres الرياضيات",
+                "فصول الرياضيات",
 
             "library.chapters_description":
-                "اختر الفصل للدخول إلى الفيديوهات والدروس الخاصة به.",
+                "اختر الفصل للدخول إلى الفيديوهات الخاصة به.",
 
-            "library.empty_title":
-                "المحتوى التعليمي قيد الإعداد",
+            "library.no_chapters":
+                "لم تتم إضافة الفصول لهذا المستوى بعد.",
 
-            "library.empty_description":
-                "سيتم إضافة الـChapitres والدروس تدريجيًا. كل Chapitre سيحتوي على ما يصل إلى 20 فيديو تعليمي، وسيكون أول فيديو مجانيًا للتجربة.",
+            "library.no_chapters_text":
+                "سيتم إضافة الفصول تدريجيًا. يمكن أن يحتوي كل فصل على فيديو واحد إلى 20 فيديو كحد أقصى، والفيديو الأول مجاني.",
+
+            "library.chapter":
+                "فصل",
+
+            "library.videos":
+                "فيديو",
+
+            "library.choose_subject":
+                "اختر المادة أولًا",
 
             "library.no_level_title":
                 "اختر شهادتك الدراسية"
@@ -961,19 +965,19 @@
                 "Choisissez votre diplôme",
 
             "library.choose_certificate_text":
-                "Choisissez Concours, Brevet ou Baccalauréat afin d'afficher le contenu éducatif adapté.",
+                "Choisissez Concours, Brevet ou Baccalauréat afin d'afficher la matière adaptée.",
 
             "library.choose_certificate_button":
                 "Choisir le diplôme",
 
             "library.teacher_description":
-                "Votre professeur intelligent dans EduNova AI • Choisissez le diplôme, puis la matière et le chapitre.",
+                "Votre professeur intelligent dans EduNova AI • Choisissez une matière pour accéder aux chapitres.",
 
             "library.hero_label":
-                "📚 Bibliothèque EduNova AI",
+                "📚 Matières EduNova AI",
 
             "library.hero_description":
-                "Choisissez le chapitre que vous souhaitez étudier. Chaque chapitre contiendra progressivement des leçons et des vidéos éducatives avec Afkrash AI.",
+                "Choisissez la matière disponible pour votre niveau. En première année, les mathématiques sont la matière disponible.",
 
             "library.change_certificate":
                 "Changer de diplôme",
@@ -982,37 +986,58 @@
                 "Diplôme",
 
             "library.path_certificate_sub":
-                "Choix du niveau",
+                "Niveau choisi",
 
-            "library.path_math":
-                "Mathématiques",
+            "library.path_subject":
+                "Matière",
 
-            "library.path_math_sub":
-                "Matière actuelle",
+            "library.path_subject_sub":
+                "Choisir la matière",
+
+            "library.path_chapters":
+                "Chapitres",
 
             "library.path_chapters_sub":
-                "Choisir le chapitre",
+                "Après la matière",
 
-            "library.math":
-                "Mathématiques",
+            "library.subjects_title":
+                "Matières",
+
+            "library.subjects_description":
+                "Choisissez la matière que vous souhaitez étudier.",
+
+            "library.available":
+                "Disponible maintenant",
 
             "library.math_description":
                 "La matière principale de la première année d'EduNova AI",
 
-            "library.available":
-                "Disponible maintenant",
+            "library.math_c_description":
+                "Mathématiques de la série Baccalauréat C",
+
+            "library.math_d_description":
+                "Mathématiques de la série Baccalauréat D",
 
             "library.chapters_title":
                 "Chapitres de mathématiques",
 
             "library.chapters_description":
-                "Choisissez un chapitre pour accéder à ses vidéos et leçons.",
+                "Choisissez un chapitre pour accéder à ses vidéos.",
 
-            "library.empty_title":
-                "Contenu éducatif en préparation",
+            "library.no_chapters":
+                "Les chapitres de ce niveau n'ont pas encore été ajoutés.",
 
-            "library.empty_description":
-                "Les chapitres et les leçons seront ajoutés progressivement. Chaque chapitre pourra contenir jusqu'à 20 vidéos éducatives, dont la première sera gratuite pour vous permettre de découvrir le contenu.",
+            "library.no_chapters_text":
+                "Les chapitres seront ajoutés progressivement. Chaque chapitre pourra contenir de 1 à 20 vidéos maximum, dont la première sera gratuite.",
+
+            "library.chapter":
+                "Chapitre",
+
+            "library.videos":
+                "vidéos",
+
+            "library.choose_subject":
+                "Choisissez d'abord une matière",
 
             "library.no_level_title":
                 "Choisissez votre diplôme"
@@ -1026,16 +1051,16 @@
        LEVEL NAMES
        ========================================= */
 
-    const levelNames = {
+    const LEVEL_NAMES = {
 
         concours: {
-            ar: "كونكور",
-            fr: "Concours"
+            ar: "كونكور — 6AF",
+            fr: "Concours — 6AF"
         },
 
         brevet: {
-            ar: "بريڤي",
-            fr: "Brevet"
+            ar: "بريڤي — 4ème",
+            fr: "Brevet — 4ème"
         },
 
         bac: {
@@ -1047,55 +1072,167 @@
 
 
     /* =========================================
+       SUBJECT DATA
+       ========================================= */
+
+    function getSubjectsForCurrentLevel() {
+
+        const level =
+            localStorage.getItem(
+                "student_level"
+            );
+
+
+        const branch =
+            localStorage.getItem(
+                "bac_branch"
+            );
+
+
+        /*
+         * السنة الأولى:
+         *
+         * 6AF  → Mathématiques
+         * 4ème → Mathématiques
+         * Bac C → Mathématiques C
+         * Bac D → Mathématiques D
+         */
+
+        if (level === "concours") {
+
+            return [
+                {
+                    id: "math_concours",
+                    type: "math",
+                    title: {
+                        ar: "الرياضيات",
+                        fr: "Mathématiques"
+                    },
+                    description: {
+                        ar: "رياضيات شهادة ختم الدروس الابتدائية — 6AF",
+                        fr: "Mathématiques du Concours — 6AF"
+                    }
+                }
+            ];
+
+        }
+
+
+        if (level === "brevet") {
+
+            return [
+                {
+                    id: "math_brevet",
+                    type: "math",
+                    title: {
+                        ar: "الرياضيات",
+                        fr: "Mathématiques"
+                    },
+                    description: {
+                        ar: "رياضيات شهادة ختم الدروس الإعدادية — 4ème",
+                        fr: "Mathématiques du Brevet — 4ème"
+                    }
+                }
+            ];
+
+        }
+
+
+        if (level === "bac") {
+
+            if (branch === "C") {
+
+                return [
+                    {
+                        id: "math_bac_c",
+                        type: "math_c",
+                        title: {
+                            ar: "الرياضيات C",
+                            fr: "Mathématiques C"
+                        },
+                        description: {
+                            ar: "رياضيات شعبة الباكالوريا C",
+                            fr: "Mathématiques de la série Baccalauréat C"
+                        }
+                    }
+                ];
+
+            }
+
+
+            if (branch === "D") {
+
+                return [
+                    {
+                        id: "math_bac_d",
+                        type: "math_d",
+                        title: {
+                            ar: "الرياضيات D",
+                            fr: "Mathématiques D"
+                        },
+                        description: {
+                            ar: "رياضيات شعبة الباكالوريا D",
+                            fr: "Mathématiques de la série Baccalauréat D"
+                        }
+                    }
+                ];
+
+            }
+
+        }
+
+
+        return [];
+
+    }
+
+
+    /* =========================================
        CHAPTER DATA
        ========================================= */
 
     /*
-        ==========================================
-        بنية المحتوى المستقبلية
-        ==========================================
+     * هنا سيتم وضع الفصول الحقيقية لاحقًا.
+     *
+     * مهم:
+     * - كل فصل هو مجلد مستقل.
+     * - عدد الفيديوهات من 1 إلى 20.
+     * - الفيديو 1 مجاني.
+     * - الفيديوهات 2 إلى 20 تحتاج صلاحية.
+     *
+     * لا يتم خلط Bac C مع Bac D.
+     */
 
-        كل Chapitre سيكون بهذا الشكل:
+    const CHAPTERS_BY_SUBJECT = {
 
-        {
-            id: 1,
+        math_concours: [],
 
-            title: "اسم الفصل",
+        math_brevet: [],
 
-            description:
-                "وصف مختصر للفصل",
+        math_bac_c: [],
 
-            videos: 20
-        }
+        math_bac_d: []
 
-        الحد الأقصى للفيديوهات:
-        20 فيديو لكل Chapitre.
-
-        الفيديو رقم 1:
-        مجاني.
-
-        الفيديوهات التالية:
-        تحتاج إلى صلاحية / اشتراك.
-
-        ==========================================
-    */
-
-    const chapters = [];
+    };
 
 
     /* =========================================
-       GET CURRENT LANGUAGE
+       LANGUAGE
        ========================================= */
 
     function getLibraryLanguage() {
 
-        if (typeof getSiteLanguage === "function") {
+        if (
+            typeof getSiteLanguage ===
+            "function"
+        ) {
 
             return getSiteLanguage() === "fr"
                 ? "fr"
                 : "ar";
 
         }
+
 
         return localStorage.getItem(
             "site_language"
@@ -1107,17 +1244,29 @@
 
 
     /* =========================================
-       TRANSLATE LIBRARY PAGE
+       TRANSLATION
        ========================================= */
+
+    function libraryText(key) {
+
+        const language =
+            getLibraryLanguage();
+
+
+        const translations =
+            LIBRARY_TRANSLATIONS[language] ||
+            LIBRARY_TRANSLATIONS.ar;
+
+
+        return translations[key] || key;
+
+    }
+
 
     function translateLibraryPage() {
 
         const language =
             getLibraryLanguage();
-
-        const translations =
-            LIBRARY_TRANSLATIONS[language] ||
-            LIBRARY_TRANSLATIONS.ar;
 
 
         document
@@ -1130,12 +1279,14 @@
                     );
 
 
-                if (
-                    translations[key] !== undefined
-                ) {
+                const value =
+                    libraryText(key);
+
+
+                if (value !== key) {
 
                     element.textContent =
-                        translations[key];
+                        value;
 
                 }
 
@@ -1158,26 +1309,32 @@
 
 
     /* =========================================
-       GET LEVEL NAME
+       LEVEL NAME
        ========================================= */
 
-    function getLevelName(level) {
+    function getLevelName() {
+
+        const level =
+            localStorage.getItem(
+                "student_level"
+            );
+
 
         const language =
             getLibraryLanguage();
 
 
         if (
-            levelNames[level] &&
-            levelNames[level][language]
+            LEVEL_NAMES[level] &&
+            LEVEL_NAMES[level][language]
         ) {
 
-            return levelNames[level][language];
+            return LEVEL_NAMES[level][language];
 
         }
 
 
-        return level || "-";
+        return "-";
 
     }
 
@@ -1194,7 +1351,7 @@
 
         if (language === "fr") {
 
-            return number === 1
+            return number <= 1
                 ? "vidéo"
                 : "vidéos";
 
@@ -1230,12 +1387,45 @@
             );
 
 
-        if (!noLevel || !library) {
+        if (
+            !noLevel ||
+            !library
+        ) {
+
             return;
+
         }
 
 
         if (!level) {
+
+            noLevel.style.display =
+                "block";
+
+
+            library.style.display =
+                "none";
+
+
+            return;
+
+        }
+
+
+        /*
+         * حماية إضافية:
+         * إذا كان Bac بدون C أو D،
+         * نعيد الطالب إلى اختيار الشهادة.
+         */
+
+        if (
+            level === "bac" &&
+            !["C", "D"].includes(
+                localStorage.getItem(
+                    "bac_branch"
+                )
+            )
+        ) {
 
             noLevel.style.display =
                 "block";
@@ -1267,35 +1457,29 @@
         if (levelName) {
 
             levelName.textContent =
-                getLevelName(level);
+                getLevelName();
 
         }
 
 
-        loadChapters();
+        renderSubjects();
 
     }
 
 
     /* =========================================
-       LOAD CHAPTERS
+       RENDER SUBJECTS
        ========================================= */
 
-    function loadChapters() {
+    function renderSubjects() {
 
         const container =
             document.getElementById(
-                "chapters"
+                "subjects"
             );
 
 
-        const empty =
-            document.getElementById(
-                "emptyChapters"
-            );
-
-
-        if (!container || !empty) {
+        if (!container) {
             return;
         }
 
@@ -1303,10 +1487,387 @@
         container.innerHTML = "";
 
 
+        const subjects =
+            getSubjectsForCurrentLevel();
+
+
+        if (!subjects.length) {
+
+            return;
+
+        }
+
+
+        subjects.forEach(
+            function(subject) {
+
+                const card =
+                    document.createElement(
+                        "article"
+                    );
+
+
+                card.className =
+                    "subject-card";
+
+
+                const button =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                button.type =
+                    "button";
+
+
+                button.className =
+                    "subject-button";
+
+
+                const icon =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                icon.className =
+                    "subject-icon";
+
+
+                icon.textContent =
+                    "∑";
+
+
+                const info =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                info.className =
+                    "subject-info";
+
+
+                const title =
+                    document.createElement(
+                        "h3"
+                    );
+
+
+                title.textContent =
+                    subject.title[
+                        getLibraryLanguage()
+                    ];
+
+
+                const description =
+                    document.createElement(
+                        "p"
+                    );
+
+
+                description.textContent =
+                    subject.description[
+                        getLibraryLanguage()
+                    ];
+
+
+                const badge =
+                    document.createElement(
+                        "span"
+                    );
+
+
+                badge.className =
+                    "subject-badge";
+
+
+                badge.textContent =
+                    libraryText(
+                        "library.available"
+                    );
+
+
+                info.appendChild(title);
+                info.appendChild(description);
+                info.appendChild(badge);
+
+
+                const arrow =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                arrow.className =
+                    "subject-arrow";
+
+
+                arrow.textContent =
+                    getLibraryLanguage() === "fr"
+                        ? "→"
+                        : "←";
+
+
+                button.appendChild(icon);
+                button.appendChild(info);
+                button.appendChild(arrow);
+
+
+                button.addEventListener(
+                    "click",
+                    function() {
+
+                        openSubject(
+                            subject
+                        );
+
+                    }
+                );
+
+
+                card.appendChild(button);
+
+
+                const chaptersPanel =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                chaptersPanel.className =
+                    "chapters-panel";
+
+
+                chaptersPanel.id =
+                    "chapters-" +
+                    subject.id;
+
+
+                card.appendChild(
+                    chaptersPanel
+                );
+
+
+                container.appendChild(
+                    card
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =========================================
+       OPEN SUBJECT
+       ========================================= */
+
+    function openSubject(subject) {
+
+        localStorage.setItem(
+            "selected_subject",
+            subject.id
+        );
+
+
+        localStorage.setItem(
+            "selected_subject_type",
+            subject.type
+        );
+
+
+        const panel =
+            document.getElementById(
+                "chapters-" +
+                subject.id
+            );
+
+
+        if (!panel) {
+            return;
+        }
+
+
+        const alreadyVisible =
+            panel.classList.contains(
+                "visible"
+            );
+
+
+        document
+            .querySelectorAll(
+                ".chapters-panel"
+            )
+            .forEach(
+                function(item) {
+
+                    item.classList.remove(
+                        "visible"
+                    );
+
+                }
+            );
+
+
+        if (alreadyVisible) {
+
+            return;
+
+        }
+
+
+        renderChapters(
+            subject,
+            panel
+        );
+
+
+        panel.classList.add(
+            "visible"
+        );
+
+
+        const path =
+            document.querySelector(
+                ".learning-path"
+            );
+
+
+        if (path) {
+
+            const items =
+                path.querySelectorAll(
+                    ".path-item"
+                );
+
+
+            if (items[2]) {
+
+                items[2].classList.add(
+                    "active"
+                );
+
+            }
+
+        }
+
+
+        setTimeout(
+            function() {
+
+                panel.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+            },
+            80
+        );
+
+    }
+
+
+    /* =========================================
+       RENDER CHAPTERS
+       ========================================= */
+
+    function renderChapters(
+        subject,
+        panel
+    ) {
+
+        const language =
+            getLibraryLanguage();
+
+
+        const chapters =
+            CHAPTERS_BY_SUBJECT[
+                subject.id
+            ] || [];
+
+
+        panel.innerHTML = "";
+
+
+        const header =
+            document.createElement(
+                "div"
+            );
+
+
+        header.className =
+            "chapters-panel-header";
+
+
+        const title =
+            document.createElement(
+                "h3"
+            );
+
+
+        title.textContent =
+            libraryText(
+                "library.chapters_title"
+            );
+
+
+        const description =
+            document.createElement(
+                "p"
+            );
+
+
+        description.textContent =
+            libraryText(
+                "library.chapters_description"
+            );
+
+
+        header.appendChild(title);
+        header.appendChild(description);
+
+
+        panel.appendChild(header);
+
+
         if (!chapters.length) {
 
-            empty.style.display =
-                "block";
+            const empty =
+                document.createElement(
+                    "div"
+                );
+
+
+            empty.className =
+                "empty-content";
+
+
+            empty.innerHTML = `
+
+                <div class="empty-content-icon">
+                    📚
+                </div>
+
+                <h3>
+                    ${libraryText(
+                        "library.no_chapters"
+                    )}
+                </h3>
+
+                <p>
+                    ${libraryText(
+                        "library.no_chapters_text"
+                    )}
+                </p>
+
+            `;
+
+
+            panel.appendChild(
+                empty
+            );
 
 
             return;
@@ -1314,8 +1875,14 @@
         }
 
 
-        empty.style.display =
-            "none";
+        const container =
+            document.createElement(
+                "div"
+            );
+
+
+        container.className =
+            "chapters";
 
 
         chapters.forEach(
@@ -1335,58 +1902,122 @@
                     "chapter-card";
 
 
-                const videoCount =
-                    Math.min(
-                        chapter.videos || 0,
-                        20
+                const number =
+                    document.createElement(
+                        "div"
                     );
 
 
-                card.innerHTML = `
-
-                    <div class="chapter-number">
-                        ${chapter.id}
-                    </div>
+                number.className =
+                    "chapter-number";
 
 
-                    <div class="chapter-info">
-
-                        <h3>
-                            ${chapter.title}
-                        </h3>
+                number.textContent =
+                    chapter.id;
 
 
-                        <p>
-                            ${chapter.description || ""}
-                        </p>
+                const info =
+                    document.createElement(
+                        "div"
+                    );
 
 
-                        <span class="chapter-meta">
-
-                            🎬
-                            ${videoCount}
-                            ${getVideoLabel(videoCount)}
-
-                        </span>
-
-                    </div>
+                info.className =
+                    "chapter-info";
 
 
-                    <div class="chapter-arrow">
-                        ${getLibraryLanguage() === "fr" ? "→" : "←"}
-                    </div>
+                const title =
+                    document.createElement(
+                        "h4"
+                    );
 
-                `;
+
+                title.textContent =
+                    getLocalizedValue(
+                        chapter.title
+                    );
 
 
-                card.onclick =
+                const description =
+                    document.createElement(
+                        "p"
+                    );
+
+
+                description.textContent =
+                    getLocalizedValue(
+                        chapter.description
+                    );
+
+
+                const meta =
+                    document.createElement(
+                        "span"
+                    );
+
+
+                meta.className =
+                    "chapter-meta";
+
+
+                const videoCount =
+                    Math.max(
+                        1,
+                        Math.min(
+                            Number(
+                                chapter.videos
+                            ) || 1,
+                            20
+                        )
+                    );
+
+
+                meta.textContent =
+                    "🎬 " +
+                    videoCount +
+                    " " +
+                    getVideoLabel(
+                        videoCount
+                    );
+
+
+                info.appendChild(title);
+                info.appendChild(description);
+                info.appendChild(meta);
+
+
+                const arrow =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                arrow.className =
+                    "chapter-arrow";
+
+
+                arrow.textContent =
+                    language === "fr"
+                        ? "→"
+                        : "←";
+
+
+                card.appendChild(number);
+                card.appendChild(info);
+                card.appendChild(arrow);
+
+
+                card.addEventListener(
+                    "click",
                     function() {
 
                         openChapter(
-                            chapter.id
+                            subject,
+                            chapter
                         );
 
-                    };
+                    }
+                );
 
 
                 container.appendChild(
@@ -1396,6 +2027,46 @@
             }
         );
 
+
+        panel.appendChild(
+            container
+        );
+
+    }
+
+
+    /* =========================================
+       LOCALIZED VALUE
+       ========================================= */
+
+    function getLocalizedValue(
+        value
+    ) {
+
+        if (!value) {
+            return "";
+        }
+
+
+        if (
+            typeof value ===
+            "string"
+        ) {
+
+            return value;
+
+        }
+
+
+        const language =
+            getLibraryLanguage();
+
+
+        return value[language] ||
+            value.ar ||
+            value.fr ||
+            "";
+
     }
 
 
@@ -1403,11 +2074,26 @@
        OPEN CHAPTER
        ========================================= */
 
-    function openChapter(id) {
+    function openChapter(
+        subject,
+        chapter
+    ) {
+
+        localStorage.setItem(
+            "selected_subject",
+            subject.id
+        );
+
+
+        localStorage.setItem(
+            "selected_subject_type",
+            subject.type
+        );
+
 
         localStorage.setItem(
             "selected_chapter",
-            String(id)
+            String(chapter.id)
         );
 
 
@@ -1423,6 +2109,17 @@
 
     function chooseLevel() {
 
+        if (
+            typeof goTo ===
+            "function"
+        ) {
+
+            goTo("levels.html");
+            return;
+
+        }
+
+
         window.location.href =
             "levels.html";
 
@@ -1431,6 +2128,17 @@
 
     function goDashboard() {
 
+        if (
+            typeof goTo ===
+            "function"
+        ) {
+
+            goTo("dashboard.html");
+            return;
+
+        }
+
+
         window.location.href =
             "dashboard.html";
 
@@ -1438,6 +2146,17 @@
 
 
     function goHome() {
+
+        if (
+            typeof goTo ===
+            "function"
+        ) {
+
+            goTo("index.html");
+            return;
+
+        }
+
 
         window.location.href =
             "index.html";
@@ -1478,7 +2197,20 @@
         function(event) {
 
             if (
-                event.key === "site_language"
+                event.key ===
+                "site_language"
+            ) {
+
+                translateLibraryPage();
+
+            }
+
+
+            if (
+                event.key ===
+                "student_level" ||
+                event.key ===
+                "bac_branch"
             ) {
 
                 translateLibraryPage();
@@ -1517,4 +2249,4 @@
 
 </body>
 
-                </html>
+                        </html>
