@@ -106,6 +106,7 @@
             margin-top: 3px;
             color: var(--text-soft);
             font-size: 10px;
+            line-height: 1.7;
         }
 
         /* =========================================
@@ -148,6 +149,7 @@
             margin-bottom: 10px;
             color: rgba(255,255,255,.72);
             font-size: 10px;
+            line-height: 1.7;
         }
 
         .chapter-hero h1 {
@@ -196,6 +198,7 @@
             margin: 4px 0 0;
             color: var(--text-soft);
             font-size: 11px;
+            line-height: 1.7;
         }
 
         /* =========================================
@@ -255,14 +258,23 @@
             font-weight: 900;
         }
 
-        .lock-badge {
+        .lock-badge,
+        .free-badge {
             left: 10px;
+        }
+
+        .lock-badge {
             background: rgba(15,23,42,.85);
         }
 
         .free-badge {
-            left: 10px;
             background: rgba(22,163,74,.95);
+        }
+
+        html[dir="ltr"] .lock-badge,
+        html[dir="ltr"] .free-badge {
+            left: auto;
+            right: 10px;
         }
 
         /* =========================================
@@ -299,6 +311,11 @@
             font-weight: 900;
         }
 
+        html[dir="ltr"] .video-thumbnail::before {
+            right: auto;
+            left: 12px;
+        }
+
         .play-button {
             width: 54px;
             height: 54px;
@@ -332,6 +349,11 @@
             background: rgba(0,0,0,.65);
             font-size: 9px;
             font-weight: 800;
+        }
+
+        html[dir="ltr"] .video-number {
+            right: auto;
+            left: 9px;
         }
 
         /* =========================================
@@ -404,6 +426,38 @@
             color: var(--text-soft);
             font-size: 11px;
             line-height: 1.9;
+        }
+
+        /* =========================================
+           INVALID CHAPTER
+           ========================================= */
+
+        .invalid-chapter {
+            display: none;
+            margin-top: 18px;
+            padding: 30px 18px;
+            text-align: center;
+            background: var(--surface);
+            border: 1px dashed var(--border);
+            border-radius: 20px;
+        }
+
+        .invalid-chapter-icon {
+            font-size: 38px;
+        }
+
+        .invalid-chapter h3 {
+            margin: 10px 0 6px;
+            font-size: 18px;
+            font-weight: 950;
+        }
+
+        .invalid-chapter p {
+            max-width: 500px;
+            margin: 0 auto 16px;
+            color: var(--text-soft);
+            font-size: 11px;
+            line-height: 1.8;
         }
 
         /* =========================================
@@ -507,7 +561,9 @@
     <div class="container chapter-wrapper">
 
 
-        <!-- TEACHER -->
+        <!-- =====================================
+             TEACHER
+             ===================================== -->
 
         <div class="teacher-strip">
 
@@ -530,7 +586,9 @@
         </div>
 
 
-        <!-- HERO -->
+        <!-- =====================================
+             HERO
+             ===================================== -->
 
         <section class="chapter-hero">
 
@@ -540,7 +598,7 @@
                     class="breadcrumb"
                     id="breadcrumb">
 
-                    الرياضيات ← Chapitre
+                    Mathématiques ← Chapitre
 
                 </div>
 
@@ -550,12 +608,8 @@
                 </h1>
 
 
-                <p
-                    id="chapterDescription"
-                    data-i18n="chapter.default_description">
-
-                    فيديوهات تعليمية مرتبة داخل هذا الـChapitre.
-
+                <p id="chapterDescription">
+                    فيديوهات تعليمية مرتبة داخل هذا الفصل.
                 </p>
 
 
@@ -572,14 +626,16 @@
         </section>
 
 
-        <!-- VIDEOS -->
+        <!-- =====================================
+             VIDEOS
+             ===================================== -->
 
         <section class="videos-section">
 
             <div class="section-head">
 
                 <h2 data-i18n="chapter.videos_title">
-                    فيديوهات الـChapitre
+                    فيديوهات الفصل
                 </h2>
 
                 <p data-i18n="chapter.videos_description">
@@ -608,12 +664,45 @@
                 </h3>
 
                 <p data-i18n="chapter.empty_description">
-                    لم تتم إضافة فيديوهات لهذا الـChapitre بعد.
-                    يمكن أن يحتوي كل Chapitre على ما يصل إلى 20 فيديو،
+                    لم تتم إضافة فيديوهات لهذا الفصل بعد.
+                    يمكن أن يحتوي كل فصل على فيديو واحد إلى 20 فيديو،
                     ويكون الفيديو الأول مجانيًا للتجربة.
                 </p>
 
             </div>
+
+        </section>
+
+
+        <!-- =====================================
+             INVALID CHAPTER
+             ===================================== -->
+
+        <section
+            id="invalidChapter"
+            class="invalid-chapter">
+
+            <div class="invalid-chapter-icon">
+                📚
+            </div>
+
+            <h3 data-i18n="chapter.invalid_title">
+                لم يتم العثور على الفصل
+            </h3>
+
+            <p data-i18n="chapter.invalid_description">
+                يرجى العودة إلى المواد واختيار الفصل مرة أخرى.
+            </p>
+
+            <button
+                class="btn btn-primary"
+                onclick="goLibrary()"
+                type="button"
+                data-i18n="chapter.back_to_library">
+
+                العودة إلى المواد
+
+            </button>
 
         </section>
 
@@ -634,16 +723,13 @@
         ar: {
 
             "chapter.back_library":
-                "← المكتبة",
+                "← المواد",
 
             "chapter.teacher_description":
                 "مدرسك الذكي في EduNova AI — تعلّم الرياضيات خطوة بخطوة.",
 
-            "chapter.default_description":
-                "فيديوهات تعليمية مرتبة داخل هذا الـChapitre.",
-
             "chapter.videos_title":
-                "فيديوهات الـChapitre",
+                "فيديوهات الفصل",
 
             "chapter.videos_description":
                 "الفيديو الأول مجاني، وبقية الفيديوهات متاحة ضمن الخطط التعليمية.",
@@ -652,13 +738,28 @@
                 "الفيديوهات ستُضاف هنا",
 
             "chapter.empty_description":
-                "لم تتم إضافة فيديوهات لهذا الـChapitre بعد. يمكن أن يحتوي كل Chapitre على ما يصل إلى 20 فيديو، ويكون الفيديو الأول مجانيًا للتجربة.",
+                "لم تتم إضافة فيديوهات لهذا الفصل بعد. يمكن أن يحتوي كل فصل على فيديو واحد إلى 20 فيديو، ويكون الفيديو الأول مجانيًا للتجربة.",
+
+            "chapter.invalid_title":
+                "لم يتم العثور على الفصل",
+
+            "chapter.invalid_description":
+                "يرجى العودة إلى المواد واختيار الفصل مرة أخرى.",
+
+            "chapter.back_to_library":
+                "العودة إلى المواد",
 
             "chapter.math":
                 "الرياضيات",
 
+            "chapter.math_c":
+                "الرياضيات C",
+
+            "chapter.math_d":
+                "الرياضيات D",
+
             "chapter.chapter":
-                "Chapitre",
+                "الفصل",
 
             "chapter.video":
                 "فيديو",
@@ -689,13 +790,10 @@
         fr: {
 
             "chapter.back_library":
-                "← Bibliothèque",
+                "← Matières",
 
             "chapter.teacher_description":
                 "Votre professeur intelligent dans EduNova AI — apprenez les mathématiques étape par étape.",
-
-            "chapter.default_description":
-                "Des vidéos éducatives organisées dans ce chapitre.",
 
             "chapter.videos_title":
                 "Vidéos du chapitre",
@@ -707,10 +805,25 @@
                 "Les vidéos seront ajoutées ici",
 
             "chapter.empty_description":
-                "Aucune vidéo n'a encore été ajoutée à ce chapitre. Chaque chapitre peut contenir jusqu'à 20 vidéos, dont la première est gratuite pour découvrir le contenu.",
+                "Aucune vidéo n'a encore été ajoutée à ce chapitre. Chaque chapitre peut contenir de 1 à 20 vidéos, dont la première est gratuite pour découvrir le contenu.",
+
+            "chapter.invalid_title":
+                "Chapitre introuvable",
+
+            "chapter.invalid_description":
+                "Veuillez retourner aux matières et choisir à nouveau un chapitre.",
+
+            "chapter.back_to_library":
+                "Retour aux matières",
 
             "chapter.math":
                 "Mathématiques",
+
+            "chapter.math_c":
+                "Mathématiques C",
+
+            "chapter.math_d":
+                "Mathématiques D",
 
             "chapter.chapter":
                 "Chapitre",
@@ -745,16 +858,40 @@
 
 
     /* =========================================
-       SELECTED CHAPTER
+       SELECTED DATA
        ========================================= */
 
     const selectedChapter =
         parseInt(
             localStorage.getItem(
                 "selected_chapter"
-            ) || "1",
+            ) || "0",
             10
         );
+
+
+    const selectedSubject =
+        localStorage.getItem(
+            "selected_subject"
+        ) || "";
+
+
+    const selectedSubjectType =
+        localStorage.getItem(
+            "selected_subject_type"
+        ) || "";
+
+
+    const selectedLevel =
+        localStorage.getItem(
+            "student_level"
+        ) || "";
+
+
+    const selectedBranch =
+        localStorage.getItem(
+            "bac_branch"
+        ) || "";
 
 
     /* =========================================
@@ -762,84 +899,77 @@
        ========================================= */
 
     /*
-       لاحقًا يمكن أن يصبح لكل Chapitre
-       مجموعة فيديوهات بهذا الشكل:
+     * =========================================
+     * بنية الفصول
+     * =========================================
+     *
+     * كل مادة لها فصول مستقلة.
+     *
+     * كل فصل:
+     *
+     * {
+     *     id: 1,
+     *
+     *     title: {
+     *         ar: "...",
+     *         fr: "..."
+     *     },
+     *
+     *     description: {
+     *         ar: "...",
+     *         fr: "..."
+     *     },
+     *
+     *     videos: [
+     *
+     *         {
+     *             id: 1,
+     *
+     *             title: {
+     *                 ar: "...",
+     *                 fr: "..."
+     *             },
+     *
+     *             description: {
+     *                 ar: "...",
+     *                 fr: "..."
+     *             },
+     *
+     *             duration: "15:30",
+     *
+     *             videoUrl: "..."
+     *         }
+     *
+     *     ]
+     * }
+     *
+     * الحد الأقصى:
+     * 20 فيديو لكل فصل.
+     *
+     * الفيديو 1:
+     * مجاني.
+     *
+     * الفيديو 2 إلى 20:
+     * مقفلة.
+     *
+     * =========================================
+     *
+     * حاليًا نترك البيانات فارغة حتى نضع
+     * أسماء الفصول الحقيقية والمحتوى الحقيقي
+     * لاحقًا بدون اختلاق المنهج.
+     *
+     * =========================================
+     */
 
-       {
-           id: 1,
-           title: "عنوان الفيديو",
-           description: "وصف قصير",
-           duration: "15:30",
-           videoUrl: "..."
-       }
+    const CHAPTERS_BY_SUBJECT = {
 
-       الحد الأقصى:
-       20 فيديو لكل Chapitre.
+        math_concours: [],
 
-       القاعدة:
-       الفيديو رقم 1 = مجاني
-       الفيديو رقم 2 وما بعده = مقفل
-    */
+        math_brevet: [],
 
-    const chapterData = {
+        math_bac_c: [],
 
-        1: {
-
-            title: {
-                ar: "Chapitre 1",
-                fr: "Chapitre 1"
-            },
-
-            description: {
-                ar: "الفيديوهات التعليمية الخاصة بالفصل الأول.",
-                fr: "Les vidéos éducatives du premier chapitre."
-            },
-
-            videos: [
-
-                /*
-                مثال لاحقًا:
-
-                {
-                    id: 1,
-
-                    title: {
-                        ar: "الدرس الأول",
-                        fr: "Première leçon"
-                    },
-
-                    description: {
-                        ar: "شرح الدرس الأول",
-                        fr: "Explication de la première leçon"
-                    },
-
-                    duration: "12:30",
-
-                    videoUrl: "رابط الفيديو"
-                },
-
-                {
-                    id: 2,
-
-                    title: {
-                        ar: "الدرس الثاني",
-                        fr: "Deuxième leçon"
-                    },
-
-                    description: {
-                        ar: "شرح الدرس الثاني",
-                        fr: "Explication de la deuxième leçon"
-                    },
-
-                    duration: "15:20",
-
-                    videoUrl: "رابط الفيديو"
-                }
-                */
-
-            ]
-
-        }
+        math_bac_d: []
 
     };
 
@@ -897,6 +1027,7 @@
             const language =
                 getChapterLanguage();
 
+
             return (
                 value[language] ||
                 value.ar ||
@@ -908,6 +1039,91 @@
 
 
         return value || "";
+
+    }
+
+
+    /* =========================================
+       SUBJECT LABEL
+       ========================================= */
+
+    function getSubjectLabel() {
+
+        const language =
+            getChapterLanguage();
+
+
+        if (
+            selectedSubject ===
+            "math_bac_c" ||
+            selectedSubjectType ===
+            "math_c"
+        ) {
+
+            return chapterText(
+                "chapter.math_c"
+            );
+
+        }
+
+
+        if (
+            selectedSubject ===
+            "math_bac_d" ||
+            selectedSubjectType ===
+            "math_d"
+        ) {
+
+            return chapterText(
+                "chapter.math_d"
+            );
+
+        }
+
+
+        return chapterText(
+            "chapter.math"
+        );
+
+    }
+
+
+    /* =========================================
+       GET CHAPTERS FOR SUBJECT
+       ========================================= */
+
+    function getCurrentChapters() {
+
+        return (
+            CHAPTERS_BY_SUBJECT[
+                selectedSubject
+            ] || []
+        );
+
+    }
+
+
+    /* =========================================
+       GET CURRENT CHAPTER
+       ========================================= */
+
+    function getCurrentChapter() {
+
+        const chapters =
+            getCurrentChapters();
+
+
+        return chapters.find(
+            function(chapter) {
+
+                return Number(
+                    chapter.id
+                ) === Number(
+                    selectedChapter
+                );
+
+            }
+        ) || null;
 
     }
 
@@ -966,39 +1182,102 @@
 
 
     /* =========================================
-       CHAPTER TITLE
-       ========================================= */
-
-    function getChapterTitle(data) {
-
-        if (!data) {
-
-            return (
-                chapterText(
-                    "chapter.chapter"
-                ) +
-                " " +
-                selectedChapter
-            );
-
-        }
-
-
-        return localizedValue(
-            data.title
-        );
-
-    }
-
-
-    /* =========================================
        LOAD CHAPTER
        ========================================= */
 
     function loadChapter() {
 
-        const data =
-            chapterData[selectedChapter];
+        const currentChapter =
+            getCurrentChapter();
+
+
+        const hero =
+            document.querySelector(
+                ".chapter-hero"
+            );
+
+
+        const videosSection =
+            document.querySelector(
+                ".videos-section"
+            );
+
+
+        const invalid =
+            document.getElementById(
+                "invalidChapter"
+            );
+
+
+        if (
+            !selectedSubject ||
+            !selectedChapter ||
+            !currentChapter
+        ) {
+
+            if (hero) {
+
+                hero.style.display =
+                    "none";
+
+            }
+
+
+            if (videosSection) {
+
+                videosSection.style.display =
+                    "none";
+
+            }
+
+
+            if (invalid) {
+
+                invalid.style.display =
+                    "block";
+
+            }
+
+
+            return;
+
+        }
+
+
+        if (hero) {
+
+            hero.style.display =
+                "block";
+
+        }
+
+
+        if (videosSection) {
+
+            videosSection.style.display =
+                "block";
+
+        }
+
+
+        if (invalid) {
+
+            invalid.style.display =
+                "none";
+
+        }
+
+
+        const title =
+            localizedValue(
+                currentChapter.title
+            );
+
+
+        const description =
+            localizedValue(
+                currentChapter.description
+            );
 
 
         const titleElement =
@@ -1025,66 +1304,6 @@
             );
 
 
-        if (!data) {
-
-            if (titleElement) {
-
-                titleElement.textContent =
-                    chapterText(
-                        "chapter.chapter"
-                    ) +
-                    " " +
-                    selectedChapter;
-
-            }
-
-
-            if (descriptionElement) {
-
-                descriptionElement.textContent =
-                    chapterText(
-                        "chapter.default_description"
-                    );
-
-            }
-
-
-            if (breadcrumbElement) {
-
-                breadcrumbElement.textContent =
-                    chapterText(
-                        "chapter.math"
-                    ) +
-                    " ← " +
-                    chapterText(
-                        "chapter.chapter"
-                    );
-
-            }
-
-
-            if (countElement) {
-
-                countElement.textContent =
-                    "🎬 0 " +
-                    chapterText(
-                        "chapter.video"
-                    );
-
-            }
-
-
-            showEmpty();
-
-            return;
-
-        }
-
-
-        const title =
-            getChapterTitle(data);
-
-
         if (titleElement) {
 
             titleElement.textContent =
@@ -1096,9 +1315,7 @@
         if (descriptionElement) {
 
             descriptionElement.textContent =
-                localizedValue(
-                    data.description
-                );
+                description;
 
         }
 
@@ -1106,22 +1323,29 @@
         if (breadcrumbElement) {
 
             breadcrumbElement.textContent =
-                chapterText(
-                    "chapter.math"
-                ) +
+                getSubjectLabel() +
                 " ← " +
                 title;
 
         }
 
 
+        const videos =
+            Array.isArray(
+                currentChapter.videos
+            )
+                ? currentChapter.videos
+                : [];
+
+
+        const limitedVideos =
+            videos.slice(0, 20);
+
+
         if (countElement) {
 
             const count =
-                Math.min(
-                    (data.videos || []).length,
-                    20
-                );
+                limitedVideos.length;
 
 
             countElement.textContent =
@@ -1142,7 +1366,7 @@
 
 
         renderVideos(
-            data.videos || []
+            limitedVideos
         );
 
     }
@@ -1167,7 +1391,9 @@
 
 
         if (!grid || !empty) {
+
             return;
+
         }
 
 
@@ -1176,7 +1402,8 @@
 
         if (!videos.length) {
 
-            showEmpty();
+            empty.style.display =
+                "block";
 
             return;
 
@@ -1195,6 +1422,13 @@
                     const videoNumber =
                         index + 1;
 
+
+                    /*
+                     * القاعدة الأساسية:
+                     *
+                     * فيديو 1 = مجاني
+                     * فيديو 2+ = مقفل
+                     */
 
                     const isFree =
                         videoNumber === 1;
@@ -1218,6 +1452,13 @@
                     const title =
                         localizedValue(
                             video.title
+                        ) ||
+                        (
+                            chapterText(
+                                "chapter.video"
+                            ) +
+                            " " +
+                            videoNumber
                         );
 
 
@@ -1306,19 +1547,26 @@
                         <div class="video-info">
 
                             <h3>
-                                ${title}
+                                ${escapeVideoText(
+                                    title
+                                )}
                             </h3>
 
 
                             <p>
-                                ${description}
+                                ${escapeVideoText(
+                                    description
+                                )}
                             </p>
 
 
                             <div class="video-meta">
 
                                 <span>
-                                    ⏱️ ${duration}
+                                    ⏱️
+                                    ${escapeVideoText(
+                                        duration
+                                    )}
                                 </span>
 
 
@@ -1339,7 +1587,8 @@
                     `;
 
 
-                    card.onclick =
+                    card.addEventListener(
+                        "click",
                         function() {
 
                             openVideo(
@@ -1347,7 +1596,8 @@
                                 videoNumber
                             );
 
-                        };
+                        }
+                    );
 
 
                     grid.appendChild(
@@ -1355,6 +1605,51 @@
                     );
 
                 }
+            );
+
+    }
+
+
+    /* =========================================
+       SAFE TEXT
+       ========================================= */
+
+    function escapeVideoText(value) {
+
+        if (
+            typeof escapeHTML ===
+            "function"
+        ) {
+
+            return escapeHTML(
+                String(value || "")
+            );
+
+        }
+
+
+        return String(
+            value || ""
+        )
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+            .replace(
+                /</g,
+                "&lt;"
+            )
+            .replace(
+                />/g,
+                "&gt;"
+            )
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+            .replace(
+                /'/g,
+                "&#039;"
             );
 
     }
@@ -1370,34 +1665,34 @@
     ) {
 
         /*
-           الفيديو الأول مجاني.
-
-           الفيديوهات التالية ستكون
-           مرتبطة بنظام الاشتراك لاحقًا.
-        */
-
-
-        if (videoNumber > 1) {
-
-            alert(
-                chapterText(
-                    "chapter.subscription_alert"
-                )
-            );
-
-            return;
-
-        }
-
+         * فيديو 1 مجاني.
+         */
 
         if (
-            video &&
-            video.videoUrl
+            videoNumber === 1
         ) {
 
             localStorage.setItem(
                 "selected_video",
-                JSON.stringify(video)
+                JSON.stringify(
+                    video
+                )
+            );
+
+
+            localStorage.setItem(
+                "selected_video_number",
+                String(
+                    videoNumber
+                )
+            );
+
+
+            localStorage.setItem(
+                "selected_chapter",
+                String(
+                    selectedChapter
+                )
             );
 
 
@@ -1410,33 +1705,19 @@
         }
 
 
+        /*
+         * الفيديوهات 2 إلى 20
+         * مقفلة حاليًا.
+         *
+         * نظام الاشتراك الحقيقي
+         * سيتم ربطه لاحقًا بالـBackend.
+         */
+
         alert(
             chapterText(
-                "chapter.coming_soon"
+                "chapter.subscription_alert"
             )
         );
-
-    }
-
-
-    /* =========================================
-       EMPTY
-       ========================================= */
-
-    function showEmpty() {
-
-        const empty =
-            document.getElementById(
-                "emptyVideos"
-            );
-
-
-        if (empty) {
-
-            empty.style.display =
-                "block";
-
-        }
 
     }
 
@@ -1447,6 +1728,17 @@
 
     function goLibrary() {
 
+        if (
+            typeof goTo ===
+            "function"
+        ) {
+
+            goTo("library.html");
+            return;
+
+        }
+
+
         window.location.href =
             "library.html";
 
@@ -1455,6 +1747,17 @@
 
     function goHome() {
 
+        if (
+            typeof goTo ===
+            "function"
+        ) {
+
+            goTo("index.html");
+            return;
+
+        }
+
+
         window.location.href =
             "index.html";
 
@@ -1462,7 +1765,7 @@
 
 
     /* =========================================
-       GLOBAL LANGUAGE EVENTS
+       LANGUAGE EVENTS
        ========================================= */
 
     window.addEventListener(
@@ -1494,10 +1797,29 @@
         function(event) {
 
             if (
-                event.key === "site_language"
+                event.key ===
+                "site_language"
             ) {
 
                 translateChapterPage();
+
+            }
+
+
+            if (
+                event.key ===
+                "selected_chapter" ||
+                event.key ===
+                "selected_subject" ||
+                event.key ===
+                "selected_subject_type" ||
+                event.key ===
+                "student_level" ||
+                event.key ===
+                "bac_branch"
+            ) {
+
+                location.reload();
 
             }
 
@@ -1533,4 +1855,4 @@
 
 </body>
 
-                </html>
+    </html>
