@@ -2,7 +2,6 @@
 <html lang="ar" dir="rtl">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -11,7 +10,6 @@
     <link rel="stylesheet" href="style.css">
 
     <style>
-
         .lesson-page {
             padding-bottom: 55px;
         }
@@ -73,6 +71,22 @@
             line-height: 1.8;
         }
 
+        .lesson-context {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-top: 14px;
+        }
+
+        .context-item {
+            padding: 6px 9px;
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-soft);
+            font-size: 10px;
+        }
+
         /* Video */
 
         .video-card {
@@ -112,7 +126,7 @@
             background: rgba(255,255,255,.1);
             border: 1px solid rgba(255,255,255,.12);
             border-radius: 50%;
-            font-size: 27px;
+            font-size: 24px;
         }
 
         .video-placeholder h2 {
@@ -137,7 +151,7 @@
             font-size: 10px;
         }
 
-        /* Lesson information */
+        /* Information */
 
         .lesson-info-grid {
             display: grid;
@@ -166,7 +180,7 @@
             line-height: 1.8;
         }
 
-        /* Complete */
+        /* Completion */
 
         .complete-card {
             margin-top: 18px;
@@ -247,7 +261,6 @@
         }
 
         @media (min-width: 700px) {
-
             .lesson-page {
                 max-width: 850px;
                 margin: auto;
@@ -256,11 +269,14 @@
             .lesson-info-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-
         }
 
+        @media (max-width: 480px) {
+            .lesson-navigation {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
-
 </head>
 
 
@@ -268,30 +284,27 @@
 
     <!-- Header -->
 
-    <header class="site-header">
+    <header class="header site-header">
 
         <div class="container header-inner">
 
             <button
                 class="brand"
+                type="button"
                 onclick="goHome()"
                 aria-label="EduNova AI">
 
-                <span class="brand-icon">
-                    AI
-                </span>
+                <span class="brand-icon">AI</span>
 
-                <span>
-                    EduNova AI
-                </span>
+                <span>EduNova AI</span>
 
             </button>
 
-
             <button
                 class="btn btn-secondary"
+                type="button"
                 onclick="goChapter()"
-                data-i18n="chapter">
+                data-lesson-i18n="chapter">
 
                 ← الفصل
 
@@ -306,42 +319,40 @@
 
         <div class="container lesson-page">
 
-
-            <!-- Top -->
+            <!-- Breadcrumb -->
 
             <section class="lesson-top">
 
                 <div class="lesson-breadcrumb">
 
                     <button
+                        type="button"
                         onclick="goLibrary()"
-                        data-i18n="library">
+                        data-lesson-i18n="library">
 
                         مكتبتي
 
                     </button>
 
-                    <span>
-                        /
-                    </span>
+                    <span>/</span>
 
-                    <button onclick="goChapter()">
+                    <button
+                        type="button"
+                        onclick="goChapter()">
 
-                        <span data-i18n="chapter">
+                        <span data-lesson-i18n="chapter">
                             الفصل
                         </span>
 
                         <span id="chapterNumberLabel">
-                            الأول
+                            1
                         </span>
 
                     </button>
 
-                    <span>
-                        /
-                    </span>
+                    <span>/</span>
 
-                    <span data-i18n="lesson">
+                    <span data-lesson-i18n="lesson">
                         الدرس
                     </span>
 
@@ -352,7 +363,7 @@
 
                     <span class="lesson-number-label">
 
-                        <span data-i18n="lesson">
+                        <span data-lesson-i18n="lesson">
                             الدرس
                         </span>
 
@@ -373,12 +384,32 @@
 
 
                     <p
-                        class="lesson-description"
-                        data-i18n="lesson_description">
+                        id="lessonDescription"
+                        class="lesson-description">
 
                         شاهد الدرس بتركيز، ثم قم بإتمامه لحفظ تقدمك.
 
                     </p>
+
+
+                    <div class="lesson-context">
+
+                        <span
+                            id="levelContext"
+                            class="context-item">
+                        </span>
+
+                        <span
+                            id="subjectContext"
+                            class="context-item">
+                        </span>
+
+                        <span
+                            id="chapterContext"
+                            class="context-item">
+                        </span>
+
+                    </div>
 
                 </div>
 
@@ -397,11 +428,11 @@
                             ▶
                         </div>
 
-                        <h2 data-i18n="educational_video">
+                        <h2 data-lesson-i18n="educational_video">
                             الفيديو التعليمي
                         </h2>
 
-                        <p data-i18n="video_coming_description">
+                        <p data-lesson-i18n="video_coming_description">
                             مكان الفيديو جاهز. سيتم ربط الفيديو الحقيقي في مرحلة لاحقة.
                         </p>
 
@@ -411,10 +442,11 @@
 
 
                 <div
+                    id="videoStatus"
                     class="video-status"
-                    data-i18n="video_coming">
+                    data-lesson-i18n="video_coming">
 
-                    🎬 الفيديو التعليمي — قادمًا
+                    الفيديو التعليمي — قادمًا
 
                 </div>
 
@@ -425,14 +457,13 @@
 
             <section class="lesson-info-grid">
 
-
                 <div class="info-card">
 
-                    <h2 data-i18n="what_you_learn">
-                        📖 ماذا ستتعلم؟
+                    <h2 data-lesson-i18n="what_you_learn">
+                        ماذا ستتعلم؟
                     </h2>
 
-                    <p data-i18n="what_you_learn_text">
+                    <p data-lesson-i18n="what_you_learn_text">
                         ستتعرف على المفاهيم الأساسية للدرس وتتعلم طريقة التعامل مع التمارين المرتبطة به.
                     </p>
 
@@ -441,21 +472,20 @@
 
                 <div class="info-card">
 
-                    <h2 data-i18n="lesson_goal">
-                        🎯 هدف الدرس
+                    <h2 data-lesson-i18n="lesson_goal">
+                        هدف الدرس
                     </h2>
 
-                    <p data-i18n="lesson_goal_text">
+                    <p data-lesson-i18n="lesson_goal_text">
                         بناء فهم واضح للمادة قبل الانتقال إلى الدروس التالية.
                     </p>
 
                 </div>
 
-
             </section>
 
 
-            <!-- Complete -->
+            <!-- Completion -->
 
             <section class="complete-card">
 
@@ -467,13 +497,13 @@
 
                     <div>
 
-                        <h2 data-i18n="complete_lesson">
+                        <h2 data-lesson-i18n="complete_lesson">
                             إتمام الدرس
                         </h2>
 
                         <p
                             id="completeDescription"
-                            data-i18n="complete_description">
+                            data-lesson-i18n="complete_description">
 
                             بعد إنهاء الدرس اضغط على الزر لحفظ تقدمك.
 
@@ -487,8 +517,9 @@
                 <button
                     id="completeButton"
                     class="btn btn-primary complete-button"
+                    type="button"
                     onclick="completeCurrentLesson()"
-                    data-i18n="complete_lesson">
+                    data-lesson-i18n="complete_lesson">
 
                     إتمام الدرس
 
@@ -499,8 +530,9 @@
 
                     <button
                         class="btn btn-secondary"
+                        type="button"
                         onclick="goChapter()"
-                        data-i18n="lesson_list">
+                        data-lesson-i18n="lesson_list">
 
                         ← قائمة الدروس
 
@@ -509,10 +541,11 @@
 
                     <button
                         class="btn btn-secondary"
+                        type="button"
                         onclick="goLibrary()"
-                        data-i18n="library">
+                        data-lesson-i18n="library">
 
-                        📚 مكتبتي
+                        مكتبتي
 
                     </button>
 
@@ -521,31 +554,27 @@
             </section>
 
 
-            <!-- Future lessons -->
-
             <div
+                id="futureLessonsMessage"
                 class="locked-message"
-                data-i18n="future_lessons">
+                data-lesson-i18n="future_lessons">
 
-                🔒 الدروس التالية ستتوفر تدريجيًا مع تطوير المنصة.
+                الدروس التالية ستتوفر تدريجيًا مع تطوير المنصة.
 
             </div>
-
 
         </div>
 
     </main>
 
 
-    <!-- Global system -->
-
     <script src="script.js"></script>
 
 
     <script>
-
         /* =========================================
-           EduNova AI — Lesson translations
+           EduNova AI — Lesson Page
+           Central-system compatible
            ========================================= */
 
         const LESSON_TRANSLATIONS = {
@@ -568,16 +597,16 @@
                     "مكان الفيديو جاهز. سيتم ربط الفيديو الحقيقي في مرحلة لاحقة.",
 
                 video_coming:
-                    "🎬 الفيديو التعليمي — قادمًا",
+                    "الفيديو التعليمي — قادمًا",
 
                 what_you_learn:
-                    "📖 ماذا ستتعلم؟",
+                    "ماذا ستتعلم؟",
 
                 what_you_learn_text:
                     "ستتعرف على المفاهيم الأساسية للدرس وتتعلم طريقة التعامل مع التمارين المرتبطة به.",
 
                 lesson_goal:
-                    "🎯 هدف الدرس",
+                    "هدف الدرس",
 
                 lesson_goal_text:
                     "بناء فهم واضح للمادة قبل الانتقال إلى الدروس التالية.",
@@ -592,13 +621,28 @@
                     "← قائمة الدروس",
 
                 future_lessons:
-                    "🔒 الدروس التالية ستتوفر تدريجيًا مع تطوير المنصة.",
+                    "الدروس التالية ستتوفر تدريجيًا مع تطوير المنصة.",
 
                 completed:
-                    "✓ تم إتمام الدرس",
+                    "تم إتمام الدرس",
 
                 progress_saved:
-                    "تم حفظ تقدمك بنجاح."
+                    "تم حفظ تقدمك بنجاح.",
+
+                level:
+                    "المستوى",
+
+                subject:
+                    "المادة",
+
+                chapter_label:
+                    "الفصل",
+
+                video_number:
+                    "الفيديو",
+
+                video_ready:
+                    "مساحة الفيديو جاهزة. سيتم ربط الفيديو الحقيقي لاحقًا."
 
             },
 
@@ -624,16 +668,16 @@
                     "L’espace vidéo est prêt. La vraie vidéo sera ajoutée à une étape ultérieure.",
 
                 video_coming:
-                    "🎬 Vidéo éducative — bientôt disponible",
+                    "Vidéo éducative — bientôt disponible",
 
                 what_you_learn:
-                    "📖 Que allez-vous apprendre ?",
+                    "Que allez-vous apprendre ?",
 
                 what_you_learn_text:
                     "Vous découvrirez les concepts essentiels de la leçon et apprendrez à résoudre les exercices associés.",
 
                 lesson_goal:
-                    "🎯 Objectif de la leçon",
+                    "Objectif de la leçon",
 
                 lesson_goal_text:
                     "Construire une compréhension claire de la matière avant de passer aux leçons suivantes.",
@@ -648,18 +692,61 @@
                     "← Liste des leçons",
 
                 future_lessons:
-                    "🔒 Les prochaines leçons seront disponibles progressivement avec le développement de la plateforme.",
+                    "Les prochaines leçons seront disponibles progressivement avec le développement de la plateforme.",
 
                 completed:
-                    "✓ Leçon terminée",
+                    "Leçon terminée",
 
                 progress_saved:
-                    "Votre progression a été enregistrée."
+                    "Votre progression a été enregistrée.",
+
+                level:
+                    "Niveau",
+
+                subject:
+                    "Matière",
+
+                chapter_label:
+                    "Chapitre",
+
+                video_number:
+                    "Vidéo",
+
+                video_ready:
+                    "L’espace vidéo est prêt. La vraie vidéo sera ajoutée ultérieurement."
 
             }
 
         };
 
+
+        /* =========================================
+           Safe storage
+           ========================================= */
+
+        function lessonReadStorage(key, fallback = null) {
+
+            try {
+
+                const value =
+                    localStorage.getItem(key);
+
+                return value === null
+                    ? fallback
+                    : value;
+
+            } catch {
+
+                return fallback;
+
+            }
+
+        }
+
+
+        /* =========================================
+           Language
+           ========================================= */
 
         function getLessonLanguage() {
 
@@ -673,8 +760,9 @@
             }
 
             return (
-                localStorage.getItem(
-                    "site_language"
+                lessonReadStorage(
+                    "site_language",
+                    "ar"
                 ) || "ar"
             );
 
@@ -685,7 +773,6 @@
 
             const language =
                 getLessonLanguage();
-
 
             return (
                 LESSON_TRANSLATIONS[language]?.[key] ||
@@ -722,7 +809,6 @@
                 "العشرون"
             ];
 
-
             if (
                 getLessonLanguage() ===
                 "fr"
@@ -731,7 +817,6 @@
                 return `n° ${number}`;
 
             }
-
 
             return (
                 ar[number] ||
@@ -742,95 +827,447 @@
 
 
         /* =========================================
-           Lesson data
+           Central learning selection
            ========================================= */
 
-        const lessonNumber =
-            parseInt(
-                localStorage.getItem(
-                    "selected_lesson_number"
-                ) || "1",
-                10
+        function getCurrentLessonSelection() {
+
+            if (
+                typeof getLearningSelection ===
+                "function"
+            ) {
+
+                const selection =
+                    getLearningSelection();
+
+                if (selection) {
+                    return selection;
+                }
+
+            }
+
+            let selectedVideo = null;
+
+            try {
+
+                selectedVideo =
+                    JSON.parse(
+                        lessonReadStorage(
+                            "selected_video",
+                            "null"
+                        )
+                    );
+
+            } catch {
+
+                selectedVideo = null;
+
+            }
+
+            return {
+
+                level:
+                    typeof getStudentLevel === "function"
+                        ? getStudentLevel()
+                        : lessonReadStorage(
+                            "student_level",
+                            null
+                        ),
+
+                branch:
+                    typeof getBacBranch === "function"
+                        ? getBacBranch()
+                        : lessonReadStorage(
+                            "bac_branch",
+                            null
+                        ),
+
+                subjectId:
+                    typeof getSelectedSubject === "function"
+                        ? getSelectedSubject()
+                        : lessonReadStorage(
+                            "selected_subject",
+                            null
+                        ),
+
+                subjectType:
+                    typeof getSelectedSubjectType === "function"
+                        ? getSelectedSubjectType()
+                        : lessonReadStorage(
+                            "selected_subject_type",
+                            null
+                        ),
+
+                chapterId:
+                    typeof getSelectedChapter === "function"
+                        ? getSelectedChapter()
+                        : lessonReadStorage(
+                            "selected_chapter",
+                            null
+                        ),
+
+                video:
+                    selectedVideo
+
+            };
+
+        }
+
+
+        const lessonSelection =
+            getCurrentLessonSelection();
+
+
+        /* =========================================
+           Lesson / video number
+           ========================================= */
+
+        function getCurrentVideoNumber() {
+
+            const selectedVideo =
+                lessonSelection.video;
+
+            if (
+                selectedVideo &&
+                typeof selectedVideo === "object"
+            ) {
+
+                const number =
+                    parseInt(
+                        selectedVideo.number ||
+                        selectedVideo.videoNumber ||
+                        selectedVideo.id ||
+                        "",
+                        10
+                    );
+
+                if (
+                    Number.isInteger(number) &&
+                    number >= 1
+                ) {
+
+                    return Math.min(
+                        number,
+                        typeof PLATFORM_LIMITS !== "undefined"
+                            ? PLATFORM_LIMITS.maxVideosPerChapter
+                            : 20
+                    );
+
+                }
+
+            }
+
+
+            const storedNumber =
+                parseInt(
+                    lessonReadStorage(
+                        "selected_lesson_number",
+                        lessonReadStorage(
+                            "selected_video_number",
+                            "1"
+                        )
+                    ),
+                    10
+                );
+
+
+            if (
+                Number.isInteger(storedNumber) &&
+                storedNumber >= 1
+            ) {
+
+                return Math.min(
+                    storedNumber,
+                    typeof PLATFORM_LIMITS !== "undefined"
+                        ? PLATFORM_LIMITS.maxVideosPerChapter
+                        : 20
+                );
+
+            }
+
+
+            return 1;
+
+        }
+
+
+        const currentVideoNumber =
+            getCurrentVideoNumber();
+
+
+        const currentChapterId =
+            lessonSelection.chapterId || 1;
+
+
+        /* =========================================
+           Chapter number
+           ========================================= */
+
+        function getChapterNumber() {
+
+            const value =
+                parseInt(
+                    currentChapterId,
+                    10
+                );
+
+            return (
+                Number.isInteger(value) &&
+                value >= 1
+            )
+                ? value
+                : 1;
+
+        }
+
+
+        /* =========================================
+           Labels
+           ========================================= */
+
+        function getCurrentLevelLabel() {
+
+            if (
+                typeof getLevelLabel ===
+                "function"
+            ) {
+
+                return getLevelLabel(
+                    lessonSelection.level
+                );
+
+            }
+
+            if (
+                lessonSelection.level ===
+                "concours"
+            ) {
+
+                return getLessonLanguage() === "fr"
+                    ? "6AF / Concours"
+                    : "6AF / المسابقة";
+
+            }
+
+            if (
+                lessonSelection.level ===
+                "brevet"
+            ) {
+
+                return getLessonLanguage() === "fr"
+                    ? "4ème / Brevet"
+                    : "4ème / شهادة ختم الدروس";
+
+            }
+
+            if (
+                lessonSelection.level ===
+                "bac"
+            ) {
+
+                const branch =
+                    lessonSelection.branch;
+
+                if (
+                    branch === "C" ||
+                    branch === "D"
+                ) {
+
+                    return `Baccalauréat ${branch}`;
+
+                }
+
+                return "Baccalauréat";
+
+            }
+
+            return lessonSelection.level || "";
+
+        }
+
+
+        function getCurrentSubjectLabel() {
+
+            if (
+                typeof getSubjectLabel ===
+                "function"
+            ) {
+
+                return getSubjectLabel(
+                    lessonSelection.subjectId,
+                    lessonSelection.level,
+                    lessonSelection.branch
+                );
+
+            }
+
+            if (
+                typeof getSubjectDefinition ===
+                "function"
+            ) {
+
+                const subject =
+                    getSubjectDefinition(
+                        lessonSelection.subjectId,
+                        lessonSelection.level,
+                        lessonSelection.branch
+                    );
+
+                if (subject) {
+
+                    return (
+                        subject.title ||
+                        subject.label ||
+                        subject.name ||
+                        lessonSelection.subjectId ||
+                        ""
+                    );
+
+                }
+
+            }
+
+            return (
+                lessonSelection.subjectId ||
+                ""
             );
 
+        }
 
-        const selectedChapter =
-            parseInt(
-                localStorage.getItem(
-                    "selected_chapter"
-                ) || "1",
-                10
-            );
 
+        /* =========================================
+           Header
+           ========================================= */
 
         function updateLessonHeader() {
 
-            const numberElement =
+            const lessonNumberElement =
                 document.getElementById(
                     "lessonNumber"
                 );
 
-
-            const titleElement =
+            const lessonTitleElement =
                 document.getElementById(
                     "lessonTitle"
                 );
 
-
-            const chapterElement =
+            const chapterNumberElement =
                 document.getElementById(
                     "chapterNumberLabel"
                 );
 
+            const levelContext =
+                document.getElementById(
+                    "levelContext"
+                );
 
-            if (numberElement) {
+            const subjectContext =
+                document.getElementById(
+                    "subjectContext"
+                );
 
-                numberElement.textContent =
-                    lessonNumber;
+            const chapterContext =
+                document.getElementById(
+                    "chapterContext"
+                );
+
+
+            const chapterNumber =
+                getChapterNumber();
+
+
+            if (lessonNumberElement) {
+
+                lessonNumberElement.textContent =
+                    currentVideoNumber;
 
             }
 
 
-            if (titleElement) {
+            if (lessonTitleElement) {
 
-                if (
-                    getLessonLanguage() ===
-                    "fr"
-                ) {
-
-                    titleElement.textContent =
-                        `${lessonText("lesson")} ${getLessonOrdinal(lessonNumber)}`;
-
-                } else {
-
-                    titleElement.textContent =
-                        `${lessonText("lesson")} ${getLessonOrdinal(lessonNumber)}`;
-
-                }
-
-            }
-
-
-            if (chapterElement) {
-
-                if (
-                    getLessonLanguage() ===
-                    "fr"
-                ) {
-
-                    chapterElement.textContent =
-                        selectedChapter;
-
-                } else {
-
-                    chapterElement.textContent =
+                lessonTitleElement.textContent =
+                    `${lessonText("lesson")} ${
                         getLessonOrdinal(
-                            selectedChapter
+                            currentVideoNumber
+                        )
+                    }`;
+
+            }
+
+
+            if (chapterNumberElement) {
+
+                chapterNumberElement.textContent =
+                    getLessonLanguage() === "fr"
+                        ? chapterNumber
+                        : getLessonOrdinal(
+                            chapterNumber
                         );
 
-                }
+            }
+
+
+            if (levelContext) {
+
+                levelContext.textContent =
+                    `${lessonText("level")}: ${
+                        getCurrentLevelLabel()
+                    }`;
 
             }
+
+
+            if (subjectContext) {
+
+                subjectContext.textContent =
+                    `${lessonText("subject")}: ${
+                        getCurrentSubjectLabel()
+                    }`;
+
+            }
+
+
+            if (chapterContext) {
+
+                chapterContext.textContent =
+                    `${lessonText("chapter_label")}: ${
+                        chapterNumber
+                    }`;
+
+            }
+
+        }
+
+
+        /* =========================================
+           Progress key
+           ========================================= */
+
+        function getCurrentProgressKey() {
+
+            if (
+                typeof buildLearningProgressKey ===
+                "function"
+            ) {
+
+                return buildLearningProgressKey(
+                    lessonSelection.level,
+                    lessonSelection.branch,
+                    lessonSelection.subjectId,
+                    currentChapterId,
+                    currentVideoNumber
+                );
+
+            }
+
+            return [
+                lessonSelection.level || "",
+                lessonSelection.branch || "",
+                lessonSelection.subjectId || "",
+                currentChapterId || "",
+                currentVideoNumber
+            ].join(":");
 
         }
 
@@ -842,12 +1279,28 @@
         function isCurrentLessonCompleted() {
 
             if (
+                typeof isVideoCompleted ===
+                "function"
+            ) {
+
+                return isVideoCompleted(
+                    lessonSelection.level,
+                    lessonSelection.branch,
+                    lessonSelection.subjectId,
+                    currentChapterId,
+                    currentVideoNumber
+                );
+
+            }
+
+
+            if (
                 typeof isLessonCompleted ===
                 "function"
             ) {
 
                 return isLessonCompleted(
-                    lessonNumber
+                    currentVideoNumber
                 );
 
             }
@@ -855,18 +1308,18 @@
 
             try {
 
-                const saved =
+                const completed =
                     JSON.parse(
-                        localStorage.getItem(
-                            "completed_lessons_list"
-                        ) || "[]"
+                        lessonReadStorage(
+                            "completed_lessons_list",
+                            "[]"
+                        )
                     );
 
-
                 return (
-                    Array.isArray(saved) &&
-                    saved.includes(
-                        lessonNumber
+                    Array.isArray(completed) &&
+                    completed.includes(
+                        currentVideoNumber
                     )
                 );
 
@@ -885,7 +1338,6 @@
                 document.getElementById(
                     "completeButton"
                 );
-
 
             const description =
                 document.getElementById(
@@ -906,18 +1358,15 @@
                     "done"
                 );
 
-
                 button.textContent =
                     lessonText(
                         "completed"
                     );
 
-
                 description.textContent =
                     lessonText(
                         "progress_saved"
                     );
-
 
             } else {
 
@@ -925,12 +1374,10 @@
                     "done"
                 );
 
-
                 button.textContent =
                     lessonText(
                         "complete_lesson"
                     );
-
 
                 description.textContent =
                     lessonText(
@@ -944,13 +1391,56 @@
 
         function completeCurrentLesson() {
 
+            const level =
+                lessonSelection.level;
+
+            const branch =
+                lessonSelection.branch;
+
+            const subjectId =
+                lessonSelection.subjectId;
+
+            const chapterId =
+                currentChapterId;
+
+            const videoNumber =
+                currentVideoNumber;
+
+
             if (
+                typeof completeVideo ===
+                "function"
+            ) {
+
+                completeVideo(
+                    level,
+                    branch,
+                    subjectId,
+                    chapterId,
+                    videoNumber
+                );
+
+            } else if (
+                typeof setVideoProgress ===
+                "function"
+            ) {
+
+                setVideoProgress(
+                    level,
+                    branch,
+                    subjectId,
+                    chapterId,
+                    videoNumber,
+                    100
+                );
+
+            } else if (
                 typeof completeLesson ===
                 "function"
             ) {
 
                 completeLesson(
-                    lessonNumber
+                    videoNumber
                 );
 
             } else {
@@ -959,9 +1449,10 @@
 
                     let completed =
                         JSON.parse(
-                            localStorage.getItem(
-                                "completed_lessons_list"
-                            ) || "[]"
+                            lessonReadStorage(
+                                "completed_lessons_list",
+                                "[]"
+                            )
                         );
 
 
@@ -978,12 +1469,12 @@
 
                     if (
                         !completed.includes(
-                            lessonNumber
+                            videoNumber
                         )
                     ) {
 
                         completed.push(
-                            lessonNumber
+                            videoNumber
                         );
 
                     }
@@ -995,7 +1486,6 @@
                             completed
                         )
                     );
-
 
                     localStorage.setItem(
                         "completed_lessons",
@@ -1014,7 +1504,38 @@
             }
 
 
+            if (
+                typeof saveLastLearningPosition ===
+                "function"
+            ) {
+
+                saveLastLearningPosition(
+                    level,
+                    branch,
+                    subjectId,
+                    chapterId,
+                    videoNumber
+                );
+
+            }
+
+
             updateCompletionUI();
+
+
+            if (
+                typeof notify ===
+                "function"
+            ) {
+
+                notify(
+                    lessonText(
+                        "progress_saved"
+                    ),
+                    "success"
+                );
+
+            }
 
 
             setTimeout(
@@ -1042,7 +1563,6 @@
             document.documentElement.lang =
                 language;
 
-
             document.documentElement.dir =
                 language === "fr"
                     ? "ltr"
@@ -1057,20 +1577,18 @@
 
             document
                 .querySelectorAll(
-                    "[data-i18n]"
+                    "[data-lesson-i18n]"
                 )
                 .forEach(
                     function(element) {
 
                         const key =
                             element.getAttribute(
-                                "data-i18n"
+                                "data-lesson-i18n"
                             );
-
 
                         const translated =
                             lessonText(key);
-
 
                         if (translated) {
 
@@ -1083,8 +1601,22 @@
                 );
 
 
-            updateLessonHeader();
+            const description =
+                document.getElementById(
+                    "lessonDescription"
+                );
 
+            if (description) {
+
+                description.textContent =
+                    lessonText(
+                        "lesson_description"
+                    );
+
+            }
+
+
+            updateLessonHeader();
             updateCompletionUI();
 
         }
@@ -1109,7 +1641,6 @@
 
             }
 
-
             window.location.href =
                 "chapter.html";
 
@@ -1130,7 +1661,6 @@
                 return;
 
             }
-
 
             window.location.href =
                 "library.html";
@@ -1153,9 +1683,34 @@
 
             }
 
-
             window.location.href =
                 "index.html";
+
+        }
+
+
+        /* =========================================
+           Save current learning position
+           ========================================= */
+
+        function saveCurrentLearningPosition() {
+
+            if (
+                typeof saveLastLearningPosition !==
+                "function"
+            ) {
+
+                return;
+
+            }
+
+            saveLastLearningPosition(
+                lessonSelection.level,
+                lessonSelection.branch,
+                lessonSelection.subjectId,
+                currentChapterId,
+                currentVideoNumber
+            );
 
         }
 
@@ -1212,10 +1767,54 @@
 
 
         window.addEventListener(
-            "languagechange",
+            "siteLanguageChanged",
             function() {
 
                 translateLessonPage();
+
+            }
+        );
+
+
+        window.addEventListener(
+            "themeChanged",
+            function() {
+
+                if (
+                    typeof applySiteTheme ===
+                    "function"
+                ) {
+
+                    applySiteTheme(
+                        typeof getSiteTheme ===
+                        "function"
+                            ? getSiteTheme()
+                            : "light"
+                    );
+
+                }
+
+            }
+        );
+
+
+        window.addEventListener(
+            "siteThemeChanged",
+            function() {
+
+                if (
+                    typeof applySiteTheme ===
+                    "function"
+                ) {
+
+                    applySiteTheme(
+                        typeof getSiteTheme ===
+                        "function"
+                            ? getSiteTheme()
+                            : "light"
+                    );
+
+                }
 
             }
         );
@@ -1264,6 +1863,8 @@
             }
 
 
+            saveCurrentLearningPosition();
+
             translateLessonPage();
 
         }
@@ -1275,4 +1876,4 @@
 
 </body>
 
-    </html>
+</html>
