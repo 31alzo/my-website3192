@@ -20,14 +20,46 @@
         /* =========================================================
            ACCOUNT PAGE
            EduNova AI
-           Clean • Minimal • Responsive
+           Final UI Foundation
            ========================================================= */
 
+        body {
+            padding-top: 0;
+        }
+
         .account-page-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
             margin-bottom: 18px;
+            background: color-mix(
+                in srgb,
+                var(--background) 84%,
+                transparent
+            );
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .account-page-header::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -18px;
+            height: 18px;
+            pointer-events: none;
+            background: linear-gradient(
+                to bottom,
+                var(--background),
+                transparent
+            );
+            opacity: .95;
         }
 
         .account-page-header .container {
+            min-height: 62px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -42,6 +74,7 @@
             color: var(--text);
             font-weight: 900;
             font-size: 16px;
+            min-width: 0;
         }
 
         .account-page-brand-icon {
@@ -53,14 +86,15 @@
             justify-content: center;
             background: var(--text);
             color: var(--surface);
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 900;
             letter-spacing: -.5px;
+            flex-shrink: 0;
         }
 
         .account-dashboard-button {
             min-height: 38px;
-            padding: 7px 12px;
+            padding: 7px 13px;
             border: 1px solid var(--border);
             background: var(--surface);
             color: var(--text);
@@ -69,7 +103,11 @@
             font-size: 12px;
             font-weight: 800;
             cursor: pointer;
-            transition: .2s;
+            transition:
+                border-color .2s ease,
+                color .2s ease,
+                background .2s ease;
+            flex-shrink: 0;
         }
 
         .account-dashboard-button:hover {
@@ -93,15 +131,26 @@
             box-shadow: var(--shadow-sm);
         }
 
+        .account-hero::before {
+            content: "";
+            position: absolute;
+            width: 210px;
+            height: 210px;
+            border-radius: 50%;
+            background: rgba(255,255,255,.07);
+            left: -85px;
+            top: -95px;
+        }
+
         .account-hero::after {
             content: "";
             position: absolute;
-            width: 180px;
-            height: 180px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            background: rgba(255,255,255,.08);
-            left: -70px;
-            top: -70px;
+            border: 1px solid rgba(255,255,255,.10);
+            right: -45px;
+            bottom: -45px;
         }
 
         .account-hero-content {
@@ -130,6 +179,7 @@
             margin: 0;
             font-size: 21px;
             line-height: 1.3;
+            overflow-wrap: anywhere;
         }
 
         .account-email {
@@ -147,6 +197,7 @@
             padding: 5px 10px;
             border-radius: 999px;
             background: rgba(255,255,255,.13);
+            border: 1px solid rgba(255,255,255,.10);
             font-size: 11px;
             font-weight: 700;
         }
@@ -182,7 +233,7 @@
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 10px;
         }
 
@@ -193,15 +244,22 @@
             padding: 15px 10px;
             text-align: center;
             box-shadow: var(--shadow-sm);
+            min-width: 0;
         }
 
         .stat-icon {
-            font-size: 20px;
-            margin-bottom: 5px;
-
-            /* monochrome */
-            filter: grayscale(1);
-            -webkit-filter: grayscale(1);
+            width: 32px;
+            height: 32px;
+            margin: 0 auto 7px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--background);
+            color: var(--text-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 900;
         }
 
         .stat-number {
@@ -212,8 +270,11 @@
         }
 
         .stat-label {
+            display: block;
             color: var(--text-soft);
             font-size: 10px;
+            line-height: 1.4;
+            margin-top: 2px;
         }
 
 
@@ -247,13 +308,14 @@
             height: 37px;
             border-radius: 11px;
             background: var(--primary-light);
+            color: var(--text);
+            border: 1px solid var(--border);
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-
-            filter: grayscale(1);
-            -webkit-filter: grayscale(1);
+            font-size: 13px;
+            font-weight: 900;
         }
 
         .row-text {
@@ -300,7 +362,11 @@
             color: var(--text);
             cursor: pointer;
             text-align: right;
-            transition: .2s;
+            transition:
+                border-color .2s ease,
+                color .2s ease,
+                transform .2s ease,
+                background .2s ease;
         }
 
         html[dir="ltr"] .account-action {
@@ -313,25 +379,30 @@
             transform: translateY(-1px);
         }
 
+        .account-action:active {
+            transform: translateY(0);
+        }
+
         .action-icon {
             width: 35px;
             height: 35px;
             border-radius: 10px;
             background: var(--background);
+            border: 1px solid var(--border);
+            color: var(--text-soft);
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            font-size: 16px;
-
-            filter: grayscale(1);
-            -webkit-filter: grayscale(1);
+            font-size: 14px;
+            font-weight: 900;
         }
 
         .action-arrow {
             margin-right: auto;
             color: var(--text-light);
             font-size: 18px;
+            line-height: 1;
         }
 
         html[dir="ltr"] .action-arrow {
@@ -346,7 +417,7 @@
         }
 
         .logout-action .action-icon {
-            background: var(--background);
+            color: var(--danger);
         }
 
         .logout-action:hover {
@@ -355,6 +426,10 @@
         }
 
         .danger-action {
+            color: var(--danger);
+        }
+
+        .danger-action .action-icon {
             color: var(--danger);
         }
 
@@ -370,11 +445,17 @@
         }
 
         .loading-icon {
-            font-size: 30px;
-            margin-bottom: 10px;
-
-            filter: grayscale(1);
-            -webkit-filter: grayscale(1);
+            width: 42px;
+            height: 42px;
+            margin: 0 auto 12px;
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-soft);
+            font-size: 17px;
+            font-weight: 900;
         }
 
 
@@ -393,10 +474,10 @@
             padding: 11px 16px;
             border-radius: 12px;
             font-size: 12px;
-            max-width: 90%;
+            max-width: min(90%, 430px);
             text-align: center;
             box-shadow: var(--shadow);
-            transition: .25s;
+            transition: opacity .25s ease;
         }
 
         .bottom-space {
@@ -405,7 +486,7 @@
 
 
         /* =========================================================
-           HIDDEN NAVIGATION
+           HIDDEN BOTTOM NAV
            ========================================================= */
 
         .bottom-nav {
@@ -438,6 +519,10 @@
                 margin-bottom: 15px;
             }
 
+            .account-page-header .container {
+                min-height: 58px;
+            }
+
             .account-page-brand {
                 font-size: 14px;
             }
@@ -445,6 +530,7 @@
             .account-page-brand-icon {
                 width: 33px;
                 height: 33px;
+                border-radius: 10px;
             }
 
             .account-dashboard-button {
@@ -507,12 +593,24 @@
                 font-size: 17px;
             }
 
+            .account-email {
+                max-width: 190px;
+            }
+
             .stats-grid {
                 gap: 7px;
             }
 
             .stat-card {
                 padding: 12px 5px;
+            }
+
+            .stat-number {
+                font-size: 18px;
+            }
+
+            .stat-label {
+                font-size: 9px;
             }
 
         }
@@ -535,10 +633,15 @@
 
         <a
             href="dashboard.html"
-            class="account-page-brand">
+            class="account-page-brand"
+            aria-label="EduNova AI">
 
-            <span class="account-page-brand-icon">
+            <span
+                class="account-page-brand-icon"
+                aria-hidden="true">
+
                 AI
+
             </span>
 
             <span>
@@ -578,8 +681,12 @@
             id="loading"
             class="loading-account">
 
-            <div class="loading-icon">
-                ⏳
+            <div
+                class="loading-icon"
+                aria-hidden="true">
+
+                …
+
             </div>
 
             <span id="loadingText">
@@ -604,7 +711,8 @@
 
                     <div
                         id="avatar"
-                        class="avatar">
+                        class="avatar"
+                        aria-hidden="true">
 
                         ط
 
@@ -666,8 +774,12 @@
 
                 <div class="stat-card">
 
-                    <div class="stat-icon">
-                        ⭐
+                    <div
+                        class="stat-icon"
+                        aria-hidden="true">
+
+                        +
+
                     </div>
 
                     <span
@@ -691,8 +803,12 @@
 
                 <div class="stat-card">
 
-                    <div class="stat-icon">
-                        📚
+                    <div
+                        class="stat-icon"
+                        aria-hidden="true">
+
+                        ✓
+
                     </div>
 
                     <span
@@ -716,8 +832,12 @@
 
                 <div class="stat-card">
 
-                    <div class="stat-icon">
-                        🏆
+                    <div
+                        class="stat-icon"
+                        aria-hidden="true">
+
+                        *
+
                     </div>
 
                     <span
@@ -741,8 +861,12 @@
 
                 <div class="stat-card">
 
-                    <div class="stat-icon">
-                        🔥
+                    <div
+                        class="stat-icon"
+                        aria-hidden="true">
+
+                        /
+
                     </div>
 
                     <span
@@ -783,8 +907,12 @@
 
                 <div class="account-row">
 
-                    <div class="row-icon">
-                        👤
+                    <div
+                        class="row-icon"
+                        aria-hidden="true">
+
+                        U
+
                     </div>
 
                     <div class="row-text">
@@ -812,8 +940,12 @@
 
                 <div class="account-row">
 
-                    <div class="row-icon">
-                        ✉
+                    <div
+                        class="row-icon"
+                        aria-hidden="true">
+
+                        @
+
                     </div>
 
                     <div class="row-text">
@@ -842,8 +974,12 @@
 
                 <div class="account-row">
 
-                    <div class="row-icon">
-                        🎓
+                    <div
+                        class="row-icon"
+                        aria-hidden="true">
+
+                        L
+
                     </div>
 
                     <div class="row-text">
@@ -891,16 +1027,24 @@
                     onclick="changeLevel()"
                     type="button">
 
-                    <span class="action-icon">
-                        🎓
+                    <span
+                        class="action-icon"
+                        aria-hidden="true">
+
+                        L
+
                     </span>
 
                     <span id="changeLevelText">
                         تغيير المستوى الدراسي
                     </span>
 
-                    <span class="action-arrow">
+                    <span
+                        class="action-arrow"
+                        aria-hidden="true">
+
                         ‹
+
                     </span>
 
                 </button>
@@ -911,16 +1055,24 @@
                     onclick="openSettings()"
                     type="button">
 
-                    <span class="action-icon">
-                        ⚙︎
+                    <span
+                        class="action-icon"
+                        aria-hidden="true">
+
+                        S
+
                     </span>
 
                     <span id="settingsText">
                         الإعدادات
                     </span>
 
-                    <span class="action-arrow">
+                    <span
+                        class="action-arrow"
+                        aria-hidden="true">
+
                         ‹
+
                     </span>
 
                 </button>
@@ -931,16 +1083,24 @@
                     onclick="showMessage('editData')"
                     type="button">
 
-                    <span class="action-icon">
-                        ✎
+                    <span
+                        class="action-icon"
+                        aria-hidden="true">
+
+                        E
+
                     </span>
 
                     <span id="editDataText">
                         تعديل البيانات
                     </span>
 
-                    <span class="action-arrow">
+                    <span
+                        class="action-arrow"
+                        aria-hidden="true">
+
                         ‹
+
                     </span>
 
                 </button>
@@ -951,16 +1111,24 @@
                     onclick="showMessage('password')"
                     type="button">
 
-                    <span class="action-icon">
-                        🔒
+                    <span
+                        class="action-icon"
+                        aria-hidden="true">
+
+                        P
+
                     </span>
 
                     <span id="passwordText">
                         كلمة المرور
                     </span>
 
-                    <span class="action-arrow">
+                    <span
+                        class="action-arrow"
+                        aria-hidden="true">
+
                         ‹
+
                     </span>
 
                 </button>
@@ -971,16 +1139,24 @@
                     onclick="showMessage('payments')"
                     type="button">
 
-                    <span class="action-icon">
-                        ▣
+                    <span
+                        class="action-icon"
+                        aria-hidden="true">
+
+                        $
+
                     </span>
 
                     <span id="paymentsText">
                         الاشتراكات والمدفوعات
                     </span>
 
-                    <span class="action-arrow">
+                    <span
+                        class="action-arrow"
+                        aria-hidden="true">
+
                         ‹
+
                     </span>
 
                 </button>
@@ -991,16 +1167,24 @@
                     onclick="showMessage('delete')"
                     type="button">
 
-                    <span class="action-icon">
+                    <span
+                        class="action-icon"
+                        aria-hidden="true">
+
                         ×
+
                     </span>
 
                     <span id="deleteText">
                         حذف الحساب
                     </span>
 
-                    <span class="action-arrow">
+                    <span
+                        class="action-arrow"
+                        aria-hidden="true">
+
                         ‹
+
                     </span>
 
                 </button>
@@ -1011,16 +1195,24 @@
                     onclick="logout()"
                     type="button">
 
-                    <span class="action-icon">
-                        ↪
+                    <span
+                        class="action-icon"
+                        aria-hidden="true">
+
+                        →
+
                     </span>
 
                     <span id="logoutText">
                         تسجيل الخروج
                     </span>
 
-                    <span class="action-arrow">
+                    <span
+                        class="action-arrow"
+                        aria-hidden="true">
+
                         ‹
+
                     </span>
 
                 </button>
@@ -1115,86 +1307,38 @@
 
         ar: {
 
-            pageTitle:
-                "حسابي | EduNova AI",
+            pageTitle: "حسابي | EduNova AI",
+            dashboard: "الرئيسية",
+            loading: "جاري تحميل حسابك...",
+            student: "الطالب",
+            noLevel: "لم يتم اختيار المستوى",
 
-            dashboard:
-                "الرئيسية",
+            achievements: "إنجازاتي",
+            progress: "تقدمك الدراسي",
 
-            loading:
-                "جاري تحميل حسابك...",
+            points: "النقاط",
+            lessons: "الدروس المكتملة",
+            badges: "الشارات",
+            streak: "أيام متتالية",
 
-            student:
-                "الطالب",
+            accountInfo: "معلومات الحساب",
+            name: "الاسم",
+            email: "البريد الإلكتروني",
+            level: "المستوى الدراسي",
 
-            noLevel:
-                "لم يتم اختيار المستوى",
+            accountManagement: "إدارة الحساب",
+            changeLevel: "تغيير المستوى الدراسي",
+            settings: "الإعدادات",
+            editData: "تعديل البيانات",
+            password: "كلمة المرور",
+            payments: "الاشتراكات والمدفوعات",
+            delete: "حذف الحساب",
+            logout: "تسجيل الخروج",
 
-            achievements:
-                "إنجازاتي",
-
-            progress:
-                "تقدمك الدراسي",
-
-            points:
-                "النقاط",
-
-            lessons:
-                "الدروس المكتملة",
-
-            badges:
-                "الشارات",
-
-            streak:
-                "أيام متتالية",
-
-            accountInfo:
-                "معلومات الحساب",
-
-            name:
-                "الاسم",
-
-            email:
-                "البريد الإلكتروني",
-
-            level:
-                "المستوى الدراسي",
-
-            accountManagement:
-                "إدارة الحساب",
-
-            changeLevel:
-                "تغيير المستوى الدراسي",
-
-            settings:
-                "الإعدادات",
-
-            editData:
-                "تعديل البيانات",
-
-            password:
-                "كلمة المرور",
-
-            payments:
-                "الاشتراكات والمدفوعات",
-
-            delete:
-                "حذف الحساب",
-
-            logout:
-                "تسجيل الخروج",
-
-            navHome:
-                "الرئيسية",
-
-            navLibrary:
-                "مكتبتي",
-
-            navForum:
-                "المنتدى",
-
-            navAccount:
-                "حسابي",
+            navHome: "الرئيسية",
+            navLibrary: "مكتبتي",
+            navForum: "المنتدى",
+            navAccount: "حسابي",
 
             editDataMessage:
                 "تعديل البيانات سيكون متاحًا قريبًا.",
@@ -1222,86 +1366,38 @@
 
         fr: {
 
-            pageTitle:
-                "Mon compte | EduNova AI",
+            pageTitle: "Mon compte | EduNova AI",
+            dashboard: "Accueil",
+            loading: "Chargement de votre compte...",
+            student: "Étudiant",
+            noLevel: "Aucun niveau sélectionné",
 
-            dashboard:
-                "Accueil",
+            achievements: "Mes progrès",
+            progress: "Votre progression",
 
-            loading:
-                "Chargement de votre compte...",
+            points: "Points",
+            lessons: "Leçons terminées",
+            badges: "Badges",
+            streak: "Jours consécutifs",
 
-            student:
-                "Étudiant",
+            accountInfo: "Informations du compte",
+            name: "Nom",
+            email: "Adresse e-mail",
+            level: "Niveau scolaire",
 
-            noLevel:
-                "Aucun niveau sélectionné",
+            accountManagement: "Gestion du compte",
+            changeLevel: "Changer le niveau scolaire",
+            settings: "Paramètres",
+            editData: "Modifier les informations",
+            password: "Mot de passe",
+            payments: "Abonnements et paiements",
+            delete: "Supprimer le compte",
+            logout: "Se déconnecter",
 
-            achievements:
-                "Mes progrès",
-
-            progress:
-                "Votre progression",
-
-            points:
-                "Points",
-
-            lessons:
-                "Leçons terminées",
-
-            badges:
-                "Badges",
-
-            streak:
-                "Jours consécutifs",
-
-            accountInfo:
-                "Informations du compte",
-
-            name:
-                "Nom",
-
-            email:
-                "Adresse e-mail",
-
-            level:
-                "Niveau scolaire",
-
-            accountManagement:
-                "Gestion du compte",
-
-            changeLevel:
-                "Changer le niveau scolaire",
-
-            settings:
-                "Paramètres",
-
-            editData:
-                "Modifier les informations",
-
-            password:
-                "Mot de passe",
-
-            payments:
-                "Abonnements et paiements",
-
-            delete:
-                "Supprimer le compte",
-
-            logout:
-                "Se déconnecter",
-
-            navHome:
-                "Accueil",
-
-            navLibrary:
-                "Ma bibliothèque",
-
-            navForum:
-                "Forum",
-
-            navAccount:
-                "Compte",
+            navHome: "Accueil",
+            navLibrary: "Ma bibliothèque",
+            navForum: "Forum",
+            navAccount: "Compte",
 
             editDataMessage:
                 "La modification des informations sera disponible prochainement.",
@@ -1346,7 +1442,7 @@
 
         return (
             localStorage.getItem(
-                "site_language"
+                GLOBAL_LANGUAGE_KEY || "site_language"
             ) || "ar"
         );
 
@@ -1368,10 +1464,19 @@
 
 
     /* =========================================================
-       LEVEL TRANSLATION
+       LEVEL
     ========================================================= */
 
-    function translateLevel(level) {
+    function getAccountLevelLabel() {
+
+        let level =
+            typeof getStudentLevel ===
+            "function"
+                ? getStudentLevel()
+                : localStorage.getItem(
+                    "student_level"
+                );
+
 
         if (!level) {
 
@@ -1381,24 +1486,46 @@
 
         }
 
-        const value =
+
+        if (
+            typeof getLevelLabel ===
+            "function"
+        ) {
+
+            try {
+
+                return getLevelLabel(
+                    level
+                );
+
+            } catch (error) {
+
+                console.warn(
+                    "Central level label unavailable:",
+                    error
+                );
+
+            }
+
+        }
+
+
+        const normalized =
             String(level)
                 .trim()
                 .toLowerCase();
 
-        const levels = {
 
-            "كونكور":
-                "Concours",
-
-            "كونكور":
-                "Concours",
-
-            "conconcours":
-                "Concours",
+        const fallback = {
 
             "concours":
                 "Concours",
+
+            "كونكور":
+                "Concours",
+
+            "brevet":
+                "Brevet",
 
             "بريفيه":
                 "Brevet",
@@ -1406,10 +1533,7 @@
             "بريفي":
                 "Brevet",
 
-            "brevet":
-                "Brevet",
-
-            "باكالوريا":
+            "bac":
                 "Baccalauréat",
 
             "baccalaureat":
@@ -1420,14 +1544,18 @@
 
         };
 
+
         if (
             getAccountLanguage() === "fr" &&
-            levels[value]
+            fallback[normalized]
         ) {
 
-            return levels[value];
+            return fallback[
+                normalized
+            ];
 
         }
+
 
         return level;
 
@@ -1443,44 +1571,76 @@
         const language =
             getAccountLanguage();
 
+
         document.documentElement.lang =
             language;
+
 
         document.documentElement.dir =
             language === "fr"
                 ? "ltr"
                 : "rtl";
 
+
         document.title =
-            accountText("pageTitle");
+            accountText(
+                "pageTitle"
+            );
 
 
         const elements = {
 
             dashboardButton: "dashboard",
             loadingText: "loading",
+
             achievementsTitle: "achievements",
             progressText: "progress",
+
             pointsLabel: "points",
             lessonsLabel: "lessons",
             badgesLabel: "badges",
             streakLabel: "streak",
+
             accountInfoTitle: "accountInfo",
             nameLabel: "name",
             emailLabel: "email",
             levelLabel: "level",
-            accountManagementTitle: "accountManagement",
-            changeLevelText: "changeLevel",
-            settingsText: "settings",
-            editDataText: "editData",
-            passwordText: "password",
-            paymentsText: "payments",
-            deleteText: "delete",
-            logoutText: "logout",
-            navHome: "navHome",
-            navLibrary: "navLibrary",
-            navForum: "navForum",
-            navAccount: "navAccount"
+
+            accountManagementTitle:
+                "accountManagement",
+
+            changeLevelText:
+                "changeLevel",
+
+            settingsText:
+                "settings",
+
+            editDataText:
+                "editData",
+
+            passwordText:
+                "password",
+
+            paymentsText:
+                "payments",
+
+            deleteText:
+                "delete",
+
+            logoutText:
+                "logout",
+
+            navHome:
+                "navHome",
+
+            navLibrary:
+                "navLibrary",
+
+            navForum:
+                "navForum",
+
+            navAccount:
+                "navAccount"
 
         };
 
@@ -1490,6 +1650,7 @@
 
                 const element =
                     document.getElementById(id);
+
 
                 if (element) {
 
@@ -1504,41 +1665,34 @@
         );
 
 
-        const storedLevel =
-            localStorage.getItem(
-                "student_level"
+        const levelLabel =
+            getAccountLevelLabel();
+
+
+        const studentLevel =
+            document.getElementById(
+                "studentLevel"
             );
 
-        if (storedLevel) {
 
-            const translated =
-                translateLevel(
-                    storedLevel
-                );
+        const infoLevel =
+            document.getElementById(
+                "infoLevel"
+            );
 
-            const studentLevel =
-                document.getElementById(
-                    "studentLevel"
-                );
 
-            const infoLevel =
-                document.getElementById(
-                    "infoLevel"
-                );
+        if (studentLevel) {
 
-            if (studentLevel) {
+            studentLevel.textContent =
+                levelLabel;
 
-                studentLevel.textContent =
-                    translated;
+        }
 
-            }
 
-            if (infoLevel) {
+        if (infoLevel) {
 
-                infoLevel.textContent =
-                    translated;
-
-            }
+            infoLevel.textContent =
+                levelLabel;
 
         }
 
@@ -1632,89 +1786,175 @@
 
 
             const level =
-                localStorage.getItem(
-                    "student_level"
-                ) ||
-                accountText(
-                    "noLevel"
-                );
+                getAccountLevelLabel();
 
 
             /* PROFILE */
 
-            document.getElementById(
-                "studentName"
-            ).textContent =
-                name;
+            const studentName =
+                document.getElementById(
+                    "studentName"
+                );
+
+            const studentEmail =
+                document.getElementById(
+                    "studentEmail"
+                );
+
+            const studentLevel =
+                document.getElementById(
+                    "studentLevel"
+                );
+
+            const infoName =
+                document.getElementById(
+                    "infoName"
+                );
+
+            const infoEmail =
+                document.getElementById(
+                    "infoEmail"
+                );
+
+            const infoLevel =
+                document.getElementById(
+                    "infoLevel"
+                );
 
 
-            document.getElementById(
-                "studentEmail"
-            ).textContent =
-                email;
+            if (studentName) {
+
+                studentName.textContent =
+                    name;
+
+            }
 
 
-            document.getElementById(
-                "studentLevel"
-            ).textContent =
-                translateLevel(level);
+            if (studentEmail) {
+
+                studentEmail.textContent =
+                    email;
+
+            }
 
 
-            document.getElementById(
-                "infoName"
-            ).textContent =
-                name;
+            if (studentLevel) {
+
+                studentLevel.textContent =
+                    level;
+
+            }
 
 
-            document.getElementById(
-                "infoEmail"
-            ).textContent =
-                email;
+            if (infoName) {
+
+                infoName.textContent =
+                    name;
+
+            }
 
 
-            document.getElementById(
-                "infoLevel"
-            ).textContent =
-                translateLevel(level);
+            if (infoEmail) {
+
+                infoEmail.textContent =
+                    email;
+
+            }
+
+
+            if (infoLevel) {
+
+                infoLevel.textContent =
+                    level;
+
+            }
 
 
             /* AVATAR */
 
             const firstLetter =
-                name
+                String(name)
                     .trim()
                     .charAt(0);
 
 
-            document.getElementById(
-                "avatar"
-            ).textContent =
-                firstLetter ||
-                (
-                    getAccountLanguage() === "fr"
-                        ? "É"
-                        : "ط"
+            const avatar =
+                document.getElementById(
+                    "avatar"
                 );
 
 
-            /* STATISTICS */
+            if (avatar) {
 
-            const points =
-                parseInt(
-                    localStorage.getItem(
-                        "student_points"
-                    ) || "0",
-                    10
-                );
+                avatar.textContent =
+                    firstLetter ||
+                    (
+                        getAccountLanguage() === "fr"
+                            ? "É"
+                            : "ط"
+                    );
+
+            }
 
 
-            const lessons =
-                parseInt(
-                    localStorage.getItem(
-                        "completed_lessons"
-                    ) || "0",
-                    10
-                );
+            /* =================================================
+               STATISTICS
+            ================================================= */
+
+            let points = 0;
+
+
+            if (
+                typeof getStudentPoints ===
+                "function"
+            ) {
+
+                points =
+                    Number(
+                        getStudentPoints()
+                    ) || 0;
+
+            } else {
+
+                points =
+                    parseInt(
+                        localStorage.getItem(
+                            "student_points"
+                        ) || "0",
+                        10
+                    ) || 0;
+
+            }
+
+
+            let lessons = 0;
+
+
+            if (
+                typeof getCompletedLessons ===
+                "function"
+            ) {
+
+                const completed =
+                    getCompletedLessons();
+
+
+                lessons =
+                    Array.isArray(completed)
+                        ? completed.length
+                        : Number(completed) || 0;
+
+            } else {
+
+                lessons =
+                    parseInt(
+                        localStorage.getItem(
+                            "completed_lessons"
+                        ) || "0",
+                        10
+                    ) || 0;
+
+            }
 
 
             const badges =
@@ -1729,42 +1969,90 @@
                     : 0;
 
 
-            document.getElementById(
-                "points"
-            ).textContent =
-                points;
+            const pointsElement =
+                document.getElementById(
+                    "points"
+                );
 
 
-            document.getElementById(
-                "lessons"
-            ).textContent =
-                lessons;
+            const lessonsElement =
+                document.getElementById(
+                    "lessons"
+                );
 
 
-            document.getElementById(
-                "badges"
-            ).textContent =
-                badges;
+            const badgesElement =
+                document.getElementById(
+                    "badges"
+                );
 
 
-            document.getElementById(
-                "streak"
-            ).textContent =
-                streak;
+            const streakElement =
+                document.getElementById(
+                    "streak"
+                );
+
+
+            if (pointsElement) {
+
+                pointsElement.textContent =
+                    points;
+
+            }
+
+
+            if (lessonsElement) {
+
+                lessonsElement.textContent =
+                    lessons;
+
+            }
+
+
+            if (badgesElement) {
+
+                badgesElement.textContent =
+                    badges;
+
+            }
+
+
+            if (streakElement) {
+
+                streakElement.textContent =
+                    streak;
+
+            }
 
 
             /* SHOW */
 
-            document.getElementById(
-                "loading"
-            ).style.display =
-                "none";
+            const loading =
+                document.getElementById(
+                    "loading"
+                );
 
 
-            document.getElementById(
-                "accountContent"
-            ).style.display =
-                "block";
+            const accountContent =
+                document.getElementById(
+                    "accountContent"
+                );
+
+
+            if (loading) {
+
+                loading.style.display =
+                    "none";
+
+            }
+
+
+            if (accountContent) {
+
+                accountContent.style.display =
+                    "block";
+
+            }
 
         }
 
@@ -1774,6 +2062,7 @@
                 "Account loading error:",
                 error
             );
+
 
             showMessage(
                 getAccountLanguage() === "fr"
@@ -1946,12 +2235,32 @@
 
 
         /*
-           نحذف المستوى فقط.
-           إعدادات اللغة والوضع تبقى محفوظة.
+           تسجيل الخروج لا يلمس إعدادات
+           اللغة أو الوضع أو بنية المنصة.
         */
 
         localStorage.removeItem(
             "student_level"
+        );
+
+        localStorage.removeItem(
+            "bac_branch"
+        );
+
+        localStorage.removeItem(
+            "selected_subject"
+        );
+
+        localStorage.removeItem(
+            "selected_subject_type"
+        );
+
+        localStorage.removeItem(
+            "selected_chapter"
+        );
+
+        localStorage.removeItem(
+            "selected_video"
         );
 
 
@@ -2020,6 +2329,30 @@
 
 
     /* =========================================================
+       LEVEL / BRANCH EVENTS
+    ========================================================= */
+
+    window.addEventListener(
+        "studentLevelChanged",
+        function() {
+
+            translateAccountPage();
+
+        }
+    );
+
+
+    window.addEventListener(
+        "bacBranchChanged",
+        function() {
+
+            translateAccountPage();
+
+        }
+    );
+
+
+    /* =========================================================
        STORAGE SYNC
     ========================================================= */
 
@@ -2053,6 +2386,36 @@
             ) {
 
                 translateAccountPage();
+
+            }
+
+
+            if (
+                event.key ===
+                "bac_branch"
+            ) {
+
+                translateAccountPage();
+
+            }
+
+
+            if (
+                event.key ===
+                "student_points"
+            ) {
+
+                loadAccount();
+
+            }
+
+
+            if (
+                event.key ===
+                "completed_lessons"
+            ) {
+
+                loadAccount();
 
             }
 
@@ -2092,4 +2455,4 @@
 
 </body>
 
-                        </html>
+</html>
