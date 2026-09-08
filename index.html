@@ -8,18 +8,16 @@
           content="width=device-width, initial-scale=1.0">
 
     <meta name="description"
-          content="EduNova AI — منصة تعليمية بالذكاء الاصطناعي تساعدك على الاستعداد للشهادات الدراسية مع Afkrash AI.">
+          content="EduNova AI — منصة تعليمية بالذكاء الاصطناعي تساعد الطلاب على الاستعداد للشهادات الدراسية.">
 
-    <title data-i18n="page_title">
-        EduNova AI | التعليم بالذكاء الاصطناعي
-    </title>
+    <title>EduNova AI | التعليم بالذكاء الاصطناعي</title>
 
     <link rel="stylesheet" href="style.css">
 
     <style>
         /* =====================================================
            EduNova AI — الصفحة الرئيسية
-           الحفاظ على التصميم الأصلي
+           متوافقة مع النظام العام للمنصة
         ===================================================== */
 
         .home-page {
@@ -42,15 +40,14 @@
                 ),
                 linear-gradient(
                     135deg,
-                    #2563eb 0%,
-                    #1d4ed8 55%,
-                    #1e40af 100%
+                    var(--primary),
+                    var(--primary-dark)
                 );
 
             color: #fff;
 
             box-shadow:
-                0 22px 55px rgba(37,99,235,.22);
+                0 22px 55px rgba(37,99,235,.20);
         }
 
         .home-hero::before {
@@ -108,8 +105,9 @@
             width: 9px;
             height: 9px;
             border-radius: 50%;
-            background: #93c5fd;
-            box-shadow: 0 0 0 5px rgba(147,197,253,.12);
+            background: #fff;
+            box-shadow:
+                0 0 0 5px rgba(255,255,255,.10);
         }
 
         .home-hero h1 {
@@ -123,7 +121,7 @@
 
         .home-hero h1 span {
             display: block;
-            color: #dbeafe;
+            color: rgba(255,255,255,.88);
         }
 
         .home-hero-text {
@@ -146,12 +144,12 @@
 
         .hero-primary {
             background: #fff;
-            color: #1d4ed8;
+            color: var(--primary);
         }
 
         .hero-primary:hover {
-            background: #eff6ff;
-            color: #1d4ed8;
+            background: rgba(255,255,255,.92);
+            color: var(--primary-dark);
         }
 
         .hero-secondary {
@@ -172,7 +170,8 @@
             border: 1px solid rgba(255,255,255,.16);
             border-radius: 26px;
             background: rgba(255,255,255,.10);
-            box-shadow: inset 0 1px 0 rgba(255,255,255,.10);
+            box-shadow:
+                inset 0 1px 0 rgba(255,255,255,.10);
             backdrop-filter: blur(14px);
         }
 
@@ -191,7 +190,13 @@
                     transparent 70%
                 );
             border: 1px solid rgba(255,255,255,.14);
-            font-size: 92px;
+            color: #fff;
+            font-size: 62px;
+            font-weight: 800;
+        }
+
+        .teacher-avatar::before {
+            content: "AI";
         }
 
         .teacher-card h2 {
@@ -254,7 +259,13 @@
             margin-bottom: 15px;
             border-radius: 16px;
             background: var(--primary-light);
-            font-size: 25px;
+            color: var(--primary);
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .identity-icon::before {
+            content: "AI";
         }
 
         .identity-card h3 {
@@ -298,8 +309,8 @@
             margin-top: 10px;
             padding: 5px 9px;
             border-radius: 8px;
-            background: #dcfce7;
-            color: #166534;
+            background: var(--success-light, #dcfce7);
+            color: var(--success-dark, #166534);
             font-size: 12px;
             font-weight: 700;
         }
@@ -308,19 +319,35 @@
             padding: 22px;
         }
 
+        .feature-mark {
+            width: 44px;
+            height: 44px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 12px;
+            border-radius: 13px;
+            background: var(--primary-light);
+            color: var(--primary);
+            font-size: 13px;
+            font-weight: 800;
+        }
+
         .home-final {
             position: relative;
             overflow: hidden;
             padding: 34px 24px;
             border-radius: 28px;
+
             background:
                 linear-gradient(
                     135deg,
                     var(--primary),
                     var(--primary-dark)
                 );
+
             color: #fff;
             text-align: center;
+
             box-shadow:
                 0 18px 40px rgba(37,99,235,.18);
         }
@@ -333,6 +360,15 @@
         .home-final p {
             color: rgba(255,255,255,.82);
             margin-bottom: 20px;
+        }
+
+        .home-final .btn {
+            background: #fff;
+            color: var(--primary);
+        }
+
+        .home-final .btn:hover {
+            background: rgba(255,255,255,.92);
         }
 
         @media (min-width: 760px) {
@@ -358,6 +394,29 @@
                 margin-inline-end: 0;
             }
         }
+
+        @media (max-width: 759px) {
+
+            .home-hero {
+                min-height: auto;
+            }
+
+            .home-hero-inner {
+                padding: 28px 18px;
+            }
+
+            .home-hero h1 {
+                font-size: clamp(32px, 10vw, 46px);
+            }
+
+            .home-hero-text {
+                font-size: 15px;
+            }
+
+            .teacher-card {
+                width: min(100%, 290px);
+            }
+        }
     </style>
 </head>
 
@@ -367,9 +426,14 @@
 
     <div class="container header-inner">
 
-        <a href="index.html" class="brand">
+        <a href="index.html"
+           class="brand"
+           aria-label="EduNova AI">
 
-            <span class="brand-icon">🎓</span>
+            <span class="brand-icon"
+                  aria-hidden="true">
+                AI
+            </span>
 
             <span class="brand-name">
                 EduNova AI
@@ -379,7 +443,7 @@
 
         <a href="login.html"
            class="btn btn-primary"
-           data-i18n="login">
+           data-home-i18n="login">
             دخول
         </a>
 
@@ -390,94 +454,108 @@
 
 <main class="home-page">
 
-<section class="section">
+    <!-- =====================================================
+         Hero
+    ====================================================== -->
 
-    <div class="container">
+    <section class="section">
 
-        <div class="home-hero">
+        <div class="container">
 
-            <div class="home-hero-inner">
+            <div class="home-hero">
 
-                <div class="home-hero-content">
+                <div class="home-hero-inner">
 
-                    <div class="ai-label">
+                    <div class="home-hero-content">
 
-                        <span class="ai-dot"></span>
+                        <div class="ai-label">
 
-                        <span data-i18n="ai_education">
-                            التعليم بالذكاء الاصطناعي
-                        </span>
+                            <span class="ai-dot"
+                                  aria-hidden="true"></span>
 
-                    </div>
-
-
-                    <h1 data-i18n="welcome">
-                        مرحبًا بك في
-
-                        <span>
-                            EduNova AI
-                        </span>
-                    </h1>
-
-
-                    <p class="home-hero-text">
-
-                        <span data-i18n="hero_description">
-                            منصة تعليمية جديدة تساعدك على الاستعداد
-                            لشهادتك الدراسية من خلال دروس منظمة
-                            وشروحات يقدمها مدرسك الافتراضي
-                        </span>
-
-                        <strong>
-                            Afkrash AI
-                        </strong>.
-
-                    </p>
-
-
-                    <div class="hero-actions">
-
-                        <a href="login.html"
-                           class="btn hero-primary">
-
-                            <span data-i18n="start_learning">
-                                ابدأ التعلم
+                            <span data-home-i18n="ai_education">
+                                التعليم بالذكاء الاصطناعي
                             </span>
 
-                            <span class="hero-arrow">←</span>
-
-                        </a>
+                        </div>
 
 
-                        <a href="#certificates"
-                           class="btn hero-secondary"
-                           data-i18n="choose_certificate">
+                        <h1>
 
-                            اختر شهادتك
+                            <span data-home-i18n="welcome">
+                                مرحبًا بك في
+                            </span>
 
-                        </a>
+                            <span>
+                                EduNova AI
+                            </span>
+
+                        </h1>
+
+
+                        <p class="home-hero-text">
+
+                            <span data-home-i18n="hero_description">
+                                منصة تعليمية منظمة تساعدك على الاستعداد
+                                لشهادتك الدراسية من خلال الدروس والفيديوهات
+                                التعليمية مع مدرسك الافتراضي
+                            </span>
+
+                            <strong>
+                                Afkrash AI
+                            </strong>.
+
+                        </p>
+
+
+                        <div class="hero-actions">
+
+                            <a href="login.html"
+                               class="btn hero-primary">
+
+                                <span data-home-i18n="start_learning">
+                                    ابدأ التعلم
+                                </span>
+
+                                <span class="hero-arrow"
+                                      aria-hidden="true">
+                                    ←
+                                </span>
+
+                            </a>
+
+
+                            <a href="#certificates"
+                               class="btn hero-secondary"
+                               data-home-i18n="choose_certificate">
+
+                                اختر شهادتك
+
+                            </a>
+
+                        </div>
 
                     </div>
 
-                </div>
 
+                    <div class="teacher-card">
 
-                <div class="teacher-card">
+                        <div class="teacher-avatar"
+                             aria-hidden="true">
+                        </div>
 
-                    <div class="teacher-avatar">
-                        🤖
-                    </div>
+                        <h2>
+                            Afkrash AI
+                        </h2>
 
-                    <h2>
-                        Afkrash AI
-                    </h2>
+                        <p data-home-i18n="virtual_teacher_edunova">
+                            مدرسك الافتراضي في EduNova AI
+                        </p>
 
-                    <p data-i18n="virtual_teacher_edunova">
-                        مدرسك الافتراضي في EduNova AI
-                    </p>
+                        <div class="teacher-logo">
+                            EduNova AI
+                        </div>
 
-                    <div class="teacher-logo">
-                        🎓 EduNova AI
                     </div>
 
                 </div>
@@ -486,399 +564,440 @@
 
         </div>
 
-    </div>
-
-</section>
+    </section>
 
 
-<section class="section home-section">
+    <!-- =====================================================
+         About
+    ====================================================== -->
 
-    <div class="container">
+    <section class="section home-section">
 
-        <div class="section-intro">
+        <div class="container">
 
-            <h2 class="section-title"
-                data-i18n="what_is_edunova">
-                ما هي EduNova AI؟
-            </h2>
+            <div class="section-intro">
 
-            <p data-i18n="edunova_intro">
-                منصة تعليمية تعتمد على التكنولوجيا
-                والذكاء الاصطناعي لتقديم تجربة تعلم
-                بسيطة ومنظمة للطلاب.
-            </p>
+                <h2 class="section-title"
+                    data-home-i18n="what_is_edunova">
+                    ما هي EduNova AI؟
+                </h2>
+
+                <p data-home-i18n="edunova_intro">
+                    منصة تعليمية تعتمد على التكنولوجيا والذكاء الاصطناعي
+                    لتقديم تجربة تعلم بسيطة ومنظمة للطلاب.
+                </p>
+
+            </div>
+
+
+            <div class="grid grid-2">
+
+                <article class="identity-card">
+
+                    <div class="identity-icon"
+                         aria-hidden="true">
+                    </div>
+
+                    <h3 data-home-i18n="understand_before_memorize">
+                        افهم قبل أن تحفظ
+                    </h3>
+
+                    <p data-home-i18n="understand_before_memorize_desc">
+                        نركز على فهم الفكرة وطريقة الوصول إلى الحل،
+                        وليس فقط حفظ الإجابة.
+                    </p>
+
+                </article>
+
+
+                <article class="identity-card">
+
+                    <div class="identity-icon"
+                         aria-hidden="true">
+                    </div>
+
+                    <h3 data-home-i18n="clear_learning_path">
+                        طريق تعليمي واضح
+                    </h3>
+
+                    <p data-home-i18n="clear_learning_path_desc">
+                        تبدأ باختيار الشهادة، ثم المستوى أو الفرع،
+                        ثم المادة والفصول والدروس.
+                    </p>
+
+                </article>
+
+
+                <article class="identity-card">
+
+                    <div class="identity-icon"
+                         aria-hidden="true">
+                    </div>
+
+                    <h3 data-home-i18n="afkrash_explanations">
+                        شرح بواسطة Afkrash AI
+                    </h3>
+
+                    <p data-home-i18n="afkrash_explanations_desc">
+                        مدرس افتراضي يقدم الدروس والشروحات بطريقة
+                        مبسطة ومناسبة للطالب.
+                    </p>
+
+                </article>
+
+
+                <article class="identity-card">
+
+                    <div class="identity-icon"
+                         aria-hidden="true">
+                    </div>
+
+                    <h3 data-home-i18n="step_by_step">
+                        تعلم خطوة بخطوة
+                    </h3>
+
+                    <p data-home-i18n="step_by_step_desc">
+                        تتقدم تدريجيًا من الدرس الأول إلى الدروس
+                        المتقدمة حتى تصل إلى هدفك الدراسي.
+                    </p>
+
+                </article>
+
+            </div>
 
         </div>
 
+    </section>
 
-        <div class="grid grid-2">
 
-            <article class="identity-card">
+    <!-- =====================================================
+         Certificates
+    ====================================================== -->
 
-                <div class="identity-icon">
-                    🧠
-                </div>
+    <section class="section home-section"
+             id="certificates">
 
-                <h3 data-i18n="understand_before_memorize">
-                    افهم قبل أن تحفظ
-                </h3>
+        <div class="container">
 
-                <p data-i18n="understand_before_memorize_desc">
-                    نركز على فهم الفكرة وطريقة
-                    الوصول إلى الحل، وليس فقط
-                    حفظ الإجابة.
+            <div class="section-intro">
+
+                <h2 class="section-title"
+                    data-home-i18n="choose_certificate">
+                    اختر شهادتك
+                </h2>
+
+                <p data-home-i18n="certificate_intro">
+                    اختر المسار الدراسي المناسب لك، ثم تابع إلى
+                    مكتبتك التعليمية.
                 </p>
 
-            </article>
+            </div>
 
 
-            <article class="identity-card">
+            <div class="grid grid-3">
 
-                <div class="identity-icon">
-                    🎯
-                </div>
+                <a href="login.html"
+                   class="card card-hover certificate-card">
 
-                <h3 data-i18n="clear_learning_path">
-                    طريق تعليمي واضح
-                </h3>
+                    <span class="certificate-number">
+                        01
+                    </span>
 
-                <p data-i18n="clear_learning_path_desc">
-                    دروس منظمة حسب الشهادة
-                    والمادة والـChapitres،
-                    حتى تعرف دائمًا أين أنت
-                    وإلى أين تتجه.
-                </p>
+                    <h3 data-home-i18n="concours">
+                        كونكور
+                    </h3>
 
-            </article>
+                    <p class="text-muted"
+                       data-home-i18n="concours_desc">
+                        الرياضيات، العربية، الفرنسية والعلوم الطبيعية.
+                    </p>
 
+                    <span class="available"
+                          data-home-i18n="available_plan">
+                        متاح ضمن خطة المنصة
+                    </span>
 
-            <article class="identity-card">
-
-                <div class="identity-icon">
-                    🎬
-                </div>
-
-                <h3 data-i18n="afkrash_explanations">
-                    شرح بواسطة Afkrash AI
-                </h3>
-
-                <p data-i18n="afkrash_explanations_desc">
-                    مدرس افتراضي يقدم الدروس
-                    والشروحات بطريقة مبسطة
-                    ومناسبة للطالب.
-                </p>
-
-            </article>
+                </a>
 
 
-            <article class="identity-card">
+                <a href="login.html"
+                   class="card card-hover certificate-card">
 
-                <div class="identity-icon">
-                    📈
-                </div>
+                    <span class="certificate-number">
+                        02
+                    </span>
 
-                <h3 data-i18n="step_by_step">
-                    تعلم خطوة بخطوة
-                </h3>
+                    <h3 data-home-i18n="brevet">
+                        بريڤي
+                    </h3>
 
-                <p data-i18n="step_by_step_desc">
-                    تبدأ من الدرس المناسب لك
-                    وتتقدم تدريجيًا حتى تصل
-                    إلى هدفك الدراسي.
-                </p>
+                    <p class="text-muted"
+                       data-home-i18n="brevet_desc">
+                        الرياضيات، الفيزياء والكيمياء والعلوم الطبيعية.
+                    </p>
 
-            </article>
+                    <span class="available"
+                          data-home-i18n="available_plan">
+                        متاح ضمن خطة المنصة
+                    </span>
+
+                </a>
+
+
+                <a href="login.html"
+                   class="card card-hover certificate-card">
+
+                    <span class="certificate-number">
+                        03
+                    </span>
+
+                    <h3 data-home-i18n="baccalaureate">
+                        باكالوريا
+                    </h3>
+
+                    <p class="text-muted"
+                       data-home-i18n="baccalaureate_desc">
+                        اختر لاحقًا بين باكالوريا C أو D حسب مسارك الدراسي.
+                    </p>
+
+                    <span class="available"
+                          data-home-i18n="available_plan">
+                        متاح ضمن خطة المنصة
+                    </span>
+
+                </a>
+
+            </div>
 
         </div>
 
-    </div>
-
-</section>
+    </section>
 
 
-<section class="section home-section" id="certificates">
+    <!-- =====================================================
+         Learning structure
+    ====================================================== -->
 
-    <div class="container">
+    <section class="section home-section">
 
-        <div class="section-intro">
+        <div class="container">
 
-            <h2 class="section-title"
-                data-i18n="choose_certificate">
-                اختر شهادتك
-            </h2>
+            <div class="section-intro">
 
-            <p data-i18n="certificate_intro">
-                اختر الشهادة التي تستعد للحصول
-                عليها، ثم ابدأ رحلتك التعليمية.
-            </p>
+                <h2 class="section-title"
+                    data-home-i18n="learning_structure">
+                    كيف ستتعلم؟
+                </h2>
+
+                <p data-home-i18n="learning_structure_desc">
+                    مسار واضح من الشهادة إلى الفيديو التعليمي.
+                </p>
+
+            </div>
+
+
+            <div class="grid grid-2">
+
+                <article class="card card-hover future-card">
+
+                    <div class="feature-mark">
+                        01
+                    </div>
+
+                    <h3 data-home-i18n="step_certificate">
+                        اختر الشهادة
+                    </h3>
+
+                    <p class="text-muted"
+                       data-home-i18n="step_certificate_desc">
+                        اختر 6AF أو Brevet أو Baccalauréat.
+                    </p>
+
+                </article>
+
+
+                <article class="card card-hover future-card">
+
+                    <div class="feature-mark">
+                        02
+                    </div>
+
+                    <h3 data-home-i18n="step_subject">
+                        اختر المادة
+                    </h3>
+
+                    <p class="text-muted"
+                       data-home-i18n="step_subject_desc">
+                        تظهر لك المواد المناسبة للمستوى أو الفرع الذي اخترته.
+                    </p>
+
+                </article>
+
+
+                <article class="card card-hover future-card">
+
+                    <div class="feature-mark">
+                        03
+                    </div>
+
+                    <h3 data-home-i18n="step_chapter">
+                        اختر الفصل
+                    </h3>
+
+                    <p class="text-muted"
+                       data-home-i18n="step_chapter_desc">
+                        كل مادة منظمة في فصول، وكل فصل يحتوي على فيديوهاته.
+                    </p>
+
+                </article>
+
+
+                <article class="card card-hover future-card">
+
+                    <div class="feature-mark">
+                        04
+                    </div>
+
+                    <h3 data-home-i18n="step_video">
+                        ابدأ الفيديو
+                    </h3>
+
+                    <p class="text-muted"
+                       data-home-i18n="step_video_desc">
+                        يبدأ التعلم من الفيديو الأول ثم تتقدم تدريجيًا.
+                    </p>
+
+                </article>
+
+            </div>
 
         </div>
 
-
-        <div class="grid grid-3">
-
-            <a href="login.html"
-               class="card card-hover certificate-card">
-
-                <span class="certificate-number">
-                    01
-                </span>
-
-                <h3 data-i18n="concours">
-                    كونكور
-                </h3>
-
-                <p class="text-muted"
-                   data-i18n="concours_desc">
-                    دروس ومراجعة منظمة
-                    للاستعداد للكونكور.
-                </p>
-
-                <span class="available"
-                      data-i18n="available_plan">
-                    متاح ضمن خطة المنصة
-                </span>
-
-            </a>
+    </section>
 
 
-            <a href="login.html"
-               class="card card-hover certificate-card">
+    <!-- =====================================================
+         Afkrash AI
+    ====================================================== -->
 
-                <span class="certificate-number">
-                    02
-                </span>
+    <section class="section home-section">
 
-                <h3 data-i18n="brevet">
-                    بريڤي
-                </h3>
+        <div class="container">
 
-                <p class="text-muted"
-                   data-i18n="brevet_desc">
-                    تعلم ومراجعة بطريقة
-                    منظمة لتثبيت الأساسيات.
-                </p>
+            <div class="section-intro">
 
-                <span class="available"
-                      data-i18n="available_plan">
-                    متاح ضمن خطة المنصة
-                </span>
-
-            </a>
-
-
-            <a href="login.html"
-               class="card card-hover certificate-card">
-
-                <span class="certificate-number">
-                    03
-                </span>
-
-                <h3 data-i18n="baccalaureate">
-                    باكالوريا
-                </h3>
-
-                <p class="text-muted"
-                   data-i18n="baccalaureate_desc">
-                    تحضير تدريجي للباكالوريا
-                    مع دروس وتمارين منظمة.
-                </p>
-
-                <span class="available"
-                      data-i18n="available_plan">
-                    متاح ضمن خطة المنصة
-                </span>
-
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<section class="section home-section">
-
-    <div class="container">
-
-        <div class="section-intro">
-
-            <h2 class="section-title"
-                data-i18n="first_year">
-                السنة الأولى
-            </h2>
-
-            <p data-i18n="first_year_desc">
-                نبدأ بمادة واحدة ونبنيها
-                بعناية قبل التوسع.
-            </p>
-
-        </div>
-
-
-        <div class="grid grid-2">
-
-            <article class="card card-hover future-card">
-
-                <div style="font-size:32px;margin-bottom:10px;">
-                    🧮
-                </div>
-
-                <h3 data-i18n="mathematics">
-                    الرياضيات
-                </h3>
-
-                <p class="text-muted"
-                   data-i18n="mathematics_year_one">
-                    المادة الأساسية في السنة الأولى
-                    من EduNova AI.
-                </p>
-
-            </article>
-
-
-            <article class="card card-hover future-card">
-
-                <div style="font-size:32px;margin-bottom:10px;">
-                    🤖
-                </div>
-
-                <h3>
+                <h2 class="section-title">
                     Afkrash AI
-                </h3>
+                </h2>
 
-                <p class="text-muted"
-                   data-i18n="afkrash_year_one">
-                    المدرس الافتراضي الذي سيقدم
-                    الدروس والشروحات داخل المنصة.
+                <p data-home-i18n="afkrash_intro">
+                    شخصية المدرس الافتراضي التي سترافق تجربة التعلم
+                    داخل EduNova AI.
                 </p>
 
-            </article>
+            </div>
+
+
+            <div class="grid grid-3">
+
+                <article class="card card-hover future-card">
+
+                    <div class="feature-mark">
+                        AI
+                    </div>
+
+                    <h3 data-home-i18n="educational_videos">
+                        فيديوهات تعليمية
+                    </h3>
+
+                    <p class="text-muted"
+                       data-home-i18n="educational_videos_desc">
+                        دروس يقدمها Afkrash AI بطريقة واضحة ومنظمة.
+                    </p>
+
+                </article>
+
+
+                <article class="card card-hover future-card">
+
+                    <div class="feature-mark">
+                        +
+                    </div>
+
+                    <h3 data-home-i18n="premium_content">
+                        محتوى Premium
+                    </h3>
+
+                    <p class="text-muted"
+                       data-home-i18n="premium_content_desc">
+                        بعض الدروس والفيديوهات ستكون متاحة للمشتركين
+                        حسب نظام الاشتراك.
+                    </p>
+
+                </article>
+
+
+                <article class="card card-hover future-card">
+
+                    <div class="feature-mark">
+                        APP
+                    </div>
+
+                    <h3 data-home-i18n="mobile_app">
+                        تطبيق الهاتف
+                    </h3>
+
+                    <p class="text-muted"
+                       data-home-i18n="mobile_app_desc">
+                        يمكن تطوير تطبيق EduNova AI لاحقًا بعد نجاح المنصة.
+                    </p>
+
+                </article>
+
+            </div>
 
         </div>
 
-    </div>
-
-</section>
+    </section>
 
 
-<section class="section home-section">
+    <!-- =====================================================
+         Final CTA
+    ====================================================== -->
 
-    <div class="container">
+    <section class="section">
 
-        <div class="section-intro">
+        <div class="container">
 
-            <h2 class="section-title"
-                data-i18n="just_beginning">
-                هذه مجرد البداية
-            </h2>
+            <div class="home-final">
 
-            <p data-i18n="future_intro">
-                سنطور EduNova AI تدريجيًا لتصبح
-                منصة تعليمية متكاملة.
-            </p>
+                <h2 data-home-i18n="ready_to_start">
+                    مستعد لبدء رحلتك؟
+                </h2>
+
+                <p data-home-i18n="start_journey">
+                    اختر مسارك وابدأ التعلم مع EduNova AI.
+                </p>
+
+                <a href="login.html"
+                   class="btn">
+
+                    <span data-home-i18n="start_now">
+                        ابدأ الآن
+                    </span>
+
+                    <span class="hero-arrow"
+                          aria-hidden="true">
+                        ←
+                    </span>
+
+                </a>
+
+            </div>
 
         </div>
 
-
-        <div class="grid grid-3">
-
-            <article class="card card-hover future-card">
-
-                <div style="font-size:30px;margin-bottom:10px;">
-                    🎬
-                </div>
-
-                <h3 data-i18n="educational_videos">
-                    فيديوهات تعليمية
-                </h3>
-
-                <p class="text-muted"
-                   data-i18n="educational_videos_desc">
-                    دروس يقدمها Afkrash AI
-                    بطريقة واضحة ومنظمة.
-                </p>
-
-            </article>
-
-
-            <article class="card card-hover future-card">
-
-                <div style="font-size:30px;margin-bottom:10px;">
-                    🔒
-                </div>
-
-                <h3 data-i18n="premium_content">
-                    محتوى Premium
-                </h3>
-
-                <p class="text-muted"
-                   data-i18n="premium_content_desc">
-                    بعض الدروس ستكون متاحة
-                    للمشتركين فقط.
-                </p>
-
-            </article>
-
-
-            <article class="card card-hover future-card">
-
-                <div style="font-size:30px;margin-bottom:10px;">
-                    📱
-                </div>
-
-                <h3 data-i18n="mobile_app">
-                    تطبيق الهاتف
-                </h3>
-
-                <p class="text-muted"
-                   data-i18n="mobile_app_desc">
-                    بعد نجاح الموقع، ننتقل
-                    إلى تطبيق EduNova AI.
-                </p>
-
-            </article>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<section class="section">
-
-    <div class="container">
-
-        <div class="home-final">
-
-            <h2 data-i18n="ready_to_start">
-                مستعد لبدء رحلتك؟
-            </h2>
-
-            <p data-i18n="start_journey">
-                اختر شهادتك وابدأ التعلم
-                مع EduNova AI.
-            </p>
-
-            <a href="login.html"
-               class="btn"
-               style="background:#fff;color:var(--primary);">
-
-                <span data-i18n="start_now">
-                    ابدأ الآن
-                </span>
-
-                <span class="hero-arrow">←</span>
-
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
+    </section>
 
 </main>
 
@@ -894,9 +1013,8 @@
         </p>
 
         <p style="margin-top:5px;"
-           data-i18n="footer_teacher">
-            Afkrash AI • مدرسك الافتراضي
-            بالذكاء الاصطناعي
+           data-home-i18n="footer_teacher">
+            Afkrash AI • مدرسك الافتراضي بالذكاء الاصطناعي
         </p>
 
     </div>
@@ -910,15 +1028,12 @@
 <script>
 /* =====================================================
    EduNova AI — Home Page
-   Global language + theme integration
+   الصفحة الرئيسية تستخدم النظام العالمي من script.js
 ===================================================== */
 
 const HOME_TRANSLATIONS = {
 
     ar: {
-
-        page_title:
-            "EduNova AI | التعليم بالذكاء الاصطناعي",
 
         login:
             "دخول",
@@ -930,7 +1045,7 @@ const HOME_TRANSLATIONS = {
             "مرحبًا بك في",
 
         hero_description:
-            "منصة تعليمية جديدة تساعدك على الاستعداد لشهادتك الدراسية من خلال دروس منظمة وشروحات يقدمها مدرسك الافتراضي",
+            "منصة تعليمية منظمة تساعدك على الاستعداد لشهادتك الدراسية من خلال الدروس والفيديوهات التعليمية مع مدرسك الافتراضي",
 
         start_learning:
             "ابدأ التعلم",
@@ -957,7 +1072,7 @@ const HOME_TRANSLATIONS = {
             "طريق تعليمي واضح",
 
         clear_learning_path_desc:
-            "دروس منظمة حسب الشهادة والمادة والـChapitres، حتى تعرف دائمًا أين أنت وإلى أين تتجه.",
+            "تبدأ باختيار الشهادة، ثم المستوى أو الفرع، ثم المادة والفصول والدروس.",
 
         afkrash_explanations:
             "شرح بواسطة Afkrash AI",
@@ -969,52 +1084,64 @@ const HOME_TRANSLATIONS = {
             "تعلم خطوة بخطوة",
 
         step_by_step_desc:
-            "تبدأ من الدرس المناسب لك وتتقدم تدريجيًا حتى تصل إلى هدفك الدراسي.",
+            "تتقدم تدريجيًا من الدرس الأول إلى الدروس المتقدمة حتى تصل إلى هدفك الدراسي.",
 
         certificate_intro:
-            "اختر الشهادة التي تستعد للحصول عليها، ثم ابدأ رحلتك التعليمية.",
+            "اختر المسار الدراسي المناسب لك، ثم تابع إلى مكتبتك التعليمية.",
 
         concours:
             "كونكور",
 
         concours_desc:
-            "دروس ومراجعة منظمة للاستعداد للكونكور.",
+            "الرياضيات، العربية، الفرنسية والعلوم الطبيعية.",
 
         brevet:
             "بريڤي",
 
         brevet_desc:
-            "تعلم ومراجعة بطريقة منظمة لتثبيت الأساسيات.",
+            "الرياضيات، الفيزياء والكيمياء والعلوم الطبيعية.",
 
         baccalaureate:
             "باكالوريا",
 
         baccalaureate_desc:
-            "تحضير تدريجي للباكالوريا مع دروس وتمارين منظمة.",
+            "اختر لاحقًا بين باكالوريا C أو D حسب مسارك الدراسي.",
 
         available_plan:
             "متاح ضمن خطة المنصة",
 
-        first_year:
-            "السنة الأولى",
+        learning_structure:
+            "كيف ستتعلم؟",
 
-        first_year_desc:
-            "نبدأ بمادة واحدة ونبنيها بعناية قبل التوسع.",
+        learning_structure_desc:
+            "مسار واضح من الشهادة إلى الفيديو التعليمي.",
 
-        mathematics:
-            "الرياضيات",
+        step_certificate:
+            "اختر الشهادة",
 
-        mathematics_year_one:
-            "المادة الأساسية في السنة الأولى من EduNova AI.",
+        step_certificate_desc:
+            "اختر 6AF أو Brevet أو Baccalauréat.",
 
-        afkrash_year_one:
-            "المدرس الافتراضي الذي سيقدم الدروس والشروحات داخل المنصة.",
+        step_subject:
+            "اختر المادة",
 
-        just_beginning:
-            "هذه مجرد البداية",
+        step_subject_desc:
+            "تظهر لك المواد المناسبة للمستوى أو الفرع الذي اخترته.",
 
-        future_intro:
-            "سنطور EduNova AI تدريجيًا لتصبح منصة تعليمية متكاملة.",
+        step_chapter:
+            "اختر الفصل",
+
+        step_chapter_desc:
+            "كل مادة منظمة في فصول، وكل فصل يحتوي على فيديوهاته.",
+
+        step_video:
+            "ابدأ الفيديو",
+
+        step_video_desc:
+            "يبدأ التعلم من الفيديو الأول ثم تتقدم تدريجيًا.",
+
+        afkrash_intro:
+            "شخصية المدرس الافتراضي التي سترافق تجربة التعلم داخل EduNova AI.",
 
         educational_videos:
             "فيديوهات تعليمية",
@@ -1026,19 +1153,19 @@ const HOME_TRANSLATIONS = {
             "محتوى Premium",
 
         premium_content_desc:
-            "بعض الدروس ستكون متاحة للمشتركين فقط.",
+            "بعض الدروس والفيديوهات ستكون متاحة للمشتركين حسب نظام الاشتراك.",
 
         mobile_app:
             "تطبيق الهاتف",
 
         mobile_app_desc:
-            "بعد نجاح الموقع، ننتقل إلى تطبيق EduNova AI.",
+            "يمكن تطوير تطبيق EduNova AI لاحقًا بعد نجاح المنصة.",
 
         ready_to_start:
             "مستعد لبدء رحلتك؟",
 
         start_journey:
-            "اختر شهادتك وابدأ التعلم مع EduNova AI.",
+            "اختر مسارك وابدأ التعلم مع EduNova AI.",
 
         start_now:
             "ابدأ الآن",
@@ -1050,9 +1177,6 @@ const HOME_TRANSLATIONS = {
 
     fr: {
 
-        page_title:
-            "EduNova AI | L’éducation avec l’intelligence artificielle",
-
         login:
             "Connexion",
 
@@ -1063,7 +1187,7 @@ const HOME_TRANSLATIONS = {
             "Bienvenue sur",
 
         hero_description:
-            "Une nouvelle plateforme éducative qui vous aide à préparer vos examens grâce à des cours organisés et des explications présentées par votre professeur virtuel",
+            "Une plateforme éducative organisée pour vous aider à préparer votre diplôme grâce à des cours et des vidéos éducatives avec votre professeur virtuel",
 
         start_learning:
             "Commencer à apprendre",
@@ -1090,7 +1214,7 @@ const HOME_TRANSLATIONS = {
             "Un parcours d’apprentissage clair",
 
         clear_learning_path_desc:
-            "Des cours organisés selon le diplôme, la matière et les chapitres, afin que vous sachiez toujours où vous êtes et où vous allez.",
+            "Vous choisissez d’abord le diplôme, puis le niveau ou la série, la matière, les chapitres et les leçons.",
 
         afkrash_explanations:
             "Explications avec Afkrash AI",
@@ -1102,52 +1226,64 @@ const HOME_TRANSLATIONS = {
             "Apprendre étape par étape",
 
         step_by_step_desc:
-            "Commencez par la leçon qui vous convient et progressez progressivement jusqu’à atteindre votre objectif scolaire.",
+            "Progressez progressivement du premier cours aux cours avancés jusqu’à atteindre votre objectif scolaire.",
 
         certificate_intro:
-            "Choisissez le diplôme que vous préparez, puis commencez votre parcours d’apprentissage.",
+            "Choisissez le parcours scolaire qui vous convient, puis accédez à votre bibliothèque éducative.",
 
         concours:
             "Concours",
 
         concours_desc:
-            "Des cours et des révisions organisés pour préparer le concours.",
+            "Mathématiques, arabe, français et sciences naturelles.",
 
         brevet:
             "Brevet",
 
         brevet_desc:
-            "Apprentissage et révision organisés pour consolider les bases.",
+            "Mathématiques, physique-chimie et sciences naturelles.",
 
         baccalaureate:
             "Baccalauréat",
 
         baccalaureate_desc:
-            "Une préparation progressive au baccalauréat avec des cours et des exercices organisés.",
+            "Choisissez ensuite entre le Baccalauréat C et D selon votre parcours.",
 
         available_plan:
             "Disponible dans l’offre de la plateforme",
 
-        first_year:
-            "Première année",
+        learning_structure:
+            "Comment allez-vous apprendre ?",
 
-        first_year_desc:
-            "Nous commençons par une seule matière et la construisons soigneusement avant de nous développer.",
+        learning_structure_desc:
+            "Un parcours clair du diplôme jusqu’à la vidéo éducative.",
 
-        mathematics:
-            "Mathématiques",
+        step_certificate:
+            "Choisir le diplôme",
 
-        mathematics_year_one:
-            "La matière principale de la première année d’EduNova AI.",
+        step_certificate_desc:
+            "Choisissez 6AF, Brevet ou Baccalauréat.",
 
-        afkrash_year_one:
-            "Le professeur virtuel qui présentera les cours et les explications sur la plateforme.",
+        step_subject:
+            "Choisir la matière",
 
-        just_beginning:
-            "Ce n’est que le début",
+        step_subject_desc:
+            "Les matières correspondant à votre niveau ou votre série vous seront proposées.",
 
-        future_intro:
-            "Nous développerons progressivement EduNova AI pour en faire une plateforme éducative complète.",
+        step_chapter:
+            "Choisir le chapitre",
+
+        step_chapter_desc:
+            "Chaque matière est organisée en chapitres contenant leurs vidéos.",
+
+        step_video:
+            "Commencer la vidéo",
+
+        step_video_desc:
+            "L’apprentissage commence avec la première vidéo puis progresse progressivement.",
+
+        afkrash_intro:
+            "La personnalité du professeur virtuel qui accompagnera votre expérience d’apprentissage dans EduNova AI.",
 
         educational_videos:
             "Vidéos éducatives",
@@ -1159,19 +1295,19 @@ const HOME_TRANSLATIONS = {
             "Contenu Premium",
 
         premium_content_desc:
-            "Certaines leçons seront accessibles uniquement aux abonnés.",
+            "Certaines leçons et vidéos seront accessibles aux abonnés selon le système d’abonnement.",
 
         mobile_app:
             "Application mobile",
 
         mobile_app_desc:
-            "Après le succès du site, nous passerons à l’application EduNova AI.",
+            "Une application EduNova AI pourra être développée après le succès de la plateforme.",
 
         ready_to_start:
             "Prêt à commencer votre parcours ?",
 
         start_journey:
-            "Choisissez votre diplôme et commencez à apprendre avec EduNova AI.",
+            "Choisissez votre parcours et commencez à apprendre avec EduNova AI.",
 
         start_now:
             "Commencer maintenant",
@@ -1184,26 +1320,15 @@ const HOME_TRANSLATIONS = {
 
 
 /* =====================================================
-   اللغة الحالية
-===================================================== */
-
-function getHomeLanguage() {
-
-    if (typeof getSiteLanguage === "function") {
-        return getSiteLanguage();
-    }
-
-    return localStorage.getItem("site_language") || "ar";
-}
-
-
-/* =====================================================
-   تطبيق اللغة
+   تطبيق ترجمة الصفحة
 ===================================================== */
 
 function translateHomePage() {
 
-    const language = getHomeLanguage();
+    const language =
+        typeof getSiteLanguage === "function"
+            ? getSiteLanguage()
+            : (localStorage.getItem("site_language") || "ar");
 
     const translations =
         HOME_TRANSLATIONS[language] ||
@@ -1211,13 +1336,16 @@ function translateHomePage() {
 
 
     document
-        .querySelectorAll("[data-i18n]")
+        .querySelectorAll("[data-home-i18n]")
         .forEach(element => {
 
             const key =
-                element.getAttribute("data-i18n");
+                element.getAttribute("data-home-i18n");
 
-            if (!Object.prototype.hasOwnProperty.call(translations, key)) {
+            if (!Object.prototype.hasOwnProperty.call(
+                translations,
+                key
+            )) {
                 return;
             }
 
@@ -1227,22 +1355,15 @@ function translateHomePage() {
         });
 
 
-    const title =
-        document.querySelector(
-            "title[data-i18n='page_title']"
-        );
-
-    if (title) {
-        title.textContent =
-            translations.page_title;
-    }
-
-
     document.documentElement.lang =
-        language === "fr" ? "fr" : "ar";
+        language === "fr"
+            ? "fr"
+            : "ar";
 
     document.documentElement.dir =
-        language === "fr" ? "ltr" : "rtl";
+        language === "fr"
+            ? "ltr"
+            : "rtl";
 
 
     document
@@ -1255,41 +1376,25 @@ function translateHomePage() {
                     : "←";
 
         });
-}
 
 
-/* =====================================================
-   تطبيق الوضع العام
-===================================================== */
+    const title =
+        document.querySelector("title");
 
-function applyHomeTheme() {
+    if (title) {
 
-    const theme =
-        typeof getSiteTheme === "function"
-            ? getSiteTheme()
-            : (localStorage.getItem("site_theme") || "light");
-
-
-    if (typeof applySiteTheme === "function") {
-
-        applySiteTheme(theme);
-
-    } else {
-
-        document.documentElement.dataset.theme =
-            theme;
-
-        document.body.classList.toggle(
-            "dark-mode",
-            theme === "dark"
-        );
+        title.textContent =
+            language === "fr"
+                ? "EduNova AI | L’éducation avec l’intelligence artificielle"
+                : "EduNova AI | التعليم بالذكاء الاصطناعي";
 
     }
+
 }
 
 
 /* =====================================================
-   التهيئة
+   تهيئة الصفحة
 ===================================================== */
 
 function initializeHomePage() {
@@ -1298,25 +1403,30 @@ function initializeHomePage() {
         initializeGlobalSettings();
     }
 
-    applyHomeTheme();
     translateHomePage();
 
     if (typeof setCurrentYear === "function") {
+
         setCurrentYear();
+
     } else {
 
         document
             .querySelectorAll("[data-current-year]")
             .forEach(element => {
+
                 element.textContent =
                     new Date().getFullYear();
+
             });
+
     }
+
 }
 
 
 /* =====================================================
-   عند تحميل الصفحة
+   عند التحميل
 ===================================================== */
 
 document.addEventListener(
@@ -1327,7 +1437,6 @@ document.addEventListener(
 
 /* =====================================================
    أحداث اللغة
-   دعم النظام الحالي والأنظمة السابقة
 ===================================================== */
 
 window.addEventListener(
@@ -1338,26 +1447,6 @@ window.addEventListener(
 window.addEventListener(
     "siteLanguageChanged",
     translateHomePage
-);
-
-window.addEventListener(
-    "languagechange",
-    translateHomePage
-);
-
-
-/* =====================================================
-   أحداث الثيم
-===================================================== */
-
-window.addEventListener(
-    "themeChanged",
-    applyHomeTheme
-);
-
-window.addEventListener(
-    "siteThemeChanged",
-    applyHomeTheme
 );
 
 
@@ -1373,10 +1462,6 @@ window.addEventListener(
             translateHomePage();
         }
 
-        if (event.key === "site_theme") {
-            applyHomeTheme();
-        }
-
     }
 );
 
@@ -1384,4 +1469,4 @@ window.addEventListener(
 
 </body>
 
-                    </html>
+</html>
