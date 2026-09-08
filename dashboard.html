@@ -3,8 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>لوحة الطالب | EduNova AI</title>
 
@@ -14,8 +13,8 @@
     <style>
         /* ==================================================
            EDUNOVA AI — STUDENT DASHBOARD
+           Final Visual Structure
            Responsive / Mobile First
-           Floating Invisible Top Navigation
            ================================================== */
 
         * {
@@ -30,7 +29,7 @@
         }
 
         /* ==================================================
-           FIXED INVISIBLE TOP NAVIGATION
+           FIXED TOP HEADER
            ================================================== */
 
         .dashboard-header {
@@ -61,16 +60,14 @@
             pointer-events: none;
         }
 
-        /*
-         * منطقة الضبابية التي يمر خلفها المحتوى.
-         * لا يوجد خط مرئي.
-         */
         .dashboard-header::after {
             content: "";
+
             position: absolute;
             right: 0;
             left: 0;
             bottom: -30px;
+
             height: 55px;
 
             background:
@@ -142,7 +139,7 @@
         }
 
         /* ==================================================
-           LOGO
+           BRAND
            ================================================== */
 
         .dashboard-brand {
@@ -183,7 +180,7 @@
         }
 
         /* ==================================================
-           ICON NAVIGATION
+           HEADER ACTIONS
            ================================================== */
 
         .dashboard-header-actions {
@@ -197,6 +194,8 @@
         }
 
         .dashboard-header-item {
+            position: relative;
+
             min-width: 43px;
 
             display: flex;
@@ -204,7 +203,7 @@
             align-items: center;
             justify-content: center;
 
-            padding: 0;
+            padding: 0 2px 5px;
 
             border: 0 !important;
             outline: none !important;
@@ -218,16 +217,38 @@
 
             transition:
                 opacity .18s ease,
-                transform .18s ease;
+                transform .18s ease,
+                color .18s ease;
         }
 
         .dashboard-header-item:hover {
-            opacity: .68;
+            opacity: .72;
             transform: translateY(-1px);
         }
 
         .dashboard-header-item:active {
             transform: scale(.94);
+        }
+
+        /* الصفحة الحالية */
+        .dashboard-header-item.active {
+            color: var(--primary);
+        }
+
+        .dashboard-header-item.active::after {
+            content: "";
+
+            position: absolute;
+
+            left: 7px;
+            right: 7px;
+            bottom: 0;
+
+            height: 3px;
+
+            border-radius: 999px;
+
+            background: var(--primary);
         }
 
         .dashboard-header-icon {
@@ -240,14 +261,21 @@
             font-size: 20px;
             line-height: 1;
 
+            color: currentColor;
+
+            font-style: normal;
+
             filter:
                 grayscale(1)
                 saturate(0)
                 contrast(1.15);
+        }
 
-            color: #111;
-
-            font-style: normal;
+        .dashboard-header-item.active .dashboard-header-icon {
+            filter:
+                grayscale(1)
+                saturate(0)
+                contrast(1.2);
         }
 
         .dashboard-header-label {
@@ -255,7 +283,7 @@
 
             margin-top: 2px;
 
-            color: #111;
+            color: currentColor;
 
             font-size: 9px;
             line-height: 1.3;
@@ -273,30 +301,17 @@
                 contrast(1.15);
         }
 
-        html.dark-mode .dashboard-header-label {
-            color: #fff;
-        }
-
-        /*
-         * جعل الإيموجي أحادي اللون قدر الإمكان
-         */
-        .mono-icon {
+        html.dark-mode .dashboard-header-item.active .dashboard-header-icon {
             filter:
                 grayscale(1)
                 saturate(0)
-                contrast(1.05);
-            font-style: normal;
-        }
-
-        html.dark-mode .mono-icon {
-            filter:
-                grayscale(1)
-                saturate(0)
-                invert(1);
+                brightness(0)
+                invert(1)
+                contrast(1.2);
         }
 
         /* ==================================================
-           MAIN OFFSET FOR FIXED HEADER
+           MAIN
            ================================================== */
 
         .dashboard-main {
@@ -311,9 +326,12 @@
         .dashboard-hero {
             position: relative;
             overflow: hidden;
+
             margin-bottom: 24px;
             padding: clamp(22px, 5vw, 30px);
+
             border-radius: clamp(22px, 4vw, 28px);
+
             color: #fff;
 
             background:
@@ -334,6 +352,7 @@
 
         .dashboard-hero::before {
             content: "";
+
             position: absolute;
 
             width: 210px;
@@ -348,6 +367,7 @@
 
         .dashboard-hero::after {
             content: "";
+
             position: absolute;
 
             width: 280px;
@@ -374,6 +394,7 @@
             gap: 7px;
 
             width: fit-content;
+
             margin-bottom: 9px;
             padding: 6px 11px;
 
@@ -452,7 +473,11 @@
 
             background: rgba(255,255,255,.14);
 
-            font-size: 24px;
+            color: #fff;
+
+            font-size: 13px;
+            font-weight: 900;
+            letter-spacing: -.4px;
         }
 
         .dashboard-teacher-info {
@@ -521,7 +546,10 @@
 
             background: var(--primary-light);
 
-            font-size: 19px;
+            color: var(--text);
+
+            font-size: 14px;
+            font-weight: 900;
         }
 
         .dashboard-stat-value {
@@ -575,7 +603,8 @@
         }
 
         /* ==================================================
-           CONTINUE
+           CONTINUE LEARNING
+           لا يكرر محتوى المكتبة
            ================================================== */
 
         .continue-card {
@@ -609,7 +638,7 @@
             background: var(--primary-light);
             color: var(--primary);
 
-            font-size: 26px;
+            font-size: 23px;
             font-weight: 800;
         }
 
@@ -698,7 +727,10 @@
 
             background: var(--primary-light);
 
-            font-size: 23px;
+            color: var(--text);
+
+            font-size: 15px;
+            font-weight: 900;
         }
 
         .level-content h3 {
@@ -786,18 +818,10 @@
 
             background: var(--primary-light);
 
-            font-size: 22px;
+            color: var(--text);
 
-            filter:
-                grayscale(1)
-                saturate(0);
-        }
-
-        html.dark-mode .quick-icon {
-            filter:
-                grayscale(1)
-                saturate(0)
-                invert(1);
+            font-size: 13px;
+            font-weight: 900;
         }
 
         .quick-card h3 {
@@ -881,7 +905,7 @@
 
             color: #fff;
 
-            font-size: 29px;
+            font-size: 22px;
             font-weight: 900;
 
             box-shadow:
@@ -935,7 +959,6 @@
 
         /* ==================================================
            OLD BOTTOM BAR
-           مخفي بالكامل
            ================================================== */
 
         .dashboard-bottom-nav {
@@ -1121,7 +1144,7 @@
             .dashboard-stat-icon {
                 width: 36px;
                 height: 36px;
-                font-size: 17px;
+                font-size: 13px;
             }
 
             .dashboard-stat-value {
@@ -1137,7 +1160,7 @@
             .quick-icon {
                 width: 41px;
                 height: 41px;
-                font-size: 20px;
+                font-size: 12px;
             }
 
             .quick-card h3 {
@@ -1201,14 +1224,13 @@
 <body>
 
 <!-- =====================================================
-     FIXED INVISIBLE TOP NAVIGATION
+     FIXED TOP NAVIGATION
      ===================================================== -->
 
 <header class="dashboard-header site-header">
 
     <div class="container header-inner">
 
-        <!-- الشعار -->
         <button
             class="dashboard-brand"
             onclick="goHome()"
@@ -1227,18 +1249,19 @@
         </button>
 
 
-        <!-- الأيقونات -->
         <div class="dashboard-header-actions">
 
+            <!-- الرئيسية -->
             <button
-                class="dashboard-header-item"
+                class="dashboard-header-item active"
                 onclick="goDashboard()"
-                aria-label="الرئيسية"
+                aria-label="الصفحة الرئيسية"
+                aria-current="page"
                 data-dashboard-aria="home"
                 type="button">
 
                 <span class="dashboard-header-icon">
-                    🏠
+                    ⌂
                 </span>
 
                 <span
@@ -1250,6 +1273,7 @@
             </button>
 
 
+            <!-- الإشعارات -->
             <button
                 class="dashboard-header-item"
                 onclick="showNotifications()"
@@ -1258,7 +1282,7 @@
                 type="button">
 
                 <span class="dashboard-header-icon">
-                    🔔
+                    ◇
                 </span>
 
                 <span
@@ -1270,15 +1294,16 @@
             </button>
 
 
+            <!-- الحساب -->
             <button
                 class="dashboard-header-item"
                 onclick="openAccount()"
-                aria-label="حسابي"
+                aria-label="الحساب"
                 data-dashboard-aria="account"
                 type="button">
 
                 <span class="dashboard-header-icon">
-                    👤
+                    ○
                 </span>
 
                 <span
@@ -1290,6 +1315,7 @@
             </button>
 
 
+            <!-- الإعدادات -->
             <button
                 class="dashboard-header-item"
                 onclick="openSettings()"
@@ -1298,7 +1324,7 @@
                 type="button">
 
                 <span class="dashboard-header-icon">
-                    ⚙︎
+                    ⚙
                 </span>
 
                 <span
@@ -1324,6 +1350,10 @@
 
     <div class="container">
 
+        <!-- =================================================
+             HERO
+             ================================================= -->
+
         <section class="dashboard-hero">
 
             <div class="dashboard-hero-inner">
@@ -1343,7 +1373,7 @@
                         class="dashboard-title"
                         id="welcomeName">
 
-                        مرحبًا بك 👋
+                        مرحبًا بك
 
                     </h1>
 
@@ -1363,7 +1393,7 @@
                 <div class="dashboard-teacher-mini">
 
                     <div class="dashboard-teacher-avatar">
-                        🤖
+                        AI
                     </div>
 
                     <div class="dashboard-teacher-info">
@@ -1385,14 +1415,16 @@
         </section>
 
 
-        <!-- STATISTICS -->
+        <!-- =================================================
+             STATISTICS
+             ================================================= -->
 
         <section class="dashboard-stats">
 
             <div class="dashboard-stat">
 
-                <div class="dashboard-stat-icon mono-icon">
-                    ⭐
+                <div class="dashboard-stat-icon">
+                    ★
                 </div>
 
                 <strong
@@ -1412,11 +1444,13 @@
 
             <div class="dashboard-stat">
 
-                <div class="dashboard-stat-icon mono-icon">
-                    🔥
+                <div class="dashboard-stat-icon">
+                    —
                 </div>
 
-                <strong class="dashboard-stat-value">
+                <strong
+                    class="dashboard-stat-value"
+                    id="streakValue">
                     0
                 </strong>
 
@@ -1431,11 +1465,13 @@
 
             <div class="dashboard-stat">
 
-                <div class="dashboard-stat-icon mono-icon">
-                    🏅
+                <div class="dashboard-stat-icon">
+                    +
                 </div>
 
-                <strong class="dashboard-stat-value">
+                <strong
+                    class="dashboard-stat-value"
+                    id="badgesValue">
                     0
                 </strong>
 
@@ -1450,8 +1486,8 @@
 
             <div class="dashboard-stat">
 
-                <div class="dashboard-stat-icon mono-icon">
-                    📈
+                <div class="dashboard-stat-icon">
+                    %
                 </div>
 
                 <strong
@@ -1471,7 +1507,10 @@
         </section>
 
 
-        <!-- CONTINUE -->
+        <!-- =================================================
+             CONTINUE LEARNING
+             لا يحتوي على مادة أو فصل أو فيديو
+             ================================================= -->
 
         <section class="dashboard-section">
 
@@ -1480,13 +1519,17 @@
                 <h2
                     class="dashboard-section-title"
                     data-dashboard-i18n="continueLearning">
+
                     متابعة التعلم
+
                 </h2>
 
                 <span
                     class="dashboard-section-note"
-                    data-dashboard-i18n="lastActivity">
-                    آخر نشاط
+                    data-dashboard-i18n="learningStatus">
+
+                    حالة التعلم
+
                 </span>
 
             </div>
@@ -1497,17 +1540,21 @@
                 <div class="continue-top">
 
                     <div class="continue-icon">
-                        ∑
+                        →
                     </div>
 
                     <div class="continue-info">
 
-                        <h3 data-dashboard-i18n="mathematics">
-                            الرياضيات
+                        <h3 data-dashboard-i18n="learningSpace">
+                            مساحة التعلم
                         </h3>
 
-                        <p id="courseLevel">
+                        <p
+                            id="courseLevel"
+                            data-dashboard-i18n="chooseLevel">
+
                             اختر مستواك للبدء
+
                         </p>
 
                     </div>
@@ -1545,9 +1592,9 @@
                 <button
                     class="btn btn-primary continue-button"
                     onclick="startLearning()"
-                    data-dashboard-i18n="startLearning">
+                    data-dashboard-i18n="openLibrary">
 
-                    ابدأ التعلم
+                    الانتقال إلى المكتبة
 
                 </button>
 
@@ -1556,7 +1603,9 @@
         </section>
 
 
-        <!-- LEVEL -->
+        <!-- =================================================
+             LEVEL
+             ================================================= -->
 
         <section class="dashboard-section">
 
@@ -1565,7 +1614,9 @@
                 <h2
                     class="dashboard-section-title"
                     data-dashboard-i18n="yourLevel">
+
                     مستواك الدراسي
+
                 </h2>
 
             </div>
@@ -1575,8 +1626,8 @@
 
                 <div class="level-content">
 
-                    <div class="level-icon mono-icon">
-                        🎓
+                    <div class="level-icon">
+                        LV
                     </div>
 
                     <div>
@@ -1612,7 +1663,10 @@
         </section>
 
 
-        <!-- QUICK ACCESS -->
+        <!-- =================================================
+             QUICK ACCESS
+             Settings + Account intentionally removed
+             ================================================= -->
 
         <section class="dashboard-section">
 
@@ -1631,13 +1685,15 @@
 
             <div class="quick-grid">
 
+                <!-- Library -->
+
                 <button
                     class="quick-card"
                     onclick="openLibrary()"
                     type="button">
 
                     <span class="quick-icon">
-                        📚
+                        LIB
                     </span>
 
                     <h3 data-dashboard-i18n="library">
@@ -1645,11 +1701,13 @@
                     </h3>
 
                     <p data-dashboard-i18n="libraryDescription">
-                        دروسي ومحتواي
+                        مساحة الدروس والمحتوى
                     </p>
 
                 </button>
 
+
+                <!-- Forum -->
 
                 <button
                     class="quick-card"
@@ -1657,7 +1715,7 @@
                     type="button">
 
                     <span class="quick-icon">
-                        💬
+                        FOR
                     </span>
 
                     <h3 data-dashboard-i18n="forum">
@@ -1671,13 +1729,15 @@
                 </button>
 
 
+                <!-- Challenge -->
+
                 <button
                     class="quick-card"
                     onclick="openChallenge()"
                     type="button">
 
                     <span class="quick-icon">
-                        🏆
+                        CH
                     </span>
 
                     <h3 data-dashboard-i18n="weeklyChallenge">
@@ -1691,13 +1751,15 @@
                 </button>
 
 
+                <!-- Ranking -->
+
                 <button
                     class="quick-card"
                     onclick="showComingSoon('ranking')"
                     type="button">
 
                     <span class="quick-icon">
-                        📊
+                        R
                     </span>
 
                     <h3 data-dashboard-i18n="ranking">
@@ -1711,13 +1773,15 @@
                 </button>
 
 
+                <!-- Badges -->
+
                 <button
                     class="quick-card"
                     onclick="showComingSoon('badges')"
                     type="button">
 
                     <span class="quick-icon">
-                        🥇
+                        B
                     </span>
 
                     <h3 data-dashboard-i18n="badges">
@@ -1731,13 +1795,15 @@
                 </button>
 
 
+                <!-- Subscriptions -->
+
                 <button
                     class="quick-card"
                     onclick="showComingSoon('subscriptions')"
                     type="button">
 
                     <span class="quick-icon">
-                        💳
+                        SUB
                     </span>
 
                     <h3 data-dashboard-i18n="subscriptions">
@@ -1750,52 +1816,14 @@
 
                 </button>
 
-
-                <button
-                    class="quick-card"
-                    onclick="openSettings()"
-                    type="button">
-
-                    <span class="quick-icon">
-                        ⚙︎
-                    </span>
-
-                    <h3 data-dashboard-i18n="settings">
-                        الإعدادات
-                    </h3>
-
-                    <p data-dashboard-i18n="settingsDescription">
-                        تخصيص حسابك
-                    </p>
-
-                </button>
-
-
-                <button
-                    class="quick-card"
-                    onclick="openAccount()"
-                    type="button">
-
-                    <span class="quick-icon">
-                        👤
-                    </span>
-
-                    <h3 data-dashboard-i18n="myAccount">
-                        حسابي
-                    </h3>
-
-                    <p data-dashboard-i18n="accountDescription">
-                        الملف الشخصي
-                    </p>
-
-                </button>
-
             </div>
 
         </section>
 
 
-        <!-- AFKRASH AI -->
+        <!-- =================================================
+             AFKRASH AI
+             ================================================= -->
 
         <section class="dashboard-section">
 
@@ -1829,14 +1857,8 @@
                 <p data-dashboard-i18n="aiDescription">
 
                     شخصية تعليمية ذكية سترافقك في رحلتك
-                    وتساعدك على فهم الرياضيات بطريقة واضحة
+                    وتساعدك على التعلم والفهم بطريقة واضحة
                     ومنظمة.
-
-                    <br><br>
-
-                    Afkrash AI هو جزء أساسي من تجربة
-                    EduNova AI، وسيظهر لاحقًا في الدروس
-                    والفيديوهات التعليمية.
 
                 </p>
 
@@ -1859,8 +1881,7 @@
 
 
 <!-- =====================================================
-     MOBILE NAVIGATION
-     مخفي بالكامل
+     HIDDEN BOTTOM NAV
      ===================================================== -->
 
 <nav
@@ -1868,19 +1889,19 @@
     aria-hidden="true">
 
     <button type="button" onclick="goDashboard()">
-        🏠 الرئيسية
+        الرئيسية
     </button>
 
     <button type="button" onclick="openForum()">
-        💬 المنتدى
+        المنتدى
     </button>
 
     <button type="button" onclick="showComingSoon('afkrash')">
-        🤖 Afkrash AI
+        Afkrash AI
     </button>
 
     <button type="button" onclick="openSettings()">
-        ⚙︎ الإعدادات
+        الإعدادات
     </button>
 
 </nav>
@@ -1908,28 +1929,32 @@
             teacherSubtitle:
                 "مدرسك الذكي • رفيق رحلتك التعليمية",
 
-            points: "النقاط",
+            points:
+                "النقاط",
 
-            streak: "أيام متتالية",
+            streak:
+                "أيام متتالية",
 
-            badges: "الشارات",
+            badges:
+                "الشارات",
 
-            progress: "التقدم",
+            progress:
+                "التقدم",
 
             continueLearning:
                 "متابعة التعلم",
 
-            lastActivity:
-                "آخر نشاط",
+            learningStatus:
+                "حالة التعلم",
 
-            mathematics:
-                "الرياضيات",
+            learningSpace:
+                "مساحة التعلم",
 
             chooseLevel:
                 "اختر مستواك للبدء",
 
-            startLearning:
-                "ابدأ التعلم",
+            openLibrary:
+                "الانتقال إلى المكتبة",
 
             yourLevel:
                 "مستواك الدراسي",
@@ -1950,7 +1975,7 @@
                 "مكتبتي",
 
             libraryDescription:
-                "دروسي ومحتواي",
+                "مساحة الدروس والمحتوى",
 
             forum:
                 "المنتدى",
@@ -1982,998 +2007,11 @@
             settings:
                 "الإعدادات",
 
-            settingsDescription:
-                "تخصيص حسابك",
-
             myAccount:
                 "حسابي",
-
-            accountDescription:
-                "الملف الشخصي",
 
             aiSubtitle:
                 "مدرسك الذكي في EduNova AI",
 
             aiDescription:
-                "شخصية تعليمية ذكية سترافقك في رحلتك وتساعدك على فهم الرياضيات بطريقة واضحة ومنظمة.<br><br>Afkrash AI هو جزء أساسي من تجربة EduNova AI، وسيظهر لاحقًا في الدروس والفيديوهات التعليمية.",
-
-            comingSoonLessons:
-                "قريبًا معك في الدروس",
-
-            home:
-                "الرئيسية",
-
-            notifications:
-                "الإشعارات"
-        },
-
-
-        fr: {
-
-            heroDescription:
-                "Continue ton parcours éducatif étape par étape et apprends avec Afkrash AI — ton professeur intelligent dans EduNova AI.",
-
-            teacherSubtitle:
-                "Ton professeur intelligent • Ton compagnon d'apprentissage",
-
-            points:
-                "Points",
-
-            streak:
-                "Jours consécutifs",
-
-            badges:
-                "Badges",
-
-            progress:
-                "Progression",
-
-            continueLearning:
-                "Continuer l'apprentissage",
-
-            lastActivity:
-                "Dernière activité",
-
-            mathematics:
-                "Mathématiques",
-
-            chooseLevel:
-                "Choisis ton niveau pour commencer",
-
-            startLearning:
-                "Commencer à apprendre",
-
-            yourLevel:
-                "Ton niveau scolaire",
-
-            noLevel:
-                "Aucun niveau sélectionné",
-
-            selectedLevelDescription:
-                "Niveau sélectionné pour ton compte",
-
-            changeLevel:
-                "Changer de niveau",
-
-            quickAccess:
-                "Accès rapide",
-
-            library:
-                "Ma bibliothèque",
-
-            libraryDescription:
-                "Mes cours et contenus",
-
-            forum:
-                "Forum",
-
-            forumDescription:
-                "Questions et discussions",
-
-            weeklyChallenge:
-                "Défi hebdomadaire",
-
-            challengeDescription:
-                "Entraîne-toi et teste tes connaissances",
-
-            ranking:
-                "Classement",
-
-            rankingDescription:
-                "Meilleurs étudiants",
-
-            badgesDescription:
-                "Tes réalisations",
-
-            subscriptions:
-                "Abonnements",
-
-            subscriptionsDescription:
-                "Plans éducatifs",
-
-            settings:
-                "Paramètres",
-
-            settingsDescription:
-                "Personnaliser ton compte",
-
-            myAccount:
-                "Mon compte",
-
-            accountDescription:
-                "Profil personnel",
-
-            aiSubtitle:
-                "Ton professeur intelligent dans EduNova AI",
-
-            aiDescription:
-                "Une personnalité éducative intelligente qui t'accompagnera dans ton parcours et t'aidera à comprendre les mathématiques de manière claire et organisée.<br><br>Afkrash AI est une partie essentielle de l'expérience EduNova AI et apparaîtra prochainement dans les cours et les vidéos éducatives.",
-
-            comingSoonLessons:
-                "Bientôt dans tes cours",
-
-            home:
-                "Accueil",
-
-            notifications:
-                "Notifications"
-        }
-
-    };
-
-
-    /* ==================================================
-       LANGUAGE
-       ================================================== */
-
-    function getDashboardLanguage() {
-
-        if (
-            typeof getSiteLanguage ===
-            "function"
-        ) {
-            return getSiteLanguage();
-        }
-
-        return (
-            localStorage.getItem(
-                "site_language"
-            ) || "ar"
-        );
-    }
-
-
-    function translateDashboardPage() {
-
-        const lang =
-            getDashboardLanguage();
-
-        const translations =
-            DASHBOARD_TRANSLATIONS[lang] ||
-            DASHBOARD_TRANSLATIONS.ar;
-
-
-        document.documentElement.lang =
-            lang === "fr"
-                ? "fr"
-                : "ar";
-
-
-        document.documentElement.dir =
-            lang === "fr"
-                ? "ltr"
-                : "rtl";
-
-
-        document
-            .querySelectorAll(
-                "[data-dashboard-i18n]"
-            )
-            .forEach(element => {
-
-                const key =
-                    element.getAttribute(
-                        "data-dashboard-i18n"
-                    );
-
-                if (
-                    translations[key] !==
-                    undefined
-                ) {
-
-                    element.innerHTML =
-                        translations[key];
-                }
-
-            });
-
-
-        document
-            .querySelectorAll(
-                "[data-dashboard-label]"
-            )
-            .forEach(element => {
-
-                const key =
-                    element.getAttribute(
-                        "data-dashboard-label"
-                    );
-
-                if (
-                    translations[key] !==
-                    undefined
-                ) {
-
-                    element.textContent =
-                        translations[key];
-                }
-
-            });
-
-
-        updateDynamicDashboardTexts();
-
-        updateDashboardAriaLabels();
-    }
-
-
-    function updateDynamicDashboardTexts() {
-
-        const lang =
-            getDashboardLanguage();
-
-        const translations =
-            DASHBOARD_TRANSLATIONS[lang] ||
-            DASHBOARD_TRANSLATIONS.ar;
-
-
-        const level =
-            localStorage.getItem(
-                "student_level"
-            );
-
-
-        const courseLevel =
-            document.getElementById(
-                "courseLevel"
-            );
-
-
-        const selectedLevel =
-            document.getElementById(
-                "selectedLevel"
-            );
-
-
-        if (level) {
-
-            if (selectedLevel) {
-
-                selectedLevel.textContent =
-                    level;
-            }
-
-
-            if (courseLevel) {
-
-                courseLevel.textContent =
-                    lang === "fr"
-                        ? "Niveau " + level
-                        : "مستوى " + level;
-            }
-
-        } else {
-
-            if (selectedLevel) {
-
-                selectedLevel.textContent =
-                    translations.noLevel;
-            }
-
-
-            if (courseLevel) {
-
-                courseLevel.textContent =
-                    translations.chooseLevel;
-            }
-        }
-
-
-        updateWelcomeName();
-    }
-
-
-    function updateWelcomeName() {
-
-        const welcome =
-            document.getElementById(
-                "welcomeName"
-            );
-
-
-        if (!welcome) {
-            return;
-        }
-
-
-        let name =
-            localStorage.getItem(
-                "dashboard_user_name"
-            );
-
-
-        if (!name) {
-
-            const current =
-                welcome.getAttribute(
-                    "data-user-name"
-                );
-
-
-            if (current) {
-                name = current;
-            }
-        }
-
-
-        if (!name) {
-
-            welcome.textContent =
-                getDashboardLanguage() === "fr"
-                    ? "Bienvenue 👋"
-                    : "مرحبًا بك 👋";
-
-            return;
-        }
-
-
-        welcome.textContent =
-            getDashboardLanguage() === "fr"
-                ? "Bienvenue " + name + " 👋"
-                : "مرحبًا " + name + " 👋";
-    }
-
-
-    function updateDashboardAriaLabels() {
-
-        const lang =
-            getDashboardLanguage();
-
-
-        const labels = {
-
-            home:
-                lang === "fr"
-                    ? "Accueil"
-                    : "الصفحة الرئيسية",
-
-            notifications:
-                lang === "fr"
-                    ? "Notifications"
-                    : "الإشعارات",
-
-            account:
-                lang === "fr"
-                    ? "Compte"
-                    : "الحساب",
-
-            settings:
-                lang === "fr"
-                    ? "Paramètres"
-                    : "الإعدادات"
-        };
-
-
-        document
-            .querySelectorAll(
-                "[data-dashboard-aria]"
-            )
-            .forEach(element => {
-
-                const key =
-                    element.getAttribute(
-                        "data-dashboard-aria"
-                    );
-
-
-                if (labels[key]) {
-
-                    element.setAttribute(
-                        "aria-label",
-                        labels[key]
-                    );
-                }
-
-            });
-    }
-
-
-    /* ==================================================
-       SUPABASE
-       ================================================== */
-
-    const SUPABASE_URL =
-        "https://qkzdlxqledsznhbifaxy.supabase.co";
-
-
-    const SUPABASE_KEY =
-        "sb_publishable_ZdpHXwLlhpbXztsTXpAFTg_TgOji91v";
-
-
-    const supabaseClient =
-        supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_KEY
-        );
-
-
-    /* ==================================================
-       AUTH
-       ================================================== */
-
-    async function checkAuth() {
-
-        const { data } =
-            await supabaseClient.auth.getSession();
-
-
-        if (!data.session) {
-
-            window.location.href =
-                "login.html";
-
-            return;
-        }
-
-
-        const user =
-            data.session.user;
-
-
-        let name =
-            user.user_metadata?.full_name ||
-            user.user_metadata?.name ||
-            user.user_metadata?.display_name;
-
-
-        if (
-            !name &&
-            user.email
-        ) {
-
-            name =
-                user.email.split("@")[0];
-        }
-
-
-        const welcome =
-            document.getElementById(
-                "welcomeName"
-            );
-
-
-        if (
-            name &&
-            welcome
-        ) {
-
-            welcome.setAttribute(
-                "data-user-name",
-                name
-            );
-
-
-            localStorage.setItem(
-                "dashboard_user_name",
-                name
-            );
-        }
-
-
-        loadSelectedLevel();
-
-        loadProgress();
-
-        loadPoints();
-
-        translateDashboardPage();
-    }
-
-
-    /* ==================================================
-       LEVEL
-       ================================================== */
-
-    function loadSelectedLevel() {
-
-        const level =
-            localStorage.getItem(
-                "student_level"
-            );
-
-
-        const selected =
-            document.getElementById(
-                "selectedLevel"
-            );
-
-
-        const courseLevel =
-            document.getElementById(
-                "courseLevel"
-            );
-
-
-        if (!level) {
-
-            updateDynamicDashboardTexts();
-
-            return;
-        }
-
-
-        if (selected) {
-
-            selected.textContent =
-                level;
-        }
-
-
-        if (courseLevel) {
-
-            courseLevel.textContent =
-                getDashboardLanguage() === "fr"
-                    ? "Niveau " + level
-                    : "مستوى " + level;
-        }
-    }
-
-
-    function changeLevel() {
-
-        window.location.href =
-            "levels.html";
-    }
-
-
-    /* ==================================================
-       PROGRESS
-       ================================================== */
-
-    function loadProgress() {
-
-        let completed = 0;
-
-
-        if (
-            typeof getLearningProgress ===
-            "function"
-        ) {
-
-            const progressData =
-                getLearningProgress();
-
-
-            if (
-                progressData &&
-                typeof progressData.completed ===
-                "number"
-            ) {
-
-                completed =
-                    progressData.completed;
-
-            } else if (
-                progressData &&
-                typeof progressData.completedLessons ===
-                "number"
-            ) {
-
-                completed =
-                    progressData.completedLessons;
-            }
-        }
-
-
-        if (completed === 0) {
-
-            completed =
-                parseInt(
-                    localStorage.getItem(
-                        "completed_lessons"
-                    ) || "0",
-                    10
-                );
-        }
-
-
-        const total = 20;
-
-
-        let progress =
-            Math.round(
-                (completed / total) * 100
-            );
-
-
-        progress =
-            Math.max(
-                0,
-                Math.min(
-                    100,
-                    progress
-                )
-            );
-
-
-        const courseProgress =
-            document.getElementById(
-                "courseProgress"
-            );
-
-
-        const progressValue =
-            document.getElementById(
-                "progressValue"
-            );
-
-
-        const progressBar =
-            document.getElementById(
-                "courseProgressBar"
-            );
-
-
-        if (courseProgress) {
-
-            courseProgress.textContent =
-                progress + "%";
-        }
-
-
-        if (progressValue) {
-
-            progressValue.textContent =
-                progress + "%";
-        }
-
-
-        if (progressBar) {
-
-            progressBar.style.width =
-                progress + "%";
-        }
-    }
-
-
-    /* ==================================================
-       POINTS
-       ================================================== */
-
-    function loadPoints() {
-
-        let points = 0;
-
-
-        if (
-            typeof getStudentPoints ===
-            "function"
-        ) {
-
-            points =
-                parseInt(
-                    getStudentPoints() ||
-                    "0",
-                    10
-                );
-
-        } else {
-
-            points =
-                parseInt(
-                    localStorage.getItem(
-                        "student_points"
-                    ) || "0",
-                    10
-                );
-        }
-
-
-        const pointsElement =
-            document.getElementById(
-                "pointsValue"
-            );
-
-
-        if (pointsElement) {
-
-            pointsElement.textContent =
-                points;
-        }
-    }
-
-
-    /* ==================================================
-       NAVIGATION
-       ================================================== */
-
-    function goHome() {
-
-        window.location.href =
-            "index.html";
-    }
-
-
-    function goDashboard() {
-
-        window.location.href =
-            "dashboard.html";
-    }
-
-
-    function openAccount() {
-
-        window.location.href =
-            "account.html";
-    }
-
-
-    function openLibrary() {
-
-        window.location.href =
-            "library.html";
-    }
-
-
-    function openForum() {
-
-        window.location.href =
-            "forum.html";
-    }
-
-
-    function openChallenge() {
-
-        window.location.href =
-            "challenge.html";
-    }
-
-
-    function openSettings() {
-
-        window.location.href =
-            "settings.html";
-    }
-
-
-    /* ==================================================
-       LEARNING
-       ================================================== */
-
-    function startLearning() {
-
-        const level =
-            localStorage.getItem(
-                "student_level"
-            );
-
-
-        if (!level) {
-
-            window.location.href =
-                "levels.html";
-
-            return;
-        }
-
-
-        window.location.href =
-            "library.html";
-    }
-
-
-    /* ==================================================
-       NOTIFICATIONS
-       ================================================== */
-
-    function showNotifications() {
-
-        const lang =
-            getDashboardLanguage();
-
-
-        alert(
-
-            lang === "fr"
-
-                ? "Aucune nouvelle notification pour le moment 🔔"
-
-                : "لا توجد إشعارات جديدة حاليًا 🔔"
-
-        );
-    }
-
-
-    /* ==================================================
-       TEMPORARY FEATURES
-       ================================================== */
-
-    function showComingSoon(feature) {
-
-        const lang =
-            getDashboardLanguage();
-
-
-        const names = {
-
-            ar: {
-
-                ranking:
-                    "الترتيب",
-
-                badges:
-                    "الشارات",
-
-                subscriptions:
-                    "الاشتراكات",
-
-                afkrash:
-                    "Afkrash AI"
-            },
-
-
-            fr: {
-
-                ranking:
-                    "Classement",
-
-                badges:
-                    "Badges",
-
-                subscriptions:
-                    "Abonnements",
-
-                afkrash:
-                    "Afkrash AI"
-            }
-        };
-
-
-        const featureName =
-            names[lang]?.[feature] ||
-            feature;
-
-
-        alert(
-
-            lang === "fr"
-
-                ? featureName +
-                  " sera disponible dans une prochaine étape du développement de EduNova AI."
-
-                : featureName +
-                  " ستتوفر في مرحلة لاحقة من تطوير EduNova AI."
-
-        );
-    }
-
-
-    /* ==================================================
-       EVENTS
-       ================================================== */
-
-    window.addEventListener(
-        "languageChanged",
-        translateDashboardPage
-    );
-
-
-    window.addEventListener(
-        "languagechange",
-        translateDashboardPage
-    );
-
-
-    window.addEventListener(
-        "themeChanged",
-        function() {
-
-            translateDashboardPage();
-
-        }
-    );
-
-
-    window.addEventListener(
-        "storage",
-        function(event) {
-
-            if (
-                event.key ===
-                "site_language"
-            ) {
-
-                translateDashboardPage();
-            }
-
-
-            if (
-                event.key ===
-                "student_level"
-            ) {
-
-                loadSelectedLevel();
-            }
-
-
-            if (
-                event.key ===
-                "student_points"
-            ) {
-
-                loadPoints();
-            }
-
-
-            if (
-                event.key ===
-                "completed_lessons" ||
-
-                (
-                    event.key &&
-                    event.key.endsWith(
-                        "_completed"
-                    )
-                )
-            ) {
-
-                loadProgress();
-            }
-
-        }
-    );
-
-
-    /* ==================================================
-       START
-       ================================================== */
-
-    document.addEventListener(
-        "DOMContentLoaded",
-        function() {
-
-            if (
-                typeof initializeGlobalSettings ===
-                "function"
-            ) {
-
-                initializeGlobalSettings();
-            }
-
-
-            if (
-                typeof getSiteTheme ===
-                "function" &&
-
-                typeof applySiteTheme ===
-                "function"
-            ) {
-
-                applySiteTheme(
-                    getSiteTheme()
-                );
-            }
-
-
-            translateDashboardPage();
-
-
-            checkAuth();
-
-        }
-    );
-
-</script>
-
-</body>
-    </html>
+                "شخصية تعليمية ذكية ست
