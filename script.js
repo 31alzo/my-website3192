@@ -1,16 +1,13 @@
 /* =========================================================
-   EduNova AI
-   GLOBAL JAVASCRIPT
-   Central Platform System
-   Navigation + Storage + Theme + Language
-   Education Structure + Progress + Video Access
+   EduNova AI — Global Platform Script
+   Part 1 / 3
    ========================================================= */
 
 "use strict";
 
 /* =========================================================
-1. GLOBAL SETTINGS
-========================================================= */
+   GLOBAL SETTINGS
+   ========================================================= */
 
 const GLOBAL_THEME_KEY = "site_theme";
 const GLOBAL_LANGUAGE_KEY = "site_language";
@@ -19,17 +16,15 @@ const DEFAULT_THEME = "light";
 const DEFAULT_LANGUAGE = "ar";
 
 /* =========================================================
-2. PLATFORM STORAGE KEYS
-========================================================= */
+   PLATFORM STORAGE KEYS
+   ========================================================= */
 
 const PLATFORM_KEYS = {
-
     studentLevel: "student_level",
     bacBranch: "bac_branch",
 
     selectedSubject: "selected_subject",
     selectedSubjectType: "selected_subject_type",
-
     selectedChapter: "selected_chapter",
     selectedVideo: "selected_video",
 
@@ -37,267 +32,138 @@ const PLATFORM_KEYS = {
     lastLearningPosition: "last_learning_position",
 
     studentPoints: "student_points",
-
     completedLessons: "completed_lessons",
 
     platformSettings: "platform_settings"
 };
 
 /* =========================================================
-3. PLATFORM CONSTANTS
-========================================================= */
+   PLATFORM LIMITS
+   ========================================================= */
 
 const PLATFORM_LIMITS = {
-
     maxVideosPerChapter: 20,
-
     firstFreeVideoNumber: 1,
-
     minimumVideoNumber: 1
 };
 
 /* =========================================================
-4. OFFICIAL EDUCATIONAL STRUCTURE
-
-المصدر المركزي للهيكل الدراسي.
-
-المسار:
-
-الشهادة
-    ↓
-الشعبة عند الحاجة
-    ↓
-المادة
-    ↓
-الفصل
-    ↓
-الفيديو
-
-لا تضع الصفحات الأخرى تعريفًا مختلفًا للمواد.
-========================================================= */
+   OFFICIAL EDUCATION STRUCTURE
+   ========================================================= */
 
 const EDU_STRUCTURE = {
-
     concours: {
-
         id: "concours",
-
         type: "certificate",
-
-        title: {
-            ar: "كونكور",
-            fr: "Concours"
-        },
-
-        subtitle: {
-            ar: "شهادة ختم الدروس الابتدائية - 6AF",
-            fr: "Certificat de fin des études primaires - 6AF"
-        },
+        titleKey: "level_concours",
+        subtitleKey: "level_concours_subtitle",
 
         subjects: [
-
             {
                 id: "mathematics",
-                type: "mathematics",
-                title: {
-                    ar: "الرياضيات",
-                    fr: "Mathématiques"
-                }
+                titleKey: "subject_mathematics",
+                icon: "∑"
             },
-
             {
                 id: "arabic",
-                type: "arabic",
-                title: {
-                    ar: "العربية",
-                    fr: "Arabe"
-                }
+                titleKey: "subject_arabic",
+                icon: "ع"
             },
-
             {
                 id: "french",
-                type: "french",
-                title: {
-                    ar: "الفرنسية",
-                    fr: "Français"
-                }
+                titleKey: "subject_french",
+                icon: "Fr"
             },
-
             {
                 id: "natural_sciences",
-                type: "natural_sciences",
-                title: {
-                    ar: "العلوم الطبيعية",
-                    fr: "Sciences naturelles"
-                }
+                titleKey: "subject_natural_sciences",
+                icon: "⌬"
             }
         ]
     },
 
     brevet: {
-
         id: "brevet",
-
         type: "certificate",
-
-        title: {
-            ar: "بريڤي",
-            fr: "Brevet"
-        },
-
-        subtitle: {
-            ar: "شهادة ختم الدروس الإعدادية - 4ème",
-            fr: "Certificat de fin des études du collège - 4ème"
-        },
+        titleKey: "level_brevet",
+        subtitleKey: "level_brevet_subtitle",
 
         subjects: [
-
             {
                 id: "mathematics",
-                type: "mathematics",
-                title: {
-                    ar: "الرياضيات",
-                    fr: "Mathématiques"
-                }
+                titleKey: "subject_mathematics",
+                icon: "∑"
             },
-
             {
                 id: "physics_chemistry",
-                type: "physics_chemistry",
-                title: {
-                    ar: "الفيزياء والكيمياء",
-                    fr: "Physique et chimie"
-                }
+                titleKey: "subject_physics_chemistry",
+                icon: "⚛"
             },
-
             {
                 id: "natural_sciences",
-                type: "natural_sciences",
-                title: {
-                    ar: "العلوم الطبيعية",
-                    fr: "Sciences naturelles"
-                }
+                titleKey: "subject_natural_sciences",
+                icon: "⌬"
             }
         ]
     },
 
     bac: {
-
         id: "bac",
-
         type: "baccalaureate",
-
-        title: {
-            ar: "باكالوريا",
-            fr: "Baccalauréat"
-        },
+        titleKey: "level_bac",
+        subtitleKey: "level_bac_subtitle",
 
         branches: {
-
             C: {
-
                 id: "C",
-
-                title: {
-                    ar: "شعبة الرياضيات",
-                    fr: "Série C - Mathématiques"
-                },
-
-                shortTitle: {
-                    ar: "باك C",
-                    fr: "Bac C"
-                },
-
+                titleKey: "bac_branch_c",
                 subjects: [
-
                     {
                         id: "mathematics_c",
-                        type: "mathematics_c",
-                        title: {
-                            ar: "الرياضيات",
-                            fr: "Mathématiques"
-                        }
+                        titleKey: "subject_mathematics",
+                        icon: "∑"
                     },
-
                     {
                         id: "sciences",
-                        type: "sciences",
-                        title: {
-                            ar: "العلوم",
-                            fr: "Sciences"
-                        }
+                        titleKey: "subject_sciences",
+                        icon: "⌬"
                     },
-
                     {
                         id: "physics",
-                        type: "physics",
-                        title: {
-                            ar: "الفيزياء",
-                            fr: "Physique"
-                        }
+                        titleKey: "subject_physics",
+                        icon: "⚛"
                     },
-
                     {
                         id: "chemistry",
-                        type: "chemistry",
-                        title: {
-                            ar: "الكيمياء",
-                            fr: "Chimie"
-                        }
+                        titleKey: "subject_chemistry",
+                        icon: "◇"
                     }
                 ]
             },
 
             D: {
-
                 id: "D",
-
-                title: {
-                    ar: "شعبة العلوم الطبيعية",
-                    fr: "Série D - Sciences naturelles"
-                },
-
-                shortTitle: {
-                    ar: "باك D",
-                    fr: "Bac D"
-                },
-
+                titleKey: "bac_branch_d",
                 subjects: [
-
                     {
                         id: "natural_sciences",
-                        type: "natural_sciences",
-                        title: {
-                            ar: "العلوم الطبيعية",
-                            fr: "Sciences naturelles"
-                        }
+                        titleKey: "subject_natural_sciences",
+                        icon: "⌬"
                     },
-
                     {
                         id: "mathematics_d",
-                        type: "mathematics_d",
-                        title: {
-                            ar: "الرياضيات",
-                            fr: "Mathématiques"
-                        }
+                        titleKey: "subject_mathematics",
+                        icon: "∑"
                     },
-
                     {
                         id: "physics",
-                        type: "physics",
-                        title: {
-                            ar: "الفيزياء",
-                            fr: "Physique"
-                        }
+                        titleKey: "subject_physics",
+                        icon: "⚛"
                     },
-
                     {
                         id: "chemistry",
-                        type: "chemistry",
-                        title: {
-                            ar: "الكيمياء",
-                            fr: "Chimie"
-                        }
+                        titleKey: "subject_chemistry",
+                        icon: "◇"
                     }
                 ]
             }
@@ -306,17 +172,15 @@ const EDU_STRUCTURE = {
 };
 
 /* =========================================================
-5. EMPTY CURRICULUM DATA
-
-المحتوى الحقيقي سيضاف لاحقًا أو يأتي من قاعدة البيانات.
-
-نحافظ على بنية واحدة حتى لا تحتاج الصفحات لإعادة البناء.
-========================================================= */
+   CENTRAL CURRICULUM DATA
+   ---------------------------------------------------------
+   Library is the only home of actual study content.
+   These arrays are intentionally ready to receive real
+   chapters later without changing the platform structure.
+   ========================================================= */
 
 const CURRICULUM_DATA = {
-
     concours: {
-
         mathematics: [],
         arabic: [],
         french: [],
@@ -324,16 +188,13 @@ const CURRICULUM_DATA = {
     },
 
     brevet: {
-
         mathematics: [],
         physics_chemistry: [],
         natural_sciences: []
     },
 
     bac: {
-
         C: {
-
             mathematics_c: [],
             sciences: [],
             physics: [],
@@ -341,7 +202,6 @@ const CURRICULUM_DATA = {
         },
 
         D: {
-
             natural_sciences: [],
             mathematics_d: [],
             physics: [],
@@ -351,278 +211,334 @@ const CURRICULUM_DATA = {
 };
 
 /* =========================================================
-6. NAVIGATION
-========================================================= */
+   NAVIGATION
+   ========================================================= */
 
 function goTo(page) {
+    if (!page) return false;
 
-    if (!page) return;
+    const target = String(page).trim();
 
-    window.location.href = page;
+    if (!target) return false;
+
+    window.location.href = target;
+
+    return true;
 }
 
-function goBack(fallback = "index.html") {
-
+function goBack(fallback = "dashboard.html") {
     if (window.history.length > 1) {
-
         window.history.back();
-
-    } else {
-
-        goTo(fallback);
+        return true;
     }
+
+    return goTo(fallback);
 }
 
 /* =========================================================
-7. LOCAL STORAGE
-========================================================= */
+   LOCAL STORAGE HELPERS
+   ========================================================= */
 
 function saveData(key, value) {
-
     try {
-
-        localStorage.setItem(
-            key,
-            JSON.stringify(value)
-        );
-
+        localStorage.setItem(key, JSON.stringify(value));
         return true;
-
     } catch (error) {
-
-        console.error(
-            "خطأ أثناء حفظ البيانات:",
-            error
-        );
-
+        console.error("EduNova saveData error:", error);
         return false;
     }
 }
 
 function getData(key, fallback = null) {
-
     try {
+        const raw = localStorage.getItem(key);
 
-        const value =
-            localStorage.getItem(key);
-
-        if (value === null) {
+        if (raw === null) {
             return fallback;
         }
 
-        return JSON.parse(value);
-
+        return JSON.parse(raw);
     } catch (error) {
-
-        console.error(
-            "خطأ أثناء قراءة البيانات:",
-            error
-        );
-
+        console.error("EduNova getData error:", error);
         return fallback;
     }
 }
 
 function removeData(key) {
-
     try {
-
         localStorage.removeItem(key);
-
         return true;
-
     } catch (error) {
-
-        console.error(
-            "خطأ أثناء حذف البيانات:",
-            error
-        );
-
+        console.error("EduNova removeData error:", error);
         return false;
     }
 }
 
 /* =========================================================
-8. STUDENT LEVEL
-========================================================= */
+   STUDENT LEVEL
+   ========================================================= */
+
+/*
+   Canonical levels:
+   - concours
+   - brevet
+   - bac
+
+   Compatibility:
+   - bac_c
+   - bac_d
+
+   Old dashboard versions may still send bac_c / bac_d.
+   We normalize those values into the official structure:
+   bac + branch C/D.
+*/
+
+function normalizeStudentLevel(level) {
+    const value = String(level || "").trim().toLowerCase();
+
+    if (value === "bac_c") {
+        return "bac";
+    }
+
+    if (value === "bac_d") {
+        return "bac";
+    }
+
+    return value;
+}
+
+function getLegacyBacBranchFromLevel(level) {
+    const value = String(level || "").trim().toLowerCase();
+
+    if (value === "bac_c") {
+        return "C";
+    }
+
+    if (value === "bac_d") {
+        return "D";
+    }
+
+    return "";
+}
 
 function getStudentLevel() {
-
-    return (
-        localStorage.getItem(
-            PLATFORM_KEYS.studentLevel
-        ) || ""
+    const rawLevel = getData(
+        PLATFORM_KEYS.studentLevel,
+        ""
     );
+
+    const normalizedLevel = normalizeStudentLevel(rawLevel);
+
+    /*
+       Keep old saved values compatible with the new
+       canonical architecture.
+    */
+    if (
+        rawLevel !== normalizedLevel &&
+        normalizedLevel === "bac"
+    ) {
+        saveData(
+            PLATFORM_KEYS.studentLevel,
+            normalizedLevel
+        );
+
+        const inferredBranch =
+            getLegacyBacBranchFromLevel(rawLevel);
+
+        if (
+            inferredBranch &&
+            !getBacBranch()
+        ) {
+            saveData(
+                PLATFORM_KEYS.bacBranch,
+                inferredBranch
+            );
+        }
+    }
+
+    return normalizedLevel;
 }
 
 function setStudentLevel(level) {
+    const rawLevel = String(level || "").trim();
 
-    if (!level) return false;
+    const normalizedLevel =
+        normalizeStudentLevel(rawLevel);
 
-    const validLevels = [
-        "concours",
-        "brevet",
-        "bac"
-    ];
+    const inferredBranch =
+        getLegacyBacBranchFromLevel(rawLevel);
 
-    if (!validLevels.includes(level)) {
+    if (!isValidLevel(normalizedLevel)) {
         return false;
     }
 
-    localStorage.setItem(
+    saveData(
         PLATFORM_KEYS.studentLevel,
-        level
+        normalizedLevel
     );
 
     /*
-     * عند تغيير المستوى لا نريد الاحتفاظ
-     * بمادة أو فصل من مستوى آخر.
-     */
+       Changing level means previous learning selection
+       must no longer be trusted.
+    */
     clearSelectedLearningAfterLevelChange();
 
+    /*
+       If the dashboard still sends bac_c / bac_d,
+       preserve the selected branch automatically.
+    */
+    if (
+        normalizedLevel === "bac" &&
+        inferredBranch
+    ) {
+        saveData(
+            PLATFORM_KEYS.bacBranch,
+            inferredBranch
+        );
+    }
+
     window.dispatchEvent(
-        new CustomEvent(
-            "studentLevelChanged",
-            {
-                detail: {
-                    level
-                }
+        new CustomEvent("studentLevelChanged", {
+            detail: {
+                level: normalizedLevel,
+                rawLevel: rawLevel,
+                bacBranch: inferredBranch || ""
             }
-        )
+        })
     );
 
     return true;
 }
 
 /* =========================================================
-9. BAC BRANCH
-========================================================= */
+   BAC BRANCH
+   ========================================================= */
 
 function getBacBranch() {
+    const branch = getData(
+        PLATFORM_KEYS.bacBranch,
+        ""
+    );
 
-    const branch =
-        localStorage.getItem(
-            PLATFORM_KEYS.bacBranch
-        );
+    if (!isValidBacBranch(branch)) {
+        return "";
+    }
 
-    return (
-        branch === "C" ||
-        branch === "D"
-    )
-        ? branch
-        : "";
+    return String(branch).toUpperCase();
 }
 
 function setBacBranch(branch) {
+    const safeBranch =
+        String(branch || "").trim().toUpperCase();
 
-    if (
-        branch !== "C" &&
-        branch !== "D"
-    ) {
+    if (!isValidBacBranch(safeBranch)) {
         return false;
     }
 
-    localStorage.setItem(
+    saveData(
         PLATFORM_KEYS.bacBranch,
-        branch
+        safeBranch
     );
 
-    /*
-     * تغيير الشعبة يعني أن المادة والفصل
-     * السابقين قد يصبحان غير صالحين.
-     */
     clearSelectedLearningAfterBranchChange();
 
     window.dispatchEvent(
-        new CustomEvent(
-            "bacBranchChanged",
-            {
-                detail: {
-                    branch
-                }
+        new CustomEvent("bacBranchChanged", {
+            detail: {
+                branch: safeBranch
             }
-        )
+        })
     );
 
     return true;
 }
 
 /* =========================================================
-10. EDUCATION STRUCTURE HELPERS
-========================================================= */
+   EDUCATION VALIDATION
+   ========================================================= */
 
 function isValidLevel(level) {
+    const safeLevel =
+        normalizeStudentLevel(level);
 
     return [
         "concours",
         "brevet",
         "bac"
-    ].includes(level);
+    ].includes(safeLevel);
 }
 
 function isValidBacBranch(branch) {
+    const safeBranch =
+        String(branch || "").trim().toUpperCase();
 
-    return (
-        branch === "C" ||
-        branch === "D"
-    );
+    return ["C", "D"].includes(safeBranch);
 }
 
 function requiresBacBranch(level = getStudentLevel()) {
-
-    return level === "bac";
+    return normalizeStudentLevel(level) === "bac";
 }
 
-function getLevelDefinition(
-    level = getStudentLevel()
-) {
+function getLevelDefinition(level = getStudentLevel()) {
+    const safeLevel =
+        normalizeStudentLevel(level);
 
-    if (!isValidLevel(level)) {
+    if (!isValidLevel(safeLevel)) {
         return null;
     }
 
-    return EDU_STRUCTURE[level] || null;
+    return EDU_STRUCTURE[safeLevel] || null;
 }
 
 function getBacBranchDefinition(
     branch = getBacBranch()
 ) {
+    const safeBranch =
+        String(branch || "").trim().toUpperCase();
 
-    if (!isValidBacBranch(branch)) {
+    if (!isValidBacBranch(safeBranch)) {
         return null;
     }
 
     return (
-        EDU_STRUCTURE.bac.branches[branch] ||
+        EDU_STRUCTURE.bac.branches[safeBranch] ||
         null
     );
 }
+
+/* =========================================================
+   SUBJECT HELPERS
+   ========================================================= */
 
 function getAvailableSubjects(
     level = getStudentLevel(),
     branch = getBacBranch()
 ) {
+    const safeLevel =
+        normalizeStudentLevel(level);
 
-    if (!isValidLevel(level)) {
+    if (!isValidLevel(safeLevel)) {
         return [];
     }
 
-    if (level === "bac") {
+    if (safeLevel === "bac") {
+        const safeBranch =
+            String(branch || "").trim().toUpperCase();
 
-        const branchDefinition =
-            getBacBranchDefinition(branch);
+        if (!isValidBacBranch(safeBranch)) {
+            return [];
+        }
 
-        return branchDefinition
-            ? branchDefinition.subjects
-            : [];
+        return (
+            EDU_STRUCTURE.bac.branches[
+                safeBranch
+            ]?.subjects || []
+        );
     }
 
-    const definition =
-        getLevelDefinition(level);
-
-    return definition
-        ? definition.subjects || []
-        : [];
+    return (
+        EDU_STRUCTURE[safeLevel]?.subjects || []
+    );
 }
 
 function getSubjectDefinition(
@@ -630,19 +546,17 @@ function getSubjectDefinition(
     level = getStudentLevel(),
     branch = getBacBranch()
 ) {
-
-    if (!subjectId) return null;
+    if (!subjectId) {
+        return null;
+    }
 
     const subjects =
-        getAvailableSubjects(
-            level,
-            branch
-        );
+        getAvailableSubjects(level, branch);
 
     return (
         subjects.find(
             subject =>
-                subject.id === subjectId
+                subject.id === String(subjectId)
         ) || null
     );
 }
@@ -652,7 +566,6 @@ function isValidSubject(
     level = getStudentLevel(),
     branch = getBacBranch()
 ) {
-
     return Boolean(
         getSubjectDefinition(
             subjectId,
@@ -663,25 +576,22 @@ function isValidSubject(
 }
 
 /* =========================================================
-11. SUBJECT SELECTION
-========================================================= */
+   SUBJECT SELECTION
+   ========================================================= */
 
 function getSelectedSubject() {
-
-    return (
-        localStorage.getItem(
-            PLATFORM_KEYS.selectedSubject
-        ) || ""
+    return getData(
+        PLATFORM_KEYS.selectedSubject,
+        ""
     );
 }
 
-function setSelectedSubject(subjectId) {
-
-    const level =
-        getStudentLevel();
-
-    const branch =
-        getBacBranch();
+function setSelectedSubject(
+    subjectId,
+    subjectType = ""
+) {
+    const level = getStudentLevel();
+    const branch = getBacBranch();
 
     if (
         !isValidSubject(
@@ -693,30 +603,22 @@ function setSelectedSubject(subjectId) {
         return false;
     }
 
-    localStorage.setItem(
+    saveData(
         PLATFORM_KEYS.selectedSubject,
-        subjectId
+        String(subjectId)
     );
 
-    const definition =
-        getSubjectDefinition(
-            subjectId,
-            level,
-            branch
-        );
-
-    if (definition && definition.type) {
-
-        localStorage.setItem(
+    if (subjectType) {
+        saveData(
             PLATFORM_KEYS.selectedSubjectType,
-            definition.type
+            String(subjectType)
+        );
+    } else {
+        removeData(
+            PLATFORM_KEYS.selectedSubjectType
         );
     }
 
-    /*
-     * تغيير المادة يعني أن الفصل والفيديو
-     * المختارين سابقًا قد لا يعودان صالحين.
-     */
     removeData(
         PLATFORM_KEYS.selectedChapter
     );
@@ -726,32 +628,25 @@ function setSelectedSubject(subjectId) {
     );
 
     window.dispatchEvent(
-        new CustomEvent(
-            "selectedSubjectChanged",
-            {
-                detail: {
-                    subjectId,
-                    level,
-                    branch
-                }
+        new CustomEvent("subjectChanged", {
+            detail: {
+                subject: String(subjectId),
+                subjectType: String(subjectType || "")
             }
-        )
+        })
     );
 
     return true;
 }
 
 function getSelectedSubjectType() {
-
-    return (
-        localStorage.getItem(
-            PLATFORM_KEYS.selectedSubjectType
-        ) || ""
+    return getData(
+        PLATFORM_KEYS.selectedSubjectType,
+        ""
     );
 }
 
 function clearSelectedSubject() {
-
     removeData(
         PLATFORM_KEYS.selectedSubject
     );
@@ -760,57 +655,6 @@ function clearSelectedSubject() {
         PLATFORM_KEYS.selectedSubjectType
     );
 
-    clearSelectedChapter();
-
-    return true;
-}
-
-/* =========================================================
-12. CHAPTER SELECTION
-========================================================= */
-
-function getSelectedChapter() {
-
-    return getData(
-        PLATFORM_KEYS.selectedChapter,
-        null
-    );
-}
-
-function setSelectedChapter(chapter) {
-
-    if (!chapter) return false;
-
-    const safeChapter =
-        typeof chapter === "object"
-            ? chapter
-            : {
-                id: String(chapter)
-            };
-
-    saveData(
-        PLATFORM_KEYS.selectedChapter,
-        safeChapter
-    );
-
-    removeData(
-        PLATFORM_KEYS.selectedVideo
-    );
-
-    window.dispatchEvent(
-        new CustomEvent(
-            "selectedChapterChanged",
-            {
-                detail: safeChapter
-            }
-        )
-    );
-
-    return true;
-}
-
-function clearSelectedChapter() {
-
     removeData(
         PLATFORM_KEYS.selectedChapter
     );
@@ -823,50 +667,48 @@ function clearSelectedChapter() {
 }
 
 /* =========================================================
-13. VIDEO SELECTION
-========================================================= */
+   CHAPTER SELECTION
+   ========================================================= */
 
-function getSelectedVideo() {
-
+function getSelectedChapter() {
     return getData(
-        PLATFORM_KEYS.selectedVideo,
+        PLATFORM_KEYS.selectedChapter,
         null
     );
 }
 
-function setSelectedVideo(video) {
-
-    if (!video) return false;
-
-    const safeVideo =
-        typeof video === "object"
-            ? video
-            : {
-                number: Number(video)
-            };
+function setSelectedChapter(chapter) {
+    if (
+        chapter === null ||
+        chapter === undefined
+    ) {
+        return false;
+    }
 
     saveData(
-        PLATFORM_KEYS.selectedVideo,
-        safeVideo
+        PLATFORM_KEYS.selectedChapter,
+        chapter
     );
 
-    saveLastLearningPosition(
-        safeVideo
+    removeData(
+        PLATFORM_KEYS.selectedVideo
     );
 
     window.dispatchEvent(
-        new CustomEvent(
-            "selectedVideoChanged",
-            {
-                detail: safeVideo
+        new CustomEvent("chapterChanged", {
+            detail: {
+                chapter
             }
-        )
+        })
     );
 
     return true;
 }
 
-function clearSelectedVideo() {
+function clearSelectedChapter() {
+    removeData(
+        PLATFORM_KEYS.selectedChapter
+    );
 
     removeData(
         PLATFORM_KEYS.selectedVideo
@@ -876,35 +718,72 @@ function clearSelectedVideo() {
 }
 
 /* =========================================================
-14. LEARNING SELECTION STATE
-========================================================= */
+   VIDEO SELECTION
+   ========================================================= */
+
+function getSelectedVideo() {
+    return getData(
+        PLATFORM_KEYS.selectedVideo,
+        null
+    );
+}
+
+function setSelectedVideo(video) {
+    if (
+        video === null ||
+        video === undefined
+    ) {
+        return false;
+    }
+
+    saveData(
+        PLATFORM_KEYS.selectedVideo,
+        video
+    );
+
+    saveLastLearningPosition({
+        level: getStudentLevel(),
+        branch: getBacBranch(),
+        subject: getSelectedSubject(),
+        chapter: getSelectedChapter(),
+        video
+    });
+
+    window.dispatchEvent(
+        new CustomEvent("videoChanged", {
+            detail: {
+                video
+            }
+        })
+    );
+
+    return true;
+}
+
+function clearSelectedVideo() {
+    removeData(
+        PLATFORM_KEYS.selectedVideo
+    );
+
+    return true;
+}
+
+/* =========================================================
+   LEARNING SELECTION STATE
+   ========================================================= */
 
 function getLearningSelection() {
-
     return {
-
-        level:
-            getStudentLevel(),
-
-        bacBranch:
-            getBacBranch(),
-
-        subject:
-            getSelectedSubject(),
-
-        subjectType:
-            getSelectedSubjectType(),
-
-        chapter:
-            getSelectedChapter(),
-
-        video:
-            getSelectedVideo()
+        level: getStudentLevel(),
+        branch: getBacBranch(),
+        subject: getSelectedSubject(),
+        subjectType: getSelectedSubjectType(),
+        chapter: getSelectedChapter(),
+        video: getSelectedVideo()
     };
 }
 
 function clearSelectedLearningAfterLevelChange() {
-
     removeData(
         PLATFORM_KEYS.bacBranch
     );
@@ -924,10 +803,11 @@ function clearSelectedLearningAfterLevelChange() {
     removeData(
         PLATFORM_KEYS.selectedVideo
     );
+
+    return true;
 }
 
 function clearSelectedLearningAfterBranchChange() {
-
     removeData(
         PLATFORM_KEYS.selectedSubject
     );
@@ -943,606 +823,700 @@ function clearSelectedLearningAfterBranchChange() {
     removeData(
         PLATFORM_KEYS.selectedVideo
     );
+
+    return true;
 }
 
 /* =========================================================
-15. CURRICULUM DATA HELPERS
-
-هذه الوظائف ستعمل مع البيانات المحلية الآن
-ومع بيانات قاعدة البيانات لاحقًا.
-========================================================= */
+   CURRICULUM HELPERS
+   ========================================================= */
 
 function getCurriculumContainer(
     level = getStudentLevel(),
     branch = getBacBranch(),
-    subjectId = getSelectedSubject()
+    subject = getSelectedSubject()
 ) {
+    const safeLevel =
+        normalizeStudentLevel(level);
 
-    if (!isValidLevel(level)) {
+    if (!isValidLevel(safeLevel)) {
         return [];
     }
 
-    if (level === "bac") {
+    if (safeLevel === "bac") {
+        const safeBranch =
+            String(branch || "").trim().toUpperCase();
 
-        if (!isValidBacBranch(branch)) {
+        if (!isValidBacBranch(safeBranch)) {
             return [];
         }
 
         return (
-            CURRICULUM_DATA.bac &&
-            CURRICULUM_DATA.bac[branch] &&
-            CURRICULUM_DATA.bac[branch][subjectId]
-        ) || [];
+            CURRICULUM_DATA.bac?.[
+                safeBranch
+            ]?.[subject] || []
+        );
     }
 
     return (
-        CURRICULUM_DATA[level] &&
-        CURRICULUM_DATA[level][subjectId]
-    ) || [];
+        CURRICULUM_DATA?.[
+            safeLevel
+        ]?.[subject] || []
+    );
 }
 
 function getChapters(
     level = getStudentLevel(),
     branch = getBacBranch(),
-    subjectId = getSelectedSubject()
+    subject = getSelectedSubject()
 ) {
+    const chapters =
+        getCurriculumContainer(
+            level,
+            branch,
+            subject
+        );
 
-    return getCurriculumContainer(
-        level,
-        branch,
-        subjectId
-    );
+    if (!Array.isArray(chapters)) {
+        return [];
+    }
+
+    return chapters;
 }
 
 function getChapterById(
     chapterId,
     level = getStudentLevel(),
     branch = getBacBranch(),
-    subjectId = getSelectedSubject()
+    subject = getSelectedSubject()
 ) {
-
-    if (!chapterId) return null;
+    if (
+        chapterId === null ||
+        chapterId === undefined
+    ) {
+        return null;
+    }
 
     const chapters =
         getChapters(
             level,
             branch,
-            subjectId
+            subject
         );
 
     return (
         chapters.find(
             chapter =>
-                String(chapter.id) ===
+                String(chapter?.id) ===
                 String(chapterId)
         ) || null
     );
 }
 
+/* =========================================================
+   VIDEO NORMALIZATION
+   ========================================================= */
+
 function normalizeChapterVideos(
-    chapter
+    videos
 ) {
-
-    if (!chapter) return [];
-
-    const videos =
-        Array.isArray(chapter.videos)
-            ? chapter.videos
-            : [];
+    if (!Array.isArray(videos)) {
+        return [];
+    }
 
     return videos
         .slice(
             0,
             PLATFORM_LIMITS.maxVideosPerChapter
         )
-        .map(
-            (video, index) => {
+        .map((video, index) => {
+            const number =
+                Number(
+                    video?.number ??
+                    index + 1
+                );
 
-                const number =
-                    Number(
-                        video.number ||
-                        index + 1
-                    );
+            const safeNumber =
+                Number.isFinite(number) &&
+                number >=
+                    PLATFORM_LIMITS.minimumVideoNumber
+                    ? number
+                    : index + 1;
 
-                return {
+            return {
+                ...video,
 
-                    ...video,
+                number: safeNumber,
 
-                    number,
+                free:
+                    safeNumber ===
+                    PLATFORM_LIMITS.firstFreeVideoNumber,
 
-                    free:
-                        number ===
-                        PLATFORM_LIMITS
-                            .firstFreeVideoNumber,
-
-                    locked:
-                        number >
-                        PLATFORM_LIMITS
-                            .firstFreeVideoNumber
-                };
-            }
-        );
+                locked:
+                    safeNumber >
+                    PLATFORM_LIMITS.firstFreeVideoNumber
+            };
+        });
 }
 
 function getChapterVideos(
-    chapterId,
-    level = getStudentLevel(),
-    branch = getBacBranch(),
-    subjectId = getSelectedSubject()
+    chapter
 ) {
-
-    const chapter =
-        getChapterById(
-            chapterId,
-            level,
-            branch,
-            subjectId
-        );
-
-    if (!chapter) return [];
+    if (!chapter) {
+        return [];
+    }
 
     return normalizeChapterVideos(
-        chapter
+        chapter.videos
     );
 }
 
 /* =========================================================
-16. VIDEO ACCESS
-========================================================= */
+   VIDEO ACCESS
+   ========================================================= */
 
-function isVideoFree(videoNumber) {
-
-    return Number(videoNumber) ===
-        PLATFORM_LIMITS.firstFreeVideoNumber;
-}
-
-function isVideoLocked(
-    videoNumber,
-    hasAccess = false
-) {
-
-    const number =
-        Number(videoNumber);
-
-    if (!number) return true;
-
-    if (isVideoFree(number)) {
+function isVideoFree(video) {
+    if (!video) {
         return false;
     }
 
-    return !hasAccess;
+    return (
+        Number(video.number) ===
+        PLATFORM_LIMITS.firstFreeVideoNumber
+    );
 }
 
-function getVideoAccessState(
-    videoNumber,
-    hasAccess = false,
-    completed = false
-) {
-
-    const number =
-        Number(videoNumber);
-
-    if (completed) {
-        return "completed";
+function isVideoLocked(video) {
+    if (!video) {
+        return true;
     }
 
-    if (isVideoFree(number)) {
+    return !isVideoFree(video);
+}
+
+function getVideoAccessState(video) {
+    if (!video) {
+        return "unavailable";
+    }
+
+    if (isVideoFree(video)) {
         return "free";
     }
 
-    if (hasAccess) {
-        return "available";
-    }
-
     return "locked";
-}
+}/* =========================================================
+   LEARNING PROGRESS
+   ========================================================= */
 
-/* =========================================================
-17. VIDEO PROGRESS
+function buildLearningProgressKey({
+    level = getStudentLevel(),
+    branch = getBacBranch(),
+    subject = getSelectedSubject(),
+    chapter = null,
+    video = null
+} = {}) {
+    const safeLevel =
+        normalizeStudentLevel(level);
 
-المفتاح الموحد للتقدم:
+    const safeBranch =
+        safeLevel === "bac"
+            ? String(branch || "")
+                .trim()
+                .toUpperCase()
+            : "";
 
-level
-branch
-subject
-chapter
-video
-========================================================= */
+    const subjectId =
+        typeof subject === "object"
+            ? subject?.id || ""
+            : String(subject || "");
 
-function buildLearningProgressKey(
-    level,
-    branch,
-    subjectId,
-    chapterId,
-    videoNumber
-) {
+    const chapterId =
+        typeof chapter === "object"
+            ? chapter?.id || ""
+            : String(chapter || "");
+
+    const videoId =
+        typeof video === "object"
+            ? video?.id ??
+              video?.number ??
+              ""
+            : String(video ?? "");
 
     return [
-        level || "",
-        branch || "",
-        subjectId || "",
-        chapterId || "",
-        Number(videoNumber) || 0
-    ].join(":");
+        safeLevel,
+        safeBranch,
+        subjectId,
+        chapterId,
+        videoId
+    ].join("::");
 }
 
 function getLearningProgressMap() {
-
-    return getData(
-        PLATFORM_KEYS.learningProgress,
-        {}
-    ) || {};
-}
-
-function saveLearningProgressMap(map) {
-
-    return saveData(
-        PLATFORM_KEYS.learningProgress,
-        map || {}
-    );
-}
-
-function isVideoCompleted(
-    level,
-    branch,
-    subjectId,
-    chapterId,
-    videoNumber
-) {
-
-    const key =
-        buildLearningProgressKey(
-            level,
-            branch,
-            subjectId,
-            chapterId,
-            videoNumber
-        );
-
-    const map =
-        getLearningProgressMap();
-
-    return Boolean(
-        map[key] &&
-        map[key].completed === true
-    );
-}
-
-function setVideoProgress(
-    videoData = {}
-) {
-
-    const level =
-        videoData.level ||
-        getStudentLevel();
-
-    const branch =
-        videoData.branch ||
-        getBacBranch();
-
-    const subjectId =
-        videoData.subjectId ||
-        videoData.subject ||
-        getSelectedSubject();
-
-    const chapterId =
-        videoData.chapterId ||
-        videoData.chapter ||
-        "";
-
-    const videoNumber =
-        Number(
-            videoData.videoNumber ||
-            videoData.number ||
-            0
+    const progress =
+        getData(
+            PLATFORM_KEYS.learningProgress,
+            {}
         );
 
     if (
-        !level ||
-        !subjectId ||
-        !chapterId ||
-        !videoNumber
+        !progress ||
+        typeof progress !== "object" ||
+        Array.isArray(progress)
+    ) {
+        return {};
+    }
+
+    return progress;
+}
+
+function saveLearningProgressMap(progress) {
+    if (
+        !progress ||
+        typeof progress !== "object" ||
+        Array.isArray(progress)
     ) {
         return false;
     }
 
-    const map =
-        getLearningProgressMap();
+    return saveData(
+        PLATFORM_KEYS.learningProgress,
+        progress
+    );
+}
 
+function isVideoCompleted({
+    level = getStudentLevel(),
+    branch = getBacBranch(),
+    subject = getSelectedSubject(),
+    chapter = null,
+    video = null
+} = {}) {
     const key =
-        buildLearningProgressKey(
+        buildLearningProgressKey({
             level,
             branch,
-            subjectId,
-            chapterId,
-            videoNumber
-        );
+            subject,
+            chapter,
+            video
+        });
 
-    map[key] = {
+    if (!key) {
+        return false;
+    }
 
-        level,
+    const progress =
+        getLearningProgressMap();
 
-        branch,
+    return Boolean(
+        progress[key]?.completed
+    );
+}
 
-        subjectId,
+function setVideoProgress({
+    level = getStudentLevel(),
+    branch = getBacBranch(),
+    subject = getSelectedSubject(),
+    chapter = null,
+    video = null,
+    progress = 0,
+    completed = false
+} = {}) {
+    const key =
+        buildLearningProgressKey({
+            level,
+            branch,
+            subject,
+            chapter,
+            video
+        });
 
-        chapterId,
+    if (!key) {
+        return false;
+    }
 
-        videoNumber,
+    const progressMap =
+        getLearningProgressMap();
 
-        completed:
-            videoData.completed === true,
-
-        progress:
+    const numericProgress =
+        Math.max(
+            0,
             Math.min(
                 100,
-                Math.max(
-                    0,
-                    Number(
-                        videoData.progress || 0
-                    )
-                )
-            ),
+                Number(progress) || 0
+            )
+        );
 
-        updatedAt:
-            new Date().toISOString()
-    };
-
-    saveLearningProgressMap(map);
-
-    return map[key];
-}
-
-function completeVideo(videoData = {}) {
-
-    return setVideoProgress({
-
-        ...videoData,
-
-        completed: true,
-
-        progress: 100
-    });
-}
-
-/* =========================================================
-18. LAST LEARNING POSITION
-========================================================= */
-
-function saveLastLearningPosition(
-    videoData = {}
-) {
-
-    const position = {
+    progressMap[key] = {
+        progress: numericProgress,
+        completed: Boolean(completed),
+        updatedAt: Date.now(),
 
         level:
-            videoData.level ||
-            getStudentLevel(),
+            normalizeStudentLevel(level),
 
         branch:
-            videoData.branch ||
-            getBacBranch(),
+            normalizeStudentLevel(level) === "bac"
+                ? String(branch || "")
+                    .trim()
+                    .toUpperCase()
+                : "",
 
-        subjectId:
-            videoData.subjectId ||
-            videoData.subject ||
-            getSelectedSubject(),
+        subject:
+            typeof subject === "object"
+                ? subject?.id || ""
+                : String(subject || ""),
 
-        chapterId:
-            videoData.chapterId ||
-            videoData.chapter ||
-            "",
+        chapter:
+            typeof chapter === "object"
+                ? chapter?.id || ""
+                : String(chapter || ""),
 
-        videoNumber:
-            Number(
-                videoData.videoNumber ||
-                videoData.number ||
-                0
-            ),
-
-        updatedAt:
-            new Date().toISOString()
+        video:
+            typeof video === "object"
+                ? video?.id ??
+                  video?.number ??
+                  ""
+                : String(video ?? "")
     };
 
-    return saveData(
-        PLATFORM_KEYS.lastLearningPosition,
-        position
+    saveLearningProgressMap(
+        progressMap
     );
-}
 
-function getLastLearningPosition() {
-
-    return getData(
-        PLATFORM_KEYS.lastLearningPosition,
-        null
-    );
-}
-
-/* =========================================================
-19. LEGACY LESSON COMPATIBILITY
-
-النظام القديم:
-lesson_1_completed
-
-نحافظ عليه حتى لا تتعطل الصفحات الحالية.
-========================================================= */
-
-const TOTAL_LESSONS = 20;
-
-function isLessonCompleted(number) {
-
-    return localStorage.getItem(
-        `lesson_${number}_completed`
-    ) === "true";
-}
-
-function completeLesson(number) {
-
-    if (!number) return false;
-
-    localStorage.setItem(
-        `lesson_${number}_completed`,
-        "true"
+    window.dispatchEvent(
+        new CustomEvent("learningProgressChanged", {
+            detail: {
+                key,
+                progress: progressMap[key]
+            }
+        })
     );
 
     return true;
 }
 
-function getCompletedLessons(
-    total = TOTAL_LESSONS
-) {
-
-    let completed = 0;
-
-    for (
-        let i = 1;
-        i <= total;
-        i++
-    ) {
-
-        if (
-            isLessonCompleted(i)
-        ) {
-            completed++;
-        }
-    }
-
-    return completed;
-}
-
-function getLearningProgress(
-    total = TOTAL_LESSONS
-) {
-
-    if (!total) return 0;
-
-    const completed =
-        getCompletedLessons(total);
-
-    return Math.round(
-        (completed / total) * 100
-    );
+function completeVideo({
+    level = getStudentLevel(),
+    branch = getBacBranch(),
+    subject = getSelectedSubject(),
+    chapter = null,
+    video = null
+} = {}) {
+    return setVideoProgress({
+        level,
+        branch,
+        subject,
+        chapter,
+        video,
+        progress: 100,
+        completed: true
+    });
 }
 
 /* =========================================================
-20. STUDENT POINTS
-========================================================= */
+   LAST LEARNING POSITION
+   ========================================================= */
+
+function saveLastLearningPosition(position = {}) {
+    if (
+        !position ||
+        typeof position !== "object"
+    ) {
+        return false;
+    }
+
+    const normalized = {
+        level:
+            normalizeStudentLevel(
+                position.level ||
+                getStudentLevel()
+            ),
+
+        branch:
+            String(
+                position.branch ||
+                getBacBranch() ||
+                ""
+            )
+                .trim()
+                .toUpperCase(),
+
+        subject:
+            position.subject ||
+            getSelectedSubject() ||
+            "",
+
+        chapter:
+            position.chapter ||
+            getSelectedChapter() ||
+            null,
+
+        video:
+            position.video ||
+            getSelectedVideo() ||
+            null,
+
+        updatedAt: Date.now()
+    };
+
+    return saveData(
+        PLATFORM_KEYS.lastLearningPosition,
+        normalized
+    );
+}
+
+function getLastLearningPosition() {
+    const position =
+        getData(
+            PLATFORM_KEYS.lastLearningPosition,
+            null
+        );
+
+    if (
+        !position ||
+        typeof position !== "object"
+    ) {
+        return null;
+    }
+
+    return position;
+}
+
+/* =========================================================
+   LEGACY LESSON COMPATIBILITY
+   ---------------------------------------------------------
+   Kept temporarily so older pages continue working while
+   the platform is migrated fully to chapter/video progress.
+   ========================================================= */
+
+const TOTAL_LESSONS = 20;
+
+function isLessonCompleted(
+    lessonNumber
+) {
+    const number =
+        Number(lessonNumber);
+
+    if (
+        !Number.isFinite(number) ||
+        number < 1
+    ) {
+        return false;
+    }
+
+    const completed =
+        getData(
+            PLATFORM_KEYS.completedLessons,
+            []
+        );
+
+    if (!Array.isArray(completed)) {
+        return false;
+    }
+
+    return completed.includes(number);
+}
+
+function completeLesson(
+    lessonNumber
+) {
+    const number =
+        Number(lessonNumber);
+
+    if (
+        !Number.isFinite(number) ||
+        number < 1
+    ) {
+        return false;
+    }
+
+    const completed =
+        getData(
+            PLATFORM_KEYS.completedLessons,
+            []
+        );
+
+    const list =
+        Array.isArray(completed)
+            ? completed
+            : [];
+
+    if (!list.includes(number)) {
+        list.push(number);
+    }
+
+    list.sort(
+        (a, b) => a - b
+    );
+
+    saveData(
+        PLATFORM_KEYS.completedLessons,
+        list
+    );
+
+    window.dispatchEvent(
+        new CustomEvent(
+            "lessonCompleted",
+            {
+                detail: {
+                    lessonNumber: number
+                }
+            }
+        )
+    );
+
+    return true;
+}
+
+function getCompletedLessons() {
+    const completed =
+        getData(
+            PLATFORM_KEYS.completedLessons,
+            []
+        );
+
+    return Array.isArray(completed)
+        ? completed
+        : [];
+}
+
+function getLearningProgress() {
+    const completed =
+        getCompletedLessons();
+
+    return {
+        completed,
+        total: TOTAL_LESSONS,
+
+        percentage:
+            TOTAL_LESSONS > 0
+                ? Math.round(
+                    (
+                        completed.length /
+                        TOTAL_LESSONS
+                    ) * 100
+                )
+                : 0
+    };
+}
+
+/* =========================================================
+   STUDENT POINTS
+   ========================================================= */
 
 function getStudentPoints() {
+    const points =
+        Number(
+            getData(
+                PLATFORM_KEYS.studentPoints,
+                0
+            )
+        );
 
-    return Number(
-        localStorage.getItem(
-            PLATFORM_KEYS.studentPoints
-        ) || 0
-    );
+    if (
+        !Number.isFinite(points) ||
+        points < 0
+    ) {
+        return 0;
+    }
+
+    return Math.floor(points);
 }
 
 function setStudentPoints(points) {
+    const numericPoints =
+        Number(points);
 
-    const safePoints =
-        Math.max(
-            0,
-            Number(points) || 0
-        );
+    if (
+        !Number.isFinite(numericPoints) ||
+        numericPoints < 0
+    ) {
+        return false;
+    }
 
-    localStorage.setItem(
+    saveData(
         PLATFORM_KEYS.studentPoints,
-        String(safePoints)
+        Math.floor(numericPoints)
     );
 
-    return safePoints;
+    window.dispatchEvent(
+        new CustomEvent(
+            "studentPointsChanged",
+            {
+                detail: {
+                    points:
+                        Math.floor(
+                            numericPoints
+                        )
+                }
+            }
+        )
+    );
+
+    return true;
 }
 
-function addStudentPoints(points) {
+function addStudentPoints(
+    amount
+) {
+    const numericAmount =
+        Number(amount);
+
+    if (
+        !Number.isFinite(numericAmount)
+    ) {
+        return false;
+    }
 
     const current =
         getStudentPoints();
 
     return setStudentPoints(
-        current +
-        (Number(points) || 0)
+        current + numericAmount
     );
 }
 
 /* =========================================================
-21. GLOBAL THEME
-========================================================= */
+   THEME
+   ========================================================= */
 
 function getSiteTheme() {
-
-    const saved =
+    const stored =
         localStorage.getItem(
             GLOBAL_THEME_KEY
         );
 
-    if (
-        saved === "dark" ||
-        saved === "light"
-    ) {
-        return saved;
-    }
-
-    try {
-
-        const oldSettings =
-            JSON.parse(
-                localStorage.getItem(
-                    PLATFORM_KEYS.platformSettings
-                ) || "null"
-            );
-
-        if (
-            oldSettings &&
-            oldSettings.darkMode === true
-        ) {
-            return "dark";
-        }
-
-    } catch (error) {
-
-        console.warn(
-            "تعذر قراءة إعداد الوضع الليلي القديم"
-        );
-    }
-
-    return DEFAULT_THEME;
+    return stored === "dark"
+        ? "dark"
+        : "light";
 }
 
 function applySiteTheme(
     theme = getSiteTheme()
 ) {
-
     const safeTheme =
         theme === "dark"
             ? "dark"
             : "light";
 
-    const root =
-        document.documentElement;
+    document.documentElement.dataset.theme =
+        safeTheme;
 
-    root.classList.toggle(
-        "dark-mode",
+    document.documentElement.classList.toggle(
+        "dark",
         safeTheme === "dark"
     );
-
-    root.setAttribute(
-        "data-theme",
-        safeTheme
-    );
-
-    root.style.colorScheme =
-        safeTheme;
 
     localStorage.setItem(
         GLOBAL_THEME_KEY,
         safeTheme
     );
 
-    syncLegacySettings({
-        theme: safeTheme
-    });
+    updateThemeControls(
+        safeTheme
+    );
 
-    updateThemeControls();
+    syncLegacySettings();
 
     window.dispatchEvent(
         new CustomEvent(
@@ -1555,210 +1529,147 @@ function applySiteTheme(
         )
     );
 
-    window.dispatchEvent(
-        new CustomEvent(
-            "siteThemeChanged",
-            {
-                detail: {
-                    theme: safeTheme
-                }
-            }
-        )
-    );
-
     return safeTheme;
 }
 
 function toggleDarkMode() {
-
     const current =
         getSiteTheme();
 
-    const next =
+    return applySiteTheme(
         current === "dark"
             ? "light"
-            : "dark";
-
-    applySiteTheme(next);
-
-    return next;
+            : "dark"
+    );
 }
 
-function updateThemeControls() {
-
-    const theme =
-        getSiteTheme();
-
+function updateThemeControls(
+    theme = getSiteTheme()
+) {
     const isDark =
         theme === "dark";
-
-    const checkbox =
-        document.querySelector(
-            "#darkMode"
-        );
-
-    if (checkbox) {
-        checkbox.checked =
-            isDark;
-    }
 
     document
         .querySelectorAll(
             "[data-theme-toggle]"
         )
         .forEach(button => {
-
             button.setAttribute(
                 "aria-pressed",
                 String(isDark)
             );
 
-            button.dataset.theme =
-                theme;
+            button.classList.toggle(
+                "active",
+                isDark
+            );
+        });
+
+    document
+        .querySelectorAll(
+            ".theme-toggle"
+        )
+        .forEach(button => {
+            button.setAttribute(
+                "aria-pressed",
+                String(isDark)
+            );
+        });
+
+    document
+        .querySelectorAll(
+            "#themeToggle"
+        )
+        .forEach(input => {
+            if (
+                input instanceof HTMLInputElement
+            ) {
+                input.checked = isDark;
+            }
         });
 }
 
 /* =========================================================
-22. GLOBAL LANGUAGE
-========================================================= */
+   LANGUAGE
+   ========================================================= */
 
 function getSiteLanguage() {
-
-    const saved =
+    const stored =
         localStorage.getItem(
             GLOBAL_LANGUAGE_KEY
         );
 
-    if (
-        saved === "ar" ||
-        saved === "fr"
-    ) {
-        return saved;
-    }
-
-    try {
-
-        const oldSettings =
-            JSON.parse(
-                localStorage.getItem(
-                    PLATFORM_KEYS.platformSettings
-                ) || "null"
-            );
-
-        if (
-            oldSettings &&
-            (
-                oldSettings.language === "fr" ||
-                oldSettings.language === "ar"
-            )
-        ) {
-            return oldSettings.language;
-        }
-
-    } catch (error) {
-
-        console.warn(
-            "تعذر قراءة إعداد اللغة القديم"
-        );
-    }
-
-    return DEFAULT_LANGUAGE;
+    return stored === "fr"
+        ? "fr"
+        : "ar";
 }
 
-/* =========================================================
-23. TRANSLATIONS
-========================================================= */
-
 const GLOBAL_TRANSLATIONS = {
-
     ar: {
+        nav_home: "الرئيسية",
+        nav_library: "المكتبة",
+        nav_forum: "المنتدى",
+        nav_challenge: "التحدي",
 
-        home: "الرئيسية",
-        dashboard: "لوحة الطالب",
-        levels: "اختيار المستوى",
-        library: "مكتبتي",
-        account: "حسابي",
-        settings: "الإعدادات",
-        forum: "المجتمع",
-        challenge: "التحدي",
-        ranking: "الترتيب",
-        badges: "الشارات",
-        subscriptions: "الاشتراكات",
-        login: "تسجيل الدخول",
-        logout: "تسجيل الخروج",
+        level_concours: "مسابقة 6AF",
+        level_concours_subtitle:
+            "التحضير لمسابقات التعليم",
 
-        back: "رجوع",
-        next: "التالي",
-        previous: "السابق",
-        continue: "متابعة",
-        save: "حفظ",
-        cancel: "إلغاء",
-        close: "إغلاق",
-        search: "بحث",
+        level_brevet: "4ème / Brevet",
+        level_brevet_subtitle:
+            "التحضير لشهادة التعليم الإعدادي",
 
-        site_name: "EduNova AI",
-        ai_teacher: "Afkrash AI",
-        teacher: "Afkrash AI",
+        level_bac: "البكالوريا",
+        level_bac_subtitle:
+            "التحضير لامتحان البكالوريا",
 
-        teacher_description:
-            "مدرسك الذكي في EduNova AI",
+        bac_branch_c:
+            "البكالوريا C",
 
-        mathematics:
+        bac_branch_d:
+            "البكالوريا D",
+
+        subject_mathematics:
             "الرياضيات",
 
-        arabic:
+        subject_mathematics_c:
+            "الرياضيات",
+
+        subject_mathematics_d:
+            "الرياضيات",
+
+        subject_arabic:
             "العربية",
 
-        french_subject:
+        subject_french:
             "الفرنسية",
 
-        physics:
-            "الفيزياء",
-
-        chemistry:
-            "الكيمياء",
-
-        physics_chemistry:
-            "الفيزياء والكيمياء",
-
-        natural_sciences:
+        subject_natural_sciences:
             "العلوم الطبيعية",
 
-        sciences:
+        subject_physics_chemistry:
+            "الفيزياء والكيمياء",
+
+        subject_physics:
+            "الفيزياء",
+
+        subject_chemistry:
+            "الكيمياء",
+
+        subject_sciences:
             "العلوم",
 
         chapter:
-            "فصل",
+            "الفصل",
 
         chapters:
             "الفصول",
 
         video:
-            "فيديو",
+            "الفيديو",
 
         videos:
-            "فيديوهات",
-
-        concours:
-            "كونكور",
-
-        brevet:
-            "بريڤي",
-
-        bac:
-            "باكالوريا",
-
-        bac_c:
-            "باك C",
-
-        bac_d:
-            "باك D",
-
-        bac_c_full:
-            "باكالوريا شعبة الرياضيات",
-
-        bac_d_full:
-            "باكالوريا شعبة العلوم الطبيعية",
+            "الفيديوهات",
 
         free:
             "مجاني",
@@ -1766,190 +1677,155 @@ const GLOBAL_TRANSLATIONS = {
         locked:
             "مقفل",
 
-        available:
-            "متاح",
+        unavailable:
+            "غير متاح",
 
-        completed:
-            "مكتمل",
+        continue_learning:
+            "متابعة التعلم",
 
-        in_progress:
-            "قيد التقدم",
+        start_learning:
+            "ابدأ التعلم",
 
-        subscriber:
-            "للمشتركين",
+        choose_level:
+            "اختر المستوى",
 
-        subscription:
-            "الاشتراك",
+        choose_subject:
+            "اختر المادة",
 
-        first_video_free:
-            "الفيديو الأول مجاني",
+        choose_chapter:
+            "اختر الفصل",
 
-        subscription_required:
-            "هذا الفيديو متاح للمشتركين فقط",
+        no_content:
+            "لا يوجد محتوى متاح حاليًا",
+
+        coming_soon:
+            "هذه الميزة ستكون متاحة قريبًا",
+
+        login_required:
+            "يجب تسجيل الدخول أولًا",
+
+        saved_successfully:
+            "تم الحفظ بنجاح",
+
+        error_occurred:
+            "حدث خطأ، حاول مرة أخرى",
+
+        points:
+            "النقاط",
+
+        lessons:
+            "الدروس",
+
+        badges:
+            "الشارات",
+
+        ranking:
+            "الترتيب",
+
+        subscriptions:
+            "الاشتراكات",
+
+        settings:
+            "الإعدادات",
+
+        account:
+            "الحساب",
+
+        notifications:
+            "الإشعارات",
 
         language:
             "اللغة",
 
-        arabic_language:
-            "العربية",
+        theme:
+            "المظهر",
 
-        french_language:
-            "Français",
+        light:
+            "فاتح",
 
-        dark_mode:
-            "الوضع الداكن",
+        dark:
+            "داكن",
 
-        light_mode:
-            "الوضع الفاتح",
+        back:
+            "رجوع",
 
-        loading:
-            "جارٍ التحميل...",
+        next:
+            "التالي",
 
-        coming_soon:
-            "قريبًا",
+        previous:
+            "السابق",
 
-        no_content:
-            "لا يوجد محتوى حاليًا",
+        completed:
+            "مكتمل",
 
-        no_chapters:
-            "لا توجد فصول مضافة حاليًا",
+        mark_completed:
+            "تحديد كمكتمل",
 
-        no_videos:
-            "لا توجد فيديوهات مضافة حاليًا",
+        watch_video:
+            "مشاهدة الفيديو",
 
-        saved:
-            "تم الحفظ بنجاح",
+        video_locked_message:
+            "هذا الفيديو مقفل حاليًا",
 
-        dark_enabled:
-            "تم تفعيل الوضع الداكن",
+        first_video_free:
+            "الفيديو الأول مجاني",
 
-        dark_disabled:
-            "تم تفعيل الوضع الفاتح",
-
-        language_changed:
-            "تم تغيير اللغة",
-
-        select_level:
-            "اختر المستوى",
-
-        select_branch:
-            "اختر الشعبة",
-
-        select_subject:
-            "اختر المادة",
-
-        learning:
-            "التعلم",
-
-        progress:
-            "التقدم",
-
-        last_activity:
-            "آخر نشاط",
-
-        resume_learning:
-            "متابعة التعلم"
+        max_videos_message:
+            "الحد الأقصى 20 فيديو لكل فصل"
     },
 
     fr: {
+        nav_home: "Accueil",
+        nav_library: "Bibliothèque",
+        nav_forum: "Forum",
+        nav_challenge: "Défi",
 
-        home:
-            "Accueil",
+        level_concours: "Concours 6AF",
+        level_concours_subtitle:
+            "Préparation aux concours scolaires",
 
-        dashboard:
-            "Tableau de bord",
+        level_brevet: "4ème / Brevet",
+        level_brevet_subtitle:
+            "Préparation au Brevet",
 
-        levels:
-            "Choix du niveau",
+        level_bac: "Baccalauréat",
+        level_bac_subtitle:
+            "Préparation au Baccalauréat",
 
-        library:
-            "Ma bibliothèque",
+        bac_branch_c:
+            "Baccalauréat C",
 
-        account:
-            "Mon compte",
+        bac_branch_d:
+            "Baccalauréat D",
 
-        settings:
-            "Paramètres",
-
-        forum:
-            "Communauté",
-
-        challenge:
-            "Défi",
-
-        ranking:
-            "Classement",
-
-        badges:
-            "Badges",
-
-        subscriptions:
-            "Abonnements",
-
-        login:
-            "Connexion",
-
-        logout:
-            "Déconnexion",
-
-        back:
-            "Retour",
-
-        next:
-            "Suivant",
-
-        previous:
-            "Précédent",
-
-        continue:
-            "Continuer",
-
-        save:
-            "Enregistrer",
-
-        cancel:
-            "Annuler",
-
-        close:
-            "Fermer",
-
-        search:
-            "Rechercher",
-
-        site_name:
-            "EduNova AI",
-
-        ai_teacher:
-            "Afkrash AI",
-
-        teacher:
-            "Afkrash AI",
-
-        teacher_description:
-            "Votre professeur intelligent dans EduNova AI",
-
-        mathematics:
+        subject_mathematics:
             "Mathématiques",
 
-        arabic:
+        subject_mathematics_c:
+            "Mathématiques",
+
+        subject_mathematics_d:
+            "Mathématiques",
+
+        subject_arabic:
             "Arabe",
 
-        french_subject:
+        subject_french:
             "Français",
 
-        physics:
-            "Physique",
-
-        chemistry:
-            "Chimie",
-
-        physics_chemistry:
-            "Physique et chimie",
-
-        natural_sciences:
+        subject_natural_sciences:
             "Sciences naturelles",
 
-        sciences:
+        subject_physics_chemistry:
+            "Physique et Chimie",
+
+        subject_physics:
+            "Physique",
+
+        subject_chemistry:
+            "Chimie",
+
+        subject_sciences:
             "Sciences",
 
         chapter:
@@ -1964,163 +1840,156 @@ const GLOBAL_TRANSLATIONS = {
         videos:
             "Vidéos",
 
-        concours:
-            "Concours",
-
-        brevet:
-            "Brevet",
-
-        bac:
-            "Baccalauréat",
-
-        bac_c:
-            "Bac C",
-
-        bac_d:
-            "Bac D",
-
-        bac_c_full:
-            "Baccalauréat - Série C",
-
-        bac_d_full:
-            "Baccalauréat - Série D",
-
         free:
             "Gratuit",
 
         locked:
             "Verrouillé",
 
-        available:
-            "Disponible",
+        unavailable:
+            "Indisponible",
 
-        completed:
-            "Terminé",
+        continue_learning:
+            "Continuer l'apprentissage",
 
-        in_progress:
-            "En cours",
+        start_learning:
+            "Commencer",
 
-        subscriber:
-            "Abonnés",
+        choose_level:
+            "Choisir le niveau",
 
-        subscription:
-            "Abonnement",
+        choose_subject:
+            "Choisir la matière",
 
-        first_video_free:
-            "La première vidéo est gratuite",
+        choose_chapter:
+            "Choisir le chapitre",
 
-        subscription_required:
-            "Cette vidéo est réservée aux abonnés",
+        no_content:
+            "Aucun contenu disponible pour le moment",
+
+        coming_soon:
+            "Cette fonctionnalité sera bientôt disponible",
+
+        login_required:
+            "Veuillez vous connecter d'abord",
+
+        saved_successfully:
+            "Enregistré avec succès",
+
+        error_occurred:
+            "Une erreur est survenue, réessayez",
+
+        points:
+            "Points",
+
+        lessons:
+            "Leçons",
+
+        badges:
+            "Badges",
+
+        ranking:
+            "Classement",
+
+        subscriptions:
+            "Abonnements",
+
+        settings:
+            "Paramètres",
+
+        account:
+            "Compte",
+
+        notifications:
+            "Notifications",
 
         language:
             "Langue",
 
-        arabic_language:
-            "العربية",
+        theme:
+            "Thème",
 
-        french_language:
-            "Français",
+        light:
+            "Clair",
 
-        dark_mode:
-            "Mode sombre",
+        dark:
+            "Sombre",
 
-        light_mode:
-            "Mode clair",
+        back:
+            "Retour",
 
-        loading:
-            "Chargement...",
+        next:
+            "Suivant",
 
-        coming_soon:
-            "Bientôt disponible",
+        previous:
+            "Précédent",
 
-        no_content:
-            "Aucun contenu pour le moment",
+        completed:
+            "Terminé",
 
-        no_chapters:
-            "Aucun chapitre n'a encore été ajouté",
+        mark_completed:
+            "Marquer comme terminé",
 
-        no_videos:
-            "Aucune vidéo n'a encore été ajoutée",
+        watch_video:
+            "Regarder la vidéo",
 
-        saved:
-            "Enregistré avec succès",
+        video_locked_message:
+            "Cette vidéo est actuellement verrouillée",
 
-        dark_enabled:
-            "Mode sombre activé",
+        first_video_free:
+            "La première vidéo est gratuite",
 
-        dark_disabled:
-            "Mode clair activé",
-
-        language_changed:
-            "Langue modifiée",
-
-        select_level:
-            "Choisissez le niveau",
-
-        select_branch:
-            "Choisissez la série",
-
-        select_subject:
-            "Choisissez la matière",
-
-        learning:
-            "Apprentissage",
-
-        progress:
-            "Progression",
-
-        last_activity:
-            "Dernière activité",
-
-        resume_learning:
-            "Continuer l'apprentissage"
+        max_videos_message:
+            "Maximum de 20 vidéos par chapitre"
     }
 };
 
-/* =========================================================
-24. TRANSLATION HELPERS
-========================================================= */
-
-function translateText(key) {
-
+function translateText(
+    key,
+    fallback = ""
+) {
     const language =
         getSiteLanguage();
 
+    const dictionary =
+        GLOBAL_TRANSLATIONS[
+            language
+        ] || GLOBAL_TRANSLATIONS.ar;
+
     return (
-        GLOBAL_TRANSLATIONS[language] &&
-        GLOBAL_TRANSLATIONS[language][key]
-    ) || (
-        GLOBAL_TRANSLATIONS.ar[key]
-    ) || key;
+        dictionary[key] ??
+        fallback ??
+        key
+    );
 }
 
 function applySiteLanguage(
     language = getSiteLanguage()
 ) {
-
     const safeLanguage =
         language === "fr"
             ? "fr"
             : "ar";
 
-    const root =
-        document.documentElement;
+    const direction =
+        safeLanguage === "ar"
+            ? "rtl"
+            : "ltr";
+
+    document.documentElement.lang =
+        safeLanguage;
+
+    document.documentElement.dir =
+        direction;
+
+    document.body?.setAttribute(
+        "dir",
+        direction
+    );
 
     localStorage.setItem(
         GLOBAL_LANGUAGE_KEY,
         safeLanguage
-    );
-
-    root.setAttribute(
-        "lang",
-        safeLanguage
-    );
-
-    root.setAttribute(
-        "dir",
-        safeLanguage === "ar"
-            ? "rtl"
-            : "ltr"
     );
 
     document
@@ -2128,18 +1997,21 @@ function applySiteLanguage(
             "[data-i18n]"
         )
         .forEach(element => {
-
             const key =
-                element.dataset.i18n;
+                element.getAttribute(
+                    "data-i18n"
+                );
+
+            if (!key) return;
 
             const translated =
-                translateText(key);
+                translateText(
+                    key,
+                    element.textContent
+                );
 
-            if (translated) {
-
-                element.textContent =
-                    translated;
-            }
+            element.textContent =
+                translated;
         });
 
     document
@@ -2147,13 +2019,22 @@ function applySiteLanguage(
             "[data-i18n-placeholder]"
         )
         .forEach(element => {
-
             const key =
-                element.dataset
-                    .i18nPlaceholder;
+                element.getAttribute(
+                    "data-i18n-placeholder"
+                );
 
-            element.placeholder =
-                translateText(key);
+            if (!key) return;
+
+            element.setAttribute(
+                "placeholder",
+                translateText(
+                    key,
+                    element.getAttribute(
+                        "placeholder"
+                    ) || ""
+                )
+            );
         });
 
     document
@@ -2161,43 +2042,29 @@ function applySiteLanguage(
             "[data-i18n-title]"
         )
         .forEach(element => {
-
             const key =
-                element.dataset
-                    .i18nTitle;
+                element.getAttribute(
+                    "data-i18n-title"
+                );
 
-            element.title =
-                translateText(key);
-        });
+            if (!key) return;
 
-    document
-        .querySelectorAll(
-            "[data-language]"
-        )
-        .forEach(element => {
-
-            element.classList.toggle(
-                "active",
-                element.dataset.language ===
-                    safeLanguage
+            element.setAttribute(
+                "title",
+                translateText(
+                    key,
+                    element.getAttribute(
+                        "title"
+                    ) || ""
+                )
             );
         });
 
-    const languageSelect =
-        document.querySelector(
-            "#language"
-        );
+    updateLanguageControls(
+        safeLanguage
+    );
 
-    if (languageSelect) {
-
-        languageSelect.value =
-            safeLanguage;
-    }
-
-    syncLegacySettings({
-        language:
-            safeLanguage
-    });
+    syncLegacySettings();
 
     window.dispatchEvent(
         new CustomEvent(
@@ -2226,86 +2093,125 @@ function applySiteLanguage(
     return safeLanguage;
 }
 
-function toggleLanguage() {
+function updateLanguageControls(
+    language = getSiteLanguage()
+) {
+    document
+        .querySelectorAll(
+            "[data-language]"
+        )
+        .forEach(button => {
+            const value =
+                button.getAttribute(
+                    "data-language"
+                );
 
+            const active =
+                value === language;
+
+            button.classList.toggle(
+                "active",
+                active
+            );
+
+            button.setAttribute(
+                "aria-pressed",
+                String(active)
+            );
+        });
+
+    document
+        .querySelectorAll(
+            "[data-lang-toggle]"
+        )
+        .forEach(button => {
+            button.setAttribute(
+                "aria-pressed",
+                "false"
+            );
+        });
+}
+
+function toggleLanguage() {
     const current =
         getSiteLanguage();
 
-    const next =
+    return applySiteLanguage(
         current === "ar"
             ? "fr"
-            : "ar";
-
-    applySiteLanguage(next);
-
-    return next;
+            : "ar"
+    );
 }
 
 /* =========================================================
-25. EDUCATION LABEL HELPERS
-========================================================= */
+   EDUCATION LABEL HELPERS
+   ========================================================= */
 
 function getLevelLabel(
-    level = getStudentLevel(),
-    language = getSiteLanguage()
+    level = getStudentLevel()
 ) {
+    const safeLevel =
+        normalizeStudentLevel(level);
 
     const definition =
-        getLevelDefinition(level);
+        getLevelDefinition(
+            safeLevel
+        );
 
     if (!definition) {
         return "";
     }
 
-    return (
-        definition.title &&
-        definition.title[language]
-    ) || "";
+    return translateText(
+        definition.titleKey,
+        definition.id
+    );
 }
 
 function getLevelSubtitle(
-    level = getStudentLevel(),
-    language = getSiteLanguage()
+    level = getStudentLevel()
 ) {
+    const safeLevel =
+        normalizeStudentLevel(level);
 
     const definition =
-        getLevelDefinition(level);
+        getLevelDefinition(
+            safeLevel
+        );
 
     if (!definition) {
         return "";
     }
 
-    return (
-        definition.subtitle &&
-        definition.subtitle[language]
-    ) || "";
+    return translateText(
+        definition.subtitleKey,
+        ""
+    );
 }
 
 function getBacBranchLabel(
-    branch = getBacBranch(),
-    language = getSiteLanguage()
+    branch = getBacBranch()
 ) {
-
     const definition =
-        getBacBranchDefinition(branch);
+        getBacBranchDefinition(
+            branch
+        );
 
     if (!definition) {
         return "";
     }
 
-    return (
-        definition.title &&
-        definition.title[language]
-    ) || "";
+    return translateText(
+        definition.titleKey,
+        definition.id
+    );
 }
 
 function getSubjectLabel(
-    subjectId = getSelectedSubject(),
+    subjectId,
     level = getStudentLevel(),
-    branch = getBacBranch(),
-    language = getSiteLanguage()
+    branch = getBacBranch()
 ) {
-
     const definition =
         getSubjectDefinition(
             subjectId,
@@ -2317,322 +2223,345 @@ function getSubjectLabel(
         return "";
     }
 
-    return (
-        definition.title &&
-        definition.title[language]
-    ) || "";
+    return translateText(
+        definition.titleKey,
+        definition.id
+    );
+}/* =========================================================
+   LEGACY SETTINGS SYNC
+   ========================================================= */
+
+function syncLegacySettings() {
+    const settings = {
+        theme: getSiteTheme(),
+        language: getSiteLanguage()
+    };
+
+    saveData(
+        PLATFORM_KEYS.platformSettings,
+        settings
+    );
+
+    return settings;
 }
 
 /* =========================================================
-26. LEGACY SETTINGS SYNC
-========================================================= */
-
-function syncLegacySettings(
-    options = {}
-) {
-
-    try {
-
-        const settings =
-            JSON.parse(
-                localStorage.getItem(
-                    PLATFORM_KEYS.platformSettings
-                ) || "{}"
-            );
-
-        if (
-            options.theme === "dark" ||
-            options.theme === "light"
-        ) {
-
-            settings.darkMode =
-                options.theme === "dark";
-        }
-
-        if (
-            options.language === "ar" ||
-            options.language === "fr"
-        ) {
-
-            settings.language =
-                options.language;
-        }
-
-        localStorage.setItem(
-            PLATFORM_KEYS.platformSettings,
-            JSON.stringify(settings)
-        );
-
-    } catch (error) {
-
-        console.warn(
-            "تعذر مزامنة الإعدادات القديمة"
-        );
-    }
-}
-
-/* =========================================================
-27. DOM HELPERS
-========================================================= */
+   DOM HELPERS
+   ========================================================= */
 
 function setText(
     selector,
-    text
+    value
 ) {
-
     const element =
-        document.querySelector(
-            selector
-        );
+        typeof selector === "string"
+            ? document.querySelector(selector)
+            : selector;
 
-    if (element) {
-
-        element.textContent =
-            text ?? "";
+    if (!element) {
+        return false;
     }
+
+    element.textContent =
+        value ?? "";
+
+    return true;
 }
 
-function show(selector) {
-
+function show(
+    selector
+) {
     const element =
-        document.querySelector(
-            selector
-        );
+        typeof selector === "string"
+            ? document.querySelector(selector)
+            : selector;
 
-    if (element) {
-
-        element.classList.remove(
-            "hidden"
-        );
+    if (!element) {
+        return false;
     }
+
+    element.hidden = false;
+
+    element.classList.remove(
+        "hidden"
+    );
+
+    return true;
 }
 
-function hide(selector) {
-
+function hide(
+    selector
+) {
     const element =
-        document.querySelector(
-            selector
-        );
+        typeof selector === "string"
+            ? document.querySelector(selector)
+            : selector;
 
-    if (element) {
-
-        element.classList.add(
-            "hidden"
-        );
+    if (!element) {
+        return false;
     }
+
+    element.hidden = true;
+
+    element.classList.add(
+        "hidden"
+    );
+
+    return true;
 }
 
-function toggle(selector) {
-
+function toggle(
+    selector,
+    force
+) {
     const element =
-        document.querySelector(
-            selector
-        );
+        typeof selector === "string"
+            ? document.querySelector(selector)
+            : selector;
 
-    if (element) {
-
-        element.classList.toggle(
-            "hidden"
-        );
+    if (!element) {
+        return false;
     }
+
+    const shouldShow =
+        typeof force === "boolean"
+            ? force
+            : element.hidden;
+
+    if (shouldShow) {
+        show(element);
+    } else {
+        hide(element);
+    }
+
+    return shouldShow;
 }
 
 /* =========================================================
-28. BUTTON STATE
-========================================================= */
+   BUTTON STATE
+   ========================================================= */
 
 function setButtonLoading(
     button,
-    loadingText =
-        translateText("loading")
+    loading = true,
+    loadingText = "..."
 ) {
+    const element =
+        typeof button === "string"
+            ? document.querySelector(button)
+            : button;
 
-    if (!button) return;
-
-    if (
-        !button.dataset.originalText
-    ) {
-
-        button.dataset.originalText =
-            button.innerHTML;
+    if (!element) {
+        return false;
     }
 
-    button.innerHTML =
-        loadingText;
+    if (loading) {
+        if (
+            element.dataset.originalText ===
+            undefined
+        ) {
+            element.dataset.originalText =
+                element.textContent;
+        }
 
-    button.disabled = true;
+        element.disabled = true;
 
-    button.setAttribute(
-        "aria-busy",
-        "true"
-    );
+        element.setAttribute(
+            "aria-busy",
+            "true"
+        );
 
-    button.style.opacity =
-        "0.7";
+        element.textContent =
+            loadingText;
+    } else {
+        resetButton(element);
+    }
+
+    return true;
 }
 
-function resetButton(button) {
+function resetButton(
+    button
+) {
+    const element =
+        typeof button === "string"
+            ? document.querySelector(button)
+            : button;
 
-    if (!button) return;
-
-    if (
-        button.dataset.originalText
-    ) {
-
-        button.innerHTML =
-            button.dataset.originalText;
+    if (!element) {
+        return false;
     }
 
-    button.disabled = false;
+    if (
+        element.dataset.originalText !==
+        undefined
+    ) {
+        element.textContent =
+            element.dataset.originalText;
 
-    button.removeAttribute(
+        delete element.dataset.originalText;
+    }
+
+    element.disabled = false;
+
+    element.removeAttribute(
         "aria-busy"
     );
 
-    button.style.opacity = "";
+    return true;
 }
 
 /* =========================================================
-29. NOTIFICATIONS
-========================================================= */
+   NOTIFICATIONS
+   ========================================================= */
 
-function notify(message) {
-
-    if (!message) return;
-
-    const oldNotice =
-        document.querySelector(
-            ".global-notice"
-        );
-
-    if (oldNotice) {
-        oldNotice.remove();
+function notify(
+    message,
+    type = "info",
+    duration = 3000
+) {
+    if (!message) {
+        return false;
     }
 
-    const notice =
-        document.createElement(
-            "div"
+    let container =
+        document.querySelector(
+            "#edunova-notifications"
         );
 
-    notice.className =
-        "global-notice";
+    if (!container) {
+        container =
+            document.createElement("div");
 
-    notice.setAttribute(
-        "role",
-        "status"
-    );
+        container.id =
+            "edunova-notifications";
 
-    notice.textContent =
-        message;
+        container.setAttribute(
+            "aria-live",
+            "polite"
+        );
 
-    Object.assign(
-        notice.style,
-        {
+        container.style.position =
+            "fixed";
 
-            position:
-                "fixed",
+        container.style.top =
+            "82px";
 
-            top:
-                "18px",
+        container.style.left =
+            "50%";
 
-            left:
-                "50%",
+        container.style.transform =
+            "translateX(-50%)";
 
-            transform:
-                "translateX(-50%)",
+        container.style.zIndex =
+            "99999";
 
-            zIndex:
-                "9999",
+        container.style.width =
+            "min(92%, 420px)";
 
-            width:
-                "min(90%, 420px)",
-
-            padding:
-                "13px 16px",
-
-            background:
-                "#172033",
-
-            color:
-                "#ffffff",
-
-            borderRadius:
-                "12px",
-
-            textAlign:
-                "center",
-
-            fontSize:
-                "14px",
-
-            fontWeight:
-                "700",
-
-            boxShadow:
-                "0 10px 30px rgba(0,0,0,.15)",
-
-            opacity:
-                "1",
-
-            transition:
-                "opacity .2s ease"
-        }
-    );
-
-    if (
-        document.body
-    ) {
+        container.style.pointerEvents =
+            "none";
 
         document.body.appendChild(
-            notice
+            container
         );
     }
 
-    setTimeout(() => {
+    const notification =
+        document.createElement("div");
 
-        notice.style.opacity =
+    notification.textContent =
+        String(message);
+
+    notification.dataset.type =
+        String(type);
+
+    notification.style.pointerEvents =
+        "auto";
+
+    notification.style.padding =
+        "12px 16px";
+
+    notification.style.marginBottom =
+        "8px";
+
+    notification.style.borderRadius =
+        "14px";
+
+    notification.style.background =
+        "var(--card-bg, #ffffff)";
+
+    notification.style.color =
+        "var(--text-color, #111111)";
+
+    notification.style.border =
+        "1px solid var(--border-color, #e5e7eb)";
+
+    notification.style.boxShadow =
+        "0 10px 30px rgba(0,0,0,.10)";
+
+    notification.style.textAlign =
+        "center";
+
+    notification.style.fontSize =
+        "14px";
+
+    notification.style.transition =
+        "opacity .25s ease, transform .25s ease";
+
+    container.appendChild(
+        notification
+    );
+
+    window.setTimeout(() => {
+        notification.style.opacity =
             "0";
 
-        setTimeout(() => {
+        notification.style.transform =
+            "translateY(-6px)";
 
-            notice.remove();
+        window.setTimeout(() => {
+            notification.remove();
+        }, 250);
+    }, Math.max(500, duration));
 
-        }, 200);
-
-    }, 2500);
+    return true;
 }
 
 /* =========================================================
-30. CONFIRMATION
-========================================================= */
+   CONFIRMATION
+   ========================================================= */
 
 function confirmAction(
     message,
     callback
 ) {
+    const confirmed =
+        window.confirm(
+            String(
+                message ||
+                translateText(
+                    "confirm_action",
+                    "هل أنت متأكد؟"
+                )
+            )
+        );
 
     if (
-        !message ||
-        typeof callback !==
-            "function"
+        confirmed &&
+        typeof callback === "function"
     ) {
-        return;
-    }
-
-    if (
-        window.confirm(message)
-    ) {
-
         callback();
     }
+
+    return confirmed;
 }
 
 /* =========================================================
-31. CURRENT YEAR
-========================================================= */
+   CURRENT YEAR
+   ========================================================= */
 
 function setCurrentYear() {
-
     const year =
         new Date().getFullYear();
 
@@ -2641,248 +2570,253 @@ function setCurrentYear() {
             "[data-current-year]"
         )
         .forEach(element => {
-
             element.textContent =
-                year;
+                String(year);
         });
+
+    const currentYearElement =
+        document.querySelector(
+            "#currentYear"
+        );
+
+    if (currentYearElement) {
+        currentYearElement.textContent =
+            String(year);
+    }
+
+    return year;
 }
 
 /* =========================================================
-32. ACTIVE NAVIGATION
-========================================================= */
+   ACTIVE NAVIGATION
+   ========================================================= */
 
-function setActiveNav() {
-
-    const currentPage =
-        window.location.pathname
-            .split("/")
-            .pop() ||
-        "index.html";
+function setActiveNav(
+    page
+) {
+    const requestedPage =
+        String(
+            page ||
+            window.location.pathname
+                .split("/")
+                .pop() ||
+            "index.html"
+        )
+            .split("?")[0]
+            .split("#")[0];
 
     document
         .querySelectorAll(
-            "[data-nav]"
+            ".nav-link, [data-nav]"
         )
         .forEach(link => {
-
-            const target =
+            const href =
                 link.getAttribute(
                     "href"
                 );
 
-            if (
-                target === currentPage
-            ) {
-
-                link.classList.add(
-                    "active"
+            const dataNav =
+                link.getAttribute(
+                    "data-nav"
                 );
 
-            } else {
+            const target =
+                String(
+                    dataNav ||
+                    href ||
+                    ""
+                )
+                    .split("?")[0]
+                    .split("#")[0]
+                    .split("/")
+                    .pop();
 
-                link.classList.remove(
-                    "active"
+            const normalizedTarget =
+                target || "index.html";
+
+            const active =
+                normalizedTarget ===
+                requestedPage;
+
+            link.classList.toggle(
+                "active",
+                active
+            );
+
+            if (active) {
+                link.setAttribute(
+                    "aria-current",
+                    "page"
+                );
+            } else {
+                link.removeAttribute(
+                    "aria-current"
                 );
             }
         });
+
+    return true;
 }
 
 /* =========================================================
-33. SMOOTH SCROLL
-========================================================= */
+   SMOOTH SCROLL
+   ========================================================= */
 
 function scrollToElement(
-    selector
+    selector,
+    offset = 0
 ) {
-
     const element =
-        document.querySelector(
-            selector
-        );
+        typeof selector === "string"
+            ? document.querySelector(selector)
+            : selector;
 
-    if (!element) return;
+    if (!element) {
+        return false;
+    }
 
-    element.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
+    const top =
+        element.getBoundingClientRect()
+            .top +
+        window.scrollY -
+        Number(offset || 0);
+
+    window.scrollTo({
+        top: Math.max(0, top),
+        behavior: "smooth"
     });
+
+    return true;
 }
 
 /* =========================================================
-34. SAFE HTML
-========================================================= */
+   SAFE HTML
+   ========================================================= */
 
-function escapeHTML(value) {
-
+function escapeHTML(
+    value
+) {
     if (
         value === null ||
         value === undefined
     ) {
-
         return "";
     }
 
-    return String(value)
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
-        );
+    const div =
+        document.createElement("div");
+
+    div.textContent =
+        String(value);
+
+    return div.innerHTML;
 }
 
 /* =========================================================
-35. PAGE UTILITIES
-========================================================= */
+   PAGE UTILITIES
+   ========================================================= */
 
 function addClass(
     selector,
     className
 ) {
-
     const element =
-        document.querySelector(
-            selector
-        );
+        typeof selector === "string"
+            ? document.querySelector(selector)
+            : selector;
 
-    if (
-        element &&
-        className
-    ) {
-
-        element.classList.add(
-            className
-        );
+    if (!element || !className) {
+        return false;
     }
+
+    element.classList.add(
+        className
+    );
+
+    return true;
 }
 
 function removeClass(
     selector,
     className
 ) {
-
     const element =
-        document.querySelector(
-            selector
-        );
+        typeof selector === "string"
+            ? document.querySelector(selector)
+            : selector;
 
-    if (
-        element &&
-        className
-    ) {
-
-        element.classList.remove(
-            className
-        );
+    if (!element || !className) {
+        return false;
     }
+
+    element.classList.remove(
+        className
+    );
+
+    return true;
 }
 
-function exists(selector) {
+function exists(
+    selector
+) {
+    if (
+        typeof selector !== "string"
+    ) {
+        return Boolean(selector);
+    }
 
     return Boolean(
-        document.querySelector(
-            selector
-        )
+        document.querySelector(selector)
     );
 }
 
 /* =========================================================
-36. DEVICE
-========================================================= */
+   DEVICE
+   ========================================================= */
 
 function isMobile() {
-
     return window.matchMedia(
-        "(max-width: 639px)"
+        "(max-width: 768px)"
     ).matches;
 }
 
 /* =========================================================
-37. GLOBAL SETTINGS CONTROLS
-========================================================= */
+   GLOBAL SETTINGS CONTROLS
+   ========================================================= */
 
 function initializeGlobalSettings() {
-
-    const darkMode =
-        document.querySelector(
-            "#darkMode"
-        );
-
-    if (darkMode) {
-
-        darkMode.checked =
-            getSiteTheme() === "dark";
-
-        darkMode.addEventListener(
-            "change",
-            function () {
-
-                applySiteTheme(
-                    this.checked
-                        ? "dark"
-                        : "light"
-                );
-            }
-        );
-    }
+    const theme =
+        getSiteTheme();
 
     const language =
-        document.querySelector(
-            "#language"
-        );
+        getSiteLanguage();
 
-    if (language) {
+    applySiteTheme(
+        theme
+    );
 
-        language.value =
-            getSiteLanguage();
-
-        language.addEventListener(
-            "change",
-            function () {
-
-                applySiteLanguage(
-                    this.value
-                );
-            }
-        );
-    }
+    applySiteLanguage(
+        language
+    );
 
     document
         .querySelectorAll(
             "[data-theme-toggle]"
         )
         .forEach(button => {
-
             if (
-                button.dataset
-                    .globalThemeBound ===
+                button.dataset.bound ===
                 "true"
             ) {
                 return;
             }
 
-            button.dataset
-                .globalThemeBound =
+            button.dataset.bound =
                 "true";
 
             button.addEventListener(
                 "click",
                 () => {
-
                     toggleDarkMode();
                 }
             );
@@ -2893,188 +2827,248 @@ function initializeGlobalSettings() {
             "[data-language]"
         )
         .forEach(button => {
-
             if (
-                button.dataset
-                    .globalLanguageBound ===
+                button.dataset.bound ===
                 "true"
             ) {
                 return;
             }
 
-            button.dataset
-                .globalLanguageBound =
+            button.dataset.bound =
                 "true";
 
             button.addEventListener(
                 "click",
                 () => {
-
                     const language =
-                        button.dataset
-                            .language;
-
-                    if (
-                        language === "ar" ||
-                        language === "fr"
-                    ) {
-
-                        applySiteLanguage(
-                            language
+                        button.getAttribute(
+                            "data-language"
                         );
-                    }
+
+                    applySiteLanguage(
+                        language
+                    );
                 }
             );
         });
+
+    document
+        .querySelectorAll(
+            "[data-lang-toggle]"
+        )
+        .forEach(button => {
+            if (
+                button.dataset.bound ===
+                "true"
+            ) {
+                return;
+            }
+
+            button.dataset.bound =
+                "true";
+
+            button.addEventListener(
+                "click",
+                () => {
+                    toggleLanguage();
+                }
+            );
+        });
+
+    const themeToggle =
+        document.querySelector(
+            "#themeToggle"
+        );
+
+    if (
+        themeToggle &&
+        !themeToggle.dataset.bound
+    ) {
+        themeToggle.dataset.bound =
+            "true";
+
+        themeToggle.addEventListener(
+            "change",
+            event => {
+                applySiteTheme(
+                    event.target.checked
+                        ? "dark"
+                        : "light"
+                );
+            }
+        );
+    }
+
+    return true;
 }
 
 /* =========================================================
-38. EARLY THEME
-========================================================= */
+   EARLY THEME
+   ---------------------------------------------------------
+   Prevents unnecessary light/dark flashing during load.
+   ========================================================= */
 
 (function earlyTheme() {
-
     try {
-
-        const theme =
+        const stored =
             localStorage.getItem(
                 GLOBAL_THEME_KEY
             );
 
-        const safeTheme =
-            theme === "dark"
+        const theme =
+            stored === "dark"
                 ? "dark"
-                : "light";
+                : DEFAULT_THEME;
 
-        const root =
-            document.documentElement;
+        document.documentElement.dataset.theme =
+            theme;
 
-        root.classList.toggle(
-            "dark-mode",
-            safeTheme === "dark"
+        document.documentElement.classList.toggle(
+            "dark",
+            theme === "dark"
         );
-
-        root.setAttribute(
-            "data-theme",
-            safeTheme
-        );
-
-        root.style.colorScheme =
-            safeTheme;
-
     } catch (error) {
-
         console.warn(
-            "تعذر تطبيق الوضع المبكر"
+            "EduNova early theme error:",
+            error
         );
     }
-
 })();
 
 /* =========================================================
-39. EARLY LANGUAGE
-========================================================= */
+   EARLY LANGUAGE
+   ========================================================= */
 
 (function earlyLanguage() {
-
     try {
-
-        const language =
+        const stored =
             localStorage.getItem(
                 GLOBAL_LANGUAGE_KEY
             );
 
-        const safeLanguage =
-            language === "fr"
+        const language =
+            stored === "fr"
                 ? "fr"
-                : "ar";
+                : DEFAULT_LANGUAGE;
 
-        const root =
-            document.documentElement;
+        document.documentElement.lang =
+            language;
 
-        root.setAttribute(
-            "lang",
-            safeLanguage
-        );
-
-        root.setAttribute(
-            "dir",
-            safeLanguage === "fr"
-                ? "ltr"
-                : "rtl"
-        );
-
+        document.documentElement.dir =
+            language === "ar"
+                ? "rtl"
+                : "ltr";
     } catch (error) {
-
         console.warn(
-            "تعذر تطبيق اللغة المبكرة"
+            "EduNova early language error:",
+            error
         );
     }
-
 })();
 
 /* =========================================================
-40. CROSS-TAB / CROSS-PAGE SYNC
-========================================================= */
+   CROSS-TAB / CROSS-PAGE STORAGE SYNC
+   ========================================================= */
 
 window.addEventListener(
     "storage",
-    function (event) {
-
+    event => {
         if (
             event.key ===
             GLOBAL_THEME_KEY
         ) {
-
             applySiteTheme(
-                event.newValue ||
-                DEFAULT_THEME
+                event.newValue === "dark"
+                    ? "dark"
+                    : "light"
             );
+
+            return;
         }
 
         if (
             event.key ===
             GLOBAL_LANGUAGE_KEY
         ) {
-
             applySiteLanguage(
-                event.newValue ||
-                DEFAULT_LANGUAGE
+                event.newValue === "fr"
+                    ? "fr"
+                    : "ar"
             );
+
+            return;
         }
 
         if (
             event.key ===
             PLATFORM_KEYS.studentLevel
         ) {
-
             window.dispatchEvent(
                 new CustomEvent(
                     "studentLevelChanged",
                     {
                         detail: {
                             level:
-                                event.newValue ||
-                                ""
+                                normalizeStudentLevel(
+                                    event.newValue
+                                )
                         }
                     }
                 )
             );
+
+            return;
         }
 
         if (
             event.key ===
             PLATFORM_KEYS.bacBranch
         ) {
-
             window.dispatchEvent(
                 new CustomEvent(
                     "bacBranchChanged",
                     {
                         detail: {
                             branch:
-                                event.newValue ||
-                                ""
+                                String(
+                                    event.newValue ||
+                                    ""
+                                ).toUpperCase()
+                        }
+                    }
+                )
+            );
+
+            return;
+        }
+
+        if (
+            event.key ===
+            PLATFORM_KEYS.learningProgress
+        ) {
+            window.dispatchEvent(
+                new CustomEvent(
+                    "learningProgressChanged"
+                )
+            );
+
+            return;
+        }
+
+        if (
+            event.key ===
+            PLATFORM_KEYS.studentPoints
+        ) {
+            window.dispatchEvent(
+                new CustomEvent(
+                    "studentPointsChanged",
+                    {
+                        detail: {
+                            points:
+                                Number(
+                                    event.newValue ||
+                                    0
+                                )
                         }
                     }
                 )
@@ -3084,13 +3078,12 @@ window.addEventListener(
 );
 
 /* =========================================================
-41. GLOBAL INITIALIZATION
-========================================================= */
+   GLOBAL DOM INITIALIZATION
+   ========================================================= */
 
 document.addEventListener(
     "DOMContentLoaded",
     () => {
-
         applySiteTheme(
             getSiteTheme()
         );
@@ -3105,11 +3098,22 @@ document.addEventListener(
 
         setActiveNav();
 
-        updateThemeControls();
+        updateThemeControls(
+            getSiteTheme()
+        );
+
+        updateLanguageControls(
+            getSiteLanguage()
+        );
     }
 );
 
 /* =========================================================
-END OF GLOBAL JAVASCRIPT
-EduNova AI
-========================================================= */
+   PLATFORM READY EVENT
+   ========================================================= */
+
+window.dispatchEvent(
+    new CustomEvent(
+        "eduNovaScriptReady"
+    )
+);
