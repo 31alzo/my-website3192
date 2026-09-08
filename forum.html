@@ -2,1892 +2,2065 @@
 <html lang="ar" dir="rtl">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
 
-  <title>المنتدى | EduNova AI</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="style.css">
+    <meta name="description"
+          content="EduNova AI — المنتدى الطلابي للنقاش والتعاون وتبادل المعرفة.">
 
-  <style>
-    /* =========================================
-       EduNova AI — Forum Page
-       ========================================= */
+    <title>المنتدى | EduNova AI</title>
 
-    .forum-hero {
-      background:
-        linear-gradient(135deg, #2563eb, #1d4ed8);
-      color: white;
-      border-radius: 24px;
-      padding: 28px 22px;
-      margin-bottom: 20px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.18);
-    }
+    <link rel="stylesheet" href="style.css">
 
-    .forum-hero::after {
-      content: "";
-      position: absolute;
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.08);
-      left: -70px;
-      top: -70px;
-    }
+    <style>
+        /* =====================================================
+           EduNova AI — Forum
+           ===================================================== */
 
-    .forum-hero-content {
-      position: relative;
-      z-index: 1;
-    }
+        .forum-hero {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 22px;
+            padding: 30px 24px;
+            border-radius: 26px;
 
-    .forum-hero .eyebrow {
-      font-size: 13px;
-      font-weight: 700;
-      opacity: .85;
-      margin-bottom: 8px;
-    }
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--primary-dark)
+                );
 
-    .forum-hero h1 {
-      margin: 0 0 10px;
-      font-size: 26px;
-    }
+            color: #fff;
 
-    .forum-hero p {
-      margin: 0;
-      line-height: 1.8;
-      font-size: 14px;
-      opacity: .92;
-      max-width: 650px;
-    }
+            box-shadow:
+                0 16px 38px rgba(37,99,235,.18);
+        }
 
-    .write-card {
-      margin-bottom: 22px;
-    }
+        .forum-hero::after {
+            content: "";
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            left: -90px;
+            top: -100px;
+            border: 1px solid rgba(255,255,255,.12);
+            border-radius: 50%;
+        }
 
-    .write-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
+        .forum-hero-content {
+            position: relative;
+            z-index: 1;
+        }
 
-    .write-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 14px;
-      background: var(--primary-light);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 21px;
-      flex-shrink: 0;
-    }
+        .forum-hero .eyebrow {
+            margin-bottom: 8px;
+            color: rgba(255,255,255,.78);
+            font-size: 13px;
+            font-weight: 700;
+        }
 
-    .write-header h2 {
-      margin: 0;
-      font-size: 18px;
-    }
+        .forum-hero h1 {
+            margin: 0 0 10px;
+            color: #fff;
+            font-size: 28px;
+            line-height: 1.3;
+        }
 
-    .write-header p {
-      margin: 4px 0 0;
-      color: var(--text-soft);
-      font-size: 12px;
-    }
+        .forum-hero p {
+            max-width: 680px;
+            margin: 0;
+            color: rgba(255,255,255,.86);
+            font-size: 14px;
+            line-height: 1.9;
+        }
 
-    .forum-input,
-    .forum-textarea {
-      width: 100%;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text);
-      border-radius: 14px;
-      padding: 13px 14px;
-      font-family: inherit;
-      font-size: 14px;
-      outline: none;
-      transition: .2s;
-      margin-bottom: 10px;
-      box-sizing: border-box;
-    }
+        .write-card {
+            margin-bottom: 24px;
+        }
 
-    .forum-input::placeholder,
-    .forum-textarea::placeholder {
-      color: var(--text-light);
-    }
+        .write-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
 
-    .forum-input:focus,
-    .forum-textarea:focus {
-      border-color: var(--primary);
-      background: var(--surface);
-      box-shadow: 0 0 0 4px rgba(37,99,235,.08);
-    }
+        .write-icon {
+            width: 46px;
+            height: 46px;
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
 
-    .forum-textarea {
-      min-height: 115px;
-      resize: vertical;
-      line-height: 1.7;
-    }
+            border-radius: 14px;
+            background: var(--primary-light);
+            color: var(--primary);
 
-    .publish-row {
-      display: flex;
-      justify-content: flex-end;
-    }
+            font-size: 13px;
+            font-weight: 800;
+        }
 
-    .publish-btn {
-      min-width: 150px;
-    }
+        .write-icon::before {
+            content: "POST";
+        }
 
-    .posts-heading {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin: 25px 0 14px;
-    }
+        .write-header h2 {
+            margin: 0;
+            font-size: 18px;
+        }
 
-    .posts-heading h2 {
-      margin: 0;
-      font-size: 20px;
-    }
+        .write-header p {
+            margin: 4px 0 0;
+            color: var(--text-soft);
+            font-size: 12px;
+        }
 
-    .posts-count {
-      font-size: 12px;
-      color: var(--text-soft);
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 6px 10px;
-      white-space: nowrap;
-    }
+        .forum-input,
+        .forum-textarea {
+            width: 100%;
+            box-sizing: border-box;
 
-    .post-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 18px;
-      margin-bottom: 14px;
-      box-shadow: var(--shadow-sm);
-      transition: transform .2s, box-shadow .2s;
-    }
+            margin-bottom: 10px;
+            padding: 13px 14px;
 
-    .post-card:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
-    }
+            border: 1px solid var(--border);
+            border-radius: 14px;
 
-    .post-top {
-      display: flex;
-      align-items: center;
-      gap: 11px;
-      margin-bottom: 14px;
-    }
+            background: var(--surface);
+            color: var(--text);
 
-    .post-avatar {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: var(--primary-light);
-      color: var(--primary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      flex-shrink: 0;
-    }
+            font-family: inherit;
+            font-size: 14px;
 
-    .post-user {
-      font-size: 14px;
-      font-weight: 800;
-      color: var(--text);
-    }
+            outline: none;
 
-    .post-time {
-      font-size: 11px;
-      color: var(--text-light);
-      margin-top: 3px;
-    }
+            transition:
+                border-color .2s ease,
+                box-shadow .2s ease;
+        }
 
-    .post-title {
-      font-size: 17px;
-      font-weight: 800;
-      color: var(--text);
-      margin-bottom: 8px;
-      line-height: 1.5;
-    }
+        .forum-input::placeholder,
+        .forum-textarea::placeholder {
+            color: var(--text-light);
+        }
 
-    .post-content {
-      color: var(--text-soft);
-      line-height: 1.9;
-      font-size: 14px;
-      white-space: pre-wrap;
-      word-break: break-word;
-    }
+        .forum-input:focus,
+        .forum-textarea:focus {
+            border-color: var(--primary);
+            box-shadow:
+                0 0 0 4px
+                rgba(37,99,235,.08);
+        }
 
-    .post-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 15px;
-      padding-top: 13px;
-      border-top: 1px solid var(--border);
-    }
+        .forum-textarea {
+            min-height: 120px;
+            resize: vertical;
+            line-height: 1.8;
+        }
 
-    .comment-toggle {
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text-soft);
-      border-radius: 11px;
-      padding: 9px 12px;
-      font-family: inherit;
-      font-size: 12px;
-      cursor: pointer;
-      transition: .2s;
-    }
+        .publish-row {
+            display: flex;
+            justify-content: flex-end;
+        }
 
-    .comment-toggle:hover {
-      border-color: var(--primary);
-      color: var(--primary);
-      background: var(--primary-light);
-    }
+        .publish-btn {
+            min-width: 150px;
+        }
 
-    .comments-area {
-      display: none;
-      margin-top: 14px;
-      padding-top: 14px;
-      border-top: 1px solid var(--border);
-    }
+        .posts-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
 
-    .comments-area.open {
-      display: block;
-    }
+            margin: 28px 0 14px;
+        }
 
-    .comments-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
+        .posts-heading h2 {
+            margin: 0;
+            font-size: 20px;
+        }
 
-    .comment {
-      background: var(--surface-muted);
-      border-radius: 13px;
-      padding: 11px 12px;
-      line-height: 1.7;
-      font-size: 13px;
-      color: var(--text-soft);
-    }
+        .posts-count {
+            padding: 6px 10px;
 
-    .comment strong {
-      color: var(--primary);
-      display: inline-block;
-      margin-bottom: 3px;
-    }
+            border: 1px solid var(--border);
+            border-radius: 999px;
 
-    .comment-box {
-      margin-top: 11px;
-    }
+            background: var(--surface);
+            color: var(--text-soft);
 
-    .comment-box textarea {
-      width: 100%;
-      min-height: 75px;
-      resize: vertical;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 11px;
-      font-family: inherit;
-      outline: none;
-      background: var(--surface);
-      color: var(--text);
-      font-size: 13px;
-      box-sizing: border-box;
-    }
+            font-size: 12px;
+            white-space: nowrap;
+        }
 
-    .comment-box textarea::placeholder {
-      color: var(--text-light);
-    }
+        .post-card {
+            margin-bottom: 14px;
+            padding: 18px;
 
-    .comment-box textarea:focus {
-      border-color: var(--primary);
-    }
+            border: 1px solid var(--border);
+            border-radius: 20px;
 
-    .comment-submit {
-      margin-top: 7px;
-      border: none;
-      background: var(--primary);
-      color: white;
-      border-radius: 10px;
-      padding: 9px 13px;
-      font-family: inherit;
-      font-size: 12px;
-      cursor: pointer;
-    }
+            background: var(--surface);
 
-    .empty-forum {
-      text-align: center;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 35px 20px;
-    }
+            box-shadow: var(--shadow-sm);
 
-    .empty-forum-icon {
-      font-size: 42px;
-      margin-bottom: 10px;
-    }
+            transition:
+                transform .2s ease,
+                box-shadow .2s ease;
+        }
 
-    .empty-forum h3 {
-      margin: 0 0 6px;
-      font-size: 17px;
-      color: var(--text);
-    }
+        .post-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
 
-    .empty-forum p {
-      margin: 0;
-      color: var(--text-soft);
-      font-size: 13px;
-    }
+        .post-top {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            margin-bottom: 14px;
+        }
 
-    .bottom-action {
-      margin-top: 25px;
-      margin-bottom: 20px;
-    }
+        .post-avatar {
+            width: 44px;
+            height: 44px;
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
 
-    .forum-message {
-      direction: inherit;
-    }
+            border-radius: 50%;
+            background: var(--primary-light);
+            color: var(--primary);
 
-    html[dir="ltr"] .publish-row {
-      justify-content: flex-start;
-    }
+            font-weight: 800;
+        }
 
-    html[dir="ltr"] .forum-hero::after {
-      left: auto;
-      right: -70px;
-    }
+        .post-user {
+            color: var(--text);
+            font-size: 14px;
+            font-weight: 800;
+        }
 
-    @media (max-width: 600px) {
+        .post-time {
+            margin-top: 3px;
+            color: var(--text-light);
+            font-size: 11px;
+        }
 
-      .forum-hero {
-        border-radius: 20px;
-        padding: 23px 18px;
-      }
+        .post-title {
+            margin-bottom: 8px;
+            color: var(--text);
 
-      .forum-hero h1 {
-        font-size: 22px;
-      }
+            font-size: 17px;
+            font-weight: 800;
+            line-height: 1.5;
+        }
 
-      .write-header h2 {
-        font-size: 17px;
-      }
+        .post-content {
+            color: var(--text-soft);
+            font-size: 14px;
+            line-height: 1.9;
 
-      .publish-row {
-        display: block;
-      }
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
 
-      .publish-btn {
-        width: 100%;
-      }
+        .post-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
 
-      .post-card {
-        padding: 15px;
-        border-radius: 17px;
-      }
+            margin-top: 15px;
+            padding-top: 13px;
 
-      .post-title {
-        font-size: 16px;
-      }
+            border-top: 1px solid var(--border);
+        }
 
-      .posts-heading h2 {
-        font-size: 18px;
-      }
-    }
-  </style>
+        .comment-toggle {
+            padding: 9px 12px;
+
+            border: 1px solid var(--border);
+            border-radius: 11px;
+
+            background: var(--surface);
+            color: var(--text-soft);
+
+            font-family: inherit;
+            font-size: 12px;
+
+            cursor: pointer;
+
+            transition:
+                border-color .2s ease,
+                color .2s ease,
+                background .2s ease;
+        }
+
+        .comment-toggle:hover {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .comments-area {
+            display: none;
+
+            margin-top: 14px;
+            padding-top: 14px;
+
+            border-top: 1px solid var(--border);
+        }
+
+        .comments-area.open {
+            display: block;
+        }
+
+        .comments-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .comment {
+            padding: 11px 12px;
+
+            border-radius: 13px;
+
+            background: var(--surface-muted);
+
+            color: var(--text-soft);
+
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .comment strong {
+            display: inline-block;
+            margin-bottom: 3px;
+            color: var(--primary);
+        }
+
+        .comment-box {
+            margin-top: 11px;
+        }
+
+        .comment-box textarea {
+            width: 100%;
+            box-sizing: border-box;
+
+            min-height: 75px;
+            padding: 11px;
+
+            resize: vertical;
+
+            border: 1px solid var(--border);
+            border-radius: 12px;
+
+            background: var(--surface);
+            color: var(--text);
+
+            font-family: inherit;
+            font-size: 13px;
+
+            outline: none;
+        }
+
+        .comment-box textarea::placeholder {
+            color: var(--text-light);
+        }
+
+        .comment-box textarea:focus {
+            border-color: var(--primary);
+        }
+
+        .comment-submit {
+            margin-top: 7px;
+            padding: 9px 13px;
+
+            border: none;
+            border-radius: 10px;
+
+            background: var(--primary);
+            color: #fff;
+
+            font-family: inherit;
+            font-size: 12px;
+
+            cursor: pointer;
+        }
+
+        .empty-forum {
+            padding: 35px 20px;
+
+            border: 1px solid var(--border);
+            border-radius: 20px;
+
+            background: var(--surface);
+
+            text-align: center;
+        }
+
+        .empty-forum-icon {
+            width: 48px;
+            height: 48px;
+            display: grid;
+            place-items: center;
+
+            margin: 0 auto 12px;
+
+            border-radius: 15px;
+
+            background: var(--primary-light);
+            color: var(--primary);
+
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .empty-forum-icon::before {
+            content: "FORUM";
+        }
+
+        .empty-forum h3 {
+            margin: 0 0 6px;
+            color: var(--text);
+            font-size: 17px;
+        }
+
+        .empty-forum p {
+            margin: 0;
+            color: var(--text-soft);
+            font-size: 13px;
+        }
+
+        .bottom-action {
+            margin-top: 25px;
+            margin-bottom: 20px;
+        }
+
+        .forum-message {
+            direction: inherit;
+        }
+
+        html[dir="ltr"] .publish-row {
+            justify-content: flex-start;
+        }
+
+        html[dir="ltr"] .forum-hero::after {
+            left: auto;
+            right: -90px;
+        }
+
+        @media (max-width: 600px) {
+
+            .forum-hero {
+                padding: 24px 18px;
+                border-radius: 20px;
+            }
+
+            .forum-hero h1 {
+                font-size: 23px;
+            }
+
+            .write-header h2 {
+                font-size: 17px;
+            }
+
+            .publish-row {
+                display: block;
+            }
+
+            .publish-btn {
+                width: 100%;
+            }
+
+            .post-card {
+                padding: 15px;
+                border-radius: 17px;
+            }
+
+            .post-title {
+                font-size: 16px;
+            }
+
+            .posts-heading h2 {
+                font-size: 18px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-  <!-- Header -->
-  <header class="site-header">
+<header class="site-header">
 
     <div class="container header-inner">
 
-      <a href="dashboard.html" class="brand">
-        <span class="brand-icon">🎓</span>
-        <span>EduNova AI</span>
-      </a>
+        <a href="dashboard.html"
+           class="brand"
+           aria-label="EduNova AI">
 
-      <button
-        class="btn btn-secondary btn-sm"
-        onclick="goDashboard()"
-        data-i18n="home">
-        الرئيسية
-      </button>
+            <span class="brand-icon"
+                  aria-hidden="true">
+                AI
+            </span>
 
-    </div>
+            <span class="brand-name">
+                EduNova AI
+            </span>
 
-  </header>
+        </a>
 
-
-  <main class="page">
-
-    <div class="container">
-
-      <!-- Hero -->
-      <section class="forum-hero">
-
-        <div class="forum-hero-content">
-
-          <div class="eyebrow" data-i18n="student_community">
-            مجتمع الطلاب 💬
-          </div>
-
-          <h1 data-i18n="student_forum">
-            المنتدى الطلابي
-          </h1>
-
-          <p data-i18n="forum_description">
-            اسأل، ناقش، شارك حلولك واستفد من تجارب بقية الطلاب.
-            هذا المكان مخصص للتعلم والتعاون.
-          </p>
-
-        </div>
-
-      </section>
-
-
-      <!-- New post -->
-      <section class="card write-card">
-
-        <div class="write-header">
-
-          <div class="write-icon">
-            ✍️
-          </div>
-
-          <div>
-
-            <h2 data-i18n="write_new_post">
-              اكتب منشورًا جديدًا
-            </h2>
-
-            <p data-i18n="post_hint">
-              شارك سؤالًا أو فكرة أو حلًا مفيدًا
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <input
-          id="postTitle"
-          class="forum-input"
-          type="text"
-          maxlength="120"
-          placeholder="عنوان المنشور"
-          data-i18n-placeholder="post_title_placeholder">
-
-
-        <textarea
-          id="postContent"
-          class="forum-textarea"
-          maxlength="2000"
-          placeholder="اكتب سؤالك أو فكرتك أو الحل الذي تريد مشاركته..."
-          data-i18n-placeholder="post_content_placeholder"></textarea>
-
-
-        <div class="publish-row">
-
-          <button
-            id="publishBtn"
-            class="btn btn-primary publish-btn"
-            onclick="createPost()"
-            data-i18n="publish_post">
-
-            نشر المنشور
-
-          </button>
-
-        </div>
-
-      </section>
-
-
-      <!-- Posts heading -->
-      <div class="posts-heading">
-
-        <h2 data-i18n="latest_posts">
-          أحدث المنشورات
-        </h2>
-
-        <span
-          id="postsCount"
-          class="posts-count">
-          0 منشور
-        </span>
-
-      </div>
-
-
-      <!-- Posts -->
-      <section id="postsContainer"></section>
-
-
-      <!-- Back -->
-      <div class="bottom-action">
 
         <button
-          class="btn btn-outline"
-          style="width:100%;"
-          onclick="goDashboard()"
-          data-i18n="back_to_home">
+            type="button"
+            class="btn btn-secondary btn-sm"
+            onclick="goDashboard()"
+            data-forum-i18n="home">
 
-          ← العودة إلى الرئيسية
+            الرئيسية
 
         </button>
 
-      </div>
+    </div>
+
+</header>
+
+
+<main class="page">
+
+    <div class="container">
+
+        <!-- =================================================
+             Forum Hero
+        ================================================== -->
+
+        <section class="forum-hero">
+
+            <div class="forum-hero-content">
+
+                <div class="eyebrow"
+                     data-forum-i18n="student_community">
+                    مجتمع الطلاب
+                </div>
+
+                <h1 data-forum-i18n="student_forum">
+                    المنتدى الطلابي
+                </h1>
+
+                <p data-forum-i18n="forum_description">
+                    اسأل، ناقش، شارك حلولك واستفد من تجارب
+                    بقية الطلاب. هذا المكان مخصص للتعلم والتعاون.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             Create Post
+        ================================================== -->
+
+        <section class="card write-card">
+
+            <div class="write-header">
+
+                <div class="write-icon"
+                     aria-hidden="true">
+                </div>
+
+                <div>
+
+                    <h2 data-forum-i18n="write_new_post">
+                        اكتب منشورًا جديدًا
+                    </h2>
+
+                    <p data-forum-i18n="post_hint">
+                        شارك سؤالًا أو فكرة أو حلًا مفيدًا
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <input
+                id="postTitle"
+                class="forum-input"
+                type="text"
+                maxlength="120"
+                autocomplete="off"
+                placeholder="عنوان المنشور"
+                data-forum-placeholder="post_title_placeholder">
+
+
+            <textarea
+                id="postContent"
+                class="forum-textarea"
+                maxlength="2000"
+                placeholder="اكتب سؤالك أو فكرتك أو الحل الذي تريد مشاركته..."
+                data-forum-placeholder="post_content_placeholder"></textarea>
+
+
+            <div class="publish-row">
+
+                <button
+                    id="publishBtn"
+                    type="button"
+                    class="btn btn-primary publish-btn"
+                    onclick="createPost()"
+                    data-forum-i18n="publish_post">
+
+                    نشر المنشور
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             Posts
+        ================================================== -->
+
+        <div class="posts-heading">
+
+            <h2 data-forum-i18n="latest_posts">
+                أحدث المنشورات
+            </h2>
+
+            <span
+                id="postsCount"
+                class="posts-count">
+                0 منشور
+            </span>
+
+        </div>
+
+
+        <section id="postsContainer"></section>
+
+
+        <div class="bottom-action">
+
+            <button
+                type="button"
+                class="btn btn-outline"
+                style="width:100%;"
+                onclick="goDashboard()"
+                data-forum-i18n="back_to_home">
+
+                ← العودة إلى الرئيسية
+
+            </button>
+
+        </div>
 
     </div>
 
-  </main>
+</main>
 
 
-  <!-- Bottom navigation -->
-  <nav class="bottom-nav">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <a href="dashboard.html">
-      <span>⌂</span>
-      <small data-i18n="home">الرئيسية</small>
-    </a>
-
-    <a href="library.html">
-      <span>📚</span>
-      <small data-i18n="library">مكتبتي</small>
-    </a>
-
-    <a href="forum.html" class="active">
-      <span>💬</span>
-      <small data-i18n="forum">المنتدى</small>
-    </a>
-
-    <a href="account.html">
-      <span>👤</span>
-      <small data-i18n="account">حسابي</small>
-    </a>
-
-  </nav>
+<script src="script.js"></script>
 
 
-  <!-- Supabase -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* =====================================================
+   EduNova AI — Forum Page
+   يعتمد على النظام العالمي للغة والثيم
+===================================================== */
 
-  <!-- Global system -->
-  <script src="script.js"></script>
+const FORUM_TRANSLATIONS = {
 
+    ar: {
 
-  <script>
-
-    /* =========================================
-       EduNova AI — Forum translations
-       ========================================= */
-
-    const FORUM_TRANSLATIONS = {
-
-      ar: {
-
-        student_community: "مجتمع الطلاب 💬",
-
-        student_forum: "المنتدى الطلابي",
-
-        forum_description:
-          "اسأل، ناقش، شارك حلولك واستفد من تجارب بقية الطلاب. هذا المكان مخصص للتعلم والتعاون.",
-
-        write_new_post:
-          "اكتب منشورًا جديدًا",
-
-        post_hint:
-          "شارك سؤالًا أو فكرة أو حلًا مفيدًا",
-
-        post_title_placeholder:
-          "عنوان المنشور",
-
-        post_content_placeholder:
-          "اكتب سؤالك أو فكرتك أو الحل الذي تريد مشاركته...",
-
-        publish_post:
-          "نشر المنشور",
-
-        latest_posts:
-          "أحدث المنشورات",
-
-        back_to_home:
-          "← العودة إلى الرئيسية",
-
-        no_posts:
-          "لا توجد منشورات بعد",
-
-        first_post:
-          "كن أول طالب يبدأ النقاش!",
-
-        comments:
-          "التعليقات",
-
-        write_comment:
-          "اكتب تعليقك...",
-
-        publish_comment:
-          "نشر التعليق",
-
-        posts_count:
-          "منشور",
-
-        today:
-          "اليوم",
-
-        yesterday:
-          "أمس",
-
-        now:
-          "الآن",
-
-        default_student:
-          "طالب",
-
-        default_math_student:
-          "طالب الرياضيات",
-
-        hard_working_student:
-          "طالب مجتهد",
-
-        math_lover:
-          "محب الرياضيات",
-
-        default_post_title:
-          "كيف أفهم هذا التمرين؟",
-
-        default_post_content:
-          "هل يمكن لأحد أن يساعدني في فهم طريقة حل التمرين؟ أريد أن أفهم الخطوات وليس الجواب فقط.",
-
-        default_comment:
-          "حاول تقسيم المسألة إلى خطوات صغيرة وستجد أن الحل يصبح أسهل.",
-
-        share_solution:
-          "مشاركة حل",
-
-        share_solution_content:
-          "وجدت طريقة مختلفة لحل أحد التمارين، وسأشاركها معكم للاستفادة والنقاش.",
-
-        write_title_first:
-          "اكتب عنوان المنشور أولًا.",
-
-        write_content_first:
-          "اكتب محتوى المنشور أولًا.",
-
-        post_published:
-          "تم نشر منشورك بنجاح ✓",
-
-        write_comment_first:
-          "اكتب التعليق أولًا.",
-
-        comment_published:
-          "تم نشر تعليقك ✓"
-
-      },
-
-
-      fr: {
+        home:
+            "الرئيسية",
 
         student_community:
-          "Communauté des étudiants 💬",
+            "مجتمع الطلاب",
 
         student_forum:
-          "Forum des étudiants",
+            "المنتدى الطلابي",
 
         forum_description:
-          "Posez vos questions, discutez, partagez vos solutions et profitez de l’expérience des autres étudiants. Cet espace est dédié à l’apprentissage et à la collaboration.",
+            "اسأل، ناقش، شارك حلولك واستفد من تجارب بقية الطلاب. هذا المكان مخصص للتعلم والتعاون.",
 
         write_new_post:
-          "Écrire une nouvelle publication",
+            "اكتب منشورًا جديدًا",
 
         post_hint:
-          "Partagez une question, une idée ou une solution utile",
+            "شارك سؤالًا أو فكرة أو حلًا مفيدًا",
 
         post_title_placeholder:
-          "Titre de la publication",
+            "عنوان المنشور",
 
         post_content_placeholder:
-          "Écrivez votre question, votre idée ou la solution que vous souhaitez partager...",
+            "اكتب سؤالك أو فكرتك أو الحل الذي تريد مشاركته...",
 
         publish_post:
-          "Publier",
+            "نشر المنشور",
 
         latest_posts:
-          "Dernières publications",
+            "أحدث المنشورات",
 
         back_to_home:
-          "← Retour à l’accueil",
+            "← العودة إلى الرئيسية",
 
         no_posts:
-          "Aucune publication pour le moment",
+            "لا توجد منشورات بعد",
 
         first_post:
-          "Soyez le premier étudiant à lancer la discussion !",
+            "كن أول طالب يبدأ النقاش!",
 
         comments:
-          "Commentaires",
+            "التعليقات",
 
         write_comment:
-          "Écrivez votre commentaire...",
+            "اكتب تعليقك...",
 
         publish_comment:
-          "Publier le commentaire",
+            "نشر التعليق",
 
         posts_count:
-          "publication(s)",
+            "منشور",
 
         today:
-          "Aujourd’hui",
+            "اليوم",
 
         yesterday:
-          "Hier",
+            "أمس",
 
         now:
-          "Maintenant",
+            "الآن",
 
         default_student:
-          "Étudiant",
+            "طالب",
 
         default_math_student:
-          "Étudiant en mathématiques",
+            "طالب الرياضيات",
 
         hard_working_student:
-          "Étudiant assidu",
+            "طالب مجتهد",
 
         math_lover:
-          "Passionné de maths",
+            "محب الرياضيات",
 
         default_post_title:
-          "Comment comprendre cet exercice ?",
+            "كيف أفهم هذا التمرين؟",
 
         default_post_content:
-          "Quelqu’un peut-il m’aider à comprendre la méthode de résolution de cet exercice ? Je veux comprendre les étapes et pas seulement la réponse.",
+            "هل يمكن لأحد أن يساعدني في فهم طريقة حل التمرين؟ أريد أن أفهم الخطوات وليس الجواب فقط.",
 
         default_comment:
-          "Essayez de diviser le problème en petites étapes. Vous verrez que la solution devient plus facile.",
+            "حاول تقسيم المسألة إلى خطوات صغيرة وستجد أن الحل يصبح أسهل.",
 
         share_solution:
-          "Partager une solution",
+            "مشاركة حل",
 
         share_solution_content:
-          "J’ai trouvé une autre méthode pour résoudre un exercice et je souhaite la partager avec vous pour apprendre et discuter.",
+            "وجدت طريقة مختلفة لحل أحد التمارين، وسأشاركها معكم للاستفادة والنقاش.",
 
         write_title_first:
-          "Écrivez d’abord le titre de la publication.",
+            "اكتب عنوان المنشور أولًا.",
 
         write_content_first:
-          "Écrivez d’abord le contenu de la publication.",
+            "اكتب محتوى المنشور أولًا.",
 
         post_published:
-          "Votre publication a été publiée avec succès ✓",
+            "تم نشر منشورك بنجاح",
 
         write_comment_first:
-          "Écrivez d’abord le commentaire.",
+            "اكتب التعليق أولًا.",
 
         comment_published:
-          "Votre commentaire a été publié ✓"
+            "تم نشر تعليقك بنجاح"
 
-      }
-
-    };
+    },
 
 
-    function getForumLanguage() {
+    fr: {
 
-      if (typeof getSiteLanguage === "function") {
+        home:
+            "Accueil",
+
+        student_community:
+            "Communauté des étudiants",
+
+        student_forum:
+            "Forum des étudiants",
+
+        forum_description:
+            "Posez vos questions, discutez, partagez vos solutions et profitez de l’expérience des autres étudiants. Cet espace est dédié à l’apprentissage et à la collaboration.",
+
+        write_new_post:
+            "Écrire une nouvelle publication",
+
+        post_hint:
+            "Partagez une question, une idée ou une solution utile",
+
+        post_title_placeholder:
+            "Titre de la publication",
+
+        post_content_placeholder:
+            "Écrivez votre question, votre idée ou la solution que vous souhaitez partager...",
+
+        publish_post:
+            "Publier",
+
+        latest_posts:
+            "Dernières publications",
+
+        back_to_home:
+            "← Retour à l’accueil",
+
+        no_posts:
+            "Aucune publication pour le moment",
+
+        first_post:
+            "Soyez le premier étudiant à lancer la discussion !",
+
+        comments:
+            "Commentaires",
+
+        write_comment:
+            "Écrivez votre commentaire...",
+
+        publish_comment:
+            "Publier le commentaire",
+
+        posts_count:
+            "publication(s)",
+
+        today:
+            "Aujourd’hui",
+
+        yesterday:
+            "Hier",
+
+        now:
+            "Maintenant",
+
+        default_student:
+            "Étudiant",
+
+        default_math_student:
+            "Étudiant en mathématiques",
+
+        hard_working_student:
+            "Étudiant assidu",
+
+        math_lover:
+            "Passionné de maths",
+
+        default_post_title:
+            "Comment comprendre cet exercice ?",
+
+        default_post_content:
+            "Quelqu’un peut-il m’aider à comprendre la méthode de résolution de cet exercice ? Je veux comprendre les étapes et pas seulement la réponse.",
+
+        default_comment:
+            "Essayez de diviser le problème en petites étapes. Vous verrez que la solution devient plus facile.",
+
+        share_solution:
+            "Partager une solution",
+
+        share_solution_content:
+            "J’ai trouvé une autre méthode pour résoudre un exercice et je souhaite la partager avec vous pour apprendre et discuter.",
+
+        write_title_first:
+            "Écrivez d’abord le titre de la publication.",
+
+        write_content_first:
+            "Écrivez d’abord le contenu de la publication.",
+
+        post_published:
+            "Votre publication a été publiée avec succès",
+
+        write_comment_first:
+            "Écrivez d’abord le commentaire.",
+
+        comment_published:
+            "Votre commentaire a été publié avec succès"
+
+    }
+
+};
+
+
+/* =====================================================
+   Language
+===================================================== */
+
+function getForumLanguage() {
+
+    if (typeof getSiteLanguage === "function") {
         return getSiteLanguage();
-      }
-
-      return localStorage.getItem("site_language") || "ar";
-
     }
 
+    return localStorage.getItem("site_language") || "ar";
+}
 
-    function forumText(key) {
 
-      const language = getForumLanguage();
+function forumText(key) {
 
-      return (
+    const language =
+        getForumLanguage();
+
+    return (
         FORUM_TRANSLATIONS[language]?.[key] ||
-        FORUM_TRANSLATIONS.ar[key] ||
+        FORUM_TRANSLATIONS.ar?.[key] ||
         key
-      );
-
-    }
-
-
-    function translateForumPage() {
-
-      const language = getForumLanguage();
-
-      document.documentElement.lang = language;
-      document.documentElement.dir =
-        language === "fr" ? "ltr" : "rtl";
+    );
+}
 
 
-      document.title =
+function translateForumPage() {
+
+    const language =
+        getForumLanguage();
+
+    document.documentElement.lang =
         language === "fr"
-          ? "Forum | EduNova AI"
-          : "المنتدى | EduNova AI";
+            ? "fr"
+            : "ar";
+
+    document.documentElement.dir =
+        language === "fr"
+            ? "ltr"
+            : "rtl";
 
 
-      document
-        .querySelectorAll("[data-i18n]")
+    document.title =
+        language === "fr"
+            ? "Forum | EduNova AI"
+            : "المنتدى | EduNova AI";
+
+
+    document
+        .querySelectorAll("[data-forum-i18n]")
         .forEach(function(element) {
 
-          const key =
-            element.getAttribute("data-i18n");
+            const key =
+                element.getAttribute(
+                    "data-forum-i18n"
+                );
 
-          const translated =
-            forumText(key);
-
-          if (translated) {
-            element.textContent = translated;
-          }
+            element.textContent =
+                forumText(key);
 
         });
 
 
-      document
-        .querySelectorAll("[data-i18n-placeholder]")
+    document
+        .querySelectorAll("[data-forum-placeholder]")
         .forEach(function(element) {
 
-          const key =
-            element.getAttribute("data-i18n-placeholder");
+            const key =
+                element.getAttribute(
+                    "data-forum-placeholder"
+                );
 
-          element.placeholder =
-            forumText(key);
+            element.placeholder =
+                forumText(key);
 
         });
 
 
-      renderPosts();
+    renderPosts();
 
-    }
-
-
-    /* =========================================
-       Supabase
-       ========================================= */
-
-    const SUPABASE_URL =
-      "https://qkzdlxqledsznhbifaxy.supabase.co";
-
-    const SUPABASE_KEY =
-      "sb_publishable_ZdpHXwLlhpbXztsTXpAFTg_TgOji91v";
+}
 
 
-    const supabaseClient =
-      supabase.createClient(
+/* =====================================================
+   Supabase
+===================================================== */
+
+const SUPABASE_URL =
+    "https://qkzdlxqledsznhbifaxy.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_ZdpHXwLlhpbXztsTXpAFTg_TgOji91v";
+
+
+const supabaseClient =
+    supabase.createClient(
         SUPABASE_URL,
         SUPABASE_KEY
-      );
+    );
 
 
-    let currentUser = null;
+let currentUser = null;
 
 
-    /* =========================================
-       Default posts
-       ========================================= */
+/* =====================================================
+   Default local posts
+===================================================== */
 
-    const defaultPosts = [
+const defaultPosts = [
 
-      {
+    {
         id: 1,
 
-        name: "طالب الرياضيات",
+        name:
+            "طالب الرياضيات",
 
         title:
-          "كيف أفهم هذا التمرين؟",
+            "كيف أفهم هذا التمرين؟",
 
         content:
-          "هل يمكن لأحد أن يساعدني في فهم طريقة حل التمرين؟ أريد أن أفهم الخطوات وليس الجواب فقط.",
+            "هل يمكن لأحد أن يساعدني في فهم طريقة حل التمرين؟ أريد أن أفهم الخطوات وليس الجواب فقط.",
 
-        time: "اليوم",
+        time:
+            "اليوم",
 
         comments: [
 
-          {
-            name: "طالب مجتهد",
+            {
+                name:
+                    "طالب مجتهد",
 
-            text:
-              "حاول تقسيم المسألة إلى خطوات صغيرة وستجد أن الحل يصبح أسهل."
-          }
+                text:
+                    "حاول تقسيم المسألة إلى خطوات صغيرة وستجد أن الحل يصبح أسهل."
+            }
 
         ]
 
-      },
+    },
 
 
-      {
+    {
         id: 2,
 
-        name: "محب الرياضيات",
+        name:
+            "محب الرياضيات",
 
         title:
-          "مشاركة حل",
+            "مشاركة حل",
 
         content:
-          "وجدت طريقة مختلفة لحل أحد التمارين، وسأشاركها معكم للاستفادة والنقاش.",
+            "وجدت طريقة مختلفة لحل أحد التمارين، وسأشاركها معكم للاستفادة والنقاش.",
 
-        time: "أمس",
+        time:
+            "أمس",
 
         comments: []
 
-      }
-
-    ];
-
-
-    /* =========================================
-       Authentication
-       ========================================= */
-
-    async function checkAuth() {
-
-      const {
-        data: { session }
-      } = await supabaseClient.auth.getSession();
-
-
-      if (!session) {
-
-        window.location.href =
-          "login.html";
-
-        return false;
-
-      }
-
-
-      currentUser =
-        session.user;
-
-
-      return true;
-
     }
 
-
-    function getDisplayName() {
-
-      if (
-        currentUser &&
-        currentUser.user_metadata &&
-        currentUser.user_metadata.full_name
-      ) {
-
-        return currentUser
-          .user_metadata
-          .full_name;
-
-      }
+];
 
 
-      if (
-        currentUser &&
-        currentUser.email
-      ) {
+/* =====================================================
+   Authentication
+===================================================== */
 
-        return currentUser
-          .email
-          .split("@")[0];
+async function checkAuth() {
 
-      }
+    try {
 
-
-      return forumText("default_student");
-
-    }
+        const {
+            data: { session }
+        } =
+            await supabaseClient.auth.getSession();
 
 
-    function getInitial(name) {
+        if (!session) {
 
-      if (!name) {
+            window.location.href =
+                "login.html";
 
-        return forumText(
-          "default_student"
-        ).charAt(0);
-
-      }
-
-
-      return name.charAt(0);
-
-    }
-
-
-    /* =========================================
-       Local forum storage
-       ========================================= */
-
-    function getPosts() {
-
-      const saved =
-        localStorage.getItem(
-          "forum_posts"
-        );
-
-
-      if (saved) {
-
-        try {
-
-          return JSON.parse(saved);
-
-        } catch (error) {
-
-          return defaultPosts;
+            return false;
 
         }
 
-      }
+
+        currentUser =
+            session.user;
 
 
-      return defaultPosts;
+        return true;
+
+    } catch (error) {
+
+        console.error(
+            "Forum authentication error:",
+            error
+        );
+
+        return false;
+
+    }
+
+}
+
+
+function getDisplayName() {
+
+    if (
+        currentUser &&
+        currentUser.user_metadata &&
+        currentUser.user_metadata.full_name
+    ) {
+
+        return currentUser
+            .user_metadata
+            .full_name;
 
     }
 
 
-    function savePosts(posts) {
+    if (
+        currentUser &&
+        currentUser.email
+    ) {
 
-      localStorage.setItem(
+        return currentUser
+            .email
+            .split("@")[0];
+
+    }
+
+
+    return forumText(
+        "default_student"
+    );
+
+}
+
+
+function getInitial(name) {
+
+    if (!name) {
+
+        return forumText(
+            "default_student"
+        ).charAt(0);
+
+    }
+
+    return name.charAt(0);
+
+}
+
+
+/* =====================================================
+   Local storage
+===================================================== */
+
+function getPosts() {
+
+    const saved =
+        localStorage.getItem(
+            "forum_posts"
+        );
+
+
+    if (!saved) {
+        return [];
+    }
+
+
+    try {
+
+        const posts =
+            JSON.parse(saved);
+
+        return Array.isArray(posts)
+            ? posts
+            : [];
+
+    } catch (error) {
+
+        return [];
+
+    }
+
+}
+
+
+function savePosts(posts) {
+
+    localStorage.setItem(
         "forum_posts",
         JSON.stringify(posts)
-      );
+    );
 
-    }
-
-
-    /* =========================================
-       Localize default posts
-       ========================================= */
-
-    function getLocalizedDefaultPosts() {
-
-      const language =
-        getForumLanguage();
+}
 
 
-      if (language === "fr") {
+/* =====================================================
+   Default localized posts
+===================================================== */
 
-        return [
+function getLocalizedDefaultPosts() {
 
-          {
+    return [
+
+        {
             id: 1,
 
             name:
-              forumText(
-                "default_math_student"
-              ),
+                forumText(
+                    "default_math_student"
+                ),
 
             title:
-              forumText(
-                "default_post_title"
-              ),
+                forumText(
+                    "default_post_title"
+                ),
 
             content:
-              forumText(
-                "default_post_content"
-              ),
+                forumText(
+                    "default_post_content"
+                ),
 
             time:
-              forumText("today"),
+                forumText("today"),
 
             comments: [
 
-              {
-                name:
-                  forumText(
-                    "hard_working_student"
-                  ),
+                {
+                    name:
+                        forumText(
+                            "hard_working_student"
+                        ),
 
-                text:
-                  forumText(
-                    "default_comment"
-                  )
-
-              }
+                    text:
+                        forumText(
+                            "default_comment"
+                        )
+                }
 
             ]
 
-          },
+        },
 
 
-          {
+        {
             id: 2,
 
             name:
-              forumText(
-                "math_lover"
-              ),
+                forumText(
+                    "math_lover"
+                ),
 
             title:
-              forumText(
-                "share_solution"
-              ),
+                forumText(
+                    "share_solution"
+                ),
 
             content:
-              forumText(
-                "share_solution_content"
-              ),
+                forumText(
+                    "share_solution_content"
+                ),
 
             time:
-              forumText("yesterday"),
+                forumText("yesterday"),
 
             comments: []
 
-          }
+        }
 
-        ];
+    ];
 
-      }
+}
 
 
-      return defaultPosts;
+function getPostsForDisplay() {
+
+    const posts =
+        getPosts();
+
+
+    if (!posts.length) {
+
+        return getLocalizedDefaultPosts();
 
     }
 
 
-    function getPostsForDisplay() {
+    return posts;
 
-      const saved =
-        localStorage.getItem(
-          "forum_posts"
-        );
+}
 
 
-      if (!saved) {
+/* =====================================================
+   Render
+===================================================== */
 
-        return getLocalizedDefaultPosts();
+function renderPosts() {
 
-      }
-
-
-      try {
-
-        return JSON.parse(saved);
-
-      } catch (error) {
-
-        return getLocalizedDefaultPosts();
-
-      }
-
-    }
-
-
-    /* =========================================
-       Render posts
-       ========================================= */
-
-    function renderPosts() {
-
-      const container =
+    const container =
         document.getElementById(
-          "postsContainer"
+            "postsContainer"
         );
 
-
-      const countElement =
+    const countElement =
         document.getElementById(
-          "postsCount"
+            "postsCount"
         );
 
 
-      if (!container || !countElement) {
+    if (!container || !countElement) {
         return;
-      }
+    }
 
 
-      const posts =
+    const posts =
         getPostsForDisplay();
 
 
-      container.innerHTML = "";
+    container.innerHTML =
+        "";
 
 
-      const countText =
-        forumText("posts_count");
+    countElement.textContent =
+        `${posts.length} ${forumText("posts_count")}`;
 
 
-      countElement.textContent =
-        getForumLanguage() === "fr"
-          ? `${posts.length} ${countText}`
-          : `${posts.length} ${countText}`;
-
-
-      if (!posts.length) {
+    if (!posts.length) {
 
         container.innerHTML = `
 
-          <div class="empty-forum">
+            <div class="empty-forum">
 
-            <div class="empty-forum-icon">
-              💬
+                <div
+                    class="empty-forum-icon"
+                    aria-hidden="true">
+                </div>
+
+                <h3>
+                    ${escapeHTML(
+                        forumText("no_posts")
+                    )}
+                </h3>
+
+                <p>
+                    ${escapeHTML(
+                        forumText("first_post")
+                    )}
+                </p>
+
             </div>
-
-            <h3>
-              ${escapeHTML(
-                forumText("no_posts")
-              )}
-            </h3>
-
-            <p>
-              ${escapeHTML(
-                forumText("first_post")
-              )}
-            </p>
-
-          </div>
 
         `;
 
         return;
 
-      }
+    }
 
 
-      posts
+    posts
         .slice()
         .reverse()
         .forEach(function(post) {
 
-          const article =
-            document.createElement(
-              "article"
+            const article =
+                document.createElement(
+                    "article"
+                );
+
+
+            article.className =
+                "post-card";
+
+
+            const comments =
+                Array.isArray(post.comments)
+                    ? post.comments
+                    : [];
+
+
+            let commentsHTML =
+                "";
+
+
+            comments.forEach(
+                function(comment) {
+
+                    commentsHTML += `
+
+                        <div class="comment">
+
+                            <strong>
+                                ${escapeHTML(
+                                    comment.name ||
+                                    forumText(
+                                        "default_student"
+                                    )
+                                )}
+                            </strong>
+
+                            <br>
+
+                            ${escapeHTML(
+                                comment.text || ""
+                            )}
+
+                        </div>
+
+                    `;
+
+                }
             );
 
 
-          article.className =
-            "post-card";
+            article.innerHTML = `
+
+                <div class="post-top">
+
+                    <div class="post-avatar">
+
+                        ${escapeHTML(
+                            getInitial(post.name)
+                        )}
+
+                    </div>
+
+                    <div>
+
+                        <div class="post-user">
+
+                            ${escapeHTML(
+                                post.name ||
+                                forumText(
+                                    "default_student"
+                                )
+                            )}
+
+                        </div>
+
+                        <div class="post-time">
+
+                            ${escapeHTML(
+                                post.time || ""
+                            )}
+
+                        </div>
+
+                    </div>
+
+                </div>
 
 
-          const comments =
-            post.comments || [];
+                <div class="post-title">
 
-
-          let commentsHTML = "";
-
-
-          comments.forEach(
-            function(comment) {
-
-              commentsHTML += `
-
-                <div class="comment">
-
-                  <strong>
                     ${escapeHTML(
-                      comment.name
+                        post.title || ""
                     )}
-                  </strong>
-
-                  <br>
-
-                  ${escapeHTML(
-                    comment.text
-                  )}
 
                 </div>
 
-              `;
 
-            }
-          );
+                <div class="post-content">
 
+                    ${escapeHTML(
+                        post.content || ""
+                    )}
 
-          article.innerHTML = `
-
-            <div class="post-top">
-
-              <div class="post-avatar">
-                ${escapeHTML(
-                  getInitial(post.name)
-                )}
-              </div>
-
-              <div>
-
-                <div class="post-user">
-                  ${escapeHTML(
-                    post.name
-                  )}
                 </div>
 
-                <div class="post-time">
-                  ${escapeHTML(
-                    post.time
-                  )}
+
+                <div class="post-actions">
+
+                    <button
+                        type="button"
+                        class="comment-toggle"
+                        onclick="toggleComments(${post.id})">
+
+                        ${escapeHTML(
+                            forumText("comments")
+                        )}
+
+                        (${comments.length})
+
+                    </button>
+
                 </div>
 
-              </div>
 
-            </div>
+                <div
+                    class="comments-area"
+                    id="comments-${post.id}">
 
+                    <div class="comments-list">
 
-            <div class="post-title">
-              ${escapeHTML(
-                post.title
-              )}
-            </div>
+                        ${commentsHTML}
 
-
-            <div class="post-content">
-              ${escapeHTML(
-                post.content
-              )}
-            </div>
+                    </div>
 
 
-            <div class="post-actions">
+                    <div class="comment-box">
 
-              <button
-                class="comment-toggle"
-                onclick="toggleComments(${post.id})">
-
-                💬
-                ${escapeHTML(
-                  forumText("comments")
-                )}
-                (${comments.length})
-
-              </button>
-
-            </div>
+                        <textarea
+                            id="comment-input-${post.id}"
+                            maxlength="1000"
+                            placeholder="${escapeHTML(
+                                forumText(
+                                    "write_comment"
+                                )
+                            )}"></textarea>
 
 
-            <div
-              class="comments-area"
-              id="comments-${post.id}">
+                        <button
+                            type="button"
+                            class="comment-submit"
+                            onclick="addComment(${post.id})">
 
-              <div class="comments-list">
+                            ${escapeHTML(
+                                forumText(
+                                    "publish_comment"
+                                )
+                            )}
 
-                ${commentsHTML}
+                        </button>
 
-              </div>
+                    </div>
 
+                </div>
 
-              <div class="comment-box">
-
-                <textarea
-                  id="comment-input-${post.id}"
-                  maxlength="1000"
-                  placeholder="${escapeHTML(
-                    forumText(
-                      "write_comment"
-                    )
-                  )}"></textarea>
+            `;
 
 
-                <button
-                  class="comment-submit"
-                  onclick="addComment(${post.id})">
-
-                  ${escapeHTML(
-                    forumText(
-                      "publish_comment"
-                    )
-                  )}
-
-                </button>
-
-              </div>
-
-            </div>
-
-          `;
-
-
-          container.appendChild(
-            article
-          );
+            container.appendChild(
+                article
+            );
 
         });
 
+}
+
+
+/* =====================================================
+   Create post
+===================================================== */
+
+function createPost() {
+
+    const titleElement =
+        document.getElementById(
+            "postTitle"
+        );
+
+    const contentElement =
+        document.getElementById(
+            "postContent"
+        );
+
+
+    if (!titleElement || !contentElement) {
+        return;
     }
 
 
-    /* =========================================
-       Create post
-       ========================================= */
+    const title =
+        titleElement.value.trim();
 
-    function createPost() {
-
-      const title =
-        document.getElementById(
-          "postTitle"
-        )
-        .value
-        .trim();
+    const content =
+        contentElement.value.trim();
 
 
-      const content =
-        document.getElementById(
-          "postContent"
-        )
-        .value
-        .trim();
-
-
-      if (!title) {
+    if (!title) {
 
         showMessage(
-          forumText(
-            "write_title_first"
-          )
+            forumText(
+                "write_title_first"
+            )
         );
+
+        titleElement.focus();
 
         return;
 
-      }
+    }
 
 
-      if (!content) {
+    if (!content) {
 
         showMessage(
-          forumText(
-            "write_content_first"
-          )
+            forumText(
+                "write_content_first"
+            )
         );
+
+        contentElement.focus();
 
         return;
 
-      }
+    }
 
 
-      const posts =
+    const existingPosts =
         getPosts();
 
 
-      const newPost = {
+    const newPost = {
 
         id:
-          Date.now(),
+            Date.now(),
 
         name:
-          getDisplayName(),
+            getDisplayName(),
 
         title:
-          title,
+            title,
 
         content:
-          content,
+            content,
 
         time:
-          forumText("now"),
+            forumText("now"),
 
         comments:
-          []
+            []
 
-      };
+    };
 
 
-      posts.push(
+    existingPosts.push(
         newPost
-      );
+    );
 
 
-      savePosts(
-        posts
-      );
+    savePosts(
+        existingPosts
+    );
 
 
-      document.getElementById(
-        "postTitle"
-      ).value = "";
+    titleElement.value =
+        "";
+
+    contentElement.value =
+        "";
 
 
-      document.getElementById(
-        "postContent"
-      ).value = "";
+    renderPosts();
 
 
-      renderPosts();
-
-
-      showMessage(
+    showMessage(
         forumText(
-          "post_published"
+            "post_published"
         )
-      );
+    );
 
-    }
+}
 
 
-    /* =========================================
-       Comments
-       ========================================= */
+/* =====================================================
+   Comments
+===================================================== */
 
-    function toggleComments(postId) {
+function toggleComments(postId) {
 
-      const area =
+    const area =
         document.getElementById(
-          "comments-" + postId
+            "comments-" + postId
         );
 
 
-      if (!area) {
+    if (!area) {
         return;
-      }
+    }
 
 
-      area.classList.toggle(
+    area.classList.toggle(
         "open"
-      );
+    );
 
-    }
+}
 
 
-    function addComment(postId) {
+function addComment(postId) {
 
-      const input =
+    const input =
         document.getElementById(
-          "comment-input-" + postId
+            "comment-input-" + postId
         );
 
 
-      if (!input) {
+    if (!input) {
         return;
-      }
+    }
 
 
-      const text =
+    const text =
         input.value.trim();
 
 
-      if (!text) {
+    if (!text) {
 
         showMessage(
-          forumText(
-            "write_comment_first"
-          )
+            forumText(
+                "write_comment_first"
+            )
         );
+
+        input.focus();
 
         return;
 
-      }
+    }
 
 
-      const posts =
+    const posts =
         getPosts();
 
 
-      const post =
+    const post =
         posts.find(
-          function(item) {
+            function(item) {
 
-            return item.id === postId;
+                return (
+                    String(item.id) ===
+                    String(postId)
+                );
 
-          }
+            }
         );
 
 
-      if (!post) {
+    if (!post) {
         return;
-      }
-
-
-      if (!post.comments) {
-
-        post.comments = [];
-
-      }
-
-
-      post.comments.push({
-
-        name:
-          getDisplayName(),
-
-        text:
-          text
-
-      });
-
-
-      savePosts(
-        posts
-      );
-
-
-      renderPosts();
-
-
-      showMessage(
-        forumText(
-          "comment_published"
-        )
-      );
-
     }
 
 
-    /* =========================================
-       Message
-       ========================================= */
+    if (!Array.isArray(post.comments)) {
+        post.comments = [];
+    }
 
-    function showMessage(message) {
 
-      const old =
+    post.comments.push({
+
+        name:
+            getDisplayName(),
+
+        text:
+            text
+
+    });
+
+
+    savePosts(
+        posts
+    );
+
+
+    renderPosts();
+
+
+    showMessage(
+        forumText(
+            "comment_published"
+        )
+    );
+
+}
+
+
+/* =====================================================
+   Message
+===================================================== */
+
+function showMessage(message) {
+
+    const old =
         document.querySelector(
-          ".forum-message"
+            ".forum-message"
         );
 
 
-      if (old) {
+    if (old) {
         old.remove();
-      }
+    }
 
 
-      const box =
+    const box =
         document.createElement(
-          "div"
+            "div"
         );
 
 
-      box.className =
+    box.className =
         "forum-message";
 
 
-      box.textContent =
+    box.textContent =
         message;
 
 
-      Object.assign(
+    Object.assign(
         box.style,
         {
 
-          position: "fixed",
+            position:
+                "fixed",
 
-          bottom: "85px",
+            bottom:
+                "25px",
 
-          left: "50%",
+            left:
+                "50%",
 
-          transform:
-            "translateX(-50%)",
+            transform:
+                "translateX(-50%)",
 
-          background:
-            "var(--text)",
+            background:
+                "var(--text)",
 
-          color:
-            "var(--surface)",
+            color:
+                "var(--surface)",
 
-          padding:
-            "12px 18px",
+            padding:
+                "12px 18px",
 
-          borderRadius:
-            "12px",
+            borderRadius:
+                "12px",
 
-          fontSize:
-            "13px",
+            fontSize:
+                "13px",
 
-          zIndex:
-            "9999",
+            zIndex:
+                "9999",
 
-          boxShadow:
-            "0 8px 25px rgba(0,0,0,.18)",
+            boxShadow:
+                "0 8px 25px rgba(0,0,0,.18)",
 
-          maxWidth:
-            "90%",
+            maxWidth:
+                "90%",
 
-          textAlign:
-            "center"
+            textAlign:
+                "center"
 
         }
-      );
+    );
 
 
-      document.body.appendChild(
+    document.body.appendChild(
         box
-      );
+    );
 
 
-      setTimeout(
+    setTimeout(
         function() {
 
-          box.style.opacity =
-            "0";
+            box.style.opacity =
+                "0";
 
-          box.style.transition =
-            ".25s";
+            box.style.transition =
+                ".25s";
 
 
-          setTimeout(
-            function() {
+            setTimeout(
+                function() {
 
-              box.remove();
+                    box.remove();
 
-            },
-            250
-          );
+                },
+                250
+            );
 
         },
         2200
-      );
+    );
 
-    }
+}
 
 
-    /* =========================================
-       Navigation
-       ========================================= */
+/* =====================================================
+   Navigation
+===================================================== */
 
-    function goDashboard() {
+function goDashboard() {
 
-      if (typeof goTo === "function") {
+    if (typeof goTo === "function") {
 
         goTo(
-          "dashboard.html"
+            "dashboard.html"
         );
 
         return;
 
-      }
-
-
-      window.location.href =
-        "dashboard.html";
-
     }
 
 
-    /* =========================================
-       Global settings synchronization
-       ========================================= */
+    window.location.href =
+        "dashboard.html";
 
-    window.addEventListener(
-      "storage",
-      function(event) {
+}
+
+
+/* =====================================================
+   Global events
+===================================================== */
+
+window.addEventListener(
+    "languageChanged",
+    translateForumPage
+);
+
+window.addEventListener(
+    "siteLanguageChanged",
+    translateForumPage
+);
+
+
+window.addEventListener(
+    "themeChanged",
+    function() {
 
         if (
-          event.key ===
-          "site_language"
-        ) {
-
-          translateForumPage();
-
-        }
-
-
-        if (
-          event.key ===
-          "site_theme"
-        ) {
-
-          if (
             typeof applySiteTheme ===
             "function"
-          ) {
+        ) {
 
             applySiteTheme(
-              event.newValue ||
-              "light"
+                typeof getSiteTheme ===
+                "function"
+                    ? getSiteTheme()
+                    : "light"
             );
-
-          }
 
         }
 
-      }
-    );
+    }
+);
 
 
-    window.addEventListener(
-      "languageChanged",
-      function() {
+window.addEventListener(
+    "siteThemeChanged",
+    function() {
 
-        translateForumPage();
+        if (
+            typeof applySiteTheme ===
+            "function"
+        ) {
 
-      }
-    );
+            applySiteTheme(
+                typeof getSiteTheme ===
+                "function"
+                    ? getSiteTheme()
+                    : "light"
+            );
+
+        }
+
+    }
+);
 
 
-    window.addEventListener(
-      "languagechange",
-      function() {
+window.addEventListener(
+    "storage",
+    function(event) {
 
-        translateForumPage();
+        if (
+            event.key ===
+            "site_language"
+        ) {
 
-      }
-    );
+            translateForumPage();
+
+        }
 
 
-    /* =========================================
-       Start
-       ========================================= */
+        if (
+            event.key ===
+            "site_theme"
+        ) {
 
-    async function startPage() {
+            if (
+                typeof applySiteTheme ===
+                "function"
+            ) {
 
-      if (
+                applySiteTheme(
+                    event.newValue ||
+                    "light"
+                );
+
+            }
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   Start
+===================================================== */
+
+async function startForumPage() {
+
+    if (
         typeof initializeGlobalSettings ===
         "function"
-      ) {
+    ) {
 
         initializeGlobalSettings();
 
-      }
+    }
 
 
-      if (
+    if (
         typeof applySiteTheme ===
         "function"
-      ) {
+    ) {
 
         applySiteTheme(
-          typeof getSiteTheme ===
-          "function"
-            ? getSiteTheme()
-            : "light"
+            typeof getSiteTheme ===
+            "function"
+                ? getSiteTheme()
+                : "light"
         );
-
-      }
-
-
-      if (
-        typeof applySiteLanguage ===
-        "function"
-      ) {
-
-        applySiteLanguage(
-          getForumLanguage()
-        );
-
-      }
-
-
-      translateForumPage();
-
-
-      const authenticated =
-        await checkAuth();
-
-
-      if (!authenticated) {
-        return;
-      }
-
-
-      renderPosts();
 
     }
 
 
-    startPage();
+    if (
+        typeof applySiteLanguage ===
+        "function"
+    ) {
 
-  </script>
+        applySiteLanguage(
+            getForumLanguage()
+        );
+
+    }
+
+
+    translateForumPage();
+
+
+    const authenticated =
+        await checkAuth();
+
+
+    if (!authenticated) {
+        return;
+    }
+
+
+    renderPosts();
+
+}
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    startForumPage
+);
+
+</script>
 
 </body>
-  </html>
+
+</html>
