@@ -18,263 +18,520 @@
     <style>
 
         /* =========================================================
-           ACCOUNT PAGE
-           EduNova AI
-           Final UI Foundation
+           ACCOUNT PAGE — EDUNOVA AI
+           Dashboard-aligned final UI
            ========================================================= */
 
         body {
             padding-top: 0;
         }
 
-        .account-page-header {
-            position: sticky;
+
+        /* =========================================================
+           HEADER
+           ========================================================= */
+
+        .account-header {
+            position: fixed;
             top: 0;
+            left: 0;
+            right: 0;
             z-index: 1000;
-            margin-bottom: 18px;
+            height: 70px;
+
             background: color-mix(
                 in srgb,
-                var(--background) 84%,
+                var(--background) 78%,
                 transparent
             );
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
+
             border-bottom: 1px solid var(--border);
+
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
         }
 
-        .account-page-header::after {
+
+        .account-header::after {
             content: "";
             position: absolute;
             left: 0;
             right: 0;
-            bottom: -18px;
-            height: 18px;
+            bottom: -24px;
+            height: 24px;
             pointer-events: none;
+
             background: linear-gradient(
                 to bottom,
                 var(--background),
                 transparent
             );
-            opacity: .95;
+
+            opacity: .92;
         }
 
-        .account-page-header .container {
-            min-height: 62px;
+
+        .account-header-inner {
+            width: min(
+                100%,
+                var(--container-width, 1100px)
+            );
+
+            height: 70px;
+
+            margin: 0 auto;
+            padding: 0 16px;
+
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 12px;
         }
 
-        .account-page-brand {
+
+        /* =========================================================
+           BRAND
+           ========================================================= */
+
+        .account-brand {
             display: inline-flex;
             align-items: center;
             gap: 9px;
-            text-decoration: none;
+
             color: var(--text);
+            text-decoration: none;
+
+            font-size: 15px;
             font-weight: 900;
-            font-size: 16px;
-            min-width: 0;
+
+            white-space: nowrap;
         }
 
-        .account-page-brand-icon {
+
+        .account-brand-mark {
             width: 35px;
             height: 35px;
-            border-radius: 11px;
+
             display: flex;
             align-items: center;
             justify-content: center;
+
+            border-radius: 11px;
+
             background: var(--text);
             color: var(--surface);
+
             font-size: 10px;
             font-weight: 900;
             letter-spacing: -.5px;
-            flex-shrink: 0;
-        }
-
-        .account-dashboard-button {
-            min-height: 38px;
-            padding: 7px 13px;
-            border: 1px solid var(--border);
-            background: var(--surface);
-            color: var(--text);
-            border-radius: 12px;
-            font-family: inherit;
-            font-size: 12px;
-            font-weight: 800;
-            cursor: pointer;
-            transition:
-                border-color .2s ease,
-                color .2s ease,
-                background .2s ease;
-            flex-shrink: 0;
-        }
-
-        .account-dashboard-button:hover {
-            border-color: var(--primary);
-            color: var(--primary);
         }
 
 
         /* =========================================================
-           HERO
+           HEADER ACTIONS
            ========================================================= */
 
-        .account-hero {
-            background: var(--primary);
-            color: white;
-            border-radius: 22px;
-            padding: 23px 19px;
-            margin-bottom: 18px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .account-hero::before {
-            content: "";
-            position: absolute;
-            width: 210px;
-            height: 210px;
-            border-radius: 50%;
-            background: rgba(255,255,255,.07);
-            left: -85px;
-            top: -95px;
-        }
-
-        .account-hero::after {
-            content: "";
-            position: absolute;
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 1px solid rgba(255,255,255,.10);
-            right: -45px;
-            bottom: -45px;
-        }
-
-        .account-hero-content {
-            position: relative;
-            z-index: 1;
+        .account-header-actions {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 4px;
         }
 
-        .avatar {
-            width: 63px;
-            height: 63px;
-            border-radius: 19px;
-            background: rgba(255,255,255,.14);
-            border: 1px solid rgba(255,255,255,.30);
+
+        .account-header-action {
+            min-width: 62px;
+            min-height: 52px;
+
+            padding: 5px 7px;
+
+            border: 0;
+            background: transparent;
+
+            color: var(--text-soft);
+
+            text-decoration: none;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            gap: 3px;
+
+            border-radius: 11px;
+
+            font-family: inherit;
+            font-size: 9px;
+            font-weight: 800;
+
+            cursor: pointer;
+
+            transition:
+                color .2s ease,
+                background .2s ease;
+        }
+
+
+        .account-header-action:hover {
+            color: var(--text);
+            background: var(--primary-light);
+        }
+
+
+        .account-header-action.active {
+            color: var(--primary);
+        }
+
+
+        .account-header-icon {
+            width: 23px;
+            height: 23px;
+
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
-            font-weight: 900;
-            flex-shrink: 0;
-        }
 
-        .account-name {
-            margin: 0;
-            font-size: 21px;
-            line-height: 1.3;
-            overflow-wrap: anywhere;
-        }
-
-        .account-email {
-            margin: 5px 0 0;
-            opacity: .86;
-            font-size: 12px;
-            direction: ltr;
-            text-align: right;
-            overflow-wrap: anywhere;
-        }
-
-        .level-pill {
-            display: inline-block;
-            margin-top: 8px;
-            padding: 5px 10px;
-            border-radius: 999px;
-            background: rgba(255,255,255,.13);
-            border: 1px solid rgba(255,255,255,.10);
-            font-size: 11px;
+            font-size: 17px;
+            line-height: 1;
             font-weight: 700;
         }
 
 
         /* =========================================================
-           SECTIONS
+           MAIN
            ========================================================= */
 
-        .section-heading {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            margin: 22px 2px 11px;
+        .account-main {
+            padding-top: 94px;
+            padding-bottom: 28px;
         }
 
-        .section-heading h2 {
-            margin: 0;
-            font-size: 18px;
-            color: var(--text);
-        }
 
-        .section-heading span {
-            color: var(--text-soft);
-            font-size: 11px;
+        .account-container {
+            width: min(
+                100%,
+                var(--container-width, 1100px)
+            );
+
+            margin: 0 auto;
+            padding: 0 16px;
         }
 
 
         /* =========================================================
-           STATS
+           PAGE INTRO
            ========================================================= */
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 10px;
+        .account-intro {
+            margin-bottom: 18px;
         }
 
-        .stat-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 17px;
-            padding: 15px 10px;
-            text-align: center;
-            box-shadow: var(--shadow-sm);
-            min-width: 0;
+
+        .account-intro h1 {
+            margin: 0;
+
+            color: var(--text);
+
+            font-size: clamp(
+                24px,
+                5vw,
+                31px
+            );
+
+            line-height: 1.25;
+            font-weight: 950;
         }
 
-        .stat-icon {
-            width: 32px;
-            height: 32px;
-            margin: 0 auto 7px;
-            border-radius: 10px;
-            border: 1px solid var(--border);
-            background: var(--background);
+
+        .account-intro p {
+            margin: 6px 0 0;
+
             color: var(--text-soft);
+
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+
+        /* =========================================================
+           PROFILE CARD
+           ========================================================= */
+
+        .account-profile {
+            position: relative;
+            overflow: hidden;
+
+            margin-bottom: 18px;
+
+            padding: 21px 18px;
+
+            border-radius: 22px;
+
+            background: var(--primary);
+            color: white;
+
+            box-shadow: var(--shadow-sm);
+        }
+
+
+        .account-profile::before {
+            content: "";
+
+            position: absolute;
+
+            width: 220px;
+            height: 220px;
+
+            left: -90px;
+            top: -115px;
+
+            border-radius: 50%;
+
+            background: rgba(
+                255,
+                255,
+                255,
+                .07
+            );
+        }
+
+
+        .account-profile::after {
+            content: "";
+
+            position: absolute;
+
+            width: 130px;
+            height: 130px;
+
+            right: -55px;
+            bottom: -65px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(
+                255,
+                255,
+                255,
+                .10
+            );
+        }
+
+
+        .account-profile-content {
+            position: relative;
+            z-index: 1;
+
+            display: flex;
+            align-items: center;
+
+            gap: 14px;
+        }
+
+
+        .account-avatar {
+            width: 64px;
+            height: 64px;
+
+            flex-shrink: 0;
+
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
-            font-weight: 900;
+
+            border-radius: 19px;
+
+            background: rgba(
+                255,
+                255,
+                255,
+                .14
+            );
+
+            border: 1px solid rgba(
+                255,
+                255,
+                255,
+                .28
+            );
+
+            color: white;
+
+            font-size: 24px;
+            font-weight: 950;
         }
 
-        .stat-number {
-            display: block;
-            color: var(--primary);
-            font-size: 20px;
-            font-weight: 900;
+
+        .account-profile-info {
+            min-width: 0;
         }
 
-        .stat-label {
-            display: block;
-            color: var(--text-soft);
+
+        .account-name {
+            margin: 0;
+
+            font-size: 21px;
+            line-height: 1.3;
+            font-weight: 900;
+
+            overflow-wrap: anywhere;
+        }
+
+
+        .account-email {
+            margin: 5px 0 0;
+
+            direction: ltr;
+            text-align: right;
+
+            font-size: 11px;
+            line-height: 1.5;
+
+            opacity: .84;
+
+            overflow-wrap: anywhere;
+        }
+
+
+        html[dir="ltr"] .account-email {
+            text-align: left;
+        }
+
+
+        .account-level {
+            display: inline-flex;
+
+            margin-top: 8px;
+            padding: 5px 10px;
+
+            border-radius: 999px;
+
+            background: rgba(
+                255,
+                255,
+                255,
+                .13
+            );
+
+            border: 1px solid rgba(
+                255,
+                255,
+                255,
+                .10
+            );
+
             font-size: 10px;
+            font-weight: 800;
+        }
+
+
+        /* =========================================================
+           SECTION HEADER
+           ========================================================= */
+
+        .account-section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 10px;
+
+            margin: 22px 2px 10px;
+        }
+
+
+        .account-section-title {
+            margin: 0;
+
+            color: var(--text);
+
+            font-size: 17px;
+            font-weight: 900;
+        }
+
+
+        .account-section-subtitle {
+            color: var(--text-soft);
+
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+
+        /* =========================================================
+           STATISTICS
+           ========================================================= */
+
+        .account-stats {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 10px;
+        }
+
+
+        .account-stat {
+            min-width: 0;
+
+            padding: 15px 9px;
+
+            background: var(--surface);
+
+            border: 1px solid var(--border);
+
+            border-radius: 17px;
+
+            text-align: center;
+
+            box-shadow: var(--shadow-sm);
+        }
+
+
+        .account-stat-icon {
+            width: 32px;
+            height: 32px;
+
+            margin: 0 auto 7px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 10px;
+
+            background: var(--background);
+
+            border: 1px solid var(--border);
+
+            color: var(--text-soft);
+
+            font-size: 13px;
+            font-weight: 900;
+        }
+
+
+        .account-stat-number {
+            display: block;
+
+            color: var(--primary);
+
+            font-size: 20px;
+            line-height: 1.2;
+            font-weight: 950;
+        }
+
+
+        .account-stat-label {
+            display: block;
+
+            margin-top: 3px;
+
+            color: var(--text-soft);
+
+            font-size: 9px;
             line-height: 1.4;
-            margin-top: 2px;
         }
 
 
@@ -282,57 +539,82 @@
            ACCOUNT INFORMATION
            ========================================================= */
 
-        .account-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 18px;
+        .account-info-card {
             overflow: hidden;
+
+            background: var(--surface);
+
+            border: 1px solid var(--border);
+
+            border-radius: 18px;
+
             box-shadow: var(--shadow-sm);
         }
 
-        .account-row {
-            min-height: 59px;
-            padding: 12px 14px;
-            border-bottom: 1px solid var(--border);
+
+        .account-info-row {
+            min-height: 60px;
+
+            padding: 11px 14px;
+
             display: flex;
             align-items: center;
+
             gap: 11px;
+
+            border-bottom: 1px solid var(--border);
         }
 
-        .account-row:last-child {
-            border-bottom: none;
+
+        .account-info-row:last-child {
+            border-bottom: 0;
         }
 
-        .row-icon {
+
+        .account-info-icon {
             width: 37px;
             height: 37px;
-            border-radius: 11px;
-            background: var(--primary-light);
-            color: var(--text);
-            border: 1px solid var(--border);
+
+            flex-shrink: 0;
+
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
-            font-size: 13px;
+
+            border-radius: 11px;
+
+            background: var(--primary-light);
+
+            border: 1px solid var(--border);
+
+            color: var(--text-soft);
+
+            font-size: 12px;
             font-weight: 900;
         }
 
-        .row-text {
-            flex: 1;
+
+        .account-info-text {
             min-width: 0;
+            flex: 1;
         }
 
-        .row-label {
-            color: var(--text-soft);
-            font-size: 10px;
+
+        .account-info-label {
             margin-bottom: 3px;
+
+            color: var(--text-soft);
+
+            font-size: 9px;
         }
 
-        .row-value {
+
+        .account-info-value {
+            color: var(--text);
+
             font-size: 13px;
             font-weight: 800;
-            color: var(--text);
+
             overflow-wrap: anywhere;
         }
 
@@ -343,93 +625,136 @@
 
         .account-actions {
             display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
             gap: 9px;
         }
 
+
         .account-action {
             width: 100%;
-            min-height: 52px;
-            border: 1px solid var(--border);
-            background: var(--surface);
-            border-radius: 15px;
-            padding: 10px 12px;
+            min-height: 54px;
+
+            padding: 9px 11px;
+
             display: flex;
             align-items: center;
-            gap: 11px;
-            font-family: inherit;
-            font-size: 12px;
-            font-weight: 800;
+
+            gap: 10px;
+
+            background: var(--surface);
+
+            border: 1px solid var(--border);
+
+            border-radius: 15px;
+
             color: var(--text);
-            cursor: pointer;
+
+            font-family: inherit;
+
+            font-size: 11px;
+            font-weight: 800;
+
             text-align: right;
+
+            cursor: pointer;
+
             transition:
                 border-color .2s ease,
                 color .2s ease,
-                transform .2s ease,
-                background .2s ease;
+                background .2s ease,
+                transform .2s ease;
         }
+
 
         html[dir="ltr"] .account-action {
             text-align: left;
         }
 
+
         .account-action:hover {
             border-color: var(--primary);
+
             color: var(--primary);
+
+            background: var(--surface);
+
             transform: translateY(-1px);
         }
+
 
         .account-action:active {
             transform: translateY(0);
         }
 
-        .action-icon {
+
+        .account-action-icon {
             width: 35px;
             height: 35px;
-            border-radius: 10px;
-            background: var(--background);
-            border: 1px solid var(--border);
-            color: var(--text-soft);
+
+            flex-shrink: 0;
+
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
-            font-size: 14px;
+
+            border-radius: 10px;
+
+            background: var(--background);
+
+            border: 1px solid var(--border);
+
+            color: var(--text-soft);
+
+            font-size: 13px;
             font-weight: 900;
         }
 
-        .action-arrow {
+
+        .account-action-arrow {
             margin-right: auto;
+
             color: var(--text-light);
-            font-size: 18px;
+
+            font-size: 17px;
             line-height: 1;
         }
 
-        html[dir="ltr"] .action-arrow {
+
+        html[dir="ltr"]
+        .account-action-arrow {
             margin-right: 0;
             margin-left: auto;
         }
 
-        .logout-action {
-            color: var(--danger);
-            background: var(--surface);
-            border-color: var(--border);
-        }
 
-        .logout-action .action-icon {
+        .account-action.danger {
             color: var(--danger);
         }
 
-        .logout-action:hover {
+
+        .account-action.danger
+        .account-action-icon {
             color: var(--danger);
+        }
+
+
+        .account-action.logout {
+            color: var(--danger);
+        }
+
+
+        .account-action.logout
+        .account-action-icon {
+            color: var(--danger);
+        }
+
+
+        .account-action.logout:hover,
+        .account-action.danger:hover {
             border-color: var(--danger);
-        }
-
-        .danger-action {
-            color: var(--danger);
-        }
-
-        .danger-action .action-icon {
             color: var(--danger);
         }
 
@@ -438,24 +763,43 @@
            LOADING
            ========================================================= */
 
-        .loading-account {
-            text-align: center;
-            padding: 70px 20px;
+        .account-loading {
+            min-height: 55vh;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
             color: var(--text-soft);
+
+            text-align: center;
         }
 
-        .loading-icon {
-            width: 42px;
-            height: 42px;
-            margin: 0 auto 12px;
-            border: 1px solid var(--border);
-            border-radius: 13px;
+
+        .account-loading-icon {
+            width: 43px;
+            height: 43px;
+
+            margin-bottom: 12px;
+
             display: flex;
             align-items: center;
             justify-content: center;
+
+            border: 1px solid var(--border);
+
+            border-radius: 13px;
+
             color: var(--text-soft);
-            font-size: 17px;
+
+            font-size: 16px;
             font-weight: 900;
+        }
+
+
+        .account-loading-text {
+            font-size: 12px;
         }
 
 
@@ -465,28 +809,41 @@
 
         .account-message {
             position: fixed;
-            bottom: 20px;
+
             left: 50%;
-            transform: translateX(-50%);
+            bottom: 20px;
+
             z-index: 9999;
+
+            transform: translateX(-50%);
+
+            width: max-content;
+            max-width: min(
+                90%,
+                440px
+            );
+
+            padding: 11px 16px;
+
+            border-radius: 12px;
+
             background: var(--text);
             color: var(--surface);
-            padding: 11px 16px;
-            border-radius: 12px;
-            font-size: 12px;
-            max-width: min(90%, 430px);
-            text-align: center;
-            box-shadow: var(--shadow);
-            transition: opacity .25s ease;
-        }
 
-        .bottom-space {
-            height: 15px;
+            font-size: 11px;
+            font-weight: 700;
+
+            text-align: center;
+
+            box-shadow: var(--shadow);
+
+            transition:
+                opacity .25s ease;
         }
 
 
         /* =========================================================
-           HIDDEN BOTTOM NAV
+           HIDE OLD BOTTOM NAV
            ========================================================= */
 
         .bottom-nav {
@@ -500,14 +857,20 @@
            RESPONSIVE
            ========================================================= */
 
-        @media (min-width: 650px) {
+        @media (max-width: 760px) {
 
-            .stats-grid {
-                grid-template-columns: repeat(4, 1fr);
+            .account-header-action {
+                min-width: 55px;
             }
 
-            .account-actions {
-                grid-template-columns: repeat(2, 1fr);
+            .account-header-action
+            span:last-child {
+                font-size: 8px;
+            }
+
+            .account-stats {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
             }
 
         }
@@ -515,40 +878,50 @@
 
         @media (max-width: 600px) {
 
-            .account-page-header {
-                margin-bottom: 15px;
+            .account-header-inner {
+                padding: 0 11px;
             }
 
-            .account-page-header .container {
-                min-height: 58px;
+            .account-brand {
+                font-size: 13px;
             }
 
-            .account-page-brand {
-                font-size: 14px;
-            }
-
-            .account-page-brand-icon {
+            .account-brand-mark {
                 width: 33px;
                 height: 33px;
                 border-radius: 10px;
             }
 
-            .account-dashboard-button {
-                min-height: 36px;
-                padding: 6px 10px;
-                font-size: 11px;
+            .account-header-actions {
+                gap: 1px;
             }
 
-            .account-hero {
-                border-radius: 19px;
+            .account-header-action {
+                min-width: 48px;
+                min-height: 52px;
+                padding: 4px;
+            }
+
+            .account-header-icon {
+                width: 21px;
+                height: 21px;
+                font-size: 15px;
+            }
+
+            .account-main {
+                padding-top: 88px;
+            }
+
+            .account-container {
+                padding: 0 12px;
+            }
+
+            .account-profile {
                 padding: 20px 15px;
+                border-radius: 19px;
             }
 
-            .account-hero-content {
-                gap: 11px;
-            }
-
-            .avatar {
+            .account-avatar {
                 width: 57px;
                 height: 57px;
                 border-radius: 17px;
@@ -560,57 +933,41 @@
             }
 
             .account-email {
-                font-size: 11px;
+                font-size: 10px;
             }
 
-            .stats-grid {
-                gap: 8px;
-            }
-
-            .stat-card {
-                padding: 13px 8px;
-                border-radius: 15px;
-            }
-
-            .account-row {
-                padding: 11px 12px;
-            }
-
-            .account-action {
-                min-height: 50px;
+            .account-actions {
+                grid-template-columns: 1fr;
             }
 
         }
 
 
-        @media (max-width: 360px) {
+        @media (max-width: 390px) {
 
-            .account-page-brand span:last-child {
+            .account-brand span:last-child {
                 display: none;
             }
 
-            .account-name {
-                font-size: 17px;
+            .account-header-action {
+                min-width: 44px;
             }
 
-            .account-email {
-                max-width: 190px;
+            .account-header-action
+            span:last-child {
+                font-size: 7px;
             }
 
-            .stats-grid {
-                gap: 7px;
+            .account-stat {
+                padding: 13px 6px;
             }
 
-            .stat-card {
-                padding: 12px 5px;
-            }
-
-            .stat-number {
+            .account-stat-number {
                 font-size: 18px;
             }
 
-            .stat-label {
-                font-size: 9px;
+            .account-stat-label {
+                font-size: 8px;
             }
 
         }
@@ -627,17 +984,18 @@
      HEADER
 ========================================================= -->
 
-<header class="account-page-header">
+<header class="account-header">
 
-    <div class="container">
+    <div class="account-header-inner">
+
 
         <a
             href="dashboard.html"
-            class="account-page-brand"
+            class="account-brand"
             aria-label="EduNova AI">
 
             <span
-                class="account-page-brand-icon"
+                class="account-brand-mark"
                 aria-hidden="true">
 
                 AI
@@ -651,15 +1009,94 @@
         </a>
 
 
-        <button
-            class="account-dashboard-button"
-            onclick="goDashboard()"
-            id="dashboardButton"
-            type="button">
+        <nav
+            class="account-header-actions"
+            aria-label="Main navigation">
 
-            الرئيسية
 
-        </button>
+            <a
+                href="dashboard.html"
+                class="account-header-action"
+                aria-label="الرئيسية">
+
+                <span
+                    class="account-header-icon"
+                    aria-hidden="true">
+
+                    ⌂
+
+                </span>
+
+                <span data-i18n="nav_home">
+                    الرئيسية
+                </span>
+
+            </a>
+
+
+            <button
+                class="account-header-action"
+                type="button"
+                onclick="showNotifications()"
+                aria-label="الإشعارات">
+
+                <span
+                    class="account-header-icon"
+                    aria-hidden="true">
+
+                    ◔
+
+                </span>
+
+                <span data-i18n="nav_notifications">
+                    الإشعارات
+                </span>
+
+            </button>
+
+
+            <a
+                href="account.html"
+                class="account-header-action active"
+                aria-current="page"
+                aria-label="حسابي">
+
+                <span
+                    class="account-header-icon"
+                    aria-hidden="true">
+
+                    ○
+
+                </span>
+
+                <span data-i18n="nav_account">
+                    حسابي
+                </span>
+
+            </a>
+
+
+            <a
+                href="settings.html"
+                class="account-header-action"
+                aria-label="الإعدادات">
+
+                <span
+                    class="account-header-icon"
+                    aria-hidden="true">
+
+                    ⚙
+
+                </span>
+
+                <span data-i18n="nav_settings">
+                    الإعدادات
+                </span>
+
+            </a>
+
+
+        </nav>
 
     </div>
 
@@ -670,48 +1107,70 @@
      MAIN
 ========================================================= -->
 
-<main class="page">
+<main class="account-main">
 
-    <div class="container">
+    <div class="account-container">
 
 
         <!-- LOADING -->
 
         <div
             id="loading"
-            class="loading-account">
+            class="account-loading">
 
             <div
-                class="loading-icon"
+                class="account-loading-icon"
                 aria-hidden="true">
 
                 …
 
             </div>
 
-            <span id="loadingText">
+            <span
+                id="loadingText"
+                class="account-loading-text">
+
                 جاري تحميل حسابك...
+
             </span>
 
         </div>
 
 
-        <!-- ACCOUNT -->
+        <!-- ACCOUNT CONTENT -->
 
         <div
             id="accountContent"
             style="display:none;">
 
 
-            <!-- HERO -->
+            <!-- INTRO -->
 
-            <section class="account-hero">
+            <section class="account-intro">
 
-                <div class="account-hero-content">
+                <h1>
+                    <span id="accountPageTitle">
+                        حسابي
+                    </span>
+                </h1>
+
+                <p id="accountPageSubtitle">
+                    إدارة حسابك ومتابعة تقدمك الدراسي.
+                </p>
+
+            </section>
+
+
+            <!-- PROFILE -->
+
+            <section class="account-profile">
+
+                <div class="account-profile-content">
+
 
                     <div
                         id="avatar"
-                        class="avatar"
+                        class="account-avatar"
                         aria-hidden="true">
 
                         ط
@@ -719,15 +1178,16 @@
                     </div>
 
 
-                    <div>
+                    <div
+                        class="account-profile-info">
 
-                        <h1
+                        <h2
                             id="studentName"
                             class="account-name">
 
                             الطالب
 
-                        </h1>
+                        </h2>
 
 
                         <p
@@ -741,13 +1201,14 @@
 
                         <span
                             id="studentLevel"
-                            class="level-pill">
+                            class="account-level">
 
                             لم يتم اختيار المستوى
 
                         </span>
 
                     </div>
+
 
                 </div>
 
@@ -756,26 +1217,34 @@
 
             <!-- STATS -->
 
-            <div class="section-heading">
+            <div class="account-section-header">
 
-                <h2 id="achievementsTitle">
+                <h2
+                    id="achievementsTitle"
+                    class="account-section-title">
+
                     إنجازاتي
+
                 </h2>
 
-                <span id="progressText">
+                <span
+                    id="progressText"
+                    class="account-section-subtitle">
+
                     تقدمك الدراسي
+
                 </span>
 
             </div>
 
 
-            <section class="stats-grid">
+            <section class="account-stats">
 
 
-                <div class="stat-card">
+                <div class="account-stat">
 
                     <div
-                        class="stat-icon"
+                        class="account-stat-icon"
                         aria-hidden="true">
 
                         +
@@ -784,15 +1253,15 @@
 
                     <span
                         id="points"
-                        class="stat-number">
+                        class="account-stat-number">
 
                         0
 
                     </span>
 
                     <span
-                        class="stat-label"
-                        id="pointsLabel">
+                        id="pointsLabel"
+                        class="account-stat-label">
 
                         النقاط
 
@@ -801,10 +1270,10 @@
                 </div>
 
 
-                <div class="stat-card">
+                <div class="account-stat">
 
                     <div
-                        class="stat-icon"
+                        class="account-stat-icon"
                         aria-hidden="true">
 
                         ✓
@@ -813,15 +1282,15 @@
 
                     <span
                         id="lessons"
-                        class="stat-number">
+                        class="account-stat-number">
 
                         0
 
                     </span>
 
                     <span
-                        class="stat-label"
-                        id="lessonsLabel">
+                        id="lessonsLabel"
+                        class="account-stat-label">
 
                         الدروس المكتملة
 
@@ -830,10 +1299,10 @@
                 </div>
 
 
-                <div class="stat-card">
+                <div class="account-stat">
 
                     <div
-                        class="stat-icon"
+                        class="account-stat-icon"
                         aria-hidden="true">
 
                         *
@@ -842,15 +1311,15 @@
 
                     <span
                         id="badges"
-                        class="stat-number">
+                        class="account-stat-number">
 
                         0
 
                     </span>
 
                     <span
-                        class="stat-label"
-                        id="badgesLabel">
+                        id="badgesLabel"
+                        class="account-stat-label">
 
                         الشارات
 
@@ -859,10 +1328,10 @@
                 </div>
 
 
-                <div class="stat-card">
+                <div class="account-stat">
 
                     <div
-                        class="stat-icon"
+                        class="account-stat-icon"
                         aria-hidden="true">
 
                         /
@@ -871,15 +1340,15 @@
 
                     <span
                         id="streak"
-                        class="stat-number">
+                        class="account-stat-number">
 
                         0
 
                     </span>
 
                     <span
-                        class="stat-label"
-                        id="streakLabel">
+                        id="streakLabel"
+                        class="account-stat-label">
 
                         أيام متتالية
 
@@ -893,33 +1362,37 @@
 
             <!-- ACCOUNT INFORMATION -->
 
-            <div class="section-heading">
+            <div class="account-section-header">
 
-                <h2 id="accountInfoTitle">
+                <h2
+                    id="accountInfoTitle"
+                    class="account-section-title">
+
                     معلومات الحساب
+
                 </h2>
 
             </div>
 
 
-            <section class="account-card">
+            <section class="account-info-card">
 
 
-                <div class="account-row">
+                <div class="account-info-row">
 
                     <div
-                        class="row-icon"
+                        class="account-info-icon"
                         aria-hidden="true">
 
                         U
 
                     </div>
 
-                    <div class="row-text">
+                    <div class="account-info-text">
 
                         <div
-                            class="row-label"
-                            id="nameLabel">
+                            id="nameLabel"
+                            class="account-info-label">
 
                             الاسم
 
@@ -927,7 +1400,7 @@
 
                         <div
                             id="infoName"
-                            class="row-value">
+                            class="account-info-value">
 
                             -
 
@@ -938,21 +1411,21 @@
                 </div>
 
 
-                <div class="account-row">
+                <div class="account-info-row">
 
                     <div
-                        class="row-icon"
+                        class="account-info-icon"
                         aria-hidden="true">
 
                         @
 
                     </div>
 
-                    <div class="row-text">
+                    <div class="account-info-text">
 
                         <div
-                            class="row-label"
-                            id="emailLabel">
+                            id="emailLabel"
+                            class="account-info-label">
 
                             البريد الإلكتروني
 
@@ -960,7 +1433,7 @@
 
                         <div
                             id="infoEmail"
-                            class="row-value"
+                            class="account-info-value"
                             dir="ltr">
 
                             -
@@ -972,21 +1445,21 @@
                 </div>
 
 
-                <div class="account-row">
+                <div class="account-info-row">
 
                     <div
-                        class="row-icon"
+                        class="account-info-icon"
                         aria-hidden="true">
 
                         L
 
                     </div>
 
-                    <div class="row-text">
+                    <div class="account-info-text">
 
                         <div
-                            class="row-label"
-                            id="levelLabel">
+                            id="levelLabel"
+                            class="account-info-label">
 
                             المستوى الدراسي
 
@@ -994,7 +1467,7 @@
 
                         <div
                             id="infoLevel"
-                            class="row-value">
+                            class="account-info-value">
 
                             -
 
@@ -1005,213 +1478,300 @@
                 </div>
 
 
-            </section>
+            </section>            <section class="account-actions-section">
 
 
-            <!-- ACCOUNT ACTIONS -->
+                <div class="section-heading">
 
-            <div class="section-heading">
+                    <div class="section-heading-icon" aria-hidden="true">
+                        ⚙
+                    </div>
 
-                <h2 id="accountManagementTitle">
-                    إدارة الحساب
-                </h2>
+                    <div>
 
-            </div>
+                        <h2
+                            id="actionsTitle"
+                            class="section-title">
+
+                            إدارة الحساب
+
+                        </h2>
+
+                        <p
+                            id="actionsSubtitle"
+                            class="section-subtitle">
+
+                            تحكم في إعدادات حسابك وبياناتك.
+
+                        </p>
+
+                    </div>
+
+                </div>
 
 
-            <section class="account-actions">
+                <div class="account-actions-grid">
+
+
+                    <button
+                        type="button"
+                        class="account-action-card"
+                        onclick="changeLevel()">
+
+                        <span
+                            class="account-action-icon"
+                            aria-hidden="true">
+
+                            ↕️
+
+                        </span>
+
+                        <span class="account-action-content">
+
+                            <strong id="changeLevelText">
+
+                                تغيير المستوى
+
+                            </strong>
+
+                            <small id="changeLevelDesc">
+
+                                اختر المستوى الدراسي من جديد
+
+                            </small>
+
+                        </span>
+
+                        <span
+                            class="account-action-arrow"
+                            aria-hidden="true">
+
+                            ‹
+
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="account-action-card"
+                        onclick="openSettings()">
+
+                        <span
+                            class="account-action-icon"
+                            aria-hidden="true">
+
+                            ⚙
+
+                        </span>
+
+                        <span class="account-action-content">
+
+                            <strong id="settingsText">
+
+                                الإعدادات
+
+                            </strong>
+
+                            <small id="settingsDesc">
+
+                                اللغة والمظهر وإعدادات المنصة
+
+                            </small>
+
+                        </span>
+
+                        <span
+                            class="account-action-arrow"
+                            aria-hidden="true">
+
+                            ‹
+
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="account-action-card"
+                        onclick="showMessage(accountText('editDataSoon'))">
+
+                        <span
+                            class="account-action-icon"
+                            aria-hidden="true">
+
+                            ✎
+
+                        </span>
+
+                        <span class="account-action-content">
+
+                            <strong id="editDataText">
+
+                                تعديل البيانات
+
+                            </strong>
+
+                            <small id="editDataDesc">
+
+                                تعديل معلومات الحساب الشخصية
+
+                            </small>
+
+                        </span>
+
+                        <span
+                            class="account-action-arrow"
+                            aria-hidden="true">
+
+                            ‹
+
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="account-action-card"
+                        onclick="showMessage(accountText('passwordSoon'))">
+
+                        <span
+                            class="account-action-icon"
+                            aria-hidden="true">
+
+                            •
+
+                        </span>
+
+                        <span class="account-action-content">
+
+                            <strong id="passwordText">
+
+                                كلمة المرور
+
+                            </strong>
+
+                            <small id="passwordDesc">
+
+                                تغيير كلمة مرور الحساب
+
+                            </small>
+
+                        </span>
+
+                        <span
+                            class="account-action-arrow"
+                            aria-hidden="true">
+
+                            ‹
+
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="account-action-card"
+                        onclick="showMessage(accountText('subscriptionsSoon'))">
+
+                        <span
+                            class="account-action-icon"
+                            aria-hidden="true">
+
+                            $
+
+                        </span>
+
+                        <span class="account-action-content">
+
+                            <strong id="subscriptionsText">
+
+                                الاشتراكات والدفع
+
+                            </strong>
+
+                            <small id="subscriptionsDesc">
+
+                                إدارة الاشتراك وطرق الدفع
+
+                            </small>
+
+                        </span>
+
+                        <span
+                            class="account-action-arrow"
+                            aria-hidden="true">
+
+                            ‹
+
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="account-action-card danger"
+                        onclick="showMessage(accountText('deleteSoon'))">
+
+                        <span
+                            class="account-action-icon"
+                            aria-hidden="true">
+
+                            ×
+
+                        </span>
+
+                        <span class="account-action-content">
+
+                            <strong id="deleteAccountText">
+
+                                حذف الحساب
+
+                            </strong>
+
+                            <small id="deleteAccountDesc">
+
+                                حذف الحساب وبياناته نهائياً
+
+                            </small>
+
+                        </span>
+
+                        <span
+                            class="account-action-arrow"
+                            aria-hidden="true">
+
+                            ‹
+
+                        </span>
+
+                    </button>
+
+
+                </div>
 
 
                 <button
-                    class="account-action"
-                    onclick="changeLevel()"
-                    type="button">
+                    type="button"
+                    class="logout-button"
+                    onclick="logout()">
 
                     <span
-                        class="action-icon"
+                        class="logout-icon"
                         aria-hidden="true">
 
-                        L
-
-                    </span>
-
-                    <span id="changeLevelText">
-                        تغيير المستوى الدراسي
-                    </span>
-
-                    <span
-                        class="action-arrow"
-                        aria-hidden="true">
-
-                        ‹
-
-                    </span>
-
-                </button>
-
-
-                <button
-                    class="account-action"
-                    onclick="openSettings()"
-                    type="button">
-
-                    <span
-                        class="action-icon"
-                        aria-hidden="true">
-
-                        S
-
-                    </span>
-
-                    <span id="settingsText">
-                        الإعدادات
-                    </span>
-
-                    <span
-                        class="action-arrow"
-                        aria-hidden="true">
-
-                        ‹
-
-                    </span>
-
-                </button>
-
-
-                <button
-                    class="account-action"
-                    onclick="showMessage('editData')"
-                    type="button">
-
-                    <span
-                        class="action-icon"
-                        aria-hidden="true">
-
-                        E
-
-                    </span>
-
-                    <span id="editDataText">
-                        تعديل البيانات
-                    </span>
-
-                    <span
-                        class="action-arrow"
-                        aria-hidden="true">
-
-                        ‹
-
-                    </span>
-
-                </button>
-
-
-                <button
-                    class="account-action"
-                    onclick="showMessage('password')"
-                    type="button">
-
-                    <span
-                        class="action-icon"
-                        aria-hidden="true">
-
-                        P
-
-                    </span>
-
-                    <span id="passwordText">
-                        كلمة المرور
-                    </span>
-
-                    <span
-                        class="action-arrow"
-                        aria-hidden="true">
-
-                        ‹
-
-                    </span>
-
-                </button>
-
-
-                <button
-                    class="account-action"
-                    onclick="showMessage('payments')"
-                    type="button">
-
-                    <span
-                        class="action-icon"
-                        aria-hidden="true">
-
-                        $
-
-                    </span>
-
-                    <span id="paymentsText">
-                        الاشتراكات والمدفوعات
-                    </span>
-
-                    <span
-                        class="action-arrow"
-                        aria-hidden="true">
-
-                        ‹
-
-                    </span>
-
-                </button>
-
-
-                <button
-                    class="account-action danger-action"
-                    onclick="showMessage('delete')"
-                    type="button">
-
-                    <span
-                        class="action-icon"
-                        aria-hidden="true">
-
-                        ×
-
-                    </span>
-
-                    <span id="deleteText">
-                        حذف الحساب
-                    </span>
-
-                    <span
-                        class="action-arrow"
-                        aria-hidden="true">
-
-                        ‹
-
-                    </span>
-
-                </button>
-
-
-                <button
-                    class="account-action logout-action"
-                    onclick="logout()"
-                    type="button">
-
-                    <span
-                        class="action-icon"
-                        aria-hidden="true">
-
-                        →
+                        ↪
 
                     </span>
 
                     <span id="logoutText">
+
                         تسجيل الخروج
-                    </span>
-
-                    <span
-                        class="action-arrow"
-                        aria-hidden="true">
-
-                        ‹
 
                     </span>
 
@@ -1221,627 +1781,812 @@
             </section>
 
 
-            <div class="bottom-space"></div>
+            <div
+                id="accountMessage"
+                class="account-message"
+                role="status"
+                aria-live="polite">
+            </div>
 
 
-        </div>
+        </main>
+
+
+        <footer class="account-footer">
+
+            <div class="footer-brand">
+                EduNova AI
+            </div>
+
+            <div
+                id="footerText"
+                class="footer-text">
+
+                منصتك التعليمية الذكية
+
+            </div>
+
+        </footer>
+
 
     </div>
 
-</main>
 
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+    </script>
 
-<!-- =========================================================
-     HIDDEN BOTTOM NAV
-========================================================= -->
 
-<nav
-    class="bottom-nav"
-    aria-hidden="true">
+    <script>
 
-    <a href="dashboard.html">
-        <span>⌂</span>
-        <small id="navHome">الرئيسية</small>
-    </a>
+        /* =========================================================
+           ACCOUNT PAGE — SUPABASE
+           ========================================================= */
 
-    <a href="library.html">
-        <span>▦</span>
-        <small id="navLibrary">مكتبتي</small>
-    </a>
+        const ACCOUNT_SUPABASE_URL =
+            "https://qkzdlxqledsznhbifaxy.supabase.co";
 
-    <a href="forum.html">
-        <span>○</span>
-        <small id="navForum">المنتدى</small>
-    </a>
+        const ACCOUNT_SUPABASE_KEY =
+            "sb_publishable_ZdpHXwLlhpbXztsTXpAFTg_TgOji91v";
 
-    <a
-        href="account.html"
-        class="active">
 
-        <span>●</span>
-        <small id="navAccount">حسابي</small>
+        let accountSupabase = null;
 
-    </a>
 
-</nav>
+        try {
 
+            if (
+                typeof window.supabase !== "undefined" &&
+                typeof window.supabase.createClient === "function"
+            ) {
 
-<!-- =========================================================
-     GLOBAL SCRIPT
-========================================================= -->
+                accountSupabase =
+                    window.supabase.createClient(
+                        ACCOUNT_SUPABASE_URL,
+                        ACCOUNT_SUPABASE_KEY
+                    );
 
-<script src="script.js"></script>
+            }
 
+        } catch (error) {
 
-<!-- =========================================================
-     SUPABASE
-========================================================= -->
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-
-<script>
-
-    /* =========================================================
-       SUPABASE
-    ========================================================= */
-
-    const SUPABASE_URL =
-        "https://qkzdlxqledsznhbifaxy.supabase.co";
-
-    const SUPABASE_KEY =
-        "sb_publishable_ZdpHXwLlhpbXztsTXpAFTg_TgOji91v";
-
-    const supabaseClient =
-        supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_KEY
-        );
-
-
-    /* =========================================================
-       TRANSLATIONS
-    ========================================================= */
-
-    const ACCOUNT_TRANSLATIONS = {
-
-        ar: {
-
-            pageTitle: "حسابي | EduNova AI",
-            dashboard: "الرئيسية",
-            loading: "جاري تحميل حسابك...",
-            student: "الطالب",
-            noLevel: "لم يتم اختيار المستوى",
-
-            achievements: "إنجازاتي",
-            progress: "تقدمك الدراسي",
-
-            points: "النقاط",
-            lessons: "الدروس المكتملة",
-            badges: "الشارات",
-            streak: "أيام متتالية",
-
-            accountInfo: "معلومات الحساب",
-            name: "الاسم",
-            email: "البريد الإلكتروني",
-            level: "المستوى الدراسي",
-
-            accountManagement: "إدارة الحساب",
-            changeLevel: "تغيير المستوى الدراسي",
-            settings: "الإعدادات",
-            editData: "تعديل البيانات",
-            password: "كلمة المرور",
-            payments: "الاشتراكات والمدفوعات",
-            delete: "حذف الحساب",
-            logout: "تسجيل الخروج",
-
-            navHome: "الرئيسية",
-            navLibrary: "مكتبتي",
-            navForum: "المنتدى",
-            navAccount: "حسابي",
-
-            editDataMessage:
-                "تعديل البيانات سيكون متاحًا قريبًا.",
-
-            passwordMessage:
-                "إدارة كلمة المرور ستكون متاحة عند اكتمال نظام الحسابات.",
-
-            paymentsMessage:
-                "إدارة الاشتراكات والمدفوعات ستتم إضافتها لاحقًا.",
-
-            deleteMessage:
-                "حذف الحساب سيتم تفعيله بعد اكتمال النظام النهائي.",
-
-            logoutConfirm:
-                "هل تريد تسجيل الخروج من حسابك؟",
-
-            logoutError:
-                "حدث خطأ أثناء تسجيل الخروج.",
-
-            defaultStudent:
-                "الطالب"
-
-        },
-
-
-        fr: {
-
-            pageTitle: "Mon compte | EduNova AI",
-            dashboard: "Accueil",
-            loading: "Chargement de votre compte...",
-            student: "Étudiant",
-            noLevel: "Aucun niveau sélectionné",
-
-            achievements: "Mes progrès",
-            progress: "Votre progression",
-
-            points: "Points",
-            lessons: "Leçons terminées",
-            badges: "Badges",
-            streak: "Jours consécutifs",
-
-            accountInfo: "Informations du compte",
-            name: "Nom",
-            email: "Adresse e-mail",
-            level: "Niveau scolaire",
-
-            accountManagement: "Gestion du compte",
-            changeLevel: "Changer le niveau scolaire",
-            settings: "Paramètres",
-            editData: "Modifier les informations",
-            password: "Mot de passe",
-            payments: "Abonnements et paiements",
-            delete: "Supprimer le compte",
-            logout: "Se déconnecter",
-
-            navHome: "Accueil",
-            navLibrary: "Ma bibliothèque",
-            navForum: "Forum",
-            navAccount: "Compte",
-
-            editDataMessage:
-                "La modification des informations sera disponible prochainement.",
-
-            passwordMessage:
-                "La gestion du mot de passe sera disponible lorsque le système de compte sera terminé.",
-
-            paymentsMessage:
-                "La gestion des abonnements et des paiements sera ajoutée prochainement.",
-
-            deleteMessage:
-                "La suppression du compte sera activée après la finalisation du système.",
-
-            logoutConfirm:
-                "Voulez-vous vous déconnecter de votre compte ?",
-
-            logoutError:
-                "Une erreur s'est produite lors de la déconnexion.",
-
-            defaultStudent:
-                "Étudiant"
-
-        }
-
-    };
-
-
-    /* =========================================================
-       LANGUAGE
-    ========================================================= */
-
-    function getAccountLanguage() {
-
-        if (
-            typeof getSiteLanguage ===
-            "function"
-        ) {
-
-            return getSiteLanguage();
-
-        }
-
-        return (
-            localStorage.getItem(
-                GLOBAL_LANGUAGE_KEY || "site_language"
-            ) || "ar"
-        );
-
-    }
-
-
-    function accountText(key) {
-
-        const language =
-            getAccountLanguage();
-
-        return (
-            ACCOUNT_TRANSLATIONS[language]?.[key] ||
-            ACCOUNT_TRANSLATIONS.ar[key] ||
-            key
-        );
-
-    }
-
-
-    /* =========================================================
-       LEVEL
-    ========================================================= */
-
-    function getAccountLevelLabel() {
-
-        let level =
-            typeof getStudentLevel ===
-            "function"
-                ? getStudentLevel()
-                : localStorage.getItem(
-                    "student_level"
-                );
-
-
-        if (!level) {
-
-            return accountText(
-                "noLevel"
+            console.error(
+                "EduNova account Supabase initialization error:",
+                error
             );
 
         }
 
 
-        if (
-            typeof getLevelLabel ===
-            "function"
-        ) {
+        /* =========================================================
+           ACCOUNT TRANSLATIONS
+           ========================================================= */
+
+        const ACCOUNT_TRANSLATIONS = {
+
+            ar: {
+
+                pageTitle:
+                    "حسابي | EduNova AI",
+
+                pageTitleText:
+                    "حسابي",
+
+                pageSubtitle:
+                    "إدارة حسابك ومتابعة تقدمك الدراسي.",
+
+                profileTitle:
+                    "ملف الطالب",
+
+                profileSubtitle:
+                    "معلوماتك الأساسية وحالتك الدراسية.",
+
+                student:
+                    "طالب EduNova AI",
+
+                level:
+                    "المستوى",
+
+                points:
+                    "النقاط",
+
+                videos:
+                    "الفيديوهات",
+
+                chapters:
+                    "الفصول",
+
+                accountInfo:
+                    "معلومات الحساب",
+
+                name:
+                    "الاسم",
+
+                email:
+                    "البريد الإلكتروني",
+
+                levelStudy:
+                    "المستوى الدراسي",
+
+                actionsTitle:
+                    "إدارة الحساب",
+
+                actionsSubtitle:
+                    "تحكم في إعدادات حسابك وبياناتك.",
+
+                changeLevel:
+                    "تغيير المستوى",
+
+                changeLevelDesc:
+                    "اختر المستوى الدراسي من جديد",
+
+                settings:
+                    "الإعدادات",
+
+                settingsDesc:
+                    "اللغة والمظهر وإعدادات المنصة",
+
+                editData:
+                    "تعديل البيانات",
+
+                editDataDesc:
+                    "تعديل معلومات الحساب الشخصية",
+
+                password:
+                    "كلمة المرور",
+
+                passwordDesc:
+                    "تغيير كلمة مرور الحساب",
+
+                subscriptions:
+                    "الاشتراكات والدفع",
+
+                subscriptionsDesc:
+                    "إدارة الاشتراك وطرق الدفع",
+
+                deleteAccount:
+                    "حذف الحساب",
+
+                deleteAccountDesc:
+                    "حذف الحساب وبياناته نهائياً",
+
+                logout:
+                    "تسجيل الخروج",
+
+                footer:
+                    "منصتك التعليمية الذكية",
+
+                loading:
+                    "جارٍ تحميل بيانات الحساب...",
+
+                noName:
+                    "طالب EduNova AI",
+
+                noEmail:
+                    "غير متوفر",
+
+                noLevel:
+                    "غير محدد",
+
+                editDataSoon:
+                    "ميزة تعديل البيانات ستكون متاحة قريباً.",
+
+                passwordSoon:
+                    "إدارة كلمة المرور ستكون متاحة قريباً.",
+
+                subscriptionsSoon:
+                    "قسم الاشتراكات والدفع سيكون متاحاً قريباً.",
+
+                deleteSoon:
+                    "حذف الحساب سيكون متاحاً من خلال إعدادات الحساب لاحقاً.",
+
+                levelChanged:
+                    "سيتم فتح اختيار المستوى من جديد.",
+
+                logoutConfirm:
+                    "هل تريد تسجيل الخروج من حسابك؟",
+
+                logoutError:
+                    "حدث خطأ أثناء تسجيل الخروج.",
+
+                loggedOut:
+                    "تم تسجيل الخروج بنجاح.",
+
+                settingsUnavailable:
+                    "سيتم فتح الإعدادات قريباً."
+
+            },
+
+
+            fr: {
+
+                pageTitle:
+                    "Mon compte | EduNova AI",
+
+                pageTitleText:
+                    "Mon compte",
+
+                pageSubtitle:
+                    "Gérez votre compte et suivez votre progression scolaire.",
+
+                profileTitle:
+                    "Profil de l’élève",
+
+                profileSubtitle:
+                    "Vos informations principales et votre situation scolaire.",
+
+                student:
+                    "Élève EduNova AI",
+
+                level:
+                    "Niveau",
+
+                points:
+                    "Points",
+
+                videos:
+                    "Vidéos",
+
+                chapters:
+                    "Chapitres",
+
+                accountInfo:
+                    "Informations du compte",
+
+                name:
+                    "Nom",
+
+                email:
+                    "Adresse e-mail",
+
+                levelStudy:
+                    "Niveau scolaire",
+
+                actionsTitle:
+                    "Gestion du compte",
+
+                actionsSubtitle:
+                    "Gérez les paramètres et les données de votre compte.",
+
+                changeLevel:
+                    "Changer de niveau",
+
+                changeLevelDesc:
+                    "Choisir à nouveau votre niveau scolaire",
+
+                settings:
+                    "Paramètres",
+
+                settingsDesc:
+                    "Langue, apparence et paramètres de la plateforme",
+
+                editData:
+                    "Modifier les données",
+
+                editDataDesc:
+                    "Modifier les informations personnelles du compte",
+
+                password:
+                    "Mot de passe",
+
+                passwordDesc:
+                    "Modifier le mot de passe du compte",
+
+                subscriptions:
+                    "Abonnements et paiement",
+
+                subscriptionsDesc:
+                    "Gérer l’abonnement et les moyens de paiement",
+
+                deleteAccount:
+                    "Supprimer le compte",
+
+                deleteAccountDesc:
+                    "Supprimer définitivement le compte et ses données",
+
+                logout:
+                    "Se déconnecter",
+
+                footer:
+                    "Votre plateforme éducative intelligente",
+
+                loading:
+                    "Chargement des informations du compte...",
+
+                noName:
+                    "Élève EduNova AI",
+
+                noEmail:
+                    "Non disponible",
+
+                noLevel:
+                    "Non défini",
+
+                editDataSoon:
+                    "La modification des données sera disponible prochainement.",
+
+                passwordSoon:
+                    "La gestion du mot de passe sera disponible prochainement.",
+
+                subscriptionsSoon:
+                    "La section abonnements et paiement sera disponible prochainement.",
+
+                deleteSoon:
+                    "La suppression du compte sera disponible plus tard dans les paramètres.",
+
+                levelChanged:
+                    "La sélection du niveau sera ouverte à nouveau.",
+
+                logoutConfirm:
+                    "Voulez-vous vous déconnecter de votre compte ?",
+
+                logoutError:
+                    "Une erreur est survenue lors de la déconnexion.",
+
+                loggedOut:
+                    "Déconnexion réussie.",
+
+                settingsUnavailable:
+                    "Les paramètres seront disponibles prochainement."
+
+            }
+
+        };
+
+
+        /* =========================================================
+           ACCOUNT LANGUAGE
+           ========================================================= */
+
+        function getAccountLanguage() {
+
+            const storedLanguage =
+                localStorage.getItem("site_language");
+
+            if (
+                storedLanguage === "fr" ||
+                storedLanguage === "ar"
+            ) {
+
+                return storedLanguage;
+
+            }
+
+            return "ar";
+
+        }
+
+
+        function accountText(key) {
+
+            const language =
+                getAccountLanguage();
+
+            return (
+                ACCOUNT_TRANSLATIONS[language]?.[key] ??
+                ACCOUNT_TRANSLATIONS.ar[key] ??
+                key
+            );
+
+        }
+
+
+        /* =========================================================
+           ACCOUNT LEVEL LABEL
+           ========================================================= */
+
+        function getAccountLevelLabel(level) {
+
+            if (!level) {
+
+                return accountText("noLevel");
+
+            }
+
+
+            const normalized =
+                String(level)
+                    .trim()
+                    .toLowerCase();
+
+
+            const language =
+                getAccountLanguage();
+
+
+            const labels = {
+
+                concours: {
+                    ar: "السادسة ابتدائي — كونكور",
+                    fr: "6AF — Concours"
+                },
+
+                "6af": {
+                    ar: "السادسة ابتدائي — كونكور",
+                    fr: "6AF — Concours"
+                },
+
+                brevet: {
+                    ar: "الرابعة إعدادي — بريفي",
+                    fr: "4ème — Brevet"
+                },
+
+                "4eme": {
+                    ar: "الرابعة إعدادي — بريفي",
+                    fr: "4ème — Brevet"
+                },
+
+                "4ème": {
+                    ar: "الرابعة إعدادي — بريفي",
+                    fr: "4ème — Brevet"
+                },
+
+                bac_c: {
+                    ar: "البكالوريا — شعبة C",
+                    fr: "Baccalauréat — Série C"
+                },
+
+                "bac-c": {
+                    ar: "البكالوريا — شعبة C",
+                    fr: "Baccalauréat — Série C"
+                },
+
+                bac_c_math: {
+                    ar: "البكالوريا — شعبة C",
+                    fr: "Baccalauréat — Série C"
+                },
+
+                bac_d: {
+                    ar: "البكالوريا — شعبة D",
+                    fr: "Baccalauréat — Série D"
+                },
+
+                "bac-d": {
+                    ar: "البكالوريا — شعبة D",
+                    fr: "Baccalauréat — Série D"
+                },
+
+                bac_d_science: {
+                    ar: "البكالوريا — شعبة D",
+                    fr: "Baccalauréat — Série D"
+                }
+
+            };
+
+
+            if (labels[normalized]) {
+
+                return labels[normalized][language];
+
+            }
+
+
+            if (
+                typeof window.getLevelLabel === "function"
+            ) {
+
+                try {
+
+                    const result =
+                        window.getLevelLabel(
+                            normalized,
+                            language
+                        );
+
+                    if (result) {
+
+                        return result;
+
+                    }
+
+                } catch (error) {
+
+                    console.warn(
+                        "Account level label fallback:",
+                        error
+                    );
+
+                }
+
+            }
+
+
+            return level;
+
+        }
+
+
+        /* =========================================================
+           ACCOUNT PAGE TRANSLATION
+           ========================================================= */
+
+        function translateAccountPage() {
+
+            const language =
+                getAccountLanguage();
+
+            const text =
+                ACCOUNT_TRANSLATIONS[language];
+
+
+            document.documentElement.lang =
+                language;
+
+            document.documentElement.dir =
+                language === "fr"
+                    ? "ltr"
+                    : "rtl";
+
+
+            document.title =
+                text.pageTitle;
+
+
+            const mappings = {
+
+                pageTitleText: "pageTitleText",
+                pageSubtitle: "pageSubtitle",
+
+                profileTitle: "profileTitle",
+                profileSubtitle: "profileSubtitle",
+
+                accountInfoTitle: "accountInfo",
+
+                nameLabel: "name",
+                emailLabel: "email",
+                levelLabel: "levelStudy",
+
+                actionsTitle: "actionsTitle",
+                actionsSubtitle: "actionsSubtitle",
+
+                changeLevelText: "changeLevel",
+                changeLevelDesc: "changeLevelDesc",
+
+                settingsText: "settings",
+                settingsDesc: "settingsDesc",
+
+                editDataText: "editData",
+                editDataDesc: "editDataDesc",
+
+                passwordText: "password",
+                passwordDesc: "passwordDesc",
+
+                subscriptionsText: "subscriptions",
+                subscriptionsDesc: "subscriptionsDesc",
+
+                deleteAccountText: "deleteAccount",
+                deleteAccountDesc: "deleteAccountDesc",
+
+                logoutText: "logout",
+                footerText: "footer"
+
+            };
+
+
+            Object.keys(mappings).forEach(function(id) {
+
+                const element =
+                    document.getElementById(id);
+
+                const key =
+                    mappings[id];
+
+                if (
+                    element &&
+                    text[key] !== undefined
+                ) {
+
+                    element.textContent =
+                        text[key];
+
+                }
+
+            });
+
+
+            document
+                .querySelectorAll("[data-i18n]")
+                .forEach(function(element) {
+
+                    const key =
+                        element.getAttribute("data-i18n");
+
+                    if (
+                        text[key] !== undefined
+                    ) {
+
+                        element.textContent =
+                            text[key];
+
+                    }
+
+                });
+
+
+            const studentLabel =
+                document.getElementById("profileStudentLabel");
+
+            if (studentLabel) {
+
+                studentLabel.textContent =
+                    text.student;
+
+            }
+
+
+            const levelStatLabel =
+                document.getElementById("levelStatLabel");
+
+            if (levelStatLabel) {
+
+                levelStatLabel.textContent =
+                    text.level;
+
+            }
+
+
+            const pointsStatLabel =
+                document.getElementById("pointsStatLabel");
+
+            if (pointsStatLabel) {
+
+                pointsStatLabel.textContent =
+                    text.points;
+
+            }
+
+
+            const videosStatLabel =
+                document.getElementById("videosStatLabel");
+
+            if (videosStatLabel) {
+
+                videosStatLabel.textContent =
+                    text.videos;
+
+            }
+
+
+            const chaptersStatLabel =
+                document.getElementById("chaptersStatLabel");
+
+            if (chaptersStatLabel) {
+
+                chaptersStatLabel.textContent =
+                    text.chapters;
+
+            }
+
+        }
+
+
+        /* =========================================================
+           THEME
+           ========================================================= */
+
+        function applyAccountTheme() {
+
+            const theme =
+                localStorage.getItem("site_theme") ||
+                "light";
+
+
+            document.documentElement.setAttribute(
+                "data-theme",
+                theme
+            );
+
+
+            document.body.classList.toggle(
+                "dark-mode",
+                theme === "dark"
+            );
+
+        }
+
+
+        /* =========================================================
+           ACCOUNT DATA
+           ========================================================= */
+
+        async function loadAccount() {
+
+            const nameElement =
+                document.getElementById("profileName");
+
+            const profileSubtitle =
+                document.getElementById("profileSubtitle");
+
+            const infoName =
+                document.getElementById("infoName");
+
+            const infoEmail =
+                document.getElementById("infoEmail");
+
+            const infoLevel =
+                document.getElementById("infoLevel");
+
+
+            if (profileSubtitle) {
+
+                profileSubtitle.textContent =
+                    accountText("loading");
+
+            }
+
+
+            let user = null;
+
 
             try {
 
-                return getLevelLabel(
-                    level
-                );
+                if (accountSupabase) {
+
+                    const response =
+                        await accountSupabase.auth.getUser();
+
+                    user =
+                        response?.data?.user || null;
+
+                }
 
             } catch (error) {
 
                 console.warn(
-                    "Central level label unavailable:",
+                    "EduNova account auth error:",
                     error
                 );
 
             }
 
-        }
 
+            const localUser =
+                JSON.parse(
+                    localStorage.getItem("edunova_user") ||
+                    "null"
+                );
 
-        const normalized =
-            String(level)
-                .trim()
-                .toLowerCase();
 
+            const finalUser =
+                user ||
+                localUser ||
+                null;
 
-        const fallback = {
 
-            "concours":
-                "Concours",
+            const metadata =
+                finalUser?.user_metadata ||
+                finalUser?.metadata ||
+                {};
 
-            "كونكور":
-                "Concours",
 
-            "brevet":
-                "Brevet",
-
-            "بريفيه":
-                "Brevet",
-
-            "بريفي":
-                "Brevet",
-
-            "bac":
-                "Baccalauréat",
-
-            "baccalaureat":
-                "Baccalauréat",
-
-            "baccalauréat":
-                "Baccalauréat"
-
-        };
-
-
-        if (
-            getAccountLanguage() === "fr" &&
-            fallback[normalized]
-        ) {
-
-            return fallback[
-                normalized
-            ];
-
-        }
-
-
-        return level;
-
-    }
-
-
-    /* =========================================================
-       APPLY LANGUAGE
-    ========================================================= */
-
-    function translateAccountPage() {
-
-        const language =
-            getAccountLanguage();
-
-
-        document.documentElement.lang =
-            language;
-
-
-        document.documentElement.dir =
-            language === "fr"
-                ? "ltr"
-                : "rtl";
-
-
-        document.title =
-            accountText(
-                "pageTitle"
-            );
-
-
-        const elements = {
-
-            dashboardButton: "dashboard",
-            loadingText: "loading",
-
-            achievementsTitle: "achievements",
-            progressText: "progress",
-
-            pointsLabel: "points",
-            lessonsLabel: "lessons",
-            badgesLabel: "badges",
-            streakLabel: "streak",
-
-            accountInfoTitle: "accountInfo",
-            nameLabel: "name",
-            emailLabel: "email",
-            levelLabel: "level",
-
-            accountManagementTitle:
-                "accountManagement",
-
-            changeLevelText:
-                "changeLevel",
-
-            settingsText:
-                "settings",
-
-            editDataText:
-                "editData",
-
-            passwordText:
-                "password",
-
-            paymentsText:
-                "payments",
-
-            deleteText:
-                "delete",
-
-            logoutText:
-                "logout",
-
-            navHome:
-                "navHome",
-
-            navLibrary:
-                "navLibrary",
-
-            navForum:
-                "navForum",
-
-            navAccount:
-                "navAccount"
-
-        };
-
-
-        Object.keys(elements).forEach(
-            function(id) {
-
-                const element =
-                    document.getElementById(id);
-
-
-                if (element) {
-
-                    element.textContent =
-                        accountText(
-                            elements[id]
-                        );
-
-                }
-
-            }
-        );
-
-
-        const levelLabel =
-            getAccountLevelLabel();
-
-
-        const studentLevel =
-            document.getElementById(
-                "studentLevel"
-            );
-
-
-        const infoLevel =
-            document.getElementById(
-                "infoLevel"
-            );
-
-
-        if (studentLevel) {
-
-            studentLevel.textContent =
-                levelLabel;
-
-        }
-
-
-        if (infoLevel) {
-
-            infoLevel.textContent =
-                levelLabel;
-
-        }
-
-
-        if (
-            typeof updateThemeControls ===
-            "function"
-        ) {
-
-            updateThemeControls();
-
-        }
-
-    }
-
-
-    /* =========================================================
-       THEME
-    ========================================================= */
-
-    function applyAccountTheme() {
-
-        if (
-            typeof getSiteTheme ===
-            "function" &&
-            typeof applySiteTheme ===
-            "function"
-        ) {
-
-            applySiteTheme(
-                getSiteTheme()
-            );
-
-        }
-
-    }
-
-
-    /* =========================================================
-       LOAD ACCOUNT
-    ========================================================= */
-
-    async function loadAccount() {
-
-        try {
-
-            const {
-                data,
-                error
-            } =
-                await supabaseClient.auth.getSession();
-
-
-            if (
-                error ||
-                !data.session
-            ) {
-
-                window.location.href =
-                    "login.html";
-
-                return;
-
-            }
-
-
-            const user =
-                data.session.user;
-
-
-            let name =
-                user.user_metadata?.full_name ||
-                user.user_metadata?.name ||
-                user.user_metadata?.display_name;
-
-
-            if (!name) {
-
-                name =
-                    user.email
-                        ? user.email.split("@")[0]
-                        : accountText(
-                            "defaultStudent"
-                        );
-
-            }
+            const name =
+                metadata.full_name ||
+                metadata.name ||
+                finalUser?.full_name ||
+                finalUser?.name ||
+                localStorage.getItem("student_name") ||
+                accountText("noName");
 
 
             const email =
-                user.email || "-";
+                finalUser?.email ||
+                localStorage.getItem("student_email") ||
+                accountText("noEmail");
 
 
             const level =
-                getAccountLevelLabel();
+                metadata.level ||
+                metadata.study_level ||
+                finalUser?.level ||
+                localStorage.getItem("selected_level") ||
+                localStorage.getItem("student_level") ||
+                "";
 
 
-            /* PROFILE */
+            if (nameElement) {
 
-            const studentName =
-                document.getElementById(
-                    "studentName"
-                );
-
-            const studentEmail =
-                document.getElementById(
-                    "studentEmail"
-                );
-
-            const studentLevel =
-                document.getElementById(
-                    "studentLevel"
-                );
-
-            const infoName =
-                document.getElementById(
-                    "infoName"
-                );
-
-            const infoEmail =
-                document.getElementById(
-                    "infoEmail"
-                );
-
-            const infoLevel =
-                document.getElementById(
-                    "infoLevel"
-                );
-
-
-            if (studentName) {
-
-                studentName.textContent =
+                nameElement.textContent =
                     name;
-
-            }
-
-
-            if (studentEmail) {
-
-                studentEmail.textContent =
-                    email;
-
-            }
-
-
-            if (studentLevel) {
-
-                studentLevel.textContent =
-                    level;
 
             }
 
@@ -1865,132 +2610,123 @@
             if (infoLevel) {
 
                 infoLevel.textContent =
-                    level;
+                    getAccountLevelLabel(level);
 
             }
 
 
-            /* AVATAR */
+            if (profileSubtitle) {
 
-            const firstLetter =
-                String(name)
-                    .trim()
-                    .charAt(0);
+                profileSubtitle.textContent =
+                    accountText("profileSubtitle");
+
+            }
 
 
-            const avatar =
-                document.getElementById(
-                    "avatar"
+            const profileInitial =
+                document.getElementById("profileInitial");
+
+            if (profileInitial) {
+
+                const firstCharacter =
+                    String(name || "E")
+                        .trim()
+                        .charAt(0)
+                        .toUpperCase();
+
+                profileInitial.textContent =
+                    firstCharacter || "E";
+
+            }
+
+
+            updateAccountStats();
+
+        }
+
+
+        /* =========================================================
+           ACCOUNT STATS
+           ========================================================= */
+
+        function updateAccountStats() {
+
+            const progressData =
+                JSON.parse(
+                    localStorage.getItem("edunova_progress") ||
+                    "{}"
                 );
 
 
-            if (avatar) {
-
-                avatar.textContent =
-                    firstLetter ||
-                    (
-                        getAccountLanguage() === "fr"
-                            ? "É"
-                            : "ط"
-                    );
-
-            }
+            let videosCompleted = 0;
+            let chaptersCompleted = 0;
 
 
-            /* =================================================
-               STATISTICS
-            ================================================= */
+            Object.keys(progressData).forEach(function(key) {
 
-            let points = 0;
-
-
-            if (
-                typeof getStudentPoints ===
-                "function"
-            ) {
-
-                points =
-                    Number(
-                        getStudentPoints()
-                    ) || 0;
-
-            } else {
-
-                points =
-                    parseInt(
-                        localStorage.getItem(
-                            "student_points"
-                        ) || "0",
-                        10
-                    ) || 0;
-
-            }
+                const value =
+                    progressData[key];
 
 
-            let lessons = 0;
+                if (
+                    typeof value === "number"
+                ) {
+
+                    videosCompleted +=
+                        Math.max(0, value);
+
+                }
+
+                else if (
+                    value &&
+                    typeof value === "object"
+                ) {
+
+                    if (
+                        value.completed === true
+                    ) {
+
+                        chaptersCompleted++;
+
+                    }
+
+                }
+
+            });
 
 
-            if (
-                typeof getCompletedLessons ===
-                "function"
-            ) {
-
-                const completed =
-                    getCompletedLessons();
-
-
-                lessons =
-                    Array.isArray(completed)
-                        ? completed.length
-                        : Number(completed) || 0;
-
-            } else {
-
-                lessons =
-                    parseInt(
-                        localStorage.getItem(
-                            "completed_lessons"
-                        ) || "0",
-                        10
-                    ) || 0;
-
-            }
+            const points =
+                Number(
+                    localStorage.getItem("edunova_points") ||
+                    localStorage.getItem("points") ||
+                    "0"
+                );
 
 
-            const badges =
-                points >= 50
-                    ? 1
-                    : 0;
+            const videosElement =
+                document.getElementById("videosStat");
 
-
-            const streak =
-                lessons > 0
-                    ? 1
-                    : 0;
-
+            const chaptersElement =
+                document.getElementById("chaptersStat");
 
             const pointsElement =
-                document.getElementById(
-                    "points"
-                );
+                document.getElementById("pointsStat");
 
 
-            const lessonsElement =
-                document.getElementById(
-                    "lessons"
-                );
+            if (videosElement) {
+
+                videosElement.textContent =
+                    videosCompleted;
+
+            }
 
 
-            const badgesElement =
-                document.getElementById(
-                    "badges"
-                );
+            if (chaptersElement) {
 
+                chaptersElement.textContent =
+                    chaptersCompleted;
 
-            const streakElement =
-                document.getElementById(
-                    "streak"
-                );
+            }
 
 
             if (pointsElement) {
@@ -2000,457 +2736,213 @@
 
             }
 
-
-            if (lessonsElement) {
-
-                lessonsElement.textContent =
-                    lessons;
-
-            }
+        }
 
 
-            if (badgesElement) {
+        /* =========================================================
+           NAVIGATION
+           ========================================================= */
 
-                badgesElement.textContent =
-                    badges;
+        function goDashboard() {
 
-            }
-
-
-            if (streakElement) {
-
-                streakElement.textContent =
-                    streak;
-
-            }
-
-
-            /* SHOW */
-
-            const loading =
-                document.getElementById(
-                    "loading"
-                );
-
-
-            const accountContent =
-                document.getElementById(
-                    "accountContent"
-                );
-
-
-            if (loading) {
-
-                loading.style.display =
-                    "none";
-
-            }
-
-
-            if (accountContent) {
-
-                accountContent.style.display =
-                    "block";
-
-            }
+            window.location.href =
+                "dashboard.html";
 
         }
 
-        catch (error) {
 
-            console.error(
-                "Account loading error:",
-                error
-            );
-
+        function changeLevel() {
 
             showMessage(
-                getAccountLanguage() === "fr"
-                    ? "Impossible de charger le compte."
-                    : "تعذر تحميل الحساب."
-            );
-
-        }
-
-    }
-
-
-    /* =========================================================
-       NAVIGATION
-    ========================================================= */
-
-    function goDashboard() {
-
-        window.location.href =
-            "dashboard.html";
-
-    }
-
-
-    function changeLevel() {
-
-        window.location.href =
-            "levels.html";
-
-    }
-
-
-    function openSettings() {
-
-        window.location.href =
-            "settings.html";
-
-    }
-
-
-    /* =========================================================
-       MESSAGE
-    ========================================================= */
-
-    function showMessage(type) {
-
-        const messages = {
-
-            editData:
-                accountText(
-                    "editDataMessage"
-                ),
-
-            password:
-                accountText(
-                    "passwordMessage"
-                ),
-
-            payments:
-                accountText(
-                    "paymentsMessage"
-                ),
-
-            delete:
-                accountText(
-                    "deleteMessage"
-                )
-
-        };
-
-
-        const message =
-            messages[type] ||
-            type;
-
-
-        const old =
-            document.querySelector(
-                ".account-message"
+                accountText("levelChanged")
             );
 
 
-        if (old) {
+            setTimeout(function() {
 
-            old.remove();
+                window.location.href =
+                    "dashboard.html";
+
+            }, 700);
 
         }
 
 
-        const box =
-            document.createElement(
-                "div"
-            );
+        function openSettings() {
+
+            if (
+                typeof window.location !== "undefined"
+            ) {
+
+                window.location.href =
+                    "settings.html";
+
+            }
+
+        }
 
 
-        box.className =
-            "account-message";
+        /* =========================================================
+           MESSAGE
+           ========================================================= */
+
+        let accountMessageTimer = null;
 
 
-        box.textContent =
-            message;
+        function showMessage(message) {
+
+            const element =
+                document.getElementById("accountMessage");
 
 
-        document.body.appendChild(
-            box
+            if (!element) {
+
+                return;
+
+            }
+
+
+            element.textContent =
+                message;
+
+
+            element.classList.add("show");
+
+
+            if (accountMessageTimer) {
+
+                clearTimeout(
+                    accountMessageTimer
+                );
+
+            }
+
+
+            accountMessageTimer =
+                setTimeout(function() {
+
+                    element.classList.remove(
+                        "show"
+                    );
+
+                }, 3200);
+
+        }
+
+
+        /* =========================================================
+           LOGOUT
+           ========================================================= */
+
+        async function logout() {
+
+            const confirmed =
+                window.confirm(
+                    accountText("logoutConfirm")
+                );
+
+
+            if (!confirmed) {
+
+                return;
+
+            }
+
+
+            try {
+
+                if (accountSupabase) {
+
+                    await accountSupabase.auth.signOut();
+
+                }
+
+
+                localStorage.removeItem(
+                    "edunova_user"
+                );
+
+
+                showMessage(
+                    accountText("loggedOut")
+                );
+
+
+                setTimeout(function() {
+
+                    window.location.href =
+                        "index.html";
+
+                }, 700);
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "EduNova logout error:",
+                    error
+                );
+
+
+                showMessage(
+                    accountText("logoutError")
+                );
+
+            }
+
+        }
+
+
+        /* =========================================================
+           GLOBAL LANGUAGE / THEME SYNC
+           ========================================================= */
+
+        window.addEventListener(
+            "storage",
+            function(event) {
+
+                if (
+                    event.key === "site_language"
+                ) {
+
+                    translateAccountPage();
+
+                    loadAccount();
+
+                }
+
+
+                if (
+                    event.key === "site_theme"
+                ) {
+
+                    applyAccountTheme();
+
+                }
+
+            }
         );
 
 
-        setTimeout(
+        /* =========================================================
+           INITIALIZATION
+           ========================================================= */
+
+        document.addEventListener(
+            "DOMContentLoaded",
             function() {
-
-                box.style.opacity =
-                    "0";
-
-
-                setTimeout(
-                    function() {
-
-                        box.remove();
-
-                    },
-                    250
-                );
-
-            },
-            2300
-        );
-
-    }
-
-
-    /* =========================================================
-       LOGOUT
-    ========================================================= */
-
-    async function logout() {
-
-        const confirmed =
-            window.confirm(
-                accountText(
-                    "logoutConfirm"
-                )
-            );
-
-
-        if (!confirmed) {
-
-            return;
-
-        }
-
-
-        const {
-            error
-        } =
-            await supabaseClient.auth.signOut();
-
-
-        if (error) {
-
-            showMessage(
-                accountText(
-                    "logoutError"
-                )
-            );
-
-            return;
-
-        }
-
-
-        /*
-           تسجيل الخروج لا يلمس إعدادات
-           اللغة أو الوضع أو بنية المنصة.
-        */
-
-        localStorage.removeItem(
-            "student_level"
-        );
-
-        localStorage.removeItem(
-            "bac_branch"
-        );
-
-        localStorage.removeItem(
-            "selected_subject"
-        );
-
-        localStorage.removeItem(
-            "selected_subject_type"
-        );
-
-        localStorage.removeItem(
-            "selected_chapter"
-        );
-
-        localStorage.removeItem(
-            "selected_video"
-        );
-
-
-        window.location.href =
-            "login.html";
-
-    }
-
-
-    /* =========================================================
-       GLOBAL LANGUAGE EVENTS
-    ========================================================= */
-
-    window.addEventListener(
-        "languageChanged",
-        function() {
-
-            translateAccountPage();
-
-        }
-    );
-
-
-    window.addEventListener(
-        "siteLanguageChanged",
-        function() {
-
-            translateAccountPage();
-
-        }
-    );
-
-
-    window.addEventListener(
-        "languagechange",
-        function() {
-
-            translateAccountPage();
-
-        }
-    );
-
-
-    /* =========================================================
-       GLOBAL THEME EVENTS
-    ========================================================= */
-
-    window.addEventListener(
-        "themeChanged",
-        function() {
-
-            applyAccountTheme();
-
-        }
-    );
-
-
-    window.addEventListener(
-        "siteThemeChanged",
-        function() {
-
-            applyAccountTheme();
-
-        }
-    );
-
-
-    /* =========================================================
-       LEVEL / BRANCH EVENTS
-    ========================================================= */
-
-    window.addEventListener(
-        "studentLevelChanged",
-        function() {
-
-            translateAccountPage();
-
-        }
-    );
-
-
-    window.addEventListener(
-        "bacBranchChanged",
-        function() {
-
-            translateAccountPage();
-
-        }
-    );
-
-
-    /* =========================================================
-       STORAGE SYNC
-    ========================================================= */
-
-    window.addEventListener(
-        "storage",
-        function(event) {
-
-            if (
-                event.key ===
-                "site_language"
-            ) {
-
-                translateAccountPage();
-
-            }
-
-
-            if (
-                event.key ===
-                "site_theme"
-            ) {
 
                 applyAccountTheme();
 
-            }
-
-
-            if (
-                event.key ===
-                "student_level"
-            ) {
-
                 translateAccountPage();
-
-            }
-
-
-            if (
-                event.key ===
-                "bac_branch"
-            ) {
-
-                translateAccountPage();
-
-            }
-
-
-            if (
-                event.key ===
-                "student_points"
-            ) {
 
                 loadAccount();
 
             }
+        );
 
-
-            if (
-                event.key ===
-                "completed_lessons"
-            ) {
-
-                loadAccount();
-
-            }
-
-        }
-    );
-
-
-    /* =========================================================
-       START
-    ========================================================= */
-
-    document.addEventListener(
-        "DOMContentLoaded",
-        function() {
-
-            if (
-                typeof initializeGlobalSettings ===
-                "function"
-            ) {
-
-                initializeGlobalSettings();
-
-            }
-
-
-            applyAccountTheme();
-
-            translateAccountPage();
-
-            loadAccount();
-
-        }
-    );
-
-</script>
+    </script>    </script>
 
 
 </body>
