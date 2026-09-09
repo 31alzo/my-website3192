@@ -117,6 +117,7 @@ const EDU_STRUCTURE = {
             C: {
                 id: "C",
                 titleKey: "bac_branch_c",
+
                 subjects: [
                     {
                         id: "mathematics_c",
@@ -144,6 +145,7 @@ const EDU_STRUCTURE = {
             D: {
                 id: "D",
                 titleKey: "bac_branch_d",
+
                 subjects: [
                     {
                         id: "natural_sciences",
@@ -172,104 +174,384 @@ const EDU_STRUCTURE = {
 };
 
 /* =========================================================
-   CENTRAL CURRICULUM DATA
+   DEMO CURRICULUM GENERATOR
    ---------------------------------------------------------
-   Library is the only home of actual study content.
-   These arrays are intentionally ready to receive real
-   chapters later without changing the platform structure.
+   5 chapters are generated for every subject.
+   Every chapter contains a variable number of videos.
+   The number of videos is ALWAYS below 20.
+
+   This is temporary demonstration content.
+   Real curriculum will replace it later without changing
+   the structure of Library / Chapter / Video pages.
    ========================================================= */
 
-const CURRICULUM_DATA = {
-    concours: {
-        mathematics: [],
-        arabic: [],
-        french: [],
-        natural_sciences: []
-    },
+const DEMO_VIDEO_COUNTS = [
+    7,
+    9,
+    6,
+    10,
+    8
+];
 
-    brevet: {
-        mathematics: [],
-        physics_chemistry: [],
-        natural_sciences: []
-    },
+const DEMO_VIDEO_DURATIONS = [
+    "08:32",
+    "12:15",
+    "09:48",
+    "14:20",
+    "07:55",
+    "11:36",
+    "16:10",
+    "10:24",
+    "13:42",
+    "06:58",
+    "15:05",
+    "09:17"
+];
 
-    bac: {
-        C: {
-            mathematics_c: [],
-            sciences: [],
-            physics: [],
-            chemistry: []
-        },
+function createDemoVideos(
+    subjectId,
+    chapterNumber,
+    count
+) {
+    const safeCount = Math.max(
+        1,
+        Math.min(
+            PLATFORM_LIMITS.maxVideosPerChapter - 1,
+            Number(count) || 1
+        )
+    );
 
-        D: {
-            natural_sciences: [],
-            mathematics_d: [],
-            physics: [],
-            chemistry: []
-        }
+    const videos = [];
+
+    for (
+        let index = 0;
+        index < safeCount;
+        index++
+    ) {
+        const number = index + 1;
+
+        const duration =
+            DEMO_VIDEO_DURATIONS[
+                (
+                    index +
+                    chapterNumber +
+                    String(subjectId).length
+                ) %
+                DEMO_VIDEO_DURATIONS.length
+            ];
+
+        videos.push({
+            id:
+                `${subjectId}-ch${chapterNumber}-v${number}`,
+
+            number,
+
+            title: {
+                ar:
+                    `الفيديو التجريبي ${number}`,
+                fr:
+                    `Vidéo de démonstration ${number}`
+            },
+
+            description: {
+                ar:
+                    `شرح تجريبي للفصل ${chapterNumber} — الفيديو ${number}.`,
+                fr:
+                    `Démonstration du chapitre ${chapterNumber} — vidéo ${number}.`
+            },
+
+            duration,
+
+            videoUrl: "",
+
+            free:
+                number ===
+                PLATFORM_LIMITS.firstFreeVideoNumber,
+
+            locked:
+                number >
+                PLATFORM_LIMITS.firstFreeVideoNumber
+        });
     }
-};
+
+    return videos;
+}
+
+function createDemoChapters(
+    subjectId
+) {
+    return Array.from(
+        { length: 5 },
+        (_, index) => {
+            const chapterNumber =
+                index + 1;
+
+            return {
+                id:
+                    `${subjectId}-chapter-${chapterNumber}`,
+
+                number:
+                    chapterNumber,
+
+                title: {
+                    ar:
+                        `الفصل التجريبي ${chapterNumber}`,
+                    fr:
+                        `Chapitre de démonstration ${chapterNumber}`
+                },
+
+                description: {
+                    ar:
+                        `محتوى تجريبي للفصل ${chapterNumber} سيتم استبداله بالمحتوى الدراسي الحقيقي لاحقًا.`,
+                    fr:
+                        `Contenu de démonstration du chapitre ${chapterNumber}, qui sera remplacé par le contenu réel plus tard.`
+                },
+
+                videos:
+                    createDemoVideos(
+                        subjectId,
+                        chapterNumber,
+                        DEMO_VIDEO_COUNTS[index]
+                    )
+            };
+        }
+    );
+}
+
+function createEmptyCurriculumFromStructure() {
+    const curriculum = {
+        concours: {},
+        brevet: {},
+        bac: {
+            C: {},
+            D: {}
+        }
+    };
+
+    const safeStructure =
+        EDU_STRUCTURE || {};
+
+    Object.keys(
+        safeStructure
+    ).forEach(level => {
+        const definition =
+            safeStructure[level];
+
+        if (!definition) {
+            return;
+        }
+
+        if (
+            level === "bac"
+        ) {
+            const branches =
+                definition.branches || {};
+
+            Object.keys(
+                branches
+            ).forEach(branch => {
+                const subjects =
+                    branches[branch]
+                        ?.subjects || [];
+
+                subjects.forEach(
+                    subject => {
+                        curriculum.bac[
+                            branch
+                        ][subject.id] = [];
+                    }
+                );
+            });
+
+            return;
+        }
+
+        const subjects =
+            definition.subjects || [];
+
+        subjects.forEach(
+            subject => {
+                curriculum[level][
+                    subject.id
+                ] = [];
+            }
+        );
+    });
+
+    return curriculum;
+}
+
+function buildDemoCurriculum() {
+    const curriculum =
+        createEmptyCurriculumFromStructure();
+
+    Object.keys(
+        EDU_STRUCTURE
+    ).forEach(level => {
+        const definition =
+            EDU_STRUCTURE[level];
+
+        if (!definition) {
+            return;
+        }
+
+        if (
+            level === "bac"
+        ) {
+            Object.keys(
+                definition.branches || {}
+            ).forEach(branch => {
+                const subjects =
+                    definition
+                        .branches[branch]
+                        ?.subjects || [];
+
+                subjects.forEach(
+                    subject => {
+                        curriculum.bac[
+                            branch
+                        ][subject.id] =
+                            createDemoChapters(
+                                subject.id
+                            );
+                    }
+                );
+            });
+
+            return;
+        }
+
+        const subjects =
+            definition.subjects || [];
+
+        subjects.forEach(
+            subject => {
+                curriculum[level][
+                    subject.id
+                ] =
+                    createDemoChapters(
+                        subject.id
+                    );
+            }
+        );
+    });
+
+    return curriculum;
+}
+
+/* =========================================================
+   CENTRAL CURRICULUM DATA
+   ========================================================= */
+
+const CURRICULUM_DATA =
+    buildDemoCurriculum();
 
 /* =========================================================
    NAVIGATION
    ========================================================= */
 
 function goTo(page) {
-    if (!page) return false;
+    if (!page) {
+        return false;
+    }
 
-    const target = String(page).trim();
+    const target =
+        String(page).trim();
 
-    if (!target) return false;
+    if (!target) {
+        return false;
+    }
 
-    window.location.href = target;
+    window.location.href =
+        target;
 
     return true;
 }
 
-function goBack(fallback = "dashboard.html") {
-    if (window.history.length > 1) {
+function goBack(
+    fallback = "dashboard.html"
+) {
+    if (
+        window.history.length > 1
+    ) {
         window.history.back();
         return true;
     }
 
-    return goTo(fallback);
+    return goTo(
+        fallback
+    );
 }
 
 /* =========================================================
    LOCAL STORAGE HELPERS
    ========================================================= */
 
-function saveData(key, value) {
+function saveData(
+    key,
+    value
+) {
     try {
-        localStorage.setItem(key, JSON.stringify(value));
+        localStorage.setItem(
+            key,
+            JSON.stringify(value)
+        );
+
         return true;
     } catch (error) {
-        console.error("EduNova saveData error:", error);
+        console.error(
+            "EduNova saveData error:",
+            error
+        );
+
         return false;
     }
 }
 
-function getData(key, fallback = null) {
+function getData(
+    key,
+    fallback = null
+) {
     try {
-        const raw = localStorage.getItem(key);
+        const raw =
+            localStorage.getItem(
+                key
+            );
 
-        if (raw === null) {
+        if (
+            raw === null
+        ) {
             return fallback;
         }
 
-        return JSON.parse(raw);
+        return JSON.parse(
+            raw
+        );
     } catch (error) {
-        console.error("EduNova getData error:", error);
+        console.error(
+            "EduNova getData error:",
+            error
+        );
+
         return fallback;
     }
 }
 
-function removeData(key) {
+function removeData(
+    key
+) {
     try {
-        localStorage.removeItem(key);
+        localStorage.removeItem(
+            key
+        );
+
         return true;
     } catch (error) {
-        console.error("EduNova removeData error:", error);
+        console.error(
+            "EduNova removeData error:",
+            error
+        );
+
         return false;
     }
 }
@@ -287,34 +569,52 @@ function removeData(key) {
    Compatibility:
    - bac_c
    - bac_d
-
-   Old dashboard versions may still send bac_c / bac_d.
-   We normalize those values into the official structure:
-   bac + branch C/D.
 */
 
-function normalizeStudentLevel(level) {
-    const value = String(level || "").trim().toLowerCase();
+function normalizeStudentLevel(
+    level
+) {
+    const value =
+        String(
+            level || ""
+        )
+            .trim()
+            .toLowerCase();
 
-    if (value === "bac_c") {
+    if (
+        value === "bac_c"
+    ) {
         return "bac";
     }
 
-    if (value === "bac_d") {
+    if (
+        value === "bac_d"
+    ) {
         return "bac";
     }
 
     return value;
 }
 
-function getLegacyBacBranchFromLevel(level) {
-    const value = String(level || "").trim().toLowerCase();
+function getLegacyBacBranchFromLevel(
+    level
+) {
+    const value =
+        String(
+            level || ""
+        )
+            .trim()
+            .toLowerCase();
 
-    if (value === "bac_c") {
+    if (
+        value === "bac_c"
+    ) {
         return "C";
     }
 
-    if (value === "bac_d") {
+    if (
+        value === "bac_d"
+    ) {
         return "D";
     }
 
@@ -322,20 +622,22 @@ function getLegacyBacBranchFromLevel(level) {
 }
 
 function getStudentLevel() {
-    const rawLevel = getData(
-        PLATFORM_KEYS.studentLevel,
-        ""
-    );
+    const rawLevel =
+        getData(
+            PLATFORM_KEYS.studentLevel,
+            ""
+        );
 
-    const normalizedLevel = normalizeStudentLevel(rawLevel);
+    const normalizedLevel =
+        normalizeStudentLevel(
+            rawLevel
+        );
 
-    /*
-       Keep old saved values compatible with the new
-       canonical architecture.
-    */
     if (
-        rawLevel !== normalizedLevel &&
-        normalizedLevel === "bac"
+        rawLevel !==
+            normalizedLevel &&
+        normalizedLevel ===
+            "bac"
     ) {
         saveData(
             PLATFORM_KEYS.studentLevel,
@@ -343,7 +645,9 @@ function getStudentLevel() {
         );
 
         const inferredBranch =
-            getLegacyBacBranchFromLevel(rawLevel);
+            getLegacyBacBranchFromLevel(
+                rawLevel
+            );
 
         if (
             inferredBranch &&
@@ -359,16 +663,29 @@ function getStudentLevel() {
     return normalizedLevel;
 }
 
-function setStudentLevel(level) {
-    const rawLevel = String(level || "").trim();
+function setStudentLevel(
+    level
+) {
+    const rawLevel =
+        String(
+            level || ""
+        ).trim();
 
     const normalizedLevel =
-        normalizeStudentLevel(rawLevel);
+        normalizeStudentLevel(
+            rawLevel
+        );
 
     const inferredBranch =
-        getLegacyBacBranchFromLevel(rawLevel);
+        getLegacyBacBranchFromLevel(
+            rawLevel
+        );
 
-    if (!isValidLevel(normalizedLevel)) {
+    if (
+        !isValidLevel(
+            normalizedLevel
+        )
+    ) {
         return false;
     }
 
@@ -377,18 +694,11 @@ function setStudentLevel(level) {
         normalizedLevel
     );
 
-    /*
-       Changing level means previous learning selection
-       must no longer be trusted.
-    */
     clearSelectedLearningAfterLevelChange();
 
-    /*
-       If the dashboard still sends bac_c / bac_d,
-       preserve the selected branch automatically.
-    */
     if (
-        normalizedLevel === "bac" &&
+        normalizedLevel ===
+            "bac" &&
         inferredBranch
     ) {
         saveData(
@@ -398,13 +708,21 @@ function setStudentLevel(level) {
     }
 
     window.dispatchEvent(
-        new CustomEvent("studentLevelChanged", {
-            detail: {
-                level: normalizedLevel,
-                rawLevel: rawLevel,
-                bacBranch: inferredBranch || ""
+        new CustomEvent(
+            "studentLevelChanged",
+            {
+                detail: {
+                    level:
+                        normalizedLevel,
+
+                    rawLevel,
+
+                    bacBranch:
+                        inferredBranch ||
+                        ""
+                }
             }
-        })
+        )
     );
 
     return true;
@@ -415,23 +733,40 @@ function setStudentLevel(level) {
    ========================================================= */
 
 function getBacBranch() {
-    const branch = getData(
-        PLATFORM_KEYS.bacBranch,
-        ""
-    );
+    const branch =
+        getData(
+            PLATFORM_KEYS.bacBranch,
+            ""
+        );
 
-    if (!isValidBacBranch(branch)) {
+    if (
+        !isValidBacBranch(
+            branch
+        )
+    ) {
         return "";
     }
 
-    return String(branch).toUpperCase();
+    return String(
+        branch
+    ).toUpperCase();
 }
 
-function setBacBranch(branch) {
+function setBacBranch(
+    branch
+) {
     const safeBranch =
-        String(branch || "").trim().toUpperCase();
+        String(
+            branch || ""
+        )
+            .trim()
+            .toUpperCase();
 
-    if (!isValidBacBranch(safeBranch)) {
+    if (
+        !isValidBacBranch(
+            safeBranch
+        )
+    ) {
         return false;
     }
 
@@ -443,11 +778,15 @@ function setBacBranch(branch) {
     clearSelectedLearningAfterBranchChange();
 
     window.dispatchEvent(
-        new CustomEvent("bacBranchChanged", {
-            detail: {
-                branch: safeBranch
+        new CustomEvent(
+            "bacBranchChanged",
+            {
+                detail: {
+                    branch:
+                        safeBranch
+                }
             }
-        })
+        )
     );
 
     return true;
@@ -457,52 +796,98 @@ function setBacBranch(branch) {
    EDUCATION VALIDATION
    ========================================================= */
 
-function isValidLevel(level) {
+function isValidLevel(
+    level
+) {
     const safeLevel =
-        normalizeStudentLevel(level);
+        normalizeStudentLevel(
+            level
+        );
 
     return [
         "concours",
         "brevet",
         "bac"
-    ].includes(safeLevel);
+    ].includes(
+        safeLevel
+    );
 }
 
-function isValidBacBranch(branch) {
+function isValidBacBranch(
+    branch
+) {
     const safeBranch =
-        String(branch || "").trim().toUpperCase();
+        String(
+            branch || ""
+        )
+            .trim()
+            .toUpperCase();
 
-    return ["C", "D"].includes(safeBranch);
+    return [
+        "C",
+        "D"
+    ].includes(
+        safeBranch
+    );
 }
 
-function requiresBacBranch(level = getStudentLevel()) {
-    return normalizeStudentLevel(level) === "bac";
+function requiresBacBranch(
+    level = getStudentLevel()
+) {
+    return (
+        normalizeStudentLevel(
+            level
+        ) === "bac"
+    );
 }
 
-function getLevelDefinition(level = getStudentLevel()) {
+function getLevelDefinition(
+    level = getStudentLevel()
+) {
     const safeLevel =
-        normalizeStudentLevel(level);
+        normalizeStudentLevel(
+            level
+        );
 
-    if (!isValidLevel(safeLevel)) {
+    if (
+        !isValidLevel(
+            safeLevel
+        )
+    ) {
         return null;
     }
 
-    return EDU_STRUCTURE[safeLevel] || null;
+    return (
+        EDU_STRUCTURE[
+            safeLevel
+        ] || null
+    );
 }
 
 function getBacBranchDefinition(
     branch = getBacBranch()
 ) {
     const safeBranch =
-        String(branch || "").trim().toUpperCase();
+        String(
+            branch || ""
+        )
+            .trim()
+            .toUpperCase();
 
-    if (!isValidBacBranch(safeBranch)) {
+    if (
+        !isValidBacBranch(
+            safeBranch
+        )
+    ) {
         return null;
     }
 
     return (
-        EDU_STRUCTURE.bac.branches[safeBranch] ||
-        null
+        EDU_STRUCTURE
+            .bac
+            .branches[
+                safeBranch
+            ] || null
     );
 }
 
@@ -515,29 +900,50 @@ function getAvailableSubjects(
     branch = getBacBranch()
 ) {
     const safeLevel =
-        normalizeStudentLevel(level);
+        normalizeStudentLevel(
+            level
+        );
 
-    if (!isValidLevel(safeLevel)) {
+    if (
+        !isValidLevel(
+            safeLevel
+        )
+    ) {
         return [];
     }
 
-    if (safeLevel === "bac") {
+    if (
+        safeLevel === "bac"
+    ) {
         const safeBranch =
-            String(branch || "").trim().toUpperCase();
+            String(
+                branch || ""
+            )
+                .trim()
+                .toUpperCase();
 
-        if (!isValidBacBranch(safeBranch)) {
+        if (
+            !isValidBacBranch(
+                safeBranch
+            )
+        ) {
             return [];
         }
 
         return (
-            EDU_STRUCTURE.bac.branches[
-                safeBranch
-            ]?.subjects || []
+            EDU_STRUCTURE
+                .bac
+                .branches[
+                    safeBranch
+                ]
+                ?.subjects || []
         );
     }
 
     return (
-        EDU_STRUCTURE[safeLevel]?.subjects || []
+        EDU_STRUCTURE[
+            safeLevel
+        ]?.subjects || []
     );
 }
 
@@ -551,12 +957,16 @@ function getSubjectDefinition(
     }
 
     const subjects =
-        getAvailableSubjects(level, branch);
+        getAvailableSubjects(
+            level,
+            branch
+        );
 
     return (
         subjects.find(
             subject =>
-                subject.id === String(subjectId)
+                subject.id ===
+                String(subjectId)
         ) || null
     );
 }
@@ -590,8 +1000,11 @@ function setSelectedSubject(
     subjectId,
     subjectType = ""
 ) {
-    const level = getStudentLevel();
-    const branch = getBacBranch();
+    const level =
+        getStudentLevel();
+
+    const branch =
+        getBacBranch();
 
     if (
         !isValidSubject(
@@ -608,7 +1021,9 @@ function setSelectedSubject(
         String(subjectId)
     );
 
-    if (subjectType) {
+    if (
+        subjectType
+    ) {
         saveData(
             PLATFORM_KEYS.selectedSubjectType,
             String(subjectType)
@@ -628,12 +1043,23 @@ function setSelectedSubject(
     );
 
     window.dispatchEvent(
-        new CustomEvent("subjectChanged", {
-            detail: {
-                subject: String(subjectId),
-                subjectType: String(subjectType || "")
+        new CustomEvent(
+            "subjectChanged",
+            {
+                detail: {
+                    subject:
+                        String(
+                            subjectId
+                        ),
+
+                    subjectType:
+                        String(
+                            subjectType ||
+                            ""
+                        )
+                }
             }
-        })
+        )
     );
 
     return true;
@@ -677,7 +1103,9 @@ function getSelectedChapter() {
     );
 }
 
-function setSelectedChapter(chapter) {
+function setSelectedChapter(
+    chapter
+) {
     if (
         chapter === null ||
         chapter === undefined
@@ -695,11 +1123,14 @@ function setSelectedChapter(chapter) {
     );
 
     window.dispatchEvent(
-        new CustomEvent("chapterChanged", {
-            detail: {
-                chapter
+        new CustomEvent(
+            "chapterChanged",
+            {
+                detail: {
+                    chapter
+                }
             }
-        })
+        )
     );
 
     return true;
@@ -728,7 +1159,9 @@ function getSelectedVideo() {
     );
 }
 
-function setSelectedVideo(video) {
+function setSelectedVideo(
+    video
+) {
     if (
         video === null ||
         video === undefined
@@ -742,19 +1175,30 @@ function setSelectedVideo(video) {
     );
 
     saveLastLearningPosition({
-        level: getStudentLevel(),
-        branch: getBacBranch(),
-        subject: getSelectedSubject(),
-        chapter: getSelectedChapter(),
+        level:
+            getStudentLevel(),
+
+        branch:
+            getBacBranch(),
+
+        subject:
+            getSelectedSubject(),
+
+        chapter:
+            getSelectedChapter(),
+
         video
     });
 
     window.dispatchEvent(
-        new CustomEvent("videoChanged", {
-            detail: {
-                video
+        new CustomEvent(
+            "videoChanged",
+            {
+                detail: {
+                    video
+                }
             }
-        })
+        )
     );
 
     return true;
@@ -774,12 +1218,23 @@ function clearSelectedVideo() {
 
 function getLearningSelection() {
     return {
-        level: getStudentLevel(),
-        branch: getBacBranch(),
-        subject: getSelectedSubject(),
-        subjectType: getSelectedSubjectType(),
-        chapter: getSelectedChapter(),
-        video: getSelectedVideo()
+        level:
+            getStudentLevel(),
+
+        branch:
+            getBacBranch(),
+
+        subject:
+            getSelectedSubject(),
+
+        subjectType:
+            getSelectedSubjectType(),
+
+        chapter:
+            getSelectedChapter(),
+
+        video:
+            getSelectedVideo()
     };
 }
 
@@ -837,31 +1292,52 @@ function getCurriculumContainer(
     subject = getSelectedSubject()
 ) {
     const safeLevel =
-        normalizeStudentLevel(level);
+        normalizeStudentLevel(
+            level
+        );
 
-    if (!isValidLevel(safeLevel)) {
+    if (
+        !isValidLevel(
+            safeLevel
+        )
+    ) {
         return [];
     }
 
-    if (safeLevel === "bac") {
+    if (
+        safeLevel === "bac"
+    ) {
         const safeBranch =
-            String(branch || "").trim().toUpperCase();
+            String(
+                branch || ""
+            )
+                .trim()
+                .toUpperCase();
 
-        if (!isValidBacBranch(safeBranch)) {
+        if (
+            !isValidBacBranch(
+                safeBranch
+            )
+        ) {
             return [];
         }
 
         return (
-            CURRICULUM_DATA.bac?.[
-                safeBranch
-            ]?.[subject] || []
+            CURRICULUM_DATA
+                .bac?.[
+                    safeBranch
+                ]?.[
+                    subject
+                ] || []
         );
     }
 
     return (
         CURRICULUM_DATA?.[
             safeLevel
-        ]?.[subject] || []
+        ]?.[
+            subject
+        ] || []
     );
 }
 
@@ -877,7 +1353,11 @@ function getChapters(
             subject
         );
 
-    if (!Array.isArray(chapters)) {
+    if (
+        !Array.isArray(
+            chapters
+        )
+    ) {
         return [];
     }
 
@@ -907,8 +1387,12 @@ function getChapterById(
     return (
         chapters.find(
             chapter =>
-                String(chapter?.id) ===
-                String(chapterId)
+                String(
+                    chapter?.id
+                ) ===
+                String(
+                    chapterId
+                )
         ) || null
     );
 }
@@ -920,43 +1404,59 @@ function getChapterById(
 function normalizeChapterVideos(
     videos
 ) {
-    if (!Array.isArray(videos)) {
+    if (
+        !Array.isArray(
+            videos
+        )
+    ) {
         return [];
     }
 
     return videos
         .slice(
             0,
-            PLATFORM_LIMITS.maxVideosPerChapter
+            PLATFORM_LIMITS
+                .maxVideosPerChapter
         )
-        .map((video, index) => {
-            const number =
-                Number(
-                    video?.number ??
-                    index + 1
-                );
+        .map(
+            (
+                video,
+                index
+            ) => {
+                const number =
+                    Number(
+                        video?.number ??
+                        index + 1
+                    );
 
-            const safeNumber =
-                Number.isFinite(number) &&
-                number >=
-                    PLATFORM_LIMITS.minimumVideoNumber
-                    ? number
-                    : index + 1;
+                const safeNumber =
+                    Number.isFinite(
+                        number
+                    ) &&
+                    number >=
+                        PLATFORM_LIMITS
+                            .minimumVideoNumber
+                        ? number
+                        : index + 1;
 
-            return {
-                ...video,
+                return {
+                    ...video,
 
-                number: safeNumber,
+                    number:
+                        safeNumber,
 
-                free:
-                    safeNumber ===
-                    PLATFORM_LIMITS.firstFreeVideoNumber,
+                    free:
+                        safeNumber ===
+                        PLATFORM_LIMITS
+                            .firstFreeVideoNumber,
 
-                locked:
-                    safeNumber >
-                    PLATFORM_LIMITS.firstFreeVideoNumber
-            };
-        });
+                    locked:
+                        safeNumber >
+                        PLATFORM_LIMITS
+                            .firstFreeVideoNumber
+                };
+            }
+        );
 }
 
 function getChapterVideos(
@@ -975,2141 +1475,1391 @@ function getChapterVideos(
    VIDEO ACCESS
    ========================================================= */
 
-function isVideoFree(video) {
+function isVideoFree(
+    video
+) {
     if (!video) {
         return false;
     }
 
     return (
-        Number(video.number) ===
-        PLATFORM_LIMITS.firstFreeVideoNumber
+        Number(
+            video.number
+        ) ===
+        PLATFORM_LIMITS
+            .firstFreeVideoNumber
     );
 }
 
-function isVideoLocked(video) {
+function isVideoLocked(
+    video
+) {
     if (!video) {
         return true;
     }
 
-    return !isVideoFree(video);
+    return !isVideoFree(
+        video
+    );
 }
 
-function getVideoAccessState(video) {
+function getVideoAccessState(
+    video
+) {
     if (!video) {
         return "unavailable";
     }
 
-    if (isVideoFree(video)) {
+    if (
+        isVideoFree(
+            video
+        )
+    ) {
         return "free";
     }
 
     return "locked";
 }/* =========================================================
-   LEARNING PROGRESS
+   CURRICULUM DATA — DEMO CONTENT
    ========================================================= */
 
-function buildLearningProgressKey({
-    level = getStudentLevel(),
-    branch = getBacBranch(),
-    subject = getSelectedSubject(),
-    chapter = null,
-    video = null
-} = {}) {
-    const safeLevel =
-        normalizeStudentLevel(level);
+const DEMO_VIDEO_DURATIONS = [
+    "08:32",
+    "11:45",
+    "14:20",
+    "09:18",
+    "12:06",
+    "16:40",
+    "10:25",
+    "13:15",
+    "07:54",
+    "15:22"
+];
 
-    const safeBranch =
-        safeLevel === "bac"
-            ? String(branch || "")
-                .trim()
-                .toUpperCase()
-            : "";
+const DEMO_VIDEO_COUNTS = [
+    8,
+    6,
+    10,
+    7,
+    9
+];
 
-    const subjectId =
-        typeof subject === "object"
-            ? subject?.id || ""
-            : String(subject || "");
+const DEMO_CHAPTER_TITLES = {
+    chapter_1: {
+        ar: "الفصل التجريبي 1",
+        fr: "Chapitre démo 1"
+    },
+    chapter_2: {
+        ar: "الفصل التجريبي 2",
+        fr: "Chapitre démo 2"
+    },
+    chapter_3: {
+        ar: "الفصل التجريبي 3",
+        fr: "Chapitre démo 3"
+    },
+    chapter_4: {
+        ar: "الفصل التجريبي 4",
+        fr: "Chapitre démo 4"
+    },
+    chapter_5: {
+        ar: "الفصل التجريبي 5",
+        fr: "Chapitre démo 5"
+    }
+};
 
-    const chapterId =
-        typeof chapter === "object"
-            ? chapter?.id || ""
-            : String(chapter || "");
+const DEMO_VIDEO_TITLES = {
+    video_1: {
+        ar: "الفيديو التجريبي 1",
+        fr: "Vidéo démo 1"
+    },
+    video_2: {
+        ar: "الفيديو التجريبي 2",
+        fr: "Vidéo démo 2"
+    },
+    video_3: {
+        ar: "الفيديو التجريبي 3",
+        fr: "Vidéo démo 3"
+    },
+    video_4: {
+        ar: "الفيديو التجريبي 4",
+        fr: "Vidéo démo 4"
+    },
+    video_5: {
+        ar: "الفيديو التجريبي 5",
+        fr: "Vidéo démo 5"
+    },
+    video_6: {
+        ar: "الفيديو التجريبي 6",
+        fr: "Vidéo démo 6"
+    },
+    video_7: {
+        ar: "الفيديو التجريبي 7",
+        fr: "Vidéo démo 7"
+    },
+    video_8: {
+        ar: "الفيديو التجريبي 8",
+        fr: "Vidéo démo 8"
+    },
+    video_9: {
+        ar: "الفيديو التجريبي 9",
+        fr: "Vidéo démo 9"
+    },
+    video_10: {
+        ar: "الفيديو التجريبي 10",
+        fr: "Vidéo démo 10"
+    }
+};
 
-    const videoId =
-        typeof video === "object"
-            ? video?.id ??
-              video?.number ??
-              ""
-            : String(video ?? "");
 
-    return [
-        safeLevel,
-        safeBranch,
-        subjectId,
-        chapterId,
-        videoId
-    ].join("::");
+/* =========================================================
+   DEMO CURRICULUM HELPERS
+   ========================================================= */
+
+function createDemoVideos(count) {
+    const safeCount = Math.min(
+        Math.max(Number(count) || 1, 1),
+        PLATFORM_LIMITS.maxVideosPerChapter - 1
+    );
+
+    return Array.from(
+        { length: safeCount },
+        (_, index) => {
+            const number = index + 1;
+            const videoId = `video_${number}`;
+
+            return {
+                id: videoId,
+                number,
+                titleKey: videoId,
+                title: DEMO_VIDEO_TITLES[videoId],
+                duration:
+                    DEMO_VIDEO_DURATIONS[index] ||
+                    DEMO_VIDEO_DURATIONS[
+                        index % DEMO_VIDEO_DURATIONS.length
+                    ],
+                videoUrl: "",
+                isDemo: true
+            };
+        }
+    );
 }
 
-function getLearningProgressMap() {
-    const progress =
-        getData(
-            PLATFORM_KEYS.learningProgress,
-            {}
-        );
 
-    if (
-        !progress ||
-        typeof progress !== "object" ||
-        Array.isArray(progress)
-    ) {
+function createDemoChapters() {
+    return Array.from(
+        { length: 5 },
+        (_, index) => {
+            const number = index + 1;
+            const chapterId = `chapter_${number}`;
+
+            return {
+                id: chapterId,
+                number,
+                titleKey: chapterId,
+                title: DEMO_CHAPTER_TITLES[chapterId],
+                videos: createDemoVideos(
+                    DEMO_VIDEO_COUNTS[index]
+                )
+            };
+        }
+    );
+}
+
+
+function createDemoSubject(
+    subjectId,
+    subjectNameAr,
+    subjectNameFr,
+    subjectType
+) {
+    return {
+        id: subjectId,
+        name: {
+            ar: subjectNameAr,
+            fr: subjectNameFr
+        },
+        title: {
+            ar: subjectNameAr,
+            fr: subjectNameFr
+        },
+        subjectType: subjectType || "subject",
+        chapters: createDemoChapters()
+    };
+}
+
+
+/* =========================================================
+   CENTRAL CURRICULUM
+   ========================================================= */
+
+CURRICULUM_DATA.concours = {
+    mathematics: createDemoSubject(
+        "mathematics",
+        "الرياضيات",
+        "Mathématiques",
+        "mathematics"
+    ),
+
+    arabic: createDemoSubject(
+        "arabic",
+        "العربية",
+        "Arabe",
+        "arabic"
+    ),
+
+    french: createDemoSubject(
+        "french",
+        "الفرنسية",
+        "Français",
+        "french"
+    ),
+
+    natural_sciences: createDemoSubject(
+        "natural_sciences",
+        "العلوم الطبيعية",
+        "Sciences naturelles",
+        "natural_sciences"
+    )
+};
+
+
+CURRICULUM_DATA.brevet = {
+    mathematics: createDemoSubject(
+        "mathematics",
+        "الرياضيات",
+        "Mathématiques",
+        "mathematics"
+    ),
+
+    physics_chemistry: createDemoSubject(
+        "physics_chemistry",
+        "الفيزياء والكيمياء",
+        "Physique-Chimie",
+        "physics_chemistry"
+    ),
+
+    natural_sciences: createDemoSubject(
+        "natural_sciences",
+        "العلوم الطبيعية",
+        "Sciences naturelles",
+        "natural_sciences"
+    )
+};
+
+
+CURRICULUM_DATA.bac_c = {
+    mathematics: createDemoSubject(
+        "mathematics",
+        "الرياضيات",
+        "Mathématiques",
+        "mathematics"
+    ),
+
+    sciences: createDemoSubject(
+        "sciences",
+        "العلوم",
+        "Sciences",
+        "sciences"
+    ),
+
+    physics: createDemoSubject(
+        "physics",
+        "الفيزياء",
+        "Physique",
+        "physics"
+    ),
+
+    chemistry: createDemoSubject(
+        "chemistry",
+        "الكيمياء",
+        "Chimie",
+        "chemistry"
+    )
+};
+
+
+CURRICULUM_DATA.bac_d = {
+    natural_sciences: createDemoSubject(
+        "natural_sciences",
+        "العلوم الطبيعية",
+        "Sciences naturelles",
+        "natural_sciences"
+    ),
+
+    mathematics: createDemoSubject(
+        "mathematics",
+        "الرياضيات",
+        "Mathématiques",
+        "mathematics"
+    ),
+
+    physics: createDemoSubject(
+        "physics",
+        "الفيزياء",
+        "Physique",
+        "physics"
+    ),
+
+    chemistry: createDemoSubject(
+        "chemistry",
+        "الكيمياء",
+        "Chimie",
+        "chemistry"
+    )
+};
+
+
+/* =========================================================
+   CURRICULUM ACCESS HELPERS
+   ========================================================= */
+
+function getCurriculumForLevel(level) {
+    const normalizedLevel = normalizeStudentLevel(level);
+
+    if (!normalizedLevel) {
         return {};
     }
 
-    return progress;
+    return CURRICULUM_DATA[normalizedLevel] || {};
 }
 
-function saveLearningProgressMap(progress) {
-    if (
-        !progress ||
-        typeof progress !== "object" ||
-        Array.isArray(progress)
-    ) {
-        return false;
+
+function getSubjectsForLevel(level) {
+    const curriculum = getCurriculumForLevel(level);
+
+    return Object.values(curriculum);
+}
+
+
+function getSubjectData(level, subjectId) {
+    const curriculum = getCurriculumForLevel(level);
+
+    if (!subjectId) {
+        return null;
     }
 
-    return saveData(
-        PLATFORM_KEYS.learningProgress,
-        progress
-    );
+    return curriculum[subjectId] || null;
 }
 
-function isVideoCompleted({
-    level = getStudentLevel(),
-    branch = getBacBranch(),
-    subject = getSelectedSubject(),
-    chapter = null,
-    video = null
-} = {}) {
-    const key =
-        buildLearningProgressKey({
-            level,
-            branch,
-            subject,
-            chapter,
-            video
-        });
 
-    if (!key) {
-        return false;
-    }
-
-    const progress =
-        getLearningProgressMap();
-
-    return Boolean(
-        progress[key]?.completed
-    );
-}
-
-function setVideoProgress({
-    level = getStudentLevel(),
-    branch = getBacBranch(),
-    subject = getSelectedSubject(),
-    chapter = null,
-    video = null,
-    progress = 0,
-    completed = false
-} = {}) {
-    const key =
-        buildLearningProgressKey({
-            level,
-            branch,
-            subject,
-            chapter,
-            video
-        });
-
-    if (!key) {
-        return false;
-    }
-
-    const progressMap =
-        getLearningProgressMap();
-
-    const numericProgress =
-        Math.max(
-            0,
-            Math.min(
-                100,
-                Number(progress) || 0
-            )
-        );
-
-    progressMap[key] = {
-        progress: numericProgress,
-        completed: Boolean(completed),
-        updatedAt: Date.now(),
-
-        level:
-            normalizeStudentLevel(level),
-
-        branch:
-            normalizeStudentLevel(level) === "bac"
-                ? String(branch || "")
-                    .trim()
-                    .toUpperCase()
-                : "",
-
-        subject:
-            typeof subject === "object"
-                ? subject?.id || ""
-                : String(subject || ""),
-
-        chapter:
-            typeof chapter === "object"
-                ? chapter?.id || ""
-                : String(chapter || ""),
-
-        video:
-            typeof video === "object"
-                ? video?.id ??
-                  video?.number ??
-                  ""
-                : String(video ?? "")
-    };
-
-    saveLearningProgressMap(
-        progressMap
-    );
-
-    window.dispatchEvent(
-        new CustomEvent("learningProgressChanged", {
-            detail: {
-                key,
-                progress: progressMap[key]
-            }
-        })
-    );
-
-    return true;
-}
-
-function completeVideo({
-    level = getStudentLevel(),
-    branch = getBacBranch(),
-    subject = getSelectedSubject(),
-    chapter = null,
-    video = null
-} = {}) {
-    return setVideoProgress({
+function getChaptersForSubject(level, subjectId) {
+    const subject = getSubjectData(
         level,
-        branch,
-        subject,
-        chapter,
-        video,
-        progress: 100,
-        completed: true
-    });
+        subjectId
+    );
+
+    if (!subject || !Array.isArray(subject.chapters)) {
+        return [];
+    }
+
+    return subject.chapters;
 }
+
+
+function getChapterData(
+    level,
+    subjectId,
+    chapterId
+) {
+    const chapters = getChaptersForSubject(
+        level,
+        subjectId
+    );
+
+    return (
+        chapters.find(
+            chapter =>
+                String(chapter.id) === String(chapterId)
+        ) || null
+    );
+}
+
+
+function getVideosForChapter(
+    level,
+    subjectId,
+    chapterId
+) {
+    const chapter = getChapterData(
+        level,
+        subjectId,
+        chapterId
+    );
+
+    if (!chapter || !Array.isArray(chapter.videos)) {
+        return [];
+    }
+
+    return chapter.videos;
+}
+
+
+function getVideoData(
+    level,
+    subjectId,
+    chapterId,
+    videoId
+) {
+    const videos = getVideosForChapter(
+        level,
+        subjectId,
+        chapterId
+    );
+
+    return (
+        videos.find(
+            video =>
+                String(video.id) === String(videoId)
+        ) || null
+    );
+}
+
 
 /* =========================================================
-   LAST LEARNING POSITION
+   CURRICULUM COUNTS
    ========================================================= */
 
-function saveLastLearningPosition(position = {}) {
-    if (
-        !position ||
-        typeof position !== "object"
-    ) {
+function getChapterCount(
+    level,
+    subjectId
+) {
+    return getChaptersForSubject(
+        level,
+        subjectId
+    ).length;
+}
+
+
+function getVideoCount(
+    level,
+    subjectId,
+    chapterId
+) {
+    return getVideosForChapter(
+        level,
+        subjectId,
+        chapterId
+    ).length;
+}
+
+
+/* =========================================================
+   VIDEO ACCESS
+   ========================================================= */
+
+function isVideoFree(video) {
+    if (!video) {
         return false;
     }
 
-    const normalized = {
-        level:
-            normalizeStudentLevel(
-                position.level ||
-                getStudentLevel()
-            ),
+    return Number(video.number) === 1;
+}
 
-        branch:
-            String(
-                position.branch ||
-                getBacBranch() ||
-                ""
-            )
-                .trim()
-                .toUpperCase(),
 
-        subject:
-            position.subject ||
-            getSelectedSubject() ||
-            "",
+function isVideoLocked(video) {
+    return !isVideoFree(video);
+}
 
-        chapter:
-            position.chapter ||
-            getSelectedChapter() ||
-            null,
 
-        video:
-            position.video ||
-            getSelectedVideo() ||
-            null,
-
-        updatedAt: Date.now()
-    };
-
-    return saveData(
-        PLATFORM_KEYS.lastLearningPosition,
-        normalized
+function canAccessVideo(video) {
+    return Boolean(
+        video &&
+        isVideoFree(video)
     );
 }
 
-function getLastLearningPosition() {
-    const position =
-        getData(
-            PLATFORM_KEYS.lastLearningPosition,
-            null
+
+/* =========================================================
+   SUBJECT / CHAPTER / VIDEO SELECTION
+   ========================================================= */
+
+function saveSelectedSubject(
+    subjectId,
+    subjectType
+) {
+    if (subjectId) {
+        localStorage.setItem(
+            PLATFORM_KEYS.selectedSubject,
+            String(subjectId)
         );
+    }
+
+    if (subjectType) {
+        localStorage.setItem(
+            PLATFORM_KEYS.selectedSubjectType,
+            String(subjectType)
+        );
+    }
+}
+
+
+function getSelectedSubject() {
+    return localStorage.getItem(
+        PLATFORM_KEYS.selectedSubject
+    ) || "";
+}
+
+
+function getSelectedSubjectType() {
+    return localStorage.getItem(
+        PLATFORM_KEYS.selectedSubjectType
+    ) || "";
+}
+
+
+function saveSelectedChapter(chapterId) {
+    if (!chapterId) {
+        return;
+    }
+
+    localStorage.setItem(
+        PLATFORM_KEYS.selectedChapter,
+        String(chapterId)
+    );
+}
+
+
+function getSelectedChapter() {
+    return localStorage.getItem(
+        PLATFORM_KEYS.selectedChapter
+    ) || "";
+}
+
+
+function saveSelectedVideo(videoId) {
+    if (!videoId) {
+        return;
+    }
+
+    localStorage.setItem(
+        PLATFORM_KEYS.selectedVideo,
+        String(videoId)
+    );
+}
+
+
+function getSelectedVideo() {
+    return localStorage.getItem(
+        PLATFORM_KEYS.selectedVideo
+    ) || "";
+}
+
+
+/* =========================================================
+   SAFE CURRICULUM LOOKUP
+   ========================================================= */
+
+function getCurrentSubject() {
+    const level = getStudentLevel();
+    const subjectId = getSelectedSubject();
+
+    if (!level || !subjectId) {
+        return null;
+    }
+
+    return getSubjectData(
+        level,
+        subjectId
+    );
+}
+
+
+function getCurrentChapter() {
+    const level = getStudentLevel();
+    const subjectId = getSelectedSubject();
+    const chapterId = getSelectedChapter();
 
     if (
-        !position ||
-        typeof position !== "object"
+        !level ||
+        !subjectId ||
+        !chapterId
     ) {
         return null;
     }
 
-    return position;
+    return getChapterData(
+        level,
+        subjectId,
+        chapterId
+    );
 }
+
+
+function getCurrentVideo() {
+    const level = getStudentLevel();
+    const subjectId = getSelectedSubject();
+    const chapterId = getSelectedChapter();
+    const videoId = getSelectedVideo();
+
+    if (
+        !level ||
+        !subjectId ||
+        !chapterId ||
+        !videoId
+    ) {
+        return null;
+    }
+
+    return getVideoData(
+        level,
+        subjectId,
+        chapterId,
+        videoId
+    );
+}
+
 
 /* =========================================================
-   LEGACY LESSON COMPATIBILITY
-   ---------------------------------------------------------
-   Kept temporarily so older pages continue working while
-   the platform is migrated fully to chapter/video progress.
+   SUBJECT NAVIGATION
    ========================================================= */
 
-const TOTAL_LESSONS = 20;
+function openSubject(subjectId, subjectType) {
+    saveSelectedSubject(
+        subjectId,
+        subjectType
+    );
 
-function isLessonCompleted(
-    lessonNumber
-) {
-    const number =
-        Number(lessonNumber);
+    localStorage.removeItem(
+        PLATFORM_KEYS.selectedChapter
+    );
 
-    if (
-        !Number.isFinite(number) ||
-        number < 1
-    ) {
-        return false;
-    }
+    localStorage.removeItem(
+        PLATFORM_KEYS.selectedVideo
+    );
 
-    const completed =
-        getData(
-            PLATFORM_KEYS.completedLessons,
-            []
-        );
-
-    if (!Array.isArray(completed)) {
-        return false;
-    }
-
-    return completed.includes(number);
+    window.location.href = "chapter.html";
 }
 
-function completeLesson(
-    lessonNumber
-) {
-    const number =
-        Number(lessonNumber);
 
-    if (
-        !Number.isFinite(number) ||
-        number < 1
-    ) {
-        return false;
-    }
+function openChapter(chapterId) {
+    saveSelectedChapter(chapterId);
 
-    const completed =
-        getData(
-            PLATFORM_KEYS.completedLessons,
-            []
-        );
-
-    const list =
-        Array.isArray(completed)
-            ? completed
-            : [];
-
-    if (!list.includes(number)) {
-        list.push(number);
-    }
-
-    list.sort(
-        (a, b) => a - b
+    localStorage.removeItem(
+        PLATFORM_KEYS.selectedVideo
     );
 
-    saveData(
-        PLATFORM_KEYS.completedLessons,
-        list
+    window.location.href = "video.html";
+}
+
+
+function openVideo(videoId) {
+    const video = getVideoData(
+        getStudentLevel(),
+        getSelectedSubject(),
+        getSelectedChapter(),
+        videoId
     );
 
-    window.dispatchEvent(
-        new CustomEvent(
-            "lessonCompleted",
-            {
-                detail: {
-                    lessonNumber: number
+    if (!video) {
+        return;
+    }
+
+    saveSelectedVideo(videoId);
+
+    window.location.href = "video.html";
+}
+
+
+/* =========================================================
+   CURRICULUM VALIDATION
+   ========================================================= */
+
+function validateCurriculumStructure() {
+    const levels = Object.keys(
+        CURRICULUM_DATA
+    );
+
+    const report = {
+        valid: true,
+        levels: 0,
+        subjects: 0,
+        chapters: 0,
+        videos: 0
+    };
+
+    levels.forEach(level => {
+        const subjects =
+            getSubjectsForLevel(level);
+
+        report.levels += 1;
+        report.subjects += subjects.length;
+
+        subjects.forEach(subject => {
+            const chapters =
+                Array.isArray(subject.chapters)
+                    ? subject.chapters
+                    : [];
+
+            report.chapters += chapters.length;
+
+            chapters.forEach(chapter => {
+                const videos =
+                    Array.isArray(chapter.videos)
+                        ? chapter.videos
+                        : [];
+
+                report.videos += videos.length;
+
+                if (
+                    videos.length >=
+                    PLATFORM_LIMITS.maxVideosPerChapter
+                ) {
+                    report.valid = false;
                 }
-            }
-        )
-    );
+            });
+        });
+    });
 
-    return true;
+    return report;
 }
 
-function getCompletedLessons() {
-    const completed =
-        getData(
-            PLATFORM_KEYS.completedLessons,
-            []
+
+/* =========================================================
+   DEMO CONTENT LABEL HELPERS
+   ========================================================= */
+
+function getLocalizedValue(
+    value,
+    language
+) {
+    if (!value) {
+        return "";
+    }
+
+    if (
+        typeof value === "object" &&
+        !Array.isArray(value)
+    ) {
+        return (
+            value[language] ||
+            value.ar ||
+            value.fr ||
+            Object.values(value)[0] ||
+            ""
         );
+    }
 
-    return Array.isArray(completed)
-        ? completed
-        : [];
+    return String(value);
 }
+
+
+function getChapterTitle(
+    chapter,
+    language
+) {
+    if (!chapter) {
+        return "";
+    }
+
+    if (chapter.title) {
+        return getLocalizedValue(
+            chapter.title,
+            language || getSiteLanguage()
+        );
+    }
+
+    if (chapter.titleKey) {
+        return translateText(
+            chapter.titleKey,
+            language || getSiteLanguage()
+        );
+    }
+
+    return "";
+}
+
+
+function getVideoTitle(
+    video,
+    language
+) {
+    if (!video) {
+        return "";
+    }
+
+    if (video.title) {
+        return getLocalizedValue(
+            video.title,
+            language || getSiteLanguage()
+        );
+    }
+
+    if (video.titleKey) {
+        return translateText(
+            video.titleKey,
+            language || getSiteLanguage()
+        );
+    }
+
+    return "";
+}function getVideoDuration(video) {
+    if (!video) {
+        return "";
+    }
+
+    return video.duration || "";
+}
+
+
+function getVideoUrl(video) {
+    if (!video) {
+        return "";
+    }
+
+    return video.videoUrl || "";
+}
+
+
+/* =========================================================
+   LANGUAGE TRANSLATIONS — HEADER + DEMO CONTENT
+   ========================================================= */
+
+Object.assign(
+    GLOBAL_TRANSLATIONS.ar,
+    {
+        nav_home: "الرئيسية",
+        nav_notifications: "الإشعارات",
+        nav_account: "حسابي",
+        nav_settings: "الإعدادات",
+
+        demo_chapter_1: "الفصل التجريبي 1",
+        demo_chapter_2: "الفصل التجريبي 2",
+        demo_chapter_3: "الفصل التجريبي 3",
+        demo_chapter_4: "الفصل التجريبي 4",
+        demo_chapter_5: "الفصل التجريبي 5",
+
+        demo_video_1: "الفيديو التجريبي 1",
+        demo_video_2: "الفيديو التجريبي 2",
+        demo_video_3: "الفيديو التجريبي 3",
+        demo_video_4: "الفيديو التجريبي 4",
+        demo_video_5: "الفيديو التجريبي 5",
+        demo_video_6: "الفيديو التجريبي 6",
+        demo_video_7: "الفيديو التجريبي 7",
+        demo_video_8: "الفيديو التجريبي 8",
+        demo_video_9: "الفيديو التجريبي 9",
+        demo_video_10: "الفيديو التجريبي 10"
+    }
+);
+
+
+Object.assign(
+    GLOBAL_TRANSLATIONS.fr,
+    {
+        nav_home: "Accueil",
+        nav_notifications: "Notifications",
+        nav_account: "Mon compte",
+        nav_settings: "Paramètres",
+
+        demo_chapter_1: "Chapitre démo 1",
+        demo_chapter_2: "Chapitre démo 2",
+        demo_chapter_3: "Chapitre démo 3",
+        demo_chapter_4: "Chapitre démo 4",
+        demo_chapter_5: "Chapitre démo 5",
+
+        demo_video_1: "Vidéo démo 1",
+        demo_video_2: "Vidéo démo 2",
+        demo_video_3: "Vidéo démo 3",
+        demo_video_4: "Vidéo démo 4",
+        demo_video_5: "Vidéo démo 5",
+        demo_video_6: "Vidéo démo 6",
+        demo_video_7: "Vidéo démo 7",
+        demo_video_8: "Vidéo démo 8",
+        demo_video_9: "Vidéo démo 9",
+        demo_video_10: "Vidéo démo 10"
+    }
+);
+
+
+/* =========================================================
+   HEADER TRANSLATION HELPERS
+   ========================================================= */
+
+function getHeaderTranslations(language) {
+    const lang =
+        language === "fr"
+            ? "fr"
+            : "ar";
+
+    return {
+        home:
+            translateText(
+                "nav_home",
+                lang
+            ),
+
+        notifications:
+            translateText(
+                "nav_notifications",
+                lang
+            ),
+
+        account:
+            translateText(
+                "nav_account",
+                lang
+            ),
+
+        settings:
+            translateText(
+                "nav_settings",
+                lang
+            )
+    };
+}
+
+
+function updateHeaderLanguage(language) {
+    const translations =
+        getHeaderTranslations(language);
+
+    const selectors = {
+        home:
+            '[data-i18n="nav_home"]',
+
+        notifications:
+            '[data-i18n="nav_notifications"]',
+
+        account:
+            '[data-i18n="nav_account"]',
+
+        settings:
+            '[data-i18n="nav_settings"]'
+    };
+
+    Object.keys(selectors).forEach(key => {
+        document
+            .querySelectorAll(selectors[key])
+            .forEach(element => {
+                element.textContent =
+                    translations[key];
+            });
+    });
+}
+
+
+/* =========================================================
+   DEMO CURRICULUM INFORMATION
+   ========================================================= */
+
+function getCurriculumSummary(level) {
+    const subjects =
+        getSubjectsForLevel(level);
+
+    let chapters = 0;
+    let videos = 0;
+
+    subjects.forEach(subject => {
+        const subjectChapters =
+            Array.isArray(subject.chapters)
+                ? subject.chapters
+                : [];
+
+        chapters +=
+            subjectChapters.length;
+
+        subjectChapters.forEach(chapter => {
+            if (
+                Array.isArray(chapter.videos)
+            ) {
+                videos +=
+                    chapter.videos.length;
+            }
+        });
+    });
+
+    return {
+        subjects: subjects.length,
+        chapters,
+        videos
+    };
+}
+
+
+/* =========================================================
+   PROGRESS HELPERS
+   ========================================================= */
 
 function getLearningProgress() {
+    const raw =
+        localStorage.getItem(
+            PLATFORM_KEYS.learningProgress
+        );
+
+    if (!raw) {
+        return {};
+    }
+
+    try {
+        const parsed =
+            JSON.parse(raw);
+
+        return parsed &&
+            typeof parsed === "object"
+            ? parsed
+            : {};
+    } catch (error) {
+        return {};
+    }
+}
+
+
+function saveLearningProgress(progress) {
+    if (
+        !progress ||
+        typeof progress !== "object"
+    ) {
+        return;
+    }
+
+    localStorage.setItem(
+        PLATFORM_KEYS.learningProgress,
+        JSON.stringify(progress)
+    );
+}
+
+
+function getVideoProgressKey(
+    level,
+    subjectId,
+    chapterId,
+    videoId
+) {
+    return [
+        normalizeStudentLevel(level),
+        subjectId,
+        chapterId,
+        videoId
+    ].join(":");
+}
+
+
+function isVideoCompleted(
+    level,
+    subjectId,
+    chapterId,
+    videoId
+) {
+    const progress =
+        getLearningProgress();
+
+    const key =
+        getVideoProgressKey(
+            level,
+            subjectId,
+            chapterId,
+            videoId
+        );
+
+    return Boolean(progress[key]);
+}
+
+
+function markVideoCompleted(
+    level,
+    subjectId,
+    chapterId,
+    videoId
+) {
+    const progress =
+        getLearningProgress();
+
+    const key =
+        getVideoProgressKey(
+            level,
+            subjectId,
+            chapterId,
+            videoId
+        );
+
+    progress[key] = {
+        completed: true,
+        completedAt:
+            new Date().toISOString()
+    };
+
+    saveLearningProgress(progress);
+}
+
+
+/* =========================================================
+   CHAPTER PROGRESS
+   ========================================================= */
+
+function getChapterProgress(
+    level,
+    subjectId,
+    chapterId
+) {
+    const videos =
+        getVideosForChapter(
+            level,
+            subjectId,
+            chapterId
+        );
+
+    if (!videos.length) {
+        return {
+            completed: 0,
+            total: 0,
+            percentage: 0
+        };
+    }
+
     const completed =
-        getCompletedLessons();
+        videos.filter(video =>
+            isVideoCompleted(
+                level,
+                subjectId,
+                chapterId,
+                video.id
+            )
+        ).length;
 
     return {
         completed,
-        total: TOTAL_LESSONS,
-
+        total: videos.length,
         percentage:
-            TOTAL_LESSONS > 0
+            Math.round(
+                (completed /
+                    videos.length) *
+                    100
+            )
+    };
+}
+
+
+/* =========================================================
+   SUBJECT PROGRESS
+   ========================================================= */
+
+function getSubjectProgress(
+    level,
+    subjectId
+) {
+    const chapters =
+        getChaptersForSubject(
+            level,
+            subjectId
+        );
+
+    let total = 0;
+    let completed = 0;
+
+    chapters.forEach(chapter => {
+        const progress =
+            getChapterProgress(
+                level,
+                subjectId,
+                chapter.id
+            );
+
+        total += progress.total;
+        completed += progress.completed;
+    });
+
+    return {
+        completed,
+        total,
+        percentage:
+            total > 0
                 ? Math.round(
-                    (
-                        completed.length /
-                        TOTAL_LESSONS
-                    ) * 100
+                    (completed / total) *
+                    100
                 )
                 : 0
     };
 }
 
-/* =========================================================
-   STUDENT POINTS
-   ========================================================= */
-
-function getStudentPoints() {
-    const points =
-        Number(
-            getData(
-                PLATFORM_KEYS.studentPoints,
-                0
-            )
-        );
-
-    if (
-        !Number.isFinite(points) ||
-        points < 0
-    ) {
-        return 0;
-    }
-
-    return Math.floor(points);
-}
-
-function setStudentPoints(points) {
-    const numericPoints =
-        Number(points);
-
-    if (
-        !Number.isFinite(numericPoints) ||
-        numericPoints < 0
-    ) {
-        return false;
-    }
-
-    saveData(
-        PLATFORM_KEYS.studentPoints,
-        Math.floor(numericPoints)
-    );
-
-    window.dispatchEvent(
-        new CustomEvent(
-            "studentPointsChanged",
-            {
-                detail: {
-                    points:
-                        Math.floor(
-                            numericPoints
-                        )
-                }
-            }
-        )
-    );
-
-    return true;
-}
-
-function addStudentPoints(
-    amount
-) {
-    const numericAmount =
-        Number(amount);
-
-    if (
-        !Number.isFinite(numericAmount)
-    ) {
-        return false;
-    }
-
-    const current =
-        getStudentPoints();
-
-    return setStudentPoints(
-        current + numericAmount
-    );
-}
 
 /* =========================================================
-   THEME
+   LAST LEARNING POSITION
    ========================================================= */
 
-function getSiteTheme() {
-    const stored =
-        localStorage.getItem(
-            GLOBAL_THEME_KEY
-        );
-
-    return stored === "dark"
-        ? "dark"
-        : "light";
-}
-
-function applySiteTheme(
-    theme = getSiteTheme()
+function saveLastLearningPosition(
+    position
 ) {
-    const safeTheme =
-        theme === "dark"
-            ? "dark"
-            : "light";
-
-    document.documentElement.dataset.theme =
-        safeTheme;
-
-    document.documentElement.classList.toggle(
-        "dark",
-        safeTheme === "dark"
-    );
+    if (!position) {
+        return;
+    }
 
     localStorage.setItem(
-        GLOBAL_THEME_KEY,
-        safeTheme
-    );
-
-    updateThemeControls(
-        safeTheme
-    );
-
-    syncLegacySettings();
-
-    window.dispatchEvent(
-        new CustomEvent(
-            "themeChanged",
-            {
-                detail: {
-                    theme: safeTheme
-                }
-            }
-        )
-    );
-
-    return safeTheme;
-}
-
-function toggleDarkMode() {
-    const current =
-        getSiteTheme();
-
-    return applySiteTheme(
-        current === "dark"
-            ? "light"
-            : "dark"
+        PLATFORM_KEYS.lastLearningPosition,
+        JSON.stringify(position)
     );
 }
 
-function updateThemeControls(
-    theme = getSiteTheme()
-) {
-    const isDark =
-        theme === "dark";
 
-    document
-        .querySelectorAll(
-            "[data-theme-toggle]"
-        )
-        .forEach(button => {
-            button.setAttribute(
-                "aria-pressed",
-                String(isDark)
-            );
-
-            button.classList.toggle(
-                "active",
-                isDark
-            );
-        });
-
-    document
-        .querySelectorAll(
-            ".theme-toggle"
-        )
-        .forEach(button => {
-            button.setAttribute(
-                "aria-pressed",
-                String(isDark)
-            );
-        });
-
-    document
-        .querySelectorAll(
-            "#themeToggle"
-        )
-        .forEach(input => {
-            if (
-                input instanceof HTMLInputElement
-            ) {
-                input.checked = isDark;
-            }
-        });
-}
-
-/* =========================================================
-   LANGUAGE
-   ========================================================= */
-
-function getSiteLanguage() {
-    const stored =
+function getLastLearningPosition() {
+    const raw =
         localStorage.getItem(
-            GLOBAL_LANGUAGE_KEY
+            PLATFORM_KEYS.lastLearningPosition
         );
 
-    return stored === "fr"
-        ? "fr"
-        : "ar";
-}
-
-const GLOBAL_TRANSLATIONS = {
-    ar: {
-        nav_home: "الرئيسية",
-        nav_library: "المكتبة",
-        nav_forum: "المنتدى",
-        nav_challenge: "التحدي",
-
-        level_concours: "مسابقة 6AF",
-        level_concours_subtitle:
-            "التحضير لمسابقات التعليم",
-
-        level_brevet: "4ème / Brevet",
-        level_brevet_subtitle:
-            "التحضير لشهادة التعليم الإعدادي",
-
-        level_bac: "البكالوريا",
-        level_bac_subtitle:
-            "التحضير لامتحان البكالوريا",
-
-        bac_branch_c:
-            "البكالوريا C",
-
-        bac_branch_d:
-            "البكالوريا D",
-
-        subject_mathematics:
-            "الرياضيات",
-
-        subject_mathematics_c:
-            "الرياضيات",
-
-        subject_mathematics_d:
-            "الرياضيات",
-
-        subject_arabic:
-            "العربية",
-
-        subject_french:
-            "الفرنسية",
-
-        subject_natural_sciences:
-            "العلوم الطبيعية",
-
-        subject_physics_chemistry:
-            "الفيزياء والكيمياء",
-
-        subject_physics:
-            "الفيزياء",
-
-        subject_chemistry:
-            "الكيمياء",
-
-        subject_sciences:
-            "العلوم",
-
-        chapter:
-            "الفصل",
-
-        chapters:
-            "الفصول",
-
-        video:
-            "الفيديو",
-
-        videos:
-            "الفيديوهات",
-
-        free:
-            "مجاني",
-
-        locked:
-            "مقفل",
-
-        unavailable:
-            "غير متاح",
-
-        continue_learning:
-            "متابعة التعلم",
-
-        start_learning:
-            "ابدأ التعلم",
-
-        choose_level:
-            "اختر المستوى",
-
-        choose_subject:
-            "اختر المادة",
-
-        choose_chapter:
-            "اختر الفصل",
-
-        no_content:
-            "لا يوجد محتوى متاح حاليًا",
-
-        coming_soon:
-            "هذه الميزة ستكون متاحة قريبًا",
-
-        login_required:
-            "يجب تسجيل الدخول أولًا",
-
-        saved_successfully:
-            "تم الحفظ بنجاح",
-
-        error_occurred:
-            "حدث خطأ، حاول مرة أخرى",
-
-        points:
-            "النقاط",
-
-        lessons:
-            "الدروس",
-
-        badges:
-            "الشارات",
-
-        ranking:
-            "الترتيب",
-
-        subscriptions:
-            "الاشتراكات",
-
-        settings:
-            "الإعدادات",
-
-        account:
-            "الحساب",
-
-        notifications:
-            "الإشعارات",
-
-        language:
-            "اللغة",
-
-        theme:
-            "المظهر",
-
-        light:
-            "فاتح",
-
-        dark:
-            "داكن",
-
-        back:
-            "رجوع",
-
-        next:
-            "التالي",
-
-        previous:
-            "السابق",
-
-        completed:
-            "مكتمل",
-
-        mark_completed:
-            "تحديد كمكتمل",
-
-        watch_video:
-            "مشاهدة الفيديو",
-
-        video_locked_message:
-            "هذا الفيديو مقفل حاليًا",
-
-        first_video_free:
-            "الفيديو الأول مجاني",
-
-        max_videos_message:
-            "الحد الأقصى 20 فيديو لكل فصل"
-    },
-
-    fr: {
-        nav_home: "Accueil",
-        nav_library: "Bibliothèque",
-        nav_forum: "Forum",
-        nav_challenge: "Défi",
-
-        level_concours: "Concours 6AF",
-        level_concours_subtitle:
-            "Préparation aux concours scolaires",
-
-        level_brevet: "4ème / Brevet",
-        level_brevet_subtitle:
-            "Préparation au Brevet",
-
-        level_bac: "Baccalauréat",
-        level_bac_subtitle:
-            "Préparation au Baccalauréat",
-
-        bac_branch_c:
-            "Baccalauréat C",
-
-        bac_branch_d:
-            "Baccalauréat D",
-
-        subject_mathematics:
-            "Mathématiques",
-
-        subject_mathematics_c:
-            "Mathématiques",
-
-        subject_mathematics_d:
-            "Mathématiques",
-
-        subject_arabic:
-            "Arabe",
-
-        subject_french:
-            "Français",
-
-        subject_natural_sciences:
-            "Sciences naturelles",
-
-        subject_physics_chemistry:
-            "Physique et Chimie",
-
-        subject_physics:
-            "Physique",
-
-        subject_chemistry:
-            "Chimie",
-
-        subject_sciences:
-            "Sciences",
-
-        chapter:
-            "Chapitre",
-
-        chapters:
-            "Chapitres",
-
-        video:
-            "Vidéo",
-
-        videos:
-            "Vidéos",
-
-        free:
-            "Gratuit",
-
-        locked:
-            "Verrouillé",
-
-        unavailable:
-            "Indisponible",
-
-        continue_learning:
-            "Continuer l'apprentissage",
-
-        start_learning:
-            "Commencer",
-
-        choose_level:
-            "Choisir le niveau",
-
-        choose_subject:
-            "Choisir la matière",
-
-        choose_chapter:
-            "Choisir le chapitre",
-
-        no_content:
-            "Aucun contenu disponible pour le moment",
-
-        coming_soon:
-            "Cette fonctionnalité sera bientôt disponible",
-
-        login_required:
-            "Veuillez vous connecter d'abord",
-
-        saved_successfully:
-            "Enregistré avec succès",
-
-        error_occurred:
-            "Une erreur est survenue, réessayez",
-
-        points:
-            "Points",
-
-        lessons:
-            "Leçons",
-
-        badges:
-            "Badges",
-
-        ranking:
-            "Classement",
-
-        subscriptions:
-            "Abonnements",
-
-        settings:
-            "Paramètres",
-
-        account:
-            "Compte",
-
-        notifications:
-            "Notifications",
-
-        language:
-            "Langue",
-
-        theme:
-            "Thème",
-
-        light:
-            "Clair",
-
-        dark:
-            "Sombre",
-
-        back:
-            "Retour",
-
-        next:
-            "Suivant",
-
-        previous:
-            "Précédent",
-
-        completed:
-            "Terminé",
-
-        mark_completed:
-            "Marquer comme terminé",
-
-        watch_video:
-            "Regarder la vidéo",
-
-        video_locked_message:
-            "Cette vidéo est actuellement verrouillée",
-
-        first_video_free:
-            "La première vidéo est gratuite",
-
-        max_videos_message:
-            "Maximum de 20 vidéos par chapitre"
-    }
-};
-
-function translateText(
-    key,
-    fallback = ""
-) {
-    const language =
-        getSiteLanguage();
-
-    const dictionary =
-        GLOBAL_TRANSLATIONS[
-            language
-        ] || GLOBAL_TRANSLATIONS.ar;
-
-    return (
-        dictionary[key] ??
-        fallback ??
-        key
-    );
-}
-
-function applySiteLanguage(
-    language = getSiteLanguage()
-) {
-    const safeLanguage =
-        language === "fr"
-            ? "fr"
-            : "ar";
-
-    const direction =
-        safeLanguage === "ar"
-            ? "rtl"
-            : "ltr";
-
-    document.documentElement.lang =
-        safeLanguage;
-
-    document.documentElement.dir =
-        direction;
-
-    document.body?.setAttribute(
-        "dir",
-        direction
-    );
-
-    localStorage.setItem(
-        GLOBAL_LANGUAGE_KEY,
-        safeLanguage
-    );
-
-    document
-        .querySelectorAll(
-            "[data-i18n]"
-        )
-        .forEach(element => {
-            const key =
-                element.getAttribute(
-                    "data-i18n"
-                );
-
-            if (!key) return;
-
-            const translated =
-                translateText(
-                    key,
-                    element.textContent
-                );
-
-            element.textContent =
-                translated;
-        });
-
-    document
-        .querySelectorAll(
-            "[data-i18n-placeholder]"
-        )
-        .forEach(element => {
-            const key =
-                element.getAttribute(
-                    "data-i18n-placeholder"
-                );
-
-            if (!key) return;
-
-            element.setAttribute(
-                "placeholder",
-                translateText(
-                    key,
-                    element.getAttribute(
-                        "placeholder"
-                    ) || ""
-                )
-            );
-        });
-
-    document
-        .querySelectorAll(
-            "[data-i18n-title]"
-        )
-        .forEach(element => {
-            const key =
-                element.getAttribute(
-                    "data-i18n-title"
-                );
-
-            if (!key) return;
-
-            element.setAttribute(
-                "title",
-                translateText(
-                    key,
-                    element.getAttribute(
-                        "title"
-                    ) || ""
-                )
-            );
-        });
-
-    updateLanguageControls(
-        safeLanguage
-    );
-
-    syncLegacySettings();
-
-    window.dispatchEvent(
-        new CustomEvent(
-            "languageChanged",
-            {
-                detail: {
-                    language:
-                        safeLanguage
-                }
-            }
-        )
-    );
-
-    window.dispatchEvent(
-        new CustomEvent(
-            "siteLanguageChanged",
-            {
-                detail: {
-                    language:
-                        safeLanguage
-                }
-            }
-        )
-    );
-
-    return safeLanguage;
-}
-
-function updateLanguageControls(
-    language = getSiteLanguage()
-) {
-    document
-        .querySelectorAll(
-            "[data-language]"
-        )
-        .forEach(button => {
-            const value =
-                button.getAttribute(
-                    "data-language"
-                );
-
-            const active =
-                value === language;
-
-            button.classList.toggle(
-                "active",
-                active
-            );
-
-            button.setAttribute(
-                "aria-pressed",
-                String(active)
-            );
-        });
-
-    document
-        .querySelectorAll(
-            "[data-lang-toggle]"
-        )
-        .forEach(button => {
-            button.setAttribute(
-                "aria-pressed",
-                "false"
-            );
-        });
-}
-
-function toggleLanguage() {
-    const current =
-        getSiteLanguage();
-
-    return applySiteLanguage(
-        current === "ar"
-            ? "fr"
-            : "ar"
-    );
-}
-
-/* =========================================================
-   EDUCATION LABEL HELPERS
-   ========================================================= */
-
-function getLevelLabel(
-    level = getStudentLevel()
-) {
-    const safeLevel =
-        normalizeStudentLevel(level);
-
-    const definition =
-        getLevelDefinition(
-            safeLevel
-        );
-
-    if (!definition) {
-        return "";
+    if (!raw) {
+        return null;
     }
 
-    return translateText(
-        definition.titleKey,
-        definition.id
-    );
-}
-
-function getLevelSubtitle(
-    level = getStudentLevel()
-) {
-    const safeLevel =
-        normalizeStudentLevel(level);
-
-    const definition =
-        getLevelDefinition(
-            safeLevel
-        );
-
-    if (!definition) {
-        return "";
-    }
-
-    return translateText(
-        definition.subtitleKey,
-        ""
-    );
-}
-
-function getBacBranchLabel(
-    branch = getBacBranch()
-) {
-    const definition =
-        getBacBranchDefinition(
-            branch
-        );
-
-    if (!definition) {
-        return "";
-    }
-
-    return translateText(
-        definition.titleKey,
-        definition.id
-    );
-}
-
-function getSubjectLabel(
-    subjectId,
-    level = getStudentLevel(),
-    branch = getBacBranch()
-) {
-    const definition =
-        getSubjectDefinition(
-            subjectId,
-            level,
-            branch
-        );
-
-    if (!definition) {
-        return "";
-    }
-
-    return translateText(
-        definition.titleKey,
-        definition.id
-    );
-}/* =========================================================
-   LEGACY SETTINGS SYNC
-   ========================================================= */
-
-function syncLegacySettings() {
-    const settings = {
-        theme: getSiteTheme(),
-        language: getSiteLanguage()
-    };
-
-    saveData(
-        PLATFORM_KEYS.platformSettings,
-        settings
-    );
-
-    return settings;
-}
-
-/* =========================================================
-   DOM HELPERS
-   ========================================================= */
-
-function setText(
-    selector,
-    value
-) {
-    const element =
-        typeof selector === "string"
-            ? document.querySelector(selector)
-            : selector;
-
-    if (!element) {
-        return false;
-    }
-
-    element.textContent =
-        value ?? "";
-
-    return true;
-}
-
-function show(
-    selector
-) {
-    const element =
-        typeof selector === "string"
-            ? document.querySelector(selector)
-            : selector;
-
-    if (!element) {
-        return false;
-    }
-
-    element.hidden = false;
-
-    element.classList.remove(
-        "hidden"
-    );
-
-    return true;
-}
-
-function hide(
-    selector
-) {
-    const element =
-        typeof selector === "string"
-            ? document.querySelector(selector)
-            : selector;
-
-    if (!element) {
-        return false;
-    }
-
-    element.hidden = true;
-
-    element.classList.add(
-        "hidden"
-    );
-
-    return true;
-}
-
-function toggle(
-    selector,
-    force
-) {
-    const element =
-        typeof selector === "string"
-            ? document.querySelector(selector)
-            : selector;
-
-    if (!element) {
-        return false;
-    }
-
-    const shouldShow =
-        typeof force === "boolean"
-            ? force
-            : element.hidden;
-
-    if (shouldShow) {
-        show(element);
-    } else {
-        hide(element);
-    }
-
-    return shouldShow;
-}
-
-/* =========================================================
-   BUTTON STATE
-   ========================================================= */
-
-function setButtonLoading(
-    button,
-    loading = true,
-    loadingText = "..."
-) {
-    const element =
-        typeof button === "string"
-            ? document.querySelector(button)
-            : button;
-
-    if (!element) {
-        return false;
-    }
-
-    if (loading) {
-        if (
-            element.dataset.originalText ===
-            undefined
-        ) {
-            element.dataset.originalText =
-                element.textContent;
-        }
-
-        element.disabled = true;
-
-        element.setAttribute(
-            "aria-busy",
-            "true"
-        );
-
-        element.textContent =
-            loadingText;
-    } else {
-        resetButton(element);
-    }
-
-    return true;
-}
-
-function resetButton(
-    button
-) {
-    const element =
-        typeof button === "string"
-            ? document.querySelector(button)
-            : button;
-
-    if (!element) {
-        return false;
-    }
-
-    if (
-        element.dataset.originalText !==
-        undefined
-    ) {
-        element.textContent =
-            element.dataset.originalText;
-
-        delete element.dataset.originalText;
-    }
-
-    element.disabled = false;
-
-    element.removeAttribute(
-        "aria-busy"
-    );
-
-    return true;
-}
-
-/* =========================================================
-   NOTIFICATIONS
-   ========================================================= */
-
-function notify(
-    message,
-    type = "info",
-    duration = 3000
-) {
-    if (!message) {
-        return false;
-    }
-
-    let container =
-        document.querySelector(
-            "#edunova-notifications"
-        );
-
-    if (!container) {
-        container =
-            document.createElement("div");
-
-        container.id =
-            "edunova-notifications";
-
-        container.setAttribute(
-            "aria-live",
-            "polite"
-        );
-
-        container.style.position =
-            "fixed";
-
-        container.style.top =
-            "82px";
-
-        container.style.left =
-            "50%";
-
-        container.style.transform =
-            "translateX(-50%)";
-
-        container.style.zIndex =
-            "99999";
-
-        container.style.width =
-            "min(92%, 420px)";
-
-        container.style.pointerEvents =
-            "none";
-
-        document.body.appendChild(
-            container
-        );
-    }
-
-    const notification =
-        document.createElement("div");
-
-    notification.textContent =
-        String(message);
-
-    notification.dataset.type =
-        String(type);
-
-    notification.style.pointerEvents =
-        "auto";
-
-    notification.style.padding =
-        "12px 16px";
-
-    notification.style.marginBottom =
-        "8px";
-
-    notification.style.borderRadius =
-        "14px";
-
-    notification.style.background =
-        "var(--card-bg, #ffffff)";
-
-    notification.style.color =
-        "var(--text-color, #111111)";
-
-    notification.style.border =
-        "1px solid var(--border-color, #e5e7eb)";
-
-    notification.style.boxShadow =
-        "0 10px 30px rgba(0,0,0,.10)";
-
-    notification.style.textAlign =
-        "center";
-
-    notification.style.fontSize =
-        "14px";
-
-    notification.style.transition =
-        "opacity .25s ease, transform .25s ease";
-
-    container.appendChild(
-        notification
-    );
-
-    window.setTimeout(() => {
-        notification.style.opacity =
-            "0";
-
-        notification.style.transform =
-            "translateY(-6px)";
-
-        window.setTimeout(() => {
-            notification.remove();
-        }, 250);
-    }, Math.max(500, duration));
-
-    return true;
-}
-
-/* =========================================================
-   CONFIRMATION
-   ========================================================= */
-
-function confirmAction(
-    message,
-    callback
-) {
-    const confirmed =
-        window.confirm(
-            String(
-                message ||
-                translateText(
-                    "confirm_action",
-                    "هل أنت متأكد؟"
-                )
-            )
-        );
-
-    if (
-        confirmed &&
-        typeof callback === "function"
-    ) {
-        callback();
-    }
-
-    return confirmed;
-}
-
-/* =========================================================
-   CURRENT YEAR
-   ========================================================= */
-
-function setCurrentYear() {
-    const year =
-        new Date().getFullYear();
-
-    document
-        .querySelectorAll(
-            "[data-current-year]"
-        )
-        .forEach(element => {
-            element.textContent =
-                String(year);
-        });
-
-    const currentYearElement =
-        document.querySelector(
-            "#currentYear"
-        );
-
-    if (currentYearElement) {
-        currentYearElement.textContent =
-            String(year);
-    }
-
-    return year;
-}
-
-/* =========================================================
-   ACTIVE NAVIGATION
-   ========================================================= */
-
-function setActiveNav(
-    page
-) {
-    const requestedPage =
-        String(
-            page ||
-            window.location.pathname
-                .split("/")
-                .pop() ||
-            "index.html"
-        )
-            .split("?")[0]
-            .split("#")[0];
-
-    document
-        .querySelectorAll(
-            ".nav-link, [data-nav]"
-        )
-        .forEach(link => {
-            const href =
-                link.getAttribute(
-                    "href"
-                );
-
-            const dataNav =
-                link.getAttribute(
-                    "data-nav"
-                );
-
-            const target =
-                String(
-                    dataNav ||
-                    href ||
-                    ""
-                )
-                    .split("?")[0]
-                    .split("#")[0]
-                    .split("/")
-                    .pop();
-
-            const normalizedTarget =
-                target || "index.html";
-
-            const active =
-                normalizedTarget ===
-                requestedPage;
-
-            link.classList.toggle(
-                "active",
-                active
-            );
-
-            if (active) {
-                link.setAttribute(
-                    "aria-current",
-                    "page"
-                );
-            } else {
-                link.removeAttribute(
-                    "aria-current"
-                );
-            }
-        });
-
-    return true;
-}
-
-/* =========================================================
-   SMOOTH SCROLL
-   ========================================================= */
-
-function scrollToElement(
-    selector,
-    offset = 0
-) {
-    const element =
-        typeof selector === "string"
-            ? document.querySelector(selector)
-            : selector;
-
-    if (!element) {
-        return false;
-    }
-
-    const top =
-        element.getBoundingClientRect()
-            .top +
-        window.scrollY -
-        Number(offset || 0);
-
-    window.scrollTo({
-        top: Math.max(0, top),
-        behavior: "smooth"
-    });
-
-    return true;
-}
-
-/* =========================================================
-   SAFE HTML
-   ========================================================= */
-
-function escapeHTML(
-    value
-) {
-    if (
-        value === null ||
-        value === undefined
-    ) {
-        return "";
-    }
-
-    const div =
-        document.createElement("div");
-
-    div.textContent =
-        String(value);
-
-    return div.innerHTML;
-}
-
-/* =========================================================
-   PAGE UTILITIES
-   ========================================================= */
-
-function addClass(
-    selector,
-    className
-) {
-    const element =
-        typeof selector === "string"
-            ? document.querySelector(selector)
-            : selector;
-
-    if (!element || !className) {
-        return false;
-    }
-
-    element.classList.add(
-        className
-    );
-
-    return true;
-}
-
-function removeClass(
-    selector,
-    className
-) {
-    const element =
-        typeof selector === "string"
-            ? document.querySelector(selector)
-            : selector;
-
-    if (!element || !className) {
-        return false;
-    }
-
-    element.classList.remove(
-        className
-    );
-
-    return true;
-}
-
-function exists(
-    selector
-) {
-    if (
-        typeof selector !== "string"
-    ) {
-        return Boolean(selector);
-    }
-
-    return Boolean(
-        document.querySelector(selector)
-    );
-}
-
-/* =========================================================
-   DEVICE
-   ========================================================= */
-
-function isMobile() {
-    return window.matchMedia(
-        "(max-width: 768px)"
-    ).matches;
-}
-
-/* =========================================================
-   GLOBAL SETTINGS CONTROLS
-   ========================================================= */
-
-function initializeGlobalSettings() {
-    const theme =
-        getSiteTheme();
-
-    const language =
-        getSiteLanguage();
-
-    applySiteTheme(
-        theme
-    );
-
-    applySiteLanguage(
-        language
-    );
-
-    document
-        .querySelectorAll(
-            "[data-theme-toggle]"
-        )
-        .forEach(button => {
-            if (
-                button.dataset.bound ===
-                "true"
-            ) {
-                return;
-            }
-
-            button.dataset.bound =
-                "true";
-
-            button.addEventListener(
-                "click",
-                () => {
-                    toggleDarkMode();
-                }
-            );
-        });
-
-    document
-        .querySelectorAll(
-            "[data-language]"
-        )
-        .forEach(button => {
-            if (
-                button.dataset.bound ===
-                "true"
-            ) {
-                return;
-            }
-
-            button.dataset.bound =
-                "true";
-
-            button.addEventListener(
-                "click",
-                () => {
-                    const language =
-                        button.getAttribute(
-                            "data-language"
-                        );
-
-                    applySiteLanguage(
-                        language
-                    );
-                }
-            );
-        });
-
-    document
-        .querySelectorAll(
-            "[data-lang-toggle]"
-        )
-        .forEach(button => {
-            if (
-                button.dataset.bound ===
-                "true"
-            ) {
-                return;
-            }
-
-            button.dataset.bound =
-                "true";
-
-            button.addEventListener(
-                "click",
-                () => {
-                    toggleLanguage();
-                }
-            );
-        });
-
-    const themeToggle =
-        document.querySelector(
-            "#themeToggle"
-        );
-
-    if (
-        themeToggle &&
-        !themeToggle.dataset.bound
-    ) {
-        themeToggle.dataset.bound =
-            "true";
-
-        themeToggle.addEventListener(
-            "change",
-            event => {
-                applySiteTheme(
-                    event.target.checked
-                        ? "dark"
-                        : "light"
-                );
-            }
-        );
-    }
-
-    return true;
-}
-
-/* =========================================================
-   EARLY THEME
-   ---------------------------------------------------------
-   Prevents unnecessary light/dark flashing during load.
-   ========================================================= */
-
-(function earlyTheme() {
     try {
-        const stored =
-            localStorage.getItem(
-                GLOBAL_THEME_KEY
-            );
-
-        const theme =
-            stored === "dark"
-                ? "dark"
-                : DEFAULT_THEME;
-
-        document.documentElement.dataset.theme =
-            theme;
-
-        document.documentElement.classList.toggle(
-            "dark",
-            theme === "dark"
-        );
+        return JSON.parse(raw);
     } catch (error) {
-        console.warn(
-            "EduNova early theme error:",
-            error
-        );
+        return null;
     }
-})();
+}
+
 
 /* =========================================================
-   EARLY LANGUAGE
+   PLATFORM INITIALIZATION CHECK
    ========================================================= */
 
-(function earlyLanguage() {
-    try {
-        const stored =
-            localStorage.getItem(
-                GLOBAL_LANGUAGE_KEY
-            );
+function ensureDemoCurriculum() {
+    const validation =
+        validateCurriculumStructure();
 
-        const language =
-            stored === "fr"
-                ? "fr"
-                : DEFAULT_LANGUAGE;
-
-        document.documentElement.lang =
-            language;
-
-        document.documentElement.dir =
-            language === "ar"
-                ? "rtl"
-                : "ltr";
-    } catch (error) {
+    if (!validation.valid) {
         console.warn(
-            "EduNova early language error:",
-            error
+            "EduNova AI: curriculum validation failed.",
+            validation
         );
     }
-})();
+
+    return validation;
+}
+
 
 /* =========================================================
-   CROSS-TAB / CROSS-PAGE STORAGE SYNC
+   GLOBAL HEADER HELPERS
    ========================================================= */
 
-window.addEventListener(
-    "storage",
-    event => {
-        if (
-            event.key ===
-            GLOBAL_THEME_KEY
-        ) {
-            applySiteTheme(
-                event.newValue === "dark"
-                    ? "dark"
-                    : "light"
-            );
+function refreshHeaderTranslations() {
+    updateHeaderLanguage(
+        getSiteLanguage()
+    );
+}
 
-            return;
+
+function initializeHeaderTranslations() {
+    if (
+        typeof document === "undefined"
+    ) {
+        return;
+    }
+
+    refreshHeaderTranslations();
+
+    document.addEventListener(
+        "siteLanguageChanged",
+        refreshHeaderTranslations
+    );
+}
+
+
+/* =========================================================
+   DEMO CURRICULUM INITIALIZATION
+   ========================================================= */
+
+ensureDemoCurriculum();
+
+
+/* =========================================================
+   LANGUAGE EVENT BRIDGE
+   ========================================================= */
+
+if (
+    typeof window !== "undefined"
+) {
+    window.addEventListener(
+        "eduNovaLanguageChanged",
+        function () {
+            refreshHeaderTranslations();
         }
+    );
 
-        if (
-            event.key ===
-            GLOBAL_LANGUAGE_KEY
-        ) {
-            applySiteLanguage(
-                event.newValue === "fr"
-                    ? "fr"
-                    : "ar"
-            );
-
-            return;
+    window.addEventListener(
+        "languageChanged",
+        function () {
+            refreshHeaderTranslations();
         }
+    );
+}
 
-        if (
-            event.key ===
-            PLATFORM_KEYS.studentLevel
-        ) {
-            window.dispatchEvent(
-                new CustomEvent(
-                    "studentLevelChanged",
-                    {
-                        detail: {
-                            level:
-                                normalizeStudentLevel(
-                                    event.newValue
-                                )
-                        }
-                    }
-                )
-            );
 
-            return;
-        }
+/* =========================================================
+   PUBLIC API
+   ========================================================= */
 
-        if (
-            event.key ===
-            PLATFORM_KEYS.bacBranch
-        ) {
-            window.dispatchEvent(
-                new CustomEvent(
-                    "bacBranchChanged",
-                    {
-                        detail: {
-                            branch:
-                                String(
-                                    event.newValue ||
-                                    ""
-                                ).toUpperCase()
-                        }
-                    }
-                )
-            );
+window.EduNova = window.EduNova || {};
 
-            return;
-        }
+Object.assign(
+    window.EduNova,
+    {
+        curriculum:
+            CURRICULUM_DATA,
 
-        if (
-            event.key ===
-            PLATFORM_KEYS.learningProgress
-        ) {
-            window.dispatchEvent(
-                new CustomEvent(
-                    "learningProgressChanged"
-                )
-            );
+        getSubjectsForLevel,
+        getSubjectData,
+        getChaptersForSubject,
+        getChapterData,
+        getVideosForChapter,
+        getVideoData,
 
-            return;
-        }
+        getChapterCount,
+        getVideoCount,
 
-        if (
-            event.key ===
-            PLATFORM_KEYS.studentPoints
-        ) {
-            window.dispatchEvent(
-                new CustomEvent(
-                    "studentPointsChanged",
-                    {
-                        detail: {
-                            points:
-                                Number(
-                                    event.newValue ||
-                                    0
-                                )
-                        }
-                    }
-                )
-            );
-        }
+        getChapterTitle,
+        getVideoTitle,
+        getVideoDuration,
+        getVideoUrl,
+
+        isVideoFree,
+        isVideoLocked,
+        canAccessVideo,
+
+        getCurriculumSummary,
+        validateCurriculumStructure,
+
+        getChapterProgress,
+        getSubjectProgress,
+
+        saveSelectedSubject,
+        getSelectedSubject,
+
+        saveSelectedChapter,
+        getSelectedChapter,
+
+        saveSelectedVideo,
+        getSelectedVideo,
+
+        openSubject,
+        openChapter,
+        openVideo,
+
+        getHeaderTranslations,
+        refreshHeaderTranslations
     }
 );
 
+
 /* =========================================================
-   GLOBAL DOM INITIALIZATION
+   DOM READY — HEADER TRANSLATION
    ========================================================= */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
-        applySiteTheme(
-            getSiteTheme()
-        );
+if (
+    document.readyState === "loading"
+) {
+    document.addEventListener(
+        "DOMContentLoaded",
+        initializeHeaderTranslations,
+        {
+            once: true
+        }
+    );
+} else {
+    initializeHeaderTranslations();
+}
 
-        applySiteLanguage(
-            getSiteLanguage()
-        );
-
-        initializeGlobalSettings();
-
-        setCurrentYear();
-
-        setActiveNav();
-
-        updateThemeControls(
-            getSiteTheme()
-        );
-
-        updateLanguageControls(
-            getSiteLanguage()
-        );
-    }
-);
 
 /* =========================================================
-   PLATFORM READY EVENT
+   SCRIPT READY EVENT
    ========================================================= */
 
 window.dispatchEvent(
