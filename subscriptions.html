@@ -1,0 +1,3941 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="EduNova AI — الاشتراكات والباقات التعليمية">
+
+    <title>الاشتراكات | EduNova AI</title>
+
+    <link rel="stylesheet"
+          href="style.css">
+
+
+    <style>
+
+        /* =====================================================
+           EduNova AI — Subscriptions
+           Part 1
+           ===================================================== */
+
+        :root {
+
+            --sub-green:
+                var(--primary, #16835c);
+
+            --sub-green-soft:
+                var(--primary-light, rgba(22,131,92,.09));
+
+            --sub-text:
+                var(--text, #18221e);
+
+            --sub-muted:
+                var(--text-soft, #6b756f);
+
+            --sub-light:
+                var(--text-light, #9aa39e);
+
+            --sub-surface:
+                var(--surface, #ffffff);
+
+            --sub-surface-muted:
+                var(--surface-muted, #f5f7f6);
+
+            --sub-border:
+                var(--border, #e3e8e5);
+
+            --sub-shadow:
+                var(--shadow-sm,
+                0 7px 24px rgba(20,30,40,.045));
+
+            --sub-shadow-md:
+                var(--shadow-md,
+                0 12px 32px rgba(20,30,40,.08));
+
+        }
+
+
+        /* =====================================================
+           PAGE
+           ===================================================== */
+
+        .subscriptions-page {
+
+            padding-top: 28px;
+
+            padding-bottom: 50px;
+
+        }
+
+
+        /* =====================================================
+           HERO
+           ===================================================== */
+
+        .subscriptions-hero {
+
+            position: relative;
+
+            overflow: hidden;
+
+            margin-bottom: 22px;
+
+            padding: 28px 24px;
+
+            border:
+                1px solid
+                rgba(22,131,92,.12);
+
+            border-radius: 24px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--sub-green),
+                    color-mix(
+                        in srgb,
+                        var(--sub-green) 78%,
+                        #10291f
+                    )
+                );
+
+            color: #fff;
+
+            box-shadow:
+                0 16px 38px
+                rgba(22,131,92,.14);
+
+        }
+
+
+        .subscriptions-hero::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 190px;
+            height: 190px;
+
+            left: -75px;
+            bottom: -110px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.12);
+
+            border-radius: 50%;
+
+        }
+
+
+        .subscriptions-hero::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 130px;
+            height: 130px;
+
+            right: -55px;
+            top: -65px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.09);
+
+            border-radius: 50%;
+
+        }
+
+
+        .subscriptions-hero-content {
+
+            position: relative;
+
+            z-index: 1;
+
+            max-width: 760px;
+
+        }
+
+
+        .subscriptions-eyebrow {
+
+            margin-bottom: 7px;
+
+            color:
+                rgba(255,255,255,.72);
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+        }
+
+
+        .subscriptions-hero h1 {
+
+            margin:
+                0 0 9px;
+
+            color: #fff;
+
+            font-size: 27px;
+
+            line-height: 1.3;
+
+        }
+
+
+        .subscriptions-hero p {
+
+            max-width: 700px;
+
+            margin: 0;
+
+            color:
+                rgba(255,255,255,.86);
+
+            font-size: 13px;
+
+            line-height: 1.9;
+
+        }
+
+
+        /* =====================================================
+           CURRENT SUBSCRIPTION
+           ===================================================== */
+
+        .subscription-status {
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1fr)
+                auto;
+
+            align-items: center;
+
+            gap: 18px;
+
+            margin-bottom: 24px;
+
+            padding: 19px;
+
+            border:
+                1px solid
+                var(--sub-border);
+
+            border-radius: 20px;
+
+            background:
+                var(--sub-surface);
+
+            box-shadow:
+                var(--sub-shadow);
+
+        }
+
+
+        .subscription-status-main {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            min-width: 0;
+
+        }
+
+
+        .subscription-status-icon {
+
+            width: 45px;
+            height: 45px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            flex: 0 0 auto;
+
+            border-radius: 13px;
+
+            background:
+                var(--sub-green-soft);
+
+            color:
+                var(--sub-green);
+
+            font-size: 14px;
+
+            font-weight: 900;
+
+        }
+
+
+        .subscription-status-content {
+
+            min-width: 0;
+
+        }
+
+
+        .subscription-status-label {
+
+            margin-bottom: 3px;
+
+            color:
+                var(--sub-muted);
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+        }
+
+
+        .subscription-status-title {
+
+            color:
+                var(--sub-text);
+
+            font-size: 15px;
+
+            font-weight: 850;
+
+        }
+
+
+        .subscription-status-meta {
+
+            margin-top: 3px;
+
+            color:
+                var(--sub-light);
+
+            font-size: 10px;
+
+        }
+
+
+        .subscription-status-badge {
+
+            padding:
+                7px 11px;
+
+            border-radius: 999px;
+
+            background:
+                var(--sub-green-soft);
+
+            color:
+                var(--sub-green);
+
+            font-size: 10px;
+
+            font-weight: 850;
+
+            white-space: nowrap;
+
+        }
+
+
+        /* =====================================================
+           SECTION TITLE
+           ===================================================== */
+
+        .subscriptions-section-heading {
+
+            margin:
+                27px 0 14px;
+
+        }
+
+
+        .subscriptions-section-heading h2 {
+
+            margin: 0;
+
+            color:
+                var(--sub-text);
+
+            font-size: 19px;
+
+        }
+
+
+        .subscriptions-section-heading p {
+
+            margin:
+                5px 0 0;
+
+            color:
+                var(--sub-muted);
+
+            font-size: 11px;
+
+            line-height: 1.7;
+
+        }
+
+
+        /* =====================================================
+           PLANS
+           ===================================================== */
+
+        .subscription-plans {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 13px;
+
+        }
+
+
+        .subscription-plan {
+
+            position: relative;
+
+            display: flex;
+
+            flex-direction: column;
+
+            min-width: 0;
+
+            padding: 19px;
+
+            border:
+                1px solid
+                var(--sub-border);
+
+            border-radius: 20px;
+
+            background:
+                var(--sub-surface);
+
+            box-shadow:
+                var(--sub-shadow);
+
+            transition:
+                transform .2s ease,
+                box-shadow .2s ease,
+                border-color .2s ease;
+
+        }
+
+
+        .subscription-plan:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                var(--sub-shadow-md);
+
+            border-color:
+                rgba(22,131,92,.2);
+
+        }
+
+
+        .subscription-plan.featured {
+
+            border-color:
+                rgba(22,131,92,.35);
+
+        }
+
+
+        .subscription-plan-badge {
+
+            position: absolute;
+
+            top: 13px;
+
+            left: 13px;
+
+            padding:
+                5px 8px;
+
+            border-radius: 999px;
+
+            background:
+                var(--sub-green-soft);
+
+            color:
+                var(--sub-green);
+
+            font-size: 9px;
+
+            font-weight: 850;
+
+        }
+
+
+        .subscription-plan-icon {
+
+            width: 43px;
+            height: 43px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin-bottom: 13px;
+
+            border-radius: 12px;
+
+            background:
+                var(--sub-green-soft);
+
+            color:
+                var(--sub-green);
+
+            font-size: 13px;
+
+            font-weight: 900;
+
+        }
+
+
+        .subscription-plan-name {
+
+            margin-bottom: 5px;
+
+            color:
+                var(--sub-text);
+
+            font-size: 16px;
+
+            font-weight: 850;
+
+        }
+
+
+        .subscription-plan-description {
+
+            min-height: 40px;
+
+            color:
+                var(--sub-muted);
+
+            font-size: 11px;
+
+            line-height: 1.7;
+
+        }
+
+
+        .subscription-price {
+
+            display: flex;
+
+            align-items: baseline;
+
+            gap: 5px;
+
+            margin:
+                15px 0;
+
+        }
+
+
+        .subscription-price-value {
+
+            color:
+                var(--sub-green);
+
+            font-size: 26px;
+
+            font-weight: 900;
+
+            line-height: 1;
+
+        }
+
+
+        .subscription-price-currency {
+
+            color:
+                var(--sub-muted);
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+        }
+
+
+        .subscription-features {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 8px;
+
+            margin:
+                0 0 18px;
+
+            padding: 0;
+
+            list-style: none;
+
+        }
+
+
+        .subscription-features li {
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 7px;
+
+            color:
+                var(--sub-muted);
+
+            font-size: 11px;
+
+            line-height: 1.6;
+
+        }
+
+
+        .subscription-feature-check {
+
+            color:
+                var(--sub-green);
+
+            font-weight: 900;
+
+            flex: 0 0 auto;
+
+        }
+
+
+        .subscription-plan-button {
+
+            width: 100%;
+
+            margin-top: auto;
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
+
+        @media (max-width: 850px) {
+
+            .subscription-plans {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .subscriptions-page {
+
+                padding-top: 20px;
+
+                padding-bottom: 35px;
+
+            }
+
+
+            .subscriptions-hero {
+
+                padding: 23px 18px;
+
+                border-radius: 20px;
+
+            }
+
+
+            .subscriptions-hero h1 {
+
+                font-size: 23px;
+
+            }
+
+
+            .subscriptions-hero p {
+
+                font-size: 12px;
+
+            }
+
+
+            .subscription-status {
+
+                grid-template-columns: 1fr;
+
+                gap: 12px;
+
+                padding: 16px;
+
+            }
+
+
+            .subscription-status-badge {
+
+                justify-self: start;
+
+            }
+
+
+            .subscription-plan {
+
+                padding: 17px;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           PART 1 CONTINUES
+           ===================================================== */
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <header class="header">
+
+        <div class="container header-inner">
+
+
+            <a href="index.html"
+               class="brand"
+               aria-label="EduNova AI">
+
+                <span
+                    class="brand-icon"
+                    aria-hidden="true">
+                    AI
+                </span>
+
+                <span class="brand-name">
+                    EduNova AI
+                </span>
+
+            </a>
+
+
+            <nav
+                class="header-actions"
+                aria-label="التنقل الرئيسي">
+
+
+                <a
+                    href="index.html"
+                    class="header-action">
+
+                    <span
+                        class="header-action-icon"
+                        aria-hidden="true">
+                        ⌂
+                    </span>
+
+                    <span data-sub-i18n="home">
+                        الرئيسية
+                    </span>
+
+                </a>
+
+
+                <button
+                    type="button"
+                    class="header-action"
+                    onclick="showSubscriptionNotifications()">
+
+                    <span
+                        class="header-action-icon"
+                        aria-hidden="true">
+                        ◔
+                    </span>
+
+                    <span data-sub-i18n="notifications">
+                        الإشعارات
+                    </span>
+
+                </button>
+
+
+                <a
+                    href="account.html"
+                    class="header-action">
+
+                    <span
+                        class="header-action-icon"
+                        aria-hidden="true">
+                        ○
+                    </span>
+
+                    <span data-sub-i18n="account">
+                        حسابي
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="settings.html"
+                    class="header-action">
+
+                    <span
+                        class="header-action-icon"
+                        aria-hidden="true">
+                        ⚙
+                    </span>
+
+                    <span data-sub-i18n="settings">
+                        الإعدادات
+                    </span>
+
+                </a>
+
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main class="page subscriptions-page">
+
+        <div class="container">
+
+
+            <!-- =================================================
+                 HERO
+                 ================================================= -->
+
+            <section class="subscriptions-hero">
+
+                <div class="subscriptions-hero-content">
+
+
+                    <div
+                        class="subscriptions-eyebrow"
+                        data-sub-i18n="subscription_center">
+
+                        مركز الاشتراكات
+
+                    </div>
+
+
+                    <h1
+                        data-sub-i18n="subscriptions_title">
+
+                        اختر الباقة المناسبة لتعلمك
+
+                    </h1>
+
+
+                    <p
+                        data-sub-i18n="subscriptions_description">
+
+                        افتح الدروس والفيديوهات التعليمية
+                        واستمر في التعلم وفق المستوى
+                        والمسار الدراسي الخاص بك.
+
+                    </p>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 CURRENT STATUS
+                 ================================================= -->
+
+            <section
+                class="subscription-status"
+                id="subscriptionStatusCard">
+
+
+                <div
+                    class="subscription-status-main">
+
+
+                    <div
+                        class="subscription-status-icon"
+                        aria-hidden="true">
+
+                        ✓
+
+                    </div>
+
+
+                    <div
+                        class="subscription-status-content">
+
+
+                        <div
+                            class="subscription-status-label"
+                            data-sub-i18n="current_subscription">
+
+                            الاشتراك الحالي
+
+                        </div>
+
+
+                        <div
+                            id="currentSubscriptionTitle"
+                            class="subscription-status-title">
+
+                            لا يوجد اشتراك نشط
+
+                        </div>
+
+
+                        <div
+                            id="currentSubscriptionMeta"
+                            class="subscription-status-meta">
+
+                            اختر إحدى الباقات للبدء.
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="currentSubscriptionBadge"
+                    class="subscription-status-badge">
+
+                    غير مشترك
+
+                </div>
+
+
+            </section>
+
+
+            <!-- =================================================
+                 PLANS TITLE
+                 ================================================= -->
+
+            <section
+                class="subscriptions-section-heading">
+
+                <h2 data-sub-i18n="available_plans">
+
+                    الباقات المتاحة
+
+                </h2>
+
+
+                <p data-sub-i18n="plans_description">
+
+                    يمكنك اختيار المدة المناسبة، ثم
+                    الانتقال إلى خطوات الدفع وإرسال إثبات
+                    التحويل للمراجعة.
+
+                </p>
+
+            </section>
+
+
+            <!-- =================================================
+                 PLANS
+                 ================================================= -->
+
+            <section
+                class="subscription-plans"
+                id="subscriptionPlans">
+
+
+                <!-- WEEKLY -->
+
+                <article
+                    class="subscription-plan"
+                    data-plan="weekly">
+
+
+                    <div
+                        class="subscription-plan-icon"
+                        aria-hidden="true">
+
+                        7
+
+                    </div>
+
+
+                    <div
+                        class="subscription-plan-name"
+                        data-sub-i18n="weekly">
+
+                        أسبوعي
+
+                    </div>
+
+
+                    <div
+                        class="subscription-plan-description"
+                        data-sub-i18n="weekly_description">
+
+                        مناسب للتجربة والتعلم
+                        خلال فترة قصيرة.
+
+                    </div>
+
+
+                    <div class="subscription-price">
+
+                        <span
+                            class="subscription-price-value">
+
+                            1,000
+
+                        </span>
+
+                        <span
+                            class="subscription-price-currency"
+                            data-sub-i18n="mru">
+
+                            MRU
+
+                        </span>
+
+                    </div>
+
+
+                    <ul class="subscription-features">
+
+                        <li>
+
+                            <span
+                                class="subscription-feature-check">
+                                ✓
+                            </span>
+
+                            <span
+                                data-sub-i18n="feature_content">
+
+                                الوصول إلى المحتوى المشترك
+
+                            </span>
+
+                        </li>
+
+
+                        <li>
+
+                            <span
+                                class="subscription-feature-check">
+                                ✓
+                            </span>
+
+                            <span
+                                data-sub-i18n="feature_duration">
+
+                                صلاحية لمدة أسبوع
+
+                            </span>
+
+                        </li>
+
+
+                        <li>
+
+                            <span
+                                class="subscription-feature-check">
+                                ✓
+                            </span>
+
+                            <span
+                                data-sub-i18n="feature_progress">
+
+                                متابعة تقدمك الدراسي
+
+                            </span>
+
+                        </li>
+
+                    </ul>
+
+
+                    <button
+                        type="button"
+                        class="btn btn-primary subscription-plan-button"
+                        onclick="selectSubscriptionPlan('weekly')"
+                        data-sub-i18n="choose_plan">
+
+                        اختيار الباقة
+
+                    </button>
+
+
+                </article>
+
+
+                <!-- MONTHLY -->
+
+                <article
+                    class="subscription-plan featured"
+                    data-plan="monthly">
+
+
+                    <div
+                        class="subscription-plan-badge"
+                        data-sub-i18n="popular">
+
+                        الأكثر اختيارًا
+
+                    </div>
+
+
+                    <div
+                        class="subscription-plan-icon"
+                        aria-hidden="true">
+
+                        30
+
+                    </div>
+
+
+                    <div
+                        class="subscription-plan-name"
+                        data-sub-i18n="monthly">
+
+                        شهري
+
+                    </div>
+
+
+                    <div
+                        class="subscription-plan-description"
+                        data-sub-i18n="monthly_description">
+
+                        الخيار المتوازن للطلاب الذين
+                        يريدون الدراسة باستمرار.
+
+                    </div>
+
+
+                    <div class="subscription-price">
+
+                        <span
+                            class="subscription-price-value">
+
+                            3,000
+
+                        </span>
+
+                        <span
+                            class="subscription-price-currency"
+                            data-sub-i18n="mru">
+
+                            MRU
+
+                        </span>
+
+                    </div>
+
+
+                    <ul class="subscription-features">
+
+                        <li>
+
+                            <span
+                                class="subscription-feature-check">
+                                ✓
+                            </span>
+
+                            <span
+                                data-sub-i18n="feature_content">
+
+                                الوصول إلى المحتوى المشترك
+
+                            </span>
+
+                        </li>
+
+
+                        <li>
+
+                            <span
+                                class="subscription-feature-check">
+                                ✓
+                            </span>
+
+                            <span
+                                data-sub-i18n="feature_month">
+
+                                صلاحية لمدة شهر
+
+                            </span>
+
+                        </li>
+
+
+                        <li>
+
+                            <span
+                                class="subscription-feature-check">
+                                ✓
+                            </span>
+
+                            <span
+                                data-sub-i18n="feature_progress">
+
+                                متابعة تقدمك الدراسي
+
+                            </span>
+
+                        </li>
+
+                    </ul>
+
+
+                    <button
+                        type="button"
+                        class="btn btn-primary subscription-plan-button"
+                        onclick="selectSubscriptionPlan('monthly')"
+                        data-sub-i18n="choose_plan">
+
+                        اختيار الباقة
+
+                    </button>
+
+
+                </article>
+
+
+                <!-- YEARLY -->
+
+                <article
+                    class="subscription-plan"
+                    data-plan="yearly">
+
+
+                    <div
+                        class="subscription-plan-icon"
+                        aria-hidden="true">
+
+                        12
+
+                    </div>
+
+
+                    <div
+                        class="subscription-plan-name"
+                        data-sub-i18n="yearly">
+
+                        سنوي
+
+                    </div>
+
+
+                    <div
+                        class="subscription-plan-description"
+                        data-sub-i18n="yearly_description">
+
+                        للطلاب الذين يريدون خطة تعلم
+                        طويلة المدى.
+
+                    </div>
+
+
+                    <div class="subscription-price">
+
+                        <span
+                            class="subscription-price-value">
+
+                            25,000
+
+                        </span>
+
+                        <span
+                            class="subscription-price-currency"
+                            data-sub-i18n="mru">
+
+                            MRU
+
+                        </span>
+
+                    </div>
+
+
+                    <ul class="subscription-features">
+
+                        <li>
+
+                            <span
+                                class="subscription-feature-check">
+                                ✓
+                            </span>
+
+                            <span
+                                data-sub-i18n="feature_content">
+
+                                الوصول إلى المحتوى المشترك
+
+                            </span>
+
+                        </li>
+
+
+                        <li>
+
+                            <span
+                                class="subscription-feature-check">
+                                ✓
+                            </span>
+
+                            <span
+                                data-sub-i18n="feature_year">
+
+                                صلاحية لمدة سنة
+
+                            </span>
+
+                        </li>
+
+
+                        <li>
+
+                            <span
+                                class="subscription-feature-check">
+                                ✓
+                            </span>
+
+                            <span
+                                data-sub-i18n="feature_progress">
+
+                                متابعة تقدمك الدراسي
+
+                            </span>
+
+                        </li>
+
+                    </ul>
+
+
+                    <button
+                        type="button"
+                        class="btn btn-primary subscription-plan-button"
+                        onclick="selectSubscriptionPlan('yearly')"
+                        data-sub-i18n="choose_plan">
+
+                        اختيار الباقة
+
+                    </button>
+
+
+                </article>
+
+
+            </section>
+
+
+            <!-- =================================================
+                 PART 2 CONTINUES HERE
+                 ================================================= -->        <!-- =================================================
+             PART 2 OF 4
+             تفاصيل الاشتراك + الدفع + إثبات التحويل
+             ================================================= -->
+
+        <section class="subscription-details-section" id="subscriptionDetailsSection">
+
+            <div class="section-heading">
+                <div>
+                    <span class="section-kicker" data-sub-i18n="details_kicker">
+                        تفاصيل الاشتراك
+                    </span>
+
+                    <h2 data-sub-i18n="details_title">
+                        اختر ما تريد فتحه
+                    </h2>
+
+                    <p data-sub-i18n="details_desc">
+                        يمكنك الاشتراك لفترة محددة أو فتح فصل كامل.
+                    </p>
+                </div>
+            </div>
+
+
+            <!-- اختيار نوع الوصول -->
+            <div class="access-options" id="accessOptions">
+
+                <button
+                    type="button"
+                    class="access-option active"
+                    id="fullPlatformOption"
+                    onclick="selectAccessType('subscription')"
+                >
+                    <span class="access-option-icon" aria-hidden="true">◉</span>
+
+                    <span class="access-option-content">
+                        <strong data-sub-i18n="access_subscription_title">
+                            اشتراك المنصة
+                        </strong>
+
+                        <small data-sub-i18n="access_subscription_desc">
+                            افتح المحتوى المتاح خلال مدة اشتراكك.
+                        </small>
+                    </span>
+                </button>
+
+
+                <button
+                    type="button"
+                    class="access-option"
+                    id="chapterOption"
+                    onclick="selectAccessType('chapter')"
+                >
+                    <span class="access-option-icon" aria-hidden="true">□</span>
+
+                    <span class="access-option-content">
+                        <strong data-sub-i18n="access_chapter_title">
+                            فتح فصل كامل
+                        </strong>
+
+                        <small data-sub-i18n="access_chapter_desc">
+                            ادفع مرة واحدة لفتح فصل محدد.
+                        </small>
+                    </span>
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 بيانات الاشتراك
+                 ================================================= -->
+
+            <div class="selected-plan-panel" id="selectedPlanPanel">
+
+                <div class="selected-plan-header">
+
+                    <div>
+                        <span class="panel-kicker" data-sub-i18n="selected_plan">
+                            الخطة المختارة
+                        </span>
+
+                        <h3 id="selectedPlanName">
+                            الاشتراك الشهري
+                        </h3>
+                    </div>
+
+                    <div class="selected-plan-price">
+                        <strong id="selectedPlanPrice">3,000</strong>
+                        <span>MRU</span>
+                    </div>
+
+                </div>
+
+
+                <div class="plan-summary-grid">
+
+                    <div class="summary-item">
+                        <span data-sub-i18n="summary_duration">
+                            المدة
+                        </span>
+
+                        <strong id="selectedPlanDuration">
+                            شهر واحد
+                        </strong>
+                    </div>
+
+
+                    <div class="summary-item">
+                        <span data-sub-i18n="summary_access">
+                            الوصول
+                        </span>
+
+                        <strong data-sub-i18n="summary_access_value">
+                            محتوى المنصة
+                        </strong>
+                    </div>
+
+
+                    <div class="summary-item">
+                        <span data-sub-i18n="summary_activation">
+                            التفعيل
+                        </span>
+
+                        <strong data-sub-i18n="summary_activation_value">
+                            بعد مراجعة الدفع
+                        </strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 فتح فصل كامل
+                 ================================================= -->
+
+            <div class="chapter-unlock-panel" id="chapterUnlockPanel" hidden>
+
+                <div class="chapter-unlock-header">
+
+                    <div>
+                        <span class="panel-kicker" data-sub-i18n="chapter_unlock_kicker">
+                            فتح فصل كامل
+                        </span>
+
+                        <h3 data-sub-i18n="chapter_unlock_title">
+                            اختر الفصل الذي تريد فتحه
+                        </h3>
+
+                        <p data-sub-i18n="chapter_unlock_desc">
+                            سيتم ربط عملية الدفع بالفصل المحدد.
+                        </p>
+                    </div>
+
+                    <span class="chapter-unlock-icon" aria-hidden="true">
+                        □
+                    </span>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="chapterSelect" data-sub-i18n="chapter_select_label">
+                        الفصل
+                    </label>
+
+                    <select id="chapterSelect">
+                        <option value="" data-sub-i18n="chapter_select_placeholder">
+                            اختر الفصل
+                        </option>
+                    </select>
+
+                </div>
+
+
+                <div class="chapter-price-box">
+
+                    <div>
+                        <span data-sub-i18n="chapter_price_label">
+                            سعر فتح الفصل
+                        </span>
+
+                        <small data-sub-i18n="chapter_price_note">
+                            السعر يحدده النظام حسب الفصل.
+                        </small>
+                    </div>
+
+                    <strong id="chapterUnlockPrice">
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 طريقة الدفع
+                 ================================================= -->
+
+            <div class="payment-section">
+
+                <div class="section-heading compact-heading">
+                    <div>
+                        <span class="section-kicker" data-sub-i18n="payment_kicker">
+                            الدفع
+                        </span>
+
+                        <h2 data-sub-i18n="payment_title">
+                            اختر طريقة الدفع
+                        </h2>
+
+                        <p data-sub-i18n="payment_desc">
+                            بعد التحويل، أرسل إثبات العملية ليتم التحقق منه.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="payment-methods" id="paymentMethods">
+
+                    <button
+                        type="button"
+                        class="payment-method active"
+                        data-payment-method="bankily"
+                        onclick="selectPaymentMethod('bankily')"
+                    >
+                        <span class="payment-method-icon" aria-hidden="true">
+                            B
+                        </span>
+
+                        <span>
+                            <strong>Bankily</strong>
+                            <small data-sub-i18n="payment_bankily">
+                                بنكيلي
+                            </small>
+                        </span>
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="payment-method"
+                        data-payment-method="masrivi"
+                        onclick="selectPaymentMethod('masrivi')"
+                    >
+                        <span class="payment-method-icon" aria-hidden="true">
+                            M
+                        </span>
+
+                        <span>
+                            <strong>Masrivi</strong>
+                            <small data-sub-i18n="payment_masrivi">
+                                مصرفي
+                            </small>
+                        </span>
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="payment-method"
+                        data-payment-method="sedad"
+                        onclick="selectPaymentMethod('sedad')"
+                    >
+                        <span class="payment-method-icon" aria-hidden="true">
+                            S
+                        </span>
+
+                        <span>
+                            <strong>Sedad</strong>
+                            <small data-sub-i18n="payment_sedad">
+                                سداد
+                            </small>
+                        </span>
+                    </button>
+
+                </div>
+
+
+                <!-- رقم الدفع -->
+                <div class="payment-number-card">
+
+                    <div class="payment-number-info">
+
+                        <span class="payment-number-label"
+                              data-sub-i18n="payment_number_label">
+                            رقم الدفع
+                        </span>
+
+                        <strong id="paymentNumber">
+                            سيتم عرضه هنا
+                        </strong>
+
+                        <small data-sub-i18n="payment_number_note">
+                            استخدم هذا الرقم عند إجراء التحويل.
+                        </small>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="copy-payment-btn"
+                        onclick="copyPaymentNumber()"
+                    >
+                        <span aria-hidden="true">□</span>
+                        <span data-sub-i18n="copy_number">
+                            نسخ الرقم
+                        </span>
+                    </button>
+
+                </div>
+
+
+                <!-- =================================================
+                     نموذج إثبات الدفع
+                     ================================================= -->
+
+                <div class="payment-form">
+
+                    <div class="form-group">
+
+                        <label
+                            for="senderPhone"
+                            data-sub-i18n="sender_phone_label"
+                        >
+                            رقم الهاتف الذي أرسلت منه
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="senderPhone"
+                            inputmode="tel"
+                            autocomplete="tel"
+                            placeholder="مثال: 22 XX XX XX"
+                            data-sub-placeholder="sender_phone_placeholder"
+                        >
+
+                        <small
+                            class="field-hint"
+                            data-sub-i18n="sender_phone_hint"
+                        >
+                            أدخل الرقم المستخدم في عملية التحويل.
+                        </small>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label
+                            for="paymentReference"
+                            data-sub-i18n="payment_reference_label"
+                        >
+                            رقم العملية
+                        </label>
+
+                        <input
+                            type="text"
+                            id="paymentReference"
+                            autocomplete="off"
+                            placeholder="أدخل رقم العملية إن وجد"
+                            data-sub-placeholder="payment_reference_placeholder"
+                        >
+
+                        <small
+                            class="field-hint"
+                            data-sub-i18n="payment_reference_hint"
+                        >
+                            يمكنك تركه فارغًا إذا لم يكن ظاهرًا في الإيصال.
+                        </small>
+
+                    </div>
+
+
+                    <!-- رفع صورة الإيصال -->
+                    <div class="form-group">
+
+                        <label
+                            for="paymentProof"
+                            data-sub-i18n="payment_proof_label"
+                        >
+                            إثبات التحويل
+                        </label>
+
+                        <label
+                            class="upload-box"
+                            for="paymentProof"
+                            id="paymentProofLabel"
+                        >
+
+                            <span class="upload-icon" aria-hidden="true">
+                                ↑
+                            </span>
+
+                            <span class="upload-title"
+                                  data-sub-i18n="upload_title">
+                                اختر صورة الإيصال
+                            </span>
+
+                            <span class="upload-description"
+                                  data-sub-i18n="upload_description">
+                                PNG أو JPG — صورة واضحة لعملية التحويل
+                            </span>
+
+                        </label>
+
+                        <input
+                            type="file"
+                            id="paymentProof"
+                            accept="image/png,image/jpeg,image/webp"
+                            hidden
+                        >
+
+                        <div
+                            class="selected-file"
+                            id="selectedPaymentFile"
+                            hidden
+                        >
+                            <span aria-hidden="true">✓</span>
+                            <span id="selectedPaymentFileName"></span>
+                        </div>
+
+                    </div>
+
+
+                    <!-- ملاحظة -->
+                    <div class="payment-note">
+
+                        <span class="payment-note-icon" aria-hidden="true">
+                            i
+                        </span>
+
+                        <p data-sub-i18n="payment_note">
+                            بعد إرسال الطلب، ستتم مراجعة إثبات الدفع من الإدارة.
+                            لن يتم تفعيل الاشتراك قبل تأكيد العملية.
+                        </p>
+
+                    </div>
+
+
+                    <!-- رسالة الحالة -->
+                    <div
+                        class="payment-message"
+                        id="paymentMessage"
+                        role="status"
+                        aria-live="polite"
+                        hidden
+                    ></div>
+
+
+                    <!-- زر الإرسال -->
+                    <button
+                        type="button"
+                        class="submit-payment-btn"
+                        id="submitPaymentBtn"
+                        onclick="submitSubscriptionRequest()"
+                    >
+                        <span aria-hidden="true">✓</span>
+
+                        <span data-sub-i18n="submit_payment">
+                            إرسال طلب الاشتراك
+                        </span>
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 خطوات الدفع
+                 ================================================= -->
+
+            <section class="payment-steps">
+
+                <div class="section-heading compact-heading">
+
+                    <div>
+                        <span class="section-kicker" data-sub-i18n="steps_kicker">
+                            كيف يعمل؟
+                        </span>
+
+                        <h2 data-sub-i18n="steps_title">
+                            خطوات تفعيل اشتراكك
+                        </h2>
+                    </div>
+
+                </div>
+
+
+                <div class="steps-grid">
+
+                    <article class="step-card">
+
+                        <span class="step-number">1</span>
+
+                        <div>
+                            <h3 data-sub-i18n="step_1_title">
+                                اختر الخطة
+                            </h3>
+
+                            <p data-sub-i18n="step_1_desc">
+                                اختر الاشتراك المناسب أو افتح فصلًا كاملًا.
+                            </p>
+                        </div>
+
+                    </article>
+
+
+                    <article class="step-card">
+
+                        <span class="step-number">2</span>
+
+                        <div>
+                            <h3 data-sub-i18n="step_2_title">
+                                أرسل المبلغ
+                            </h3>
+
+                            <p data-sub-i18n="step_2_desc">
+                                حوّل المبلغ باستخدام طريقة الدفع المختارة.
+                            </p>
+                        </div>
+
+                    </article>
+
+
+                    <article class="step-card">
+
+                        <span class="step-number">3</span>
+
+                        <div>
+                            <h3 data-sub-i18n="step_3_title">
+                                أرسل الإثبات
+                            </h3>
+
+                            <p data-sub-i18n="step_3_desc">
+                                ارفع صورة واضحة للإيصال وأدخل رقم هاتفك.
+                            </p>
+                        </div>
+
+                    </article>
+
+
+                    <article class="step-card">
+
+                        <span class="step-number">4</span>
+
+                        <div>
+                            <h3 data-sub-i18n="step_4_title">
+                                انتظر التفعيل
+                            </h3>
+
+                            <p data-sub-i18n="step_4_desc">
+                                تتحقق الإدارة من العملية ثم يتم تفعيل الوصول.
+                            </p>
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+        <!-- =================================================
+             نهاية الجزء 2
+             الجزء 3 يبدأ من هنا
+             ================================================= -->        <!-- =================================================
+             PART 3 OF 4
+             JavaScript:
+             إدارة الخطط + الدفع + الاشتراك + الحالة
+             ================================================= -->
+
+        </main>
+
+
+        <!-- =================================================
+             FOOTER
+             ================================================= -->
+
+        <footer class="subscriptions-footer">
+
+            <div class="footer-inner">
+
+                <div class="footer-brand">
+                    <span class="footer-brand-icon">AI</span>
+
+                    <div>
+                        <strong>EduNova AI</strong>
+
+                        <span data-sub-i18n="footer_tagline">
+                            تعلم بذكاء، وتقدم بثقة.
+                        </span>
+                    </div>
+                </div>
+
+
+                <div class="footer-links">
+
+                    <a href="index.html" data-sub-i18n="footer_home">
+                        الرئيسية
+                    </a>
+
+                    <a href="library.html" data-sub-i18n="footer_library">
+                        مكتبتي
+                    </a>
+
+                    <a href="forum.html" data-sub-i18n="footer_forum">
+                        المنتدى
+                    </a>
+
+                    <a href="account.html" data-sub-i18n="footer_account">
+                        حسابي
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <span>
+                    © <span id="currentYear"></span> EduNova AI
+                </span>
+
+                <span data-sub-i18n="footer_rights">
+                    جميع الحقوق محفوظة.
+                </span>
+            </div>
+
+        </footer>
+
+
+        <!-- =================================================
+             SUBSCRIPTIONS JAVASCRIPT
+             ================================================= -->
+
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+        <script>
+
+            /* =================================================
+               الإعدادات الأساسية
+               ================================================= */
+
+            const SUBSCRIPTION_STORAGE_KEY = "edunova_subscription";
+            const SUBSCRIPTION_REQUESTS_KEY = "edunova_subscription_requests";
+
+            const SELECTED_LEVEL_KEYS = [
+                "selected_level",
+                "student_level"
+            ];
+
+            const SELECTED_SUBJECT_KEYS = [
+                "selected_subject"
+            ];
+
+            const SELECTED_CHAPTER_KEYS = [
+                "selected_chapter"
+            ];
+
+
+            /* =================================================
+               إعداد Supabase
+               ================================================= */
+
+            const SUPABASE_URL =
+                "https://qkzdlxqledsznhbifaxy.supabase.co";
+
+            const SUPABASE_PUBLISHABLE_KEY =
+                "sb_publishable_ZdpHXwLlhpbXztsTXpAFTg_TgOji91v";
+
+            let subscriptionSupabase = null;
+
+            try {
+
+                if (
+                    window.supabase &&
+                    typeof window.supabase.createClient === "function"
+                ) {
+
+                    subscriptionSupabase =
+                        window.supabase.createClient(
+                            SUPABASE_URL,
+                            SUPABASE_PUBLISHABLE_KEY
+                        );
+
+                }
+
+            } catch (error) {
+
+                console.warn(
+                    "Supabase initialization failed:",
+                    error
+                );
+
+            }
+
+
+            /* =================================================
+               الخطط
+               ================================================= */
+
+            const SUBSCRIPTION_PLANS = {
+
+                weekly: {
+                    id: "weekly",
+                    nameAr: "الاشتراك الأسبوعي",
+                    nameFr: "Abonnement hebdomadaire",
+                    price: 1000,
+                    durationAr: "7 أيام",
+                    durationFr: "7 jours",
+                    durationDays: 7
+                },
+
+                monthly: {
+                    id: "monthly",
+                    nameAr: "الاشتراك الشهري",
+                    nameFr: "Abonnement mensuel",
+                    price: 3000,
+                    durationAr: "شهر واحد",
+                    durationFr: "1 mois",
+                    durationDays: 30
+                },
+
+                yearly: {
+                    id: "yearly",
+                    nameAr: "الاشتراك السنوي",
+                    nameFr: "Abonnement annuel",
+                    price: 25000,
+                    durationAr: "سنة واحدة",
+                    durationFr: "1 an",
+                    durationDays: 365
+                }
+
+            };
+
+
+            /* =================================================
+               وسائل الدفع
+               ================================================= */
+
+            const PAYMENT_METHODS = {
+
+                bankily: {
+                    id: "bankily",
+                    name: "Bankily",
+                    nameAr: "بنكيلي",
+                    paymentNumber: ""
+                },
+
+                masrivi: {
+                    id: "masrivi",
+                    name: "Masrivi",
+                    nameAr: "مصرفي",
+                    paymentNumber: ""
+                },
+
+                sedad: {
+                    id: "sedad",
+                    name: "Sedad",
+                    nameAr: "سداد",
+                    paymentNumber: ""
+                }
+
+            };
+
+
+            /*
+             * أرقام الدفع ستوضع هنا لاحقًا.
+             *
+             * مثال:
+             *
+             * PAYMENT_METHODS.bankily.paymentNumber = "22XXXXXX";
+             *
+             * لا نضع رقمًا حقيقيًا الآن حتى لا يتم استخدام
+             * رقم غير صحيح في النسخة التجريبية.
+             */
+
+
+            /* =================================================
+               الحالة الحالية
+               ================================================= */
+
+            let selectedPlan = "monthly";
+            let selectedAccessType = "subscription";
+            let selectedPaymentMethod = "bankily";
+            let selectedChapter = "";
+            let selectedProofFile = null;
+
+
+            /* =================================================
+               أدوات التخزين
+               ================================================= */
+
+            function getStorageValue(keys) {
+
+                for (const key of keys) {
+
+                    const value =
+                        localStorage.getItem(key);
+
+                    if (
+                        value !== null &&
+                        value !== undefined &&
+                        value !== ""
+                    ) {
+                        return value;
+                    }
+
+                }
+
+                return "";
+
+            }
+
+
+            function readSubscription() {
+
+                try {
+
+                    const raw =
+                        localStorage.getItem(
+                            SUBSCRIPTION_STORAGE_KEY
+                        );
+
+                    if (!raw) {
+                        return null;
+                    }
+
+                    return JSON.parse(raw);
+
+                } catch (error) {
+
+                    console.warn(
+                        "Unable to read subscription:",
+                        error
+                    );
+
+                    return null;
+
+                }
+
+            }
+
+
+            function saveSubscription(subscription) {
+
+                try {
+
+                    localStorage.setItem(
+                        SUBSCRIPTION_STORAGE_KEY,
+                        JSON.stringify(subscription)
+                    );
+
+                } catch (error) {
+
+                    console.warn(
+                        "Unable to save subscription:",
+                        error
+                    );
+
+                }
+
+            }
+
+
+            function readRequests() {
+
+                try {
+
+                    const raw =
+                        localStorage.getItem(
+                            SUBSCRIPTION_REQUESTS_KEY
+                        );
+
+                    if (!raw) {
+                        return [];
+                    }
+
+                    const parsed = JSON.parse(raw);
+
+                    return Array.isArray(parsed)
+                        ? parsed
+                        : [];
+
+                } catch (error) {
+
+                    console.warn(
+                        "Unable to read subscription requests:",
+                        error
+                    );
+
+                    return [];
+
+                }
+
+            }
+
+
+            function saveRequests(requests) {
+
+                try {
+
+                    localStorage.setItem(
+                        SUBSCRIPTION_REQUESTS_KEY,
+                        JSON.stringify(requests)
+                    );
+
+                } catch (error) {
+
+                    console.warn(
+                        "Unable to save requests:",
+                        error
+                    );
+
+                }
+
+            }
+
+
+            /* =================================================
+               اللغة
+               ================================================= */
+
+            function getSubscriptionLanguage() {
+
+                return (
+                    localStorage.getItem("site_language")
+                    || "ar"
+                );
+
+            }
+
+
+            function isFrench() {
+
+                return getSubscriptionLanguage() === "fr";
+
+            }
+
+
+            const SUBSCRIPTION_TRANSLATIONS = {
+
+                ar: {
+
+                    details_kicker: "تفاصيل الاشتراك",
+                    details_title: "اختر ما تريد فتحه",
+                    details_desc:
+                        "يمكنك الاشتراك لفترة محددة أو فتح فصل كامل.",
+
+                    access_subscription_title:
+                        "اشتراك المنصة",
+
+                    access_subscription_desc:
+                        "افتح المحتوى المتاح خلال مدة اشتراكك.",
+
+                    access_chapter_title:
+                        "فتح فصل كامل",
+
+                    access_chapter_desc:
+                        "ادفع مرة واحدة لفتح فصل محدد.",
+
+                    selected_plan:
+                        "الخطة المختارة",
+
+                    summary_duration:
+                        "المدة",
+
+                    summary_access:
+                        "الوصول",
+
+                    summary_access_value:
+                        "محتوى المنصة",
+
+                    summary_activation:
+                        "التفعيل",
+
+                    summary_activation_value:
+                        "بعد مراجعة الدفع",
+
+                    chapter_unlock_kicker:
+                        "فتح فصل كامل",
+
+                    chapter_unlock_title:
+                        "اختر الفصل الذي تريد فتحه",
+
+                    chapter_unlock_desc:
+                        "سيتم ربط عملية الدفع بالفصل المحدد.",
+
+                    chapter_select_label:
+                        "الفصل",
+
+                    chapter_select_placeholder:
+                        "اختر الفصل",
+
+                    chapter_price_label:
+                        "سعر فتح الفصل",
+
+                    chapter_price_note:
+                        "السعر يحدده النظام حسب الفصل.",
+
+                    payment_kicker:
+                        "الدفع",
+
+                    payment_title:
+                        "اختر طريقة الدفع",
+
+                    payment_desc:
+                        "بعد التحويل، أرسل إثبات العملية ليتم التحقق منه.",
+
+                    payment_bankily:
+                        "بنكيلي",
+
+                    payment_masrivi:
+                        "مصرفي",
+
+                    payment_sedad:
+                        "سداد",
+
+                    payment_number_label:
+                        "رقم الدفع",
+
+                    payment_number_note:
+                        "استخدم هذا الرقم عند إجراء التحويل.",
+
+                    copy_number:
+                        "نسخ الرقم",
+
+                    sender_phone_label:
+                        "رقم الهاتف الذي أرسلت منه",
+
+                    sender_phone_hint:
+                        "أدخل الرقم المستخدم في عملية التحويل.",
+
+                    payment_reference_label:
+                        "رقم العملية",
+
+                    payment_reference_hint:
+                        "يمكنك تركه فارغًا إذا لم يكن ظاهرًا في الإيصال.",
+
+                    payment_proof_label:
+                        "إثبات التحويل",
+
+                    upload_title:
+                        "اختر صورة الإيصال",
+
+                    upload_description:
+                        "PNG أو JPG — صورة واضحة لعملية التحويل",
+
+                    payment_note:
+                        "بعد إرسال الطلب، ستتم مراجعة إثبات الدفع من الإدارة. لن يتم تفعيل الاشتراك قبل تأكيد العملية.",
+
+                    submit_payment:
+                        "إرسال طلب الاشتراك",
+
+                    steps_kicker:
+                        "كيف يعمل؟",
+
+                    steps_title:
+                        "خطوات تفعيل اشتراكك",
+
+                    step_1_title:
+                        "اختر الخطة",
+
+                    step_1_desc:
+                        "اختر الاشتراك المناسب أو افتح فصلًا كاملًا.",
+
+                    step_2_title:
+                        "أرسل المبلغ",
+
+                    step_2_desc:
+                        "حوّل المبلغ باستخدام طريقة الدفع المختارة.",
+
+                    step_3_title:
+                        "أرسل الإثبات",
+
+                    step_3_desc:
+                        "ارفع صورة واضحة للإيصال وأدخل رقم هاتفك.",
+
+                    step_4_title:
+                        "انتظر التفعيل",
+
+                    step_4_desc:
+                        "تتحقق الإدارة من العملية ثم يتم تفعيل الوصول.",
+
+                    footer_tagline:
+                        "تعلم بذكاء، وتقدم بثقة.",
+
+                    footer_home:
+                        "الرئيسية",
+
+                    footer_library:
+                        "مكتبتي",
+
+                    footer_forum:
+                        "المنتدى",
+
+                    footer_account:
+                        "حسابي",
+
+                    footer_rights:
+                        "جميع الحقوق محفوظة.",
+
+                    phone_required:
+                        "يرجى إدخال رقم الهاتف.",
+
+                    proof_required:
+                        "يرجى رفع صورة إثبات التحويل.",
+
+                    chapter_required:
+                        "يرجى اختيار الفصل.",
+
+                    payment_success:
+                        "تم إرسال طلبك بنجاح. ستتم مراجعته من الإدارة.",
+
+                    payment_number_missing:
+                        "رقم الدفع لهذه الطريقة لم يتم إعداده بعد.",
+
+                    copied:
+                        "تم نسخ رقم الدفع.",
+
+                    pending:
+                        "قيد المراجعة",
+
+                    approved:
+                        "مفعّل",
+
+                    rejected:
+                        "مرفوض"
+
+                },
+
+
+                fr: {
+
+                    details_kicker: "Détails de l'abonnement",
+                    details_title: "Choisissez ce que vous voulez ouvrir",
+                    details_desc:
+                        "Choisissez une durée d'abonnement ou ouvrez un chapitre complet.",
+
+                    access_subscription_title:
+                        "Abonnement plateforme",
+
+                    access_subscription_desc:
+                        "Accédez au contenu pendant la durée de votre abonnement.",
+
+                    access_chapter_title:
+                        "Ouvrir un chapitre complet",
+
+                    access_chapter_desc:
+                        "Payez une seule fois pour ouvrir un chapitre.",
+
+                    selected_plan:
+                        "Plan sélectionné",
+
+                    summary_duration:
+                        "Durée",
+
+                    summary_access:
+                        "Accès",
+
+                    summary_access_value:
+                        "Contenu de la plateforme",
+
+                    summary_activation:
+                        "Activation",
+
+                    summary_activation_value:
+                        "Après vérification du paiement",
+
+                    chapter_unlock_kicker:
+                        "Chapitre complet",
+
+                    chapter_unlock_title:
+                        "Choisissez le chapitre",
+
+                    chapter_unlock_desc:
+                        "Le paiement sera associé au chapitre choisi.",
+
+                    chapter_select_label:
+                        "Chapitre",
+
+                    chapter_select_placeholder:
+                        "Choisir un chapitre",
+
+                    chapter_price_label:
+                        "Prix du chapitre",
+
+                    chapter_price_note:
+                        "Le prix dépend du chapitre.",
+
+                    payment_kicker:
+                        "Paiement",
+
+                    payment_title:
+                        "Choisissez un moyen de paiement",
+
+                    payment_desc:
+                        "Après le transfert, envoyez la preuve pour vérification.",
+
+                    payment_bankily:
+                        "Bankily",
+
+                    payment_masrivi:
+                        "Masrivi",
+
+                    payment_sedad:
+                        "Sedad",
+
+                    payment_number_label:
+                        "Numéro de paiement",
+
+                    payment_number_note:
+                        "Utilisez ce numéro pour effectuer le transfert.",
+
+                    copy_number:
+                        "Copier",
+
+                    sender_phone_label:
+                        "Numéro utilisé pour le transfert",
+
+                    sender_phone_hint:
+                        "Entrez le numéro utilisé lors du paiement.",
+
+                    payment_reference_label:
+                        "Référence de l'opération",
+
+                    payment_reference_hint:
+                        "Vous pouvez laisser ce champ vide si elle n'apparaît pas sur le reçu.",
+
+                    payment_proof_label:
+                        "Preuve du transfert",
+
+                    upload_title:
+                        "Choisir la photo du reçu",
+
+                    upload_description:
+                        "PNG ou JPG — photo claire du transfert",
+
+                    payment_note:
+                        "Après l'envoi, l'administration vérifiera votre paiement. L'abonnement ne sera pas activé avant confirmation.",
+
+                    submit_payment:
+                        "Envoyer la demande",
+
+                    steps_kicker:
+                        "Comment ça marche ?",
+
+                    steps_title:
+                        "Étapes d'activation",
+
+                    step_1_title:
+                        "Choisir le plan",
+
+                    step_1_desc:
+                        "Choisissez un abonnement ou ouvrez un chapitre complet.",
+
+                    step_2_title:
+                        "Envoyer le montant",
+
+                    step_2_desc:
+                        "Effectuez le transfert avec le moyen choisi.",
+
+                    step_3_title:
+                        "Envoyer la preuve",
+
+                    step_3_desc:
+                        "Ajoutez une photo claire du reçu et votre numéro.",
+
+                    step_4_title:
+                        "Attendre l'activation",
+
+                    step_4_desc:
+                        "L'administration vérifie puis active votre accès.",
+
+                    footer_tagline:
+                        "Apprenez intelligemment, progressez avec confiance.",
+
+                    footer_home:
+                        "Accueil",
+
+                    footer_library:
+                        "Ma bibliothèque",
+
+                    footer_forum:
+                        "Forum",
+
+                    footer_account:
+                        "Mon compte",
+
+                    footer_rights:
+                        "Tous droits réservés.",
+
+                    phone_required:
+                        "Veuillez saisir votre numéro de téléphone.",
+
+                    proof_required:
+                        "Veuillez ajouter une preuve de transfert.",
+
+                    chapter_required:
+                        "Veuillez choisir un chapitre.",
+
+                    payment_success:
+                        "Votre demande a été envoyée. Elle sera vérifiée par l'administration.",
+
+                    payment_number_missing:
+                        "Le numéro de paiement de cette méthode n'est pas encore configuré.",
+
+                    copied:
+                        "Numéro de paiement copié.",
+
+                    pending:
+                        "En attente",
+
+                    approved:
+                        "Activé",
+
+                    rejected:
+                        "Refusé"
+
+                }
+
+            };
+
+
+            function subscriptionText(key) {
+
+                const language =
+                    getSubscriptionLanguage();
+
+                return (
+                    SUBSCRIPTION_TRANSLATIONS[language]?.[key]
+                    ||
+                    SUBSCRIPTION_TRANSLATIONS.ar[key]
+                    ||
+                    key
+                );
+
+            }
+
+
+            function applySubscriptionTranslations() {
+
+                const language =
+                    getSubscriptionLanguage();
+
+                document.documentElement.lang =
+                    language === "fr" ? "fr" : "ar";
+
+                document.documentElement.dir =
+                    language === "fr" ? "ltr" : "rtl";
+
+
+                document
+                    .querySelectorAll("[data-sub-i18n]")
+                    .forEach(element => {
+
+                        const key =
+                            element.dataset.subI18n;
+
+                        const text =
+                            subscriptionText(key);
+
+                        if (text) {
+                            element.textContent = text;
+                        }
+
+                    });
+
+
+                document
+                    .querySelectorAll("[data-sub-placeholder]")
+                    .forEach(element => {
+
+                        const key =
+                            element.dataset.subPlaceholder;
+
+                        const text =
+                            subscriptionText(key);
+
+                        if (text) {
+                            element.placeholder = text;
+                        }
+
+                    });
+
+
+                updateSelectedPlanUI();
+                updatePaymentNumber();
+
+            }
+
+
+            /* =================================================
+               الخطط
+               ================================================= */
+
+            function formatMRU(value) {
+
+                if (
+                    value === null ||
+                    value === undefined ||
+                    value === ""
+                ) {
+                    return "—";
+                }
+
+                return Number(value).toLocaleString(
+                    "en-US"
+                );
+
+            }
+
+
+            function selectSubscriptionPlan(planId) {
+
+                if (
+                    !SUBSCRIPTION_PLANS[planId]
+                ) {
+                    return;
+                }
+
+                selectedPlan = planId;
+                selectedAccessType = "subscription";
+
+                updateAccessTypeUI();
+                updateSelectedPlanUI();
+                scrollToPayment();
+
+            }
+
+
+            function updateSelectedPlanUI() {
+
+                const plan =
+                    SUBSCRIPTION_PLANS[selectedPlan];
+
+                if (!plan) {
+                    return;
+                }
+
+                const name =
+                    isFrench()
+                        ? plan.nameFr
+                        : plan.nameAr;
+
+                const duration =
+                    isFrench()
+                        ? plan.durationFr
+                        : plan.durationAr;
+
+
+                const nameElement =
+                    document.getElementById(
+                        "selectedPlanName"
+                    );
+
+                const priceElement =
+                    document.getElementById(
+                        "selectedPlanPrice"
+                    );
+
+                const durationElement =
+                    document.getElementById(
+                        "selectedPlanDuration"
+                    );
+
+
+                if (nameElement) {
+                    nameElement.textContent = name;
+                }
+
+                if (priceElement) {
+                    priceElement.textContent =
+                        formatMRU(plan.price);
+                }
+
+                if (durationElement) {
+                    durationElement.textContent =
+                        duration;
+                }
+
+
+                document
+                    .querySelectorAll(".plan-card")
+                    .forEach(card => {
+
+                        card.classList.toggle(
+                            "selected",
+                            card.dataset.plan === selectedPlan
+                        );
+
+                    });
+
+            }
+
+
+            /* =================================================
+               نوع الوصول
+               ================================================= */
+
+            function selectAccessType(type) {
+
+                if (
+                    type !== "subscription" &&
+                    type !== "chapter"
+                ) {
+                    return;
+                }
+
+                selectedAccessType = type;
+
+                updateAccessTypeUI();
+
+                if (type === "chapter") {
+                    loadChapterOptions();
+                }
+
+            }
+
+
+            function updateAccessTypeUI() {
+
+                const subscriptionOption =
+                    document.getElementById(
+                        "fullPlatformOption"
+                    );
+
+                const chapterOption =
+                    document.getElementById(
+                        "chapterOption"
+                    );
+
+                const chapterPanel =
+                    document.getElementById(
+                        "chapterUnlockPanel"
+                    );
+
+                const planPanel =
+                    document.getElementById(
+                        "selectedPlanPanel"
+                    );
+
+                const submitButton =
+                    document.getElementById(
+                        "submitPaymentBtn"
+                    );
+
+
+                if (subscriptionOption) {
+
+                    subscriptionOption.classList.toggle(
+                        "active",
+                        selectedAccessType === "subscription"
+                    );
+
+                }
+
+
+                if (chapterOption) {
+
+                    chapterOption.classList.toggle(
+                        "active",
+                        selectedAccessType === "chapter"
+                    );
+
+                }
+
+
+                if (chapterPanel) {
+
+                    chapterPanel.hidden =
+                        selectedAccessType !== "chapter";
+
+                }
+
+
+                if (planPanel) {
+
+                    planPanel.hidden =
+                        selectedAccessType !== "subscription";
+
+                }
+
+
+                if (submitButton) {
+
+                    const span =
+                        submitButton.querySelector(
+                            "[data-sub-i18n]"
+                        );
+
+                    if (span) {
+
+                        span.textContent =
+                            selectedAccessType === "chapter"
+                                ? (
+                                    isFrench()
+                                        ? "Envoyer la demande d'ouverture"
+                                        : "إرسال طلب فتح الفصل"
+                                  )
+                                : subscriptionText(
+                                    "submit_payment"
+                                  );
+
+                    }
+
+                }
+
+            }
+
+
+            /* =================================================
+               الفصول
+               ================================================= */
+
+            function getSelectedLevel() {
+
+                return getStorageValue(
+                    SELECTED_LEVEL_KEYS
+                );
+
+            }
+
+
+            function getSelectedSubject() {
+
+                return getStorageValue(
+                    SELECTED_SUBJECT_KEYS
+                );
+
+            }
+
+
+            function getSelectedChapter() {
+
+                return getStorageValue(
+                    SELECTED_CHAPTER_KEYS
+                );
+
+            }
+
+
+            function getCurriculumChapters() {
+
+                try {
+
+                    if (
+                        typeof window.getCurriculumChapters ===
+                        "function"
+                    ) {
+
+                        const level =
+                            getSelectedLevel();
+
+                        const branch =
+                            localStorage.getItem(
+                                "selected_branch"
+                            ) || "";
+
+                        const subject =
+                            getSelectedSubject();
+
+                        const chapters =
+                            window.getCurriculumChapters(
+                                level,
+                                branch,
+                                subject
+                            );
+
+                        if (Array.isArray(chapters)) {
+                            return chapters;
+                        }
+
+                    }
+
+                } catch (error) {
+
+                    console.warn(
+                        "Unable to load central chapters:",
+                        error
+                    );
+
+                }
+
+                return [];
+
+            }
+
+
+            function loadChapterOptions() {
+
+                const select =
+                    document.getElementById(
+                        "chapterSelect"
+                    );
+
+                if (!select) {
+                    return;
+                }
+
+
+                const chapters =
+                    getCurriculumChapters();
+
+
+                while (select.options.length > 1) {
+                    select.remove(1);
+                }
+
+
+                chapters.forEach((chapter, index) => {
+
+                    const option =
+                        document.createElement("option");
+
+                    const chapterId =
+                        chapter.id ||
+                        chapter.slug ||
+                        chapter.key ||
+                        String(index + 1);
+
+                    const titleAr =
+                        chapter.titleAr ||
+                        chapter.nameAr ||
+                        chapter.title ||
+                        `الفصل ${index + 1}`;
+
+                    const titleFr =
+                        chapter.titleFr ||
+                        chapter.nameFr ||
+                        titleAr;
+
+
+                    option.value = chapterId;
+
+                    option.textContent =
+                        isFrench()
+                            ? titleFr
+                            : titleAr;
+
+                    select.appendChild(option);
+
+                });
+
+
+                const currentChapter =
+                    getSelectedChapter();
+
+                if (currentChapter) {
+                    select.value = currentChapter;
+                    selectedChapter = currentChapter;
+                }
+
+                updateChapterPrice();
+
+            }
+
+
+            function updateChapterPrice() {
+
+                const priceElement =
+                    document.getElementById(
+                        "chapterUnlockPrice"
+                    );
+
+                if (!priceElement) {
+                    return;
+                }
+
+
+                /*
+                 * سعر الفصل سيصبح قابلًا للإدارة من لوحة الإدارة.
+                 * لا نضع سعرًا افتراضيًا غير متفق عليه.
+                 */
+
+                priceElement.textContent = "—";
+
+            }
+
+
+            /* =================================================
+               وسائل الدفع
+               ================================================= */
+
+            function selectPaymentMethod(method) {
+
+                if (
+                    !PAYMENT_METHODS[method]
+                ) {
+                    return;
+                }
+
+                selectedPaymentMethod = method;
+
+
+                document
+                    .querySelectorAll(".payment-method")
+                    .forEach(button => {
+
+                        button.classList.toggle(
+                            "active",
+                            button.dataset.paymentMethod === method
+                        );
+
+                    });
+
+
+                updatePaymentNumber();
+
+            }
+
+
+            function updatePaymentNumber() {
+
+                const element =
+                    document.getElementById(
+                        "paymentNumber"
+                    );
+
+                if (!element) {
+                    return;
+                }
+
+
+                const payment =
+                    PAYMENT_METHODS[
+                        selectedPaymentMethod
+                    ];
+
+
+                if (
+                    payment &&
+                    payment.paymentNumber
+                ) {
+
+                    element.textContent =
+                        payment.paymentNumber;
+
+                } else {
+
+                    element.textContent =
+                        isFrench()
+                            ? "Non configuré"
+                            : "سيتم عرضه هنا";
+
+                }
+
+            }
+
+
+            async function copyPaymentNumber() {
+
+                const payment =
+                    PAYMENT_METHODS[
+                        selectedPaymentMethod
+                    ];
+
+
+                if (
+                    !payment ||
+                    !payment.paymentNumber
+                ) {
+
+                    showPaymentMessage(
+                        subscriptionText(
+                            "payment_number_missing"
+                        ),
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                try {
+
+                    await navigator.clipboard.writeText(
+                        payment.paymentNumber
+                    );
+
+                    showPaymentMessage(
+                        subscriptionText("copied"),
+                        "success"
+                    );
+
+                } catch (error) {
+
+                    console.warn(
+                        "Copy failed:",
+                        error
+                    );
+
+                }
+
+            }
+
+
+            /* =================================================
+               ملف إثبات الدفع
+               ================================================= */
+
+            function setupPaymentFileInput() {
+
+                const input =
+                    document.getElementById(
+                        "paymentProof"
+                    );
+
+                if (!input) {
+                    return;
+                }
+
+
+                input.addEventListener(
+                    "change",
+                    function () {
+
+                        const file =
+                            this.files &&
+                            this.files[0];
+
+                        selectedProofFile =
+                            file || null;
+
+
+                        const selectedFile =
+                            document.getElementById(
+                                "selectedPaymentFile"
+                            );
+
+                        const fileName =
+                            document.getElementById(
+                                "selectedPaymentFileName"
+                            );
+
+
+                        if (file) {
+
+                            if (selectedFile) {
+                                selectedFile.hidden = false;
+                            }
+
+                            if (fileName) {
+                                fileName.textContent =
+                                    file.name;
+                            }
+
+                        } else {
+
+                            if (selectedFile) {
+                                selectedFile.hidden = true;
+                            }
+
+                            if (fileName) {
+                                fileName.textContent = "";
+                            }
+
+                        }
+
+                    }
+                );
+
+            }
+
+
+            /* =================================================
+               الرسائل
+               ================================================= */
+
+            function showPaymentMessage(
+                message,
+                type = "info"
+            ) {
+
+                const element =
+                    document.getElementById(
+                        "paymentMessage"
+                    );
+
+                if (!element) {
+                    return;
+                }
+
+
+                element.hidden = false;
+
+                element.className =
+                    "payment-message " + type;
+
+                element.textContent =
+                    message;
+
+
+                window.setTimeout(() => {
+
+                    if (element) {
+                        element.hidden = true;
+                    }
+
+                }, 5000);
+
+            }
+
+
+            /* =================================================
+               إنشاء طلب الدفع
+               ================================================= */
+
+            async function submitSubscriptionRequest() {
+
+                const phoneInput =
+                    document.getElementById(
+                        "senderPhone"
+                    );
+
+                const referenceInput =
+                    document.getElementById(
+                        "paymentReference"
+                    );
+
+
+                const phone =
+                    phoneInput
+                        ? phoneInput.value.trim()
+                        : "";
+
+                const reference =
+                    referenceInput
+                        ? referenceInput.value.trim()
+                        : "";
+
+
+                if (!phone) {
+
+                    showPaymentMessage(
+                        subscriptionText(
+                            "phone_required"
+                        ),
+                        "error"
+                    );
+
+                    phoneInput?.focus();
+
+                    return;
+                }
+
+
+                if (!selectedProofFile) {
+
+                    showPaymentMessage(
+                        subscriptionText(
+                            "proof_required"
+                        ),
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                if (
+                    selectedAccessType === "chapter" &&
+                    !selectedChapter
+                ) {
+
+                    showPaymentMessage(
+                        subscriptionText(
+                            "chapter_required"
+                        ),
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                const plan =
+                    SUBSCRIPTION_PLANS[
+                        selectedPlan
+                    ];
+
+
+                const request = {
+
+                    id:
+                        "SUB-" +
+                        Date.now() +
+                        "-" +
+                        Math.random()
+                            .toString(36)
+                            .slice(2, 8),
+
+                    accessType:
+                        selectedAccessType,
+
+                    plan:
+                        selectedAccessType === "subscription"
+                            ? selectedPlan
+                            : null,
+
+                    chapter:
+                        selectedAccessType === "chapter"
+                            ? selectedChapter
+                            : null,
+
+                    paymentMethod:
+                        selectedPaymentMethod,
+
+                    paymentNumber:
+                        PAYMENT_METHODS[
+                            selectedPaymentMethod
+                        ].paymentNumber || "",
+
+                    amount:
+                        selectedAccessType === "subscription"
+                            ? plan.price
+                            : null,
+
+                    senderPhone:
+                        phone,
+
+                    paymentReference:
+                        reference,
+
+                    proofFileName:
+                        selectedProofFile.name,
+
+                    status:
+                        "pending",
+
+                    createdAt:
+                        new Date().toISOString()
+
+                };
+
+
+                const requests =
+                    read        <!-- =================================================
+             PART 4 OF 4
+             اللمسات النهائية + الأمان + إغلاق الملف
+             ================================================= -->
+
+        <script>
+
+            /* =================================================
+               تحسين اختيار الفصل
+               ================================================= */
+
+            function syncChapterSelection() {
+
+                const select =
+                    document.getElementById(
+                        "chapterSelect"
+                    );
+
+                if (!select) {
+                    return;
+                }
+
+
+                if (selectedChapter) {
+                    select.value = selectedChapter;
+                }
+
+            }
+
+
+            /* =================================================
+               التحقق من حالة الطلب الأخير
+               ================================================= */
+
+            function getLatestSubscriptionRequest() {
+
+                const requests =
+                    readRequests();
+
+                if (
+                    !Array.isArray(requests) ||
+                    requests.length === 0
+                ) {
+                    return null;
+                }
+
+                return requests[
+                    requests.length - 1
+                ];
+
+            }
+
+
+            function getSubscriptionStatus() {
+
+                const subscription =
+                    readSubscription();
+
+                if (!subscription) {
+                    return "none";
+                }
+
+                return subscription.status || "pending";
+
+            }
+
+
+            /* =================================================
+               منع إرسال طلب فارغ بشكل متكرر
+               ================================================= */
+
+            function hasPendingRequest() {
+
+                const request =
+                    getLatestSubscriptionRequest();
+
+                return (
+                    request &&
+                    request.status === "pending"
+                );
+
+            }
+
+
+            /* =================================================
+               تحسين زر الإرسال
+               ================================================= */
+
+            const originalSubmitSubscriptionRequest =
+                window.submitSubscriptionRequest;
+
+
+            window.submitSubscriptionRequest =
+                async function () {
+
+                    if (hasPendingRequest()) {
+
+                        showPaymentMessage(
+                            isFrench()
+                                ? "Une demande est déjà en cours de vérification."
+                                : "لديك طلب دفع قيد المراجعة بالفعل.",
+                            "info"
+                        );
+
+                        return;
+                    }
+
+
+                    if (
+                        typeof originalSubmitSubscriptionRequest ===
+                        "function"
+                    ) {
+
+                        return originalSubmitSubscriptionRequest();
+
+                    }
+
+                };
+
+
+            /* =================================================
+               تحديث حالة الاشتراك عند العودة للصفحة
+               ================================================= */
+
+            document.addEventListener(
+                "visibilitychange",
+                function () {
+
+                    if (
+                        document.visibilityState ===
+                        "visible"
+                    ) {
+
+                        renderSubscriptionStatus();
+
+                        applySubscriptionTheme();
+
+                        applySubscriptionTranslations();
+
+                        syncChapterSelection();
+
+                    }
+
+                }
+            );
+
+
+            /* =================================================
+               دعم اختيار الخطة من الرابط
+               
+               مثال مستقبلي:
+               subscriptions.html?plan=monthly
+               ================================================= */
+
+            function loadPlanFromURL() {
+
+                try {
+
+                    const params =
+                        new URLSearchParams(
+                            window.location.search
+                        );
+
+                    const plan =
+                        params.get("plan");
+
+                    if (
+                        plan &&
+                        SUBSCRIPTION_PLANS[plan]
+                    ) {
+
+                        selectedPlan = plan;
+
+                        updateSelectedPlanUI();
+
+                    }
+
+                } catch (error) {
+
+                    console.warn(
+                        "Unable to read subscription URL:",
+                        error
+                    );
+
+                }
+
+            }
+
+
+            /* =================================================
+               تحميل السياق الحالي للدراسة
+               ================================================= */
+
+            function restoreStudyContext() {
+
+                const level =
+                    getSelectedLevel();
+
+                const subject =
+                    getSelectedSubject();
+
+                const chapter =
+                    getSelectedChapter();
+
+
+                /*
+                 * لا نغير اختيارات الطالب.
+                 * نستخدمها فقط لربط طلب فتح الفصل
+                 * بالفصل الذي اختاره الطالب.
+                 */
+
+                if (chapter) {
+                    selectedChapter = chapter;
+                }
+
+
+                if (
+                    selectedAccessType ===
+                    "chapter"
+                ) {
+
+                    loadChapterOptions();
+
+                }
+
+            }
+
+
+            /* =================================================
+               تحديث تهيئة الصفحة
+               ================================================= */
+
+            const originalInitializeSubscriptionsPage =
+                initializeSubscriptionsPage;
+
+
+            initializeSubscriptionsPage =
+                function () {
+
+                    originalInitializeSubscriptionsPage();
+
+                    loadPlanFromURL();
+
+                    restoreStudyContext();
+
+                    syncChapterSelection();
+
+                };
+
+
+            /*
+             * إذا كانت الصفحة قد تم تحميلها قبل تعريف
+             * التهيئة الجديدة، نضمن تحديث العناصر الآن.
+             */
+
+            if (
+                document.readyState !==
+                "loading"
+            ) {
+
+                window.setTimeout(
+                    function () {
+
+                        try {
+
+                            applySubscriptionTheme();
+
+                            applySubscriptionTranslations();
+
+                            renderSubscriptionStatus();
+
+                            syncChapterSelection();
+
+                        } catch (error) {
+
+                            console.warn(
+                                "Subscription final sync failed:",
+                                error
+                            );
+
+                        }
+
+                    },
+                    50
+                );
+
+            }
+
+
+            /* =================================================
+               حماية بسيطة من إدخال غير صالح
+               ================================================= */
+
+            const phoneInput =
+                document.getElementById(
+                    "senderPhone"
+                );
+
+
+            if (phoneInput) {
+
+                phoneInput.addEventListener(
+                    "input",
+                    function () {
+
+                        /*
+                         * نسمح بالأرقام والمسافات وعلامة +
+                         * فقط لرقم الهاتف.
+                         */
+
+                        this.value =
+                            this.value.replace(
+                                /[^0-9+\s-]/g,
+                                ""
+                            );
+
+                    }
+                );
+
+            }
+
+
+            /* =================================================
+               تنظيف رسالة الدفع عند تغيير البيانات
+               ================================================= */
+
+            [
+                "senderPhone",
+                "paymentReference"
+            ].forEach(function (id) {
+
+                const input =
+                    document.getElementById(id);
+
+                if (!input) {
+                    return;
+                }
+
+
+                input.addEventListener(
+                    "input",
+                    function () {
+
+                        const message =
+                            document.getElementById(
+                                "paymentMessage"
+                            );
+
+                        if (message) {
+                            message.hidden = true;
+                        }
+
+                    }
+                );
+
+            });
+
+
+            /* =================================================
+               API عامة إضافية
+               ================================================= */
+
+            window.getEduNovaSubscription =
+                function () {
+                    return readSubscription();
+                };
+
+
+            window.getEduNovaSubscriptionStatus =
+                function () {
+                    return getSubscriptionStatus();
+                };
+
+
+            window.getEduNovaSubscriptionRequests =
+                function () {
+                    return readRequests();
+                };
+
+
+            /* =================================================
+               إشعار عند وجود طلب قيد المراجعة
+               ================================================= */
+
+            function showPendingSubscriptionNotice() {
+
+                if (!hasPendingRequest()) {
+                    return;
+                }
+
+
+                const message =
+                    isFrench()
+                        ? "Votre dernière demande est en cours de vérification."
+                        : "طلب الاشتراك الأخير قيد المراجعة حاليًا.";
+
+
+                /*
+                 * لا نظهره مباشرة في كل مرة حتى لا نزعج الطالب.
+                 * يمكن للإدارة لاحقًا إرسال إشعار حقيقي.
+                 */
+
+                console.info(
+                    "EduNova AI:",
+                    message
+                );
+
+            }
+
+
+            window.setTimeout(
+                showPendingSubscriptionNotice,
+                500
+            );
+
+        </script>
+
+    </body>
+</html>
