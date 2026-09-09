@@ -1,630 +1,1466 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8">
 
-<head>
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الإعدادات | EduNova AI</title>
 
-    <title>الإعدادات | EduNova AI</title>
+<!-- النظام العالمي -->
+<script src="script.js"></script>
 
-    <!-- النظام العالمي -->
-    <script src="script.js"></script>
+<!-- تطبيق اللغة والمظهر مبكرًا لمنع الوميض -->
+<script>
+    (function () {
+        try {
 
-    <!-- تطبيق المظهر واللغة مبكرًا لمنع الوميض -->
-    <script>
-        (function () {
-            try {
+            const theme =
+                localStorage.getItem("site_theme") || "light";
 
-                const theme =
-                    localStorage.getItem("site_theme") || "light";
+            const language =
+                localStorage.getItem("site_language") || "ar";
 
-                const language =
-                    localStorage.getItem("site_language") || "ar";
+            document.documentElement.classList.toggle(
+                "dark-mode",
+                theme === "dark"
+            );
 
-                document.documentElement.classList.toggle(
-                    "dark-mode",
-                    theme === "dark"
-                );
+            document.documentElement.setAttribute(
+                "data-theme",
+                theme === "dark" ? "dark" : "light"
+            );
 
-                document.documentElement.setAttribute(
-                    "data-theme",
-                    theme === "dark" ? "dark" : "light"
-                );
+            document.documentElement.setAttribute(
+                "lang",
+                language === "fr" ? "fr" : "ar"
+            );
 
-                document.documentElement.setAttribute(
-                    "lang",
-                    language === "fr" ? "fr" : "ar"
-                );
+            document.documentElement.setAttribute(
+                "dir",
+                language === "fr" ? "ltr" : "rtl"
+            );
 
-                document.documentElement.setAttribute(
-                    "dir",
-                    language === "fr" ? "ltr" : "rtl"
-                );
+        } catch (error) {}
+    })();
+</script>
 
-            } catch (error) {}
-        })();
-    </script>
+<link
+    rel="stylesheet"
+    href="style.css">
 
-    <link rel="stylesheet" href="style.css">
 
-    <style>
+<style>
+
+    /* =====================================================
+       SETTINGS PAGE
+    ===================================================== */
+
+    .settings-page {
+        padding-top: 94px;
+        padding-bottom: 48px;
+    }
+
+
+    /* =====================================================
+       HEADER
+    ===================================================== */
+
+    .settings-header {
+
+        position: fixed;
+
+        top: 0;
+        left: 0;
+        right: 0;
+
+        height: var(--header-height, 70px);
+
+        z-index: 1000;
+
+        background:
+            color-mix(
+                in srgb,
+                var(--surface) 84%,
+                transparent
+            );
+
+        border-bottom:
+            1px solid var(--border);
+
+        backdrop-filter:
+            blur(18px);
+
+        -webkit-backdrop-filter:
+            blur(18px);
+    }
+
+
+    .settings-header-inner {
+
+        width: min(
+            100%,
+            1180px
+        );
+
+        height: 100%;
+
+        margin: 0 auto;
+
+        padding:
+            0 18px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        gap: 20px;
+    }
+
+
+    .settings-brand {
+
+        display: inline-flex;
+
+        align-items: center;
+
+        gap: 9px;
+
+        color:
+            var(--text);
+
+        font-size: 17px;
+
+        font-weight: 900;
+
+        text-decoration: none;
+
+        white-space: nowrap;
+    }
+
+
+    .settings-brand-mark {
+
+        width: 34px;
+        height: 34px;
+
+        display: grid;
+
+        place-items: center;
+
+        border-radius: 11px;
+
+        background:
+            var(--primary);
+
+        color:
+            #ffffff;
+
+        font-size: 11px;
+
+        font-weight: 900;
+
+        letter-spacing: -.5px;
+    }
+
+
+    .settings-header-actions {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 4px;
+    }
+
+
+    .settings-header-action {
+
+        min-width: 62px;
+
+        min-height: 50px;
+
+        padding:
+            5px 7px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 2px;
+
+        border: 0;
+
+        background: transparent;
+
+        color:
+            var(--text-soft);
+
+        text-decoration: none;
+
+        border-radius: 12px;
+
+        font-family: inherit;
+
+        font-size: 10px;
+
+        font-weight: 700;
+
+        cursor: pointer;
+
+        transition:
+            background .2s ease,
+            color .2s ease;
+    }
+
+
+    .settings-header-action:hover {
+
+        background:
+            var(--primary-light);
+
+        color:
+            var(--primary);
+    }
+
+
+    .settings-header-action.active {
+
+        color:
+            var(--primary);
+    }
+
+
+    .settings-header-icon {
+
+        width: 21px;
+        height: 21px;
+
+        display: grid;
+
+        place-items: center;
+
+        font-size: 17px;
+
+        line-height: 1;
+    }
+
+
+    /* =====================================================
+       HEADER BLUR / FADE
+    ===================================================== */
+
+    .settings-header-fade {
+
+        position: fixed;
+
+        top:
+            var(--header-height, 70px);
+
+        left: 0;
+        right: 0;
+
+        height: 42px;
+
+        z-index: 999;
+
+        pointer-events: none;
+
+        background:
+            linear-gradient(
+                to bottom,
+                var(--surface),
+                transparent
+            );
+
+        opacity: .94;
+    }
+
+
+    /* =====================================================
+       MAIN CONTAINER
+    ===================================================== */
+
+    .settings-container {
+
+        width: min(
+            100%,
+            940px
+        );
+
+        margin: 0 auto;
+
+        padding:
+            0 18px;
+    }
+
+
+    /* =====================================================
+       HERO
+    ===================================================== */
+
+    .settings-hero {
+
+        position: relative;
+
+        overflow: hidden;
+
+        padding:
+            28px 24px;
+
+        margin-bottom: 30px;
+
+        border:
+            1px solid
+            rgba(255,255,255,.08);
+
+        border-radius: 26px;
+
+        background:
+            linear-gradient(
+                135deg,
+                var(--primary),
+                var(--primary-deep)
+            );
+
+        color:
+            #ffffff;
+
+        box-shadow:
+            0 18px 42px
+            rgba(37,99,235,.18);
+    }
+
+
+    .settings-hero::before {
+
+        content: "";
+
+        position: absolute;
+
+        width: 190px;
+        height: 190px;
+
+        top: -95px;
+        right: -60px;
+
+        border-radius: 50%;
+
+        background:
+            rgba(255,255,255,.09);
+
+        pointer-events: none;
+    }
+
+
+    .settings-hero::after {
+
+        content: "";
+
+        position: absolute;
+
+        width: 120px;
+        height: 120px;
+
+        bottom: -70px;
+        left: 14%;
+
+        border-radius: 50%;
+
+        background:
+            rgba(255,255,255,.06);
+
+        pointer-events: none;
+    }
+
+
+    .settings-hero-content {
+
+        position: relative;
+
+        z-index: 1;
+    }
+
+
+    .settings-hero-icon {
+
+        width: 52px;
+        height: 52px;
+
+        display: grid;
+
+        place-items: center;
+
+        margin-bottom: 15px;
+
+        border:
+            1px solid
+            rgba(255,255,255,.18);
+
+        border-radius: 16px;
+
+        background:
+            rgba(255,255,255,.13);
+
+        font-size: 22px;
+    }
+
+
+    .settings-hero h1 {
+
+        margin: 0 0 7px;
+
+        font-size:
+            clamp(
+                25px,
+                5vw,
+                34px
+            );
+
+        line-height: 1.2;
+
+        font-weight: 900;
+    }
+
+
+    .settings-hero p {
+
+        max-width: 650px;
+
+        margin: 0;
+
+        color:
+            rgba(255,255,255,.84);
+
+        font-size: 13px;
+
+        line-height: 1.85;
+    }
+
+
+    /* =====================================================
+       SECTION
+    ===================================================== */
+
+    .settings-section {
+
+        margin-bottom: 28px;
+    }
+
+
+    .settings-section-heading {
+
+        margin-bottom: 12px;
+    }
+
+
+    .settings-section-title {
+
+        margin: 0;
+
+        font-size: 18px;
+
+        font-weight: 900;
+
+        color:
+            var(--text);
+    }
+
+
+    .settings-section-description {
+
+        margin:
+            5px 0 0;
+
+        color:
+            var(--text-soft);
+
+        font-size: 12px;
+
+        line-height: 1.7;
+    }
+
+
+    /* =====================================================
+       CARD
+    ===================================================== */
+
+    .settings-card {
+
+        overflow: hidden;
+
+        border:
+            1px solid var(--border);
+
+        border-radius: 20px;
+
+        background:
+            var(--surface);
+
+        box-shadow:
+            var(--shadow-sm);
+    }
+
+
+    /* =====================================================
+       ACCOUNT
+    ===================================================== */
+
+    .profile-box {
+
+        padding:
+            20px;
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 14px;
+    }
+
+
+    .profile-avatar {
+
+        width: 56px;
+        height: 56px;
+
+        flex-shrink: 0;
+
+        display: grid;
+
+        place-items: center;
+
+        border-radius: 17px;
+
+        background:
+            var(--primary);
+
+        color:
+            #ffffff;
+
+        font-size: 21px;
+
+        font-weight: 900;
+    }
+
+
+    .profile-details {
+
+        min-width: 0;
+    }
+
+
+    .profile-name {
+
+        margin-bottom: 3px;
+
+        color:
+            var(--text);
+
+        font-size: 16px;
+
+        font-weight: 900;
+    }
+
+
+    .profile-email {
+
+        direction: ltr;
+
+        text-align: right;
+
+        color:
+            var(--text-soft);
+
+        font-size: 11px;
+
+        word-break: break-all;
+    }
+
+
+    .active-badge {
+
+        display: inline-flex;
+
+        align-items: center;
+
+        margin-top: 7px;
+
+        padding:
+            4px 9px;
+
+        border-radius: 999px;
+
+        background:
+            #f0fdf4;
+
+        color:
+            #15803d;
+
+        font-size: 10px;
+
+        font-weight: 800;
+    }
+
+
+    html.dark-mode .active-badge {
+
+        background:
+            #12351f;
+
+        color:
+            #86efac;
+    }
+
+
+    /* =====================================================
+       SETTING ROW
+    ===================================================== */
+
+    .setting-row {
+
+        min-height: 70px;
+
+        padding:
+            13px 16px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        gap: 14px;
+
+        border-bottom:
+            1px solid var(--border);
+    }
+
+
+    .setting-row:last-child {
+
+        border-bottom: 0;
+    }
+
+
+    .setting-info {
+
+        min-width: 0;
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 12px;
+    }
+
+
+    .setting-icon {
+
+        width: 40px;
+        height: 40px;
+
+        flex-shrink: 0;
+
+        display: grid;
+
+        place-items: center;
+
+        border-radius: 12px;
+
+        background:
+            var(--primary-light);
+
+        color:
+            var(--primary);
+
+        font-size: 17px;
+    }
+
+
+    .setting-text {
+
+        min-width: 0;
+    }
+
+
+    .setting-name {
+
+        margin-bottom: 3px;
+
+        color:
+            var(--text);
+
+        font-size: 13px;
+
+        font-weight: 800;
+    }
+
+
+    .setting-description {
+
+        color:
+            var(--text-soft);
+
+        font-size: 10px;
+
+        line-height: 1.6;
+    }
+
+
+    /* =====================================================
+       SELECT
+    ===================================================== */
+
+    .settings-select {
+
+        min-width: 112px;
+
+        padding:
+            9px 11px;
+
+        border:
+            1px solid var(--border);
+
+        border-radius: 10px;
+
+        outline: none;
+
+        background:
+            var(--surface);
+
+        color:
+            var(--text);
+
+        font-family: inherit;
+
+        font-size: 12px;
+
+        cursor: pointer;
+    }
+
+
+    .settings-select:focus {
+
+        border-color:
+            var(--primary);
+
+        box-shadow:
+            0 0 0 3px
+            rgba(37,99,235,.10);
+    }
+
+
+    /* =====================================================
+       SWITCH
+    ===================================================== */
+
+    .switch {
+
+        position: relative;
+
+        width: 48px;
+        height: 27px;
+
+        flex-shrink: 0;
+    }
+
+
+    .switch input {
+
+        position: absolute;
+
+        width: 1px;
+        height: 1px;
+
+        opacity: 0;
+
+        pointer-events: none;
+    }
+
+
+    .switch-slider {
+
+        position: absolute;
+
+        inset: 0;
+
+        border-radius: 999px;
+
+        background:
+            #cbd5e1;
+
+        cursor: pointer;
+
+        transition:
+            background .2s ease;
+    }
+
+
+    .switch-slider::before {
+
+        content: "";
+
+        position: absolute;
+
+        width: 21px;
+        height: 21px;
+
+        top: 3px;
+
+        right: 3px;
+
+        border-radius: 50%;
+
+        background:
+            #ffffff;
+
+        box-shadow:
+            0 2px 6px
+            rgba(0,0,0,.15);
+
+        transition:
+            transform .2s ease;
+    }
+
+
+    .switch input:checked
+    + .switch-slider {
+
+        background:
+            var(--primary);
+    }
+
+
+    .switch input:checked
+    + .switch-slider::before {
+
+        transform:
+            translateX(-21px);
+    }
+
+
+    html[dir="ltr"]
+    .switch input:checked
+    + .switch-slider::before {
+
+        transform:
+            translateX(-21px);
+    }
+
+
+    /* =====================================================
+       INFO BOX
+    ===================================================== */
+
+    .info-box {
+
+        margin: 14px;
+
+        padding:
+            14px 15px;
+
+        border:
+            1px solid
+            rgba(37,99,235,.14);
+
+        border-radius: 15px;
+
+        background:
+            var(--primary-light);
+
+        color:
+            var(--text);
+
+        font-size: 11px;
+
+        line-height: 1.85;
+    }
+
+
+    /* =====================================================
+       ACTIONS
+    ===================================================== */
+
+    .settings-actions {
+
+        display: grid;
+
+        grid-template-columns:
+            1fr;
+
+        gap: 10px;
+    }
+
+
+    .settings-action {
+
+        width: 100%;
+
+        min-height: 58px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        gap: 12px;
+
+        padding:
+            10px 14px;
+
+        border:
+            1px solid var(--border);
+
+        border-radius: 17px;
+
+        background:
+            var(--surface);
+
+        color:
+            var(--text);
+
+        box-shadow:
+            var(--shadow-sm);
+
+        text-align: inherit;
+
+        font-family: inherit;
+
+        cursor: pointer;
+
+        transition:
+            transform .2s ease,
+            box-shadow .2s ease,
+            border-color .2s ease;
+    }
+
+
+    .settings-action:hover {
+
+        transform:
+            translateY(-1px);
+
+        box-shadow:
+            var(--shadow-md);
+
+        border-color:
+            var(--primary);
+    }
+
+
+    .settings-action-content {
+
+        min-width: 0;
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 11px;
+    }
+
+
+    .settings-action-icon {
+
+        width: 40px;
+        height: 40px;
+
+        flex-shrink: 0;
+
+        display: grid;
+
+        place-items: center;
+
+        border-radius: 12px;
+
+        background:
+            var(--primary-light);
+
+        color:
+            var(--primary);
+
+        font-size: 17px;
+    }
+
+
+    .settings-action-title {
+
+        display: block;
+
+        margin-bottom: 2px;
+
+        font-size: 12px;
+
+        font-weight: 800;
+    }
+
+
+    .settings-action-description {
+
+        display: block;
+
+        color:
+            var(--text-soft);
+
+        font-size: 10px;
+
+        line-height: 1.5;
+    }
+
+
+    .settings-action-arrow {
+
+        flex-shrink: 0;
+
+        color:
+            var(--text-light);
+
+        font-size: 17px;
+    }
+
+
+    /* =====================================================
+       DANGER
+    ===================================================== */
+
+    .danger-action {
+
+        border-color:
+            #fecaca;
+
+        background:
+            #fffafa;
+
+        color:
+            var(--danger);
+    }
+
+
+    .danger-action:hover {
+
+        border-color:
+            var(--danger);
+
+        box-shadow:
+            0 8px 24px
+            rgba(220,38,38,.08);
+    }
+
+
+    .danger-action
+    .settings-action-icon {
+
+        background:
+            #fef2f2;
+
+        color:
+            var(--danger);
+    }
+
+
+    html.dark-mode
+    .danger-action {
+
+        background:
+            #27171b;
+
+        border-color:
+            #57232b;
+    }
+
+
+    html.dark-mode
+    .danger-action
+    .settings-action-icon {
+
+        background:
+            #3b1d22;
+    }
+
+
+    /* =====================================================
+       VERSION
+    ===================================================== */
+
+    .settings-version {
+
+        padding:
+            12px 0 28px;
+
+        text-align: center;
+
+        color:
+            var(--text-light);
+
+        font-size: 10px;
+
+        line-height: 1.8;
+    }
+
+
+    /* =====================================================
+       TOAST
+    ===================================================== */
+
+    .toast {
+
+        position: fixed;
+
+        left: 50%;
+
+        bottom: 24px;
+
+        width:
+            min(
+                calc(100% - 32px),
+                420px
+            );
+
+        padding:
+            12px 15px;
+
+        transform:
+            translate(-50%, 18px);
+
+        opacity: 0;
+
+        visibility: hidden;
+
+        z-index: 9999;
+
+        border-radius: 14px;
+
+        background:
+            #172033;
+
+        color:
+            #ffffff;
+
+        text-align: center;
+
+        font-size: 12px;
+
+        font-weight: 700;
+
+        box-shadow:
+            0 12px 30px
+            rgba(0,0,0,.18);
+
+        transition:
+            opacity .25s ease,
+            transform .25s ease,
+            visibility .25s ease;
+    }
+
+
+    .toast.show {
+
+        opacity: 1;
+
+        visibility: visible;
+
+        transform:
+            translate(-50%, 0);
+    }
+
+
+    /* =====================================================
+       RESPONSIVE
+    ===================================================== */
+
+    @media (max-width: 760px) {
+
+        .settings-header-action {
+
+            min-width: 54px;
+        }
+
+        .settings-header-action
+        span:last-child {
+
+            font-size: 9px;
+        }
+
+        .settings-brand {
+
+            font-size: 15px;
+        }
+
+    }
+
+
+    @media (max-width: 560px) {
+
+        .settings-page {
+
+            padding-top: 86px;
+        }
+
+        .settings-container {
+
+            padding:
+                0 14px;
+        }
+
+        .settings-header-inner {
+
+            padding:
+                0 10px;
+        }
+
+        .settings-brand {
+
+            gap: 7px;
+        }
+
+        .settings-brand-mark {
+
+            width: 31px;
+            height: 31px;
+        }
+
+        .settings-header-actions {
+
+            gap: 0;
+        }
+
+        .settings-header-action {
+
+            min-width: 48px;
+
+            padding:
+                4px 4px;
+        }
+
+        .settings-header-icon {
+
+            font-size: 15px;
+        }
 
         .settings-hero {
-            background:
-                linear-gradient(
-                    135deg,
-                    var(--primary),
-                    var(--primary-deep)
-                );
 
-            color: white;
-            border-radius: 24px;
-            padding: 26px 22px;
-            margin-bottom: 28px;
+            padding:
+                24px 19px;
 
-            box-shadow:
-                0 12px 30px rgba(37,99,235,.18);
+            border-radius: 22px;
         }
 
         .settings-hero-icon {
-            width: 58px;
-            height: 58px;
 
-            display: grid;
-            place-items: center;
-
-            background: rgba(255,255,255,.16);
-
-            border: 1px solid rgba(255,255,255,.2);
-
-            border-radius: 18px;
-
-            font-size: 28px;
-
-            margin-bottom: 16px;
-        }
-
-        .settings-hero h1 {
-            font-size: clamp(25px,6vw,34px);
-            margin: 0 0 6px;
-            font-weight: 900;
-        }
-
-        .settings-hero p {
-            margin: 0;
-            opacity: .88;
-            line-height: 1.8;
-            font-size: 13px;
-        }
-
-        .settings-section {
-            margin-bottom: 26px;
-        }
-
-        .settings-section-title {
-            font-size: 19px;
-            font-weight: 900;
-            margin-bottom: 10px;
-        }
-
-        .settings-section-description {
-            color: var(--text-soft);
-            font-size: 13px;
-            margin-bottom: 12px;
-        }
-
-        .settings-card {
-            overflow: hidden;
-        }
-
-        .profile-box {
-            padding: 20px;
-
-            display: flex;
-            align-items: center;
-
-            gap: 14px;
-        }
-
-        .profile-avatar {
-            width: 58px;
-            height: 58px;
-
-            flex-shrink: 0;
-
-            display: grid;
-            place-items: center;
-
-            background: var(--primary);
-
-            color: white;
-
-            border-radius: 18px;
-
-            font-size: 23px;
-            font-weight: 900;
-        }
-
-        .profile-name {
-            font-size: 17px;
-            font-weight: 900;
-            margin-bottom: 3px;
-        }
-
-        .profile-email {
-            direction: ltr;
-            text-align: right;
-
-            color: var(--text-soft);
-
-            font-size: 12px;
-
-            word-break: break-all;
-        }
-
-        .active-badge {
-            display: inline-flex;
-
-            align-items: center;
-
-            margin-top: 8px;
-
-            padding: 4px 9px;
-
-            border-radius: 999px;
-
-            background: #f0fdf4;
-            color: #15803d;
-
-            font-size: 11px;
-            font-weight: 800;
-        }
-
-        html.dark-mode .active-badge {
-            background: #12351f;
-            color: #86efac;
+            width: 48px;
+            height: 48px;
         }
 
         .setting-row {
-            min-height: 70px;
 
-            padding: 14px 16px;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-            gap: 14px;
-
-            border-bottom:
-                1px solid var(--border);
-        }
-
-        .setting-row:last-child {
-            border-bottom: none;
+            padding:
+                12px 13px;
         }
 
         .setting-info {
-            min-width: 0;
 
-            display: flex;
-
-            align-items: center;
-
-            gap: 12px;
+            gap: 9px;
         }
 
         .setting-icon {
-            width: 42px;
-            height: 42px;
 
-            flex-shrink: 0;
-
-            display: grid;
-            place-items: center;
-
-            background:
-                var(--primary-light);
-
-            border-radius: 13px;
-
-            font-size: 20px;
-        }
-
-        .setting-text {
-            min-width: 0;
-        }
-
-        .setting-name {
-            font-size: 14px;
-            font-weight: 800;
-            margin-bottom: 3px;
-        }
-
-        .setting-description {
-            color: var(--text-soft);
-            font-size: 11px;
-            line-height: 1.55;
+            width: 37px;
+            height: 37px;
         }
 
         .settings-select {
-            min-width: 110px;
 
-            padding: 9px 11px;
-
-            border:
-                1px solid var(--border);
-
-            border-radius: 10px;
-
-            background:
-                var(--surface);
-
-            color:
-                var(--text);
-
-            outline: none;
-
-            cursor: pointer;
+            min-width: 96px;
         }
 
-        .settings-select:focus {
-            border-color:
-                var(--primary);
+    }
 
-            box-shadow:
-                0 0 0 3px
-                rgba(37,99,235,.10);
-        }
 
-        /* SWITCH */
+    @media (min-width: 700px) {
 
-        .switch {
-            position: relative;
-
-            width: 50px;
-            height: 28px;
-
-            flex-shrink: 0;
-        }
-
-        .switch input {
-            display: none;
-        }
-
-        .switch-slider {
-            position: absolute;
-
-            inset: 0;
-
-            background: #cbd5e1;
-
-            border-radius: 999px;
-
-            cursor: pointer;
-
-            transition: .2s ease;
-        }
-
-        .switch-slider::before {
-            content: "";
-
-            position: absolute;
-
-            width: 22px;
-            height: 22px;
-
-            top: 3px;
-            right: 3px;
-
-            background: white;
-
-            border-radius: 50%;
-
-            box-shadow:
-                0 2px 6px rgba(0,0,0,.16);
-
-            transition: .2s ease;
-        }
-
-        .switch input:checked + .switch-slider {
-            background:
-                var(--primary);
-        }
-
-        .switch input:checked + .switch-slider::before {
-            transform:
-                translateX(-22px);
-        }
-
-        /* ACTIONS */
-
-        .settings-actions {
-            display: grid;
-            gap: 10px;
-        }
-
-        .settings-action {
-            width: 100%;
-            min-height: 52px;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-            gap: 12px;
-
-            padding: 13px 15px;
-
-            background:
-                var(--surface);
-
-            color:
-                var(--text);
-
-            border:
-                1px solid var(--border);
-
-            border-radius: 16px;
-
-            box-shadow:
-                var(--shadow-sm);
-
-            text-align: inherit;
-
-            transition: .2s ease;
-
-            font-family: inherit;
-
-            cursor: pointer;
-        }
-
-        .settings-action:hover {
-            transform: translateY(-1px);
-
-            box-shadow:
-                var(--shadow-md);
-        }
-
-        .settings-action-content {
-            display: flex;
-
-            align-items: center;
-
-            gap: 12px;
-        }
-
-        .settings-action-icon {
-            width: 40px;
-            height: 40px;
-
-            display: grid;
-            place-items: center;
-
-            background:
-                var(--primary-light);
-
-            border-radius: 12px;
-
-            font-size: 19px;
-        }
-
-        .settings-action-title {
-            display: block;
-
-            font-size: 13px;
-            font-weight: 800;
-        }
-
-        .settings-action-description {
-            display: block;
-
-            color:
-                var(--text-soft);
-
-            font-size: 10px;
-
-            margin-top: 2px;
-        }
-
-        .arrow {
-            color:
-                var(--text-light);
-
-            font-size: 18px;
-        }
-
-        .danger-action {
-            color:
-                var(--danger);
-
-            border-color:
-                #fecaca;
-
-            background:
-                #fffafa;
-        }
-
-        html.dark-mode .danger-action {
-            background:
-                #27171b;
-
-            border-color:
-                #57232b;
-        }
-
-        .danger-action .settings-action-icon {
-            background:
-                #fef2f2;
-        }
-
-        html.dark-mode
-        .danger-action
-        .settings-action-icon {
-            background:
-                #3b1d22;
-        }
-
-        .info-box {
-            padding: 16px;
-
-            background:
-                var(--primary-light);
-
-            border:
-                1px solid #dbeafe;
-
-            border-radius: 16px;
-
-            color:
-                var(--text);
-
-            font-size: 12px;
-
-            line-height: 1.8;
-        }
-
-        html.dark-mode .info-box {
-            border-color:
-                #294579;
-        }
-
-        .toast {
-            position: fixed;
-
-            left: 50%;
-            bottom: 82px;
-
-            transform:
-                translate(-50%,20px);
-
-            width:
-                min(90%,420px);
-
-            padding: 13px 16px;
-
-            background:
-                #172033;
-
-            color:
-                white;
-
-            border-radius: 14px;
-
-            text-align: center;
-
-            font-size: 13px;
-            font-weight: 700;
-
-            opacity: 0;
-            visibility: hidden;
-
-            transition: .25s ease;
-
-            z-index: 9999;
-        }
-
-        .toast.show {
-            opacity: 1;
-            visibility: visible;
-
-            transform:
-                translate(-50%,0);
-        }
-
-        .version {
-            text-align: center;
-
-            color:
-                var(--text-light);
-
-            font-size: 11px;
+        .settings-hero {
 
             padding:
-                8px 0 100px;
+                32px;
         }
 
-        @media (min-width:700px) {
+        .settings-actions {
 
-            .settings-hero {
-                padding: 34px;
-            }
-
-            .settings-actions {
-                grid-template-columns:
-                    repeat(2,1fr);
-            }
-
+            grid-template-columns:
+                repeat(2, 1fr);
         }
 
-    </style>
-
-</head>
+    }
 
 
-<body>
+    /* =====================================================
+       LTR
+    ===================================================== */
 
-<header class="site-header">
+    html[dir="ltr"]
+    .profile-email {
 
-    <div class="container header-inner">
+        text-align: left;
+    }
+
+
+    html[dir="ltr"]
+    .settings-action-arrow {
+
+        transform:
+            rotate(180deg);
+    }
+
+
+</style>
+
+</head><body><!-- =====================================================
+     HEADER
+===================================================== --><header class="settings-header"><div class="settings-header-inner">
+
+    <a
+        href="dashboard.html"
+        class="settings-brand">
+
+        <span
+            class="settings-brand-mark"
+            aria-hidden="true">
+
+            AI
+
+        </span>
+
+        <span>
+            EduNova AI
+        </span>
+
+    </a>
+
+
+    <nav
+        class="settings-header-actions"
+        aria-label="Main navigation">
+
 
         <a
             href="dashboard.html"
-            class="brand">
+            class="settings-header-action">
 
-            <span class="brand-icon">
-                🎓
+            <span
+                class="settings-header-icon"
+                aria-hidden="true">
+
+                ⌂
+
             </span>
 
-            <span data-i18n="brand">
-                EduNova AI
+            <span data-i18n="nav_home">
+                الرئيسية
             </span>
 
         </a>
 
+
         <button
-            class="btn btn-secondary"
-            onclick="goAccount()"
-            type="button">
+            class="settings-header-action"
+            type="button"
+            onclick="showNotifications()">
 
-            👤
+            <span
+                class="settings-header-icon"
+                aria-hidden="true">
 
-            <span data-i18n="myAccount">
-                حسابي
+                ◔
+
+            </span>
+
+            <span data-i18n="nav_notifications">
+                الإشعارات
             </span>
 
         </button>
 
-    </div>
 
-</header>
+        <a
+            href="account.html"
+            class="settings-header-action">
+
+            <span
+                class="settings-header-icon"
+                aria-hidden="true">
+
+                ○
+
+            </span>
+
+            <span data-i18n="nav_account">
+                حسابي
+            </span>
+
+        </a>
 
 
-<main class="page">
+        <a
+            href="settings.html"
+            class="settings-header-action active"
+            aria-current="page">
 
-<div class="container">
+            <span
+                class="settings-header-icon"
+                aria-hidden="true">
+
+                ⚙
+
+            </span>
+
+            <span data-i18n="nav_settings">
+                الإعدادات
+            </span>
+
+        </a>
+
+    </nav>
+
+</div>
+
+</header><div
+    class="settings-header-fade"
+    aria-hidden="true">
+</div><!-- =====================================================
+     MAIN
+===================================================== --><main class="settings-page"><div class="settings-container">
 
 
     <!-- HERO -->
 
     <section class="settings-hero">
 
-        <div class="settings-hero-icon">
-            ⚙️
+        <div class="settings-hero-content">
+
+            <div
+                class="settings-hero-icon"
+                aria-hidden="true">
+
+                ⚙
+
+            </div>
+
+            <h1 data-i18n="settings">
+                الإعدادات
+            </h1>
+
+            <p data-i18n="settingsIntro">
+                خصص تجربة التعلم الخاصة بك وتحكم في إعدادات المنصة.
+            </p>
+
         </div>
-
-        <h1 data-i18n="settings">
-            الإعدادات
-        </h1>
-
-        <p data-i18n="settingsIntro">
-            خصص تجربة التعلم الخاصة بك وتحكم في إعدادات المنصة.
-        </p>
 
     </section>
 
@@ -633,23 +1469,28 @@
 
     <section class="settings-section">
 
-        <h2
-            class="settings-section-title"
-            data-i18n="accountSection">
+        <div class="settings-section-heading">
 
-            👤 حسابي
+            <h2
+                class="settings-section-title"
+                data-i18n="accountSection">
 
-        </h2>
+                حسابي
 
-        <p
-            class="settings-section-description"
-            data-i18n="accountDescription">
+            </h2>
 
-            معلومات حسابك الحالية.
+            <p
+                class="settings-section-description"
+                data-i18n="accountDescription">
 
-        </p>
+                معلومات حسابك الحالية.
 
-        <div class="card settings-card">
+            </p>
+
+        </div>
+
+
+        <div class="settings-card">
 
             <div class="profile-box">
 
@@ -661,7 +1502,7 @@
 
                 </div>
 
-                <div>
+                <div class="profile-details">
 
                     <div
                         class="profile-name"
@@ -700,15 +1541,20 @@
 
     <section class="settings-section">
 
-        <h2
-            class="settings-section-title"
-            data-i18n="appearance">
+        <div class="settings-section-heading">
 
-            🎨 المظهر واللغة
+            <h2
+                class="settings-section-title"
+                data-i18n="appearance">
 
-        </h2>
+                المظهر واللغة
 
-        <div class="card settings-card">
+            </h2>
+
+        </div>
+
+
+        <div class="settings-card">
 
 
             <!-- LANGUAGE -->
@@ -717,8 +1563,12 @@
 
                 <div class="setting-info">
 
-                    <div class="setting-icon">
-                        🌐
+                    <div
+                        class="setting-icon"
+                        aria-hidden="true">
+
+                        ◉
+
                     </div>
 
                     <div class="setting-text">
@@ -742,6 +1592,7 @@
                     </div>
 
                 </div>
+
 
                 <select
                     class="settings-select"
@@ -775,8 +1626,12 @@
 
                 <div class="setting-info">
 
-                    <div class="setting-icon">
-                        🌓
+                    <div
+                        class="setting-icon"
+                        aria-hidden="true">
+
+                        ◐
+
                     </div>
 
                     <div class="setting-text">
@@ -801,13 +1656,16 @@
 
                 </div>
 
+
                 <label class="switch">
 
                     <input
                         type="checkbox"
                         id="darkMode">
 
-                    <span class="switch-slider"></span>
+                    <span
+                        class="switch-slider">
+                    </span>
 
                 </label>
 
@@ -822,22 +1680,31 @@
 
     <section class="settings-section">
 
-        <h2
-            class="settings-section-title"
-            data-i18n="notifications">
+        <div class="settings-section-heading">
 
-            🔔 الإشعارات
+            <h2
+                class="settings-section-title"
+                data-i18n="notifications">
 
-        </h2>
+                الإشعارات
 
-        <div class="card settings-card">
+            </h2>
+
+        </div>
+
+
+        <div class="settings-card">
 
             <div class="setting-row">
 
                 <div class="setting-info">
 
-                    <div class="setting-icon">
-                        📢
+                    <div
+                        class="setting-icon"
+                        aria-hidden="true">
+
+                        ◌
+
                     </div>
 
                     <div class="setting-text">
@@ -862,6 +1729,7 @@
 
                 </div>
 
+
                 <label class="switch">
 
                     <input
@@ -880,8 +1748,12 @@
 
                 <div class="setting-info">
 
-                    <div class="setting-icon">
-                        📚
+                    <div
+                        class="setting-icon"
+                        aria-hidden="true">
+
+                        ◷
+
                     </div>
 
                     <div class="setting-text">
@@ -906,6 +1778,7 @@
 
                 </div>
 
+
                 <label class="switch">
 
                     <input
@@ -924,8 +1797,12 @@
 
                 <div class="setting-info">
 
-                    <div class="setting-icon">
-                        🏆
+                    <div
+                        class="setting-icon"
+                        aria-hidden="true">
+
+                        ☆
+
                     </div>
 
                     <div class="setting-text">
@@ -950,6 +1827,7 @@
 
                 </div>
 
+
                 <label class="switch">
 
                     <input
@@ -972,22 +1850,31 @@
 
     <section class="settings-section">
 
-        <h2
-            class="settings-section-title"
-            data-i18n="learning">
+        <div class="settings-section-heading">
 
-            📚 التعلم
+            <h2
+                class="settings-section-title"
+                data-i18n="learning">
 
-        </h2>
+                التعلم
 
-        <div class="card settings-card">
+            </h2>
+
+        </div>
+
+
+        <div class="settings-card">
 
             <div class="setting-row">
 
                 <div class="setting-info">
 
-                    <div class="setting-icon">
-                        ▶️
+                    <div
+                        class="setting-icon"
+                        aria-hidden="true">
+
+                        ▷
+
                     </div>
 
                     <div class="setting-text">
@@ -1012,6 +1899,7 @@
 
                 </div>
 
+
                 <label class="switch">
 
                     <input
@@ -1030,8 +1918,12 @@
 
                 <div class="setting-info">
 
-                    <div class="setting-icon">
-                        ⏰
+                    <div
+                        class="setting-icon"
+                        aria-hidden="true">
+
+                        ◷
+
                     </div>
 
                     <div class="setting-text">
@@ -1055,6 +1947,7 @@
                     </div>
 
                 </div>
+
 
                 <select
                     class="settings-select"
@@ -1090,29 +1983,33 @@
 
         </div>
 
-    </section>
+    </section><!-- AI -->    <section class="settings-section">
+
+        <div class="settings-section-heading">
+
+            <h2
+                class="settings-section-title"
+                data-i18n="aiSection">
+
+                Afkrash AI
+
+            </h2>
+
+        </div>
 
 
-    <!-- AI -->
-
-    <section class="settings-section">
-
-        <h2
-            class="settings-section-title"
-            data-i18n="aiSection">
-
-            🤖 Afkrash AI
-
-        </h2>
-
-        <div class="card settings-card">
+        <div class="settings-card">
 
             <div class="setting-row">
 
                 <div class="setting-info">
 
-                    <div class="setting-icon">
-                        🧠
+                    <div
+                        class="setting-icon"
+                        aria-hidden="true">
+
+                        AI
+
                     </div>
 
                     <div class="setting-text">
@@ -1137,6 +2034,7 @@
 
                 </div>
 
+
                 <label class="switch">
 
                     <input
@@ -1151,17 +2049,11 @@
             </div>
 
 
-            <div style="padding:15px">
+            <div class="info-box" data-i18n="aiInfo">
 
-                <div
-                    class="info-box"
-                    data-i18n="aiInfo">
-
-                    🤖 Afkrash AI سيتم تطويره لاحقًا ليكون
-                    مساعدك داخل المحتوى التعليمي، ويساعدك
-                    في فهم الشرح وحل التمارين والتدرب على الأسئلة.
-
-                </div>
+                Afkrash AI سيتم تطويره لاحقًا ليكون
+                مساعدك داخل المحتوى التعليمي، ويساعدك
+                في فهم الشرح وحل التمارين والتدرب على الأسئلة.
 
             </div>
 
@@ -1174,22 +2066,31 @@
 
     <section class="settings-section">
 
-        <h2
-            class="settings-section-title"
-            data-i18n="community">
+        <div class="settings-section-heading">
 
-            👥 الخصوصية والمجتمع
+            <h2
+                class="settings-section-title"
+                data-i18n="community">
 
-        </h2>
+                الخصوصية والمجتمع
 
-        <div class="card settings-card">
+            </h2>
+
+        </div>
+
+
+        <div class="settings-card">
 
             <div class="setting-row">
 
                 <div class="setting-info">
 
-                    <div class="setting-icon">
-                        🏅
+                    <div
+                        class="setting-icon"
+                        aria-hidden="true">
+
+                        #
+
                     </div>
 
                     <div class="setting-text">
@@ -1214,6 +2115,7 @@
 
                 </div>
 
+
                 <label class="switch">
 
                     <input
@@ -1236,16 +2138,23 @@
 
     <section class="settings-section">
 
-        <h2
-            class="settings-section-title"
-            data-i18n="quickAccess">
+        <div class="settings-section-heading">
 
-            ⚡ الوصول السريع
+            <h2
+                class="settings-section-title"
+                data-i18n="quickAccess">
 
-        </h2>
+                الوصول السريع
+
+            </h2>
+
+        </div>
+
 
         <div class="settings-actions">
 
+
+            <!-- LEVELS -->
 
             <button
                 class="settings-action"
@@ -1254,8 +2163,12 @@
 
                 <span class="settings-action-content">
 
-                    <span class="settings-action-icon">
-                        🎓
+                    <span
+                        class="settings-action-icon"
+                        aria-hidden="true">
+
+                        L
+
                     </span>
 
                     <span>
@@ -1280,12 +2193,19 @@
 
                 </span>
 
-                <span class="arrow">
+
+                <span
+                    class="settings-action-arrow"
+                    aria-hidden="true">
+
                     ←
+
                 </span>
 
             </button>
 
+
+            <!-- LIBRARY -->
 
             <button
                 class="settings-action"
@@ -1294,8 +2214,12 @@
 
                 <span class="settings-action-content">
 
-                    <span class="settings-action-icon">
-                        📚
+                    <span
+                        class="settings-action-icon"
+                        aria-hidden="true">
+
+                        ▤
+
                     </span>
 
                     <span>
@@ -1320,12 +2244,19 @@
 
                 </span>
 
-                <span class="arrow">
+
+                <span
+                    class="settings-action-arrow"
+                    aria-hidden="true">
+
                     ←
+
                 </span>
 
             </button>
 
+
+            <!-- FORUM -->
 
             <button
                 class="settings-action"
@@ -1334,8 +2265,12 @@
 
                 <span class="settings-action-content">
 
-                    <span class="settings-action-icon">
-                        💬
+                    <span
+                        class="settings-action-icon"
+                        aria-hidden="true">
+
+                        •
+
                     </span>
 
                     <span>
@@ -1360,12 +2295,19 @@
 
                 </span>
 
-                <span class="arrow">
+
+                <span
+                    class="settings-action-arrow"
+                    aria-hidden="true">
+
                     ←
+
                 </span>
 
             </button>
 
+
+            <!-- DASHBOARD -->
 
             <button
                 class="settings-action"
@@ -1374,8 +2316,12 @@
 
                 <span class="settings-action-content">
 
-                    <span class="settings-action-icon">
-                        🏠
+                    <span
+                        class="settings-action-icon"
+                        aria-hidden="true">
+
+                        ⌂
+
                     </span>
 
                     <span>
@@ -1400,8 +2346,13 @@
 
                 </span>
 
-                <span class="arrow">
+
+                <span
+                    class="settings-action-arrow"
+                    aria-hidden="true">
+
                     ←
+
                 </span>
 
             </button>
@@ -1415,15 +2366,23 @@
 
     <section class="settings-section">
 
-        <h2
-            class="settings-section-title"
-            data-i18n="security">
+        <div class="settings-section-heading">
 
-            🔐 الحساب والأمان
+            <h2
+                class="settings-section-title"
+                data-i18n="security">
 
-        </h2>
+                الحساب والأمان
+
+            </h2>
+
+        </div>
+
 
         <div class="settings-actions">
+
+
+            <!-- PASSWORD -->
 
             <button
                 class="settings-action"
@@ -1432,8 +2391,12 @@
 
                 <span class="settings-action-content">
 
-                    <span class="settings-action-icon">
-                        🔑
+                    <span
+                        class="settings-action-icon"
+                        aria-hidden="true">
+
+                        *
+
                     </span>
 
                     <span>
@@ -1458,12 +2421,19 @@
 
                 </span>
 
-                <span class="arrow">
+
+                <span
+                    class="settings-action-arrow"
+                    aria-hidden="true">
+
                     ←
+
                 </span>
 
             </button>
 
+
+            <!-- PAYMENTS -->
 
             <button
                 class="settings-action"
@@ -1472,8 +2442,12 @@
 
                 <span class="settings-action-content">
 
-                    <span class="settings-action-icon">
-                        💳
+                    <span
+                        class="settings-action-icon"
+                        aria-hidden="true">
+
+                        $
+
                     </span>
 
                     <span>
@@ -1498,8 +2472,13 @@
 
                 </span>
 
-                <span class="arrow">
+
+                <span
+                    class="settings-action-arrow"
+                    aria-hidden="true">
+
                     ←
+
                 </span>
 
             </button>
@@ -1513,22 +2492,31 @@
 
     <section class="settings-section">
 
-        <h2
-            class="settings-section-title"
-            data-i18n="about">
+        <div class="settings-section-heading">
 
-            ℹ️ حول المنصة
+            <h2
+                class="settings-section-title"
+                data-i18n="about">
 
-        </h2>
+                حول المنصة
 
-        <div class="card settings-card">
+            </h2>
+
+        </div>
+
+
+        <div class="settings-card">
 
             <div class="setting-row">
 
                 <div class="setting-info">
 
-                    <div class="setting-icon">
-                        🎓
+                    <div
+                        class="setting-icon"
+                        aria-hidden="true">
+
+                        AI
+
                     </div>
 
                     <div class="setting-text">
@@ -1553,8 +2541,17 @@
 
                 </div>
 
-                <span class="setting-value">
+
+                <span
+                    class="setting-value"
+                    style="
+                        color:var(--text-light);
+                        font-size:11px;
+                        font-weight:800;
+                    ">
+
                     1.0
+
                 </span>
 
             </div>
@@ -1575,8 +2572,12 @@
 
             <span class="settings-action-content">
 
-                <span class="settings-action-icon">
-                    🚪
+                <span
+                    class="settings-action-icon"
+                    aria-hidden="true">
+
+                    ×
+
                 </span>
 
                 <span>
@@ -1601,8 +2602,13 @@
 
             </span>
 
-            <span class="arrow">
+
+            <span
+                class="settings-action-arrow"
+                aria-hidden="true">
+
                 ←
+
             </span>
 
         </button>
@@ -1612,9 +2618,11 @@
 
     <!-- VERSION -->
 
-    <div class="version">
+    <div class="settings-version">
 
-        EduNova AI — Afkrash AI
+        <span>
+            EduNova AI — Afkrash AI
+        </span>
 
         <br>
 
@@ -1627,84 +2635,10 @@
 
 </div>
 
-</main>
-
-
-<!-- BOTTOM NAV -->
-
-<nav class="bottom-nav">
-
-    <button
-        onclick="goDashboard()"
-        type="button">
-
-        🏠
-
-        <span data-i18n="home">
-            الرئيسية
-        </span>
-
-    </button>
-
-
-    <button
-        onclick="goLibrary()"
-        type="button">
-
-        📚
-
-        <span data-i18n="library">
-            مكتبتي
-        </span>
-
-    </button>
-
-
-    <button
-        onclick="goForum()"
-        type="button">
-
-        💬
-
-        <span data-i18n="forum">
-            المنتدى
-        </span>
-
-    </button>
-
-
-    <button
-        class="active"
-        onclick="goAccount()"
-        type="button">
-
-        👤
-
-        <span data-i18n="account">
-            حسابي
-        </span>
-
-    </button>
-
-</nav>
-
-
-<!-- TOAST -->
-
-<div
+</main><!-- TOAST --><div
     class="toast"
     id="toast">
-</div>
-
-
-<!-- =====================================================
-     SUPABASE
-===================================================== -->
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-
-<script>
+</div><!-- SUPABASE --><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
 
 "use strict";
 
@@ -1734,17 +2668,26 @@ const SETTINGS_TRANSLATIONS = {
 
     ar: {
 
-        brand: "EduNova AI",
+        nav_home:
+            "الرئيسية",
 
-        myAccount: "حسابي",
+        nav_notifications:
+            "الإشعارات",
 
-        settings: "الإعدادات",
+        nav_account:
+            "حسابي",
+
+        nav_settings:
+            "الإعدادات",
+
+        settings:
+            "الإعدادات",
 
         settingsIntro:
             "خصص تجربة التعلم الخاصة بك وتحكم في إعدادات المنصة.",
 
         accountSection:
-            "👤 حسابي",
+            "حسابي",
 
         accountDescription:
             "معلومات حسابك الحالية.",
@@ -1753,7 +2696,7 @@ const SETTINGS_TRANSLATIONS = {
             "● حساب نشط",
 
         appearance:
-            "🎨 المظهر واللغة",
+            "المظهر واللغة",
 
         language:
             "اللغة",
@@ -1774,7 +2717,7 @@ const SETTINGS_TRANSLATIONS = {
             "تغيير مظهر الموقع إلى الوضع الداكن",
 
         notifications:
-            "🔔 الإشعارات",
+            "الإشعارات",
 
         platformNotifications:
             "إشعارات المنصة",
@@ -1795,7 +2738,7 @@ const SETTINGS_TRANSLATIONS = {
             "إشعارات التحديات والشارات والنقاط",
 
         learning:
-            "📚 التعلم",
+            "التعلم",
 
         continueLearning:
             "متابعة التعلم تلقائيًا",
@@ -1810,7 +2753,7 @@ const SETTINGS_TRANSLATIONS = {
             "المدة المقترحة لجلسة الدراسة",
 
         aiSection:
-            "🤖 Afkrash AI",
+            "Afkrash AI",
 
         aiAssistant:
             "المساعدة الذكية",
@@ -1819,10 +2762,10 @@ const SETTINGS_TRANSLATIONS = {
             "السماح لـ Afkrash AI بمساعدتك في التعلم",
 
         aiInfo:
-            "🤖 Afkrash AI سيتم تطويره لاحقًا ليكون مساعدك داخل المحتوى التعليمي، ويساعدك في فهم الشرح وحل التمارين والتدرب على الأسئلة.",
+            "Afkrash AI سيتم تطويره لاحقًا ليكون مساعدك داخل المحتوى التعليمي، ويساعدك في فهم الشرح وحل التمارين والتدرب على الأسئلة.",
 
         community:
-            "👥 الخصوصية والمجتمع",
+            "الخصوصية والمجتمع",
 
         leaderboard:
             "الظهور في لوحة المتصدرين",
@@ -1831,7 +2774,7 @@ const SETTINGS_TRANSLATIONS = {
             "السماح بظهور حسابك في الترتيب العام",
 
         quickAccess:
-            "⚡ الوصول السريع",
+            "الوصول السريع",
 
         changeLevel:
             "تغيير المستوى الدراسي",
@@ -1858,7 +2801,7 @@ const SETTINGS_TRANSLATIONS = {
             "العودة إلى الصفحة الرئيسية",
 
         security:
-            "🔐 الحساب والأمان",
+            "الحساب والأمان",
 
         changePassword:
             "تغيير كلمة المرور",
@@ -1873,7 +2816,7 @@ const SETTINGS_TRANSLATIONS = {
             "سيتم تفعيلها في المرحلة القادمة",
 
         about:
-            "ℹ️ حول المنصة",
+            "حول المنصة",
 
         platformName:
             "EduNova AI",
@@ -1886,15 +2829,6 @@ const SETTINGS_TRANSLATIONS = {
 
         logoutDescription:
             "الخروج من حسابك على هذا الجهاز",
-
-        home:
-            "الرئيسية",
-
-        library:
-            "مكتبتي",
-
-        account:
-            "حسابي",
 
         version:
             "الإصدار 1.0",
@@ -1922,11 +2856,17 @@ const SETTINGS_TRANSLATIONS = {
 
     fr: {
 
-        brand:
-            "EduNova AI",
+        nav_home:
+            "Accueil",
 
-        myAccount:
-            "Mon compte",
+        nav_notifications:
+            "Notifications",
+
+        nav_account:
+            "Compte",
+
+        nav_settings:
+            "Paramètres",
 
         settings:
             "Paramètres",
@@ -1935,7 +2875,7 @@ const SETTINGS_TRANSLATIONS = {
             "Personnalisez votre expérience d'apprentissage et contrôlez les paramètres de la plateforme.",
 
         accountSection:
-            "👤 Mon compte",
+            "Mon compte",
 
         accountDescription:
             "Informations actuelles de votre compte.",
@@ -1944,7 +2884,7 @@ const SETTINGS_TRANSLATIONS = {
             "● Compte actif",
 
         appearance:
-            "🎨 Apparence et langue",
+            "Apparence et langue",
 
         language:
             "Langue",
@@ -1965,7 +2905,7 @@ const SETTINGS_TRANSLATIONS = {
             "Activer l'apparence sombre du site",
 
         notifications:
-            "🔔 Notifications",
+            "Notifications",
 
         platformNotifications:
             "Notifications de la plateforme",
@@ -1986,7 +2926,7 @@ const SETTINGS_TRANSLATIONS = {
             "Notifications des défis, badges et points",
 
         learning:
-            "📚 Apprentissage",
+            "Apprentissage",
 
         continueLearning:
             "Continuer automatiquement l'apprentissage",
@@ -2001,7 +2941,7 @@ const SETTINGS_TRANSLATIONS = {
             "Durée recommandée pour une session d'étude",
 
         aiSection:
-            "🤖 Afkrash AI",
+            "Afkrash AI",
 
         aiAssistant:
             "Assistant intelligent",
@@ -2010,10 +2950,10 @@ const SETTINGS_TRANSLATIONS = {
             "Autoriser Afkrash AI à vous aider dans votre apprentissage",
 
         aiInfo:
-            "🤖 Afkrash AI sera développé prochainement pour devenir votre assistant dans le contenu éducatif et vous aider à comprendre les explications, résoudre les exercices et vous entraîner.",
+            "Afkrash AI sera développé prochainement pour devenir votre assistant dans le contenu éducatif et vous aider à comprendre les explications, résoudre les exercices et vous entraîner.",
 
         community:
-            "👥 Confidentialité et communauté",
+            "Confidentialité et communauté",
 
         leaderboard:
             "Apparaître dans le classement",
@@ -2022,7 +2962,7 @@ const SETTINGS_TRANSLATIONS = {
             "Autoriser l'affichage de votre compte dans le classement général",
 
         quickAccess:
-            "⚡ Accès rapide",
+            "Accès rapide",
 
         changeLevel:
             "Changer de niveau scolaire",
@@ -2049,7 +2989,7 @@ const SETTINGS_TRANSLATIONS = {
             "Retour à la page principale",
 
         security:
-            "🔐 Compte et sécurité",
+            "Compte et sécurité",
 
         changePassword:
             "Changer le mot de passe",
@@ -2064,7 +3004,7 @@ const SETTINGS_TRANSLATIONS = {
             "Cette fonction sera activée prochainement",
 
         about:
-            "ℹ️ À propos",
+            "À propos",
 
         platformName:
             "EduNova AI",
@@ -2077,15 +3017,6 @@ const SETTINGS_TRANSLATIONS = {
 
         logoutDescription:
             "Quitter votre compte sur cet appareil",
-
-        home:
-            "Accueil",
-
-        library:
-            "Bibliothèque",
-
-        account:
-            "Compte",
 
         version:
             "Version 1.0",
@@ -2137,7 +3068,7 @@ const defaultSettings = {
 
 
 /* =========================================================
-   READ PAGE SETTINGS
+   GET SETTINGS
 ========================================================= */
 
 function getPageSettings() {
@@ -2168,17 +3099,58 @@ function getPageSettings() {
 
 
 /* =========================================================
-   SETTINGS TRANSLATION
+   CURRENT LANGUAGE
+========================================================= */
+
+function getSettingsLanguage() {
+
+    try {
+
+        if (
+            typeof getSiteLanguage ===
+            "function"
+        ) {
+
+            return getSiteLanguage() ===
+                "fr"
+                ? "fr"
+                : "ar";
+        }
+
+    } catch (error) {}
+
+    return localStorage.getItem(
+        "site_language"
+    ) === "fr"
+        ? "fr"
+        : "ar";
+
+}
+
+
+/* =========================================================
+   TRANSLATE
 ========================================================= */
 
 function translateSettingsPage() {
 
     const language =
-        getSiteLanguage();
+        getSettingsLanguage();
 
     const dictionary =
-        SETTINGS_TRANSLATIONS[language] ||
+        SETTINGS_TRANSLATIONS[
+            language
+        ] ||
         SETTINGS_TRANSLATIONS.ar;
+
+
+    document.documentElement.lang =
+        language;
+
+    document.documentElement.dir =
+        language === "fr"
+            ? "ltr"
+            : "rtl";
 
 
     document
@@ -2189,7 +3161,8 @@ function translateSettingsPage() {
                 element.dataset.i18n;
 
             if (
-                dictionary[key] !== undefined
+                dictionary[key] !==
+                undefined
             ) {
 
                 element.textContent =
@@ -2200,78 +3173,81 @@ function translateSettingsPage() {
         });
 
 
-    /* مدة الدراسة */
-
     const duration =
         document.getElementById(
             "studyDuration"
         );
 
+
     if (duration) {
 
-        const value =
+        const currentValue =
             duration.value;
-
-        const options =
-            duration.options;
 
 
         if (language === "fr") {
 
-            if (options[0])
-                options[0].textContent =
+            if (duration.options[0])
+                duration.options[0].textContent =
                     "15 minutes";
 
-            if (options[1])
-                options[1].textContent =
+            if (duration.options[1])
+                duration.options[1].textContent =
                     "30 minutes";
 
-            if (options[2])
-                options[2].textContent =
+            if (duration.options[2])
+                duration.options[2].textContent =
                     "45 minutes";
 
-            if (options[3])
-                options[3].textContent =
+            if (duration.options[3])
+                duration.options[3].textContent =
                     "1 heure";
 
-            if (options[4])
-                options[4].textContent =
+            if (duration.options[4])
+                duration.options[4].textContent =
                     "1 h 30";
 
         } else {
 
-            if (options[0])
-                options[0].textContent =
+            if (duration.options[0])
+                duration.options[0].textContent =
                     "15 دقيقة";
 
-            if (options[1])
-                options[1].textContent =
+            if (duration.options[1])
+                duration.options[1].textContent =
                     "30 دقيقة";
 
-            if (options[2])
-                options[2].textContent =
+            if (duration.options[2])
+                duration.options[2].textContent =
                     "45 دقيقة";
 
-            if (options[3])
-                options[3].textContent =
+            if (duration.options[3])
+                duration.options[3].textContent =
                     "ساعة";
 
-            if (options[4])
-                options[4].textContent =
+            if (duration.options[4])
+                duration.options[4].textContent =
                     "ساعة ونصف";
 
         }
 
+
         duration.value =
-            value;
+            currentValue;
 
     }
 
 
-    /* اتجاه الأسهم */
+    document.title =
+        language === "fr"
+            ? "Paramètres | EduNova AI"
+            : "الإعدادات | EduNova AI";
+
 
     document
-        .querySelectorAll(".arrow")
+        .querySelectorAll(
+            ".settings-action-arrow"
+        )
         .forEach(arrow => {
 
             arrow.textContent =
@@ -2281,386 +3257,263 @@ function translateSettingsPage() {
 
         });
 
+}/* =========================
+   SAVE SETTINGS
+========================= */
 
-    /* عنوان الصفحة */
+function savePageSettings(showMessage = true) {
 
-    document.title =
-        language === "fr"
-            ? "Paramètres | EduNova AI"
-            : "الإعدادات | EduNova AI";
-
-}
-
-
-/* =========================================================
-   SAVE PAGE SETTINGS
-========================================================= */
-
-function savePageSettings(
-    showMessage = true
-) {
-
-    const settings = {
-
-        platformNotifications:
-            document.getElementById(
-                "platformNotifications"
-            )?.checked ?? true,
-
-        studyNotifications:
-            document.getElementById(
-                "studyNotifications"
-            )?.checked ?? true,
-
-        achievementNotifications:
-            document.getElementById(
-                "achievementNotifications"
-            )?.checked ?? true,
-
-        continueLearning:
-            document.getElementById(
-                "continueLearning"
-            )?.checked ?? true,
-
-        studyDuration:
-            document.getElementById(
-                "studyDuration"
-            )?.value || "30",
-
-        aiAssistant:
-            document.getElementById(
-                "aiAssistant"
-            )?.checked ?? true,
-
-        leaderboard:
-            document.getElementById(
-                "leaderboard"
-            )?.checked ?? true
-
-    };
-
-
-    /*
-     * إعدادات الطالب الإضافية
-     * أما اللغة والمظهر فمصدرهما:
-     *
-     * site_language
-     * site_theme
-     */
+    const settings = getPageSettings();
 
     localStorage.setItem(
         "platform_settings",
         JSON.stringify(settings)
     );
 
+    localStorage.setItem(
+        "site_theme",
+        settings.darkMode ? "dark" : "light"
+    );
+
+    localStorage.setItem(
+        "site_language",
+        settings.language
+    );
 
     if (showMessage) {
-
-        const language =
-            getSiteLanguage();
-
-        const dictionary =
-            SETTINGS_TRANSLATIONS[
-                language
-            ] || SETTINGS_TRANSLATIONS.ar;
-
         showToast(
-            dictionary.saved
+            settings.language === "fr"
+                ? "Settings saved successfully"
+                : "تم حفظ الإعدادات بنجاح"
         );
-
     }
-
 }
 
 
-/* =========================================================
+/* =========================
    LOAD SETTINGS
-========================================================= */
+========================= */
 
 function loadSettings() {
 
-    const settings =
-        getPageSettings();
+    const settings = getPageSettings();
 
-    const language =
-        getSiteLanguage();
+    const darkModeToggle =
+        document.getElementById("darkModeToggle");
 
-    const theme =
-        getSiteTheme();
+    const languageSelect =
+        document.getElementById("languageSelect");
 
+    const notificationsToggle =
+        document.getElementById("notificationsToggle");
 
-    const languageElement =
-        document.getElementById(
-            "language"
-        );
+    const remindersToggle =
+        document.getElementById("remindersToggle");
 
-    const darkModeElement =
-        document.getElementById(
-            "darkMode"
-        );
+    const progressToggle =
+        document.getElementById("progressToggle");
 
-
-    if (languageElement) {
-
-        languageElement.value =
-            language;
-
+    if (darkModeToggle) {
+        darkModeToggle.checked =
+            settings.darkMode;
     }
 
-
-    if (darkModeElement) {
-
-        darkModeElement.checked =
-            theme === "dark";
-
+    if (languageSelect) {
+        languageSelect.value =
+            settings.language;
     }
 
+    if (notificationsToggle) {
+        notificationsToggle.checked =
+            settings.notifications;
+    }
 
-    const platformNotifications =
-        document.getElementById(
-            "platformNotifications"
+    if (remindersToggle) {
+        remindersToggle.checked =
+            settings.reminders;
+    }
+
+    if (progressToggle) {
+        progressToggle.checked =
+            settings.progress;
+    }
+
+    localStorage.setItem(
+        "platform_settings",
+        JSON.stringify(settings)
+    );
+
+    localStorage.setItem(
+        "site_theme",
+        settings.darkMode
+            ? "dark"
+            : "light"
+    );
+
+    localStorage.setItem(
+        "site_language",
+        settings.language
+    );
+
+    if (typeof applySiteTheme === "function") {
+        applySiteTheme(
+            settings.darkMode
+                ? "dark"
+                : "light"
         );
-
-    if (platformNotifications) {
-
-        platformNotifications.checked =
-            settings.platformNotifications;
-
     }
 
-
-    const studyNotifications =
-        document.getElementById(
-            "studyNotifications"
+    if (typeof applySiteLanguage === "function") {
+        applySiteLanguage(
+            settings.language
         );
-
-    if (studyNotifications) {
-
-        studyNotifications.checked =
-            settings.studyNotifications;
-
     }
-
-
-    const achievementNotifications =
-        document.getElementById(
-            "achievementNotifications"
-        );
-
-    if (achievementNotifications) {
-
-        achievementNotifications.checked =
-            settings.achievementNotifications;
-
-    }
-
-
-    const continueLearning =
-        document.getElementById(
-            "continueLearning"
-        );
-
-    if (continueLearning) {
-
-        continueLearning.checked =
-            settings.continueLearning;
-
-    }
-
-
-    const studyDuration =
-        document.getElementById(
-            "studyDuration"
-        );
-
-    if (studyDuration) {
-
-        studyDuration.value =
-            settings.studyDuration;
-
-    }
-
-
-    const aiAssistant =
-        document.getElementById(
-            "aiAssistant"
-        );
-
-    if (aiAssistant) {
-
-        aiAssistant.checked =
-            settings.aiAssistant;
-
-    }
-
-
-    const leaderboard =
-        document.getElementById(
-            "leaderboard"
-        );
-
-    if (leaderboard) {
-
-        leaderboard.checked =
-            settings.leaderboard;
-
-    }
-
-
-    /*
-     * النظام العالمي
-     */
-
-    applySiteTheme(theme);
-
-    applySiteLanguage(language);
 
     translateSettingsPage();
-
 }
 
 
-/* =========================================================
+/* =========================
    TOAST
-========================================================= */
-
-let toastTimer;
-
+========================= */
 
 function showToast(message) {
 
     const toast =
-        document.getElementById(
-            "toast"
-        );
+        document.getElementById("settingsToast");
 
-    if (!toast) return;
+    if (!toast) {
+        return;
+    }
 
-
-    toast.textContent =
-        message;
-
-
-    toast.classList.add(
-        "show"
-    );
-
+    toast.textContent = message;
+    toast.classList.add("show");
 
     clearTimeout(
-        toastTimer
+        window.settingsToastTimer
     );
 
+    window.settingsToastTimer =
+        setTimeout(() => {
 
-    toastTimer =
-        setTimeout(
-            () => {
+            toast.classList.remove("show");
 
-                toast.classList.remove(
-                    "show"
-                );
-
-            },
-            2200
-        );
-
+        }, 2600);
 }
 
 
-/* =========================================================
+/* =========================
    SETTINGS CHANGE
-========================================================= */
+========================= */
 
 document.addEventListener(
     "change",
-    function (event) {
+    function(event) {
 
+        const target =
+            event.target;
 
-        /* DARK MODE */
+        if (!target) {
+            return;
+        }
 
         if (
-            event.target.id ===
-            "darkMode"
+            target.id ===
+            "darkModeToggle"
         ) {
 
-            const enabled =
-                event.target.checked;
-
-
-            applySiteTheme(
-                enabled
+            const theme =
+                target.checked
                     ? "dark"
-                    : "light"
+                    : "light";
+
+            localStorage.setItem(
+                "site_theme",
+                theme
             );
 
+            if (
+                typeof applySiteTheme ===
+                "function"
+            ) {
+                applySiteTheme(theme);
+            }
 
             savePageSettings(false);
 
-
             const language =
-                getSiteLanguage();
-
-            const dictionary =
-                SETTINGS_TRANSLATIONS[
-                    language
-                ] || SETTINGS_TRANSLATIONS.ar;
-
+                getSettingsLanguage();
 
             showToast(
-                enabled
-                    ? dictionary.darkEnabled
-                    : dictionary.darkDisabled
+                language === "fr"
+                    ? "Theme updated"
+                    : "تم تحديث المظهر"
             );
 
-
             return;
-
         }
 
 
-        /* LANGUAGE */
-
         if (
-            event.target.id ===
-            "language"
+            target.id ===
+            "languageSelect"
         ) {
 
             const language =
-                event.target.value;
+                target.value === "fr"
+                    ? "fr"
+                    : "ar";
 
-
-            applySiteLanguage(
+            localStorage.setItem(
+                "site_language",
                 language
             );
 
+            if (
+                typeof applySiteLanguage ===
+                "function"
+            ) {
+                applySiteLanguage(language);
+            }
 
             translateSettingsPage();
-
-
             savePageSettings(false);
 
+            showToast(
+                language === "fr"
+                    ? "Language updated"
+                    : "تم تحديث اللغة"
+            );
 
             return;
-
         }
 
 
-        /* بقية الإعدادات */
+        if (
+            target.id ===
+                "notificationsToggle" ||
+            target.id ===
+                "remindersToggle" ||
+            target.id ===
+                "progressToggle"
+        ) {
 
-        savePageSettings(true);
+            savePageSettings();
+
+        }
 
     }
 );
 
 
-/* =========================================================
+/* =========================
    NAVIGATION
-========================================================= */
+========================= */
 
 function goDashboard() {
 
     window.location.href =
         "dashboard.html";
-
 }
 
 
@@ -2668,7 +3521,6 @@ function goAccount() {
 
     window.location.href =
         "account.html";
-
 }
 
 
@@ -2676,7 +3528,6 @@ function goLibrary() {
 
     window.location.href =
         "library.html";
-
 }
 
 
@@ -2684,7 +3535,6 @@ function goForum() {
 
     window.location.href =
         "forum.html";
-
 }
 
 
@@ -2692,73 +3542,54 @@ function goLevels() {
 
     window.location.href =
         "levels.html";
-
 }
 
 
-/* =========================================================
+/* =========================
    COMING SOON
-========================================================= */
+========================= */
 
 function comingSoon() {
 
     const language =
-        getSiteLanguage();
-
-    const dictionary =
-        SETTINGS_TRANSLATIONS[
-            language
-        ] || SETTINGS_TRANSLATIONS.ar;
-
+        getSettingsLanguage();
 
     showToast(
-        dictionary.comingSoon
+        language === "fr"
+            ? "This feature will be available soon."
+            : "هذه الميزة ستكون متاحة قريبًا."
     );
-
 }
 
 
-/* =========================================================
+/* =========================
    LOGOUT
-========================================================= */
+========================= */
 
 async function logout() {
 
     const language =
-        getSiteLanguage();
+        getSettingsLanguage();
 
-    const dictionary =
-        SETTINGS_TRANSLATIONS[
-            language
-        ] || SETTINGS_TRANSLATIONS.ar;
+    try {
 
+        if (
+            typeof supabaseClient !==
+            "undefined" &&
+            supabaseClient &&
+            supabaseClient.auth
+        ) {
 
-    const confirmed =
-        window.confirm(
-            dictionary.logoutConfirm
+            await supabaseClient.auth.signOut();
+
+        }
+
+    } catch (error) {
+
+        console.warn(
+            "Logout warning:",
+            error
         );
-
-
-    if (!confirmed) {
-        return;
-    }
-
-
-    const {
-        error
-    } =
-        await supabaseClient
-            .auth
-            .signOut();
-
-
-    if (error) {
-
-        showToast(
-            dictionary.logoutError
-        );
-
-        return;
 
     }
 
@@ -2780,116 +3611,314 @@ async function logout() {
     );
 
 
-    window.location.href =
-        "login.html";
-
-}
+    sessionStorage.clear();
 
 
-/* =========================================================
-   LOAD USER
-========================================================= */
-
-async function loadUser() {
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-            .auth
-            .getSession();
+    showToast(
+        language === "fr"
+            ? "Logged out successfully"
+            : "تم تسجيل الخروج بنجاح"
+    );
 
 
-    if (
-        error ||
-        !data ||
-        !data.session
-    ) {
+    setTimeout(() => {
 
         window.location.href =
             "login.html";
 
-        return;
-
-    }
-
-
-    const user =
-        data.session.user;
-
-
-    let name =
-        user.user_metadata?.full_name ||
-        user.user_metadata?.name ||
-        user.user_metadata?.display_name;
-
-
-    if (!name) {
-
-        name =
-            user.email
-                ? user.email.split("@")[0]
-                : "الطالب";
-
-    }
-
-
-    const userName =
-        document.getElementById(
-            "userName"
-        );
-
-    const userEmail =
-        document.getElementById(
-            "userEmail"
-        );
-
-    const avatar =
-        document.getElementById(
-            "avatar"
-        );
-
-
-    if (userName) {
-
-        userName.textContent =
-            name;
-
-    }
-
-
-    if (userEmail) {
-
-        userEmail.textContent =
-            user.email || "-";
-
-    }
-
-
-    if (avatar) {
-
-        avatar.textContent =
-            name.trim().charAt(0) ||
-            "ط";
-
-    }
-
-
-    loadSettings();
-
+    }, 350);
 }
 
 
-/* =========================================================
-   START
-========================================================= */
+/* =========================
+   LOAD USER
+========================= */
+
+async function loadUser() {
+
+    try {
+
+        if (
+            typeof supabaseClient ===
+            "undefined" ||
+            !supabaseClient ||
+            !supabaseClient.auth
+        ) {
+
+            loadSettings();
+            return;
+
+        }
+
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .auth
+                .getSession();
+
+
+        if (error) {
+
+            console.warn(
+                "Unable to read session:",
+                error
+            );
+
+            loadSettings();
+            return;
+        }
+
+
+        const session =
+            data &&
+            data.session
+                ? data.session
+                : null;
+
+
+        if (!session) {
+
+            window.location.href =
+                "login.html";
+
+            return;
+        }
+
+
+        const user =
+            session.user;
+
+
+        const metadata =
+            user &&
+            user.user_metadata
+                ? user.user_metadata
+                : {};
+
+
+        const name =
+            metadata.full_name ||
+            metadata.name ||
+            metadata.username ||
+            user.email ||
+            "EduNova AI";
+
+
+        const email =
+            user.email ||
+            "";
+
+
+        const userName =
+            document.getElementById(
+                "userName"
+            );
+
+        const userEmail =
+            document.getElementById(
+                "userEmail"
+            );
+
+        const avatar =
+            document.getElementById(
+                "userAvatar"
+            );
+
+
+        if (userName) {
+            userName.textContent =
+                name;
+        }
+
+
+        if (userEmail) {
+            userEmail.textContent =
+                email;
+        }
+
+
+        if (avatar) {
+
+            const avatarUrl =
+                metadata.avatar_url ||
+                metadata.picture ||
+                "";
+
+            if (avatarUrl) {
+
+                avatar.src =
+                    avatarUrl;
+
+                avatar.alt =
+                    name;
+
+            } else {
+
+                avatar.textContent =
+                    String(name)
+                        .trim()
+                        .charAt(0)
+                        .toUpperCase();
+
+            }
+
+        }
+
+
+        loadSettings();
+
+    } catch (error) {
+
+        console.error(
+            "Settings user loading error:",
+            error
+        );
+
+        loadSettings();
+
+    }
+}
+
+
+/* =========================
+   INITIALIZATION
+========================= */
 
 document.addEventListener(
     "DOMContentLoaded",
-    () => {
+    function() {
+
+        if (
+            typeof initializeGlobalSettings ===
+            "function"
+        ) {
+
+            initializeGlobalSettings();
+
+        }
+
+
+        if (
+            typeof applySiteTheme ===
+            "function"
+        ) {
+
+            const savedTheme =
+                localStorage.getItem(
+                    "site_theme"
+                ) || "light";
+
+            applySiteTheme(
+                savedTheme
+            );
+
+        }
+
+
+        if (
+            typeof applySiteLanguage ===
+            "function"
+        ) {
+
+            const savedLanguage =
+                localStorage.getItem(
+                    "site_language"
+                ) || "ar";
+
+            applySiteLanguage(
+                savedLanguage
+            );
+
+        }
+
 
         loadUser();
+
+    }
+);
+
+
+/* =========================
+   CROSS-TAB SYNC
+========================= */
+
+window.addEventListener(
+    "storage",
+    function(event) {
+
+        if (
+            event.key ===
+            "site_theme"
+        ) {
+
+            if (
+                typeof applySiteTheme ===
+                "function"
+            ) {
+
+                applySiteTheme(
+                    event.newValue ||
+                    "light"
+                );
+
+            }
+
+            const toggle =
+                document.getElementById(
+                    "darkModeToggle"
+                );
+
+            if (toggle) {
+
+                toggle.checked =
+                    event.newValue ===
+                    "dark";
+
+            }
+
+        }
+
+
+        if (
+            event.key ===
+            "site_language"
+        ) {
+
+            const language =
+                event.newValue === "fr"
+                    ? "fr"
+                    : "ar";
+
+
+            const select =
+                document.getElementById(
+                    "languageSelect"
+                );
+
+            if (select) {
+                select.value =
+                    language;
+            }
+
+
+            if (
+                typeof applySiteLanguage ===
+                "function"
+            ) {
+
+                applySiteLanguage(
+                    language
+                );
+
+            }
+
+
+            translateSettingsPage();
+
+        }
 
     }
 );
@@ -2897,5 +3926,4 @@ document.addEventListener(
 </script>
 
 </body>
-
-    </html>
+</html>
