@@ -9,603 +9,998 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-    <title>المكتبة | EduNova AI</title>
+    <meta
+        name="theme-color"
+        content="#ffffff">
+
+    <title>مكتبتي | EduNova AI</title>
 
     <link
         rel="stylesheet"
         href="style.css">
 
-    <script src="script.js"></script>
 
     <style>
 
-        /* =========================================
-           EDUNOVA AI — LIBRARY
-           Certificate → Subject → Chapters
-           ========================================= */
+        /* =========================================================
+           LIBRARY PAGE
+           EduNova AI — Dashboard-aligned design
+           ========================================================= */
 
-        .library-page {
-            padding: 24px 0 60px;
+        :root {
+
+            --library-header-height: 70px;
+
+            --library-green: #16835c;
+
+            --library-green-dark: #106946;
+
+            --library-border: rgba(20, 30, 40, 0.08);
+
+            --library-card:
+                rgba(255, 255, 255, 0.94);
+
+            --library-muted: #718096;
+
+            --library-text: #17202a;
+
+            --library-shadow:
+                0 12px 34px rgba(20, 30, 40, 0.07);
+
         }
 
-        .library-wrapper {
-            width: 100%;
-            max-width: 980px;
-            margin: auto;
+
+        html[data-theme="dark"] {
+
+            --library-border:
+                rgba(255, 255, 255, 0.09);
+
+            --library-card:
+                rgba(28, 34, 40, 0.96);
+
+            --library-muted: #aeb8c2;
+
+            --library-text: #f2f5f7;
+
+            --library-shadow:
+                0 14px 36px rgba(0, 0, 0, 0.24);
+
         }
 
-        /* =========================================
-           TEACHER IDENTITY
-           ========================================= */
 
-        .teacher-strip {
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            background:
+                var(--bg-color, #f7f9fa);
+
+            color:
+                var(--library-text);
+
+        }
+
+
+        /* =========================================================
+           LIBRARY HEADER
+           ========================================================= */
+
+        .library-header {
+
+            position: fixed;
+
+            top: 0;
+
+            left: 0;
+
+            right: 0;
+
+            z-index: 1000;
+
+            height:
+                var(--library-header-height);
+
             display: flex;
+
             align-items: center;
-            gap: 12px;
-            margin-bottom: 18px;
-            padding: 12px 14px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            box-shadow: var(--shadow-sm);
+
+            gap: 18px;
+
+            padding:
+                0 24px;
+
+            background:
+                rgba(255, 255, 255, 0.82);
+
+            border-bottom:
+                1px solid var(--library-border);
+
+            backdrop-filter:
+                blur(18px);
+
+            -webkit-backdrop-filter:
+                blur(18px);
+
         }
 
-        .teacher-avatar {
-            width: 46px;
-            height: 46px;
-            flex-shrink: 0;
-            display: grid;
-            place-items: center;
-            border-radius: 14px;
-            background: var(--primary);
-            color: #fff;
-            font-size: 13px;
-            font-weight: 900;
+
+        html[data-theme="dark"] .library-header {
+
+            background:
+                rgba(20, 24, 28, 0.82);
+
         }
 
-        .teacher-strip strong {
-            display: block;
-            font-size: 14px;
-            font-weight: 900;
-        }
 
-        .teacher-strip span {
-            display: block;
-            margin-top: 3px;
-            color: var(--text-soft);
-            font-size: 11px;
-            line-height: 1.7;
-        }
+        .library-header::after {
 
-        /* =========================================
-           HERO
-           ========================================= */
+            content: "";
 
-        .library-hero {
-            position: relative;
-            overflow: hidden;
-            padding: 27px 22px;
-            margin-bottom: 18px;
-            border-radius: 25px;
+            position: absolute;
+
+            left: 0;
+
+            right: 0;
+
+            top: 100%;
+
+            height: 34px;
+
+            pointer-events: none;
+
             background:
                 linear-gradient(
-                    135deg,
-                    var(--primary-deep),
-                    var(--primary),
-                    var(--accent)
+                    to bottom,
+                    rgba(255,255,255,0.20),
+                    transparent
                 );
-            color: #fff;
-            box-shadow: var(--shadow-lg);
+
+            backdrop-filter:
+                blur(8px);
+
+            -webkit-backdrop-filter:
+                blur(8px);
+
         }
 
-        .library-hero::before,
-        .library-hero::after {
-            content: "";
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255,255,255,.08);
+
+        html[data-theme="dark"]
+        .library-header::after {
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    rgba(20,24,28,0.18),
+                    transparent
+                );
+
         }
 
-        .library-hero::before {
-            width: 190px;
-            height: 190px;
-            left: -80px;
-            top: -90px;
-        }
 
-        .library-hero::after {
-            width: 140px;
-            height: 140px;
-            right: -50px;
-            bottom: -60px;
-        }
+        .library-brand {
 
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-label {
-            display: inline-flex;
-            padding: 5px 10px;
-            border-radius: 999px;
-            background: rgba(255,255,255,.14);
-            font-size: 10px;
-            font-weight: 800;
-        }
-
-        .library-hero h1 {
-            margin: 12px 0 7px;
-            font-size: clamp(26px, 6vw, 38px);
-            line-height: 1.25;
-            font-weight: 950;
-        }
-
-        .library-hero p {
-            max-width: 680px;
-            margin: 0;
-            color: rgba(255,255,255,.88);
-            font-size: 13px;
-            line-height: 1.9;
-        }
-
-        .level-actions {
             display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 17px;
+
+            align-items: center;
+
+            gap: 10px;
+
+            flex-shrink: 0;
+
+            color:
+                var(--library-text);
+
+            font-size: 18px;
+
+            font-weight: 800;
+
+            white-space: nowrap;
+
         }
 
-        .level-actions button {
-            padding: 9px 13px;
-            border: 0;
+
+        .library-brand-mark {
+
+            width: 34px;
+
+            height: 34px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
             border-radius: 10px;
-            background: #fff;
-            color: var(--primary);
-            font-family: inherit;
-            font-size: 11px;
-            font-weight: 850;
-            cursor: pointer;
-        }
 
-        /* =========================================
-           LEARNING PATH
-           ========================================= */
+            background:
+                rgba(22, 131, 92, 0.10);
 
-        .learning-path {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            margin-bottom: 18px;
-        }
+            color:
+                var(--library-green);
 
-        .path-item {
-            position: relative;
-            padding: 11px 8px;
-            text-align: center;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 15px;
-            box-shadow: var(--shadow-sm);
-        }
+            font-size: 17px;
 
-        .path-item.active {
-            border-color: var(--primary);
-            background: var(--primary-light);
-        }
-
-        .path-number {
-            width: 28px;
-            height: 28px;
-            display: grid;
-            place-items: center;
-            margin: 0 auto 5px;
-            border-radius: 9px;
-            background: var(--primary);
-            color: #fff;
-            font-size: 11px;
-            font-weight: 900;
-        }
-
-        .path-item:not(.active) .path-number {
-            background: var(--primary-light);
-            color: var(--primary);
-        }
-
-        .path-item strong {
-            display: block;
-            font-size: 10px;
-            font-weight: 900;
-        }
-
-        .path-item span {
-            display: block;
-            margin-top: 2px;
-            color: var(--text-soft);
-            font-size: 8px;
-        }
-
-        /* =========================================
-           SUBJECTS
-           ========================================= */
-
-        .subjects-section {
-            margin-top: 4px;
-        }
-
-        .section-title {
-            margin-bottom: 12px;
-        }
-
-        .section-title h2 {
-            margin: 0;
-            font-size: 20px;
-            font-weight: 950;
-        }
-
-        .section-title p {
-            margin: 4px 0 0;
-            color: var(--text-soft);
-            font-size: 11px;
-            line-height: 1.7;
-        }
-
-        .subjects {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-        }
-
-        .subject-card {
-            width: 100%;
-            padding: 18px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 22px;
-            box-shadow: var(--shadow-md);
-        }
-
-        .subject-card.selected {
-            border-color: var(--primary);
-            box-shadow: 0 8px 28px rgba(0,0,0,.08);
-        }
-
-        .subject-button {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            gap: 13px;
-            padding: 0;
-            border: 0;
-            background: transparent;
-            color: inherit;
-            font-family: inherit;
-            text-align: inherit;
-            cursor: pointer;
-        }
-
-        .subject-icon {
-            width: 58px;
-            height: 58px;
-            flex-shrink: 0;
-            display: grid;
-            place-items: center;
-            border-radius: 17px;
-            background: var(--primary-light);
-            color: var(--primary);
-            font-size: 20px;
-            font-weight: 950;
-        }
-
-        .subject-info {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .subject-info h3 {
-            margin: 0;
-            font-size: 18px;
-            font-weight: 950;
-        }
-
-        .subject-info p {
-            margin: 4px 0 0;
-            color: var(--text-soft);
-            font-size: 11px;
-            line-height: 1.7;
-        }
-
-        .subject-badge {
-            display: inline-flex;
-            margin-top: 7px;
-            padding: 4px 8px;
-            border-radius: 999px;
-            background: var(--primary-light);
-            color: var(--primary);
-            font-size: 9px;
-            font-weight: 900;
-        }
-
-        .subject-arrow {
-            flex-shrink: 0;
-            color: var(--primary);
-            font-size: 20px;
-            font-weight: 900;
-        }
-
-        /* =========================================
-           CHAPTERS
-           ========================================= */
-
-        .chapters-panel {
-            display: none;
-            margin-top: 18px;
-            padding-top: 18px;
-            border-top: 1px solid var(--border);
-        }
-
-        .chapters-panel.visible {
-            display: block;
-        }
-
-        .chapters-panel-header {
-            margin-bottom: 12px;
-        }
-
-        .chapters-panel-header h3 {
-            margin: 0;
-            font-size: 18px;
-            font-weight: 950;
-        }
-
-        .chapters-panel-header p {
-            margin: 4px 0 0;
-            color: var(--text-soft);
-            font-size: 10px;
-            line-height: 1.7;
-        }
-
-        .chapters {
-            display: grid;
-            gap: 12px;
-        }
-
-        .chapter-card {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            gap: 13px;
-            padding: 15px;
-            text-align: inherit;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            box-shadow: var(--shadow-sm);
-            color: inherit;
-            font-family: inherit;
-            cursor: pointer;
-            transition:
-                transform .2s ease,
-                border-color .2s ease,
-                box-shadow .2s ease;
-        }
-
-        .chapter-card:hover {
-            transform: translateY(-2px);
-            border-color: var(--primary);
-            box-shadow: var(--shadow-md);
-        }
-
-        .chapter-card:active {
-            transform: scale(.985);
-        }
-
-        .chapter-number {
-            width: 50px;
-            height: 50px;
-            flex-shrink: 0;
-            display: grid;
-            place-items: center;
-            border-radius: 15px;
-            background: var(--primary-light);
-            color: var(--primary);
-            font-size: 15px;
-            font-weight: 950;
-        }
-
-        .chapter-info {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .chapter-info h4 {
-            margin: 0;
-            font-size: 15px;
-            font-weight: 900;
-        }
-
-        .chapter-info p {
-            margin: 4px 0 0;
-            color: var(--text-soft);
-            font-size: 10px;
-            line-height: 1.6;
-        }
-
-        .chapter-meta {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            margin-top: 7px;
-            padding: 4px 8px;
-            border-radius: 999px;
-            background: var(--primary-light);
-            color: var(--primary);
-            font-size: 9px;
             font-weight: 800;
+
         }
 
-        .chapter-arrow {
-            flex-shrink: 0;
-            color: var(--primary);
-            font-size: 19px;
-            font-weight: 900;
+
+        .library-header-actions {
+
+            margin-inline-start: auto;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: flex-end;
+
+            gap: 8px;
+
         }
 
-        /* =========================================
-           EMPTY CONTENT
-           ========================================= */
 
-        .empty-content {
-            margin-top: 15px;
-            padding: 28px 17px;
-            text-align: center;
-            border: 1px dashed var(--border);
-            border-radius: 18px;
-            background: var(--surface);
-        }
+        .library-header-action {
 
-        .empty-content-icon {
-            width: 48px;
-            height: 48px;
-            display: grid;
-            place-items: center;
-            margin: 0 auto;
-            border-radius: 14px;
-            background: var(--primary-light);
-            color: var(--primary);
-            font-size: 20px;
-            font-weight: 900;
-        }
+            display: inline-flex;
 
-        .empty-content h3 {
-            margin: 8px 0 5px;
-            font-size: 16px;
-            font-weight: 900;
-        }
+            align-items: center;
 
-        .empty-content p {
-            max-width: 520px;
-            margin: auto;
-            color: var(--text-soft);
-            font-size: 11px;
-            line-height: 1.8;
-        }
+            justify-content: center;
 
-        /* =========================================
-           NO LEVEL
-           ========================================= */
+            gap: 6px;
 
-        .no-level {
-            padding: 38px 20px;
-            text-align: center;
-            background: var(--surface);
-            border: 1px dashed var(--border);
-            border-radius: 22px;
-        }
+            min-height: 40px;
 
-        .no-level-icon {
-            width: 58px;
-            height: 58px;
-            display: grid;
-            place-items: center;
-            margin: 0 auto;
-            border-radius: 17px;
-            background: var(--primary-light);
-            color: var(--primary);
-            font-size: 22px;
-            font-weight: 950;
-        }
+            padding:
+                5px 10px;
 
-        .no-level h2 {
-            margin: 10px 0 6px;
-            font-size: 20px;
-            font-weight: 950;
-        }
+            border: 0;
 
-        .no-level p {
-            max-width: 450px;
-            margin: 0 auto 17px;
-            color: var(--text-soft);
+            border-radius: 10px;
+
+            background: transparent;
+
+            color:
+                var(--library-muted);
+
+            text-decoration: none;
+
+            font: inherit;
+
             font-size: 12px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                color .2s ease,
+                background .2s ease;
+
+        }
+
+
+        .library-header-action:hover {
+
+            color:
+                var(--library-text);
+
+            background:
+                rgba(22, 131, 92, 0.07);
+
+        }
+
+
+        .library-header-action.active {
+
+            color:
+                var(--library-green);
+
+            background:
+                rgba(22, 131, 92, 0.08);
+
+        }
+
+
+        .library-header-action-icon {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            width: 19px;
+
+            height: 19px;
+
+            font-size: 16px;
+
+            line-height: 1;
+
+        }
+
+
+        /* =========================================================
+           MAIN
+           ========================================================= */
+
+        .library-page {
+
+            width: min(
+                1180px,
+                calc(100% - 36px)
+            );
+
+            margin: 0 auto;
+
+            padding-top:
+                calc(
+                    var(--library-header-height) + 58px
+                );
+
+            padding-bottom: 70px;
+
+        }
+
+
+        /* =========================================================
+           INTRO
+           ========================================================= */
+
+        .library-intro {
+
+            margin-bottom: 28px;
+
+        }
+
+
+        .library-eyebrow {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            margin-bottom: 9px;
+
+            color:
+                var(--library-green);
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+        }
+
+
+        .library-eyebrow-dot {
+
+            width: 7px;
+
+            height: 7px;
+
+            border-radius: 50%;
+
+            background:
+                var(--library-green);
+
+        }
+
+
+        .library-title {
+
+            margin: 0;
+
+            color:
+                var(--library-text);
+
+            font-size:
+                clamp(28px, 4vw, 40px);
+
+            line-height: 1.25;
+
+            font-weight: 850;
+
+            letter-spacing: -0.4px;
+
+        }
+
+
+        .library-subtitle {
+
+            max-width: 700px;
+
+            margin:
+                10px 0 0;
+
+            color:
+                var(--library-muted);
+
+            font-size: 15px;
+
             line-height: 1.8;
+
         }
 
-        /* =========================================
-           MOBILE
-           ========================================= */
 
-        @media (max-width: 520px) {
+        /* =========================================================
+           CURRENT LEVEL CARD
+           ========================================================= */
 
-            .library-page {
-                padding-top: 18px;
+        .library-current-card {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 18px;
+
+            margin-bottom: 30px;
+
+            padding: 20px 22px;
+
+            border:
+                1px solid var(--library-border);
+
+            border-radius: 18px;
+
+            background:
+                var(--library-card);
+
+            box-shadow:
+                var(--library-shadow);
+
+        }
+
+
+        .library-current-main {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            min-width: 0;
+
+        }
+
+
+        .library-current-icon {
+
+            flex: 0 0 auto;
+
+            width: 48px;
+
+            height: 48px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 14px;
+
+            background:
+                rgba(22, 131, 92, 0.10);
+
+            color:
+                var(--library-green);
+
+            font-size: 21px;
+
+            font-weight: 800;
+
+        }
+
+
+        .library-current-text {
+
+            min-width: 0;
+
+        }
+
+
+        .library-current-label {
+
+            margin-bottom: 4px;
+
+            color:
+                var(--library-muted);
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+        }
+
+
+        .library-current-level {
+
+            color:
+                var(--library-text);
+
+            font-size: 17px;
+
+            font-weight: 800;
+
+        }
+
+
+        .library-change-level {
+
+            flex: 0 0 auto;
+
+            border: 0;
+
+            border-radius: 10px;
+
+            padding:
+                10px 14px;
+
+            background:
+                rgba(22, 131, 92, 0.09);
+
+            color:
+                var(--library-green);
+
+            font: inherit;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            transition:
+                background .2s ease,
+                transform .2s ease;
+
+        }
+
+
+        .library-change-level:hover {
+
+            background:
+                rgba(22, 131, 92, 0.15);
+
+            transform:
+                translateY(-1px);
+
+        }
+
+
+        /* =========================================================
+           SECTION HEADING
+           ========================================================= */
+
+        .library-section-heading {
+
+            display: flex;
+
+            align-items: flex-end;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            margin-bottom: 16px;
+
+        }
+
+
+        .library-section-title {
+
+            margin: 0;
+
+            color:
+                var(--library-text);
+
+            font-size: 20px;
+
+            font-weight: 850;
+
+        }
+
+
+        .library-section-description {
+
+            margin: 5px 0 0;
+
+            color:
+                var(--library-muted);
+
+            font-size: 13px;
+
+            line-height: 1.7;
+
+        }
+
+
+        /* =========================================================
+           CERTIFICATE / LEVEL SELECTION
+           ========================================================= */
+
+        .library-level-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 14px;
+
+        }
+
+
+        .library-level-card {
+
+            position: relative;
+
+            min-height: 150px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: space-between;
+
+            padding: 18px;
+
+            border:
+                1px solid var(--library-border);
+
+            border-radius: 17px;
+
+            background:
+                var(--library-card);
+
+            color:
+                var(--library-text);
+
+            text-align: start;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 7px 24px rgba(20, 30, 40, 0.045);
+
+            transition:
+                transform .22s ease,
+                border-color .22s ease,
+                box-shadow .22s ease;
+
+        }
+
+
+        .library-level-card:hover {
+
+            transform:
+                translateY(-3px);
+
+            border-color:
+                rgba(22, 131, 92, 0.25);
+
+            box-shadow:
+                var(--library-shadow);
+
+        }
+
+
+        .library-level-card.selected {
+
+            border-color:
+                rgba(22, 131, 92, 0.55);
+
+            box-shadow:
+                0 10px 30px
+                rgba(22, 131, 92, 0.10);
+
+        }
+
+
+        .library-level-card-top {
+
+            display: flex;
+
+            align-items: flex-start;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+        }
+
+
+        .library-level-icon {
+
+            width: 40px;
+
+            height: 40px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 12px;
+
+            background:
+                rgba(22, 131, 92, 0.09);
+
+            color:
+                var(--library-green);
+
+            font-size: 17px;
+
+            font-weight: 800;
+
+        }
+
+
+        .library-level-check {
+
+            width: 21px;
+
+            height: 21px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 50%;
+
+            border:
+                1px solid var(--library-border);
+
+            color:
+                transparent;
+
+            font-size: 12px;
+
+            font-weight: 900;
+
+        }
+
+
+        .library-level-card.selected
+        .library-level-check {
+
+            border-color:
+                var(--library-green);
+
+            background:
+                var(--library-green);
+
+            color:
+                #fff;
+
+        }
+
+
+        .library-level-name {
+
+            margin-top: 16px;
+
+            color:
+                var(--library-text);
+
+            font-size: 15px;
+
+            font-weight: 850;
+
+        }
+
+
+        .library-level-desc {
+
+            margin-top: 5px;
+
+            color:
+                var(--library-muted);
+
+            font-size: 11px;
+
+            line-height: 1.6;
+
+        }
+
+
+        /* =========================================================
+           RESPONSIVE
+           ========================================================= */
+
+        @media (max-width: 900px) {
+
+            .library-level-grid {
+
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+
             }
 
-            .library-hero {
-                padding: 23px 17px;
-                border-radius: 22px;
-            }
+        }
 
-            .library-hero h1 {
-                font-size: 26px;
-            }
 
-            .subject-card {
-                padding: 15px;
-            }
+        @media (max-width: 680px) {
 
-            .subject-info h3 {
-                font-size: 16px;
-            }
+            .library-header {
 
-            .chapter-card {
-                padding: 13px;
+                padding:
+                    0 14px;
+
                 gap: 10px;
+
             }
 
-            .chapter-number {
-                width: 44px;
-                height: 44px;
+
+            .library-brand {
+
+                font-size: 15px;
+
             }
 
-            .chapter-info h4 {
-                font-size: 14px;
+
+            .library-brand-mark {
+
+                width: 31px;
+
+                height: 31px;
+
+                border-radius: 9px;
+
             }
 
-        }
 
-        /* =========================================
-           DESKTOP
-           ========================================= */
+            .library-header-actions {
 
-        @media (min-width: 700px) {
+                gap: 2px;
+
+            }
+
+
+            .library-header-action {
+
+                min-width: 36px;
+
+                padding:
+                    5px 6px;
+
+                font-size: 0;
+
+            }
+
+
+            .library-header-action-icon {
+
+                font-size: 17px;
+
+            }
+
 
             .library-page {
-                padding-top: 40px;
+
+                width:
+                    min(
+                        100% - 24px,
+                        1180px
+                    );
+
+                padding-top:
+                    calc(
+                        var(--library-header-height) + 42px
+                    );
+
+                padding-bottom: 45px;
+
             }
 
-            .subjects {
-                grid-template-columns: repeat(2, 1fr);
+
+            .library-current-card {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+
             }
 
-            .chapters {
-                grid-template-columns: repeat(2, 1fr);
+
+            .library-change-level {
+
+                width: 100%;
+
             }
 
-            .chapter-card {
-                min-height: 100px;
+
+            .library-section-heading {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+
+                gap: 4px;
+
+            }
+
+
+            .library-level-grid {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .library-level-card {
+
+                min-height: 125px;
+
             }
 
         }
 
-        /* =========================================
-           HIDE BOTTOM NAV ON LIBRARY
-           ========================================= */
 
-        .bottom-nav,
-        .mobile-bottom-nav,
-        nav.bottom-nav {
-            display: none !important;
+        @media (max-width: 420px) {
+
+            .library-title {
+
+                font-size: 27px;
+
+            }
+
+
+            .library-subtitle {
+
+                font-size: 13px;
+
+            }
+
+
+            .library-current-card {
+
+                padding: 17px;
+
+            }
+
         }
+
+
+        /* =========================================================
+           LTR
+           ========================================================= */
+
+        html[dir="ltr"] .library-section-heading {
+
+            text-align: left;
+
+        }
+
+
+        html[dir="ltr"] .library-current-main {
+
+            flex-direction: row;
+
+        }
+
+
+        html[dir="ltr"] .library-level-card {
+
+            text-align: left;
+
+        }
+
 
     </style>
 
@@ -614,1798 +1009,2029 @@
 
 <body>
 
-<header class="site-header">
 
-    <div class="container header-inner">
+    <!-- =========================================================
+         TOP HEADER
+         ========================================================= -->
 
-        <button
-            class="brand"
-            onclick="goHome()"
-            type="button"
+    <header class="library-header">
+
+
+        <a
+            href="dashboard.html"
+            class="library-brand"
             aria-label="EduNova AI">
 
-            <span class="brand-icon">
-                AI
+            <span
+                class="library-brand-mark"
+                aria-hidden="true">
+
+                E
+
             </span>
 
             <span>
+
                 EduNova AI
+
             </span>
 
-        </button>
+        </a>
 
 
-        <button
-            class="btn btn-secondary"
-            onclick="goDashboard()"
-            type="button"
-            id="dashboardButton">
-
-            لوحة الطالب
-
-        </button>
-
-    </div>
-
-</header>
+        <nav
+            class="library-header-actions"
+            aria-label="Main navigation">
 
 
-<main class="page library-page">
+            <a
+                href="dashboard.html"
+                class="library-header-action">
 
-    <div class="container library-wrapper">
+                <span
+                    class="library-header-action-icon"
+                    aria-hidden="true">
 
-        <!-- =========================================
-             NO LEVEL
-             ========================================= -->
+                    ⌂
 
-        <section
-            id="noLevel"
-            class="no-level"
-            style="display:none;">
+                </span>
 
-            <div class="no-level-icon">
-                EDU
-            </div>
+                <span data-i18n="nav_home">
 
-            <h2 id="noLevelTitle">
-                اختر شهادتك الدراسية
-            </h2>
+                    الرئيسية
 
-            <p id="noLevelText">
-                اختر المسار الدراسي أولاً حتى نعرض
-                المواد الخاصة به.
-            </p>
+                </span>
+
+            </a>
+
 
             <button
-                class="btn btn-primary"
-                onclick="chooseLevel()"
                 type="button"
-                id="chooseLevelButton">
+                class="library-header-action"
+                onclick="showNotifications()">
 
-                اختيار الشهادة
+                <span
+                    class="library-header-action-icon"
+                    aria-hidden="true">
+
+                    ◔
+
+                </span>
+
+                <span data-i18n="nav_notifications">
+
+                    الإشعارات
+
+                </span>
 
             </button>
+
+
+            <a
+                href="account.html"
+                class="library-header-action">
+
+                <span
+                    class="library-header-action-icon"
+                    aria-hidden="true">
+
+                    ○
+
+                </span>
+
+                <span data-i18n="nav_account">
+
+                    حسابي
+
+                </span>
+
+            </a>
+
+
+            <a
+                href="settings.html"
+                class="library-header-action">
+
+                <span
+                    class="library-header-action-icon"
+                    aria-hidden="true">
+
+                    ⚙
+
+                </span>
+
+                <span data-i18n="nav_settings">
+
+                    الإعدادات
+
+                </span>
+
+            </a>
+
+
+        </nav>
+
+
+    </header>
+
+
+    <!-- =========================================================
+         PAGE
+         ========================================================= -->
+
+    <main class="library-page">
+
+
+        <!-- INTRO -->
+
+        <section class="library-intro">
+
+
+            <div class="library-eyebrow">
+
+                <span
+                    class="library-eyebrow-dot"
+                    aria-hidden="true">
+                </span>
+
+                <span id="libraryEyebrow">
+
+                    المحتوى الدراسي
+
+                </span>
+
+            </div>
+
+
+            <h1
+                id="libraryTitle"
+                class="library-title">
+
+                مكتبتي
+
+            </h1>
+
+
+            <p
+                id="librarySubtitle"
+                class="library-subtitle">
+
+                اختر مستواك الدراسي للوصول إلى المواد
+                والفصول والدروس التعليمية.
+
+            </p>
+
 
         </section>
 
 
-        <!-- =========================================
-             LIBRARY CONTENT
-             ========================================= -->
+        <!-- CURRENT LEVEL -->
 
-        <div
-            id="libraryContent"
-            style="display:none;">
+        <section
+            class="library-current-card"
+            aria-label="Current level">
 
 
-            <!-- TEACHER -->
+            <div class="library-current-main">
 
-            <div class="teacher-strip">
 
-                <div class="teacher-avatar">
-                    AI
+                <div
+                    class="library-current-icon"
+                    aria-hidden="true">
+
+                    ◈
+
                 </div>
+
+
+                <div class="library-current-text">
+
+
+                    <div
+                        id="currentLevelLabel"
+                        class="library-current-label">
+
+                        مستواك الحالي
+
+                    </div>
+
+
+                    <div
+                        id="currentLevelValue"
+                        class="library-current-level">
+
+                        جارٍ التحميل...
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+            <button
+                type="button"
+                class="library-change-level"
+                onclick="libraryChangeLevel()"
+                id="libraryChangeLevelButton">
+
+                تغيير المستوى
+
+            </button>
+
+
+        </section>
+
+
+        <!-- LEVELS -->
+
+        <section
+            aria-labelledby="levelsTitle">
+
+
+            <div class="library-section-heading">
+
 
                 <div>
 
-                    <strong>
-                        Afkrash AI
-                    </strong>
+                    <h2
+                        id="levelsTitle"
+                        class="library-section-title">
 
-                    <span id="teacherDescription">
-                        مدرسك الذكي في EduNova AI
-                    </span>
+                        اختر شهادتك الدراسية
 
-                </div>
-
-            </div>
-
-
-            <!-- HERO -->
-
-            <section class="library-hero">
-
-                <div class="hero-content">
-
-                    <span
-                        class="hero-label"
-                        id="heroLabel">
-
-                        مواد EduNova AI
-
-                    </span>
-
-                    <h1 id="levelName">
-                        -
-                    </h1>
-
-                    <p id="heroDescription">
-                        اختر المادة التي تريد دراستها،
-                        ثم اختر الفصل للوصول إلى دروسه.
-                    </p>
-
-                    <div class="level-actions">
-
-                        <button
-                            onclick="chooseLevel()"
-                            type="button"
-                            id="changeCertificateButton">
-
-                            تغيير الشهادة
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- LEARNING PATH -->
-
-            <div class="learning-path">
-
-                <div class="path-item active">
-
-                    <div class="path-number">
-                        1
-                    </div>
-
-                    <strong id="pathCertificate">
-                        الشهادة
-                    </strong>
-
-                    <span id="pathCertificateSub">
-                        المستوى المختار
-                    </span>
-
-                </div>
-
-
-                <div
-                    id="pathSubject"
-                    class="path-item">
-
-                    <div class="path-number">
-                        2
-                    </div>
-
-                    <strong id="pathSubjectTitle">
-                        المادة
-                    </strong>
-
-                    <span id="pathSubjectSub">
-                        اختر المادة
-                    </span>
-
-                </div>
-
-
-                <div
-                    id="pathChapters"
-                    class="path-item">
-
-                    <div class="path-number">
-                        3
-                    </div>
-
-                    <strong id="pathChaptersTitle">
-                        الفصول
-                    </strong>
-
-                    <span id="pathChaptersSub">
-                        بعد اختيار المادة
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <!-- SUBJECTS -->
-
-            <section class="subjects-section">
-
-                <div class="section-title">
-
-                    <h2 id="subjectsTitle">
-                        المواد
                     </h2>
 
-                    <p id="subjectsDescription">
-                        اختر المادة التي تريد دراستها.
+
+                    <p
+                        id="levelsDescription"
+                        class="library-section-description">
+
+                        اختر المستوى للوصول إلى المواد
+                        التعليمية الخاصة به.
+
                     </p>
 
                 </div>
 
 
-                <div
-                    id="subjects"
-                    class="subjects">
+            </div>
+
+
+            <div
+                id="libraryLevelGrid"
+                class="library-level-grid">
+
+
+                <!-- 6AF -->
+
+                <button
+                    type="button"
+                    class="library-level-card"
+                    data-level="concours"
+                    onclick="selectLibraryLevel('concours')">
+
+
+                    <div
+                        class="library-level-card-top">
+
+
+                        <span
+                            class="library-level-icon"
+                            aria-hidden="true">
+
+                            6
+
+                        </span>
+
+
+                        <span
+                            class="library-level-check"
+                            aria-hidden="true">
+
+                            ✓
+
+                        </span>
+
+
+                    </div>
+
+
+                    <div>
+
+                        <div
+                            class="library-level-name">
+
+                            السادسة ابتدائي
+
+                        </div>
+
+
+                        <div
+                            class="library-level-desc">
+
+                            كونكور — 6AF
+
+                        </div>
+
+                    </div>
+
+
+                </button>
+
+
+                <!-- 4EME -->
+
+                <button
+                    type="button"
+                    class="library-level-card"
+                    data-level="brevet"
+                    onclick="selectLibraryLevel('brevet')">
+
+
+                    <div
+                        class="library-level-card-top">
+
+
+                        <span
+                            class="library-level-icon"
+                            aria-hidden="true">
+
+                            4
+
+                        </span>
+
+
+                        <span
+                            class="library-level-check"
+                            aria-hidden="true">
+
+                            ✓
+
+                        </span>
+
+
+                    </div>
+
+
+                    <div>
+
+                        <div
+                            class="library-level-name">
+
+                            الرابعة إعدادي
+
+                        </div>
+
+
+                        <div
+                            class="library-level-desc">
+
+                            بريفي — 4ème
+
+                        </div>
+
+                    </div>
+
+
+                </button>
+
+
+                <!-- BAC C -->
+
+                <button
+                    type="button"
+                    class="library-level-card"
+                    data-level="bac_c"
+                    onclick="selectLibraryLevel('bac_c')">
+
+
+                    <div
+                        class="library-level-card-top">
+
+
+                        <span
+                            class="library-level-icon"
+                            aria-hidden="true">
+
+                            C
+
+                        </span>
+
+
+                        <span
+                            class="library-level-check"
+                            aria-hidden="true">
+
+                            ✓
+
+                        </span>
+
+
+                    </div>
+
+
+                    <div>
+
+                        <div
+                            class="library-level-name">
+
+                            البكالوريا C
+
+                        </div>
+
+
+                        <div
+                            class="library-level-desc">
+
+                            Baccalauréat — Série C
+
+                        </div>
+
+                    </div>
+
+
+                </button>
+
+
+                <!-- BAC D -->
+
+                <button
+                    type="button"
+                    class="library-level-card"
+                    data-level="bac_d"
+                    onclick="selectLibraryLevel('bac_d')">
+
+
+                    <div
+                        class="library-level-card-top">
+
+
+                        <span
+                            class="library-level-icon"
+                            aria-hidden="true">
+
+                            D
+
+                        </span>
+
+
+                        <span
+                            class="library-level-check"
+                            aria-hidden="true">
+
+                            ✓
+
+                        </span>
+
+
+                    </div>
+
+
+                    <div>
+
+                        <div
+                            class="library-level-name">
+
+                            البكالوريا D
+
+                        </div>
+
+
+                        <div
+                            class="library-level-desc">
+
+                            Baccalauréat — Série D
+
+                        </div>
+
+                    </div>
+
+
+                </button>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =====================================================
+             PART 2 CONTINUES HERE
+             ===================================================== -->        <!-- =====================================================
+             SELECTED LEVEL CONTENT
+             ===================================================== -->
+
+        <section
+            id="libraryContentSection"
+            class="library-content-section"
+            aria-labelledby="subjectsTitle"
+            hidden>
+
+
+            <div class="library-section-heading">
+
+
+                <div>
+
+                    <h2
+                        id="subjectsTitle"
+                        class="library-section-title">
+
+                        المواد الدراسية
+
+                    </h2>
+
+
+                    <p
+                        id="subjectsDescription"
+                        class="library-section-description">
+
+                        اختر مادة للوصول إلى فصولها ودروسها.
+
+                    </p>
+
                 </div>
 
-            </section>
 
+                <button
+                    type="button"
+                    class="library-change-level"
+                    onclick="libraryBackToLevels()"
+                    id="libraryBackButton">
+
+                    تغيير المستوى
+
+                </button>
+
+
+            </div>
+
+
+            <div
+                id="librarySubjectGrid"
+                class="library-level-grid">
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =====================================================
+             CHAPTER CONTENT
+             ===================================================== -->
+
+        <section
+            id="libraryChapterSection"
+            hidden>
+
+
+            <div class="library-section-heading">
+
+
+                <div>
+
+                    <h2
+                        id="chapterTitle"
+                        class="library-section-title">
+
+                        الفصول
+
+                    </h2>
+
+
+                    <p
+                        id="chapterDescription"
+                        class="library-section-description">
+
+                        اختر فصلاً لعرض الفيديوهات التعليمية.
+
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="library-change-level"
+                    onclick="libraryBackToSubjects()"
+                    id="libraryBackSubjectsButton">
+
+                    العودة إلى المواد
+
+                </button>
+
+
+            </div>
+
+
+            <div
+                id="libraryChapterGrid"
+                class="library-level-grid">
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =====================================================
+             VIDEO CONTENT
+             ===================================================== -->
+
+        <section
+            id="libraryVideoSection"
+            hidden>
+
+
+            <div class="library-section-heading">
+
+
+                <div>
+
+                    <h2
+                        id="videoTitle"
+                        class="library-section-title">
+
+                        الدروس
+
+                    </h2>
+
+
+                    <p
+                        id="videoDescription"
+                        class="library-section-description">
+
+                        اختر الفيديو الذي تريد مشاهدته.
+
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="library-change-level"
+                    onclick="libraryBackToChapters()"
+                    id="libraryBackChaptersButton">
+
+                    العودة إلى الفصول
+
+                </button>
+
+
+            </div>
+
+
+            <div
+                id="libraryVideoGrid"
+                class="library-video-grid">
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =====================================================
+             EMPTY / MESSAGE
+             ===================================================== -->
+
+        <div
+            id="libraryMessage"
+            class="library-message"
+            role="status"
+            aria-live="polite">
 
         </div>
 
-    </div>
 
-</main>
+    </main>
 
 
-<script>
+    <footer class="library-footer">
 
-    /* =====================================================
-       LIBRARY — GLOBAL PLATFORM INTEGRATION
-       ===================================================== */
 
+        <div
+            class="library-footer-brand">
 
-    const LIBRARY_TEXT = {
+            EduNova AI
 
-        ar: {
+        </div>
 
-            dashboard:
-                "لوحة الطالب",
 
-            chooseLevel:
-                "اختر شهادتك الدراسية",
+        <div
+            id="libraryFooterText">
 
-            chooseLevelText:
-                "اختر كونكور أو بريڤي أو باكالوريا حتى نعرض المواد الخاصة بالمسار.",
+            منصتك التعليمية الذكية
 
-            chooseLevelButton:
-                "اختيار الشهادة",
+        </div>
 
-            teacher:
-                "مدرسك الذكي في EduNova AI • اختر المادة للوصول إلى الفصول.",
 
-            heroLabel:
-                "مواد EduNova AI",
+    </footer>
 
-            heroText:
-                "اختر المادة التي تريد دراستها، ثم اختر الفصل للوصول إلى دروسه.",
 
-            changeLevel:
-                "تغيير الشهادة",
+    <style>
 
-            certificate:
-                "الشهادة",
+        /* =========================================================
+           SUBJECT / CHAPTER / VIDEO CARDS
+           ========================================================= */
 
-            certificateSub:
-                "المستوى المختار",
+        .library-content-section,
+        #libraryChapterSection,
+        #libraryVideoSection {
 
-            subject:
-                "المادة",
-
-            subjectSub:
-                "اختر المادة",
-
-            chapters:
-                "الفصول",
-
-            chaptersSub:
-                "بعد اختيار المادة",
-
-            subjectsTitle:
-                "المواد",
-
-            subjectsText:
-                "اختر المادة التي تريد دراستها.",
-
-            available:
-                "متاحة",
-
-            chapterTitle:
-                "فصول",
-
-            chapterText:
-                "اختر الفصل للدخول إلى صفحة الفيديوهات الخاصة به.",
-
-            noChapters:
-                "لم تتم إضافة الفصول لهذا المسار بعد.",
-
-            noChaptersText:
-                "سيتم إضافة الفصول تدريجيًا. يمكن أن يحتوي كل فصل على فيديو واحد إلى 20 فيديو كحد أقصى، والفيديو الأول مجاني.",
-
-            video:
-                "فيديو",
-
-            videos:
-                "فيديوهات",
-
-            concours:
-                "كونكور — 6AF",
-
-            brevet:
-                "بريڤي — 4ème",
-
-            bac:
-                "باكالوريا",
-
-            bacC:
-                "باكالوريا — شعبة C",
-
-            bacD:
-                "باكالوريا — شعبة D"
-
-        },
-
-
-        fr: {
-
-            dashboard:
-                "Tableau de l'élève",
-
-            chooseLevel:
-                "Choisissez votre diplôme",
-
-            chooseLevelText:
-                "Choisissez Concours, Brevet ou Baccalauréat afin d'afficher les matières du parcours.",
-
-            chooseLevelButton:
-                "Choisir le diplôme",
-
-            teacher:
-                "Votre professeur intelligent dans EduNova AI • Choisissez une matière pour accéder aux chapitres.",
-
-            heroLabel:
-                "Matières EduNova AI",
-
-            heroText:
-                "Choisissez la matière que vous souhaitez étudier, puis sélectionnez un chapitre.",
-
-            changeLevel:
-                "Changer de diplôme",
-
-            certificate:
-                "Diplôme",
-
-            certificateSub:
-                "Niveau choisi",
-
-            subject:
-                "Matière",
-
-            subjectSub:
-                "Choisir la matière",
-
-            chapters:
-                "Chapitres",
-
-            chaptersSub:
-                "Après la matière",
-
-            subjectsTitle:
-                "Matières",
-
-            subjectsText:
-                "Choisissez la matière que vous souhaitez étudier.",
-
-            available:
-                "Disponible",
-
-            chapterTitle:
-                "Chapitres",
-
-            chapterText:
-                "Choisissez un chapitre pour accéder à sa page vidéo.",
-
-            noChapters:
-                "Les chapitres de ce parcours n'ont pas encore été ajoutés.",
-
-            noChaptersText:
-                "Les chapitres seront ajoutés progressivement. Chaque chapitre pourra contenir de 1 à 20 vidéos maximum, dont la première sera gratuite.",
-
-            video:
-                "vidéo",
-
-            videos:
-                "vidéos",
-
-            concours:
-                "Concours — 6AF",
-
-            brevet:
-                "Brevet — 4ème",
-
-            bac:
-                "Baccalauréat",
-
-            bacC:
-                "Baccalauréat — Série C",
-
-            bacD:
-                "Baccalauréat — Série D"
+            margin-top: 34px;
 
         }
 
-    };
 
+        .library-content-section[hidden],
+        #libraryChapterSection[hidden],
+        #libraryVideoSection[hidden] {
 
-    /* =====================================================
-       LANGUAGE
-       ===================================================== */
-
-    function getLibraryLanguage() {
-
-        if (
-            typeof getSiteLanguage ===
-            "function"
-        ) {
-
-            return getSiteLanguage() === "fr"
-                ? "fr"
-                : "ar";
+            display: none !important;
 
         }
 
-        return localStorage.getItem(
-            "site_language"
-        ) === "fr"
-            ? "fr"
-            : "ar";
 
-    }
+        .library-video-grid {
 
+            display: grid;
 
-    function libraryText(key) {
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
 
-        const language =
-            getLibraryLanguage();
+            gap: 14px;
 
-        return (
-            LIBRARY_TEXT[language] ||
-            LIBRARY_TEXT.ar
-        )[key] || key;
-
-    }
+        }
 
 
-    /* =====================================================
-       CURRENT EDUCATION PATH
-       ===================================================== */
+        .library-video-card {
 
-    function getCurrentLibraryPath() {
+            display: flex;
 
-        const level =
-            typeof getStudentLevel ===
-            "function"
-                ? getStudentLevel()
-                : localStorage.getItem(
-                    "student_level"
+            align-items: center;
+
+            gap: 14px;
+
+            width: 100%;
+
+            padding: 15px;
+
+            border:
+                1px solid var(--library-border);
+
+            border-radius: 16px;
+
+            background:
+                var(--library-card);
+
+            color:
+                var(--library-text);
+
+            text-align: start;
+
+            box-shadow:
+                0 7px 24px
+                rgba(20, 30, 40, 0.045);
+
+            cursor: pointer;
+
+            transition:
+                transform .2s ease,
+                border-color .2s ease,
+                box-shadow .2s ease;
+
+        }
+
+
+        .library-video-card:hover {
+
+            transform:
+                translateY(-2px);
+
+            border-color:
+                rgba(22, 131, 92, 0.25);
+
+            box-shadow:
+                var(--library-shadow);
+
+        }
+
+
+        .library-video-card.locked {
+
+            cursor: not-allowed;
+
+            opacity: .68;
+
+        }
+
+
+        .library-video-card.locked:hover {
+
+            transform: none;
+
+        }
+
+
+        .library-video-number {
+
+            flex: 0 0 auto;
+
+            width: 42px;
+
+            height: 42px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 12px;
+
+            background:
+                rgba(22, 131, 92, 0.09);
+
+            color:
+                var(--library-green);
+
+            font-size: 13px;
+
+            font-weight: 900;
+
+        }
+
+
+        .library-video-card.locked
+        .library-video-number {
+
+            background:
+                rgba(110, 120, 130, 0.09);
+
+            color:
+                var(--library-muted);
+
+        }
+
+
+        .library-video-content {
+
+            min-width: 0;
+
+            flex: 1;
+
+        }
+
+
+        .library-video-name {
+
+            overflow: hidden;
+
+            color:
+                var(--library-text);
+
+            font-size: 14px;
+
+            font-weight: 800;
+
+            white-space: nowrap;
+
+            text-overflow: ellipsis;
+
+        }
+
+
+        .library-video-meta {
+
+            display: flex;
+
+            align-items: center;
+
+            flex-wrap: wrap;
+
+            gap: 8px;
+
+            margin-top: 5px;
+
+            color:
+                var(--library-muted);
+
+            font-size: 11px;
+
+        }
+
+
+        .library-video-duration {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 4px;
+
+        }
+
+
+        .library-video-status {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 4px;
+
+            color:
+                var(--library-green);
+
+            font-weight: 800;
+
+        }
+
+
+        .library-video-card.locked
+        .library-video-status {
+
+            color:
+                var(--library-muted);
+
+        }
+
+
+        .library-video-action {
+
+            flex: 0 0 auto;
+
+            color:
+                var(--library-green);
+
+            font-size: 17px;
+
+            font-weight: 900;
+
+        }
+
+
+        .library-subject-card {
+
+            min-height: 135px;
+
+        }
+
+
+        .library-subject-icon {
+
+            width: 42px;
+
+            height: 42px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 12px;
+
+            background:
+                rgba(22, 131, 92, 0.09);
+
+            color:
+                var(--library-green);
+
+            font-size: 16px;
+
+            font-weight: 900;
+
+        }
+
+
+        .library-subject-count {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            margin-top: 10px;
+
+            color:
+                var(--library-muted);
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+        }
+
+
+        .library-chapter-card {
+
+            min-height: 145px;
+
+        }
+
+
+        .library-chapter-progress {
+
+            margin-top: 11px;
+
+            height: 5px;
+
+            overflow: hidden;
+
+            border-radius: 999px;
+
+            background:
+                rgba(110, 120, 130, 0.12);
+
+        }
+
+
+        .library-chapter-progress-bar {
+
+            height: 100%;
+
+            width: 0;
+
+            border-radius: inherit;
+
+            background:
+                var(--library-green);
+
+            transition:
+                width .25s ease;
+
+        }
+
+
+        .library-chapter-meta {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+            margin-top: 7px;
+
+            color:
+                var(--library-muted);
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+        }
+
+
+        /* =========================================================
+           MESSAGE
+           ========================================================= */
+
+        .library-message {
+
+            display: none;
+
+            margin-top: 22px;
+
+            padding: 13px 15px;
+
+            border:
+                1px solid
+                rgba(22, 131, 92, 0.16);
+
+            border-radius: 13px;
+
+            background:
+                rgba(22, 131, 92, 0.07);
+
+            color:
+                var(--library-green);
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            line-height: 1.7;
+
+        }
+
+
+        .library-message.show {
+
+            display: block;
+
+        }
+
+
+        /* =========================================================
+           FOOTER
+           ========================================================= */
+
+        .library-footer {
+
+            width:
+                min(
+                    1180px,
+                    calc(100% - 36px)
                 );
 
-        const branch =
-            typeof getBacBranch ===
-            "function"
-                ? getBacBranch()
-                : localStorage.getItem(
-                    "bac_branch"
-                );
+            margin:
+                0 auto;
 
+            padding:
+                0 0 38px;
 
-        if (
-            level === "concours" ||
-            level === "brevet"
-        ) {
+            text-align: center;
 
-            return {
-                level: level,
-                branch: null
-            };
+            color:
+                var(--library-muted);
+
+            font-size: 11px;
 
         }
 
 
-        if (
-            level === "bac" &&
-            (
-                branch === "C" ||
-                branch === "D"
-            )
-        ) {
+        .library-footer-brand {
 
-            return {
-                level: "bac",
-                branch: branch
-            };
+            margin-bottom: 4px;
+
+            color:
+                var(--library-text);
+
+            font-size: 13px;
+
+            font-weight: 800;
 
         }
 
 
-        return null;
+        /* =========================================================
+           MOBILE
+           ========================================================= */
 
-    }
+        @media (max-width: 680px) {
 
+            .library-video-grid {
 
-    /* =====================================================
-       LEVEL LABEL
-       ===================================================== */
-
-    function getCurrentLevelLabel() {
-
-        const path =
-            getCurrentLibraryPath();
-
-        if (!path) {
-            return "-";
-        }
-
-
-        if (
-            typeof getLevelLabel ===
-            "function"
-        ) {
-
-            if (path.level === "bac") {
-
-                if (
-                    typeof getBacBranchLabel ===
-                    "function"
-                ) {
-
-                    return getBacBranchLabel(
-                        path.branch
-                    );
-
-                }
-
-                return path.branch === "C"
-                    ? libraryText("bacC")
-                    : libraryText("bacD");
+                grid-template-columns: 1fr;
 
             }
 
-            return getLevelLabel(
-                path.level
+
+            .library-footer {
+
+                width:
+                    calc(100% - 24px);
+
+            }
+
+        }
+
+    </style>
+
+
+    <script src="script.js"></script>
+
+
+    <script>
+
+        /* =========================================================
+           LIBRARY PAGE
+           ========================================================= */
+
+        let librarySelectedLevel = null;
+
+        let librarySelectedSubject = null;
+
+        let librarySelectedChapter = null;
+
+
+        const LIBRARY_TRANSLATIONS = {
+
+            ar: {
+
+                eyebrow:
+                    "المحتوى الدراسي",
+
+                title:
+                    "مكتبتي",
+
+                subtitle:
+                    "اختر مستواك الدراسي للوصول إلى المواد والفصول والدروس التعليمية.",
+
+                currentLevel:
+                    "مستواك الحالي",
+
+                loading:
+                    "جارٍ التحميل...",
+
+                chooseCertificate:
+                    "اختر شهادتك الدراسية",
+
+                chooseCertificateDescription:
+                    "اختر المستوى للوصول إلى المواد التعليمية الخاصة به.",
+
+                subjects:
+                    "المواد الدراسية",
+
+                subjectsDescription:
+                    "اختر مادة للوصول إلى فصولها ودروسها.",
+
+                chapters:
+                    "الفصول",
+
+                chaptersDescription:
+                    "اختر فصلاً لعرض الفيديوهات التعليمية.",
+
+                videos:
+                    "الدروس",
+
+                videosDescription:
+                    "اختر الفيديو الذي تريد مشاهدته.",
+
+                changeLevel:
+                    "تغيير المستوى",
+
+                backSubjects:
+                    "العودة إلى المواد",
+
+                backChapters:
+                    "العودة إلى الفصول",
+
+                videosCount:
+                    "فيديوهات",
+
+                chaptersCount:
+                    "فصول",
+
+                free:
+                    "مجاني",
+
+                locked:
+                    "مقفل",
+
+                watch:
+                    "مشاهدة",
+
+                noContent:
+                    "لا يوجد محتوى متاح حالياً.",
+
+                selectLevel:
+                    "اختر مستوى للمتابعة.",
+
+                levelChanged:
+                    "يمكنك اختيار المستوى الدراسي من جديد.",
+
+                footer:
+                    "منصتك التعليمية الذكية",
+
+                progress:
+                    "التقدم",
+
+                completed:
+                    "مكتمل"
+
+            },
+
+            fr: {
+
+                eyebrow:
+                    "Contenu pédagogique",
+
+                title:
+                    "Ma bibliothèque",
+
+                subtitle:
+                    "Choisissez votre niveau scolaire pour accéder aux matières, chapitres et cours.",
+
+                currentLevel:
+                    "Votre niveau actuel",
+
+                loading:
+                    "Chargement...",
+
+                chooseCertificate:
+                    "Choisissez votre niveau",
+
+                chooseCertificateDescription:
+                    "Choisissez votre niveau pour accéder à son contenu pédagogique.",
+
+                subjects:
+                    "Matières",
+
+                subjectsDescription:
+                    "Choisissez une matière pour accéder à ses chapitres et cours.",
+
+                chapters:
+                    "Chapitres",
+
+                chaptersDescription:
+                    "Choisissez un chapitre pour voir les vidéos pédagogiques.",
+
+                videos:
+                    "Cours",
+
+                videosDescription:
+                    "Choisissez la vidéo que vous souhaitez regarder.",
+
+                changeLevel:
+                    "Changer de niveau",
+
+                backSubjects:
+                    "Retour aux matières",
+
+                backChapters:
+                    "Retour aux chapitres",
+
+                videosCount:
+                    "vidéos",
+
+                chaptersCount:
+                    "chapitres",
+
+                free:
+                    "Gratuit",
+
+                locked:
+                    "Verrouillé",
+
+                watch:
+                    "Regarder",
+
+                noContent:
+                    "Aucun contenu disponible pour le moment.",
+
+                selectLevel:
+                    "Choisissez un niveau pour continuer.",
+
+                levelChanged:
+                    "Vous pouvez choisir à nouveau votre niveau scolaire.",
+
+                footer:
+                    "Votre plateforme éducative intelligente",
+
+                progress:
+                    "Progression",
+
+                completed:
+                    "Terminé"
+
+            }
+
+        };
+
+
+        /* =========================================================
+           LANGUAGE
+           ========================================================= */
+
+        function getLibraryLanguage() {
+
+            const language =
+                localStorage.getItem(
+                    "site_language"
+                );
+
+            return (
+                language === "fr"
+                    ? "fr"
+                    : "ar"
             );
 
         }
 
 
-        if (path.level === "concours") {
-            return libraryText("concours");
-        }
+        function libraryText(key) {
 
-        if (path.level === "brevet") {
-            return libraryText("brevet");
-        }
+            const language =
+                getLibraryLanguage();
 
-        if (path.branch === "C") {
-            return libraryText("bacC");
-        }
+            return (
+                LIBRARY_TRANSLATIONS[language]?.[key] ??
+                LIBRARY_TRANSLATIONS.ar[key] ??
+                key
+            );
 
-        return libraryText("bacD");
-
-    }
-
-
-    /* =====================================================
-       SUBJECTS FROM CENTRAL SCRIPT.JS
-       ===================================================== */
-
-    function getLibrarySubjects() {
-
-        const path =
-            getCurrentLibraryPath();
-
-        if (!path) {
-            return [];
         }
 
 
-        if (
-            typeof getAvailableSubjects ===
-            "function"
+        function libraryLevelName(level) {
+
+            const language =
+                getLibraryLanguage();
+
+
+            const names = {
+
+                concours: {
+                    ar: "السادسة ابتدائي — كونكور",
+                    fr: "6AF — Concours"
+                },
+
+                brevet: {
+                    ar: "الرابعة إعدادي — بريفي",
+                    fr: "4ème — Brevet"
+                },
+
+                bac_c: {
+                    ar: "البكالوريا — شعبة C",
+                    fr: "Baccalauréat — Série C"
+                },
+
+                bac_d: {
+                    ar: "البكالوريا — شعبة D",
+                    fr: "Baccalauréat — Série D"
+                }
+
+            };
+
+
+            return (
+                names[level]?.[language] ??
+                level ??
+                libraryText("loading")
+            );
+
+        }
+
+
+        function libraryLocalizedTitle(item) {
+
+            if (!item) {
+
+                return "";
+
+            }
+
+
+            const language =
+                getLibraryLanguage();
+
+
+            if (language === "fr") {
+
+                return (
+                    item.titleFr ||
+                    item.nameFr ||
+                    item.title ||
+                    item.name ||
+                    ""
+                );
+
+            }
+
+
+            return (
+                item.titleAr ||
+                item.nameAr ||
+                item.title ||
+                item.name ||
+                ""
+            );
+
+        }
+
+
+        /* =========================================================
+           CURRICULUM ACCESS
+           ========================================================= */
+
+        function getLibraryCurriculum() {
+
+            if (
+                typeof CURRICULUM_DATA !== "undefined"
+            ) {
+
+                return CURRICULUM_DATA;
+
+            }
+
+
+            if (
+                typeof window.CURRICULUM_DATA !== "undefined"
+            ) {
+
+                return window.CURRICULUM_DATA;
+
+            }
+
+
+            return {};
+
+        }
+
+
+        function getLibraryLevelData(level) {
+
+            const curriculum =
+                getLibraryCurriculum();
+
+
+            return curriculum[level] || [];
+
+        }
+
+
+        function getLibrarySubjectData(
+            level,
+            subjectId
         ) {
 
             const subjects =
-                getAvailableSubjects(
-                    path.level,
-                    path.branch
+                getLibraryLevelData(level);
+
+
+            return subjects.find(function(subject) {
+
+                return (
+                    subject.id === subjectId ||
+                    subject.key === subjectId
                 );
 
-            return Array.isArray(subjects)
-                ? subjects
-                : [];
+            }) || null;
 
         }
 
 
-        return [];
-
-    }
-
-
-    /* =====================================================
-       SUBJECT ICON
-       ===================================================== */
-
-    function getSubjectSymbol(subjectId) {
-
-        const symbols = {
-
-            mathematics:
-                "∑",
-
-            arabic:
-                "ع",
-
-            french:
-                "Fr",
-
-            natural_sciences:
-                "Sc",
-
-            physics_chemistry:
-                "Φ",
-
-            mathematics_c:
-                "∑",
-
-            sciences:
-                "Sc",
-
-            physics:
-                "Φ",
-
-            chemistry:
-                "Ch",
-
-            mathematics_d:
-                "∑"
-
-        };
-
-        return symbols[subjectId] || "EDU";
-
-    }
-
-
-    /* =====================================================
-       SUBJECT LABEL
-       ===================================================== */
-
-    function getLibrarySubjectLabel(
-        subject
-    ) {
-
-        if (!subject) {
-            return "";
-        }
-
-
-        if (
-            typeof getSubjectLabel ===
-            "function"
+        function getLibraryChapterData(
+            subject,
+            chapterId
         ) {
 
-            const label =
-                getSubjectLabel(
-                    subject.id,
-                    getCurrentLibraryPath()
-                        ?.level,
-                    getCurrentLibraryPath()
-                        ?.branch
-                );
+            if (!subject) {
 
-            if (label) {
-                return label;
+                return null;
+
             }
 
-        }
-
-
-        if (
-            subject.title
-        ) {
-
-            return getLocalizedValue(
-                subject.title
-            );
-
-        }
-
-
-        return subject.id || "";
-
-    }
-
-
-    /* =====================================================
-       SUBJECT DESCRIPTION
-       ===================================================== */
-
-    function getSubjectDescription(
-        subject
-    ) {
-
-        const language =
-            getLibraryLanguage();
-
-        const descriptions = {
-
-            mathematics: {
-                ar:
-                    "الرياضيات — 6AF أو 4ème حسب المسار الدراسي.",
-                fr:
-                    "Mathématiques — 6AF ou 4ème selon le parcours."
-            },
-
-            arabic: {
-                ar:
-                    "اللغة العربية — شهادة ختم الدروس الابتدائية.",
-                fr:
-                    "Arabe — certificat de fin des études primaires."
-            },
-
-            french: {
-                ar:
-                    "اللغة الفرنسية — شهادة ختم الدروس الابتدائية.",
-                fr:
-                    "Français — certificat de fin des études primaires."
-            },
-
-            natural_sciences: {
-                ar:
-                    "العلوم الطبيعية ضمن المسار الدراسي المحدد.",
-                fr:
-                    "Sciences naturelles selon le parcours sélectionné."
-            },
-
-            physics_chemistry: {
-                ar:
-                    "الفيزياء والكيمياء — مسار البريڤي.",
-                fr:
-                    "Physique-chimie — parcours Brevet."
-            },
-
-            mathematics_c: {
-                ar:
-                    "الرياضيات الخاصة بشعبة الباكالوريا C.",
-                fr:
-                    "Mathématiques de la série Baccalauréat C."
-            },
-
-            sciences: {
-                ar:
-                    "العلوم الخاصة بشعبة الباكالوريا C.",
-                fr:
-                    "Sciences de la série Baccalauréat C."
-            },
-
-            physics: {
-                ar:
-                    "الفيزياء ضمن مسار الباكالوريا.",
-                fr:
-                    "Physique du parcours Baccalauréat."
-            },
-
-            chemistry: {
-                ar:
-                    "الكيمياء ضمن مسار الباكالوريا.",
-                fr:
-                    "Chimie du parcours Baccalauréat."
-            },
-
-            mathematics_d: {
-                ar:
-                    "الرياضيات الخاصة بشعبة الباكالوريا D.",
-                fr:
-                    "Mathématiques de la série Baccalauréat D."
-            }
-
-        };
-
-
-        if (
-            descriptions[subject.id]
-        ) {
-
-            return (
-                descriptions[subject.id][
-                    language
-                ] ||
-                descriptions[subject.id].ar
-            );
-
-        }
-
-
-        return language === "fr"
-            ? "Matière du parcours sélectionné."
-            : "مادة ضمن المسار الدراسي المختار.";
-
-    }
-
-
-    /* =====================================================
-       CHAPTER DATA
-       ===================================================== */
-
-    function getLibraryChapters(
-        subject
-    ) {
-
-        if (!subject) {
-            return [];
-        }
-
-
-        if (
-            typeof getChapters ===
-            "function"
-        ) {
 
             const chapters =
-                getChapters(
-                    subject.id
+                Array.isArray(subject.chapters)
+                    ? subject.chapters
+                    : [];
+
+
+            return chapters.find(function(chapter) {
+
+                return (
+                    chapter.id === chapterId ||
+                    chapter.key === chapterId
                 );
 
-            if (
-                Array.isArray(chapters)
+            }) || null;
+
+        }
+
+
+        /* =========================================================
+           STORAGE
+           ========================================================= */
+
+        function getStoredLibraryLevel() {
+
+            const candidates = [
+
+                localStorage.getItem(
+                    "selected_level"
+                ),
+
+                localStorage.getItem(
+                    "student_level"
+                ),
+
+                localStorage.getItem(
+                    "eduNova_level"
+                )
+
+            ];
+
+
+            for (
+                let i = 0;
+                i < candidates.length;
+                i++
             ) {
 
-                return chapters;
+                if (candidates[i]) {
 
-            }
-
-        }
-
-
-        return [];
-
-    }
-
-
-    /* =====================================================
-       LOCALIZED VALUE
-       ===================================================== */
-
-    function getLocalizedValue(
-        value
-    ) {
-
-        if (!value) {
-            return "";
-        }
-
-
-        if (
-            typeof value ===
-            "string"
-        ) {
-
-            return value;
-
-        }
-
-
-        const language =
-            getLibraryLanguage();
-
-
-        return value[language] ||
-            value.ar ||
-            value.fr ||
-            "";
-
-    }
-
-
-    /* =====================================================
-       APPLY LANGUAGE
-       ===================================================== */
-
-    function applyLibraryLanguage() {
-
-        const language =
-            getLibraryLanguage();
-
-
-        document.documentElement.lang =
-            language;
-
-        document.documentElement.dir =
-            language === "fr"
-                ? "ltr"
-                : "rtl";
-
-
-        document.title =
-            language === "fr"
-                ? "Bibliothèque | EduNova AI"
-                : "المكتبة | EduNova AI";
-
-
-        setLibraryText(
-            "dashboardButton",
-            libraryText("dashboard")
-        );
-
-        setLibraryText(
-            "noLevelTitle",
-            libraryText("chooseLevel")
-        );
-
-        setLibraryText(
-            "noLevelText",
-            libraryText("chooseLevelText")
-        );
-
-        setLibraryText(
-            "chooseLevelButton",
-            libraryText("chooseLevelButton")
-        );
-
-        setLibraryText(
-            "teacherDescription",
-            libraryText("teacher")
-        );
-
-        setLibraryText(
-            "heroLabel",
-            libraryText("heroLabel")
-        );
-
-        setLibraryText(
-            "heroDescription",
-            libraryText("heroText")
-        );
-
-        setLibraryText(
-            "changeCertificateButton",
-            libraryText("changeLevel")
-        );
-
-        setLibraryText(
-            "pathCertificate",
-            libraryText("certificate")
-        );
-
-        setLibraryText(
-            "pathCertificateSub",
-            libraryText("certificateSub")
-        );
-
-        setLibraryText(
-            "pathSubjectTitle",
-            libraryText("subject")
-        );
-
-        setLibraryText(
-            "pathSubjectSub",
-            libraryText("subjectSub")
-        );
-
-        setLibraryText(
-            "pathChaptersTitle",
-            libraryText("chapters")
-        );
-
-        setLibraryText(
-            "pathChaptersSub",
-            libraryText("chaptersSub")
-        );
-
-        setLibraryText(
-            "subjectsTitle",
-            libraryText("subjectsTitle")
-        );
-
-        setLibraryText(
-            "subjectsDescription",
-            libraryText("subjectsText")
-        );
-
-
-        loadLibrary();
-
-    }
-
-
-    function setLibraryText(
-        id,
-        text
-    ) {
-
-        const element =
-            document.getElementById(id);
-
-        if (element) {
-            element.textContent = text;
-        }
-
-    }
-
-
-    /* =====================================================
-       LOAD LIBRARY
-       ===================================================== */
-
-    function loadLibrary() {
-
-        const noLevel =
-            document.getElementById(
-                "noLevel"
-            );
-
-        const library =
-            document.getElementById(
-                "libraryContent"
-            );
-
-
-        if (
-            !noLevel ||
-            !library
-        ) {
-            return;
-        }
-
-
-        const path =
-            getCurrentLibraryPath();
-
-
-        if (!path) {
-
-            noLevel.style.display =
-                "block";
-
-            library.style.display =
-                "none";
-
-            return;
-
-        }
-
-
-        noLevel.style.display =
-            "none";
-
-        library.style.display =
-            "block";
-
-
-        setLibraryText(
-            "levelName",
-            getCurrentLevelLabel()
-        );
-
-
-        validateSavedSelection();
-
-        renderSubjects();
-
-        updateLearningPath();
-
-    }
-
-
-    /* =====================================================
-       VALIDATE SAVED SUBJECT
-       ===================================================== */
-
-    function validateSavedSelection() {
-
-        const subjects =
-            getLibrarySubjects();
-
-
-        const selectedSubject =
-            typeof getSelectedSubject ===
-            "function"
-                ? getSelectedSubject()
-                : localStorage.getItem(
-                    "selected_subject"
-                );
-
-
-        if (!selectedSubject) {
-            return;
-        }
-
-
-        const valid =
-            subjects.some(
-                function(subject) {
-
-                    return (
-                        subject.id ===
-                        selectedSubject
+                    return normalizeLibraryLevel(
+                        candidates[i]
                     );
 
                 }
-            );
-
-
-        if (!valid) {
-
-            if (
-                typeof clearSelectedSubject ===
-                "function"
-            ) {
-
-                clearSelectedSubject();
-
-            } else {
-
-                localStorage.removeItem(
-                    "selected_subject"
-                );
-
-                localStorage.removeItem(
-                    "selected_subject_type"
-                );
-
-                localStorage.removeItem(
-                    "selected_chapter"
-                );
 
             }
 
+
+            return null;
+
         }
 
-    }
+
+        function normalizeLibraryLevel(level) {
+
+            if (!level) {
+
+                return null;
+
+            }
 
 
-    /* =====================================================
-       RENDER SUBJECTS
-       ===================================================== */
+            const value =
+                String(level)
+                    .trim()
+                    .toLowerCase();
 
-    function renderSubjects() {
 
-        const container =
-            document.getElementById(
-                "subjects"
+            const aliases = {
+
+                "6af": "concours",
+
+                "6-af": "concours",
+
+                concours: "concours",
+
+                "4eme": "brevet",
+
+                "4ème": "brevet",
+
+                "4eme-brevet": "brevet",
+
+                brevet: "brevet",
+
+                "bac-c": "bac_c",
+
+                "bac c": "bac_c",
+
+                bac_c: "bac_c",
+
+                "bac-d": "bac_d",
+
+                "bac d": "bac_d",
+
+                bac_d: "bac_d"
+
+            };
+
+
+            return aliases[value] || value;
+
+        }
+
+
+        function saveLibraryLevel(level) {
+
+            if (!level) {
+
+                return;
+
+            }
+
+
+            localStorage.setItem(
+                "selected_level",
+                level
             );
 
 
-        if (!container) {
-            return;
-        }
-
-
-        container.innerHTML = "";
-
-
-        const subjects =
-            getLibrarySubjects();
-
-
-        if (!subjects.length) {
-
-            renderNoSubjects(
-                container
+            localStorage.setItem(
+                "student_level",
+                level
             );
 
-            return;
+        }
+
+
+        /* =========================================================
+           LEVEL UI
+           ========================================================= */
+
+        function updateLibraryLevelCards() {
+
+            document
+                .querySelectorAll(
+                    ".library-level-card[data-level]"
+                )
+                .forEach(function(card) {
+
+                    const cardLevel =
+                        card.getAttribute(
+                            "data-level"
+                        );
+
+
+                    card.classList.toggle(
+                        "selected",
+                        cardLevel ===
+                        librarySelectedLevel
+                    );
+
+                });
 
         }
 
 
-        const selectedSubject =
-            typeof getSelectedSubject ===
-            "function"
-                ? getSelectedSubject()
-                : localStorage.getItem(
-                    "selected_subject"
+        function updateCurrentLevel() {
+
+            const element =
+                document.getElementById(
+                    "currentLevelValue"
                 );
 
 
-        subjects.forEach(
-            function(subject) {
+            if (!element) {
 
-                if (!subject) {
-                    return;
-                }
+                return;
+
+            }
+
+
+            if (!librarySelectedLevel) {
+
+                element.textContent =
+                    libraryText("loading");
+
+                return;
+
+            }
+
+
+            element.textContent =
+                libraryLevelName(
+                    librarySelectedLevel
+                );
+
+        }
+
+
+        /* =========================================================
+           SUBJECT RENDERING
+           ========================================================= */
+
+        function renderLibrarySubjects() {
+
+            const grid =
+                document.getElementById(
+                    "librarySubjectGrid"
+                );
+
+
+            if (!grid) {
+
+                return;
+
+            }
+
+
+            grid.innerHTML = "";
+
+
+            const subjects =
+                getLibraryLevelData(
+                    librarySelectedLevel
+                );
+
+
+            if (
+                !Array.isArray(subjects) ||
+                subjects.length === 0
+            ) {
+
+                showLibraryMessage(
+                    libraryText("noContent")
+                );
+
+                return;
+
+            }
+
+
+            hideLibraryMessage();
+
+
+            subjects.forEach(function(subject, index) {
+
+                const chapters =
+                    Array.isArray(subject.chapters)
+                        ? subject.chapters
+                        : [];
 
 
                 const card =
                     document.createElement(
-                        "article"
-                    );
-
-                card.className =
-                    "subject-card";
-
-
-                if (
-                    selectedSubject ===
-                    subject.id
-                ) {
-
-                    card.classList.add(
-                        "selected"
-                    );
-
-                }
-
-
-                const button =
-                    document.createElement(
                         "button"
                     );
 
-                button.type =
-                    "button";
 
-                button.className =
-                    "subject-button";
+                card.type = "button";
 
-
-                const icon =
-                    document.createElement(
-                        "div"
-                    );
-
-                icon.className =
-                    "subject-icon";
-
-                icon.textContent =
-                    getSubjectSymbol(
-                        subject.id
-                    );
+                card.className =
+                    "library-level-card library-subject-card";
 
 
-                const info =
-                    document.createElement(
-                        "div"
-                    );
-
-                info.className =
-                    "subject-info";
-
-
-                const title =
-                    document.createElement(
-                        "h3"
-                    );
-
-                title.textContent =
-                    getLibrarySubjectLabel(
-                        subject
-                    );
-
-
-                const description =
-                    document.createElement(
-                        "p"
-                    );
-
-                description.textContent =
-                    getSubjectDescription(
-                        subject
-                    );
-
-
-                const badge =
-                    document.createElement(
-                        "span"
-                    );
-
-                badge.className =
-                    "subject-badge";
-
-                badge.textContent =
-                    libraryText(
-                        "available"
-                    );
-
-
-                info.appendChild(
-                    title
-                );
-
-                info.appendChild(
-                    description
-                );
-
-                info.appendChild(
-                    badge
-                );
-
-
-                const arrow =
-                    document.createElement(
-                        "div"
-                    );
-
-                arrow.className =
-                    "subject-arrow";
-
-                arrow.textContent =
-                    getLibraryLanguage() ===
-                    "fr"
-                        ? "→"
-                        : "←";
-
-
-                button.appendChild(
-                    icon
-                );
-
-                button.appendChild(
-                    info
-                );
-
-                button.appendChild(
-                    arrow
-                );
-
-
-                button.addEventListener(
+                card.addEventListener(
                     "click",
                     function() {
 
-                        openSubject(
-                            subject
+                        selectLibrarySubject(
+                            subject.id ||
+                            subject.key
                         );
 
                     }
                 );
 
 
-                card.appendChild(
-                    button
-                );
-
-
-                const chaptersPanel =
+                const top =
                     document.createElement(
                         "div"
                     );
 
-                chaptersPanel.className =
-                    "chapters-panel";
-
-                chaptersPanel.id =
-                    "chapters-" +
-                    subject.id;
+                top.className =
+                    "library-level-card-top";
 
 
-                card.appendChild(
-                    chaptersPanel
+                const icon =
+                    document.createElement(
+                        "span"
+                    );
+
+                icon.className =
+                    "library-subject-icon";
+
+                icon.setAttribute(
+                    "aria-hidden",
+                    "true"
+                );
+
+                icon.textContent =
+                    String(
+                        subject.icon ||
+                        (index + 1)
+                    );
+
+
+                const check =
+                    document.createElement(
+                        "span"
+                    );
+
+                check.className =
+                    "library-level-check";
+
+                check.textContent =
+                    "›";
+
+
+                top.appendChild(icon);
+
+                top.appendChild(check);
+
+
+                const body =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                const name =
+                    document.createElement(
+                        "div"
+                    );
+
+                name.className =
+                    "library-level-name";
+
+                name.textContent =
+                    libraryLocalizedTitle(
+                        subject
+                    );
+
+
+                const count =
+                    document.createElement(
+                        "div"
+                    );
+
+                count.className =
+                    "library-subject-count";
+
+                count.textContent =
+                    chapters.length +
+                    " " +
+                    libraryText(
+                        "chaptersCount"
+                    );
+
+
+                body.appendChild(name);
+
+                body.appendChild(count);
+
+
+                card.appendChild(top);
+
+                card.appendChild(body);
+
+
+                grid.appendChild(card);
+
+            });
+
+        }
+
+
+        /* =========================================================
+           CHAPTER RENDERING
+           ========================================================= */
+
+        function renderLibraryChapters() {
+
+            const grid =
+                document.getElementById(
+                    "libraryChapterGrid"
                 );
 
 
-                container.appendChild(
-                    card
-                );
+            if (!grid) {
 
-
-                if (
-                    selectedSubject ===
-                    subject.id
-                ) {
-
-                    renderChapters(
-                        subject,
-                        chaptersPanel
-                    );
-
-                    chaptersPanel.classList.add(
-                        "visible"
-                    );
-
-                }
+                return;
 
             }
-        );
 
-    }
 
+            grid.innerHTML = "";
 
-    /* =====================================================
-       NO SUBJECTS
-       ===================================================== */
 
-    function renderNoSubjects(
-        container
-    ) {
-
-        const empty =
-            document.createElement(
-                "div"
-            );
-
-        empty.className =
-            "empty-content";
-
-
-        const icon =
-            document.createElement(
-                "div"
-            );
-
-        icon.className =
-            "empty-content-icon";
-
-        icon.textContent =
-            "EDU";
-
-
-        const title =
-            document.createElement(
-                "h3"
-            );
-
-        title.textContent =
-            getLibraryLanguage() === "fr"
-                ? "Aucune matière disponible"
-                : "لا توجد مواد متاحة";
-
-
-        const text =
-            document.createElement(
-                "p"
-            );
-
-        text.textContent =
-            getLibraryLanguage() === "fr"
-                ? "Vérifiez votre parcours scolaire."
-                : "تحقق من المسار الدراسي المختار.";
-
-
-        empty.appendChild(
-            icon
-        );
-
-        empty.appendChild(
-            title
-        );
-
-        empty.appendChild(
-            text
-        );
-
-        container.appendChild(
-            empty
-        );
-
-    }
-
-
-    /* =====================================================
-       OPEN SUBJECT
-       ===================================================== */
-
-    function openSubject(
-        subject
-    ) {
-
-        if (!subject) {
-            return;
-        }
-
-
-        if (
-            typeof setSelectedSubject ===
-            "function"
-        ) {
-
-            setSelectedSubject(
-                subject.id,
-                subject.type
-            );
-
-        } else {
-
-            localStorage.setItem(
-                "selected_subject",
-                subject.id
-            );
-
-            localStorage.setItem(
-                "selected_subject_type",
-                subject.type || subject.id
-            );
-
-            localStorage.removeItem(
-                "selected_chapter"
-            );
-
-        }
-
-
-        const panel =
-            document.getElementById(
-                "chapters-" +
-                subject.id
-            );
-
-
-        if (!panel) {
-            return;
-        }
-
-
-        const alreadyVisible =
-            panel.classList.contains(
-                "visible"
-            );
-
-
-        document
-            .querySelectorAll(
-                ".chapters-panel"
-            )
-            .forEach(
-                function(item) {
-
-                    item.classList.remove(
-                        "visible"
-                    );
-
-                }
-            );
-
-
-        document
-            .querySelectorAll(
-                ".subject-card"
-            )
-            .forEach(
-                function(item) {
-
-                    item.classList.remove(
-                        "selected"
-                    );
-
-                }
-            );
-
-
-        if (
-            alreadyVisible
-        ) {
-
-            updateLearningPath();
-
-            return;
-
-        }
-
-
-        const parentCard =
-            panel.closest(
-                ".subject-card"
-            );
-
-
-        if (parentCard) {
-
-            parentCard.classList.add(
-                "selected"
-            );
-
-        }
-
-
-        renderChapters(
-            subject,
-            panel
-        );
-
-
-        panel.classList.add(
-            "visible"
-        );
-
-
-        updateLearningPath();
-
-
-        setTimeout(
-            function() {
-
-                panel.scrollIntoView({
-                    behavior: "smooth",
-                    block: "nearest"
-                });
-
-            },
-            80
-        );
-
-    }
-
-
-    /* =====================================================
-       LEARNING PATH
-       ===================================================== */
-
-    function updateLearningPath() {
-
-        const subjectPath =
-            document.getElementById(
-                "pathSubject"
-            );
-
-        const chaptersPath =
-            document.getElementById(
-                "pathChapters"
-            );
-
-
-        if (
-            !subjectPath ||
-            !chaptersPath
-        ) {
-            return;
-        }
-
-
-        const selectedSubject =
-            typeof getSelectedSubject ===
-            "function"
-                ? getSelectedSubject()
-                : localStorage.getItem(
-                    "selected_subject"
+            const subject =
+                getLibrarySubjectData(
+                    librarySelectedLevel,
+                    librarySelectedSubject
                 );
 
 
-        const visiblePanel =
-            document.querySelector(
-                ".chapters-panel.visible"
-            );
+            if (!subject) {
+
+                showLibraryMessage(
+                    libraryText("noContent")
+                );
+
+                return;
+
+            }
 
 
-        if (selectedSubject) {
-
-            subjectPath.classList.add(
-                "active"
-            );
-
-        } else {
-
-            subjectPath.classList.remove(
-                "active"
-            );
-
-        }
+            const chapters =
+                Array.isArray(subject.chapters)
+                    ? subject.chapters
+                    : [];
 
 
-        if (visiblePanel) {
+            if (chapters.length === 0) {
 
-            chaptersPath.classList.add(
-                "active"
-            );
+                showLibraryMessage(
+                    libraryText("noContent")
+                );
 
-        } else {
+                return;
 
-            chaptersPath.classList.remove(
-                "active"
-            );
-
-        }
-
-    }
+            }
 
 
-    /* =====================================================
-       RENDER CHAPTERS
-       ===================================================== */
-
-    function renderChapters(
-        subject,
-        panel
-    ) {
-
-        const chapters =
-            getLibraryChapters(
-                subject
-            );
+            hideLibraryMessage();
 
 
-        panel.innerHTML = "";
-
-
-        const header =
-            document.createElement(
-                "div"
-            );
-
-        header.className =
-            "chapters-panel-header";
-
-
-        const title =
-            document.createElement(
-                "h3"
-            );
-
-        title.textContent =
-            getLibraryLanguage() === "fr"
-                ? (
-                    libraryText("chapterTitle") +
-                    " — " +
-                    getLibrarySubjectLabel(
-                        subject
-                    )
-                )
-                : (
-                    libraryText("chapterTitle") +
-                    " — " +
-                    getLibrarySubjectLabel(
-                        subject
-                    )
+            document.getElementById(
+                "chapterTitle"
+            ).textContent =
+                libraryLocalizedTitle(
+                    subject
                 );
 
 
-        const description =
-            document.createElement(
-                "p"
-            );
-
-        description.textContent =
-            libraryText(
-                "chapterText"
-            );
+            document.getElementById(
+                "chapterDescription"
+            ).textContent =
+                libraryText(
+                    "chaptersDescription"
+                );
 
 
-        header.appendChild(
-            title
-        );
+            chapters.forEach(function(chapter, index) {
 
-        header.appendChild(
-            description
-        );
-
-        panel.appendChild(
-            header
-        );
-
-
-        if (!chapters.length) {
-
-            renderEmptyChapters(
-                panel
-            );
-
-            return;
-
-        }
-
-
-        const chaptersContainer =
-            document.createElement(
-                "div"
-            );
-
-        chaptersContainer.className =
-            "chapters";
-
-
-        chapters.forEach(
-            function(chapter) {
-
-                if (!chapter) {
-                    return;
-                }
+                const videos =
+                    Array.isArray(chapter.videos)
+                        ? chapter.videos
+                        : [];
 
 
                 const card =
@@ -2413,53 +3039,326 @@
                         "button"
                     );
 
-                card.type =
-                    "button";
+
+                card.type = "button";
 
                 card.className =
-                    "chapter-card";
+                    "library-level-card library-chapter-card";
+
+
+                card.addEventListener(
+                    "click",
+                    function() {
+
+                        selectLibraryChapter(
+                            chapter.id ||
+                            chapter.key
+                        );
+
+                    }
+                );
+
+
+                const top =
+                    document.createElement(
+                        "div"
+                    );
+
+                top.className =
+                    "library-level-card-top";
+
+
+                const icon =
+                    document.createElement(
+                        "span"
+                    );
+
+                icon.className =
+                    "library-level-icon";
+
+                icon.textContent =
+                    String(index + 1);
+
+
+                const arrow =
+                    document.createElement(
+                        "span"
+                    );
+
+                arrow.className =
+                    "library-level-check";
+
+                arrow.textContent =
+                    "›";
+
+
+                top.appendChild(icon);
+
+                top.appendChild(arrow);
+
+
+                const body =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                const name =
+                    document.createElement(
+                        "div"
+                    );
+
+                name.className =
+                    "library-level-name";
+
+                name.textContent =
+                    libraryLocalizedTitle(
+                        chapter
+                    );
+
+
+                const progress =
+                    document.createElement(
+                        "div"
+                    );
+
+                progress.className =
+                    "library-chapter-progress";
+
+
+                const progressBar =
+                    document.createElement(
+                        "div"
+                    );
+
+                progressBar.className =
+                    "library-chapter-progress-bar";
+
+
+                const chapterProgress =
+                    getLibraryChapterProgress(
+                        chapter
+                    );
+
+
+                progressBar.style.width =
+                    chapterProgress + "%";
+
+
+                progress.appendChild(
+                    progressBar
+                );
+
+
+                const meta =
+                    document.createElement(
+                        "div"
+                    );
+
+                meta.className =
+                    "library-chapter-meta";
+
+
+                const count =
+                    document.createElement(
+                        "span"
+                    );
+
+                count.textContent =
+                    videos.length +
+                    " " +
+                    libraryText(
+                        "videosCount"
+                    );
+
+
+                const progressText =
+                    document.createElement(
+                        "span"
+                    );
+
+                progressText.textContent =
+                    libraryText(
+                        "progress"
+                    ) +
+                    ": " +
+                    chapterProgress +
+                    "%";
+
+
+                meta.appendChild(count);
+
+                meta.appendChild(
+                    progressText
+                );
+
+
+                body.appendChild(name);
+
+                body.appendChild(progress);
+
+                body.appendChild(meta);
+
+
+                card.appendChild(top);
+
+                card.appendChild(body);
+
+
+                grid.appendChild(card);
+
+            });
+
+        }
+
+
+        /* =========================================================
+           VIDEO RENDERING
+           ========================================================= */
+
+        function renderLibraryVideos() {
+
+            const grid =
+                document.getElementById(
+                    "libraryVideoGrid"
+                );
+
+
+            if (!grid) {
+
+                return;
+
+            }
+
+
+            grid.innerHTML = "";
+
+
+            const subject =
+                getLibrarySubjectData(
+                    librarySelectedLevel,
+                    librarySelectedSubject
+                );
+
+
+            const chapter =
+                getLibraryChapterData(
+                    subject,
+                    librarySelectedChapter
+                );
+
+
+            if (!chapter) {
+
+                showLibraryMessage(
+                    libraryText("noContent")
+                );
+
+                return;
+
+            }
+
+
+            const videos =
+                Array.isArray(chapter.videos)
+                    ? chapter.videos
+                    : [];
+
+
+            if (videos.length === 0) {
+
+                showLibraryMessage(
+                    libraryText("noContent")
+                );
+
+                return;
+
+            }
+
+
+            hideLibraryMessage();
+
+
+            document.getElementById(
+                "videoTitle"
+            ).textContent =
+                libraryLocalizedTitle(
+                    chapter
+                );
+
+
+            videos.forEach(function(video, index) {
+
+                const card =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                card.type = "button";
+
+                card.className =
+                    "library-video-card";
+
+
+                const isLocked =
+                    index > 0;
+
+
+                if (isLocked) {
+
+                    card.classList.add(
+                        "locked"
+                    );
+
+                }
+
+
+                card.addEventListener(
+                    "click",
+                    function() {
+
+                        openLibraryVideo(
+                            video,
+                            index
+                        );
+
+                    }
+                );
 
 
                 const number =
                     document.createElement(
-                        "div"
+                        "span"
                     );
 
                 number.className =
-                    "chapter-number";
+                    "library-video-number";
 
                 number.textContent =
-                    chapter.id;
+                    String(index + 1);
 
 
-                const info =
+                const content =
                     document.createElement(
-                        "div"
+                        "span"
                     );
 
-                info.className =
-                    "chapter-info";
+                content.className =
+                    "library-video-content";
 
 
-                const chapterTitle =
+                const name =
                     document.createElement(
-                        "h4"
+                        "span"
                     );
 
-                chapterTitle.textContent =
-                    getLocalizedValue(
-                        chapter.title
-                    );
+                name.className =
+                    "library-video-name";
 
-
-                const chapterDescription =
-                    document.createElement(
-                        "p"
-                    );
-
-                chapterDescription.textContent =
-                    getLocalizedValue(
-                        chapter.description
+                name.textContent =
+                    libraryLocalizedTitle(
+                        video
                     );
 
 
@@ -2469,510 +3368,902 @@
                     );
 
                 meta.className =
-                    "chapter-meta";
+                    "library-video-meta";
 
 
-                const rawVideos =
-                    Array.isArray(
-                        chapter.videos
-                    )
-                        ? chapter.videos.length
-                        : Number(
-                            chapter.videos
-                        ) || 1;
-
-
-                const videoCount =
-                    Math.max(
-                        1,
-                        Math.min(
-                            rawVideos,
-                            20
-                        )
+                const duration =
+                    document.createElement(
+                        "span"
                     );
 
+                duration.className =
+                    "library-video-duration";
 
-                meta.textContent =
-                    videoCount +
-                    " " +
-                    (
-                        videoCount === 1
-                            ? libraryText(
-                                "video"
-                            )
-                            : libraryText(
-                                "videos"
-                            )
+                duration.textContent =
+                    video.duration ||
+                    "00:00";
+
+
+                const status =
+                    document.createElement(
+                        "span"
                     );
 
+                status.className =
+                    "library-video-status";
 
-                info.appendChild(
-                    chapterTitle
-                );
+                status.textContent =
+                    isLocked
+                        ? "• " + libraryText("locked")
+                        : "✓ " + libraryText("free");
 
-                if (
-                    chapterDescription.textContent
-                ) {
 
-                    info.appendChild(
-                        chapterDescription
+                meta.appendChild(duration);
+
+                meta.appendChild(status);
+
+
+                content.appendChild(name);
+
+                content.appendChild(meta);
+
+
+                const action =
+                    document.createElement(
+                        "span"
                     );
+
+                action.className =
+                    "library-video-action";
+
+                action.textContent =
+                    isLocked
+                        ? "•"
+                        : "›";
+
+
+                card.appendChild(number);
+
+                card.appendChild(content);
+
+                card.appendChild(action);
+
+
+                grid.appendChild(card);
+
+            });
+
+        }
+
+
+        /* =========================================================
+           PROGRESS
+           ========================================================= */
+
+        function getLibraryChapterProgress(
+            chapter
+        ) {
+
+            if (!chapter) {
+
+                return 0;
+
+            }
+
+
+            const videos =
+                Array.isArray(chapter.videos)
+                    ? chapter.videos
+                    : [];
+
+
+            if (videos.length === 0) {
+
+                return 0;
+
+            }
+
+
+            let completed = 0;
+
+
+            videos.forEach(function(video) {
+
+                const id =
+                    video.id ||
+                    video.key;
+
+
+                if (!id) {
+
+                    return;
 
                 }
 
-                info.appendChild(
-                    meta
-                );
 
-
-                const arrow =
-                    document.createElement(
-                        "div"
+                const value =
+                    localStorage.getItem(
+                        "video_progress_" + id
                     );
 
-                arrow.className =
-                    "chapter-arrow";
 
-                arrow.textContent =
-                    getLibraryLanguage() ===
-                    "fr"
-                        ? "→"
-                        : "←";
+                if (
+                    value === "completed" ||
+                    value === "100"
+                ) {
+
+                    completed++;
+
+                }
+
+            });
 
 
-                card.appendChild(
-                    number
+            return Math.round(
+                (completed / videos.length) * 100
+            );
+
+        }
+
+
+        /* =========================================================
+           SELECTION
+           ========================================================= */
+
+        function selectLibraryLevel(level) {
+
+            librarySelectedLevel =
+                normalizeLibraryLevel(level);
+
+            librarySelectedSubject = null;
+
+            librarySelectedChapter = null;
+
+
+            saveLibraryLevel(
+                librarySelectedLevel
+            );
+
+
+            updateCurrentLevel();
+
+            updateLibraryLevelCards();
+
+            renderLibrarySubjects();
+
+
+            document.getElementById(
+                "libraryContentSection"
+            ).hidden = false;
+
+
+            document.getElementById(
+                "libraryChapterSection"
+            ).hidden = true;
+
+
+            document.getElementById(
+                "libraryVideoSection"
+            ).hidden = true;
+
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+
+
+        function selectLibrarySubject(
+            subjectId
+        ) {
+
+            librarySelectedSubject =
+                subjectId;
+
+            librarySelectedChapter = null;
+
+
+            document.getElementById(
+                "libraryContentSection"
+            ).hidden = true;
+
+
+            document.getElementById(
+                "libraryChapterSection"
+            ).hidden = false;
+
+
+            document.getElementById(
+                "libraryVideoSection"
+            ).hidden = true;
+
+
+            renderLibraryChapters();
+
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+
+
+        function selectLibraryChapter(
+            chapterId
+        ) {
+
+            librarySelectedChapter =
+                chapterId;
+
+
+            document.getElementById(
+                "libraryContentSection"
+            ).hidden = true;
+
+
+            document.getElementById(
+                "libraryChapterSection"
+            ).hidden = true;
+
+
+            document.getElementById(
+                "libraryVideoSection"
+            ).hidden = false;
+
+
+            renderLibraryVideos();
+
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+
+
+        /* =========================================================
+           BACK BUTTONS
+           ========================================================= */
+
+        function libraryBackToLevels() {
+
+            document.getElementById(
+                "libraryContentSection"
+            ).hidden = true;
+
+
+            document.getElementById(
+                "libraryChapterSection"
+            ).hidden = true;
+
+
+            document.getElementById(
+                "libraryVideoSection"
+            ).hidden = true;
+
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+
+
+        function libraryBackToSubjects() {
+
+            document.getElementById(
+                "libraryContentSection"
+            ).hidden = false;
+
+
+            document.getElementById(
+                "libraryChapterSection"
+            ).hidden = true;
+
+
+            document.getElementById(
+                "libraryVideoSection"
+            ).hidden = true;
+
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+
+
+        function libraryBackToChapters() {
+
+            document.getElementById(
+                "libraryContentSection"
+            ).hidden = true;
+
+
+            document.getElementById(
+                "libraryChapterSection"
+            ).hidden = false;
+
+
+            document.getElementById(
+                "libraryVideoSection"
+            ).hidden = true;
+
+
+            renderLibraryChapters();
+
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+
+
+        function libraryChangeLevel() {
+
+            libraryBackToLevels();
+
+
+            showLibraryMessage(
+                libraryText("levelChanged")
+            );
+
+        }
+
+
+        /* =========================================================
+           VIDEO OPEN
+           ========================================================= */
+
+        function openLibraryVideo(
+            video,
+            index
+        ) {
+
+            if (index > 0) {
+
+                showLibraryMessage(
+                    libraryText("locked")
                 );
 
-                card.appendChild(
-                    info
+                return;
+
+            }
+
+
+            const videoUrl =
+                video?.videoUrl ||
+                video?.url ||
+                "";
+
+
+            if (!videoUrl) {
+
+                showLibraryMessage(
+                    libraryText("noContent")
                 );
 
-                card.appendChild(
-                    arrow
+                return;
+
+            }
+
+
+            window.location.href =
+                videoUrl;
+
+        }
+
+
+        /* =========================================================
+           MESSAGE
+           ========================================================= */
+
+        let libraryMessageTimer = null;
+
+
+        function showLibraryMessage(
+            message
+        ) {
+
+            const element =
+                document.getElementById(
+                    "libraryMessage"
                 );
 
 
-                card.addEventListener(
-                    "click",
-                    function() {
+            if (!element) {
 
-                        openChapter(
-                            subject,
-                            chapter
-                        );
+                return;
+
+            }
+
+
+            element.textContent =
+                message;
+
+
+            element.classList.add(
+                "show"
+            );
+
+
+            if (libraryMessageTimer) {
+
+                clearTimeout(
+                    libraryMessageTimer
+                );
+
+            }
+
+
+            libraryMessageTimer =
+                setTimeout(function() {
+
+                    element.classList.remove(
+                        "show"
+                    );
+
+                }, 3500);
+
+        }
+
+
+        function hideLibraryMessage() {
+
+            const element =
+                document.getElementById(
+                    "libraryMessage"
+                );
+
+
+            if (element) {
+
+                element.classList.remove(
+                    "show"
+                );
+
+            }
+
+        }
+
+
+        /* =========================================================
+           TRANSLATION
+           ========================================================= */
+
+        function translateLibraryPage() {
+
+            const language =
+                getLibraryLanguage();
+
+            const text =
+                LIBRARY_TRANSLATIONS[language];
+
+
+            document.documentElement.lang =
+                language;
+
+            document.documentElement.dir =
+                language === "fr"
+                    ? "ltr"
+                    : "rtl";
+
+
+            document.title =
+                language === "fr"
+                    ? "Ma bibliothèque | EduNova AI"
+                    : "مكتبتي | EduNova AI";
+
+
+            const mappings = {
+
+                libraryEyebrow:
+                    "eyebrow",
+
+                libraryTitle:
+                    "title",
+
+                librarySubtitle:
+                    "subtitle",
+
+                currentLevelLabel:
+                    "currentLevel",
+
+                libraryChangeLevelButton:
+                    "changeLevel",
+
+                levelsTitle:
+                    "chooseCertificate",
+
+                levelsDescription:
+                    "chooseCertificateDescription",
+
+                subjectsTitle:
+                    "subjects",
+
+                subjectsDescription:
+                    "subjectsDescription",
+
+                chapterDescription:
+                    "chaptersDescription",
+
+                videoDescription:
+                    "videosDescription",
+
+                libraryBackButton:
+                    "changeLevel",
+
+                libraryBackSubjectsButton:
+                    "backSubjects",
+
+                libraryBackChaptersButton:
+                    "backChapters",
+
+                libraryFooterText:
+                    "footer"
+
+            };
+
+
+            Object.keys(mappings).forEach(function(id) {
+
+                const element =
+                    document.getElementById(id);
+
+                const key =
+                    mappings[id];
+
+
+                if (
+                    element &&
+                    text[key] !== undefined
+                ) {
+
+                    element.textContent =
+                        text[key];
+
+                }
+
+            });
+
+
+            if (librarySelectedLevel) {
+
+                updateCurrentLevel();
+
+            }
+
+        }
+
+
+        /* =========================================================
+           NOTIFICATIONS FALLBACK
+           ========================================================= */
+
+        if (
+            typeof window.showNotifications !== "function"
+        ) {
+
+            window.showNotifications =
+                function() {
+
+                    showLibraryMessage(
+                        getLibraryLanguage() === "fr"
+                            ? "Aucune nouvelle notification."
+                            : "لا توجد إشعارات جديدة."
+                    );
+
+                };
+
+        }
+
+
+        /* =========================================================
+           INITIALIZATION
+           ========================================================= */
+
+        function initializeLibraryPage() {
+
+            translateLibraryPage();
+
+
+            librarySelectedLevel =
+                getStoredLibraryLevel();
+
+
+            updateCurrentLevel();
+
+            updateLibraryLevelCards();
+
+
+            if (librarySelectedLevel) {
+
+                renderLibrarySubjects();
+
+            }
+
+
+            window.addEventListener(
+                "storage",
+                function(event) {
+
+                    if (
+                        event.key === "site_language"
+                    ) {
+
+                        translateLibraryPage();
+
+
+                        if (
+                            librarySelectedLevel &&
+                            !document.getElementById(
+                                "libraryContentSection"
+                            ).hidden
+                        ) {
+
+                            renderLibrarySubjects();
+
+                        }
+
+
+                        if (
+                            librarySelectedSubject &&
+                            !document.getElementById(
+                                "libraryChapterSection"
+                            ).hidden
+                        ) {
+
+                            renderLibraryChapters();
+
+                        }
+
+
+                        if (
+                            librarySelectedChapter &&
+                            !document.getElementById(
+                                "libraryVideoSection"
+                            ).hidden
+                        ) {
+
+                            renderLibraryVideos();
+
+                        }
 
                     }
-                );
 
 
-                chaptersContainer.appendChild(
-                    card
-                );
+                    if (
+                        event.key === "site_theme"
+                    ) {
 
-            }
-        );
+                        /* style.css handles the global theme */
 
+                    }
 
-        panel.appendChild(
-            chaptersContainer
-        );
 
-    }
+                    if (
+                        event.key === "selected_level" ||
+                        event.key === "student_level"
+                    ) {
 
+                        librarySelectedLevel =
+                            getStoredLibraryLevel();
 
-    /* =====================================================
-       EMPTY CHAPTERS
-       ===================================================== */
+                        updateCurrentLevel();
 
-    function renderEmptyChapters(
-        panel
-    ) {
+                        updateLibraryLevelCards();
 
-        const empty =
-            document.createElement(
-                "div"
-            );
-
-        empty.className =
-            "empty-content";
-
-
-        const icon =
-            document.createElement(
-                "div"
-            );
-
-        icon.className =
-            "empty-content-icon";
-
-        icon.textContent =
-            "EDU";
-
-
-        const title =
-            document.createElement(
-                "h3"
-            );
-
-        title.textContent =
-            libraryText(
-                "noChapters"
-            );
-
-
-        const text =
-            document.createElement(
-                "p"
-            );
-
-        text.textContent =
-            libraryText(
-                "noChaptersText"
-            );
-
-
-        empty.appendChild(
-            icon
-        );
-
-        empty.appendChild(
-            title
-        );
-
-        empty.appendChild(
-            text
-        );
-
-
-        panel.appendChild(
-            empty
-        );
-
-    }
-
-
-    /* =====================================================
-       OPEN CHAPTER
-       ===================================================== */
-
-    function openChapter(
-        subject,
-        chapter
-    ) {
-
-        if (
-            !subject ||
-            !chapter
-        ) {
-            return;
-        }
-
-
-        if (
-            typeof setSelectedSubject ===
-            "function"
-        ) {
-
-            setSelectedSubject(
-                subject.id,
-                subject.type
-            );
-
-        } else {
-
-            localStorage.setItem(
-                "selected_subject",
-                subject.id
-            );
-
-            localStorage.setItem(
-                "selected_subject_type",
-                subject.type || subject.id
-            );
-
-        }
-
-
-        if (
-            typeof setSelectedChapter ===
-            "function"
-        ) {
-
-            setSelectedChapter(
-                String(chapter.id)
-            );
-
-        } else {
-
-            localStorage.setItem(
-                "selected_chapter",
-                String(chapter.id)
-            );
-
-        }
-
-
-        window.location.href =
-            "chapter.html";
-
-    }
-
-
-    /* =====================================================
-       NAVIGATION
-       ===================================================== */
-
-    function chooseLevel() {
-
-        if (
-            typeof clearSelectedSubject ===
-            "function"
-        ) {
-
-            clearSelectedSubject();
-
-        } else {
-
-            localStorage.removeItem(
-                "selected_subject"
-            );
-
-            localStorage.removeItem(
-                "selected_subject_type"
-            );
-
-            localStorage.removeItem(
-                "selected_chapter"
-            );
-
-        }
-
-
-        if (
-            typeof goTo ===
-            "function"
-        ) {
-
-            goTo(
-                "levels.html"
-            );
-
-            return;
-
-        }
-
-
-        window.location.href =
-            "levels.html";
-
-    }
-
-
-    function goDashboard() {
-
-        if (
-            typeof goTo ===
-            "function"
-        ) {
-
-            goTo(
-                "dashboard.html"
-            );
-
-            return;
-
-        }
-
-
-        window.location.href =
-            "dashboard.html";
-
-    }
-
-
-    function goHome() {
-
-        if (
-            typeof goTo ===
-            "function"
-        ) {
-
-            goTo(
-                "index.html"
-            );
-
-            return;
-
-        }
-
-
-        window.location.href =
-            "index.html";
-
-    }
-
-
-    /* =====================================================
-       EVENTS
-       ===================================================== */
-
-    window.addEventListener(
-        "languageChanged",
-        function() {
-
-            applyLibraryLanguage();
-
-        }
-    );
-
-
-    window.addEventListener(
-        "siteLanguageChanged",
-        function() {
-
-            applyLibraryLanguage();
-
-        }
-    );
-
-
-    window.addEventListener(
-        "studentLevelChanged",
-        function() {
-
-            loadLibrary();
-
-        }
-    );
-
-
-    window.addEventListener(
-        "bacBranchChanged",
-        function() {
-
-            loadLibrary();
-
-        }
-    );
-
-
-    window.addEventListener(
-        "selectedSubjectChanged",
-        function() {
-
-            renderSubjects();
-
-            updateLearningPath();
-
-        }
-    );
-
-
-    window.addEventListener(
-        "selectedChapterChanged",
-        function() {
-
-            updateLearningPath();
-
-        }
-    );
-
-
-    window.addEventListener(
-        "storage",
-        function(event) {
-
-            if (
-                event.key ===
-                "site_language"
-            ) {
-
-                applyLibraryLanguage();
-
-            }
-
-
-            if (
-                event.key ===
-                "site_theme"
-            ) {
-
-                if (
-                    typeof applySiteTheme ===
-                    "function"
-                ) {
-
-                    applySiteTheme(
-                        event.newValue ||
-                        "light"
-                    );
+                    }
 
                 }
-
-            }
-
-
-            if (
-                event.key ===
-                "student_level" ||
-                event.key ===
-                "bac_branch" ||
-                event.key ===
-                "selected_subject" ||
-                event.key ===
-                "selected_chapter"
-            ) {
-
-                loadLibrary();
-
-            }
+            );
 
         }
-    );
 
 
-    /* =====================================================
-       INITIALIZATION
-       ===================================================== */
+        document.addEventListener(
+            "DOMContentLoaded",
+            initializeLibraryPage
+        );
 
-    document.addEventListener(
-        "DOMContentLoaded",
-        function() {
 
-            if (
-                typeof initializeGlobalSettings ===
-                "function"
-            ) {
+    </script>
 
-                initializeGlobalSettings();
 
+    <!-- =========================================================
+         PART 3 CONTINUES HERE
+         ========================================================= -->    <script>
+        /* =========================================================
+           FINAL LIBRARY INITIALIZATION
+           ========================================================= */
+
+        function applyLibraryInitialView() {
+            const storedLevel = getStoredLibraryLevel();
+
+            if (!storedLevel) {
+                return;
             }
 
+            const normalizedLevel = normalizeLibraryLevel(storedLevel);
 
-            if (
-                typeof applySiteTheme ===
-                "function" &&
-                typeof getSiteTheme ===
-                "function"
-            ) {
+            if (!normalizedLevel) {
+                return;
+            }
 
-                applySiteTheme(
-                    getSiteTheme()
+            librarySelectedLevel = normalizedLevel;
+
+            updateLibraryLevelCards();
+            updateCurrentLevel();
+
+            const levelData = getLibraryLevelData(normalizedLevel);
+
+            if (!levelData || !Array.isArray(levelData.subjects)) {
+                return;
+            }
+
+            renderLibrarySubjects(levelData.subjects);
+
+            const contentSection = document.getElementById(
+                "libraryContentSection"
+            );
+
+            if (contentSection) {
+                contentSection.hidden = false;
+            }
+        }
+
+        function refreshLibraryPageLanguage() {
+            translateLibraryPage();
+
+            updateLibraryLevelCards();
+            updateCurrentLevel();
+
+            if (librarySelectedLevel) {
+                const levelData = getLibraryLevelData(
+                    librarySelectedLevel
                 );
 
+                if (levelData && Array.isArray(levelData.subjects)) {
+                    renderLibrarySubjects(levelData.subjects);
+                }
             }
 
+            if (
+                librarySelectedLevel &&
+                librarySelectedSubject
+            ) {
+                const subjectData = getLibrarySubjectData(
+                    librarySelectedLevel,
+                    librarySelectedSubject
+                );
 
-            applyLibraryLanguage();
+                if (subjectData) {
+                    renderLibraryChapters(subjectData);
+                }
+            }
 
-            loadLibrary();
+            if (
+                librarySelectedLevel &&
+                librarySelectedSubject &&
+                librarySelectedChapter
+            ) {
+                const chapterData = getLibraryChapterData(
+                    librarySelectedLevel,
+                    librarySelectedSubject,
+                    librarySelectedChapter
+                );
 
+                if (chapterData) {
+                    renderLibraryVideos(chapterData);
+                }
+            }
         }
-    );
 
-</script>
+        /* =========================================================
+           SAFE GLOBAL LANGUAGE EVENT
+           ========================================================= */
+
+        window.addEventListener(
+            "eduNovaLanguageChanged",
+            function () {
+                refreshLibraryPageLanguage();
+            }
+        );
+
+        /* =========================================================
+           SAFE STORAGE SYNC
+           ========================================================= */
+
+        window.addEventListener(
+            "storage",
+            function (event) {
+                if (
+                    event.key === "site_language" ||
+                    event.key === "site_theme" ||
+                    event.key === "eduNovaSelectedLevel" ||
+                    event.key === "selectedLevel"
+                ) {
+                    setTimeout(function () {
+                        refreshLibraryPageLanguage();
+                        applyLibraryInitialView();
+                    }, 50);
+                }
+            }
+        );
+
+        /* =========================================================
+           GLOBAL THEME SYNC
+           ========================================================= */
+
+        function syncLibraryTheme() {
+            const theme =
+                localStorage.getItem("site_theme") || "light";
+
+            document.documentElement.setAttribute(
+                "data-theme",
+                theme
+            );
+        }
+
+        syncLibraryTheme();
+
+        window.addEventListener(
+            "eduNovaThemeChanged",
+            function () {
+                syncLibraryTheme();
+            }
+        );
+
+        /* =========================================================
+           NOTIFICATION FALLBACK
+           ========================================================= */
+
+        if (typeof window.showNotifications !== "function") {
+            window.showNotifications = function () {
+                const message =
+                    getLibraryLanguage() === "fr"
+                        ? "Aucune nouvelle notification."
+                        : "لا توجد إشعارات جديدة.";
+
+                showLibraryMessage(message);
+            };
+        }
+
+        /* =========================================================
+           INITIAL PAGE LOAD
+           ========================================================= */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+                initializeLibraryPage();
+                syncLibraryTheme();
+                translateLibraryPage();
+                applyLibraryInitialView();
+            }
+        );
+
+        /* =========================================================
+           FINAL SAFETY INITIALIZATION
+           ========================================================= */
+
+        if (document.readyState !== "loading") {
+            setTimeout(function () {
+                initializeLibraryPage();
+                syncLibraryTheme();
+                translateLibraryPage();
+                applyLibraryInitialView();
+            }, 0);
+        }
+    </script>
 
 </body>
-
 </html>
