@@ -1372,54 +1372,40 @@
             ? `Bac ${selectedBranch}`
             : "";
 
-    }
-
-
-    /* =========================================
+    }    /* =========================================
        COMPLETION
        ========================================= */
 
-    function isVideoCompleted(videoNumber) {
-
-        if (
-            typeof isVideoCompleted ===
-            "function"
-        ) {
-
-            return window.isVideoCompleted(
-                selectedLevel,
-                selectedBranch,
-                selectedSubject,
-                selectedChapter,
-                videoNumber
-            );
-
-        }
-
-        return false;
-
-    }
-
-
-    /*
-     * لا نستخدم نفس اسم الدالة المركزية داخل
-     * هذه الصفحة لتجنب التداخل.
-     */
-
     function checkVideoCompleted(videoNumber) {
+
+        /*
+         * نستخدم الدالة المركزية الموجودة في script.js
+         * بدون إنشاء دالة تحمل نفس الاسم.
+         */
 
         if (
             typeof window.isVideoCompleted ===
             "function"
         ) {
 
-            return window.isVideoCompleted(
-                selectedLevel,
-                selectedBranch,
-                selectedSubject,
-                selectedChapter,
-                videoNumber
-            );
+            try {
+
+                return window.isVideoCompleted(
+                    selectedLevel,
+                    selectedBranch,
+                    selectedSubject,
+                    selectedChapter,
+                    videoNumber
+                );
+
+            } catch (error) {
+
+                console.warn(
+                    "Unable to read video progress:",
+                    error
+                );
+
+            }
 
         }
 
@@ -2235,10 +2221,7 @@
         window.location.href =
             "video.html";
 
-    }
-
-
-    /* =========================================
+    }    /* =========================================
        NAVIGATION
        ========================================= */
 
@@ -2508,6 +2491,7 @@
 
         }
     );
+
 
 </script>
 
