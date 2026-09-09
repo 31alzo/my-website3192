@@ -8,49 +8,203 @@
           content="width=device-width, initial-scale=1.0">
 
     <meta name="description"
-          content="EduNova AI — منصة تعليمية بالذكاء الاصطناعي تساعد الطلاب على الاستعداد للشهادات الدراسية.">
+          content="EduNova AI — مركزك التعليمي الذكي للدراسة والمتابعة والتقدم.">
 
-    <title>EduNova AI | التعليم بالذكاء الاصطناعي</title>
+    <title>EduNova AI | الرئيسية</title>
 
     <link rel="stylesheet" href="style.css">
 
     <style>
 
         /* =====================================================
-           EduNova AI — الصفحة الرئيسية
-           الإصدار المطور بصريًا
-           يحافظ على ألوان ونظام المنصة
+           EDUNOVA AI — HOME / STUDENT COMMAND CENTER
+           التصميم الجديد مستوحى من Settings
         ===================================================== */
 
         .home-page {
-            padding-bottom: 40px;
+            padding-bottom: 60px;
         }
 
 
         /* =====================================================
-           HERO
+           HOME HEADER
         ===================================================== */
 
-        .home-hero {
+        .home-header {
             position: relative;
             overflow: hidden;
-            min-height: 540px;
-            display: flex;
-            align-items: center;
 
-            border-radius: 32px;
+            margin-bottom: 22px;
+
+            padding: 26px;
+
+            border: 1px solid var(--border);
+            border-radius: 28px;
 
             background:
-                radial-gradient(
-                    circle at 12% 18%,
-                    rgba(255,255,255,.17),
-                    transparent 28%
-                ),
-                radial-gradient(
-                    circle at 88% 82%,
-                    rgba(255,255,255,.08),
-                    transparent 30%
-                ),
+                linear-gradient(
+                    135deg,
+                    var(--surface),
+                    var(--surface-alt, var(--surface))
+                );
+
+            box-shadow: var(--shadow-sm);
+        }
+
+        .home-header::before {
+            content: "";
+
+            position: absolute;
+
+            width: 220px;
+            height: 220px;
+
+            left: -110px;
+            bottom: -140px;
+
+            border-radius: 50%;
+
+            border: 1px solid var(--border);
+
+            opacity: .55;
+        }
+
+        .home-header-inner {
+            position: relative;
+            z-index: 1;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+        .home-welcome {
+            min-width: 0;
+        }
+
+        .home-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            margin-bottom: 8px;
+
+            color: var(--primary);
+
+            font-size: 12px;
+            font-weight: 800;
+
+            letter-spacing: .02em;
+        }
+
+        .home-eyebrow-dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: var(--primary);
+        }
+
+        .home-header h1 {
+            margin: 0 0 7px;
+
+            color: var(--text);
+
+            font-size: clamp(25px, 4vw, 34px);
+            font-weight: 850;
+
+            letter-spacing: -.03em;
+        }
+
+        .home-header p {
+            margin: 0;
+
+            color: var(--text-muted);
+
+            line-height: 1.75;
+        }
+
+        .home-header-actions {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+
+            flex-shrink: 0;
+        }
+
+        .home-icon-action {
+            width: 46px;
+            height: 46px;
+
+            display: grid;
+            place-items: center;
+
+            border: 1px solid var(--border);
+            border-radius: 15px;
+
+            background: var(--surface);
+
+            color: var(--text);
+
+            cursor: pointer;
+
+            transition:
+                transform .2s ease,
+                background .2s ease,
+                border-color .2s ease;
+        }
+
+        .home-icon-action:hover {
+            transform: translateY(-2px);
+
+            background: var(--primary-light);
+
+            border-color: var(--primary);
+
+            color: var(--primary);
+        }
+
+        .home-icon-action span {
+            font-size: 19px;
+            line-height: 1;
+        }
+
+
+        /* =====================================================
+           MAIN GRID
+        ===================================================== */
+
+        .home-dashboard-grid {
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1.45fr)
+                minmax(280px, .75fr);
+
+            gap: 18px;
+
+            margin-bottom: 18px;
+        }
+
+
+        /* =====================================================
+           CURRENT LEVEL CARD
+        ===================================================== */
+
+        .current-level-card {
+            position: relative;
+            overflow: hidden;
+
+            min-height: 280px;
+
+            padding: 28px;
+
+            border-radius: 28px;
+
+            background:
                 linear-gradient(
                     135deg,
                     var(--primary),
@@ -60,729 +214,846 @@
             color: #fff;
 
             box-shadow:
-                0 24px 60px rgba(37,99,235,.20);
+                0 18px 42px
+                rgba(37, 99, 235, .18);
         }
 
-
-        .home-hero::before {
+        .current-level-card::before {
             content: "";
+
             position: absolute;
 
-            width: 430px;
-            height: 430px;
+            width: 320px;
+            height: 320px;
 
-            left: -240px;
-            top: -220px;
+            left: -170px;
+            bottom: -210px;
 
             border-radius: 50%;
 
-            border:
-                1px solid
-                rgba(255,255,255,.11);
+            border: 1px solid
+                rgba(255,255,255,.12);
 
             box-shadow:
-                0 0 0 40px
+                0 0 0 35px
                 rgba(255,255,255,.025),
-                0 0 0 80px
+                0 0 0 70px
                 rgba(255,255,255,.018);
         }
 
-
-        .home-hero::after {
+        .current-level-card::after {
             content: "";
+
             position: absolute;
 
-            width: 500px;
-            height: 500px;
+            width: 170px;
+            height: 170px;
 
-            right: -290px;
-            bottom: -320px;
+            right: -90px;
+            top: -100px;
 
             border-radius: 50%;
 
-            border:
-                1px solid
-                rgba(255,255,255,.09);
-
-            box-shadow:
-                0 0 0 45px
-                rgba(255,255,255,.025);
+            border: 1px solid
+                rgba(255,255,255,.10);
         }
 
-
-        .hero-orbit {
-            position: absolute;
-
-            width: 160px;
-            height: 160px;
-
-            right: 42%;
-            top: -80px;
-
-            border-radius: 50%;
-
-            border:
-                1px solid
-                rgba(255,255,255,.08);
-
-            pointer-events: none;
-        }
-
-
-        .home-hero-inner {
+        .current-level-content {
             position: relative;
-            z-index: 2;
-
-            width: 100%;
-
-            display: grid;
-
-            gap: 36px;
-
-            padding: 38px 24px;
+            z-index: 1;
         }
 
-
-        .home-hero-content {
-            max-width: 680px;
-        }
-
-
-        .ai-label {
+        .current-level-label {
             display: inline-flex;
             align-items: center;
-            gap: 9px;
+            gap: 8px;
 
-            width: fit-content;
+            margin-bottom: 14px;
 
-            margin-bottom: 18px;
-            padding: 8px 14px;
+            color:
+                rgba(255,255,255,.75);
+
+            font-size: 12px;
+            font-weight: 750;
+        }
+
+        .current-level-label::before {
+            content: "";
+
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #fff;
+        }
+
+        .current-level-title {
+            margin: 0 0 7px;
+
+            color: #fff;
+
+            font-size:
+                clamp(25px, 5vw, 38px);
+
+            line-height: 1.2;
+
+            font-weight: 850;
+
+            letter-spacing: -.035em;
+        }
+
+        .current-level-description {
+            max-width: 600px;
+
+            margin: 0 0 22px;
+
+            color:
+                rgba(255,255,255,.78);
+
+            line-height: 1.8;
+        }
+
+        .current-level-actions {
+            display: flex;
+            flex-wrap: wrap;
+
+            gap: 10px;
+        }
+
+        .level-main-btn {
+            min-height: 46px;
+
+            padding:
+                0 17px;
+
+            border: 0;
+            border-radius: 13px;
+
+            background: #fff;
+
+            color: var(--primary);
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            transition:
+                transform .2s ease,
+                background .2s ease;
+        }
+
+        .level-main-btn:hover {
+            transform: translateY(-2px);
+
+            background:
+                rgba(255,255,255,.93);
+        }
+
+        .level-outline-btn {
+            min-height: 46px;
+
+            padding:
+                0 17px;
 
             border:
                 1px solid
                 rgba(255,255,255,.22);
 
-            border-radius: 999px;
+            border-radius: 13px;
 
             background:
-                rgba(255,255,255,.10);
+                rgba(255,255,255,.08);
 
             color: #fff;
 
-            font-size: 13px;
-            font-weight: 700;
+            font-weight: 750;
 
-            backdrop-filter: blur(12px);
+            cursor: pointer;
+
+            backdrop-filter: blur(10px);
+
+            transition:
+                background .2s ease,
+                transform .2s ease;
         }
 
+        .level-outline-btn:hover {
+            transform: translateY(-2px);
 
-        .ai-dot {
-            width: 8px;
-            height: 8px;
-
-            flex: 0 0 auto;
-
-            border-radius: 50%;
-
-            background: #fff;
-
-            box-shadow:
-                0 0 0 5px
-                rgba(255,255,255,.09);
-        }
-
-
-        .home-hero h1 {
-            margin: 0 0 16px;
-
-            color: #fff;
-
-            font-size:
-                clamp(38px, 8vw, 64px);
-
-            line-height: 1.12;
-
-            font-weight: 850;
-
-            letter-spacing: -.045em;
-        }
-
-
-        .home-hero h1 span {
-            display: block;
-        }
-
-
-        .home-hero h1 .hero-brand-name {
-            color:
-                rgba(255,255,255,.88);
-        }
-
-
-        .home-hero-text {
-            max-width: 630px;
-
-            margin: 0 0 28px;
-
-            color:
-                rgba(255,255,255,.84);
-
-            font-size: 17px;
-
-            line-height: 1.95;
-        }
-
-
-        .hero-actions {
-            display: flex;
-            flex-direction: column;
-
-            gap: 10px;
-        }
-
-
-        .hero-actions .btn {
-            min-height: 52px;
-        }
-
-
-        .hero-primary {
-            background: #fff;
-            color: var(--primary);
-
-            box-shadow:
-                0 10px 25px
-                rgba(0,0,0,.10);
-        }
-
-
-        .hero-primary:hover {
             background:
-                rgba(255,255,255,.93);
-
-            color:
-                var(--primary-dark);
-        }
-
-
-        .hero-secondary {
-            background:
-                rgba(255,255,255,.09);
-
-            color: #fff;
-
-            border:
-                1px solid
-                rgba(255,255,255,.21);
-
-            backdrop-filter:
-                blur(10px);
-        }
-
-
-        .hero-secondary:hover {
-            background:
-                rgba(255,255,255,.16);
-
-            color: #fff;
-        }
-
-
-        .hero-arrow {
-            display: inline-block;
-            margin-inline-start: 6px;
+                rgba(255,255,255,.15);
         }
 
 
         /* =====================================================
-           AFKRASH CARD
+           QUICK STATUS CARD
         ===================================================== */
 
-        .teacher-card {
-            position: relative;
+        .quick-status-card {
+            padding: 24px;
 
-            width: min(100%, 330px);
-
-            margin-inline: auto;
-
-            padding: 20px;
-
-            border:
-                1px solid
-                rgba(255,255,255,.16);
-
+            border: 1px solid var(--border);
             border-radius: 28px;
 
-            background:
-                rgba(255,255,255,.09);
+            background: var(--surface);
 
-            box-shadow:
-                inset 0 1px 0
-                rgba(255,255,255,.10),
-                0 20px 45px
-                rgba(0,0,0,.08);
-
-            backdrop-filter:
-                blur(16px);
+            box-shadow: var(--shadow-sm);
         }
 
+        .card-top-line {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
 
-        .teacher-card::before {
-            content: "";
+            gap: 12px;
 
-            position: absolute;
-
-            width: 110px;
-            height: 110px;
-
-            left: -45px;
-            top: -45px;
-
-            border-radius: 50%;
-
-            border:
-                1px solid
-                rgba(255,255,255,.08);
+            margin-bottom: 20px;
         }
 
+        .card-top-line h2 {
+            margin: 0;
 
-        .teacher-avatar {
-            width: 100%;
-
-            aspect-ratio: 1 / 1;
-
-            display: grid;
-            place-items: center;
-
-            margin-bottom: 17px;
-
-            border-radius: 23px;
-
-            background:
-                radial-gradient(
-                    circle at 50% 35%,
-                    rgba(255,255,255,.24),
-                    rgba(255,255,255,.06) 55%,
-                    transparent 72%
-                );
-
-            border:
-                1px solid
-                rgba(255,255,255,.14);
-
-            color: #fff;
-
-            font-size: 62px;
-            font-weight: 850;
-
-            letter-spacing: -.05em;
-        }
-
-
-        .teacher-avatar::before {
-            content: "AI";
-        }
-
-
-        .teacher-card h2 {
-            margin: 0 0 5px;
-
-            color: #fff;
-
-            font-size: 23px;
+            font-size: 18px;
             font-weight: 800;
         }
 
-
-        .teacher-card p {
-            margin: 0;
-
-            color:
-                rgba(255,255,255,.70);
-
-            font-size: 14px;
-
-            line-height: 1.7;
-        }
-
-
-        .teacher-logo {
+        .small-status {
             display: inline-flex;
             align-items: center;
-            gap: 7px;
 
-            margin-top: 15px;
-            padding: 7px 11px;
+            padding:
+                5px 9px;
 
-            border-radius: 10px;
+            border-radius: 9px;
+
+            background: var(--primary-light);
+
+            color: var(--primary);
+
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .status-number {
+            margin-bottom: 4px;
+
+            color: var(--text);
+
+            font-size: 32px;
+            font-weight: 850;
+
+            letter-spacing: -.04em;
+        }
+
+        .status-label {
+            margin-bottom: 18px;
+
+            color: var(--text-muted);
+
+            font-size: 13px;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 9px;
+
+            overflow: hidden;
+
+            margin-bottom: 9px;
+
+            border-radius: 999px;
 
             background:
-                rgba(255,255,255,.11);
+                var(--primary-light);
+        }
 
-            color: #fff;
+        .progress-value {
+            width: 0%;
+            height: 100%;
+
+            border-radius: inherit;
+
+            background:
+                var(--primary);
+
+            transition:
+                width .4s ease;
+        }
+
+        .progress-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 10px;
+
+            color: var(--text-muted);
 
             font-size: 12px;
-            font-weight: 700;
         }
 
 
         /* =====================================================
-           SECTIONS
+           STUDY CONTINUE
         ===================================================== */
 
-        .home-section {
-            padding-top: 18px;
-        }
-
-
-        .section-intro {
-            max-width: 680px;
-
-            margin-bottom: 22px;
-        }
-
-
-        .section-intro h2 {
-            margin-bottom: 6px;
-        }
-
-
-        .section-intro p {
-            margin-bottom: 0;
-
-            line-height: 1.85;
-        }
-
-
-        /* =====================================================
-           IDENTITY
-        ===================================================== */
-
-        .identity-card {
+        .continue-card {
             position: relative;
             overflow: hidden;
 
             padding: 25px;
 
-            border-radius: 25px;
+            border: 1px solid var(--border);
+            border-radius: 26px;
 
-            background:
-                var(--surface);
+            background: var(--surface);
 
-            border:
-                1px solid
-                var(--border);
-
-            box-shadow:
-                var(--shadow-sm);
-
-            transition:
-                transform .2s ease,
-                box-shadow .2s ease;
+            box-shadow: var(--shadow-sm);
         }
 
-
-        .identity-card::after {
+        .continue-card::after {
             content: "";
 
             position: absolute;
 
-            width: 100px;
-            height: 100px;
+            width: 150px;
+            height: 150px;
 
-            left: -55px;
-            bottom: -55px;
+            left: -85px;
+            bottom: -100px;
 
             border-radius: 50%;
 
-            border:
-                1px solid
-                var(--border);
+            border: 1px solid var(--border);
 
             opacity: .65;
         }
 
-
-        .identity-card:hover {
-            transform:
-                translateY(-3px);
-
-            box-shadow:
-                var(--shadow);
+        .continue-inner {
+            position: relative;
+            z-index: 1;
         }
 
+        .continue-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
 
-        .identity-icon {
-            width: 52px;
-            height: 52px;
+            gap: 15px;
+
+            margin-bottom: 18px;
+        }
+
+        .continue-heading h2 {
+            margin: 0;
+
+            font-size: 19px;
+            font-weight: 820;
+        }
+
+        .continue-heading a {
+            color: var(--primary);
+
+            font-size: 12px;
+            font-weight: 800;
+
+            text-decoration: none;
+        }
+
+        .continue-content {
+            display: grid;
+
+            grid-template-columns:
+                auto minmax(0, 1fr)
+                auto;
+
+            align-items: center;
+
+            gap: 16px;
+        }
+
+        .continue-icon {
+            width: 56px;
+            height: 56px;
 
             display: grid;
             place-items: center;
 
-            margin-bottom: 15px;
+            border-radius: 17px;
 
-            border-radius: 16px;
+            background: var(--primary-light);
 
-            background:
-                var(--primary-light);
-
-            color:
-                var(--primary);
+            color: var(--primary);
 
             font-size: 17px;
             font-weight: 850;
         }
 
-
-        .identity-icon::before {
-            content: "AI";
+        .continue-info {
+            min-width: 0;
         }
 
+        .continue-info strong {
+            display: block;
 
-        .identity-card h3 {
-            margin-bottom: 7px;
+            margin-bottom: 5px;
+
+            color: var(--text);
+
+            font-size: 15px;
+            font-weight: 800;
         }
 
+        .continue-info span {
+            display: block;
 
-        .identity-card p {
+            overflow: hidden;
+
+            color: var(--text-muted);
+
+            font-size: 12px;
+
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .continue-progress {
+            margin-top: 10px;
+        }
+
+        .continue-progress .progress-track {
+            height: 6px;
+
             margin-bottom: 0;
+        }
 
-            line-height: 1.85;
+        .continue-btn {
+            min-height: 43px;
+
+            padding:
+                0 14px;
+
+            border: 1px solid var(--border);
+            border-radius: 12px;
+
+            background: var(--surface);
+
+            color: var(--primary);
+
+            font-size: 12px;
+            font-weight: 800;
+
+            cursor: pointer;
+
+            white-space: nowrap;
+
+            transition:
+                background .2s ease,
+                transform .2s ease;
+        }
+
+        .continue-btn:hover {
+            transform: translateY(-2px);
+
+            background: var(--primary-light);
         }
 
 
         /* =====================================================
-           CERTIFICATES
+           NOTIFICATIONS / STUDY PLAN
         ===================================================== */
 
-        .certificate-card {
-            position: relative;
-            overflow: hidden;
+        .home-two-column {
+            display: grid;
 
+            grid-template-columns:
+                minmax(0, 1fr)
+                minmax(0, 1fr);
+
+            gap: 18px;
+
+            margin-top: 18px;
+        }
+
+        .home-panel {
             padding: 25px;
 
-            border-radius: 24px;
+            border: 1px solid var(--border);
+            border-radius: 26px;
 
-            transition:
-                transform .2s ease,
-                box-shadow .2s ease;
+            background: var(--surface);
+
+            box-shadow: var(--shadow-sm);
         }
 
+        .panel-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
 
-        .certificate-card::before {
-            content: "";
+            gap: 15px;
 
-            position: absolute;
+            margin-bottom: 19px;
+        }
 
-            width: 130px;
-            height: 130px;
+        .panel-heading h2 {
+            margin: 0;
 
-            left: -75px;
-            bottom: -75px;
+            font-size: 18px;
+            font-weight: 820;
+        }
 
-            border-radius: 50%;
+        .panel-heading a {
+            color: var(--primary);
 
-            border:
+            font-size: 12px;
+            font-weight: 800;
+
+            text-decoration: none;
+        }
+
+        .notification-item,
+        .schedule-item {
+            display: flex;
+            align-items: flex-start;
+
+            gap: 13px;
+
+            padding:
+                13px 0;
+
+            border-bottom:
                 1px solid
                 var(--border);
-
-            opacity: .6;
         }
 
+        .notification-item:last-child,
+        .schedule-item:last-child {
+            border-bottom: 0;
 
-        .certificate-card:hover {
-            transform:
-                translateY(-5px);
+            padding-bottom: 0;
         }
 
+        .notification-icon,
+        .schedule-icon {
+            width: 39px;
+            height: 39px;
 
-        .certificate-number {
-            display: inline-flex;
+            flex: 0 0 auto;
 
-            align-items: center;
-            justify-content: center;
+            display: grid;
+            place-items: center;
 
-            width: 44px;
-            height: 44px;
+            border-radius: 12px;
 
-            margin-bottom: 15px;
+            background: var(--primary-light);
 
-            border-radius: 13px;
-
-            background:
-                var(--primary-light);
-
-            color:
-                var(--primary);
+            color: var(--primary);
 
             font-size: 13px;
             font-weight: 850;
         }
 
+        .notification-info,
+        .schedule-info {
+            min-width: 0;
+        }
 
-        .certificate-card h3 {
-            margin-bottom: 8px;
+        .notification-info strong,
+        .schedule-info strong {
+            display: block;
+
+            margin-bottom: 4px;
+
+            color: var(--text);
+
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .notification-info p,
+        .schedule-info p {
+            margin: 0;
+
+            color: var(--text-muted);
+
+            font-size: 12px;
+
+            line-height: 1.7;
+        }
+
+        .notification-time {
+            margin-inline-start: auto;
+
+            color: var(--text-muted);
+
+            font-size: 10px;
+
+            white-space: nowrap;
+        }
+
+        .schedule-time {
+            margin-inline-start: auto;
+
+            color: var(--primary);
+
+            font-size: 12px;
+            font-weight: 800;
+
+            white-space: nowrap;
         }
 
 
-        .certificate-card p {
+        /* =====================================================
+           STUDY TARGET
+        ===================================================== */
+
+        .study-target {
+            margin-top: 18px;
+
+            padding: 25px;
+
+            border: 1px solid var(--border);
+            border-radius: 26px;
+
+            background: var(--surface);
+
+            box-shadow: var(--shadow-sm);
+        }
+
+        .target-grid {
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1fr)
+                auto;
+
+            align-items: center;
+
+            gap: 20px;
+        }
+
+        .target-copy h2 {
+            margin: 0 0 7px;
+
+            font-size: 19px;
+            font-weight: 820;
+        }
+
+        .target-copy p {
+            margin: 0;
+
+            color: var(--text-muted);
+
             line-height: 1.8;
         }
 
+        .target-stat {
+            min-width: 125px;
 
-        .certificate-card .available {
-            display: inline-block;
+            padding: 16px;
 
-            margin-top: 10px;
+            border-radius: 18px;
 
-            padding: 5px 9px;
+            background: var(--primary-light);
 
-            border-radius: 8px;
+            text-align: center;
+        }
 
-            background:
-                var(--success-light, #dcfce7);
+        .target-stat strong {
+            display: block;
 
-            color:
-                var(--success-dark, #166534);
+            margin-bottom: 4px;
 
-            font-size: 12px;
+            color: var(--primary);
+
+            font-size: 27px;
+            font-weight: 850;
+        }
+
+        .target-stat span {
+            color: var(--text-muted);
+
+            font-size: 11px;
             font-weight: 700;
         }
 
 
         /* =====================================================
-           LEARNING STRUCTURE
+           LEVEL SELECTOR
         ===================================================== */
 
-        .future-card {
-            padding: 23px;
+        .level-selector {
+            display: none;
 
-            border-radius: 22px;
+            margin-top: 18px;
+
+            padding: 25px;
+
+            border: 1px solid var(--border);
+            border-radius: 26px;
+
+            background: var(--surface);
+
+            box-shadow: var(--shadow-sm);
         }
 
+        .level-selector.show {
+            display: block;
+        }
 
-        .feature-mark {
-            width: 44px;
-            height: 44px;
+        .level-selector-heading {
+            margin-bottom: 19px;
+        }
 
+        .level-selector-heading h2 {
+            margin: 0 0 6px;
+
+            font-size: 19px;
+            font-weight: 820;
+        }
+
+        .level-selector-heading p {
+            margin: 0;
+
+            color: var(--text-muted);
+
+            line-height: 1.75;
+        }
+
+        .level-choice-grid {
             display: grid;
-            place-items: center;
 
-            margin-bottom: 13px;
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
 
-            border-radius: 13px;
+            gap: 12px;
+        }
 
-            background:
-                var(--primary-light);
+        .level-choice {
+            position: relative;
 
-            color:
-                var(--primary);
+            padding: 19px;
 
-            font-size: 12px;
+            border: 1px solid var(--border);
+            border-radius: 19px;
+
+            background: var(--surface);
+
+            color: var(--text);
+
+            text-align: start;
+
+            cursor: pointer;
+
+            transition:
+                transform .2s ease,
+                border-color .2s ease,
+                background .2s ease;
+        }
+
+        .level-choice:hover {
+            transform: translateY(-3px);
+
+            border-color: var(--primary);
+
+            background: var(--primary-light);
+        }
+
+        .level-choice-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 34px;
+            height: 34px;
+
+            margin-bottom: 12px;
+
+            border-radius: 10px;
+
+            background: var(--primary-light);
+
+            color: var(--primary);
+
+            font-size: 10px;
             font-weight: 850;
         }
 
+        .level-choice h3 {
+            margin: 0 0 5px;
 
-        .future-card h3 {
-            margin-bottom: 7px;
+            font-size: 15px;
+            font-weight: 820;
         }
 
+        .level-choice p {
+            margin: 0;
 
-        .future-card p {
-            line-height: 1.8;
+            color: var(--text-muted);
+
+            font-size: 11px;
+
+            line-height: 1.7;
         }
 
+        .branch-selector {
+            display: none;
 
-        /* =====================================================
-           FINAL CTA
-        ===================================================== */
+            margin-top: 14px;
 
-        .home-final {
-            position: relative;
-            overflow: hidden;
+            padding-top: 18px;
 
-            padding: 40px 24px;
-
-            border-radius: 30px;
-
-            background:
-                radial-gradient(
-                    circle at 20% 20%,
-                    rgba(255,255,255,.13),
-                    transparent 25%
-                ),
-                linear-gradient(
-                    135deg,
-                    var(--primary),
-                    var(--primary-dark)
-                );
-
-            color: #fff;
-
-            text-align: center;
-
-            box-shadow:
-                0 20px 45px
-                rgba(37,99,235,.18);
-        }
-
-
-        .home-final::before {
-            content: "";
-
-            position: absolute;
-
-            width: 240px;
-            height: 240px;
-
-            right: -130px;
-            top: -150px;
-
-            border-radius: 50%;
-
-            border:
+            border-top:
                 1px solid
-                rgba(255,255,255,.10);
+                var(--border);
         }
 
-
-        .home-final h2 {
-            position: relative;
-            z-index: 1;
-
-            color: #fff;
-
-            margin-bottom: 8px;
+        .branch-selector.show {
+            display: block;
         }
 
+        .branch-selector-title {
+            margin: 0 0 12px;
 
-        .home-final p {
-            position: relative;
-            z-index: 1;
-
-            color:
-                rgba(255,255,255,.82);
-
-            margin-bottom: 21px;
-
-            line-height: 1.8;
+            font-size: 14px;
+            font-weight: 800;
         }
 
+        .branch-buttons {
+            display: flex;
+            flex-wrap: wrap;
 
-        .home-final .btn {
-            position: relative;
-            z-index: 1;
-
-            background: #fff;
-
-            color:
-                var(--primary);
+            gap: 10px;
         }
 
+        .branch-button {
+            min-width: 120px;
 
-        .home-final .btn:hover {
-            background:
-                rgba(255,255,255,.93);
+            min-height: 43px;
+
+            padding:
+                0 17px;
+
+            border: 1px solid var(--border);
+            border-radius: 12px;
+
+            background: var(--surface);
+
+            color: var(--text);
+
+            font-weight: 800;
+
+            cursor: pointer;
+        }
+
+        .branch-button:hover {
+            border-color: var(--primary);
+
+            background: var(--primary-light);
+
+            color: var(--primary);
         }
 
 
@@ -790,118 +1061,102 @@
            RESPONSIVE
         ===================================================== */
 
-        @media (min-width: 760px) {
+        @media (max-width: 900px) {
 
-            .home-hero-inner {
+            .home-dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .level-choice-grid {
                 grid-template-columns:
-                    minmax(0, 1fr)
-                    330px;
-
-                align-items: center;
-
-                padding: 54px;
-            }
-
-
-            .hero-actions {
-                flex-direction: row;
-            }
-
-
-            .hero-actions .btn {
-                width: auto;
-
-                min-width: 155px;
-            }
-
-
-            .teacher-card {
-                margin-inline-start: auto;
-                margin-inline-end: 0;
+                    repeat(2, minmax(0, 1fr));
             }
 
         }
 
 
-        @media (min-width: 1000px) {
+        @media (max-width: 700px) {
 
-            .home-hero {
-                min-height: 570px;
+            .home-two-column {
+                grid-template-columns: 1fr;
             }
 
-
-            .home-hero-inner {
-                padding:
-                    64px 66px;
+            .target-grid {
+                grid-template-columns: 1fr;
             }
 
-
-            .home-hero-text {
-                font-size: 18px;
+            .target-stat {
+                width: 100%;
             }
 
         }
 
 
-        @media (max-width: 759px) {
+        @media (max-width: 560px) {
 
-            .home-hero {
-                min-height: auto;
-
-                border-radius: 26px;
+            .home-header {
+                padding: 21px;
             }
 
-
-            .home-hero-inner {
-                padding: 30px 18px;
+            .home-header-inner {
+                align-items: flex-start;
             }
 
-
-            .home-hero h1 {
-                font-size:
-                    clamp(34px, 10vw, 48px);
+            .home-header-actions {
+                display: none;
             }
 
-
-            .home-hero-text {
-                font-size: 15px;
+            .current-level-card {
+                padding: 23px;
             }
 
-
-            .teacher-card {
-                width:
-                    min(100%, 290px);
+            .quick-status-card,
+            .continue-card,
+            .home-panel,
+            .study-target,
+            .level-selector {
+                padding: 21px;
             }
 
+            .continue-content {
+                grid-template-columns:
+                    auto minmax(0, 1fr);
+            }
 
-            .home-final {
-                padding:
-                    34px 20px;
+            .continue-btn {
+                grid-column: 2;
+                justify-self: start;
+            }
+
+            .notification-time,
+            .schedule-time {
+                display: none;
+            }
+
+            .level-choice-grid {
+                grid-template-columns: 1fr;
             }
 
         }
 
 
-        @media (max-width: 420px) {
+        @media (max-width: 390px) {
 
-            .home-hero-inner {
-                padding:
-                    25px 15px;
+            .home-header h1 {
+                font-size: 25px;
             }
 
-
-            .home-hero h1 {
-                font-size: 35px;
+            .current-level-title {
+                font-size: 27px;
             }
 
-
-            .ai-label {
-                font-size: 12px;
+            .current-level-actions {
+                flex-direction: column;
             }
 
-
-            .teacher-card {
-                padding: 16px;
+            .level-main-btn,
+            .level-outline-btn {
+                width: 100%;
             }
 
         }
@@ -932,11 +1187,70 @@
         </a>
 
 
-        <a href="login.html"
-           class="btn btn-primary"
-           data-home-i18n="login">
-            دخول
-        </a>
+        <nav class="header-actions"
+             aria-label="Navigation">
+
+            <a href="dashboard.html"
+               class="header-action active">
+
+                <span class="header-action-icon"
+                      aria-hidden="true">
+                    ⌂
+                </span>
+
+                <span data-home-i18n="nav_home">
+                    الرئيسية
+                </span>
+
+            </a>
+
+
+            <button type="button"
+                    class="header-action"
+                    onclick="showHomeNotifications()">
+
+                <span class="header-action-icon"
+                      aria-hidden="true">
+                    ◔
+                </span>
+
+                <span data-home-i18n="nav_notifications">
+                    الإشعارات
+                </span>
+
+            </button>
+
+
+            <a href="account.html"
+               class="header-action">
+
+                <span class="header-action-icon"
+                      aria-hidden="true">
+                    ○
+                </span>
+
+                <span data-home-i18n="nav_account">
+                    حسابي
+                </span>
+
+            </a>
+
+
+            <a href="settings.html"
+               class="header-action">
+
+                <span class="header-action-icon"
+                      aria-hidden="true">
+                    ⚙
+                </span>
+
+                <span data-home-i18n="nav_settings">
+                    الإعدادات
+                </span>
+
+            </a>
+
+        </nav>
 
     </div>
 
@@ -945,114 +1259,63 @@
 
 <main class="home-page">
 
-    <!-- =====================================================
-         HERO
-    ====================================================== -->
-
     <section class="section">
 
         <div class="container">
 
-            <div class="home-hero">
+            <div class="home-header">
 
-                <span class="hero-orbit"
-                      aria-hidden="true"></span>
+                <div class="home-header-inner">
 
+                    <div class="home-welcome">
 
-                <div class="home-hero-inner">
+                        <div class="home-eyebrow">
 
-                    <div class="home-hero-content">
-
-                        <div class="ai-label">
-
-                            <span class="ai-dot"
+                            <span class="home-eyebrow-dot"
                                   aria-hidden="true"></span>
 
-                            <span data-home-i18n="ai_education">
-                                التعليم بالذكاء الاصطناعي
+                            <span data-home-i18n="student_center">
+                                مركز الطالب
                             </span>
 
                         </div>
 
 
-                        <h1>
-
-                            <span data-home-i18n="welcome">
-                                مرحبًا بك في
-                            </span>
-
-                            <span class="hero-brand-name">
-                                EduNova AI
-                            </span>
-
+                        <h1 id="homeWelcomeTitle">
+                            مرحبًا بك في EduNova AI
                         </h1>
 
 
-                        <p class="home-hero-text">
-
-                            <span data-home-i18n="hero_description">
-                                منصة تعليمية منظمة تساعدك على الاستعداد
-                                لشهادتك الدراسية من خلال الدروس والفيديوهات
-                                التعليمية مع مدرسك الافتراضي
-                            </span>
-
-                            <strong>
-                                Afkrash AI
-                            </strong>.
-
+                        <p data-home-i18n="home_welcome_desc">
+                            من هنا تبدأ دراستك، تتابع تقدمك، وتعرف خطوتك التالية.
                         </p>
-
-
-                        <div class="hero-actions">
-
-                            <a href="login.html"
-                               class="btn hero-primary">
-
-                                <span data-home-i18n="start_learning">
-                                    ابدأ التعلم
-                                </span>
-
-                                <span class="hero-arrow"
-                                      aria-hidden="true">
-                                    ←
-                                </span>
-
-                            </a>
-
-
-                            <a href="#certificates"
-                               class="btn hero-secondary"
-                               data-home-i18n="choose_certificate">
-
-                                اختر شهادتك
-
-                            </a>
-
-                        </div>
 
                     </div>
 
 
-                    <div class="teacher-card">
+                    <div class="home-header-actions">
 
-                        <div class="teacher-avatar"
-                             aria-hidden="true">
-                        </div>
+                        <button type="button"
+                                class="home-icon-action"
+                                onclick="showHomeNotifications()"
+                                aria-label="الإشعارات">
 
+                            <span aria-hidden="true">
+                                ◔
+                            </span>
 
-                        <h2>
-                            Afkrash AI
-                        </h2>
-
-
-                        <p data-home-i18n="virtual_teacher_edunova">
-                            مدرسك الافتراضي في EduNova AI
-                        </p>
+                        </button>
 
 
-                        <div class="teacher-logo">
-                            EduNova AI
-                        </div>
+                        <a href="settings.html"
+                           class="home-icon-action"
+                           aria-label="الإعدادات">
+
+                            <span aria-hidden="true">
+                                ⚙
+                            </span>
+
+                        </a>
 
                     </div>
 
@@ -1060,103 +1323,706 @@
 
             </div>
 
+
+            <!-- =================================================
+                 CURRENT LEVEL + QUICK STATUS
+            ================================================== -->
+
+            <div class="home-dashboard-grid">
+
+
+                <article class="current-level-card">
+
+                    <div class="current-level-content">
+
+                        <div class="current-level-label"
+                             data-home-i18n="current_level">
+                            مستواك الدراسي
+                        </div>
+
+
+                        <h2 class="current-level-title"
+                            id="currentLevelTitle">
+                            لم تحدد مستواك بعد
+                        </h2>
+
+
+                        <p class="current-level-description"
+                           id="currentLevelDescription">
+
+                            اختر المستوى أو الشهادة التي تستعد لها
+                            حتى نجهز لك المسار التعليمي المناسب.
+
+                        </p>
+
+
+                        <div class="current-level-actions">
+
+                            <button type="button"
+                                    class="level-main-btn"
+                                    onclick="toggleLevelSelector()">
+
+                                <span data-home-i18n="choose_level">
+                                    اختيار المستوى
+                                </span>
+
+                            </button>
+
+
+                            <a href="library.html"
+                               class="level-outline-btn"
+                               data-home-i18n="open_library">
+                                فتح مكتبتي
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <article class="quick-status-card">
+
+                    <div class="card-top-line">
+
+                        <h2 data-home-i18n="weekly_progress">
+                            تقدمك هذا الأسبوع
+                        </h2>
+
+                        <span class="small-status"
+                              data-home-i18n="learning">
+                            تعلم
+                        </span>
+
+                    </div>
+
+
+                    <div class="status-number"
+                         id="weeklyProgressNumber">
+                        0%
+                    </div>
+
+
+                    <div class="status-label"
+                         data-home-i18n="weekly_progress_desc">
+                        من هدفك الدراسي الأسبوعي
+                    </div>
+
+
+                    <div class="progress-track">
+
+                        <div class="progress-value"
+                             id="weeklyProgressBar">
+                        </div>
+
+                    </div>
+
+
+                    <div class="progress-meta">
+
+                        <span id="weeklyProgressVideos">
+                            0 فيديو
+                        </span>
+
+                        <span data-home-i18n="weekly_goal">
+                            الهدف الأسبوعي
+                        </span>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <!-- =================================================
+                 CONTINUE LEARNING
+            ================================================== -->
+
+            <article class="continue-card">
+
+                <div class="continue-inner">
+
+                    <div class="continue-heading">
+
+                        <h2 data-home-i18n="continue_learning">
+                            تابع دراستك
+                        </h2>
+
+                        <a href="library.html"
+                           data-home-i18n="view_library">
+                            مكتبتي
+                        </a>
+
+                    </div>
+
+
+                    <div class="continue-content">
+
+                        <div class="continue-icon"
+                             aria-hidden="true">
+                            ▶
+                        </div>
+
+
+                        <div class="continue-info">
+
+                            <strong id="continueTitle"
+                                    data-home-i18n="no_lesson">
+                                لم تبدأ درسًا بعد
+                            </strong>
+
+                            <span id="continueSubtitle">
+                                اختر مستواك وابدأ رحلتك التعليمية
+                            </span>
+
+
+                            <div class="continue-progress">
+
+                                <div class="progress-track">
+
+                                    <div class="progress-value"
+                                         id="continueProgressBar">
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <button type="button"
+                                class="continue-btn"
+                                id="continueButton"
+                                onclick="continueLearning()">
+
+                            <span data-home-i18n="start_now">
+                                ابدأ الآن
+                            </span>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 LEVEL SELECTOR
+            ================================================== -->
+
+            <section class="level-selector"
+                     id="levelSelector">
+
+                <div class="level-selector-heading">
+
+                    <h2 data-home-i18n="choose_study_level">
+                        اختر المستوى الذي تريد دراسته
+                    </h2>
+
+                    <p data-home-i18n="choose_study_level_desc">
+                        سيحدد اختيارك المواد والفصول والفيديوهات التي تظهر لك في مكتبتك.
+                    </p>
+
+                </div>
+
+
+                <div class="level-choice-grid">
+
+                    <button type="button"
+                            class="level-choice"
+                            onclick="selectHomeLevel('concours')">
+
+                        <span class="level-choice-number">
+                            01
+                        </span>
+
+                        <h3 data-home-i18n="concours">
+                            كونكور
+                        </h3>
+
+                        <p data-home-i18n="concours_desc">
+                            الرياضيات، العربية، الفرنسية والعلوم الطبيعية.
+                        </p>
+
+                    </button>
+
+
+                    <button type="button"
+                            class="level-choice"
+                            onclick="selectHomeLevel('brevet')">
+
+                        <span class="level-choice-number">
+                            02
+                        </span>
+
+                        <h3 data-home-i18n="brevet">
+                            بريڤي
+                        </h3>
+
+                        <p data-home-i18n="brevet_desc">
+                            الرياضيات، الفيزياء والكيمياء والعلوم الطبيعية.
+                        </p>
+
+                    </button>
+
+
+                    <button type="button"
+                            class="level-choice"
+                            onclick="selectHomeLevel('bac_c')">
+
+                        <span class="level-choice-number">
+                            03
+                        </span>
+
+                        <h3>
+                            Bac C
+                        </h3>
+
+                        <p data-home-i18n="bac_c_desc">
+                            الرياضيات، العلوم، الفيزياء والكيمياء.
+                        </p>
+
+                    </button>
+
+
+                    <button type="button"
+                            class="level-choice"
+                            onclick="selectHomeLevel('bac_d')">
+
+                        <span class="level-choice-number">
+                            04
+                        </span>
+
+                        <h3>
+                            Bac D
+                        </h3>
+
+                        <p data-home-i18n="bac_d_desc">
+                            العلوم الطبيعية، الرياضيات، الفيزياء والكيمياء.
+                        </p>
+
+                    </button>
+
+                </div>
+
+
+                <div class="branch-selector"
+                     id="branchSelector">
+
+                    <h3 class="branch-selector-title"
+                        data-home-i18n="choose_branch">
+                        اختر الشعبة
+                    </h3>
+
+
+                    <div class="branch-buttons">
+
+                        <button type="button"
+                                class="branch-button"
+                                onclick="selectHomeLevel('bac_c')">
+                            Bac C
+                        </button>
+
+
+                        <button type="button"
+                                class="branch-button"
+                                onclick="selectHomeLevel('bac_d')">
+                            Bac D
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
         </div>
 
-    </section><!-- =====================================================
-         WHAT IS EDUNOVA
+    </section>    <!-- =====================================================
+         NOTIFICATIONS + STUDY PLAN
     ====================================================== -->
 
-    <section class="section home-section">
+    <section class="section">
+
+        <div class="container">
+
+            <div class="home-two-column">
+
+
+                <!-- =========================
+                     NOTIFICATIONS
+                ========================== -->
+
+                <article class="home-panel"
+                         id="notificationsPanel">
+
+                    <div class="panel-heading">
+
+                        <h2 data-home-i18n="notifications">
+                            الإشعارات
+                        </h2>
+
+                        <a href="notifications.html"
+                           data-home-i18n="view_all">
+                            عرض الكل
+                        </a>
+
+                    </div>
+
+
+                    <div id="homeNotificationsList">
+
+                        <div class="notification-item">
+
+                            <div class="notification-icon"
+                                 aria-hidden="true">
+                                ◔
+                            </div>
+
+
+                            <div class="notification-info">
+
+                                <strong data-home-i18n="welcome_notification">
+                                    مرحبًا بك في EduNova AI
+                                </strong>
+
+                                <p data-home-i18n="welcome_notification_desc">
+                                    اختر مستواك الدراسي لبدء بناء مسارك التعليمي.
+                                </p>
+
+                            </div>
+
+
+                            <span class="notification-time"
+                                  data-home-i18n="now">
+                                الآن
+                            </span>
+
+                        </div>
+
+
+                        <div class="notification-item">
+
+                            <div class="notification-icon"
+                                 aria-hidden="true">
+                                ✓
+                            </div>
+
+
+                            <div class="notification-info">
+
+                                <strong data-home-i18n="study_reminder">
+                                    تذكير بالدراسة
+                                </strong>
+
+                                <p data-home-i18n="study_reminder_desc">
+                                    ستظهر هنا تذكيراتك وخطتك الزمنية اليومية.
+                                </p>
+
+                            </div>
+
+
+                            <span class="notification-time"
+                                  data-home-i18n="planned">
+                                مخطط
+                            </span>
+
+                        </div>
+
+
+                        <div class="notification-item">
+
+                            <div class="notification-icon"
+                                 aria-hidden="true">
+                                AI
+                            </div>
+
+
+                            <div class="notification-info">
+
+                                <strong data-home-i18n="afkrash_notification">
+                                    Afkrash AI
+                                </strong>
+
+                                <p data-home-i18n="afkrash_notification_desc">
+                                    ستصلك هنا التنبيهات التعليمية والتوصيات الذكية.
+                                </p>
+
+                            </div>
+
+
+                            <span class="notification-time">
+                                AI
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- =========================
+                     STUDY SCHEDULE
+                ========================== -->
+
+                <article class="home-panel">
+
+                    <div class="panel-heading">
+
+                        <h2 data-home-i18n="study_plan">
+                            خطتك الدراسية
+                        </h2>
+
+                        <a href="notifications.html"
+                           data-home-i18n="manage_plan">
+                            إدارة الخطة
+                        </a>
+
+                    </div>
+
+
+                    <div id="homeScheduleList">
+
+                        <div class="schedule-item">
+
+                            <div class="schedule-icon"
+                                 aria-hidden="true">
+                                01
+                            </div>
+
+
+                            <div class="schedule-info">
+
+                                <strong data-home-i18n="today">
+                                    اليوم
+                                </strong>
+
+                                <p data-home-i18n="schedule_first">
+                                    اختر وقت الدراسة والمواد التي تريد مراجعتها.
+                                </p>
+
+                            </div>
+
+
+                            <span class="schedule-time">
+                                —
+                            </span>
+
+                        </div>
+
+
+                        <div class="schedule-item">
+
+                            <div class="schedule-icon"
+                                 aria-hidden="true">
+                                02
+                            </div>
+
+
+                            <div class="schedule-info">
+
+                                <strong data-home-i18n="tomorrow">
+                                    غدًا
+                                </strong>
+
+                                <p data-home-i18n="schedule_second">
+                                    سيظهر هنا موعد جلسة الدراسة القادمة.
+                                </p>
+
+                            </div>
+
+
+                            <span class="schedule-time">
+                                —
+                            </span>
+
+                        </div>
+
+
+                        <div class="schedule-item">
+
+                            <div class="schedule-icon"
+                                 aria-hidden="true">
+                                +
+                            </div>
+
+
+                            <div class="schedule-info">
+
+                                <strong data-home-i18n="weekly_schedule">
+                                    الجدول الأسبوعي
+                                </strong>
+
+                                <p data-home-i18n="schedule_third">
+                                    نظّم وقتك الدراسي وحدد أهدافك للأسبوع.
+                                </p>
+
+                            </div>
+
+
+                            <span class="schedule-time">
+                                +
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <!-- =================================================
+                 STUDY TARGET
+            ================================================== -->
+
+            <article class="study-target">
+
+                <div class="target-grid">
+
+                    <div class="target-copy">
+
+                        <h2 data-home-i18n="study_target">
+                            هدفك الدراسي
+                        </h2>
+
+                        <p data-home-i18n="study_target_desc">
+                            اجعل دراستك منتظمة. حدد هدفًا أسبوعيًا
+                            وسنساعدك على متابعة تقدمك خطوة بخطوة.
+                        </p>
+
+                    </div>
+
+
+                    <div class="target-stat">
+
+                        <strong id="targetHours">
+                            0
+                        </strong>
+
+                        <span data-home-i18n="study_hours">
+                            ساعة هذا الأسبوع
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         STUDY HUB
+    ====================================================== -->
+
+    <section class="section">
 
         <div class="container">
 
             <div class="section-intro">
 
                 <h2 class="section-title"
-                    data-home-i18n="what_is_edunova">
-                    ما هي EduNova AI؟
+                    data-home-i18n="student_tools">
+                    أدواتك التعليمية
                 </h2>
 
-                <p data-home-i18n="edunova_intro">
-                    منصة تعليمية تعتمد على التكنولوجيا والذكاء الاصطناعي
-                    لتقديم تجربة تعلم بسيطة ومنظمة للطلاب.
+                <p data-home-i18n="student_tools_desc">
+                    كل ما تحتاجه للدراسة والمتابعة والتواصل في مكان واحد.
                 </p>
 
             </div>
 
 
-            <div class="grid grid-2">
+            <div class="grid grid-3">
 
-                <article class="identity-card">
 
-                    <div class="identity-icon"
+                <!-- =========================
+                     LIBRARY
+                ========================== -->
+
+                <a href="library.html"
+                   class="card card-hover future-card">
+
+                    <div class="feature-mark"
                          aria-hidden="true">
+                        □
                     </div>
 
-                    <h3 data-home-i18n="understand_before_memorize">
-                        افهم قبل أن تحفظ
+
+                    <h3 data-home-i18n="my_library">
+                        مكتبتي
                     </h3>
 
-                    <p data-home-i18n="understand_before_memorize_desc">
-                        نركز على فهم الفكرة وطريقة الوصول إلى الحل،
-                        وليس فقط حفظ الإجابة.
+
+                    <p class="text-muted"
+                       data-home-i18n="my_library_desc">
+                        المواد والفصول والفيديوهات الخاصة بمستواك الدراسي.
                     </p>
 
-                </article>
+                </a>
 
 
-                <article class="identity-card">
+                <!-- =========================
+                     FORUM
+                ========================== -->
 
-                    <div class="identity-icon"
+                <a href="forum.html"
+                   class="card card-hover future-card">
+
+                    <div class="feature-mark"
                          aria-hidden="true">
+                        ◌
                     </div>
 
-                    <h3 data-home-i18n="clear_learning_path">
-                        طريق تعليمي واضح
+
+                    <h3 data-home-i18n="forum">
+                        المنتدى
                     </h3>
 
-                    <p data-home-i18n="clear_learning_path_desc">
-                        تبدأ باختيار الشهادة، ثم المستوى أو الفرع،
-                        ثم المادة والفصول والدروس.
+
+                    <p class="text-muted"
+                       data-home-i18n="forum_desc">
+                        ناقش الدروس مع الطلاب وتابع تقييمك وتقدمك.
                     </p>
 
-                </article>
+                </a>
 
 
-                <article class="identity-card">
+                <!-- =========================
+                     SUBSCRIPTION
+                ========================== -->
 
-                    <div class="identity-icon"
+                <a href="subscriptions.html"
+                   class="card card-hover future-card">
+
+                    <div class="feature-mark"
                          aria-hidden="true">
+                        +
                     </div>
 
-                    <h3 data-home-i18n="afkrash_explanations">
-                        شرح بواسطة Afkrash AI
+
+                    <h3 data-home-i18n="subscription">
+                        اشتراكك
                     </h3>
 
-                    <p data-home-i18n="afkrash_explanations_desc">
-                        مدرس افتراضي يقدم الدروس والشروحات بطريقة
-                        مبسطة ومناسبة للطالب.
+
+                    <p class="text-muted"
+                       data-home-i18n="subscription_desc">
+                        تابع خطتك التعليمية واطلع على خيارات المحتوى Premium.
                     </p>
 
-                </article>
-
-
-                <article class="identity-card">
-
-                    <div class="identity-icon"
-                         aria-hidden="true">
-                    </div>
-
-                    <h3 data-home-i18n="step_by_step">
-                        تعلم خطوة بخطوة
-                    </h3>
-
-                    <p data-home-i18n="step_by_step_desc">
-                        تتقدم تدريجيًا من الدرس الأول إلى الدروس
-                        المتقدمة حتى تصل إلى هدفك الدراسي.
-                    </p>
-
-                </article>
+                </a>
 
             </div>
 
@@ -1166,158 +2032,31 @@
 
 
     <!-- =====================================================
-         CERTIFICATES
+         CURRICULUM PREVIEW
     ====================================================== -->
 
-    <section class="section home-section"
-             id="certificates">
+    <section class="section">
 
         <div class="container">
 
             <div class="section-intro">
 
                 <h2 class="section-title"
-                    data-home-i18n="choose_certificate">
-                    اختر شهادتك
+                    data-home-i18n="curriculum_preview">
+                    محتواك الدراسي
                 </h2>
 
-                <p data-home-i18n="certificate_intro">
-                    اختر المسار الدراسي المناسب لك، ثم تابع إلى
-                    مكتبتك التعليمية.
+                <p data-home-i18n="curriculum_preview_desc">
+                    بعد اختيار مستواك ستظهر لك المواد والفصول والفيديوهات
+                    من مكتبتك التعليمية.
                 </p>
 
             </div>
 
 
-            <div class="grid grid-4">
+            <div class="grid grid-4"
+                 id="homeSubjectPreview">
 
-                <a href="login.html"
-                   class="card card-hover certificate-card">
-
-                    <span class="certificate-number">
-                        01
-                    </span>
-
-                    <h3 data-home-i18n="concours">
-                        كونكور
-                    </h3>
-
-                    <p class="text-muted"
-                       data-home-i18n="concours_desc">
-                        الرياضيات، العربية، الفرنسية والعلوم الطبيعية.
-                    </p>
-
-                    <span class="available"
-                          data-home-i18n="available_plan">
-                        متاح ضمن خطة المنصة
-                    </span>
-
-                </a>
-
-
-                <a href="login.html"
-                   class="card card-hover certificate-card">
-
-                    <span class="certificate-number">
-                        02
-                    </span>
-
-                    <h3 data-home-i18n="brevet">
-                        بريڤي
-                    </h3>
-
-                    <p class="text-muted"
-                       data-home-i18n="brevet_desc">
-                        الرياضيات، الفيزياء والكيمياء والعلوم الطبيعية.
-                    </p>
-
-                    <span class="available"
-                          data-home-i18n="available_plan">
-                        متاح ضمن خطة المنصة
-                    </span>
-
-                </a>
-
-
-                <a href="login.html"
-                   class="card card-hover certificate-card">
-
-                    <span class="certificate-number">
-                        03
-                    </span>
-
-                    <h3>
-                        Bac C
-                    </h3>
-
-                    <p class="text-muted"
-                       data-home-i18n="bac_c_desc">
-                        مسار علمي يركز على الرياضيات والعلوم
-                        والفيزياء والكيمياء.
-                    </p>
-
-                    <span class="available"
-                          data-home-i18n="available_plan">
-                        متاح ضمن خطة المنصة
-                    </span>
-
-                </a>
-
-
-                <a href="login.html"
-                   class="card card-hover certificate-card">
-
-                    <span class="certificate-number">
-                        04
-                    </span>
-
-                    <h3>
-                        Bac D
-                    </h3>
-
-                    <p class="text-muted"
-                       data-home-i18n="bac_d_desc">
-                        مسار علمي يركز على العلوم الطبيعية
-                        والرياضيات والفيزياء والكيمياء.
-                    </p>
-
-                    <span class="available"
-                          data-home-i18n="available_plan">
-                        متاح ضمن خطة المنصة
-                    </span>
-
-                </a>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         LEARNING PATH
-    ====================================================== -->
-
-    <section class="section home-section">
-
-        <div class="container">
-
-            <div class="section-intro">
-
-                <h2 class="section-title"
-                    data-home-i18n="learning_structure">
-                    كيف ستتعلم؟
-                </h2>
-
-                <p data-home-i18n="learning_structure_desc">
-                    مسار واضح من الشهادة إلى الفيديو التعليمي.
-                </p>
-
-            </div>
-
-
-            <div class="grid grid-4">
 
                 <article class="card card-hover future-card">
 
@@ -1325,13 +2064,15 @@
                         01
                     </div>
 
-                    <h3 data-home-i18n="step_certificate">
-                        اختر الشهادة
+
+                    <h3 data-home-i18n="subject_preview_title">
+                        المواد
                     </h3>
 
+
                     <p class="text-muted"
-                       data-home-i18n="step_certificate_desc">
-                        اختر المستوى أو المسار الدراسي المناسب لك.
+                       data-home-i18n="subject_preview_desc">
+                        سيتم تحديد المواد تلقائيًا حسب المستوى الذي اخترته.
                     </p>
 
                 </article>
@@ -1340,17 +2081,18 @@
                 <article class="card card-hover future-card">
 
                     <div class="feature-mark">
-                        02
+                        05
                     </div>
 
-                    <h3 data-home-i18n="step_subject">
-                        اختر المادة
+
+                    <h3 data-home-i18n="chapters">
+                        الفصول
                     </h3>
 
+
                     <p class="text-muted"
-                       data-home-i18n="step_subject_desc">
-                        تظهر لك المواد المناسبة للمستوى أو الفرع
-                        الذي اخترته.
+                       data-home-i18n="chapters_desc">
+                        لكل مادة خمسة فصول منظمة للدراسة.
                     </p>
 
                 </article>
@@ -1359,17 +2101,18 @@
                 <article class="card card-hover future-card">
 
                     <div class="feature-mark">
-                        03
+                        01
                     </div>
 
-                    <h3 data-home-i18n="step_chapter">
-                        اختر الفصل
+
+                    <h3 data-home-i18n="free_video">
+                        الفيديو الأول
                     </h3>
 
+
                     <p class="text-muted"
-                       data-home-i18n="step_chapter_desc">
-                        كل مادة منظمة في فصول، وكل فصل يحتوي
-                        على فيديوهاته.
+                       data-home-i18n="free_video_desc">
+                        يبدأ المسار بالفيديو الأول المتاح للتجربة.
                     </p>
 
                 </article>
@@ -1378,17 +2121,18 @@
                 <article class="card card-hover future-card">
 
                     <div class="feature-mark">
-                        04
+                        +
                     </div>
 
-                    <h3 data-home-i18n="step_video">
-                        ابدأ الفيديو
+
+                    <h3 data-home-i18n="premium_videos">
+                        الفيديوهات المتقدمة
                     </h3>
 
+
                     <p class="text-muted"
-                       data-home-i18n="step_video_desc">
-                        يبدأ التعلم من الفيديو الأول ثم تتقدم
-                        تدريجيًا.
+                       data-home-i18n="premium_videos_desc">
+                        الفيديوهات التالية ترتبط بنظام الاشتراك.
                     </p>
 
                 </article>
@@ -1404,463 +2148,2425 @@
          AFKRASH AI
     ====================================================== -->
 
-    <section class="section home-section">
+    <section class="section">
 
         <div class="container">
 
-            <div class="section-intro">
+            <div class="home-panel"
+                 style="overflow:hidden; position:relative;">
 
-                <h2 class="section-title">
-                    Afkrash AI
-                </h2>
+                <div style="
+                    position:absolute;
+                    width:220px;
+                    height:220px;
+                    left:-120px;
+                    bottom:-130px;
+                    border-radius:50%;
+                    border:1px solid var(--border);
+                    opacity:.6;
+                "></div>
 
-                <p data-home-i18n="afkrash_intro">
-                    شخصية المدرس الافتراضي التي سترافق تجربة
-                    التعلم داخل EduNova AI.
-                </p>
 
-            </div>
+                <div style="
+                    position:relative;
+                    z-index:1;
+                    display:grid;
+                    grid-template-columns:minmax(0,1fr) auto;
+                    align-items:center;
+                    gap:24px;
+                ">
+
+                    <div>
+
+                        <div class="home-eyebrow">
+
+                            <span class="home-eyebrow-dot"></span>
+
+                            <span>
+                                Afkrash AI
+                            </span>
+
+                        </div>
 
 
-            <div class="grid grid-3">
+                        <h2 style="
+                            margin:0 0 8px;
+                            font-size:24px;
+                            font-weight:850;
+                        "
+                        data-home-i18n="afkrash_home_title">
 
-                <article class="card card-hover future-card">
+                            مدرسك الافتراضي
 
-                    <div class="feature-mark">
+                        </h2>
+
+
+                        <p style="
+                            margin:0;
+                            max-width:680px;
+                            color:var(--text-muted);
+                            line-height:1.85;
+                        "
+                        data-home-i18n="afkrash_home_desc">
+
+                            سيساعدك Afkrash AI على فهم الدروس،
+                            تنظيم التعلم، ومتابعة رحلتك التعليمية
+                            بشكل أكثر ذكاءً.
+
+                        </p>
+
+                    </div>
+
+
+                    <div style="
+                        width:86px;
+                        height:86px;
+                        display:grid;
+                        place-items:center;
+                        border-radius:24px;
+                        background:var(--primary-light);
+                        color:var(--primary);
+                        font-size:25px;
+                        font-weight:850;
+                    "
+                    aria-hidden="true">
+
                         AI
+
                     </div>
 
-                    <h3 data-home-i18n="educational_videos">
-                        فيديوهات تعليمية
-                    </h3>
-
-                    <p class="text-muted"
-                       data-home-i18n="educational_videos_desc">
-                        دروس يقدمها Afkrash AI بطريقة واضحة ومنظمة.
-                    </p>
-
-                </article>
-
-
-                <article class="card card-hover future-card">
-
-                    <div class="feature-mark">
-                        +
-                    </div>
-
-                    <h3 data-home-i18n="premium_content">
-                        محتوى Premium
-                    </h3>
-
-                    <p class="text-muted"
-                       data-home-i18n="premium_content_desc">
-                        بعض الدروس والفيديوهات ستكون متاحة
-                        للمشتركين حسب نظام الاشتراك.
-                    </p>
-
-                </article>
-
-
-                <article class="card card-hover future-card">
-
-                    <div class="feature-mark">
-                        AI+
-                    </div>
-
-                    <h3 data-home-i18n="smart_learning">
-                        تعلم أكثر ذكاءً
-                    </h3>
-
-                    <p class="text-muted"
-                       data-home-i18n="smart_learning_desc">
-                        ستتطور المنصة تدريجيًا لإضافة أدوات
-                        تعليمية ذكية تساعد الطالب على التعلم.
-                    </p>
-
-                </article>
+                </div>
 
             </div>
 
         </div>
 
-    </section><!-- Final CTA --><section class="section final-cta-section" id="start">
-  <div class="container">
-    <div class="final-cta">
-      <div class="final-cta-glow"></div>  <div class="final-cta-content">
-    <span class="section-eyebrow" data-i18n="ready_to_start">جاهز للانطلاق؟</span>
+    </section>
 
-    <h2 data-i18n="start_journey">
-      ابدأ رحلتك التعليمية مع EduNova AI
-    </h2>
 
-    <p data-i18n="start_now">
-      اختر مستواك، ابدأ التعلم، ودع EduNova AI يساعدك على بناء فهم أقوى خطوة بخطوة.
-    </p>
+    <!-- =====================================================
+         FINAL CTA
+    ====================================================== -->
 
-    <div class="final-cta-actions">
-      <a href="library.html" class="primary-btn">
-        <span data-i18n="start_learning">ابدأ التعلم</span>
-        <span class="btn-arrow" aria-hidden="true">←</span>
-      </a>
+    <section class="section">
 
-      <a href="login.html" class="secondary-btn">
-        <span data-i18n="login">تسجيل الدخول</span>
-      </a>
-    </div>
-  </div>
-</div>
+        <div class="container">
 
-  </div>
-</section><!-- Footer --><footer class="site-footer">
-  <div class="container footer-inner">
-    <div class="footer-brand">
-      <div class="footer-logo">
-        <span class="brand-icon">AI</span>
-        <span>EduNova AI</span>
-      </div>  <p data-i18n="footer_teacher">
-    منصة تعليمية ذكية تساعدك على التعلم بوضوح وبخطوات منظمة.
-  </p>
-</div>
+            <div class="home-final"
+                 style="
+                    position:relative;
+                    overflow:hidden;
+                    padding:42px 25px;
+                    border-radius:30px;
+                    background:
+                        linear-gradient(
+                            135deg,
+                            var(--primary),
+                            var(--primary-dark)
+                        );
+                    color:#fff;
+                    text-align:center;
+                    box-shadow:
+                        0 20px 45px
+                        rgba(37,99,235,.18);
+                 ">
 
-<div class="footer-links">
-  <a href="index.html" data-i18n="nav_home">الرئيسية</a>
-  <a href="library.html" data-i18n="choose_certificate">المحتوى الدراسي</a>
-  <a href="login.html" data-i18n="login">تسجيل الدخول</a>
-</div>
+                <div style="
+                    position:absolute;
+                    width:250px;
+                    height:250px;
+                    right:-130px;
+                    top:-160px;
+                    border-radius:50%;
+                    border:1px solid rgba(255,255,255,.10);
+                "></div>
 
-<div class="footer-copy">
-  <span>© <span id="currentYear"></span> EduNova AI</span>
-</div>
 
-  </div>
-</footer></main><script src="script.js"></script><script>
+                <h2 style="
+                    position:relative;
+                    z-index:1;
+                    color:#fff;
+                    margin:0 0 9px;
+                    font-size:clamp(23px,4vw,32px);
+                    font-weight:850;
+                "
+                data-home-i18n="home_final_title">
+
+                    مستعد لبدء دراستك؟
+
+                </h2>
+
+
+                <p style="
+                    position:relative;
+                    z-index:1;
+                    max-width:650px;
+                    margin:0 auto 21px;
+                    color:rgba(255,255,255,.80);
+                    line-height:1.85;
+                "
+                data-home-i18n="home_final_desc">
+
+                    اختر مستواك، افتح مكتبتك، وابدأ أول خطوة
+                    في رحلتك التعليمية مع EduNova AI.
+
+                </p>
+
+
+                <a href="library.html"
+                   class="btn"
+                   style="
+                        position:relative;
+                        z-index:1;
+                        background:#fff;
+                        color:var(--primary);
+                   "
+                   data-home-i18n="open_library">
+
+                    فتح مكتبتي
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+</main><script src="script.js"></script>
+
+<script>
+
 /* =========================================================
-   HOME PAGE — TRANSLATIONS
-   ========================================================= */
+   HOME PAGE — STATE
+========================================================= */
+
+let homeSelectedLevel = null;
+let homeSelectedBranch = null;
+
+
+/* =========================================================
+   HOME PAGE — LANGUAGE
+========================================================= */
 
 const HOME_TRANSLATIONS = {
-  ar: {
-    login: "تسجيل الدخول",
 
-    ai_education: "التعليم الذكي",
-    welcome: "مرحبًا بك في EduNova AI",
-    hero_description:
-      "منصة تعليمية رقمية تساعدك على فهم دروسك بطريقة واضحة ومنظمة، من الشهادة إلى المادة ثم الفصل والفيديو.",
-    start_learning: "ابدأ التعلم",
-    choose_certificate: "اختر مستواك",
+    ar: {
 
-    virtual_teacher_edunova: "معلمك الافتراضي في EduNova AI",
+        nav_home: "الرئيسية",
+        nav_notifications: "الإشعارات",
+        nav_account: "حسابي",
+        nav_settings: "الإعدادات",
 
-    what_is_edunova: "ما هي EduNova AI؟",
-    edunova_intro:
-      "EduNova AI هي منصة تعليمية تهدف إلى جعل التعلم أكثر وضوحًا وتنظيمًا، مع مسار بسيط يبدأ من مستواك الدراسي وينتهي بالفيديو التعليمي.",
+        student_center: "مركز الطالب",
 
-    understand_before_memorize: "افهم قبل أن تحفظ",
-    understand_before_memorize_desc:
-      "نركز على تقديم المحتوى بطريقة تساعدك على فهم الفكرة قبل الانتقال إلى الحفظ والتطبيق.",
+        home_welcome_desc:
+            "من هنا تبدأ دراستك، تتابع تقدمك، وتعرف خطوتك التالية.",
 
-    clear_learning_path: "مسار تعلم واضح",
-    clear_learning_path_desc:
-      "تنتقل من الشهادة إلى المادة ثم الفصل والفيديو دون تعقيد أو تشتيت.",
+        current_level: "مستواك الدراسي",
+        choose_level: "اختيار المستوى",
+        open_library: "فتح مكتبتي",
 
-    afkrash_explanations: "شرح مبسط",
-    afkrash_explanations_desc:
-      "محتوى تعليمي مصمم ليكون مباشرًا وسهل المتابعة.",
+        weekly_progress: "تقدمك هذا الأسبوع",
+        learning: "تعلم",
 
-    step_by_step: "خطوة بخطوة",
-    step_by_step_desc:
-      "تتعلم تدريجيًا وتبني معرفتك من الأساس إلى المستوى المتقدم.",
+        weekly_progress_desc:
+            "من هدفك الدراسي الأسبوعي",
 
-    certificate_intro:
-      "اختر الشهادة التي تستعد لها للوصول إلى المواد والفصول التعليمية.",
+        weekly_goal: "الهدف الأسبوعي",
 
-    concours: "مسابقة دخول السنة الأولى إعدادية",
-    concours_desc:
-      "مواد تعليمية تساعدك على الاستعداد للمسابقة وفهم الأساسيات المطلوبة.",
+        continue_learning: "تابع دراستك",
+        view_library: "مكتبتي",
 
-    brevet: "شهادة ختم الدروس الإعدادية",
-    brevet_desc:
-      "مسار تعليمي منظم لمراجعة المواد والاستعداد لاختبار الشهادة.",
+        no_lesson:
+            "لم تبدأ درسًا بعد",
 
-    bac_c_desc:
-      "مسار البكالوريا العلمية C مع مواد الرياضيات والعلوم والفيزياء والكيمياء.",
+        start_now: "ابدأ الآن",
 
-    bac_d_desc:
-      "مسار البكالوريا العلمية D مع مواد العلوم الطبيعية والرياضيات والفيزياء والكيمياء.",
+        choose_study_level:
+            "اختر المستوى الذي تريد دراسته",
 
-    available_plan: "المسارات التعليمية المتاحة",
+        choose_study_level_desc:
+            "سيحدد اختيارك المواد والفصول والفيديوهات التي تظهر لك في مكتبتك.",
 
-    learning_structure: "كيف تسير رحلة التعلم؟",
-    learning_structure_desc:
-      "صممنا المحتوى في بنية بسيطة حتى تعرف دائمًا أين أنت وما الخطوة التالية.",
+        choose_branch:
+            "اختر الشعبة",
 
-    step_certificate: "الشهادة",
-    step_certificate_desc:
-      "ابدأ باختيار الشهادة أو المستوى الدراسي الذي تستعد له.",
+        concours:
+            "كونكور",
 
-    step_subject: "المادة",
-    step_subject_desc:
-      "اختر المادة التي تريد دراستها من المواد المتاحة لمستواك.",
+        concours_desc:
+            "الرياضيات، العربية، الفرنسية والعلوم الطبيعية.",
 
-    step_chapter: "الفصل",
-    step_chapter_desc:
-      "انتقل إلى الفصل الذي تريد مراجعته وتصفح دروسه.",
+        brevet:
+            "بريڤي",
 
-    step_video: "الفيديو",
-    step_video_desc:
-      "شاهد الفيديو التعليمي وتابع تقدمك في رحلتك التعليمية.",
+        brevet_desc:
+            "الرياضيات، الفيزياء والكيمياء والعلوم الطبيعية.",
 
-    afkrash_intro:
-      "Afkrash AI هو الوجه الذكي والمحتوى المرئي الذي يرافق تجربة EduNova AI.",
+        bac_c_desc:
+            "الرياضيات، العلوم، الفيزياء والكيمياء.",
 
-    educational_videos: "فيديوهات تعليمية",
-    educational_videos_desc:
-      "شرح بصري سريع ومنظم يساعدك على استيعاب الدروس بطريقة أسهل.",
+        bac_d_desc:
+            "العلوم الطبيعية، الرياضيات، الفيزياء والكيمياء.",
 
-    premium_content: "محتوى Premium",
-    premium_content_desc:
-      "محتوى تعليمي متقدم يمكن تطويره مستقبلًا ليقدم تجربة أعمق للطلاب.",
+        notifications:
+            "الإشعارات",
 
-    smart_learning: "تعلم أكثر ذكاءً",
-    smart_learning_desc:
-      "نمزج بين التنظيم والمحتوى الرقمي والذكاء الاصطناعي لبناء تجربة تعليمية حديثة.",
+        view_all:
+            "عرض الكل",
 
-    ready_to_start: "جاهز للانطلاق؟",
+        welcome_notification:
+            "مرحبًا بك في EduNova AI",
 
-    start_journey: "ابدأ رحلتك التعليمية مع EduNova AI",
+        welcome_notification_desc:
+            "اختر مستواك الدراسي لبدء بناء مسارك التعليمي.",
 
-    start_now:
-      "اختر مستواك، ابدأ التعلم، ودع EduNova AI يساعدك على بناء فهم أقوى خطوة بخطوة.",
+        now:
+            "الآن",
 
-    footer_teacher:
-      "منصة تعليمية ذكية تساعدك على التعلم بوضوح وبخطوات منظمة.",
+        study_reminder:
+            "تذكير بالدراسة",
 
-    nav_home: "الرئيسية"
-  },
+        study_reminder_desc:
+            "ستظهر هنا تذكيراتك وخطتك الزمنية اليومية.",
 
-  fr: {
-    login: "Connexion",
+        planned:
+            "مخطط",
 
-    ai_education: "Éducation intelligente",
-    welcome: "Bienvenue sur EduNova AI",
-    hero_description:
-      "Une plateforme éducative numérique qui vous aide à comprendre vos cours de manière claire et organisée, du certificat jusqu'à la matière, au chapitre et à la vidéo.",
-    start_learning: "Commencer à apprendre",
-    choose_certificate: "Choisir votre niveau",
+        afkrash_notification:
+            "Afkrash AI",
 
-    virtual_teacher_edunova: "Votre professeur virtuel sur EduNova AI",
+        afkrash_notification_desc:
+            "ستصلك هنا التنبيهات التعليمية والتوصيات الذكية.",
 
-    what_is_edunova: "Qu'est-ce que EduNova AI ?",
-    edunova_intro:
-      "EduNova AI est une plateforme éducative conçue pour rendre l'apprentissage plus clair et mieux organisé, avec un parcours simple qui commence par votre niveau scolaire et mène jusqu'à la vidéo éducative.",
+        study_plan:
+            "خطتك الدراسية",
 
-    understand_before_memorize: "Comprendre avant de mémoriser",
-    understand_before_memorize_desc:
-      "Nous présentons le contenu de manière à vous aider à comprendre l'idée avant de passer à la mémorisation et à la pratique.",
+        manage_plan:
+            "إدارة الخطة",
 
-    clear_learning_path: "Un parcours d'apprentissage clair",
-    clear_learning_path_desc:
-      "Passez du certificat à la matière, puis au chapitre et à la vidéo sans complexité ni distraction.",
+        today:
+            "اليوم",
 
-    afkrash_explanations: "Explications simples",
-    afkrash_explanations_desc:
-      "Un contenu éducatif conçu pour être direct, clair et facile à suivre.",
+        tomorrow:
+            "غدًا",
 
-    step_by_step: "Étape par étape",
-    step_by_step_desc:
-      "Apprenez progressivement et construisez vos connaissances des bases vers les niveaux avancés.",
+        weekly_schedule:
+            "الجدول الأسبوعي",
 
-    certificate_intro:
-      "Choisissez le certificat que vous préparez pour accéder aux matières et aux chapitres éducatifs.",
+        schedule_first:
+            "اختر وقت الدراسة والمواد التي تريد مراجعتها.",
 
-    concours: "Concours d'entrée en première année du collège",
-    concours_desc:
-      "Des contenus éducatifs pour vous aider à préparer le concours et maîtriser les bases nécessaires.",
+        schedule_second:
+            "سيظهر هنا موعد جلسة الدراسة القادمة.",
 
-    brevet: "Brevet de fin des études du collège",
-    brevet_desc:
-      "Un parcours organisé pour réviser les matières et préparer l'examen du brevet.",
+        schedule_third:
+            "نظّم وقتك الدراسي وحدد أهدافك للأسبوع.",
 
-    bac_c_desc:
-      "Parcours du baccalauréat scientifique C avec les mathématiques, les sciences, la physique et la chimie.",
+        study_target:
+            "هدفك الدراسي",
 
-    bac_d_desc:
-      "Parcours du baccalauréat scientifique D avec les sciences naturelles, les mathématiques, la physique et la chimie.",
+        study_target_desc:
+            "اجعل دراستك منتظمة. حدد هدفًا أسبوعيًا وسنساعدك على متابعة تقدمك خطوة بخطوة.",
 
-    available_plan: "Parcours éducatifs disponibles",
+        study_hours:
+            "ساعة هذا الأسبوع",
 
-    learning_structure: "Comment fonctionne votre parcours ?",
-    learning_structure_desc:
-      "Le contenu est organisé de manière simple afin que vous sachiez toujours où vous êtes et quelle est la prochaine étape.",
+        student_tools:
+            "أدواتك التعليمية",
 
-    step_certificate: "Certificat",
-    step_certificate_desc:
-      "Commencez par choisir le certificat ou le niveau scolaire que vous préparez.",
+        student_tools_desc:
+            "كل ما تحتاجه للدراسة والمتابعة والتواصل في مكان واحد.",
 
-    step_subject: "Matière",
-    step_subject_desc:
-      "Choisissez la matière que vous souhaitez étudier parmi celles disponibles pour votre niveau.",
+        my_library:
+            "مكتبتي",
 
-    step_chapter: "Chapitre",
-    step_chapter_desc:
-      "Accédez au chapitre que vous souhaitez réviser et consultez ses leçons.",
+        my_library_desc:
+            "المواد والفصول والفيديوهات الخاصة بمستواك الدراسي.",
 
-    step_video: "Vidéo",
-    step_video_desc:
-      "Regardez la vidéo éducative et suivez votre progression dans votre parcours.",
+        forum:
+            "المنتدى",
 
-    afkrash_intro:
-      "Afkrash AI est le visage intelligent et le contenu visuel qui accompagne l'expérience EduNova AI.",
+        forum_desc:
+            "ناقش الدروس مع الطلاب وتابع تقييمك وتقدمك.",
 
-    educational_videos: "Vidéos éducatives",
-    educational_videos_desc:
-      "Des explications visuelles rapides et organisées pour faciliter la compréhension des cours.",
+        subscription:
+            "اشتراكك",
 
-    premium_content: "Contenu Premium",
-    premium_content_desc:
-      "Un contenu éducatif avancé qui pourra évoluer pour offrir une expérience plus approfondie aux étudiants.",
+        subscription_desc:
+            "تابع خطتك التعليمية واطلع على خيارات المحتوى Premium.",
 
-    smart_learning: "Apprentissage plus intelligent",
-    smart_learning_desc:
-      "Nous combinons organisation, contenu numérique et intelligence artificielle pour créer une expérience éducative moderne.",
+        curriculum_preview:
+            "محتواك الدراسي",
 
-    ready_to_start: "Prêt à commencer ?",
+        curriculum_preview_desc:
+            "بعد اختيار مستواك ستظهر لك المواد والفصول والفيديوهات من مكتبتك التعليمية.",
 
-    start_journey: "Commencez votre parcours éducatif avec EduNova AI",
+        subject_preview_title:
+            "المواد",
 
-    start_now:
-      "Choisissez votre niveau, commencez à apprendre et laissez EduNova AI vous aider à construire une compréhension plus solide étape par étape.",
+        subject_preview_desc:
+            "سيتم تحديد المواد تلقائيًا حسب المستوى الذي اخترته.",
 
-    footer_teacher:
-      "Une plateforme éducative intelligente qui vous aide à apprendre avec clarté et organisation.",
+        chapters:
+            "الفصول",
 
-    nav_home: "Accueil"
-  }
+        chapters_desc:
+            "لكل مادة خمسة فصول منظمة للدراسة.",
+
+        free_video:
+            "الفيديو الأول",
+
+        free_video_desc:
+            "يبدأ المسار بالفيديو الأول المتاح للتجربة.",
+
+        premium_videos:
+            "الفيديوهات المتقدمة",
+
+        premium_videos_desc:
+            "الفيديوهات التالية ترتبط بنظام الاشتراك.",
+
+        afkrash_home_title:
+            "مدرسك الافتراضي",
+
+        afkrash_home_desc:
+            "سيساعدك Afkrash AI على فهم الدروس، تنظيم التعلم، ومتابعة رحلتك التعليمية بشكل أكثر ذكاءً.",
+
+        home_final_title:
+            "مستعد لبدء دراستك؟",
+
+        home_final_desc:
+            "اختر مستواك، افتح مكتبتك، وابدأ أول خطوة في رحلتك التعليمية مع EduNova AI."
+
+    },
+
+
+    fr: {
+
+        nav_home: "Accueil",
+        nav_notifications: "Notifications",
+        nav_account: "Mon compte",
+        nav_settings: "Paramètres",
+
+        student_center: "Espace étudiant",
+
+        home_welcome_desc:
+            "Commencez vos études, suivez votre progression et découvrez votre prochaine étape.",
+
+        current_level: "Votre niveau scolaire",
+        choose_level: "Choisir le niveau",
+        open_library: "Ouvrir ma bibliothèque",
+
+        weekly_progress: "Votre progression cette semaine",
+        learning: "Apprentissage",
+
+        weekly_progress_desc:
+            "de votre objectif hebdomadaire",
+
+        weekly_goal: "Objectif hebdomadaire",
+
+        continue_learning: "Continuer vos études",
+        view_library: "Ma bibliothèque",
+
+        no_lesson:
+            "Vous n'avez pas encore commencé de cours",
+
+        start_now: "Commencer",
+
+        choose_study_level:
+            "Choisissez le niveau que vous souhaitez étudier",
+
+        choose_study_level_desc:
+            "Votre choix déterminera les matières, chapitres et vidéos affichés dans votre bibliothèque.",
+
+        choose_branch:
+            "Choisissez la série",
+
+        concours:
+            "Concours",
+
+        concours_desc:
+            "Mathématiques, arabe, français et sciences naturelles.",
+
+        brevet:
+            "Brevet",
+
+        brevet_desc:
+            "Mathématiques, physique-chimie et sciences naturelles.",
+
+        bac_c_desc:
+            "Mathématiques, sciences, physique et chimie.",
+
+        bac_d_desc:
+            "Sciences naturelles, mathématiques, physique et chimie.",
+
+        notifications:
+            "Notifications",
+
+        view_all:
+            "Voir tout",
+
+        welcome_notification:
+            "Bienvenue sur EduNova AI",
+
+        welcome_notification_desc:
+            "Choisissez votre niveau pour commencer votre parcours éducatif.",
+
+        now:
+            "Maintenant",
+
+        study_reminder:
+            "Rappel d'étude",
+
+        study_reminder_desc:
+            "Vos rappels et votre planning quotidien apparaîtront ici.",
+
+        planned:
+            "Prévu",
+
+        afkrash_notification:
+            "Afkrash AI",
+
+        afkrash_notification_desc:
+            "Vous recevrez ici les notifications éducatives et recommandations intelligentes.",
+
+        study_plan:
+            "Votre planning d'étude",
+
+        manage_plan:
+            "Gérer le planning",
+
+        today:
+            "Aujourd'hui",
+
+        tomorrow:
+            "Demain",
+
+        weekly_schedule:
+            "Planning hebdomadaire",
+
+        schedule_first:
+            "Choisissez vos horaires et les matières à réviser.",
+
+        schedule_second:
+            "Votre prochaine session d'étude apparaîtra ici.",
+
+        schedule_third:
+            "Organisez votre temps et définissez vos objectifs de la semaine.",
+
+        study_target:
+            "Votre objectif d'étude",
+
+        study_target_desc:
+            "Rendez vos études régulières. Définissez un objectif hebdomadaire et suivez votre progression étape par étape.",
+
+        study_hours:
+            "heure cette semaine",
+
+        student_tools:
+            "Vos outils éducatifs",
+
+        student_tools_desc:
+            "Tout ce dont vous avez besoin pour apprendre, suivre vos progrès et communiquer.",
+
+        my_library:
+            "Ma bibliothèque",
+
+        my_library_desc:
+            "Les matières, chapitres et vidéos correspondant à votre niveau.",
+
+        forum:
+            "Forum",
+
+        forum_desc:
+            "Discutez des cours avec les étudiants et suivez votre évaluation.",
+
+        subscription:
+            "Votre abonnement",
+
+        subscription_desc:
+            "Suivez votre formule et découvrez les options de contenu Premium.",
+
+        curriculum_preview:
+            "Votre contenu scolaire",
+
+        curriculum_preview_desc:
+            "Après avoir choisi votre niveau, les matières, chapitres et vidéos apparaîtront dans votre bibliothèque.",
+
+        subject_preview_title:
+            "Matières",
+
+        subject_preview_desc:
+            "Les matières seront automatiquement déterminées selon votre niveau.",
+
+        chapters:
+            "Chapitres",
+
+        chapters_desc:
+            "Chaque matière contient cinq chapitres organisés.",
+
+        free_video:
+            "Première vidéo",
+
+        free_video_desc:
+            "Le parcours commence par la première vidéo disponible.",
+
+        premium_videos:
+            "Vidéos avancées",
+
+        premium_videos_desc:
+            "Les vidéos suivantes sont liées au système d'abonnement.",
+
+        afkrash_home_title:
+            "Votre professeur virtuel",
+
+        afkrash_home_desc:
+            "Afkrash AI vous aidera à comprendre les cours, organiser vos études et suivre votre parcours de manière plus intelligente.",
+
+        home_final_title:
+            "Prêt à commencer vos études ?",
+
+        home_final_desc:
+            "Choisissez votre niveau, ouvrez votre bibliothèque et commencez votre parcours éducatif avec EduNova AI."
+
+    }
+
 };
 
 
 /* =========================================================
-   HOME PAGE — TRANSLATION
-   ========================================================= */
+   LANGUAGE HELPERS
+========================================================= */
 
 function getHomeLanguage() {
-  try {
-    if (typeof getSiteLanguage === "function") {
-      return getSiteLanguage() === "fr" ? "fr" : "ar";
-    }
-  } catch (error) {
-    console.warn("Unable to read site language:", error);
-  }
 
-  return localStorage.getItem("site_language") === "fr" ? "fr" : "ar";
+    try {
+
+        if (
+            typeof getSiteLanguage ===
+            "function"
+        ) {
+
+            return getSiteLanguage() === "fr"
+                ? "fr"
+                : "ar";
+
+        }
+
+    } catch (error) {
+
+        console.warn(
+            "Unable to read site language:",
+            error
+        );
+
+    }
+
+    return localStorage.getItem(
+        "site_language"
+    ) === "fr"
+        ? "fr"
+        : "ar";
+}
+
+
+function homeText(key) {
+
+    const language =
+        getHomeLanguage();
+
+    const dictionary =
+        HOME_TRANSLATIONS[language] ||
+        HOME_TRANSLATIONS.ar;
+
+    return dictionary[key] !== undefined
+        ? dictionary[key]
+        : key;
 }
 
 
 function translateHomePage() {
-  const language = getHomeLanguage();
-  const dictionary = HOME_TRANSLATIONS[language] || HOME_TRANSLATIONS.ar;
 
-  document.documentElement.lang = language;
-  document.documentElement.dir = language === "fr" ? "ltr" : "rtl";
+    const language =
+        getHomeLanguage();
 
-  document.querySelectorAll("[data-i18n]").forEach((element) => {
-    const key = element.getAttribute("data-i18n");
+    const dictionary =
+        HOME_TRANSLATIONS[language] ||
+        HOME_TRANSLATIONS.ar;
 
-    if (dictionary[key] !== undefined) {
-      element.textContent = dictionary[key];
-    }
-  });
 
-  document.title =
-    language === "fr"
-      ? "EduNova AI — Plateforme éducative intelligente"
-      : "EduNova AI — منصة تعليمية ذكية";
+    document.documentElement.lang =
+        language;
 
-  document.querySelectorAll(".btn-arrow").forEach((arrow) => {
-    arrow.textContent = language === "fr" ? "→" : "←";
-  });
+    document.documentElement.dir =
+        language === "fr"
+            ? "ltr"
+            : "rtl";
+
+
+    document
+        .querySelectorAll(
+            "[data-home-i18n]"
+        )
+        .forEach(element => {
+
+            const key =
+                element.getAttribute(
+                    "data-home-i18n"
+                );
+
+            if (
+                dictionary[key] !== undefined
+            ) {
+
+                element.textContent =
+                    dictionary[key];
+
+            }
+
+        });
+
+
+    document.title =
+        language === "fr"
+            ? "EduNova AI | Accueil"
+            : "EduNova AI | الرئيسية";
+
 }
 
 
 /* =========================================================
-   HOME PAGE — INITIALIZATION
-   ========================================================= */
+   LEVEL HELPERS
+========================================================= */
 
-function initializeHomePage() {
-  try {
-    if (typeof initializeGlobalSettings === "function") {
-      initializeGlobalSettings();
-    }
-  } catch (error) {
-    console.warn("Global settings initialization failed:", error);
-  }
+function getHomeStoredLevel() {
 
-  try {
-    if (typeof applySiteTheme === "function") {
-      applySiteTheme();
-    }
-  } catch (error) {
-    console.warn("Theme initialization failed:", error);
-  }
-
-  translateHomePage();
-
-  const yearElement = document.getElementById("currentYear");
-
-  if (yearElement) {
-    yearElement.textContent = new Date().getFullYear();
-  }
-}
-
-
-/* =========================================================
-   HOME PAGE — EVENTS
-   ========================================================= */
-
-document.addEventListener("DOMContentLoaded", initializeHomePage);
-
-window.addEventListener("languageChanged", translateHomePage);
-window.addEventListener("siteLanguageChanged", translateHomePage);
-
-window.addEventListener("themeChanged", () => {
-  try {
-    if (typeof applySiteTheme === "function") {
-      applySiteTheme();
-    }
-  } catch (error) {
-    console.warn("Unable to reapply theme:", error);
-  }
-});
-
-window.addEventListener("siteThemeChanged", () => {
-  try {
-    if (typeof applySiteTheme === "function") {
-      applySiteTheme();
-    }
-  } catch (error) {
-    console.warn("Unable to reapply theme:", error);
-  }
-});
-
-
-/* =========================================================
-   HOME PAGE — CROSS-TAB LANGUAGE/THEME SYNC
-   ========================================================= */
-
-window.addEventListener("storage", (event) => {
-  if (event.key === "site_language") {
-    translateHomePage();
-  }
-
-  if (event.key === "site_theme") {
     try {
-      if (typeof applySiteTheme === "function") {
-        applySiteTheme();
-      }
+
+        if (
+            typeof getStudentLevel ===
+            "function"
+        ) {
+
+            return getStudentLevel();
+
+        }
+
     } catch (error) {
-      console.warn("Unable to sync theme:", error);
+
+        console.warn(
+            "Unable to read student level:",
+            error
+        );
+
     }
-  }
-});
-</script></body>
+
+
+    return (
+        localStorage.getItem(
+            "student_level"
+        ) ||
+        localStorage.getItem(
+            "selected_level"
+        ) ||
+        null
+    );
+
+}
+
+
+function getHomeStoredBranch() {
+
+    try {
+
+        if (
+            typeof getBacBranch ===
+            "function"
+        ) {
+
+            return getBacBranch();
+
+        }
+
+    } catch (error) {
+
+        console.warn(
+            "Unable to read bac branch:",
+            error
+        );
+
+    }
+
+
+    return (
+        localStorage.getItem(
+            "bac_branch"
+        ) ||
+        localStorage.getItem(
+            "selected_branch"
+        ) ||
+        null
+    );
+
+}
+
+
+function normalizeHomeLevel(level) {
+
+    if (!level) {
+        return null;
+    }
+
+
+    const value =
+        String(level)
+            .trim()
+            .toLowerCase();
+
+
+    if (
+        value === "concours" ||
+        value === "6af" ||
+        value === "6af_concours"
+    ) {
+
+        return "concours";
+
+    }
+
+
+    if (
+        value === "brevet" ||
+        value === "4eme" ||
+        value === "4ème"
+    ) {
+
+        return "brevet";
+
+    }
+
+
+    if (
+        value === "bac_c" ||
+        value === "bacc" ||
+        value === "bac-c"
+    ) {
+
+        return "bac_c";
+
+    }
+
+
+    if (
+        value === "bac_d" ||
+        value === "bacd" ||
+        value === "bac-d"
+    ) {
+
+        return "bac_d";
+
+    }
+
+
+    return value;
+
+}
+
+
+/* =========================================================
+   LEVEL LABELS
+========================================================= */
+
+function getHomeLevelTitle(
+    level,
+    branch = null
+) {
+
+    const normalized =
+        normalizeHomeLevel(level);
+
+
+    if (
+        normalized === "concours"
+    ) {
+
+        return getHomeLanguage() === "fr"
+            ? "Concours"
+            : "كونكور";
+
+    }
+
+
+    if (
+        normalized === "brevet"
+    ) {
+
+        return getHomeLanguage() === "fr"
+            ? "Brevet"
+            : "بريڤي";
+
+    }
+
+
+    if (
+        normalized === "bac_c"
+    ) {
+
+        return "Bac C";
+
+    }
+
+
+    if (
+        normalized === "bac_d"
+    ) {
+
+        return "Bac D";
+
+    }
+
+
+    if (
+        branch === "bac_c"
+    ) {
+
+        return "Bac C";
+
+    }
+
+
+    if (
+        branch === "bac_d"
+    ) {
+
+        return "Bac D";
+
+    }
+
+
+    return getHomeLanguage() === "fr"
+        ? "No level selected"
+        : "لم تحدد مستواك بعد";
+
+}
+
+
+/* =========================================================
+   LEVEL DESCRIPTION
+========================================================= */
+
+function getHomeLevelDescription(
+    level
+) {
+
+    const normalized =
+        normalizeHomeLevel(level);
+
+
+    if (
+        normalized === "concours"
+    ) {
+
+        return getHomeLanguage() === "fr"
+            ? "Mathématiques, arabe, français et sciences naturelles."
+            : "الرياضيات، العربية، الفرنسية والعلوم الطبيعية.";
+
+    }
+
+
+    if (
+        normalized === "brevet"
+    ) {
+
+        return getHomeLanguage() === "fr"
+            ? "Mathématiques, physique-chimie et sciences naturelles."
+            : "الرياضيات، الفيزياء والكيمياء والعلوم الطبيعية.";
+
+    }
+
+
+    if (
+        normalized === "bac_c"
+    ) {
+
+        return getHomeLanguage() === "fr"
+            ? "Mathématiques, sciences, physique et chimie."
+            : "الرياضيات، العلوم، الفيزياء والكيمياء.";
+
+    }
+
+
+    if (
+        normalized === "bac_d"
+    ) {
+
+        return getHomeLanguage() === "fr"
+            ? "Sciences naturelles, mathématiques, physique et chimie."
+            : "العلوم الطبيعية، الرياضيات، الفيزياء والكيمياء.";
+
+    }
+
+
+    return getHomeLanguage() === "fr"
+        ? "Choose your academic level to build your learning path."
+        : "اختر مستواك الدراسي حتى نجهز لك مسارك التعليمي.";
+
+}
+
+
+/* =========================================================
+   SAVE LEVEL
+========================================================= */
+
+function saveHomeLevel(
+    level,
+    branch = null
+) {
+
+    const normalized =
+        normalizeHomeLevel(level);
+
+
+    if (!normalized) {
+        return false;
+    }
+
+
+    homeSelectedLevel =
+        normalized;
+
+
+    homeSelectedBranch =
+        branch || null;
+
+
+    try {
+
+        localStorage.setItem(
+            "student_level",
+            normalized
+        );
+
+        localStorage.setItem(
+            "selected_level",
+            normalized
+        );
+
+
+        if (branch) {
+
+            localStorage.setItem(
+                "bac_branch",
+                branch
+            );
+
+            localStorage.setItem(
+                "selected_branch",
+                branch
+            );
+
+        }
+
+    } catch (error) {
+
+        console.warn(
+            "Unable to save level:",
+            error
+        );
+
+    }
+
+
+    try {
+
+        if (
+            typeof setStudentLevel ===
+            "function"
+        ) {
+
+            setStudentLevel(
+                normalized
+            );
+
+        }
+
+    } catch (error) {
+
+        console.warn(
+            "Unable to update platform level:",
+            error
+        );
+
+    }
+
+
+    return true;
+
+}
+
+
+/* =========================================================
+   UPDATE CURRENT LEVEL CARD
+========================================================= */
+
+function updateHomeLevelUI() {
+
+    const level =
+        homeSelectedLevel ||
+        getHomeStoredLevel();
+
+
+    const branch =
+        homeSelectedBranch ||
+        getHomeStoredBranch();
+
+
+    const title =
+        document.getElementById(
+            "currentLevelTitle"
+        );
+
+    const description =
+        document.getElementById(
+            "currentLevelDescription"
+        );
+
+
+    if (title) {
+
+        title.textContent =
+            getHomeLevelTitle(
+                level,
+                branch
+            );
+
+    }
+
+
+    if (description) {
+
+        description.textContent =
+            getHomeLevelDescription(
+                level
+            );
+
+    }
+
+}
+
+
+/* =========================================================
+   LEVEL SELECTOR
+========================================================= */
+
+function toggleLevelSelector() {
+
+    const selector =
+        document.getElementById(
+            "levelSelector"
+        );
+
+
+    if (!selector) {
+        return;
+    }
+
+
+    selector.classList.toggle(
+        "show"
+    );
+
+}
+
+
+function selectHomeLevel(
+    level
+) {
+
+    const normalized =
+        normalizeHomeLevel(level);
+
+
+    if (!normalized) {
+        return;
+    }
+
+
+    /*
+       Bac C / Bac D remain separate.
+       No automatic merging.
+    */
+
+    if (
+        normalized === "bac_c" ||
+        normalized === "bac_d"
+    ) {
+
+        saveHomeLevel(
+            normalized,
+            normalized
+        );
+
+    } else {
+
+        saveHomeLevel(
+            normalized,
+            null
+        );
+
+    }
+
+
+    updateHomeLevelUI();
+
+
+    const selector =
+        document.getElementById(
+            "levelSelector"
+        );
+
+
+    if (selector) {
+
+        selector.classList.remove(
+            "show"
+        );
+
+    }
+
+
+    /*
+       The selected level becomes the
+       source for the Library.
+    */
+
+    setTimeout(() => {
+
+        try {
+
+            if (
+                typeof window.setLearningSelection ===
+                "function"
+            ) {
+
+                window.setLearningSelection({
+
+                    level:
+                        normalized,
+
+                    branch:
+                        (
+                            normalized === "bac_c" ||
+                            normalized === "bac_d"
+                        )
+                            ? normalized
+                            : null
+
+                });
+
+            }
+
+        } catch (error) {
+
+            console.warn(
+                "Unable to sync learning selection:",
+                error
+            );
+
+        }
+
+    }, 0);
+
+
+    showHomeToast(
+        getHomeLanguage() === "fr"
+            ? "Your study level has been updated."
+            : "تم تحديث مستواك الدراسي."
+    );
+
+
+    /*
+       After choosing the level,
+       the student can immediately
+       enter the Library.
+    */
+
+    setTimeout(() => {
+
+        const button =
+            document.getElementById(
+                "continueButton"
+            );
+
+        if (button) {
+
+            button.focus();
+
+        }
+
+    }, 50);
+
+}
+
+
+/* =========================================================
+   CONTINUE LEARNING
+========================================================= */
+
+function continueLearning() {
+
+    const level =
+        homeSelectedLevel ||
+        getHomeStoredLevel();
+
+
+    if (!level) {
+
+        const selector =
+            document.getElementById(
+                "levelSelector"
+            );
+
+        if (selector) {
+
+            selector.classList.add(
+                "show"
+            );
+
+        }
+
+
+        showHomeToast(
+            getHomeLanguage() === "fr"
+                ? "Choose your study level first."
+                : "اختر مستواك الدراسي أولًا."
+        );
+
+        return;
+
+    }
+
+
+    window.location.href =
+        "library.html";
+
+}
+
+
+/* =========================================================
+   PROGRESS HELPERS
+========================================================= */
+
+function getHomeProgressValue() {
+
+    let value = 0;
+
+
+    try {
+
+        if (
+            typeof getStudentProgress ===
+            "function"
+        ) {
+
+            const progress =
+                getStudentProgress(
+                    homeSelectedLevel ||
+                    getHomeStoredLevel()
+                );
+
+
+            if (
+                typeof progress ===
+                "number"
+            ) {
+
+                value = progress;
+
+            }
+
+        }
+
+    } catch (error) {
+
+        console.warn(
+            "Unable to read student progress:",
+            error
+        );
+
+    }
+
+
+    /*
+       Fallback to the local progress
+       structure used by the platform.
+    */
+
+    if (!value) {
+
+        try {
+
+            const raw =
+                localStorage.getItem(
+                    "learning_progress"
+                );
+
+
+            if (raw) {
+
+                const parsed =
+                    JSON.parse(raw);
+
+
+                if (
+                    typeof parsed ===
+                    "number"
+                ) {
+
+                    value = parsed;
+
+                }
+
+            }
+
+        } catch (error) {
+
+            console.warn(
+                "Unable to read local progress:",
+                error
+            );
+
+        }
+
+    }
+
+
+    value =
+        Number(value) || 0;
+
+
+    return Math.max(
+        0,
+        Math.min(
+            100,
+            Math.round(value)
+        )
+    );
+
+}
+
+
+/* =========================================================
+   UPDATE PROGRESS UI
+========================================================= */
+
+function updateHomeProgress() {
+
+    const progress =
+        getHomeProgressValue();
+
+
+    const number =
+        document.getElementById(
+            "weeklyProgressNumber"
+        );
+
+
+    const bar =
+        document.getElementById(
+            "weeklyProgressBar"
+        );
+
+
+    const continueBar =
+        document.getElementById(
+            "continueProgressBar"
+        );
+
+
+    if (number) {
+
+        number.textContent =
+            progress + "%";
+
+    }
+
+
+    if (bar) {
+
+        bar.style.width =
+            progress + "%";
+
+    }
+
+
+    if (continueBar) {
+
+        continueBar.style.width =
+            progress + "%";
+
+    }
+
+
+    const videos =
+        document.getElementById(
+            "weeklyProgressVideos"
+        );
+
+
+    if (videos) {
+
+        const language =
+            getHomeLanguage();
+
+
+        videos.textContent =
+            progress > 0
+                ? (
+                    language === "fr"
+                        ? Math.max(
+                            1,
+                            Math.round(
+                                progress / 10
+                            )
+                          ) +
+                          " vidéo(s)"
+                        : Math.max(
+                            1,
+                            Math.round(
+                                progress / 10
+                            )
+                          ) +
+                          " فيديو"
+                  )
+                : (
+                    language === "fr"
+                        ? "0 vidéo"
+                        : "0 فيديو"
+                  );
+
+    }
+
+}
+
+
+/* =========================================================
+   CONTINUE CARD
+========================================================= */
+
+function updateContinueCard() {
+
+    const level =
+        homeSelectedLevel ||
+        getHomeStoredLevel();
+
+
+    const title =
+        document.getElementById(
+            "continueTitle"
+        );
+
+
+    const subtitle =
+        document.getElementById(
+            "continueSubtitle"
+        );
+
+
+    if (!title || !subtitle) {
+        return;
+    }
+
+
+    if (!level) {
+
+        title.textContent =
+            homeText("no_lesson");
+
+
+        subtitle.textContent =
+            getHomeLanguage() === "fr"
+                ? "Choose your level to start your educational journey."
+                : "اختر مستواك وابدأ رحلتك التعليمية.";
+
+        return;
+
+    }
+
+
+    title.textContent =
+        getHomeLanguage() === "fr"
+            ? "Continue your learning"
+            : "تابع رحلتك التعليمية";
+
+
+    subtitle.textContent =
+        getHomeLevelTitle(
+            level,
+            homeSelectedBranch
+        ) +
+        " — " +
+        getHomeLevelDescription(
+            level
+        );
+
+}
+
+
+/* =========================================================
+   HOME TOAST
+========================================================= */
+
+function showHomeToast(
+    message
+) {
+
+    let toast =
+        document.getElementById(
+            "homeToast"
+        );
+
+
+    if (!toast) {
+
+        toast =
+            document.createElement(
+                "div"
+            );
+
+        toast.id =
+            "homeToast";
+
+
+        toast.style.position =
+            "fixed";
+
+        toast.style.bottom =
+            "24px";
+
+        toast.style.left =
+            "50%";
+
+        toast.style.transform =
+            "translateX(-50%) translateY(15px)";
+
+        toast.style.zIndex =
+            "9999";
+
+        toast.style.padding =
+            "12px 17px";
+
+        toast.style.borderRadius =
+            "13px";
+
+        toast.style.background =
+            "var(--text)";
+
+        toast.style.color =
+            "var(--surface)";
+
+        toast.style.fontSize =
+            "13px";
+
+        toast.style.fontWeight =
+            "750";
+
+        toast.style.opacity =
+            "0";
+
+        toast.style.transition =
+            "all .25s ease";
+
+        document.body.appendChild(
+            toast
+        );
+
+    }
+
+
+    toast.textContent =
+        message;
+
+
+    clearTimeout(
+        window.homeToastTimer
+    );
+
+
+    requestAnimationFrame(() => {
+
+        toast.style.opacity =
+            "1";
+
+        toast.style.transform =
+            "translateX(-50%) translateY(0)";
+
+    });
+
+
+    window.homeToastTimer =
+        setTimeout(() => {
+
+            toast.style.opacity =
+                "0";
+
+            toast.style.transform =
+                "translateX(-50%) translateY(15px)";
+
+        }, 2600);
+
+}
+
+
+/* =========================================================
+   NOTIFICATIONS
+========================================================= */
+
+function showHomeNotifications() {
+
+    const panel =
+        document.getElementById(
+            "notificationsPanel"
+        );
+
+
+    if (panel) {
+
+        panel.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+    }
+
+
+    showHomeToast(
+        getHomeLanguage() === "fr"
+            ? "Your notifications are shown below."
+            : "إشعاراتك تظهر في الأسفل."
+    );
+
+}
+
+
+/* =========================================================
+   LOAD HOME STATE
+========================================================= */
+
+function loadHomeState() {
+
+    homeSelectedLevel =
+        normalizeHomeLevel(
+            getHomeStoredLevel()
+        );
+
+
+    homeSelectedBranch =
+        getHomeStoredBranch();
+
+
+    updateHomeLevelUI();
+
+    updateHomeProgress();
+
+    updateContinueCard();
+
+
+    const year =
+        document.getElementById(
+            "currentYear"
+        );
+
+
+    if (year) {
+
+        year.textContent =
+            new Date().getFullYear();
+
+    }
+
+}
+
+
+/* =========================================================
+   GLOBAL EVENTS
+========================================================= */
+
+window.addEventListener(
+    "languageChanged",
+    function() {
+
+        translateHomePage();
+
+        updateHomeLevelUI();
+
+        updateHomeProgress();
+
+        updateContinueCard();
+
+    }
+);
+
+
+window.addEventListener(
+    "siteLanguageChanged",
+    function() {
+
+        translateHomePage();
+
+        updateHomeLevelUI();
+
+        updateHomeProgress();
+
+        updateContinueCard();
+
+    }
+);
+
+
+window.addEventListener(
+    "themeChanged",
+    function() {
+
+        if (
+            typeof applySiteTheme ===
+            "function"
+        ) {
+
+            applySiteTheme();
+
+        }
+
+    }
+);
+
+
+window.addEventListener(
+    "siteThemeChanged",
+    function() {
+
+        if (
+            typeof applySiteTheme ===
+            "function"
+        ) {
+
+            applySiteTheme();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   CROSS-TAB SYNC
+========================================================= */
+
+window.addEventListener(
+    "storage",
+    function(event) {
+
+        if (
+            event.key ===
+            "site_language"
+        ) {
+
+            translateHomePage();
+
+            updateHomeLevelUI();
+
+            updateHomeProgress();
+
+            updateContinueCard();
+
+        }
+
+
+        if (
+            event.key ===
+            "site_theme"
+        ) {
+
+            try {
+
+                if (
+                    typeof applySiteTheme ===
+                    "function"
+                ) {
+
+                    applySiteTheme();
+
+                }
+
+            } catch (error) {
+
+                console.warn(
+                    "Unable to sync theme:",
+                    error
+                );
+
+            }
+
+        }
+
+
+        if (
+            event.key ===
+            "student_level" ||
+            event.key ===
+            "selected_level" ||
+            event.key ===
+            "bac_branch" ||
+            event.key ===
+            "selected_branch"
+        ) {
+
+            homeSelectedLevel =
+                normalizeHomeLevel(
+                    getHomeStoredLevel()
+                );
+
+            homeSelectedBranch =
+                getHomeStoredBranch();
+
+            updateHomeLevelUI();
+
+            updateContinueCard();
+
+        }
+
+
+        if (
+            event.key ===
+            "learning_progress"
+        ) {
+
+            updateHomeProgress();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   INITIALIZATION
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        try {
+
+            if (
+                typeof initializeGlobalSettings ===
+                "function"
+            ) {
+
+                initializeGlobalSettings();
+
+            }
+
+        } catch (error) {
+
+            console.warn(
+                "Global settings initialization failed:",
+                error
+            );
+
+        }
+
+
+        try {
+
+            if (
+                typeof applySiteTheme ===
+                "function"
+            ) {
+
+                applySiteTheme();
+
+            }
+
+        } catch (error) {
+
+            console.warn(
+                "Theme initialization failed:",
+                error
+            );
+
+        }
+
+
+        translateHomePage();
+
+        loadHomeState();
+
+    }
+);
+
+</script><footer class="site-footer">
+
+    <div class="container">
+
+        <div class="footer-main">
+
+            <div class="footer-brand">
+
+                <div class="footer-brand-mark">
+                    AI
+                </div>
+
+                <div>
+                    <strong>
+                        EduNova AI
+                    </strong>
+
+                    <span>
+                        منصة تعليمية ذكية للطلاب
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <a href="library.html">
+                    <span data-home-i18n="my_library">
+                        مكتبتي
+                    </span>
+                </a>
+
+                <a href="forum.html">
+                    <span data-home-i18n="forum">
+                        المنتدى
+                    </span>
+                </a>
+
+                <a href="subscriptions.html">
+                    <span data-home-i18n="subscription">
+                        اشتراكك
+                    </span>
+                </a>
+
+                <a href="settings.html">
+                    <span data-home-i18n="nav_settings">
+                        الإعدادات
+                    </span>
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                ©
+                <span id="currentYear"></span>
+                EduNova AI
+            </span>
+
+            <span>
+                Afkrash AI
+            </span>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<style>
+
+/* =========================================================
+   HOME FOOTER
+========================================================= */
+
+.site-footer {
+
+    margin-top: 42px;
+
+    padding: 30px 0 24px;
+
+    border-top:
+        1px solid
+        var(--border);
+
+    background:
+        var(--surface);
+
+}
+
+
+.footer-main {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    gap:
+        24px;
+
+}
+
+
+.footer-brand {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        12px;
+
+}
+
+
+.footer-brand-mark {
+
+    width:
+        38px;
+
+    height:
+        38px;
+
+    border-radius:
+        11px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border:
+        1px solid
+        var(--border);
+
+    background:
+        var(--surface-2);
+
+    color:
+        var(--primary);
+
+    font-size:
+        12px;
+
+    font-weight:
+        900;
+
+}
+
+
+.footer-brand strong {
+
+    display:
+        block;
+
+    color:
+        var(--text);
+
+    font-size:
+        14px;
+
+}
+
+
+.footer-brand span {
+
+    display:
+        block;
+
+    margin-top:
+        3px;
+
+    color:
+        var(--muted);
+
+    font-size:
+        11px;
+
+}
+
+
+.footer-links {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    flex-wrap:
+        wrap;
+
+    justify-content:
+        flex-end;
+
+    gap:
+        8px;
+
+}
+
+
+.footer-links a {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    min-height:
+        34px;
+
+    padding:
+        0 12px;
+
+    border:
+        1px solid
+        transparent;
+
+    border-radius:
+        9px;
+
+    color:
+        var(--muted);
+
+    font-size:
+        12px;
+
+    font-weight:
+        700;
+
+    text-decoration:
+        none;
+
+    transition:
+        .2s ease;
+
+}
+
+
+.footer-links a:hover {
+
+    color:
+        var(--primary);
+
+    background:
+        var(--surface-2);
+
+    border-color:
+        var(--border);
+
+}
+
+
+.footer-bottom {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    gap:
+        15px;
+
+    margin-top:
+        22px;
+
+    padding-top:
+        17px;
+
+    border-top:
+        1px solid
+        var(--border);
+
+    color:
+        var(--muted);
+
+    font-size:
+        10px;
+
+}
+
+
+/* =========================================================
+   MOBILE FOOTER
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .site-footer {
+
+        margin-top:
+            28px;
+
+        padding:
+            24px 0 20px;
+
+    }
+
+
+    .footer-main {
+
+        align-items:
+            flex-start;
+
+        flex-direction:
+            column;
+
+    }
+
+
+    .footer-links {
+
+        width:
+            100%;
+
+        justify-content:
+            flex-start;
+
+    }
+
+
+    .footer-links a {
+
+        padding:
+            0 9px;
+
+    }
+
+
+    .footer-bottom {
+
+        align-items:
+            flex-start;
+
+        flex-direction:
+            column;
+
+        gap:
+            7px;
+
+    }
+
+}
+
+
+/* =========================================================
+   RTL / LTR
+========================================================= */
+
+html[dir="rtl"] .footer-links {
+
+    justify-content:
+        flex-start;
+
+}
+
+
+html[dir="ltr"] .footer-links {
+
+    justify-content:
+        flex-end;
+
+}
+
+
+@media (max-width: 700px) {
+
+    html[dir="rtl"] .footer-links,
+    html[dir="ltr"] .footer-links {
+
+        justify-content:
+            flex-start;
+
+    }
+
+}
+
+</style>
+
+
+<script>
+
+/* =========================================================
+   FINAL HOME PAGE SAFETY
+========================================================= */
+
+(function () {
+
+    /*
+       The homepage is index.html.
+       Normalize any old dashboard links
+       that may still exist in the shared layout.
+    */
+
+    document
+        .querySelectorAll(
+            'a[href="dashboard.html"]'
+        )
+        .forEach(function (link) {
+
+            if (
+                link.classList.contains(
+                    "header-action"
+                )
+            ) {
+
+                link.setAttribute(
+                    "href",
+                    "index.html"
+                );
+
+            }
+
+        });
+
+
+    /*
+       Keep the footer year current.
+    */
+
+    const year =
+        document.getElementById(
+            "currentYear"
+        );
+
+
+    if (year) {
+
+        year.textContent =
+            new Date().getFullYear();
+
+    }
+
+})();
+
+</script>
+
+
+</body>
 </html>
