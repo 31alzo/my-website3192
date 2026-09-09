@@ -634,7 +634,7 @@
 
             color: var(--text-soft);
 
-            font-size: 11px;
+            font-size: 9px;
             font-weight: 900;
         }
 
@@ -695,6 +695,19 @@
                 height: 41px;
             }
 
+        }
+
+
+        /* =========================================
+           RTL / LTR
+        ========================================= */
+
+        html[dir="ltr"] .video-item {
+            text-align: left;
+        }
+
+        html[dir="rtl"] .video-item {
+            text-align: right;
         }
 
     </style>
@@ -1020,7 +1033,6 @@
             <div
                 class="video-items"
                 id="videoItems">
-
             </div>
 
         </section>
@@ -1115,7 +1127,10 @@
                 "مكتمل",
 
             watch:
-                "متابعة المشاهدة"
+                "متابعة المشاهدة",
+
+            unavailable:
+                "الفيديو غير متاح حاليًا."
 
         },
 
@@ -1192,7 +1207,10 @@
                 "Terminé",
 
             watch:
-                "Continuer"
+                "Continuer",
+
+            unavailable:
+                "La vidéo n'est pas disponible actuellement."
 
         }
 
@@ -1206,18 +1224,31 @@
     function getVideoLanguage() {
 
         if (
-            typeof getSiteLanguage === "function"
+            typeof getSiteLanguage ===
+            "function"
         ) {
 
-            return getSiteLanguage();
+            try {
+
+                return getSiteLanguage();
+
+            } catch (error) {}
 
         }
 
-        return (
-            localStorage.getItem(
-                "site_language"
-            ) || "ar"
-        );
+        try {
+
+            return (
+                localStorage.getItem(
+                    "site_language"
+                ) || "ar"
+            );
+
+        } catch (error) {
+
+            return "ar";
+
+        }
 
     }
 
@@ -1226,6 +1257,7 @@
 
         const language =
             getVideoLanguage();
+
 
         return (
             VIDEO_TRANSLATIONS[language]?.[key] ||
@@ -1237,7 +1269,7 @@
 
 
     /* =========================================
-       STORAGE
+       SAFE STORAGE
     ========================================= */
 
     function readVideoStorage(key) {
@@ -1262,9 +1294,13 @@
             const value =
                 readVideoStorage(key);
 
+
             if (!value) {
+
                 return null;
+
             }
+
 
             return JSON.parse(value);
 
@@ -1298,18 +1334,26 @@
 
 
     /* =========================================
-       CENTRAL STUDENT PATH
+       CENTRAL LEARNING SELECTION
     ========================================= */
 
     function getCurrentLevel() {
 
         if (
-            typeof getStudentLevel === "function"
+            typeof getStudentLevel ===
+            "function"
         ) {
 
-            return getStudentLevel();
+            try {
+
+                return (
+                    getStudentLevel() || ""
+                );
+
+            } catch (error) {}
 
         }
+
 
         return (
             readVideoStorage(
@@ -1323,12 +1367,20 @@
     function getCurrentBranch() {
 
         if (
-            typeof getBacBranch === "function"
+            typeof getBacBranch ===
+            "function"
         ) {
 
-            return getBacBranch();
+            try {
+
+                return (
+                    getBacBranch() || ""
+                );
+
+            } catch (error) {}
 
         }
+
 
         return (
             readVideoStorage(
@@ -1342,34 +1394,44 @@
     function getCurrentSubjectId() {
 
         if (
-            typeof getSelectedSubject === "function"
+            typeof getSelectedSubject ===
+            "function"
         ) {
 
-            const subject =
-                getSelectedSubject();
+            try {
 
-            if (
-                subject &&
-                typeof subject === "object"
-            ) {
+                const subject =
+                    getSelectedSubject();
 
-                return (
-                    subject.id ||
-                    subject.subjectId ||
-                    ""
-                );
 
-            }
+                if (
+                    subject &&
+                    typeof subject ===
+                    "object"
+                ) {
 
-            if (
-                typeof subject === "string"
-            ) {
+                    return (
+                        subject.id ||
+                        subject.subjectId ||
+                        ""
+                    );
 
-                return subject;
+                }
 
-            }
+
+                if (
+                    typeof subject ===
+                    "string"
+                ) {
+
+                    return subject;
+
+                }
+
+            } catch (error) {}
 
         }
+
 
         return (
             readVideoStorage(
@@ -1383,15 +1445,21 @@
     function getCurrentSubjectType() {
 
         if (
-            typeof getSelectedSubjectType === "function"
+            typeof getSelectedSubjectType ===
+            "function"
         ) {
 
-            return (
-                getSelectedSubjectType() ||
-                ""
-            );
+            try {
+
+                return (
+                    getSelectedSubjectType() ||
+                    ""
+                );
+
+            } catch (error) {}
 
         }
+
 
         return (
             readVideoStorage(
@@ -1405,34 +1473,44 @@
     function getCurrentChapterId() {
 
         if (
-            typeof getSelectedChapter === "function"
+            typeof getSelectedChapter ===
+            "function"
         ) {
 
-            const chapter =
-                getSelectedChapter();
+            try {
 
-            if (
-                chapter &&
-                typeof chapter === "object"
-            ) {
+                const chapter =
+                    getSelectedChapter();
 
-                return (
-                    chapter.id ||
-                    chapter.chapterId ||
-                    ""
-                );
 
-            }
+                if (
+                    chapter &&
+                    typeof chapter ===
+                    "object"
+                ) {
 
-            if (
-                typeof chapter === "string"
-            ) {
+                    return (
+                        chapter.id ||
+                        chapter.chapterId ||
+                        ""
+                    );
 
-                return chapter;
+                }
 
-            }
+
+                if (
+                    typeof chapter ===
+                    "string"
+                ) {
+
+                    return chapter;
+
+                }
+
+            } catch (error) {}
 
         }
+
 
         return (
             readVideoStorage(
@@ -1446,14 +1524,18 @@
     const studentLevel =
         getCurrentLevel();
 
+
     const bacBranch =
         getCurrentBranch();
+
 
     const selectedSubjectId =
         getCurrentSubjectId();
 
+
     const selectedSubjectType =
         getCurrentSubjectType();
+
 
     const selectedChapterId =
         getCurrentChapterId();
@@ -1542,21 +1624,23 @@
 
 
     /* =========================================
-       CURRICULUM DATA
+       CENTRAL CHAPTER VIDEOS
        
-       لا نعرّف CURRICULUM_DATA هنا.
-       المصدر الرسمي هو script.js.
+       المصدر الرسمي للفيديوهات هو script.js.
+       لا نكرر CURRICULUM_DATA هنا.
     ========================================= */
 
     function getCentralChapterVideos() {
 
         if (
-            typeof getChapterVideos !== "function"
+            typeof getChapterVideos !==
+            "function"
         ) {
 
             return [];
 
         }
+
 
         try {
 
@@ -1565,11 +1649,17 @@
                     selectedChapterId
                 );
 
+
             return Array.isArray(videos)
                 ? videos.slice(0, 20)
                 : [];
 
         } catch (error) {
+
+            console.warn(
+                "Unable to load chapter videos:",
+                error
+            );
 
             return [];
 
@@ -1578,11 +1668,11 @@
     }
 
 
-    function getSelectedVideoList() {
+    function getStoredChapterVideos() {
 
         if (
             Array.isArray(
-                selectedVideo.chapterVideos
+                selectedVideo?.chapterVideos
             )
         ) {
 
@@ -1594,7 +1684,7 @@
 
         if (
             Array.isArray(
-                selectedVideo.videos
+                selectedVideo?.videos
             )
         ) {
 
@@ -1618,12 +1708,15 @@
     ) {
 
         chapterVideos =
-            getSelectedVideoList();
+            getStoredChapterVideos();
 
     }
 
 
-    /* إذا كان الفيديو الحالي هو كل ما نملكه */
+    /*
+       إذا لم نستطع الحصول على القائمة المركزية،
+       نحتفظ بالفيديو المختار حتى لا تنهار الصفحة.
+    */
 
     if (
         chapterVideos.length === 0 &&
@@ -1667,6 +1760,30 @@
                 : index + 1;
 
 
+        const fallbackTitle = {
+
+            ar:
+                `الفيديو ${number}`,
+
+            fr:
+                `Vidéo ${number}`
+
+        };
+
+
+        const fallbackDescription = {
+
+            ar:
+                videoText(
+                    "noDescription"
+                ),
+
+            fr:
+                "Aucune description disponible pour cette vidéo."
+
+        };
+
+
         return {
 
             ...video,
@@ -1679,36 +1796,32 @@
 
             title:
                 video?.title ||
-                {
-
-                    ar:
-                        `الفيديو ${number}`,
-
-                    fr:
-                        `Vidéo ${number}`
-
-                },
+                fallbackTitle,
 
             description:
                 video?.description ||
-                {
-
-                    ar:
-                        videoText("noDescription"),
-
-                    fr:
-                        videoText("noDescription")
-
-                },
+                fallbackDescription,
 
             duration:
                 video?.duration ||
                 "--:--",
 
             videoUrl:
-                video?.videoUrl ||
-                video?.url ||
-                "",
+                typeof video?.videoUrl ===
+                "string"
+                    ? video.videoUrl
+                    : (
+                        typeof video?.url ===
+                        "string"
+                            ? video.url
+                            : ""
+                    ),
+
+            /*
+               قاعدة EduNova AI الحالية:
+               الفيديو رقم 1 مجاني.
+               الفيديوهات التالية مقفلة.
+            */
 
             free:
                 number === 1,
@@ -1730,14 +1843,19 @@
 
 
     /* =========================================
-       CURRENT VIDEO FROM LIST
+       CURRENT VIDEO
     ========================================= */
 
     const currentFromList =
         chapterVideos.find(
-            video =>
-                Number(video.number) ===
-                videoNumber
+            function (video) {
+
+                return (
+                    Number(video.number) ===
+                    Number(videoNumber)
+                );
+
+            }
         );
 
 
@@ -1766,7 +1884,8 @@
     function localizedVideoValue(value) {
 
         if (
-            typeof value === "string"
+            typeof value ===
+            "string"
         ) {
 
             return value;
@@ -1776,11 +1895,13 @@
 
         if (
             value &&
-            typeof value === "object"
+            typeof value ===
+            "object"
         ) {
 
             const language =
                 getVideoLanguage();
+
 
             return (
                 value[language] ||
@@ -1804,27 +1925,28 @@
     function getCurrentSubjectDefinition() {
 
         if (
-            typeof getSubjectDefinition ===
+            typeof getSubjectDefinition !==
             "function"
         ) {
 
-            try {
-
-                return getSubjectDefinition(
-                    selectedSubjectId,
-                    studentLevel,
-                    bacBranch
-                );
-
-            } catch (error) {
-
-                return null;
-
-            }
+            return null;
 
         }
 
-        return null;
+
+        try {
+
+            return getSubjectDefinition(
+                selectedSubjectId,
+                studentLevel,
+                bacBranch
+            );
+
+        } catch (error) {
+
+            return null;
+
+        }
 
     }
 
@@ -1845,7 +1967,10 @@
                         bacBranch
                     );
 
-                if (label) {
+
+                if (
+                    label
+                ) {
 
                     return label;
 
@@ -1864,14 +1989,21 @@
             definition
         ) {
 
-            return (
+            const definitionLabel =
                 localizedVideoValue(
                     definition.title ||
                     definition.label ||
                     definition.name
-                ) ||
-                ""
-            );
+                );
+
+
+            if (
+                definitionLabel
+            ) {
+
+                return definitionLabel;
+
+            }
 
         }
 
@@ -1954,14 +2086,25 @@
     function getCurrentLevelLabel() {
 
         if (
-            typeof getLevelLabel === "function"
+            typeof getLevelLabel ===
+            "function"
         ) {
 
             try {
 
-                return getLevelLabel(
-                    studentLevel
-                );
+                const label =
+                    getLevelLabel(
+                        studentLevel
+                    );
+
+
+                if (
+                    label
+                ) {
+
+                    return label;
+
+                }
 
             } catch (error) {}
 
@@ -1984,6 +2127,16 @@
                     ? "4ème / Brevet"
                     : "4ème / شهادة ختم الدروس الإعدادية",
 
+            bac_c:
+                language === "fr"
+                    ? "Baccalauréat C"
+                    : "البكالوريا C",
+
+            bac_d:
+                language === "fr"
+                    ? "Baccalauréat D"
+                    : "البكالوريا D",
+
             bac:
                 language === "fr"
                     ? "Baccalauréat"
@@ -2005,13 +2158,101 @@
 
 
     /* =========================================
+       CHAPTER LABEL
+    ========================================= */
+
+    function getCurrentChapterLabel() {
+
+        if (
+            typeof getChapterLabel ===
+            "function"
+        ) {
+
+            try {
+
+                const label =
+                    getChapterLabel(
+                        selectedChapterId,
+                        selectedSubjectId,
+                        studentLevel,
+                        bacBranch
+                    );
+
+
+                if (
+                    label
+                ) {
+
+                    return label;
+
+                }
+
+            } catch (error) {}
+
+        }
+
+
+        if (
+            typeof getChapterDefinition ===
+            "function"
+        ) {
+
+            try {
+
+                const chapter =
+                    getChapterDefinition(
+                        selectedChapterId,
+                        selectedSubjectId,
+                        studentLevel,
+                        bacBranch
+                    );
+
+
+                if (
+                    chapter
+                ) {
+
+                    const label =
+                        localizedVideoValue(
+                            chapter.title ||
+                            chapter.label ||
+                            chapter.name
+                        );
+
+
+                    if (
+                        label
+                    ) {
+
+                        return label;
+
+                    }
+
+                }
+
+            } catch (error) {}
+
+        }
+
+
+        return (
+            selectedChapterId ||
+            (
+                getVideoLanguage() === "fr"
+                    ? "Chapitre"
+                    : "الفصل"
+            )
+        );
+
+    }    /* =========================================
        VIDEO ACCESS
     ========================================= */
 
     function isCurrentVideoFree() {
 
         if (
-            typeof isVideoFree === "function"
+            typeof isVideoFree ===
+            "function"
         ) {
 
             try {
@@ -2024,7 +2265,9 @@
 
         }
 
-        return videoNumber === 1;
+        return (
+            Number(videoNumber) === 1
+        );
 
     }
 
@@ -2032,7 +2275,8 @@
     function isCurrentVideoLocked() {
 
         if (
-            typeof isVideoLocked === "function"
+            typeof isVideoLocked ===
+            "function"
         ) {
 
             try {
@@ -2045,7 +2289,9 @@
 
         }
 
-        return videoNumber > 1;
+        return (
+            Number(videoNumber) > 1
+        );
 
     }
 
@@ -2055,7 +2301,7 @@
 
 
     /* =========================================
-       TRANSLATE
+       TRANSLATION
     ========================================= */
 
     function translateVideoPage() {
@@ -2080,64 +2326,164 @@
                 : "مشاهدة الفيديو | EduNova AI";
 
 
-        document.getElementById(
-            "backChapterButton"
-        ).textContent =
-            videoText("backChapter");
+        const backButton =
+            document.getElementById(
+                "backChapterButton"
+            );
 
 
-        document.getElementById(
-            "teacherDescription"
-        ).textContent =
-            videoText("teacherDescription");
+        if (backButton) {
+
+            backButton.textContent =
+                videoText(
+                    "backChapter"
+                );
+
+        }
 
 
-        document.getElementById(
-            "subscriptionTitle"
-        ).textContent =
-            videoText("subscriptionTitle");
+        const teacherDescription =
+            document.getElementById(
+                "teacherDescription"
+            );
 
 
-        document.getElementById(
-            "subscriptionDescription"
-        ).textContent =
-            videoText("subscriptionDescription");
+        if (teacherDescription) {
+
+            teacherDescription.textContent =
+                videoText(
+                    "teacherDescription"
+                );
+
+        }
 
 
-        document.getElementById(
-            "subscribeButton"
-        ).textContent =
-            videoText("subscribe");
+        const subscriptionTitle =
+            document.getElementById(
+                "subscriptionTitle"
+            );
 
 
-        document.getElementById(
-            "previousButton"
-        ).textContent =
-            videoText("previous");
+        if (subscriptionTitle) {
+
+            subscriptionTitle.textContent =
+                videoText(
+                    "subscriptionTitle"
+                );
+
+        }
 
 
-        document.getElementById(
-            "listButton"
-        ).textContent =
-            videoText("list");
+        const subscriptionDescription =
+            document.getElementById(
+                "subscriptionDescription"
+            );
 
 
-        document.getElementById(
-            "nextButton"
-        ).textContent =
-            videoText("next");
+        if (subscriptionDescription) {
+
+            subscriptionDescription.textContent =
+                videoText(
+                    "subscriptionDescription"
+                );
+
+        }
 
 
-        document.getElementById(
-            "videoListTitle"
-        ).textContent =
-            videoText("videoList");
+        const subscribeButton =
+            document.getElementById(
+                "subscribeButton"
+            );
 
 
-        document.getElementById(
-            "progressLabel"
-        ).textContent =
-            videoText("progress");
+        if (subscribeButton) {
+
+            subscribeButton.textContent =
+                videoText(
+                    "subscribe"
+                );
+
+        }
+
+
+        const previousButton =
+            document.getElementById(
+                "previousButton"
+            );
+
+
+        if (previousButton) {
+
+            previousButton.textContent =
+                videoText(
+                    "previous"
+                );
+
+        }
+
+
+        const listButton =
+            document.getElementById(
+                "listButton"
+            );
+
+
+        if (listButton) {
+
+            listButton.textContent =
+                videoText(
+                    "list"
+                );
+
+        }
+
+
+        const nextButton =
+            document.getElementById(
+                "nextButton"
+            );
+
+
+        if (nextButton) {
+
+            nextButton.textContent =
+                videoText(
+                    "next"
+                );
+
+        }
+
+
+        const videoListTitle =
+            document.getElementById(
+                "videoListTitle"
+            );
+
+
+        if (videoListTitle) {
+
+            videoListTitle.textContent =
+                videoText(
+                    "videoList"
+                );
+
+        }
+
+
+        const progressLabel =
+            document.getElementById(
+                "progressLabel"
+            );
+
+
+        if (progressLabel) {
+
+            progressLabel.textContent =
+                videoText(
+                    "progress"
+                );
+
+        }
 
 
         loadVideo();
@@ -2150,7 +2496,7 @@
 
 
     /* =========================================
-       LOAD VIDEO
+       LOAD CURRENT VIDEO
     ========================================= */
 
     function loadVideo() {
@@ -2174,60 +2520,126 @@
             localizedVideoValue(
                 selectedVideo.description
             ) ||
-            videoText("noDescription");
+            videoText(
+                "noDescription"
+            );
 
 
-        document.getElementById(
-            "videoSubject"
-        ).textContent =
-            getCurrentSubjectLabel();
+        const subjectElement =
+            document.getElementById(
+                "videoSubject"
+            );
 
 
-        document.getElementById(
-            "videoLevel"
-        ).textContent =
-            getCurrentLevelLabel();
+        if (subjectElement) {
+
+            subjectElement.textContent =
+                getCurrentSubjectLabel();
+
+        }
 
 
-        document.getElementById(
-            "videoChapter"
-        ).textContent =
-            videoText("chapter") +
-            " " +
-            selectedChapterId;
+        const levelElement =
+            document.getElementById(
+                "videoLevel"
+            );
 
 
-        document.getElementById(
-            "videoNumber"
-        ).textContent =
-            videoText("video") +
-            " " +
-            videoNumber;
+        if (levelElement) {
+
+            levelElement.textContent =
+                getCurrentLevelLabel();
+
+        }
 
 
-        document.getElementById(
-            "videoDuration"
-        ).textContent =
-            selectedVideo.duration ||
-            "--:--";
+        const chapterElement =
+            document.getElementById(
+                "videoChapter"
+            );
 
 
-        document.getElementById(
-            "videoTitle"
-        ).textContent =
-            title;
+        if (chapterElement) {
+
+            chapterElement.textContent =
+                getCurrentChapterLabel();
+
+        }
 
 
-        document.getElementById(
-            "videoDescription"
-        ).textContent =
-            description;
+        const numberElement =
+            document.getElementById(
+                "videoNumber"
+            );
 
 
-        document.getElementById(
-            "playerTitle"
-        ).textContent =
-            title;
+        if (numberElement) {
+
+            numberElement.textContent =
+                videoText(
+                    "video"
+                ) +
+                " " +
+                videoNumber;
+
+        }
+
+
+        const durationElement =
+            document.getElementById(
+                "videoDuration"
+            );
+
+
+        if (durationElement) {
+
+            durationElement.textContent =
+                selectedVideo.duration ||
+                "--:--";
+
+        }
+
+
+        const titleElement =
+            document.getElementById(
+                "videoTitle"
+            );
+
+
+        if (titleElement) {
+
+            titleElement.textContent =
+                title;
+
+        }
+
+
+        const descriptionElement =
+            document.getElementById(
+                "videoDescription"
+            );
+
+
+        if (descriptionElement) {
+
+            descriptionElement.textContent =
+                description;
+
+        }
+
+
+        const playerTitle =
+            document.getElementById(
+                "playerTitle"
+            );
+
+
+        if (playerTitle) {
+
+            playerTitle.textContent =
+                title;
+
+        }
 
 
         const subscriptionBox =
@@ -2252,31 +2664,67 @@
             isFree
         ) {
 
-            freeLabel.className =
-                "free-label";
+            if (freeLabel) {
 
-            freeLabel.textContent =
-                videoText("free");
+                freeLabel.className =
+                    "free-label";
 
-            subscriptionBox.style.display =
-                "none";
+                freeLabel.textContent =
+                    videoText(
+                        "free"
+                    );
 
-            playerMessage.textContent =
-                videoText("freeMessage");
+            }
+
+
+            if (subscriptionBox) {
+
+                subscriptionBox.style.display =
+                    "none";
+
+            }
+
+
+            if (playerMessage) {
+
+                playerMessage.textContent =
+                    videoText(
+                        "freeMessage"
+                    );
+
+            }
 
         } else {
 
-            freeLabel.className =
-                "locked-player-label";
+            if (freeLabel) {
 
-            freeLabel.textContent =
-                videoText("locked");
+                freeLabel.className =
+                    "locked-player-label";
 
-            subscriptionBox.style.display =
-                "block";
+                freeLabel.textContent =
+                    videoText(
+                        "locked"
+                    );
 
-            playerMessage.textContent =
-                videoText("lockedMessage");
+            }
+
+
+            if (subscriptionBox) {
+
+                subscriptionBox.style.display =
+                    "block";
+
+            }
+
+
+            if (playerMessage) {
+
+                playerMessage.textContent =
+                    videoText(
+                        "lockedMessage"
+                    );
+
+            }
 
         }
 
@@ -2289,7 +2737,7 @@
 
 
     /* =========================================
-       REAL VIDEO
+       REAL VIDEO PLAYER
     ========================================= */
 
     function renderRealVideo() {
@@ -2298,6 +2746,13 @@
             document.getElementById(
                 "videoPlayer"
             );
+
+
+        if (!player) {
+
+            return;
+
+        }
 
 
         const title =
@@ -2311,14 +2766,13 @@
             );
 
 
-        const message =
-            isFree
-                ? videoText("freeMessage")
-                : videoText("lockedMessage");
+        player.innerHTML =
+            "";
 
 
-        player.innerHTML = "";
-
+        /*
+           الفيديوهات المقفلة لا تُعرض.
+        */
 
         if (
             !isFree ||
@@ -2330,6 +2784,7 @@
                     "div"
                 );
 
+
             placeholder.className =
                 "player-placeholder";
 
@@ -2339,17 +2794,20 @@
                     "div"
                 );
 
+
             icon.className =
                 "player-icon";
 
+
             icon.textContent =
-                "▶";
+                "LOCK";
 
 
             const heading =
                 document.createElement(
                     "h2"
                 );
+
 
             heading.textContent =
                 title;
@@ -2360,8 +2818,11 @@
                     "p"
                 );
 
+
             paragraph.textContent =
-                message;
+                videoText(
+                    "lockedMessage"
+                );
 
 
             const label =
@@ -2369,24 +2830,31 @@
                     "span"
                 );
 
+
             label.className =
                 "locked-player-label";
 
+
             label.textContent =
-                videoText("locked");
+                videoText(
+                    "locked"
+                );
 
 
             placeholder.appendChild(
                 icon
             );
 
+
             placeholder.appendChild(
                 heading
             );
 
+
             placeholder.appendChild(
                 paragraph
             );
+
 
             placeholder.appendChild(
                 label
@@ -2402,6 +2870,11 @@
 
         }
 
+
+        /*
+           الفيديو الأول مجاني، ولكن حاليًا
+           لا توجد روابط حقيقية في بيانات المنصة.
+        */
 
         const videoUrl =
             typeof selectedVideo.videoUrl ===
@@ -2410,14 +2883,13 @@
                 : "";
 
 
-        if (
-            !videoUrl
-        ) {
+        if (!videoUrl) {
 
             const placeholder =
                 document.createElement(
                     "div"
                 );
+
 
             placeholder.className =
                 "player-placeholder";
@@ -2428,8 +2900,10 @@
                     "div"
                 );
 
+
             icon.className =
                 "player-icon";
+
 
             icon.textContent =
                 "▶";
@@ -2440,6 +2914,7 @@
                     "h2"
                 );
 
+
             heading.textContent =
                 title;
 
@@ -2449,8 +2924,11 @@
                     "p"
                 );
 
+
             paragraph.textContent =
-                videoText("placeholder");
+                videoText(
+                    "placeholder"
+                );
 
 
             const label =
@@ -2458,24 +2936,31 @@
                     "span"
                 );
 
+
             label.className =
                 "free-label";
 
+
             label.textContent =
-                videoText("free");
+                videoText(
+                    "free"
+                );
 
 
             placeholder.appendChild(
                 icon
             );
 
+
             placeholder.appendChild(
                 heading
             );
 
+
             placeholder.appendChild(
                 paragraph
             );
+
 
             placeholder.appendChild(
                 label
@@ -2491,6 +2976,11 @@
 
         }
 
+
+        /*
+           عندما نضيف رابط الفيديو الحقيقي لاحقًا،
+           سيُنشأ مشغل HTML5 تلقائيًا.
+        */
 
         const video =
             document.createElement(
@@ -2501,14 +2991,18 @@
         video.className =
             "real-video";
 
+
         video.controls =
             true;
+
 
         video.playsInline =
             true;
 
+
         video.preload =
             "metadata";
+
 
         video.src =
             videoUrl;
@@ -2544,10 +3038,10 @@
 
 
     /* =========================================
-       PROGRESS
+       PROGRESS KEY
     ========================================= */
 
-    function buildProgressKey() {
+    function buildVideoProgressKey() {
 
         if (
             typeof buildLearningProgressKey ===
@@ -2580,6 +3074,108 @@
     }
 
 
+    /* =========================================
+       READ VIDEO PROGRESS
+    ========================================= */
+
+    function getCurrentVideoProgress() {
+
+        if (
+            typeof getVideoProgress ===
+            "function"
+        ) {
+
+            try {
+
+                const progress =
+                    getVideoProgress(
+                        studentLevel,
+                        bacBranch,
+                        selectedSubjectId,
+                        selectedChapterId,
+                        videoNumber
+                    );
+
+
+                const number =
+                    Number(progress);
+
+
+                if (
+                    Number.isFinite(number)
+                ) {
+
+                    return Math.max(
+                        0,
+                        Math.min(
+                            100,
+                            number
+                        )
+                    );
+
+                }
+
+            } catch (error) {}
+
+        }
+
+
+        /*
+           fallback بسيط عند عدم وجود
+           دالة القراءة المركزية.
+        */
+
+        try {
+
+            const progressData =
+                readVideoJSON(
+                    "learning_progress"
+                );
+
+
+            if (
+                progressData &&
+                typeof progressData ===
+                "object"
+            ) {
+
+                const key =
+                    buildVideoProgressKey();
+
+
+                const value =
+                    progressData[key];
+
+
+                if (
+                    typeof value ===
+                    "number"
+                ) {
+
+                    return Math.max(
+                        0,
+                        Math.min(
+                            100,
+                            value
+                        )
+                    );
+
+                }
+
+            }
+
+        } catch (error) {}
+
+
+        return 0;
+
+    }
+
+
+    /* =========================================
+       RENDER PROGRESS
+    ========================================= */
+
     function renderProgress() {
 
         const progressBox =
@@ -2588,13 +3184,31 @@
             );
 
 
+        const progressFill =
+            document.getElementById(
+                "progressFill"
+            );
+
+
+        const progressValue =
+            document.getElementById(
+                "progressValue"
+            );
+
+
         if (
-            !progressBox
+            !progressBox ||
+            !progressFill ||
+            !progressValue
         ) {
 
             return;
 
         }
+
+
+        let progress =
+            getCurrentVideoProgress();
 
 
         let completed =
@@ -2631,35 +3245,50 @@
             completed
         ) {
 
-            progressBox.style.display =
-                "block";
-
-            document.getElementById(
-                "progressValue"
-            ).textContent =
-                "100%";
-
-            document.getElementById(
-                "progressFill"
-            ).style.width =
-                "100%";
-
-            return;
+            progress =
+                100;
 
         }
 
 
-        progressBox.style.display =
-            "none";
+        if (
+            progress > 0
+        ) {
+
+            progressBox.style.display =
+                "block";
+
+        } else {
+
+            progressBox.style.display =
+                "none";
+
+        }
+
+
+        progressValue.textContent =
+            Math.round(progress) +
+            "%";
+
+
+        progressFill.style.width =
+            Math.round(progress) +
+            "%";
 
     }
 
+
+    /* =========================================
+       SAVE CURRENT PROGRESS
+    ========================================= */
 
     function saveCurrentProgress(video) {
 
         if (
             !video ||
-            !Number.isFinite(video.duration) ||
+            !Number.isFinite(
+                video.duration
+            ) ||
             video.duration <= 0
         ) {
 
@@ -2673,7 +3302,8 @@
                 (
                     video.currentTime /
                     video.duration
-                ) * 100
+                ) *
+                100
             );
 
 
@@ -2725,16 +3355,24 @@
             box.style.display =
                 "block";
 
+
             value.textContent =
-                percentage + "%";
+                percentage +
+                "%";
+
 
             fill.style.width =
-                percentage + "%";
+                percentage +
+                "%";
 
         }
 
     }
 
+
+    /* =========================================
+       COMPLETE CURRENT VIDEO
+    ========================================= */
 
     function completeCurrentVideo() {
 
@@ -2753,6 +3391,7 @@
                     videoNumber
                 );
 
+
                 renderProgress();
 
                 renderVideoList();
@@ -2764,7 +3403,33 @@
         }
 
 
+        /*
+           توافق إضافي مع API قديم إن وُجد.
+        */
+
+        if (
+            typeof markVideoCompleted ===
+            "function"
+        ) {
+
+            try {
+
+                markVideoCompleted(
+                    studentLevel,
+                    bacBranch,
+                    selectedSubjectId,
+                    selectedChapterId,
+                    videoNumber
+                );
+
+            } catch (error) {}
+
+        }
+
+
         renderProgress();
+
+        renderVideoList();
 
     }
 
@@ -2781,9 +3446,7 @@
             );
 
 
-        if (
-            !container
-        ) {
+        if (!container) {
 
             return;
 
@@ -2799,10 +3462,18 @@
                 .slice(0, 20);
 
 
-        document.getElementById(
-            "videoListCount"
-        ).textContent =
-            videos.length;
+        const count =
+            document.getElementById(
+                "videoListCount"
+            );
+
+
+        if (count) {
+
+            count.textContent =
+                videos.length;
+
+        }
 
 
         if (
@@ -2814,11 +3485,15 @@
                     "div"
                 );
 
+
             empty.className =
                 "video-empty";
 
+
             empty.textContent =
-                videoText("noVideos");
+                videoText(
+                    "noVideos"
+                );
 
 
             container.appendChild(
@@ -2843,7 +3518,23 @@
                 const locked =
                     typeof isVideoLocked ===
                     "function"
-                        ? isVideoLocked(number)
+                        ? (
+                            function () {
+
+                                try {
+
+                                    return isVideoLocked(
+                                        number
+                                    );
+
+                                } catch (error) {
+
+                                    return number > 1;
+
+                                }
+
+                            }
+                        )()
                         : number > 1;
 
 
@@ -2886,12 +3577,14 @@
                 item.type =
                     "button";
 
+
                 item.className =
                     "video-item";
 
 
                 if (
-                    number === videoNumber
+                    number ===
+                    Number(videoNumber)
                 ) {
 
                     item.classList.add(
@@ -2928,8 +3621,10 @@
                         "span"
                     );
 
+
                 numberSpan.className =
                     "video-item-number";
+
 
                 numberSpan.textContent =
                     number;
@@ -2940,6 +3635,7 @@
                         "span"
                     );
 
+
                 content.className =
                     "video-item-content";
 
@@ -2949,8 +3645,10 @@
                         "span"
                     );
 
+
                 titleSpan.className =
                     "video-item-title";
+
 
                 titleSpan.textContent =
                     localizedVideoValue(
@@ -2968,35 +3666,45 @@
                         "span"
                     );
 
+
                 statusSpan.className =
                     "video-item-status";
 
 
                 if (
-                    number === videoNumber
+                    number ===
+                    Number(videoNumber)
                 ) {
 
                     statusSpan.textContent =
-                        videoText("current");
+                        videoText(
+                            "current"
+                        );
 
                 } else if (
                     completed
                 ) {
 
                     statusSpan.textContent =
-                        videoText("completed");
+                        videoText(
+                            "completed"
+                        );
 
                 } else if (
                     locked
                 ) {
 
                     statusSpan.textContent =
-                        videoText("locked");
+                        videoText(
+                            "locked"
+                        );
 
                 } else {
 
                     statusSpan.textContent =
-                        videoText("free");
+                        videoText(
+                            "free"
+                        );
 
                 }
 
@@ -3004,6 +3712,7 @@
                 content.appendChild(
                     titleSpan
                 );
+
 
                 content.appendChild(
                     statusSpan
@@ -3014,6 +3723,7 @@
                     document.createElement(
                         "span"
                     );
+
 
                 icon.className =
                     "video-item-icon";
@@ -3045,9 +3755,11 @@
                     numberSpan
                 );
 
+
                 item.appendChild(
                     content
                 );
+
 
                 item.appendChild(
                     icon
@@ -3073,25 +3785,20 @@
             }
         );
 
-    }
-
-
-    /* =========================================
+    }    /* =========================================
        SELECT VIDEO
     ========================================= */
 
     function selectVideo(number) {
 
-        const video =
-            chapterVideos.find(
-                item =>
-                    Number(item.number) ===
-                    Number(number)
-            );
+        const targetNumber =
+            Number(number);
 
 
         if (
-            !video
+            !Number.isFinite(targetNumber) ||
+            targetNumber < 1 ||
+            targetNumber > 20
         ) {
 
             return;
@@ -3099,36 +3806,81 @@
         }
 
 
-        const locked =
-            typeof isVideoLocked ===
-            "function"
-                ? isVideoLocked(number)
-                : Number(number) > 1;
+        const video =
+            chapterVideos.find(
+                function (item) {
+
+                    return (
+                        Number(item.number) ===
+                        targetNumber
+                    );
+
+                }
+            );
+
+
+        if (!video) {
+
+            return;
+
+        }
+
+
+        let locked =
+            targetNumber > 1;
 
 
         if (
-            locked
+            typeof isVideoLocked ===
+            "function"
         ) {
+
+            try {
+
+                locked =
+                    isVideoLocked(
+                        targetNumber
+                    );
+
+            } catch (error) {
+
+                locked =
+                    targetNumber > 1;
+
+            }
+
+        }
+
+
+        if (locked) {
+
+            const message =
+                videoText(
+                    "subscriptionAlert"
+                );
+
 
             if (
                 typeof notify ===
                 "function"
             ) {
 
-                notify(
-                    videoText(
-                        "subscriptionAlert"
-                    ),
-                    "warning"
-                );
+                try {
+
+                    notify(
+                        message,
+                        "warning"
+                    );
+
+                } catch (error) {
+
+                    alert(message);
+
+                }
 
             } else {
 
-                alert(
-                    videoText(
-                        "subscriptionAlert"
-                    )
-                );
+                alert(message);
 
             }
 
@@ -3145,16 +3897,18 @@
             ...video,
 
             number:
-                Number(number),
+                targetNumber,
 
             chapterVideos:
-                chapterVideos.slice(
-                    0,
-                    20
-                )
+                chapterVideos
+                    .slice(0, 20)
 
         };
 
+
+        /*
+           الحفظ المركزي هو الأولوية.
+        */
 
         if (
             typeof setSelectedVideo ===
@@ -3190,11 +3944,17 @@
 
             localStorage.setItem(
                 "selected_video_number",
-                String(number)
+                String(
+                    targetNumber
+                )
             );
 
         } catch (error) {}
 
+
+        /*
+           نحافظ على الفصل الحالي.
+        */
 
         if (
             typeof setSelectedChapter ===
@@ -3212,6 +3972,11 @@
         }
 
 
+        /*
+           ننتقل إلى نفس الصفحة مع
+           البيانات الجديدة المحفوظة.
+        */
+
         window.location.href =
             "video.html";
 
@@ -3219,16 +3984,21 @@
 
 
     /* =========================================
-       PREVIOUS
+       PREVIOUS VIDEO
     ========================================= */
 
     function previousVideo() {
 
         const index =
             chapterVideos.findIndex(
-                video =>
-                    Number(video.number) ===
-                    videoNumber
+                function (video) {
+
+                    return (
+                        Number(video.number) ===
+                        Number(videoNumber)
+                    );
+
+                }
             );
 
 
@@ -3242,7 +4012,9 @@
 
 
         const previous =
-            chapterVideos[index - 1];
+            chapterVideos[
+                index - 1
+            ];
 
 
         if (
@@ -3261,22 +4033,28 @@
 
 
     /* =========================================
-       NEXT
+       NEXT VIDEO
     ========================================= */
 
     function nextVideo() {
 
         const index =
             chapterVideos.findIndex(
-                video =>
-                    Number(video.number) ===
-                    videoNumber
+                function (video) {
+
+                    return (
+                        Number(video.number) ===
+                        Number(videoNumber)
+                    );
+
+                }
             );
 
 
         if (
             index < 0 ||
-            index >= chapterVideos.length - 1
+            index >=
+            chapterVideos.length - 1
         ) {
 
             return;
@@ -3285,7 +4063,9 @@
 
 
         const next =
-            chapterVideos[index + 1];
+            chapterVideos[
+                index + 1
+            ];
 
 
         if (
@@ -3333,9 +4113,14 @@
 
         const index =
             chapterVideos.findIndex(
-                video =>
-                    Number(video.number) ===
-                    videoNumber
+                function (video) {
+
+                    return (
+                        Number(video.number) ===
+                        Number(videoNumber)
+                    );
+
+                }
             );
 
 
@@ -3345,7 +4130,8 @@
 
         nextButton.disabled =
             index < 0 ||
-            index >= chapterVideos.length - 1;
+            index >=
+            chapterVideos.length - 1;
 
     }
 
@@ -3372,34 +4158,38 @@
 
     function goSubscribe() {
 
+        const message =
+            videoText(
+                "subscribeAlert"
+            );
+
+
         if (
             typeof notify ===
             "function"
         ) {
 
-            notify(
-                videoText(
-                    "subscribeAlert"
-                ),
-                "info"
-            );
+            try {
 
-            return;
+                notify(
+                    message,
+                    "info"
+                );
+
+                return;
+
+            } catch (error) {}
 
         }
 
 
-        alert(
-            videoText(
-                "subscribeAlert"
-            )
-        );
+        alert(message);
 
     }
 
 
     /* =========================================
-       GLOBAL EVENTS
+       GLOBAL LANGUAGE / THEME EVENTS
     ========================================= */
 
     window.addEventListener(
@@ -3431,13 +4221,42 @@
                 "function"
             ) {
 
-                updateThemeControls();
+                try {
+
+                    updateThemeControls();
+
+                } catch (error) {}
 
             }
 
         }
     );
 
+
+    window.addEventListener(
+        "siteThemeChanged",
+        function () {
+
+            if (
+                typeof updateThemeControls ===
+                "function"
+            ) {
+
+                try {
+
+                    updateThemeControls();
+
+                } catch (error) {}
+
+            }
+
+        }
+    );
+
+
+    /* =========================================
+       STORAGE SYNC
+    ========================================= */
 
     window.addEventListener(
         "storage",
@@ -3449,6 +4268,152 @@
             ) {
 
                 translateVideoPage();
+
+                return;
+
+            }
+
+
+            if (
+                event.key ===
+                "site_theme"
+            ) {
+
+                if (
+                    typeof applySiteTheme ===
+                    "function"
+                ) {
+
+                    try {
+
+                        applySiteTheme(
+                            event.newValue ||
+                            "light"
+                        );
+
+                    } catch (error) {}
+
+                }
+
+                return;
+
+            }
+
+
+            /*
+               إذا تغير الفيديو المختار من تبويب آخر،
+               نعيد تحميل الصفحة حتى تتطابق البيانات.
+            */
+
+            if (
+                event.key ===
+                "selected_video"
+            ) {
+
+                window.location.reload();
+
+                return;
+
+            }
+
+
+            /*
+               تحديث التقدم في حال تغييره
+               من تبويب آخر.
+            */
+
+            if (
+                event.key ===
+                "learning_progress"
+            ) {
+
+                renderProgress();
+
+                renderVideoList();
+
+            }
+
+        }
+    );
+
+
+    /* =========================================
+       KEYBOARD NAVIGATION
+    ========================================= */
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            /*
+               لا نتدخل إذا كان المستخدم يكتب
+               داخل عنصر إدخال.
+            */
+
+            const target =
+                event.target;
+
+
+            if (
+                target &&
+                (
+                    target.tagName ===
+                    "INPUT" ||
+                    target.tagName ===
+                    "TEXTAREA" ||
+                    target.tagName ===
+                    "SELECT"
+                )
+            ) {
+
+                return;
+
+            }
+
+
+            /*
+               سهم اليمين / اليسار
+               يتبع اتجاه الصفحة.
+            */
+
+            if (
+                event.key ===
+                "ArrowRight"
+            ) {
+
+                if (
+                    getVideoLanguage() ===
+                    "fr"
+                ) {
+
+                    nextVideo();
+
+                } else {
+
+                    previousVideo();
+
+                }
+
+            }
+
+
+            if (
+                event.key ===
+                "ArrowLeft"
+            ) {
+
+                if (
+                    getVideoLanguage() ===
+                    "fr"
+                ) {
+
+                    previousVideo();
+
+                } else {
+
+                    nextVideo();
+
+                }
 
             }
 
@@ -3464,12 +4429,44 @@
         "DOMContentLoaded",
         function () {
 
+            /*
+               نستخدم إعدادات EduNova AI
+               المركزية من script.js.
+            */
+
             if (
                 typeof initializeGlobalSettings ===
                 "function"
             ) {
 
-                initializeGlobalSettings();
+                try {
+
+                    initializeGlobalSettings();
+
+                } catch (error) {}
+
+            }
+
+
+            if (
+                typeof applySiteTheme ===
+                "function"
+            ) {
+
+                try {
+
+                    const theme =
+                        readVideoStorage(
+                            "site_theme"
+                        ) ||
+                        "light";
+
+
+                    applySiteTheme(
+                        theme
+                    );
+
+                } catch (error) {}
 
             }
 
