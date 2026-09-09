@@ -1,0 +1,2415 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>الإشعارات | EduNova AI</title>
+
+    <meta
+        name="description"
+        content="إشعارات الطالب في منصة EduNova AI"
+    >
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* =====================================================
+           EduNova AI
+           notifications.html — Part 1 / 4
+           ===================================================== */
+
+        .notifications-page {
+            padding-bottom: 50px;
+        }
+
+        .notifications-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+
+        .notifications-heading {
+            min-width: 0;
+        }
+
+        .notifications-heading h1 {
+            margin: 0 0 5px;
+            font-size: 1.55rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .notifications-heading p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.84rem;
+        }
+
+        .notifications-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .notification-count {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            min-width: 27px;
+            height: 27px;
+            padding: 0 8px;
+
+            border-radius: 999px;
+
+            background: var(--brand-primary);
+            color: #ffffff;
+
+            font-size: 0.74rem;
+            font-weight: 700;
+        }
+
+        .notification-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+
+            margin-bottom: 14px;
+            padding: 11px 13px;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+
+            background: var(--surface);
+            box-shadow: var(--shadow-xs);
+        }
+
+        .notification-filters {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+
+            min-width: 0;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .notification-filters::-webkit-scrollbar {
+            display: none;
+        }
+
+        .notification-filter {
+            flex: 0 0 auto;
+
+            min-height: 35px;
+            padding: 7px 12px;
+
+            border: 1px solid var(--border);
+            border-radius: 999px;
+
+            background: var(--surface);
+            color: var(--text-secondary);
+
+            font-family: inherit;
+            font-size: 0.76rem;
+            font-weight: 600;
+
+            cursor: pointer;
+            transition:
+                background-color 0.2s ease,
+                color 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+        .notification-filter:hover {
+            border-color: var(--brand-primary);
+            color: var(--brand-primary);
+        }
+
+        .notification-filter.active {
+            border-color: var(--brand-primary);
+            background: var(--brand-primary);
+            color: #ffffff;
+        }
+
+        .notification-list {
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+        }
+
+        .notification-item {
+            position: relative;
+
+            display: flex;
+            align-items: flex-start;
+            gap: 13px;
+
+            padding: 15px;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+
+            background: var(--surface);
+            box-shadow: var(--shadow-xs);
+
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease,
+                background-color 0.2s ease;
+        }
+
+        .notification-item:hover {
+            border-color: color-mix(
+                in srgb,
+                var(--brand-primary) 35%,
+                var(--border)
+            );
+
+            box-shadow: var(--shadow-sm);
+        }
+
+        .notification-item.unread {
+            border-color: color-mix(
+                in srgb,
+                var(--brand-primary) 30%,
+                var(--border)
+            );
+
+            background: color-mix(
+                in srgb,
+                var(--brand-primary) 4%,
+                var(--surface)
+            );
+        }
+
+        .notification-item.unread::before {
+            content: "";
+
+            position: absolute;
+            top: 15px;
+            inset-inline-start: 0;
+
+            width: 3px;
+            height: 35px;
+
+            border-radius: 0 5px 5px 0;
+            background: var(--brand-primary);
+        }
+
+        html[dir="ltr"] .notification-item.unread::before {
+            border-radius: 5px 0 0 5px;
+        }
+
+        .notification-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 43px;
+            height: 43px;
+            flex: 0 0 43px;
+
+            border-radius: 13px;
+
+            background: var(--surface-soft);
+            color: var(--brand-primary);
+
+            font-size: 1.05rem;
+            font-weight: 700;
+        }
+
+        .notification-icon.study {
+            color: var(--brand-primary);
+        }
+
+        .notification-icon.achievement {
+            color: var(--success);
+        }
+
+        .notification-icon.platform {
+            color: var(--info);
+        }
+
+        .notification-icon.ai {
+            color: var(--accent-purple);
+        }
+
+        .notification-icon.subscription {
+            color: var(--warning);
+        }
+
+        .notification-content {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .notification-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .notification-title {
+            margin: 0;
+
+            color: var(--text);
+            font-size: 0.91rem;
+            font-weight: 700;
+            line-height: 1.5;
+        }
+
+        .notification-time {
+            flex-shrink: 0;
+
+            color: var(--text-muted);
+            font-size: 0.68rem;
+            white-space: nowrap;
+        }
+
+        .notification-message {
+            margin: 5px 0 0;
+
+            color: var(--text-secondary);
+            font-size: 0.78rem;
+            line-height: 1.7;
+        }
+
+        .notification-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+
+            margin-top: 10px;
+        }
+
+        .notification-type {
+            display: inline-flex;
+            align-items: center;
+
+            min-height: 24px;
+            padding: 3px 8px;
+
+            border-radius: 999px;
+
+            background: var(--surface-hover);
+            color: var(--text-muted);
+
+            font-size: 0.64rem;
+            font-weight: 600;
+        }
+
+        .notification-actions {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .notification-action {
+            min-height: 29px;
+            padding: 5px 8px;
+
+            border: 0;
+            border-radius: 7px;
+
+            background: transparent;
+            color: var(--text-muted);
+
+            font-family: inherit;
+            font-size: 0.67rem;
+
+            cursor: pointer;
+        }
+
+        .notification-action:hover {
+            background: var(--surface-hover);
+            color: var(--brand-primary);
+        }
+
+        .notification-action.danger:hover {
+            color: var(--danger);
+        }
+
+        .notifications-empty {
+            display: none;
+
+            padding: 40px 20px;
+
+            border: 1px dashed var(--border);
+            border-radius: var(--radius-lg);
+
+            background: var(--surface);
+            text-align: center;
+        }
+
+        .notifications-empty.visible {
+            display: block;
+        }
+
+        .notifications-empty-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 58px;
+            height: 58px;
+
+            margin: 0 auto 13px;
+
+            border-radius: 18px;
+
+            background: var(--surface-soft);
+            color: var(--text-muted);
+
+            font-size: 1.35rem;
+        }
+
+        .notifications-empty h2 {
+            margin: 0 0 6px;
+
+            color: var(--text);
+            font-size: 1rem;
+        }
+
+        .notifications-empty p {
+            max-width: 360px;
+            margin: 0 auto;
+
+            color: var(--text-muted);
+            font-size: 0.77rem;
+            line-height: 1.7;
+        }
+
+        /* =====================================================
+           Responsive
+           ===================================================== */
+
+        @media (max-width: 640px) {
+
+            .notifications-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .notifications-actions {
+                width: 100%;
+            }
+
+            .notifications-actions .btn {
+                flex: 1;
+            }
+
+            .notification-toolbar {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .notification-filters {
+                width: 100%;
+            }
+
+            .notification-item {
+                padding: 13px;
+                gap: 10px;
+            }
+
+            .notification-icon {
+                width: 38px;
+                height: 38px;
+                flex-basis: 38px;
+                border-radius: 11px;
+            }
+
+            .notification-top {
+                flex-direction: column;
+                gap: 2px;
+            }
+
+            .notification-bottom {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .notification-actions {
+                width: 100%;
+            }
+
+            .notification-action {
+                padding-inline: 6px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =====================================================
+         GLOBAL HEADER
+         ===================================================== -->
+
+    <header class="header">
+        <div class="container header-inner">
+
+            <a
+                href="index.html"
+                class="brand"
+                aria-label="EduNova AI"
+            >
+                <span class="brand-icon" aria-hidden="true">AI</span>
+
+                <span class="brand-text">
+                    EduNova AI
+                </span>
+            </a>
+
+            <nav
+                class="header-actions"
+                aria-label="التنقل الرئيسي"
+            >
+
+                <a
+                    href="index.html"
+                    class="header-action"
+                >
+                    <span
+                        class="header-action-icon"
+                        aria-hidden="true"
+                    >⌂</span>
+
+                    <span data-i18n="nav_home">
+                        الرئيسية
+                    </span>
+                </a>
+
+                <a
+                    href="notifications.html"
+                    class="header-action active"
+                    aria-current="page"
+                >
+                    <span
+                        class="header-action-icon"
+                        aria-hidden="true"
+                    >◔</span>
+
+                    <span data-i18n="nav_notifications">
+                        الإشعارات
+                    </span>
+                </a>
+
+                <a
+                    href="account.html"
+                    class="header-action"
+                >
+                    <span
+                        class="header-action-icon"
+                        aria-hidden="true"
+                    >○</span>
+
+                    <span data-i18n="nav_account">
+                        حسابي
+                    </span>
+                </a>
+
+                <a
+                    href="settings.html"
+                    class="header-action"
+                >
+                    <span
+                        class="header-action-icon"
+                        aria-hidden="true"
+                    >⚙</span>
+
+                    <span data-i18n="nav_settings">
+                        الإعدادات
+                    </span>
+                </a>
+
+            </nav>
+
+        </div>
+    </header>
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main class="page notifications-page">
+
+        <div class="container">
+
+            <!-- PAGE HEADING -->
+
+            <section class="notifications-header">
+
+                <div class="notifications-heading">
+
+                    <h1 data-i18n="notifications_title">
+                        الإشعارات
+                    </h1>
+
+                    <p data-i18n="notifications_subtitle">
+                        تابع آخر التنبيهات والتحديثات الخاصة بدراستك.
+                    </p>
+
+                </div>
+
+                <div class="notifications-actions">
+
+                    <span
+                        id="unreadCount"
+                        class="notification-count"
+                        aria-label="عدد الإشعارات غير المقروءة"
+                    >0</span>
+
+                    <button
+                        type="button"
+                        class="btn btn-outline btn-sm"
+                        id="markAllReadButton"
+                        data-i18n="mark_all_read"
+                    >
+                        قراءة الكل
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- TOOLBAR -->
+
+            <section
+                class="notification-toolbar"
+                aria-label="تصفية الإشعارات"
+            >
+
+                <div
+                    class="notification-filters"
+                    role="tablist"
+                    aria-label="أنواع الإشعارات"
+                >
+
+                    <button
+                        type="button"
+                        class="notification-filter active"
+                        data-filter="all"
+                        role="tab"
+                        aria-selected="true"
+                        data-i18n="filter_all"
+                    >
+                        الكل
+                    </button>
+
+                    <button
+                        type="button"
+                        class="notification-filter"
+                        data-filter="unread"
+                        role="tab"
+                        aria-selected="false"
+                        data-i18n="filter_unread"
+                    >
+                        غير المقروءة
+                    </button>
+
+                    <button
+                        type="button"
+                        class="notification-filter"
+                        data-filter="study"
+                        role="tab"
+                        aria-selected="false"
+                        data-i18n="filter_study"
+                    >
+                        الدراسة
+                    </button>
+
+                    <button
+                        type="button"
+                        class="notification-filter"
+                        data-filter="platform"
+                        role="tab"
+                        aria-selected="false"
+                        data-i18n="filter_platform"
+                    >
+                        المنصة
+                    </button>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="btn btn-ghost btn-sm"
+                    id="clearAllButton"
+                    data-i18n="clear_all"
+                >
+                    مسح الكل
+                </button>
+
+            </section>
+
+
+            <!-- NOTIFICATIONS LIST -->
+
+            <section
+                id="notificationsList"
+                class="notification-list"
+                aria-live="polite"
+            >
+
+                <!--
+                    سيتم إنشاء الإشعارات هنا بواسطة JavaScript
+                    في الجزء 3.
+                -->
+
+            </section>
+
+
+            <!-- EMPTY STATE -->
+
+            <section
+                id="notificationsEmpty"
+                class="notifications-empty"
+            >
+
+                <div
+                    class="notifications-empty-icon"
+                    aria-hidden="true"
+                >
+                    ◔
+                </div>
+
+                <h2 data-i18n="no_notifications">
+                    لا توجد إشعارات
+                </h2>
+
+                <p data-i18n="no_notifications_text">
+                    عندما يكون لديك تحديث أو تذكير أو إنجاز جديد،
+                    سيظهر هنا.
+                </p>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <!-- =====================================================
+         SCRIPT
+         Part 2 / 4 يبدأ هنا
+         ===================================================== -->    <!-- =====================================================
+         SCRIPT
+         notifications.html — Part 2 / 4
+         ===================================================== -->
+
+    <script src="script.js"></script>
+
+    <script>
+        /* =====================================================
+           EduNova AI
+           Notifications System
+           Part 2 / 4
+           ===================================================== */
+
+        "use strict";
+
+        /* =====================================================
+           STORAGE
+           ===================================================== */
+
+        const NOTIFICATIONS_STORAGE_KEY =
+            "edunova_notifications";
+
+        const NOTIFICATIONS_READ_KEY =
+            "edunova_notifications_read";
+
+        const NOTIFICATIONS_DEMO_KEY =
+            "edunova_notifications_demo_initialized";
+
+
+        /* =====================================================
+           TRANSLATIONS
+           ===================================================== */
+
+        const NOTIFICATIONS_TRANSLATIONS = {
+
+            ar: {
+
+                notifications_title: "الإشعارات",
+
+                notifications_subtitle:
+                    "تابع آخر التنبيهات والتحديثات الخاصة بدراستك.",
+
+                nav_home: "الرئيسية",
+                nav_notifications: "الإشعارات",
+                nav_account: "حسابي",
+                nav_settings: "الإعدادات",
+
+                mark_all_read: "قراءة الكل",
+                clear_all: "مسح الكل",
+
+                filter_all: "الكل",
+                filter_unread: "غير المقروءة",
+                filter_study: "الدراسة",
+                filter_platform: "المنصة",
+
+                no_notifications:
+                    "لا توجد إشعارات",
+
+                no_notifications_text:
+                    "عندما يكون لديك تحديث أو تذكير أو إنجاز جديد، سيظهر هنا.",
+
+                mark_read:
+                    "تحديد كمقروء",
+
+                mark_unread:
+                    "تحديد كغير مقروء",
+
+                delete_notification:
+                    "حذف",
+
+                confirm_clear:
+                    "هل تريد مسح جميع الإشعارات؟",
+
+                confirm_delete:
+                    "هل تريد حذف هذا الإشعار؟",
+
+                notification_study:
+                    "الدراسة",
+
+                notification_achievement:
+                    "إنجاز",
+
+                notification_platform:
+                    "المنصة",
+
+                notification_ai:
+                    "Afkrash AI",
+
+                notification_subscription:
+                    "الاشتراك",
+
+                just_now:
+                    "الآن",
+
+                minutes_ago:
+                    "منذ {n} دقيقة",
+
+                hours_ago:
+                    "منذ {n} ساعة",
+
+                days_ago:
+                    "منذ {n} يوم",
+
+                demo_study_title:
+                    "حان وقت الدراسة",
+
+                demo_study_message:
+                    "خصص وقتًا اليوم لمتابعة دروسك وإكمال تقدمك في الخطة الدراسية.",
+
+                demo_progress_title:
+                    "تقدم جديد",
+
+                demo_progress_message:
+                    "استمر في التعلم. كل درس تكمله يقربك أكثر من هدفك.",
+
+                demo_platform_title:
+                    "مرحبًا بك في EduNova AI",
+
+                demo_platform_message:
+                    "يمكنك متابعة مستواك ودروسك وخطتك الدراسية من الرئيسية.",
+
+                demo_ai_title:
+                    "Afkrash AI لديه توصية لك",
+
+                demo_ai_message:
+                    "راجع الدرس الأخير قبل الانتقال إلى الدرس التالي للحصول على فهم أفضل.",
+
+                demo_subscription_title:
+                    "معلومات الاشتراك",
+
+                demo_subscription_message:
+                    "يمكنك متابعة حالة اشتراكك وخيارات الدفع من صفحة الاشتراكات."
+
+            },
+
+            fr: {
+
+                notifications_title: "Notifications",
+
+                notifications_subtitle:
+                    "Suivez les dernières alertes et mises à jour de vos études.",
+
+                nav_home: "Accueil",
+                nav_notifications: "Notifications",
+                nav_account: "Mon compte",
+                nav_settings: "Paramètres",
+
+                mark_all_read: "Tout lire",
+                clear_all: "Tout effacer",
+
+                filter_all: "Toutes",
+                filter_unread: "Non lues",
+                filter_study: "Études",
+                filter_platform: "Plateforme",
+
+                no_notifications:
+                    "Aucune notification",
+
+                no_notifications_text:
+                    "Les nouveaux rappels, mises à jour et réussites apparaîtront ici.",
+
+                mark_read:
+                    "Marquer comme lue",
+
+                mark_unread:
+                    "Marquer comme non lue",
+
+                delete_notification:
+                    "Supprimer",
+
+                confirm_clear:
+                    "Voulez-vous supprimer toutes les notifications ?",
+
+                confirm_delete:
+                    "Voulez-vous supprimer cette notification ?",
+
+                notification_study:
+                    "Études",
+
+                notification_achievement:
+                    "Réussite",
+
+                notification_platform:
+                    "Plateforme",
+
+                notification_ai:
+                    "Afkrash AI",
+
+                notification_subscription:
+                    "Abonnement",
+
+                just_now:
+                    "À l'instant",
+
+                minutes_ago:
+                    "Il y a {n} min",
+
+                hours_ago:
+                    "Il y a {n} h",
+
+                days_ago:
+                    "Il y a {n} j",
+
+                demo_study_title:
+                    "C'est l'heure d'étudier",
+
+                demo_study_message:
+                    "Consacrez un moment aujourd'hui à vos cours et continuez votre plan d'étude.",
+
+                demo_progress_title:
+                    "Nouveau progrès",
+
+                demo_progress_message:
+                    "Continuez à apprendre. Chaque leçon terminée vous rapproche de votre objectif.",
+
+                demo_platform_title:
+                    "Bienvenue sur EduNova AI",
+
+                demo_platform_message:
+                    "Suivez votre niveau, vos cours et votre plan d'étude depuis l'accueil.",
+
+                demo_ai_title:
+                    "Afkrash AI a une recommandation pour vous",
+
+                demo_ai_message:
+                    "Revoyez votre dernière leçon avant de passer à la suivante pour mieux comprendre.",
+
+                demo_subscription_title:
+                    "Informations sur l'abonnement",
+
+                demo_subscription_message:
+                    "Consultez l'état de votre abonnement et les options de paiement depuis la page des abonnements."
+
+            }
+
+        };
+
+
+        /* =====================================================
+           SAFE STORAGE HELPERS
+           ===================================================== */
+
+        function notificationsGetStorage(key, fallback = null) {
+
+            try {
+
+                const value = localStorage.getItem(key);
+
+                if (value === null) {
+                    return fallback;
+                }
+
+                return JSON.parse(value);
+
+            } catch (error) {
+
+                console.warn(
+                    "EduNova notifications storage read error:",
+                    error
+                );
+
+                return fallback;
+            }
+        }
+
+
+        function notificationsSetStorage(key, value) {
+
+            try {
+
+                localStorage.setItem(
+                    key,
+                    JSON.stringify(value)
+                );
+
+                return true;
+
+            } catch (error) {
+
+                console.warn(
+                    "EduNova notifications storage write error:",
+                    error
+                );
+
+                return false;
+            }
+        }
+
+
+        function notificationsRemoveStorage(key) {
+
+            try {
+
+                localStorage.removeItem(key);
+
+            } catch (error) {
+
+                console.warn(
+                    "EduNova notifications storage remove error:",
+                    error
+                );
+            }
+        }
+
+
+        /* =====================================================
+           LANGUAGE
+           ===================================================== */
+
+        function getNotificationsLanguage() {
+
+            const savedLanguage =
+                localStorage.getItem("site_language");
+
+            if (savedLanguage === "fr") {
+                return "fr";
+            }
+
+            return "ar";
+        }
+
+
+        function notificationText(key, language = null) {
+
+            const lang =
+                language || getNotificationsLanguage();
+
+            const dictionary =
+                NOTIFICATIONS_TRANSLATIONS[lang] ||
+                NOTIFICATIONS_TRANSLATIONS.ar;
+
+            return dictionary[key] ?? key;
+        }
+
+
+        function applyNotificationsTranslations() {
+
+            const language =
+                getNotificationsLanguage();
+
+            document.documentElement.lang =
+                language === "fr" ? "fr" : "ar";
+
+            document.documentElement.dir =
+                language === "fr" ? "ltr" : "rtl";
+
+            document
+                .querySelectorAll("[data-i18n]")
+                .forEach(element => {
+
+                    const key =
+                        element.getAttribute("data-i18n");
+
+                    if (!key) {
+                        return;
+                    }
+
+                    element.textContent =
+                        notificationText(key, language);
+                });
+
+            updateNotificationsCount();
+        }
+
+
+        /* =====================================================
+           DEMO NOTIFICATIONS
+           ===================================================== */
+
+        function createDemoNotifications() {
+
+            const existing =
+                notificationsGetStorage(
+                    NOTIFICATIONS_STORAGE_KEY,
+                    null
+                );
+
+            if (Array.isArray(existing) && existing.length > 0) {
+                return existing;
+            }
+
+            const now = Date.now();
+
+            const demoNotifications = [
+
+                {
+                    id: "welcome-platform",
+                    type: "platform",
+                    titleKey: "demo_platform_title",
+                    messageKey: "demo_platform_message",
+                    createdAt: now - 2 * 60 * 1000,
+                    read: false
+                },
+
+                {
+                    id: "study-reminder",
+                    type: "study",
+                    titleKey: "demo_study_title",
+                    messageKey: "demo_study_message",
+                    createdAt: now - 35 * 60 * 1000,
+                    read: false
+                },
+
+                {
+                    id: "progress-update",
+                    type: "achievement",
+                    titleKey: "demo_progress_title",
+                    messageKey: "demo_progress_message",
+                    createdAt: now - 3 * 60 * 60 * 1000,
+                    read: true
+                },
+
+                {
+                    id: "afkrash-recommendation",
+                    type: "ai",
+                    titleKey: "demo_ai_title",
+                    messageKey: "demo_ai_message",
+                    createdAt: now - 8 * 60 * 60 * 1000,
+                    read: true
+                },
+
+                {
+                    id: "subscription-info",
+                    type: "subscription",
+                    titleKey: "demo_subscription_title",
+                    messageKey: "demo_subscription_message",
+                    createdAt: now - 2 * 24 * 60 * 60 * 1000,
+                    read: true
+                }
+
+            ];
+
+            notificationsSetStorage(
+                NOTIFICATIONS_STORAGE_KEY,
+                demoNotifications
+            );
+
+            localStorage.setItem(
+                NOTIFICATIONS_DEMO_KEY,
+                "true"
+            );
+
+            return demoNotifications;
+        }
+
+
+        /* =====================================================
+           READ NOTIFICATIONS
+           ===================================================== */
+
+        function getNotifications() {
+
+            const notifications =
+                notificationsGetStorage(
+                    NOTIFICATIONS_STORAGE_KEY,
+                    null
+                );
+
+            if (!Array.isArray(notifications)) {
+                return createDemoNotifications();
+            }
+
+            return notifications;
+        }
+
+
+        function saveNotifications(notifications) {
+
+            notificationsSetStorage(
+                NOTIFICATIONS_STORAGE_KEY,
+                notifications
+            );
+
+            try {
+
+                window.dispatchEvent(
+                    new StorageEvent(
+                        "storage",
+                        {
+                            key:
+                                NOTIFICATIONS_STORAGE_KEY,
+
+                            newValue:
+                                JSON.stringify(notifications)
+                        }
+                    )
+                );
+
+            } catch (error) {
+
+                // Ignore unsupported synthetic storage events.
+            }
+        }
+
+
+        /* =====================================================
+           ICONS
+           ===================================================== */
+
+        function getNotificationIcon(type) {
+
+            const icons = {
+
+                study: "□",
+
+                achievement: "✓",
+
+                platform: "i",
+
+                ai: "✦",
+
+                subscription: "▣"
+
+            };
+
+            return icons[type] || "•";
+        }
+
+
+        function getNotificationTypeLabel(type) {
+
+            const labels = {
+
+                study: "notification_study",
+
+                achievement:
+                    "notification_achievement",
+
+                platform:
+                    "notification_platform",
+
+                ai:
+                    "notification_ai",
+
+                subscription:
+                    "notification_subscription"
+
+            };
+
+            return notificationText(
+                labels[type] || "notification_platform"
+            );
+        }
+
+
+        /* =====================================================
+           TIME FORMAT
+           ===================================================== */
+
+        function formatNotificationTime(timestamp) {
+
+            const time =
+                Number(timestamp);
+
+            if (!Number.isFinite(time)) {
+                return "";
+            }
+
+            const difference =
+                Math.max(0, Date.now() - time);
+
+            const minutes =
+                Math.floor(
+                    difference / (60 * 1000)
+                );
+
+            const hours =
+                Math.floor(
+                    difference / (60 * 60 * 1000)
+                );
+
+            const days =
+                Math.floor(
+                    difference / (24 * 60 * 60 * 1000)
+                );
+
+            if (minutes < 1) {
+                return notificationText(
+                    "just_now"
+                );
+            }
+
+            if (minutes < 60) {
+
+                return notificationText(
+                    "minutes_ago"
+                ).replace(
+                    "{n}",
+                    minutes
+                );
+            }
+
+            if (hours < 24) {
+
+                return notificationText(
+                    "hours_ago"
+                ).replace(
+                    "{n}",
+                    hours
+                );
+            }
+
+            return notificationText(
+                "days_ago"
+            ).replace(
+                "{n}",
+                days
+            );
+        }
+
+
+        /* =====================================================
+           FILTER STATE
+           ===================================================== */
+
+        let currentNotificationFilter = "all";
+
+
+        function setNotificationFilter(filter) {
+
+            currentNotificationFilter =
+                filter || "all";
+
+            document
+                .querySelectorAll(
+                    ".notification-filter"
+                )
+                .forEach(button => {
+
+                    const isActive =
+                        button.dataset.filter ===
+                        currentNotificationFilter;
+
+                    button.classList.toggle(
+                        "active",
+                        isActive
+                    );
+
+                    button.setAttribute(
+                        "aria-selected",
+                        String(isActive)
+                    );
+                });
+
+            renderNotifications();
+        }
+
+
+        function getFilteredNotifications() {
+
+            const notifications =
+                getNotifications();
+
+            if (currentNotificationFilter === "all") {
+                return notifications;
+            }
+
+            if (currentNotificationFilter === "unread") {
+
+                return notifications.filter(
+                    notification =>
+                        !notification.read
+                );
+            }
+
+            return notifications.filter(
+                notification =>
+                    notification.type ===
+                    currentNotificationFilter
+            );
+        }
+
+
+        /* =====================================================
+           END OF PART 2
+           ===================================================== */
+
+        /*
+           تابع مباشرة في الجزء 3 من 4:
+
+           - renderNotifications()
+           - unread counter
+           - mark read / unread
+           - delete notification
+           - clear all
+           - dynamic notification actions
+        */        /* =====================================================
+           EduNova AI
+           notifications.html — Part 3 / 4
+           ===================================================== */
+
+        /* =====================================================
+           ESCAPE HTML
+           ===================================================== */
+
+        function escapeNotificationHTML(value) {
+
+            if (value === null || value === undefined) {
+                return "";
+            }
+
+            return String(value)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+
+        /* =====================================================
+           NOTIFICATION TITLE / MESSAGE
+           ===================================================== */
+
+        function getNotificationTitle(notification) {
+
+            if (
+                notification.titleKey &&
+                NOTIFICATIONS_TRANSLATIONS[
+                    getNotificationsLanguage()
+                ]
+            ) {
+
+                return notificationText(
+                    notification.titleKey
+                );
+            }
+
+            return notification.title || "";
+        }
+
+
+        function getNotificationMessage(notification) {
+
+            if (
+                notification.messageKey &&
+                NOTIFICATIONS_TRANSLATIONS[
+                    getNotificationsLanguage()
+                ]
+            ) {
+
+                return notificationText(
+                    notification.messageKey
+                );
+            }
+
+            return notification.message || "";
+        }
+
+
+        /* =====================================================
+           RENDER NOTIFICATIONS
+           ===================================================== */
+
+        function renderNotifications() {
+
+            const list =
+                document.getElementById(
+                    "notificationsList"
+                );
+
+            const empty =
+                document.getElementById(
+                    "notificationsEmpty"
+                );
+
+            if (!list || !empty) {
+                return;
+            }
+
+            const notifications =
+                getFilteredNotifications();
+
+            list.innerHTML = "";
+
+            if (notifications.length === 0) {
+
+                empty.classList.add("visible");
+
+                updateNotificationsCount();
+
+                return;
+            }
+
+            empty.classList.remove("visible");
+
+            notifications
+                .sort(
+                    (a, b) =>
+                        Number(b.createdAt || 0) -
+                        Number(a.createdAt || 0)
+                )
+                .forEach(notification => {
+
+                    list.appendChild(
+                        createNotificationElement(
+                            notification
+                        )
+                    );
+                });
+
+            updateNotificationsCount();
+        }
+
+
+        /* =====================================================
+           CREATE NOTIFICATION ELEMENT
+           ===================================================== */
+
+        function createNotificationElement(notification) {
+
+            const item =
+                document.createElement("article");
+
+            const isUnread =
+                !Boolean(notification.read);
+
+            item.className =
+                "notification-item" +
+                (isUnread ? " unread" : "");
+
+            item.dataset.id =
+                notification.id;
+
+            const title =
+                escapeNotificationHTML(
+                    getNotificationTitle(notification)
+                );
+
+            const message =
+                escapeNotificationHTML(
+                    getNotificationMessage(notification)
+                );
+
+            const type =
+                escapeNotificationHTML(
+                    getNotificationTypeLabel(
+                        notification.type
+                    )
+                );
+
+            const icon =
+                escapeNotificationHTML(
+                    getNotificationIcon(
+                        notification.type
+                    )
+                );
+
+            const time =
+                escapeNotificationHTML(
+                    formatNotificationTime(
+                        notification.createdAt
+                    )
+                );
+
+            const readAction =
+                isUnread
+                    ? notificationText("mark_read")
+                    : notificationText("mark_unread");
+
+            item.innerHTML = `
+                <div
+                    class="notification-icon ${escapeNotificationHTML(
+                        notification.type || "platform"
+                    )}"
+                    aria-hidden="true"
+                >
+                    ${icon}
+                </div>
+
+                <div class="notification-content">
+
+                    <div class="notification-top">
+
+                        <h2 class="notification-title">
+                            ${title}
+                        </h2>
+
+                        <time
+                            class="notification-time"
+                            datetime="${new Date(
+                                Number(notification.createdAt || Date.now())
+                            ).toISOString()}"
+                        >
+                            ${time}
+                        </time>
+
+                    </div>
+
+                    <p class="notification-message">
+                        ${message}
+                    </p>
+
+                    <div class="notification-bottom">
+
+                        <span class="notification-type">
+                            ${type}
+                        </span>
+
+                        <div class="notification-actions">
+
+                            <button
+                                type="button"
+                                class="notification-action"
+                                data-action="toggle-read"
+                                data-id="${escapeNotificationHTML(
+                                    notification.id
+                                )}"
+                            >
+                                ${escapeNotificationHTML(
+                                    readAction
+                                )}
+                            </button>
+
+                            <button
+                                type="button"
+                                class="notification-action danger"
+                                data-action="delete"
+                                data-id="${escapeNotificationHTML(
+                                    notification.id
+                                )}"
+                            >
+                                ${escapeNotificationHTML(
+                                    notificationText(
+                                        "delete_notification"
+                                    )
+                                )}
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            `;
+
+            return item;
+        }
+
+
+        /* =====================================================
+           UNREAD COUNT
+           ===================================================== */
+
+        function getUnreadNotificationsCount() {
+
+            return getNotifications()
+                .filter(
+                    notification =>
+                        !Boolean(notification.read)
+                )
+                .length;
+        }
+
+
+        function updateNotificationsCount() {
+
+            const countElement =
+                document.getElementById(
+                    "unreadCount"
+                );
+
+            if (!countElement) {
+                return;
+            }
+
+            const count =
+                getUnreadNotificationsCount();
+
+            countElement.textContent =
+                String(count);
+
+            countElement.setAttribute(
+                "aria-label",
+                `${count} ${getNotificationsLanguage() === "fr"
+                    ? "notifications non lues"
+                    : "إشعار غير مقروء"}`
+            );
+
+            countElement.style.display =
+                count > 0 ? "inline-flex" : "none";
+        }
+
+
+        /* =====================================================
+           MARK ONE AS READ / UNREAD
+           ===================================================== */
+
+        function toggleNotificationRead(id) {
+
+            if (!id) {
+                return;
+            }
+
+            const notifications =
+                getNotifications();
+
+            const target =
+                notifications.find(
+                    notification =>
+                        String(notification.id) ===
+                        String(id)
+                );
+
+            if (!target) {
+                return;
+            }
+
+            target.read =
+                !Boolean(target.read);
+
+            saveNotifications(notifications);
+
+            renderNotifications();
+
+            showNotificationToast(
+                target.read
+                    ? (
+                        getNotificationsLanguage() === "fr"
+                            ? "Notification marquée comme lue."
+                            : "تم تحديد الإشعار كمقروء."
+                    )
+                    : (
+                        getNotificationsLanguage() === "fr"
+                            ? "Notification marquée comme non lue."
+                            : "تم تحديد الإشعار كغير مقروء."
+                    )
+            );
+        }
+
+
+        /* =====================================================
+           MARK ALL AS READ
+           ===================================================== */
+
+        function markAllNotificationsRead() {
+
+            const notifications =
+                getNotifications();
+
+            let changed = false;
+
+            notifications.forEach(
+                notification => {
+
+                    if (!notification.read) {
+
+                        notification.read = true;
+                        changed = true;
+                    }
+                }
+            );
+
+            if (!changed) {
+
+                showNotificationToast(
+                    getNotificationsLanguage() === "fr"
+                        ? "Toutes les notifications sont déjà lues."
+                        : "جميع الإشعارات مقروءة بالفعل."
+                );
+
+                return;
+            }
+
+            saveNotifications(notifications);
+
+            renderNotifications();
+
+            showNotificationToast(
+                getNotificationsLanguage() === "fr"
+                    ? "Toutes les notifications ont été lues."
+                    : "تمت قراءة جميع الإشعارات."
+            );
+        }
+
+
+        /* =====================================================
+           DELETE ONE
+           ===================================================== */
+
+        function deleteNotification(id) {
+
+            if (!id) {
+                return;
+            }
+
+            const language =
+                getNotificationsLanguage();
+
+            const confirmed =
+                window.confirm(
+                    notificationText(
+                        "confirm_delete",
+                        language
+                    )
+                );
+
+            if (!confirmed) {
+                return;
+            }
+
+            const notifications =
+                getNotifications();
+
+            const updated =
+                notifications.filter(
+                    notification =>
+                        String(notification.id) !==
+                        String(id)
+                );
+
+            saveNotifications(updated);
+
+            renderNotifications();
+
+            showNotificationToast(
+                language === "fr"
+                    ? "Notification supprimée."
+                    : "تم حذف الإشعار."
+            );
+        }
+
+
+        /* =====================================================
+           CLEAR ALL
+           ===================================================== */
+
+        function clearAllNotifications() {
+
+            const notifications =
+                getNotifications();
+
+            if (notifications.length === 0) {
+
+                showNotificationToast(
+                    getNotificationsLanguage() === "fr"
+                        ? "Aucune notification à supprimer."
+                        : "لا توجد إشعارات لمسحها."
+                );
+
+                return;
+            }
+
+            const language =
+                getNotificationsLanguage();
+
+            const confirmed =
+                window.confirm(
+                    notificationText(
+                        "confirm_clear",
+                        language
+                    )
+                );
+
+            if (!confirmed) {
+                return;
+            }
+
+            saveNotifications([]);
+
+            renderNotifications();
+
+            showNotificationToast(
+                language === "fr"
+                    ? "Toutes les notifications ont été supprimées."
+                    : "تم مسح جميع الإشعارات."
+            );
+        }
+
+
+        /* =====================================================
+           TOAST
+           ===================================================== */
+
+        function showNotificationToast(message) {
+
+            if (
+                typeof window.showToast ===
+                "function"
+            ) {
+
+                try {
+
+                    window.showToast(message);
+                    return;
+
+                } catch (error) {
+
+                    console.warn(
+                        "Global toast unavailable:",
+                        error
+                    );
+                }
+            }
+
+            let toast =
+                document.getElementById(
+                    "notificationsToast"
+                );
+
+            if (!toast) {
+
+                toast =
+                    document.createElement("div");
+
+                toast.id =
+                    "notificationsToast";
+
+                toast.className =
+                    "toast-container";
+
+                toast.innerHTML = `
+                    <div
+                        class="toast"
+                        role="status"
+                        aria-live="polite"
+                    ></div>
+                `;
+
+                document.body.appendChild(toast);
+            }
+
+            const toastMessage =
+                toast.querySelector(".toast");
+
+            if (!toastMessage) {
+                return;
+            }
+
+            toastMessage.textContent =
+                message;
+
+            toast.classList.add("show");
+
+            window.clearTimeout(
+                showNotificationToast.timer
+            );
+
+            showNotificationToast.timer =
+                window.setTimeout(
+                    () => {
+
+                        toast.classList.remove(
+                            "show"
+                        );
+
+                    },
+                    2800
+                );
+        }
+
+
+        /* =====================================================
+           END OF PART 3
+           ===================================================== */
+
+        /*
+           تابع مباشرة في الجزء 4 من 4:
+
+           - event listeners
+           - filters
+           - theme / language
+           - storage synchronization
+           - initialization
+           - final closing tags
+        */        /* =====================================================
+           EduNova AI
+           notifications.html — Part 4 / 4
+           ===================================================== */
+
+        /* =====================================================
+           EVENT LISTENERS
+           ===================================================== */
+
+        function initializeNotificationEvents() {
+
+            /* -------------------------------------------------
+               Filters
+               ------------------------------------------------- */
+
+            document
+                .querySelectorAll(
+                    ".notification-filter"
+                )
+                .forEach(button => {
+
+                    button.addEventListener(
+                        "click",
+                        () => {
+
+                            setNotificationFilter(
+                                button.dataset.filter ||
+                                "all"
+                            );
+
+                        }
+                    );
+
+                });
+
+
+            /* -------------------------------------------------
+               Mark all as read
+               ------------------------------------------------- */
+
+            const markAllButton =
+                document.getElementById(
+                    "markAllReadButton"
+                );
+
+            if (markAllButton) {
+
+                markAllButton.addEventListener(
+                    "click",
+                    markAllNotificationsRead
+                );
+            }
+
+
+            /* -------------------------------------------------
+               Clear all
+               ------------------------------------------------- */
+
+            const clearAllButton =
+                document.getElementById(
+                    "clearAllButton"
+                );
+
+            if (clearAllButton) {
+
+                clearAllButton.addEventListener(
+                    "click",
+                    clearAllNotifications
+                );
+            }
+
+
+            /* -------------------------------------------------
+               Individual notification actions
+               ------------------------------------------------- */
+
+            const list =
+                document.getElementById(
+                    "notificationsList"
+                );
+
+            if (list) {
+
+                list.addEventListener(
+                    "click",
+                    event => {
+
+                        const button =
+                            event.target.closest(
+                                "[data-action]"
+                            );
+
+                        if (!button) {
+                            return;
+                        }
+
+                        const action =
+                            button.dataset.action;
+
+                        const id =
+                            button.dataset.id;
+
+                        if (!id) {
+                            return;
+                        }
+
+                        if (
+                            action ===
+                            "toggle-read"
+                        ) {
+
+                            toggleNotificationRead(
+                                id
+                            );
+
+                            return;
+                        }
+
+                        if (
+                            action ===
+                            "delete"
+                        ) {
+
+                            deleteNotification(
+                                id
+                            );
+                        }
+
+                    }
+                );
+            }
+        }
+
+
+        /* =====================================================
+           THEME
+           ===================================================== */
+
+        function applyNotificationTheme() {
+
+            const theme =
+                localStorage.getItem(
+                    "site_theme"
+                );
+
+            if (theme === "dark") {
+
+                document.documentElement
+                    .classList.add(
+                        "dark-mode"
+                    );
+
+            } else {
+
+                document.documentElement
+                    .classList.remove(
+                        "dark-mode"
+                    );
+            }
+        }
+
+
+        /* =====================================================
+           GLOBAL THEME EVENTS
+           ===================================================== */
+
+        function listenForNotificationThemeChanges() {
+
+            window.addEventListener(
+                "storage",
+                event => {
+
+                    if (
+                        event.key ===
+                        "site_theme"
+                    ) {
+
+                        applyNotificationTheme();
+                    }
+
+                    if (
+                        event.key ===
+                        "site_language"
+                    ) {
+
+                        applyNotificationsTranslations();
+
+                        renderNotifications();
+                    }
+
+                    if (
+                        event.key ===
+                        NOTIFICATIONS_STORAGE_KEY
+                    ) {
+
+                        renderNotifications();
+                    }
+
+                }
+            );
+
+
+            window.addEventListener(
+                "eduNovaThemeChanged",
+                () => {
+
+                    applyNotificationTheme();
+
+                }
+            );
+
+
+            window.addEventListener(
+                "eduNovaLanguageChanged",
+                () => {
+
+                    applyNotificationsTranslations();
+
+                    renderNotifications();
+
+                }
+            );
+        }
+
+
+        /* =====================================================
+           SCRIPT.JS READY
+           ===================================================== */
+
+        function connectToGlobalEduNovaScript() {
+
+            if (
+                typeof window.eduNovaScriptReady !==
+                "undefined"
+            ) {
+
+                try {
+
+                    window.dispatchEvent(
+                        new CustomEvent(
+                            "eduNovaNotificationsReady"
+                        )
+                    );
+
+                } catch (error) {
+
+                    console.warn(
+                        "EduNova notification event error:",
+                        error
+                    );
+                }
+            }
+        }
+
+
+        /* =====================================================
+           INITIALIZATION
+           ===================================================== */
+
+        function initializeNotificationsPage() {
+
+            applyNotificationTheme();
+
+            createDemoNotifications();
+
+            applyNotificationsTranslations();
+
+            initializeNotificationEvents();
+
+            renderNotifications();
+
+            listenForNotificationThemeChanges();
+
+            connectToGlobalEduNovaScript();
+        }
+
+
+        /* =====================================================
+           DOM READY
+           ===================================================== */
+
+        if (
+            document.readyState ===
+            "loading"
+        ) {
+
+            document.addEventListener(
+                "DOMContentLoaded",
+                initializeNotificationsPage,
+                {
+                    once: true
+                }
+            );
+
+        } else {
+
+            initializeNotificationsPage();
+        }
+
+
+        /* =====================================================
+           CROSS-TAB REFRESH
+           ===================================================== */
+
+        window.addEventListener(
+            "storage",
+            event => {
+
+                if (
+                    event.key ===
+                    NOTIFICATIONS_STORAGE_KEY
+                ) {
+
+                    renderNotifications();
+                }
+
+            }
+        );
+
+
+        /* =====================================================
+           PERIODIC TIME UPDATE
+           ===================================================== */
+
+        window.setInterval(
+            () => {
+
+                const list =
+                    document.getElementById(
+                        "notificationsList"
+                    );
+
+                if (!list) {
+                    return;
+                }
+
+                const notifications =
+                    getFilteredNotifications();
+
+                if (notifications.length > 0) {
+                    renderNotifications();
+                }
+
+            },
+            60 * 1000
+        );
+
+
+        /* =====================================================
+           KEYBOARD ACCESSIBILITY
+           ===================================================== */
+
+        document.addEventListener(
+            "keydown",
+            event => {
+
+                if (
+                    event.key === "Escape"
+                ) {
+
+                    const activeElement =
+                        document.activeElement;
+
+                    if (
+                        activeElement &&
+                        typeof activeElement.blur ===
+                        "function"
+                    ) {
+
+                        activeElement.blur();
+                    }
+                }
+
+            }
+        );
+
+    </script>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="footer">
+
+        <div class="container footer-inner">
+
+            <div class="footer-brand">
+
+                <strong>
+                    EduNova AI
+                </strong>
+
+                <span>
+                    <span data-i18n="footer_text">
+                        منصة تعليمية ذكية تساعدك على التعلم والتقدم.
+                    </span>
+                </span>
+
+            </div>
+
+            <div class="footer-links">
+
+                <a href="index.html">
+                    <span data-i18n="nav_home">
+                        الرئيسية
+                    </span>
+                </a>
+
+                <a href="library.html">
+                    <span data-i18n="library">
+                        مكتبتي
+                    </span>
+                </a>
+
+                <a href="forum.html">
+                    <span data-i18n="forum">
+                        المنتدى
+                    </span>
+                </a>
+
+                <a href="subscriptions.html">
+                    <span data-i18n="subscriptions">
+                        الاشتراكات
+                    </span>
+                </a>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+</body>
+</html>
+
+<!-- =========================================================
+     END OF notifications.html — PART 4 / 4
+     FILE COMPLETE
+     ========================================================= -->
